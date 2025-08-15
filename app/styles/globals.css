@@ -1,0 +1,6 @@
+@layer tokens;       /* Design tokens like colors, shadows, spacing. */
+@layer base;         /* Resets, base components (buttons, links etc.), typography, global element styles. */
+@layer components;   /* component variants like switch buttons, icons, cards, modals, etc. */
+@layer utilities;    /* Helper classes like .visually-hidden, .sr-only, grid utilities, margin/padding helpers, etc. */
+
+@import './base/index.css';
