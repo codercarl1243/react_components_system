@@ -4,3 +4,12 @@
 @layer utilities;    /* Helper classes like .visually-hidden, .sr-only, grid utilities, margin/padding helpers, etc. */
 
 @import './base/index.css';
+
+body {
+    /* Styling purposes for demo only */
+    width: min(100%, 50rem);
+    padding-block-start: 4rem;
+    margin-inline: auto;
+    background: white;
+    color: black;
+}

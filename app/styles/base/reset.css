@@ -38,8 +38,6 @@
 
   /* Set core body defaults */
   body {
-    background: white;
-    color: black;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     font-family: Arial, Helvetica, sans-serif;
