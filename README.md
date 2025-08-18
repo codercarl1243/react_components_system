@@ -68,16 +68,17 @@ Each component follows a consistent structure:
 ```
 components/
 └── [component-name]/
-    ├── index.tsx            		# Main component export
-    ├── [Component].tsx    		# Component implementation  
-    ├── use[Component].ts  		# Custom hook for logic
-    ├── [component].types.ts 		# TypeScript definitions
-    └── [Component].[variant].tsx       # Component variants
+    ├── index.tsx            		          # Main component export
+    ├── [Component].tsx    		            # Component implementation  
+    ├── use[Component].ts  		            # Custom hook for logic
+    ├── [component].types.ts 		          # TypeScript definitions
+    └── [Component].[variant].tsx         # Component variants
 tests/
    └── components/
-	└──[component-name]/
+	      └──[component-name]/
+          ├── [component].test.tsx 		    # Component unit and integration tests
+          └── use[Component].test.tsx     # Hook unit tests
 styles/
-
     └── components/
         └── [component].css # Styling
 ```
@@ -145,20 +146,21 @@ styles/
 
 ### Example combinations:
 ```css
-/* Good contrast pairs */
+/* 12.9:1 ratio */
 .primary-text-on-light { 
-  color: var(--color-primary-600);     /* 12.9:1 ratio */
+  color: var(--color-primary-600);
   background: var(--color-neutral-100); 
 }
 
+/* 15.7:1 ratio */
+.neutral-card {
+  color: var(--color-neutral-800);     
+  background: var(--color-neutral-100);
+}
+/* 5.9:1 ratio - use for changes in state only. The contrast meets AA standard only.*/
 .secondary-button-hover {
   color: var(--color-neutral-100);
-  background: var(--color-secondary-400); /* 5.9:1 ratio */
-}
-
-.neutral-card {
-  color: var(--color-neutral-800);     /* 15.7:1 ratio */
-  background: var(--color-neutral-100);
+  background: var(--color-secondary-400); 
 }
 ```
 
