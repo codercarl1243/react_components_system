@@ -2,8 +2,6 @@
 
 **⚠️⚠️⚠️ WARNING - Current Work in Progress. Some or most of the links in this guide will not work at present. ⚠️⚠️⚠️**
 
-
-
 A complete design system built in React, focusing on accessibility, flexibility, and real-world production use.
 
 > ℹ️ Each component includes comprehensive documentation, tests, and linked tutorials
@@ -45,14 +43,21 @@ npm test
 npm run test:coverage
 ```
 
-
-
 ## 📦 Components
 
-<pre class="font-ui border-border-100/50 overflow-x-scroll w-full rounded border-[0.5px] shadow-[0_2px_12px_hsl(var(--always-black)/5%)]"><table class="bg-bg-100 min-w-full border-separate border-spacing-0 text-sm leading-[1.88888] whitespace-normal"><thead class="border-b-border-100/50 border-b-[0.5px] text-left"><tr class="[tbody>&]:odd:bg-bg-500/10"><th class="text-text-000 [&:not(:first-child)]:-x-[hsla(var(--border-100) / 0.5)] px-2 [&:not(:first-child)]:border-l-[0.5px]">Component</th><th class="text-text-000 [&:not(:first-child)]:-x-[hsla(var(--border-100) / 0.5)] px-2 [&:not(:first-child)]:border-l-[0.5px]">Status</th><th class="text-text-000 [&:not(:first-child)]:-x-[hsla(var(--border-100) / 0.5)] px-2 [&:not(:first-child)]:border-l-[0.5px]">Video</th><th class="text-text-000 [&:not(:first-child)]:-x-[hsla(var(--border-100) / 0.5)] px-2 [&:not(:first-child)]:border-l-[0.5px]">Blog Post</th><th class="text-text-000 [&:not(:first-child)]:-x-[hsla(var(--border-100) / 0.5)] px-2 [&:not(:first-child)]:border-l-[0.5px]">Features</th></tr></thead><tbody><tr class="[tbody>&]:odd:bg-bg-500/10"><td class="border-t-border-100/50 [&:not(:first-child)]:-x-[hsla(var(--border-100) / 0.5)] border-t-[0.5px] px-2 [&:not(:first-child)]:border-l-[0.5px]"><a class="underline" href="./components/button">Button</a></td><td class="border-t-border-100/50 [&:not(:first-child)]:-x-[hsla(var(--border-100) / 0.5)] border-t-[0.5px] px-2 [&:not(:first-child)]:border-l-[0.5px]">✅ Complete</td><td class="border-t-border-100/50 [&:not(:first-child)]:-x-[hsla(var(--border-100) / 0.5)] border-t-[0.5px] px-2 [&:not(:first-child)]:border-l-[0.5px]"><a class="underline" href="link">Watch →</a></td><td class="border-t-border-100/50 [&:not(:first-child)]:-x-[hsla(var(--border-100) / 0.5)] border-t-[0.5px] px-2 [&:not(:first-child)]:border-l-[0.5px]"><a class="underline" href="link">Read →</a></td><td class="border-t-border-100/50 [&:not(:first-child)]:-x-[hsla(var(--border-100) / 0.5)] border-t-[0.5px] px-2 [&:not(:first-child)]:border-l-[0.5px]">Base component with variants, loading states, full accessibility</td></tr><tr class="[tbody>&]:odd:bg-bg-500/10"><td class="border-t-border-100/50 [&:not(:first-child)]:-x-[hsla(var(--border-100) / 0.5)] border-t-[0.5px] px-2 [&:not(:first-child)]:border-l-[0.5px]"><a class="underline" href="./components/button/ToggleButton.tsx">ToggleButton</a></td><td class="border-t-border-100/50 [&:not(:first-child)]:-x-[hsla(var(--border-100) / 0.5)] border-t-[0.5px] px-2 [&:not(:first-child)]:border-l-[0.5px]">🚧 In Progress</td><td class="border-t-border-100/50 [&:not(:first-child)]:-x-[hsla(var(--border-100) / 0.5)] border-t-[0.5px] px-2 [&:not(:first-child)]:border-l-[0.5px]">Coming Soon</td><td class="border-t-border-100/50 [&:not(:first-child)]:-x-[hsla(var(--border-100) / 0.5)] border-t-[0.5px] px-2 [&:not(:first-child)]:border-l-[0.5px]">Coming Soon</td><td class="border-t-border-100/50 [&:not(:first-child)]:-x-[hsla(var(--border-100) / 0.5)] border-t-[0.5px] px-2 [&:not(:first-child)]:border-l-[0.5px]">Toggle functionality, pressed states, smooth animations</td></tr><tr class="[tbody>&]:odd:bg-bg-500/10"><td class="border-t-border-100/50 [&:not(:first-child)]:-x-[hsla(var(--border-100) / 0.5)] border-t-[0.5px] px-2 [&:not(:first-child)]:border-l-[0.5px]">Switch</td><td class="border-t-border-100/50 [&:not(:first-child)]:-x-[hsla(var(--border-100) / 0.5)] border-t-[0.5px] px-2 [&:not(:first-child)]:border-l-[0.5px]">📋 Planned</td><td class="border-t-border-100/50 [&:not(:first-child)]:-x-[hsla(var(--border-100) / 0.5)] border-t-[0.5px] px-2 [&:not(:first-child)]:border-l-[0.5px]">-</td><td class="border-t-border-100/50 [&:not(:first-child)]:-x-[hsla(var(--border-100) / 0.5)] border-t-[0.5px] px-2 [&:not(:first-child)]:border-l-[0.5px]">-</td><td class="border-t-border-100/50 [&:not(:first-child)]:-x-[hsla(var(--border-100) / 0.5)] border-t-[0.5px] px-2 [&:not(:first-child)]:border-l-[0.5px]">-</td></tr><tr class="[tbody>&]:odd:bg-bg-500/10"><td class="border-t-border-100/50 [&:not(:first-child)]:-x-[hsla(var(--border-100) / 0.5)] border-t-[0.5px] px-2 [&:not(:first-child)]:border-l-[0.5px]">Card</td><td class="border-t-border-100/50 [&:not(:first-child)]:-x-[hsla(var(--border-100) / 0.5)] border-t-[0.5px] px-2 [&:not(:first-child)]:border-l-[0.5px]">📋 Planned</td><td class="border-t-border-100/50 [&:not(:first-child)]:-x-[hsla(var(--border-100) / 0.5)] border-t-[0.5px] px-2 [&:not(:first-child)]:border-l-[0.5px]">-</td><td class="border-t-border-100/50 [&:not(:first-child)]:-x-[hsla(var(--border-100) / 0.5)] border-t-[0.5px] px-2 [&:not(:first-child)]:border-l-[0.5px]">-</td><td class="border-t-border-100/50 [&:not(:first-child)]:-x-[hsla(var(--border-100) / 0.5)] border-t-[0.5px] px-2 [&:not(:first-child)]:border-l-[0.5px]">-</td></tr><tr class="[tbody>&]:odd:bg-bg-500/10"><td class="border-t-border-100/50 [&:not(:first-child)]:-x-[hsla(var(--border-100) / 0.5)] border-t-[0.5px] px-2 [&:not(:first-child)]:border-l-[0.5px]">Link</td><td class="border-t-border-100/50 [&:not(:first-child)]:-x-[hsla(var(--border-100) / 0.5)] border-t-[0.5px] px-2 [&:not(:first-child)]:border-l-[0.5px]">📋 Planned</td><td class="border-t-border-100/50 [&:not(:first-child)]:-x-[hsla(var(--border-100) / 0.5)] border-t-[0.5px] px-2 [&:not(:first-child)]:border-l-[0.5px]">-</td><td class="border-t-border-100/50 [&:not(:first-child)]:-x-[hsla(var(--border-100) / 0.5)] border-t-[0.5px] px-2 [&:not(:first-child)]:border-l-[0.5px]">-</td><td class="border-t-border-100/50 [&:not(:first-child)]:-x-[hsla(var(--border-100) / 0.5)] border-t-[0.5px] px-2 [&:not(:first-child)]:border-l-[0.5px]">-</td></tr><tr class="[tbody>&]:odd:bg-bg-500/10"><td class="border-t-border-100/50 [&:not(:first-child)]:-x-[hsla(var(--border-100) / 0.5)] border-t-[0.5px] px-2 [&:not(:first-child)]:border-l-[0.5px]">Modal</td><td class="border-t-border-100/50 [&:not(:first-child)]:-x-[hsla(var(--border-100) / 0.5)] border-t-[0.5px] px-2 [&:not(:first-child)]:border-l-[0.5px]">📋 Planned</td><td class="border-t-border-100/50 [&:not(:first-child)]:-x-[hsla(var(--border-100) / 0.5)] border-t-[0.5px] px-2 [&:not(:first-child)]:border-l-[0.5px]">-</td><td class="border-t-border-100/50 [&:not(:first-child)]:-x-[hsla(var(--border-100) / 0.5)] border-t-[0.5px] px-2 [&:not(:first-child)]:border-l-[0.5px]">-</td><td class="border-t-border-100/50 [&:not(:first-child)]:-x-[hsla(var(--border-100) / 0.5)] border-t-[0.5px] px-2 [&:not(:first-child)]:border-l-[0.5px]">-</td></tr><tr class="[tbody>&]:odd:bg-bg-500/10"><td class="border-t-border-100/50 [&:not(:first-child)]:-x-[hsla(var(--border-100) / 0.5)] border-t-[0.5px] px-2 [&:not(:first-child)]:border-l-[0.5px]">Tab Panels</td><td class="border-t-border-100/50 [&:not(:first-child)]:-x-[hsla(var(--border-100) / 0.5)] border-t-[0.5px] px-2 [&:not(:first-child)]:border-l-[0.5px]">📋 Planned</td><td class="border-t-border-100/50 [&:not(:first-child)]:-x-[hsla(var(--border-100) / 0.5)] border-t-[0.5px] px-2 [&:not(:first-child)]:border-l-[0.5px]">-</td><td class="border-t-border-100/50 [&:not(:first-child)]:-x-[hsla(var(--border-100) / 0.5)] border-t-[0.5px] px-2 [&:not(:first-child)]:border-l-[0.5px]">-</td><td class="border-t-border-100/50 [&:not(:first-child)]:-x-[hsla(var(--border-100) / 0.5)] border-t-[0.5px] px-2 [&:not(:first-child)]:border-l-[0.5px]">-</td></tr></tbody></table></pre>
+<details open>
+<summary><strong>🔘 Interactive Elements</strong></summary>
+
+| Component | Status | Video | Blog | Features |
+|-----------|--------|-------|------|----------|
+| [Button](./components/button)                        | ✅ Complete    | [Watch →](link)     | [Read →](link)            | Base component, variants, loading states |
+| [ToggleButton](./components/button/ToggleButton.tsx) | 🚧 In Progress | Coming Soon         | Coming Soon               | Toggle functionality, pressed states |
+| Switch | 📋 Planned | - | - | Toggle with sliding animation |
+| Link | 📋 Planned | - | - | Accessible links with variants |
+
+</details>
 
 **Legend:** ✅ Complete | 🚧 In Progress | 📋 Planned
-
 
 ## 🏗️ Architecture
 
@@ -77,7 +82,6 @@ styles/
         └── [component].css # Styling
 ```
 
-
 ### Design Principles
 
 * **Composition over inheritance** - Components build on each other
@@ -97,29 +101,65 @@ styles/
 
 ### Color System
 
+**Usage Guidelines:**
+* **200 level**: Background fills, subtle borders (not suitable for text)
+* **400 level**: Primary text, hover states, medium emphasis borders  
+* **600 level**: High contrast text, pressed states, strong emphasis
+
+### Quick Reference
+
+| Level | Purpose | Min Contrast | Use Cases |
+|-------|---------|--------------|-----------|
+| 200 | Backgrounds | 3.0:1 | Fills, subtle borders |
+| 400 | Standard text | 4.5:1 | Body text, interactive elements |
+| 600 | High emphasis | 7.0:1+ | Headings, pressed states |
+
+> ℹ️ **Contrast ratios listed below are against white (#ffffff)**  
+> Colors at 400 and 600 levels have been chosen to ensure a minimum contrast ratio of 4.5:1, meeting WCAG AA requirements.  
+> For neutral color pairing, consider: 800 & 100 (15.7:1) or 600 & 200 (6.4:1)
+
 ```css
-	/* Primary (Blue) */
-        --color-primary-200: hsl(212, 61%, 78%);
-        --color-primary-400: hsl(212, 70%, 50%);
-        --color-primary-600: hsl(212, 85%, 22%);
+/* Primary (Blue) */
+--color-primary-200: hsl(212, 61%, 61%);    /* 3.1:1  - backgrounds only */
+--color-primary-400: hsl(212, 70%, 48%);    /* 5.3:1  - AA compliant text */
+--color-primary-600: hsl(212, 85%, 22%);    /* 12.9:1 - high contrast text */
 
-        /* Secondary (Green) */
-        --color-secondary-200: hsl(150, 61%, 78%);
-        --color-secondary-400: hsl(150, 55%, 45%);
-        --color-secondary-600: hsl(150, 80%, 20%);
+/* Secondary (Green) */
+--color-secondary-200: hsl(154, 20%, 52%);  /* 3.3:1  - backgrounds only */
+--color-secondary-400: hsl(155, 45%, 35%);  /* 5.9:1  - AA compliant text */
+--color-secondary-600: hsl(154, 80%, 20%);  /* 12.7:1 - high contrast text */
 
-        /* Accent (Purple) */
-        --color-accent-200: hsl(314, 70%, 78%);
-        --color-accent-400: hsl(314, 80%, 50%);
-        --color-accent-600: hsl(314, 80%, 24%);
+/* Accent (Purple) */
+--color-accent-200: hsl(314, 20%, 55%);     /* 3.2:1  - backgrounds only */
+--color-accent-400: hsl(314, 80%, 47%);     /* 5.2:1  - AA compliant text */
+--color-accent-600: hsl(314, 80%, 24%);     /* 9.3:1  - high contrast text */
 
-        /* Neutral colors */
-        --color-neutral-100: hsl(0, 0%, 100%);
-        --color-neutral-200: hsl(0, 0%, 88%);
-        --color-neutral-300: hsl(0, 0%, 70%);
-        --color-neutral-400: hsl(0, 0%, 50%);
-        --color-neutral-600: hsl(0, 0%, 30%);
-        --color-neutral-800: hsl(0, 0%, 15%);
+/* Neutral colors */
+--color-neutral-100: hsl(0, 0%, 100%);      /* 1.0:1  - white background */
+--color-neutral-200: hsl(0, 0%, 88%);       /* 1.6:1  - light backgrounds */
+--color-neutral-300: hsl(0, 0%, 70%);       /* 2.6:1  - subtle borders */
+--color-neutral-400: hsl(0, 0%, 46%);       /* 4.6:1  - AA compliant text */
+--color-neutral-600: hsl(0, 0%, 30%);       /* 8.5:1  - high contrast text */
+--color-neutral-800: hsl(0, 0%, 15%);       /* 15.7:1 - strongest contrast */
+```
+
+### Example combinations:
+```css
+/* Good contrast pairs */
+.primary-text-on-light { 
+  color: var(--color-primary-600);     /* 12.9:1 ratio */
+  background: var(--color-neutral-100); 
+}
+
+.secondary-button-hover {
+  color: var(--color-neutral-100);
+  background: var(--color-secondary-400); /* 5.9:1 ratio */
+}
+
+.neutral-card {
+  color: var(--color-neutral-800);     /* 15.7:1 ratio */
+  background: var(--color-neutral-100);
+}
 ```
 
 ## ♿ Accessibility Features
@@ -137,7 +177,6 @@ styles/
 * **Accessibility tests** with jest-axe
 * **Visual regression tests** (planned)
 * **Cross-browser testing** (planned)
-
 
 bash
 
