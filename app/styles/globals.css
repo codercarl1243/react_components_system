@@ -4,6 +4,8 @@
 @layer utilities;    /* Helper classes like .visually-hidden, .sr-only, grid utilities, margin/padding helpers, etc. */
 
 @import './base/index.css';
+@import './components/index.css';
+@import './tokens/index.css';
 
 body {
     /* Styling purposes for demo only */
