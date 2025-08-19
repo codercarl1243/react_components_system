@@ -1,0 +1,255 @@
+@layer base {
+    .button {
+        --button-color: currentColor;
+        --button-font-size: 1rem;
+        --button-bg-color: #fff;
+        --button-border: 1px solid currentColor;
+        --button-outline: 0;
+        --button-margin: 8px;
+        --button-padding: 4px 8px;
+
+        /* https://www.wcag.com/developers/2-5-8-target-size-minimum-level-aa/ */
+        /* AA: 24px x 24px minimum */
+        /* AAA: 44px x 44px minimum */
+        min-width: 44px;
+        min-height: 44px;
+
+        margin: var(--button-margin);
+        padding: var(--button-padding);
+        /* We reset the appearance so the button looks consistent across browsers. */
+        -webkit-appearance: none;
+        appearance: none;
+        background: none;
+        background-color: var(--button-bg-color);
+        color: var(--button-color);
+        font: inherit;
+        font-size: var(--button-font-size);
+        line-height: 1.25;
+        text-align: center;
+        vertical-align: middle;
+
+        border: var(--button-border);
+        border-color: var(--button-border-color, currentColor);
+        border-radius: 8px;
+        box-shadow: var(--button-shadow);
+        outline: var(--button-outline);
+        outline-color: var(--button-outline-color, currentColor);
+        outline-offset: var(--button-outline-offset, 2px);
+
+        transform:
+            background-color 0.2s ease,
+            color 0.2s ease,
+            border-color 0.2s ease,
+            outline 0.2s ease;
+
+
+        &:hover {
+            --button-outline: 1px solid currentColor;
+            --button-shadow: 1px 1px 4px rgba(0, 0, 0, .2);
+        }
+
+        &:focus-visible {
+            --button-outline: 1px solid currentColor;
+            --button-shadow: none;
+        }
+
+        &:active {
+            --button-outline: 1px dotted currentColor;
+            transform: translateY(1px);
+        }
+
+        &:disabled {
+            cursor: not-allowed;
+            --button-color: #4d4d4d;
+            --button-border-color: #7f7f7f;
+
+            &:hover,
+            &:focus-visible,
+            &:active {
+                --button-outline: none;
+                --button-shadow: none;
+                transform: none;
+            }
+        }
+    }
+
+    button.button {
+        cursor: pointer;
+
+    }
+
+    @media screen and (any-pointer: coarse) {
+        .button {
+            --button-margin: 12px;
+        }
+    }
+
+    .button[data-style="filled"] {
+        --button-color: var(--color-neutral-100);
+        --button-bg-color: var(--color-neutral-600);
+        --button-border-color: var(--color-neutral-800);
+
+        &:hover {
+            --button-bg-color: var(--color-neutral-400);
+        }
+
+        &:disabled {
+            --button-bg-color: var(--color-neutral-400);
+            --button-border-color: var(--color-neutral-400);
+        }
+    }
+
+    .button[data-style="outline"] {
+        --button-color: var(--color-neutral-600);
+        --button-bg-color: var(--color-neutral-100);
+        --button-border-color: var(--color-neutral-800);
+
+        &:hover {
+            --button-color: var(--color-neutral-100);
+            --button-bg-color: var(--color-neutral-600);
+        }
+
+        &:disabled {
+            --button-bg-color: var(--color-neutral-200);
+            --button-border-color: var(--color-neutral-400);
+            --button-color: var(--color-neutral-600);
+        }
+    }
+
+    .button[data-variant="primary"] {
+        --button-outline-color: var(--color-primary-200);
+
+        &[data-style="filled"] {
+            --button-bg-color: var(--color-primary-400);
+            --button-border-color: var(--color-primary-600);
+
+            &:hover {
+                --button-bg-color: var(--color-primary-600);
+            }
+
+            &:disabled {
+                --button-bg-color: var(--color-primary-400);
+                --button-border-color: var(--color-primary-400);
+                --button-color: var(--color-neutral-100);
+            }
+        }
+
+        &[data-style="outline"] {
+            --button-color: var(--color-primary-600);
+            --button-border-color: var(--color-primary-600);
+
+            &:hover {
+                --button-color: var(--color-neutral-100);
+                --button-bg-color: var(--color-primary-600);
+            }
+
+            &:disabled {
+                --button-bg-color: var(--color-neutral-100);
+                --button-color: var(--color-primary-400);
+                --button-border-color: var(--color-primary-400);
+
+                &:hover,
+                &:focus-visible,
+                &:active {
+                    --button-bg-color: var(--color-neutral-100);
+                    --button-color: var(--color-primary-400);
+                    --button-border-color: var(--color-primary-400);
+                }
+            }
+        }
+    }
+
+    .button[data-variant="secondary"] {
+        --button-outline-color: var(--color-secondary-200);
+
+        &[data-style="filled"] {
+            --button-bg-color: var(--color-secondary-400);
+            --button-border-color: var(--color-secondary-600);
+
+            &:hover {
+                --button-bg-color: var(--color-secondary-600);
+            }
+
+            &:disabled {
+                --button-bg-color: var(--color-secondary-400);
+                --button-border-color: var(--color-secondary-400);
+                --button-color: var(--color-neutral-100);
+            }
+        }
+
+        &[data-style="outline"] {
+            --button-color: var(--color-secondary-600);
+            --button-border-color: var(--color-secondary-600);
+
+            &:hover {
+                --button-color: var(--color-neutral-100);
+                --button-bg-color: var(--color-secondary-600);
+            }
+
+            &:disabled {
+                --button-bg-color: var(--color-neutral-100);
+                --button-color: var(--color-secondary-400);
+                --button-border-color: var(--color-secondary-400);
+
+                &:hover,
+                &:focus-visible,
+                &:active {
+                    --button-bg-color: var(--color-neutral-100);
+                    --button-color: var(--color-secondary-400);
+                    --button-border-color: var(--color-secondary-400);
+                }
+            }
+        }
+    }
+
+    .button[data-variant="accent"] {
+        --button-outline-color: var(--color-accent-200);
+
+        &[data-style="filled"] {
+            --button-bg-color: var(--color-accent-400);
+            --button-border-color: var(--color-accent-600);
+
+            &:hover {
+                --button-bg-color: var(--color-accent-600);
+            }
+
+            &:disabled {
+                --button-bg-color: var(--color-accent-400);
+                --button-border-color: var(--color-accent-400);
+                --button-color: var(--color-neutral-100);
+            }
+        }
+
+        &[data-style="outline"] {
+            --button-color: var(--color-accent-600);
+            --button-border-color: var(--color-accent-600);
+
+            &:hover {
+                --button-color: var(--color-neutral-100);
+                --button-bg-color: var(--color-accent-600);
+            }
+
+            &:disabled {
+                --button-bg-color: var(--color-neutral-100);
+                --button-color: var(--color-accent-400);
+                --button-border-color: var(--color-accent-400);
+
+                &:hover,
+                &:focus-visible,
+                &:active {
+                    --button-bg-color: var(--color-neutral-100);
+                    --button-color: var(--color-accent-400);
+                    --button-border-color: var(--color-accent-400);
+                }
+            }
+        }
+    }
+
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .button {
+        transition: none !important;
+        animation: none !important;
+    }
+}
