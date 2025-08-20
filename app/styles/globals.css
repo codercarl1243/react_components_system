@@ -1,16 +1,16 @@
 @layer tokens;       /* Design tokens like colors, shadows, spacing. */
 @layer base;         /* Resets, base components (buttons, links etc.), typography, global element styles. */
 @layer components;   /* component variants like switch buttons, icons, cards, modals, etc. */
-@layer utilities;    /* Helper classes like .visually-hidden, .sr-only, grid utilities, margin/padding helpers, etc. */
+@layer utilities;    /* Helper classes like, .sr-only, grid utilities, margin/padding helpers, etc. */
 
 @import './base/index.css';
 @import './components/index.css';
 @import './tokens/index.css';
+@import './utils/index.css';
 
 body {
     /* Styling purposes for demo only */
-    width: min(100%, 30rem);
-    padding-block: 4rem;
+    width: min(100%, 80rem);
     margin-inline: auto;
     background: white;
     color: black;
