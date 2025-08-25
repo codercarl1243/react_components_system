@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { PostBannerPropsType } from "./post.type";
+import Heading from "@/components/heading";
 
 
 export default function PostBanner({ title, image }: PostBannerPropsType) {
@@ -11,7 +12,7 @@ export default function PostBanner({ title, image }: PostBannerPropsType) {
                 <Image src={image.src} alt={image.alt ?? ""} height={400} width={1200} />
             )
                 : null}
-            <h1>{title}</h1>
+            <Heading headingLevel={1}>{title}</Heading>
         </div>
     )
 }
