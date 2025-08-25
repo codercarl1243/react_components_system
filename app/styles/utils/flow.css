@@ -1,0 +1,25 @@
+.flow-4 > *:not(:last-child) {
+  padding-block-end: 1rem;
+}
+
+.flow-8 > *:not(:last-child) {
+  padding-block-end: 2rem;
+}
+
+.flow-16 > *:not(:last-child) {
+  padding-block-end: 4rem;
+}
+
+@media screen and (max-width: 30rem) {
+  .flow-4 > *:not(:last-child) {
+    padding-block-end: 0.5rem;
+  }
+
+  .flow-8 > *:not(:last-child) {
+    padding-block-end: 1rem;
+  }
+
+  .flow-16 > *:not(:last-child) {
+    padding-block-end: 2rem;
+  }
+}
