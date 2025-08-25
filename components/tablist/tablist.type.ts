@@ -1,9 +1,9 @@
-import React, { ReactElement } from "react";
+import type { ReactElement, ReactNode, HTMLAttributes } from "react";
 
 export type TabPanelProps = { 
-    label: React.ReactNode;
+    label: ReactNode;
     id: string;
-} & React.HTMLAttributes<HTMLDivElement>;
+} & HTMLAttributes<HTMLDivElement>;
 
 
 export type TabListProps = {
@@ -12,4 +12,4 @@ export type TabListProps = {
     defaultActiveTabId?: string;
     orientation?: 'vertical' | 'horizontal';
     children?: ReactElement<TabPanelProps> | ReactElement<TabPanelProps>[];
-} & React.HTMLAttributes<HTMLDivElement>;
+} & HTMLAttributes<HTMLDivElement>;
