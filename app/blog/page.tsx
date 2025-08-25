@@ -1,7 +1,7 @@
 
 import PostCard from "@/components/post/post.card";
 import TabList from "@/components/tablist";
-import Link from "next/link";
+import Link from "@/components/link";
 
 export default function BlogPage() {
 
