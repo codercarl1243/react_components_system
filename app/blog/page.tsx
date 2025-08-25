@@ -9,6 +9,7 @@ export default function BlogPage() {
         <>
             <div className="blog--page__banner">
                 <PostCard data-variant={"hero"} post={undefined} />
+                 {/* TODO: Populate with recent posts (cards) **/}
                 <ul>
                     <li></li>
                     <li></li>
