@@ -45,7 +45,6 @@ export default function useTabList({
         if (!refs?.current) return;
 
         const activePanel = refs.current.find(item => item.id === activeId);
-        console.log("focusing on ",  activePanel?.panelRef.current)
         activePanel?.panelRef.current?.focus();
     };
 
@@ -62,6 +61,7 @@ export default function useTabList({
     const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
 
         const currentIndex = refs.current.findIndex(tab => tab.id === activeId);
+        if (currentIndex < 0 || refs.current.length === 0) return;
         const lastIndex = refs.current.length - 1;
 
         const noop = () => { };
