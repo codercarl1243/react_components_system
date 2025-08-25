@@ -1,6 +1,6 @@
 import Image from "next/image";
-import { PostCardPropsType } from "./post.type";
-import { JSX, useId } from "react";
+import type { PostCardPropsType } from "./post.type";
+import { useId } from "react";
 import Link from "@/components/link";
 import Heading from "@/components/heading";
 
