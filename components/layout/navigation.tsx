@@ -1,4 +1,4 @@
-import SkipLink from "../skiplink";
+import SkipLink from "@/components/skiplink";
 
 export default function Navigation() {
 
