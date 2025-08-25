@@ -6,7 +6,11 @@ export default function PostBanner({ title, image }: PostBannerPropsType) {
 
     return (
         <div className="post__banner">
-            <Image src={image.src} alt={image.alt ?? ""} height={400} width={1200} />
+
+            {image?.src ? (
+                <Image src={image.src} alt={image.alt ?? ""} height={400} width={1200} />
+            )
+                : null}
             <h1>{title}</h1>
         </div>
     )
