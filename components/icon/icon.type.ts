@@ -1,3 +1,5 @@
+import type { ElementType, SVGProps } from "react";
+
 export const sizeMap = {
   sm: 16,
   md: 24,
@@ -8,8 +10,8 @@ export const sizeMap = {
 export type PresetSize = keyof typeof sizeMap;
 
 export type IconProps = {
-  icon: React.ElementType;
+  icon: ElementType;
   size?: PresetSize | number | string;
   color?: string;
-} & React.SVGProps<SVGSVGElement>;
+} & SVGProps<SVGSVGElement>;
 
