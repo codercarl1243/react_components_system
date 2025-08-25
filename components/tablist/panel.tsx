@@ -29,16 +29,15 @@ export const TabPanel = forwardRef<HTMLDivElement, TabPanelProps>(
     ({
         children,
         className,
+        label: _ignored,
         ...props }, ref) => {
 
-        const { label: _ignored, ...rest } = props
-        console.log("props", props)
         return (
             <div
                 role="tabpanel"
                 className={clsx("tablist__content-panel", className)}
                 ref={ref}
-                {...rest}
+                {...props}
             >
                 {children}
             </div>
