@@ -30,7 +30,7 @@ export default function TabList({ onChange, activeTabId, defaultActiveTabId, chi
                     const { id, label } = tab.props
                     return (
                         <Button
-                            key={`tab-${index}`}
+                            key={`tab-${id}`}
                             role="tab"
                             id={`tab-${id}`}
                             aria-selected={isActive(id)}
@@ -57,7 +57,7 @@ export default function TabList({ onChange, activeTabId, defaultActiveTabId, chi
                     const { id, ...rest } = tab.props;
                     return (
                         <TabPanel
-                            key={`panel-${index}`}
+                            key={`panel-${id}`}
                             id={`panel-${id}`}
                             aria-labelledby={`tab-${id}`}
                             hidden={!isActive(id)}
