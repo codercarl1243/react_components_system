@@ -6,8 +6,6 @@ interface Props {
     lang?: BundledLanguage;
     inline?: boolean;
 }
-const THEME = 'github-dark';
-const THEME_STYLES = { backgroundColor: "#24292e", color: "#e1e4e8" };
 
 export default async function Code({ 
     codeString, 
@@ -17,7 +15,7 @@ export default async function Code({
 
     const out = await codeToHtml(codeString, {
         lang: lang,
-        theme: THEME
+        theme: 'github-dark'
     });
 
     if (!inline) {
@@ -26,5 +24,5 @@ export default async function Code({
 
     const innerHtml = out.replace(/^.*?<code[^>]*>|<\/code>.*$/gs, "");
 
-    return <code className={`shiki-inline shiki ${THEME}`} style={THEME_STYLES} dangerouslySetInnerHTML={{ __html: innerHtml }} />
+    return <code className={`shiki-inline shiki`} dangerouslySetInnerHTML={{ __html: innerHtml }} />
 }

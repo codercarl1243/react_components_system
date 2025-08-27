@@ -34,6 +34,10 @@
     }
 
     .shiki-inline {
+        /* theme colors for github-dark */
+        background-color: #24292e;
+        color: #e1e4e8;
+        /* theme colors for github-dark */
         border: 1px ridge var(--color-neutral-400);
         border-radius: 0.5rem;
         padding: 0.125em 0.2em;
