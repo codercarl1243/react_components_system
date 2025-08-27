@@ -109,7 +109,7 @@ export default function Button({children, ...props }){
                 </ul>
             </section>
             <section>
-                <Heading headingLevel={2}>The onClick handler with Custom Hook</ Heading>
+                <Heading headingLevel={2}>The onClick handler with Custom Hook</Heading>
                 <p>
                     <span className="bold">Moving on to the interaction handling!</span> We will keep all the logic in a custom hook in <Code codeString={`./useButton.tsx`} inline />.
                 </p>
@@ -657,26 +657,26 @@ const handleClick = (userHandler) => {
                                 <fieldset style={{ display: "flex", gap: "2rem", borderColor: "lightBlue" }}>
                                     <legend>Base Buttons</legend>
                                     <div style={{ padding: "1em" }}>
-                                        <Heading headingLevel={2}>Standard Button</ Heading>
+                                        <h2>Standard Button</h2>
                                         <Button>standard</Button>
                                         <Button isLoading={true}>standard</Button>
                                     </div>
                                     <div style={{ padding: "1em" }}>
-                                        <Heading headingLevel={2}>Primary Buttons</ Heading>
+                                        <h2>Primary Buttons</h2>
                                         <Button data-style="filled" data-variant="primary">filled</Button>
                                         <Button data-style="filled" data-variant="primary" isLoading={true}>loading</Button>
                                         <Button data-style="outline" data-variant="primary">outline</Button>
                                         <Button data-style="outline" data-variant="primary" isLoading={true}>loading</Button>
                                     </div>
                                     <div style={{ padding: "1em" }}>
-                                        <Heading headingLevel={2}>Secondary Buttons</ Heading>
+                                        <h2>Secondary Buttons</h2>
                                         <Button data-style="filled" data-variant="secondary">filled</Button>
                                         <Button data-style="filled" data-variant="secondary" isLoading={true}>loading</Button>
                                         <Button data-style="outline" data-variant="secondary">outline</Button>
                                         <Button data-style="outline" data-variant="secondary" isLoading={true}>loading</Button>
                                     </div>
                                     <div style={{ padding: "1em" }}>
-                                        <Heading headingLevel={2}>Accent Buttons</ Heading>
+                                        <h2>Accent Buttons</h2>
                                         <Button data-style="filled" data-variant="accent">filled</Button>
                                         <Button data-style="filled" data-variant="accent" isLoading={true}>loading</Button>
                                         <Button data-style="outline" data-variant="accent">outline</Button>
