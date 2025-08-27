@@ -297,7 +297,7 @@ const handleClick = (userHandler) => {
 
             <Code codeString={`
                             @layer base { }
-                            `} lang="css" />`
+                            `} lang="css" />
 
             I'm gonna open up the local server and show the rendered button while we make these changes.
 
