@@ -25,26 +25,25 @@ export default function ButtonsBasePage() {
                 <Heading headingLevel={2}>Project Structure</Heading>
                 <p>
                     For ease of reference I will be following a basic format for files and folders:
-                    <ul>
-                        <li>A folder for the component</li>
-                        <li>A type file</li>
-                        <li>A CSS file in the styles folder.</li>
-                        <li>An index file for the component...</li>
-                        <li>and Depending **on** the component, we will create a custom Hook that handles all of the logic</li>
-                        <li>Variants on the main component will receive individual files.</li>
-                    </ul>
-                    <Code lang="md" codeString={`
-                    components/
-                    ├── button/
-                    │   ├── Button.tsx          // Main component
-                    │   ├── useButton.ts        // Logic hook
-                    │   ├── button.types.ts     // TypeScript types
-                    │   └── __tests__/          // Tests
-                    styles/
-                    └── components/
-                    └── button.css          // Styling
-                    `} />
                 </p>
+                <ul>
+                    <li>A folder for the component</li>
+                    <li>A type file</li>
+                    <li>A CSS file in the styles folder.</li>
+                    <li>An index file for the component...</li>
+                    <li>and Depending **on** the component, we will create a custom Hook that handles all of the logic</li>
+                    <li>Variants on the main component will receive individual files.</li>
+                </ul>
+                <Code lang="md" codeString={`components/
+├── button/
+│   ├── Button.tsx          // Main component
+│   ├── useButton.ts        // Logic hook
+│   ├── button.types.ts     // TypeScript types
+│   └── __tests__/          // Tests
+styles/
+└── components/
+└── button.css          // Styling
+                    `} />
 
                 <p>
                     I have installed a couple of additional packages:
@@ -60,14 +59,13 @@ export default function ButtonsBasePage() {
 
                 <p>Our starting point is a simple HTML button, which will be the foundation for building more complex buttons like toggles and switches, all the way to tablists and button panels.</p>
 
-                <Code codeString={`
-                    "use client"
-
-                    export default function Button({children, ...props }){
-                        return <button {...props}>
-                                    {children}
-                                </button>
-                    }`}
+                <Code codeString={`//button.tsx
+"use client"
+export default function Button({children, ...props }){
+    return <button {...props}>
+                {children}
+            </button>
+}`}
                 />
 
                 <p>
@@ -78,40 +76,37 @@ export default function ButtonsBasePage() {
                     <p>As of React 19, the team came out and said that they would be deprecating forwardRef some time in the future and have prepared for that by adding the ability to just grab the ref from the props.
                         If you're using an older version you would still need to use forwardRef to pass through Refs properly.</p>
 
-                    <Code codeString={`
-                            const Button = forwardRef(({children, ...props }, ref) => {
-                                    return <button ref={ref} {...props}>{children}</button>
-                            )}`} />
+                    <Code codeString={`const Button = forwardRef(({children, ...props }, ref) => {
+    return <button ref={ref} {...props}>{children}</button>
+)}`} />
 
                     <Link href="https://react.dev/blog/2024/12/05/react-19#ref-as-a-prop">see the original post</Link>
                 </PostNote>
 
 
-                <Code codeString={`
-                export default function Button({children, ref, ...props }){
-                    return <button ref={ref} {...props}>{children}</button>
-                }
-                `} />
+                <Code codeString={`export default function Button({children, ref, ...props }){
+    return <button ref={ref} {...props}>{children}</button>
+}`} />
 
                 <p>
-                    Typescript will complain because it doesnt understand what these props are. We can use the intellisense of the code editor to see the return type of the component is a html button and it is receiving basic component attributes <strong>plus</strong> the ref. React provides for this sort of situation with a built-in type helper <Code inline codeString={`React.ComponentPropsWithRef<"button">;`} />.
+                    Typescript will complain because it doesnt understand what these props are. We can use the intellisense of the code editor to see the return type of the component is a html button and it is receiving basic component attributes <strong>plus</strong> the ref. React provides for this sort of situation with a built-in type helper <Code inline codeString={` type BaseButtonProps = React.ComponentPropsWithRef<"button">;`} />.
                 </p>
                 <p>
                     As we build out more complex buttons, their typing <strong>will</strong> build on the props being passed through here, so I am going to extract this into the buttons' type file.
                 </p>
-                <Code codeString={`\\button.type.ts
+                <Code codeString={`//button.type.ts
                import { ComponentPropsWithRef } from "react";
                
                export type BaseButtonProps = ComponentPropsWithRef<"button">;
                 `} />
                 <p>
                     As of now our component:
-                    <ul>
-                        <li>Renders a standard HTML button</li>
-                        <li>Passes through a ref; and..</li>
-                        <li>Allows standard button props within the component</li>
-                    </ul>
                 </p>
+                <ul>
+                    <li>Renders a standard HTML button</li>
+                    <li>Passes through a ref; and..</li>
+                    <li>Allows standard button props within the component</li>
+                </ul>
             </section>
             <section>
                 <Heading headingLevel={2}>The onClick handler with Custom Hook</ Heading>
@@ -121,8 +116,7 @@ export default function ButtonsBasePage() {
 
                 <div>
                     {/* grid this to place side by side */}
-                    <Code codeString={`
-                    export default function useButton() {
+                    <Code codeString={`export default function useButton() {
                         const handleClick = () => { }
                                 return {handleClick}
                     }
