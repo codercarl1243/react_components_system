@@ -1,24 +1,30 @@
-import type { BundledLanguage } from 'shiki'
-import { codeToHtml } from 'shiki'
-import DOMPurify from 'isomorphic-dompurify'
+import type { BundledLanguage } from 'shiki';
+import { codeToHtml } from 'shiki';
 
 interface Props {
     codeString: string
     lang?: BundledLanguage;
     inline?: boolean;
 }
-export default async function Code({ codeString, lang = "tsx", inline = false }: Props) {
-    
+const THEME = 'github-dark';
+const THEME_STYLES = { backgroundColor: "#24292e", color: "#e1e4e8" };
+
+export default async function Code({ 
+    codeString, 
+    lang = "tsx", 
+    inline = false
+ }: Props) {
+
     const out = await codeToHtml(codeString, {
         lang: lang,
-        theme: 'github-dark'
+        theme: THEME
     });
 
-    const safeHtml = DOMPurify.sanitize(out);
-
     if (!inline) {
-        return <div dangerouslySetInnerHTML={{ __html: safeHtml }} />
+        return <div className="shiki-wrapper" dangerouslySetInnerHTML={{ __html: out }} />
     }
 
-    return <span dangerouslySetInnerHTML={{ __html: safeHtml }} />
+    const innerHtml = out.replace(/^.*?<code[^>]*>|<\/code>.*$/gs, "");
+
+    return <code className={`shiki-inline shiki ${THEME}`} style={THEME_STYLES} dangerouslySetInnerHTML={{ __html: innerHtml }} />
 }
