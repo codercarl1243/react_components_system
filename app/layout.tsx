@@ -30,7 +30,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <Navigation />
-        <main>
+        <main id="main-content" tabIndex={-1}>
           {children}
         </main>
         <Footer />

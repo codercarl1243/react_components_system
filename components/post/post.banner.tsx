@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { PostBannerPropsType } from "./post.type";
+import type { PostBannerPropsType } from "@/components/post/post.type";
 import Heading from "@/components/heading";
 
 

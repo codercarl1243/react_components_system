@@ -1,4 +1,5 @@
 import Code from "@/components/code";
+import Heading from "@/components/heading";
 import Link from "@/components/link";
 import Post from "@/components/post";
 import PostNote from "@/components/post/post.note";
@@ -13,6 +14,7 @@ export default function ButtonsBasePage() {
                 src: "",
                 alt: undefined
             }}>
+
             <p>
                 This is the first in a series where we are building a Button design system.
                 We will be creating a base for a flexible, accessible, and composable button system in React.
@@ -20,29 +22,28 @@ export default function ButtonsBasePage() {
             </p>
 
             <section>
-                <h2>Project Structure</h2>
+                <Heading headingLevel={2}>Project Structure</Heading>
                 <p>
                     For ease of reference I will be following a basic format for files and folders:
-                    <ul>
-                        <li>A folder for the component</li>
-                        <li>A type file</li>
-                        <li>A CSS file in the styles folder.</li>
-                        <li>An index file for the component...</li>
-                        <li>and Depending **on** the component, we will create a custom Hook that handles all of the logic</li>
-                        <li>Variants on the main component will receive individual files.</li>
-                    </ul>
-                    <Code lang="md" codeString={`
-                    components/
-                    ├── button/
-                    │   ├── Button.tsx          // Main component
-                    │   ├── useButton.ts        // Logic hook
-                    │   ├── button.types.ts     // TypeScript types
-                    │   └── __tests__/          // Tests
-                    styles/
-                    └── components/
-                    └── button.css          // Styling
-                    `} />
                 </p>
+                <ul>
+                    <li>A folder for the component</li>
+                    <li>A type file</li>
+                    <li>A CSS file in the styles folder.</li>
+                    <li>An index file for the component...</li>
+                    <li>and Depending **on** the component, we will create a custom Hook that handles all of the logic</li>
+                    <li>Variants on the main component will receive individual files.</li>
+                </ul>
+                <Code lang="md" codeString={`components/
+├── button/
+│   ├── Button.tsx          // Main component
+│   ├── useButton.ts        // Logic hook
+│   ├── button.types.ts     // TypeScript types
+│   └── __tests__/          // Tests
+styles/
+└── components/
+└── button.css          // Styling
+                    `} />
 
                 <p>
                     I have installed a couple of additional packages:
@@ -54,96 +55,74 @@ export default function ButtonsBasePage() {
                 </ul>
             </section>
             <section>
-                <h2>Starting Code</h2>
+                <Heading headingLevel={2}>Starting Code</Heading>
 
-                <p>Our starting point is a simple HTML button, which will be the foundation for building more complex buttons like toggles and switches, all the way to tablists and the button panels.</p>
+                <p>Our starting point is a simple HTML button, which will be the foundation for building more complex buttons like toggles and switches, all the way to tablists and button panels.</p>
 
-                <Code codeString={`
-                    "use client"
-
-                    export default function Button({children, ...props }){
-                        return <button {...props}>
-                                    {children}
-                                </button>
-                    }`}
+                <Code codeString={`//button.tsx
+"use client"
+export default function Button({children, ...props }){
+    return <button {...props}>
+                {children}
+            </button>
+}`}
                 />
 
                 <p>
                     This has to be labelled as a client component because we'll handle interactions on the client side with functions that cant be serialized in the build step on the server. The ref is deliberately added to the props to communicate intent and the ability for the button to have a ref if the project has a use-case for it.
                 </p>
                 <PostNote>
-                    <h3>React Ref inside of props and the deprecation of forwardRef</h3>
+                    <Heading headingLevel={3}>React Ref inside of props and the deprecation of forwardRef</Heading>
                     <p>As of React 19, the team came out and said that they would be deprecating forwardRef some time in the future and have prepared for that by adding the ability to just grab the ref from the props.
                         If you're using an older version you would still need to use forwardRef to pass through Refs properly.</p>
 
-                    <Code codeString={`
-                            const Button = forwardRef(({children, ...props }, ref) => {
-                                    return <button ref={ref} {...props}>{children}</button>
-                            )}`} />
+                    <Code codeString={`const Button = forwardRef(({children, ...props }, ref) => {
+    return <button ref={ref} {...props}>{children}</button>
+)}`} />
 
                     <Link href="https://react.dev/blog/2024/12/05/react-19#ref-as-a-prop">see the original post</Link>
                 </PostNote>
 
 
-                <Code codeString={`
-                export default function Button({children, ref, ...props }){
-                    return <button ref={ref} {...props}>{children}</button>
-                }
-                `} />
+                <Code codeString={`export default function Button({children, ref, ...props }){
+    return <button ref={ref} {...props}>{children}</button>
+}`} />
 
                 <p>
-                    Typescript will complain because it doesnt understand what these props are. We can use the intellisense of the code editor to see the return type of the component is a html button and it is receiving basic component attributes <strong>plus</strong> the ref. React provides for this sort of situation with a built-in type helper <Code inline codeString={`React.ComponentPropsWithRef<"button">;`} />.
+                    Typescript will complain because it doesnt understand what these props are. We can use the intellisense of the code editor to see the return type of the component is a html button and it is receiving basic component attributes <strong>plus</strong> the ref. React provides for this sort of situation with a built-in type helper <Code inline codeString={` type BaseButtonProps = React.ComponentPropsWithRef<"button">;`} />.
                 </p>
                 <p>
                     As we build out more complex buttons, their typing <strong>will</strong> build on the props being passed through here, so I am going to extract this into the buttons' type file.
                 </p>
-
+                <Code codeString={`//button.type.ts
+               import { ComponentPropsWithRef } from "react";
+               
+               export type BaseButtonProps = ComponentPropsWithRef<"button">;
+                `} />
                 <p>
                     As of now our component:
-                    <ul>
-                        <li>Renders a standard HTML button</li>
-                        <li>Passes through a ref; and..</li>
-                        <li>Allows standard button props within the component</li>
-                    </ul>
                 </p>
+                <ul>
+                    <li>Renders a standard HTML button</li>
+                    <li>Passes through a ref; and..</li>
+                    <li>Allows standard button props within the component</li>
+                </ul>
             </section>
             <section>
-                <h2>The onClick handler with Custom Hook</h2>
+                <Heading headingLevel={2}>The onClick handler with Custom Hook</Heading>
                 <p>
-                    Moving on to the <span className="bold">interaction handling</span>! We will keep all the logic in a custom hook in `./useButton`.
+                    <span className="bold">Moving on to the interaction handling!</span> We will keep all the logic in a custom hook in <Code codeString={`./useButton.tsx`} inline />.
                 </p>
 
-                <Code codeString={`
-                    export default function useButton() {
+                <div>
+                    {/* grid this to place side by side */}
+                    <Code codeString={`export default function useButton() {
                         const handleClick = () => { }
                                 return {handleClick}
                     }
-                    `} />   
-
-            </section>
-
-
-
-
-            Now we could wrap this in `useCallback` but that would definitely be premature optimization.
-
-            but lets add a quick console log to verify that the functions being called:
-
-            ```tsx
-const handleClick = (userHandler) => {
-   return (event) => {
-                console.log("clicked")
-            return userHandler?.(event);
-        }
-}
-            ```
-
-            👉 **🎬 Add the hook handleClick into the component**
-
-            ```tsx
-            "use client"
-
-            export default function Button({children, onClick, ref, ...props }){
+                    `} />
+                    <Code codeString={`
+    export default function Button({children, onClick, ref, ...props }){
     const {handleClick} = useButton();
             return (
             <button
@@ -154,15 +133,23 @@ const handleClick = (userHandler) => {
                 {children}
             </button>
             )
-}
-            ```
+}`} />
+                </div>
+
+
+            </section>
+
+
+
+            ================
+
 
             I'm just going to create a route for buttons and nextJS requires a page in here which I will render our button inside of.
 
             👉 **🎬 Create a page file and navigate to 3000/buttons,**
             **Render the button and click it.**
 
-            ```tsx
+            <Code codeString={`
             'use client'
             import Button from "@/components/button";
 
@@ -173,7 +160,7 @@ const handleClick = (userHandler) => {
             </>
             )
 }
-            ```
+            `} />
 
             👉 **🎬 Show console log: 'clicked'**
 
@@ -189,14 +176,14 @@ const handleClick = (userHandler) => {
 
             so lets add some async magic to the button
 
-            ```tsx
+            <Code codeString={`
 const handleClick = (userHandler) => {
    return  async (event) => {
                 console.log("clicked")
             return await userHandler(event);
         }
 }
-            ```
+            `} />
 
             lets now cover the possible errors.
 
@@ -204,7 +191,7 @@ const handleClick = (userHandler) => {
 
             and if there is an error in the function that is being passed through we should log it but I dont think that we should resolve the error here inside a generic component. lets add a try catch, log out any errors and throw these errors further up the chain.
 
-            ```tsx
+            <Code codeString={`
 const handleClick = (userHandler) => {
    return  async (event) => {
                 console.log("clicked")
@@ -217,14 +204,14 @@ const handleClick = (userHandler) => {
             }
         }
 }
-            ```
+            `} />
 
             finally onto the type safety of our onClick handler. if we hover over the onclick attribute of the button element, we get all the types we need.
             So the event originates from a `HTMLButtonElement` and is a `MouseEvent`.
 
             We dont know what future handlers will be returning so lets keep it flexible by using a generic and allowing the button variants to type it strictly if needed, lets default it to void though.
 
-            ```tsx
+            <Code codeString={`
 
             type ButtonClickHandler<T = void> = (
             event: React.MouseEvent<HTMLButtonElement>
@@ -247,19 +234,19 @@ const handleClick = (userHandler) => {
       };
                             return {handleClick};
 }
-                            ```
+                            `} />
 
-                            ### Final Touches for the Button
+            ### Final Touches for the Button
 
-                            The final touches for the button will be to do 3 small things
-                            first lets remove any oops moments by specifying a type of button. This should prevent any buttons inside of a form from accidentally initiating a submit when clicked.
-                            Passing a type in the props will overwrite that of course.
+            The final touches for the button will be to do 3 small things
+            first lets remove any oops moments by specifying a type of button. This should prevent any buttons inside of a form from accidentally initiating a submit when clicked.
+            Passing a type in the props will overwrite that of course.
 
-                            secondly lets add a loading state. This will just be a prop passed through to the button and will ensure that every single button in the app will communicate state to the user in the same consistent manner.
+            secondly lets add a loading state. This will just be a prop passed through to the button and will ensure that every single button in the app will communicate state to the user in the same consistent manner.
 
-                            We can disable the button while it is loading, and add an aria-busy attribute to tell screen readers that this button is processing the click. Changing the text content from the original label to 'Loading...' provides clear feedback to all users about the current state."
+            We can disable the button while it is loading, and add an aria-busy attribute to tell screen readers that this button is processing the click. Changing the text content from the original label to 'Loading...' provides clear feedback to all users about the current state."
 
-                            ```tsx
+            <Code codeString={`
                             export type ButtonProps = {isLoading ?: boolean;} & React.ComponentPropsWithRef<"button">;
 
                             export default function Button({isLoading = false}){
@@ -273,17 +260,17 @@ const handleClick = (userHandler) => {
                             </button>
                             )
 }
-                            ```
+                            `} />
 
-                            ### Add CSS Styling
+            ### Add CSS Styling
 
-                            and thirdly lets add some css styling to give us a clean button with some baked in accessibility.
+            and thirdly lets add some css styling to give us a clean button with some baked in accessibility.
 
-                            to do this I am going to use good old CSS rather than any libraries. feel free to do whatever you prefer.
+            to do this I am going to use good old CSS rather than any libraries. feel free to do whatever you prefer.
 
-                            As mentioned previously I have installed CLSX to ensure class names are joined cleanly and conditional class name logic is respected.
+            As mentioned previously I have installed CLSX to ensure class names are joined cleanly and conditional class name logic is respected.
 
-                            ```tsx
+            <Code codeString={`
                             "use client"
 
                             export default function Button({type = "button", className, children, onClick, ref, ...props }){
@@ -302,36 +289,36 @@ const handleClick = (userHandler) => {
                             </button>
                             )
 }
-                            ```
+                            `} />
 
-                            👉 **🎬 Create styles/components/buttons.css file**
+            👉 **🎬 Create styles/components/buttons.css file**
 
-                            Because this is our base Button I am going to wrap all of this CSS inside a layer to ensure it can be overwritten easily.
+            Because this is our base Button I am going to wrap all of this CSS inside a layer to ensure it can be overwritten easily.
 
-                            ```css
+            <Code codeString={`
                             @layer base { }
-                            ```
+                            `} lang="css" />
 
-                            I'm gonna open up the local server and show the rendered button while we make these changes.
+            I'm gonna open up the local server and show the rendered button while we make these changes.
 
-                            lets ensure that we respect the WCAG's minimum target size requirements for interactive elements - especially as the number of countries with some level of legal requirement in place is **growing** each year. *I'll include links below for anyone who wants to read more.*
+            lets ensure that we respect the WCAG's minimum target size requirements for interactive elements - especially as the number of countries with some level of legal requirement in place is **growing** each year. *I'll include links below for anyone who wants to read more.*
 
-                            Now, the **AA** rating requires a minimum target size of  **24x24 pixels** , but since **over 60% of all internet traffic** comes from mobile users, I suggest aiming for the **AAA** requirement of **44x44 pixels** — which also happens to be roughly the average width of an adult index finger. Both the IOS guidelines and Material Design use similar sizing so users are already familiar with this.
+            Now, the **AA** rating requires a minimum target size of  **24x24 pixels** , but since **over 60% of all internet traffic** comes from mobile users, I suggest aiming for the **AAA** requirement of **44x44 pixels** — which also happens to be roughly the average width of an adult index finger. Both the IOS guidelines and Material Design use similar sizing so users are already familiar with this.
 
-                            We can also add a bit of **UX embellishment** here by applying margins around the button by default. This helps users with motor function challenges, such as:
+            We can also add a bit of **UX embellishment** here by applying margins around the button by default. This helps users with motor function challenges, such as:
 
-                            - hand tremors,&#x20;
-                            - anyone using a device 1 handed,&#x20;
-                            - people on public transport that might be bumped around,
-                            - or just folks with larger-than-average fingers.
+            - hand tremors,&#x20;
+            - anyone using a device 1 handed,&#x20;
+            - people on public transport that might be bumped around,
+            - or just folks with larger-than-average fingers.
 
-                            So I’m going to bump the minimum  **height and width to 44px**, and add **8px of margin** around each button.
+            So I’m going to bump the minimum  **height and width to 44px**, and add **8px of margin** around each button.
 
-                            If you’ve used any touch device in the past year, you’re already familiar with these sizes — both Android and iOS follow this success criterion.
+            If you’ve used any touch device in the past year, you’re already familiar with these sizes — both Android and iOS follow this success criterion.
 
-                            ### WCAG Target Size Requirements
+            ### WCAG Target Size Requirements
 
-                            ```css
+            <Code lang="css" codeString={`
                             /* https://www.wcag.com/developers/2-5-8-target-size-minimum-level-aa/ */
                             /* AA: 24px x 24px minimum */
                             /* AAA: 44px x 44px minimum */
@@ -339,13 +326,13 @@ const handleClick = (userHandler) => {
                             min-height: 44px;
                             min-width: 44px;
                             margin: 8px;
-                            ```
+                            `} />
 
-                            lets zoom through this next part. we are going reset the styling to remove any padding, borders, and appearances.
+            lets zoom through this next part. we are going reset the styling to remove any padding, borders, and appearances.
 
-                            ### CSS Reset
+            ### CSS Reset
 
-                            ```css
+            <Code lang="css" codeString={`
                             /* We reset the appearance so the button looks consistent across browsers. */
                             -webkit-appearance: none;
                             appearance: none;
@@ -385,22 +372,22 @@ const handleClick = (userHandler) => {
                             color 0.2s ease,
                             border-color 0.2s ease,
                             outline 0.2s ease;
-                            ```
+                            `} />
 
-                            I'm going to take this opportunity to remove any transitions and animations if the user of the site has preferences against it.:
+            I'm going to take this opportunity to remove any transitions and animations if the user of the site has preferences against it.:
 
-                            ```css
+            <Code lang="css" codeString={`
                             @media (prefers-reduced-motion: reduce) {
     .button {
                                 transition: none !important;
                             animation: none !important;
     }
 }
-                            ```
+                            `} />
 
-                            lets give it a cursor of pointer to show the user that it is interactive, but we're only adding this to actual `<button>` elements - because in some edge cases, we might style non-interactive elements to look like buttons for layout consistency. We don’t want to imply interactivity with a hand cursor if clicking doesn't do anything.
+            lets give it a cursor of pointer to show the user that it is interactive, but we're only adding this to actual <Code inline={true} codeString={`<button>`} /> elements - because in some edge cases, we might style non-interactive elements to look like buttons for layout consistency. We don’t want to imply interactivity with a hand cursor if clicking doesn't do anything.
 
-                                ```css
+            <Code lang="css" codeString={`
                                 button{
 
                                     /*dont add cursor: pointer to the button class.
@@ -409,12 +396,12 @@ const handleClick = (userHandler) => {
                                     */
                                     cursor: pointer;
   }
-                                ```
+                                `} />
 
-                                &#x20;
-                                and lets add in some base hover, focus-visible, active, and disabled indicators.
+            &#x20;
+            and lets add in some base hover, focus-visible, active, and disabled indicators.
 
-                                ```css
+            <Code lang="css" codeString={`
                                 &:hover {
                                     outline: 1px solid currentColor;
                                 box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2);
@@ -448,15 +435,14 @@ const handleClick = (userHandler) => {
                                 box-shadow: none;
                                 transform: none;
     }
-}
-                                ```
+}`} />
 
-                                👉 **🎬 Replace button styling with CSS variables where possible.**
+            👉 **🎬 Replace button styling with CSS variables where possible.**
 
-                                Now that we have a good base. I'm going to quickly replace some of this css with css variables that can be used to customize our buttons moving forward.
+            Now that we have a good base. I'm going to quickly replace some of this css with css variables that can be used to customize our buttons moving forward.
 
-                                a couple of these css statements reference css variables that wont be used at first but are now open for us to hook into.
-                                ```css
+            a couple of these css statements reference css variables that wont be used at first but are now open for us to hook into.
+            <Code lang="css" codeString={`
                                 @layer base {
     .button {
                                     --button - color: currentColor;
@@ -547,10 +533,10 @@ const handleClick = (userHandler) => {
         }
     }
 }
-                                ```
-                                While this might seem like a lot for a starting point, this will ensure that the styling is consistent across browsers and we can hook into it easily with minimal effort. So lets add some base variants that are styling specific. To make this a bit easier I have gone and asked our AI overlords to create a color theme giving us  primary, secondary, accent and neutral colours to use. Later on in this series you will find that the colours provided here wont always meet contrast requirements, so double check anything provided by an AI, and when in doubt there are some great colour tools out there online.
+                                `} />
+            While this might seem like a lot for a starting point, this will ensure that the styling is consistent across browsers and we can hook into it easily with minimal effort. So lets add some base variants that are styling specific. To make this a bit easier I have gone and asked our AI overlords to create a color theme giving us  primary, secondary, accent and neutral colours to use. Later on in this series you will find that the colours provided here wont always meet contrast requirements, so double check anything provided by an AI, and when in doubt there are some great colour tools out there online.
 
-                                ```css
+            <Code lang="css" codeString={`
                                 /* Primary (Blue) */
                                 --color-primary-200: hsl(212, 61%, 61%);
                                 --color-primary-400: hsl(212, 70%, 48%);
@@ -573,11 +559,11 @@ const handleClick = (userHandler) => {
                                 --color-neutral-400: hsl(0, 0%, 46%);
                                 --color-neutral-600: hsl(0, 0%, 30%);
                                 --color-neutral-800: hsl(0, 0%, 15%);
-                                ```
+                                `} />
 
-                                what I am doing here is creating a couple of hooks that we will use to style the buttons. Creating 2 distinct looks without adding much complexity. the difference in borders, outlines and shadows are already done in the base button styling. These will just decide when one of the colours will be used.
+            what I am doing here is creating a couple of hooks that we will use to style the buttons. Creating 2 distinct looks without adding much complexity. the difference in borders, outlines and shadows are already done in the base button styling. These will just decide when one of the colours will be used.
 
-                                ```css
+            <Code lang="css" codeString={`
                                 /* Base button (no variant) */
                                 .button {
                                     --button - color: var(--color-neutral-600);
@@ -618,13 +604,13 @@ const handleClick = (userHandler) => {
                                 --button-border-color: var(--color-neutral-400);
         }
     }
-                                ```
-                                the outline colour for the buttons cant be the current colour because a lot of the variants will end up with white text which results in white outlines and we have a white background.
+                                `} />
+            the outline colour for the buttons cant be the current colour because a lot of the variants will end up with white text which results in white outlines and we have a white background.
 
-                                and then we can hook into this for our 3 main variants (primary, secondary, and accent)
-                                I will just create the styling for one variant and copy that 2 more times and just change the wording; Now we could try to condense this sort of declaration down to 6 or 8 lines of css variables that change per variant but I find doing it this way is much easier for a developer to see exactly whats happening. This will come in handy later on as we use these color variants for our more complicated components
+            and then we can hook into this for our 3 main variants (primary, secondary, and accent)
+            I will just create the styling for one variant and copy that 2 more times and just change the wording; Now we could try to condense this sort of declaration down to 6 or 8 lines of css variables that change per variant but I find doing it this way is much easier for a developer to see exactly whats happening. This will come in handy later on as we use these color variants for our more complicated components
 
-                                ```css
+            <Code lang="css" codeString={`
                                 .button[data-variant="primary"] {
                                     --button - outline - color: var(--color-primary-200);
 
@@ -648,20 +634,20 @@ const handleClick = (userHandler) => {
             }
         }
     }
-                                ```
-                                to ensure typos are caught and that we only use the variants and styles that are available, lets update the typing.
+                                `} />
+            to ensure typos are caught and that we only use the variants and styles that are available, lets update the typing.
 
-                                ```ts
+            <Code codeString={`
                                 export type ButtonProps = {
                                     isLoading ?: boolean;
                                 ["data-style"]?: "outline" | "filled";
                                 ["data-variant"]?: "primary" | "secondary" | "accent";
 } & React.ComponentPropsWithRef<"button">
-                                ```
+                                `} />
 
-                                👉 **🎬 Create button variants on Button Page**
+            👉 **🎬 Create button variants on Button Page**
 
-                                ```tsx
+            <Code codeString={`
                                 'use client'
                                 import Button from "@/components/button";
 
@@ -699,44 +685,47 @@ const handleClick = (userHandler) => {
                                 </fieldset>
                                 )
 }
-                                ```
-                                so I have gone ahead and added these buttons to the buttons page.
-                                we can see that the styling works nicely regardless of the button's state.
+                                `} />
+            so I have gone ahead and added these buttons to the buttons page.
+            we can see that the styling works nicely regardless of the button's state.
 
-                                In a real design system, you'd want to document and showcase all these
-                                variants in one place - that's where tools like Storybook really shine.
-                                We'll explore setting up Storybook for our design system in the future.
+            In a real design system, you'd want to document and showcase all these
+            variants in one place - that's where tools like Storybook really shine.
+            We'll explore setting up Storybook for our design system in the future.
 
-                                For many of you this next part might be boring and/or skippable as I am writing some basic tests for the Button component.
+            For many of you this next part might be boring and/or skippable as I am writing some basic tests for the Button component.
 
-                                But for anyone that wants to follow along you will need to install a few testing packages
+            But for anyone that wants to follow along you will need to install a few testing packages
 
-                                links to these packages are down in the description. NextJS also has a helpful install line to copy if you wanted to follow their guide
+            links to these packages are down in the description. NextJS also has a helpful install line to copy if you wanted to follow their guide
 
-                                https://nextjs.org/docs/app/guides/testing/jest
+            https://nextjs.org/docs/app/guides/testing/jest
 
-                                ```bash
+            {/* make it so we can copy this string */}
+            <Code codeString={`
                                 npm install -D jest jest-environment-jsdom @testing-library/react @testing-library/dom @testing-library/jest-dom ts-node @types/jest
-                                ```
+                                `} />
 
-                                I am going to go through the basic setup.
+            I am going to go through the basic setup.
+            <Code codeString={`
 > Would you like to use Typescript for the configuration file? › Y;
 > Choose the test environment that will be used for testing: JSDOM - we are testing components and interacting with the DOM.
 > ? Do you want Jest to add coverage reports? Y - this will allow us to see the parts that our tests dont currently hit
 > Which provider should be used to instrument code for coverage? V8 - its used in the browser. the components will be also in the browser. lets test in the same environment
 > ? Automatically clear mock calls, instances, contexts and results before every test? Y
-                                99% of the time clean tests are good tests.
+ `} />
+            99% of the time clean tests are good tests.
 
-                                additional file
-                                jest.setup.ts - this file gives us access to some useful helpers so we dont need to write as much (link in the description below)
+            additional file
+            jest.setup.ts - this file gives us access to some useful helpers so we dont need to write as much (link in the description below)
 
-                                ```ts
+            <Code codeString={`
                                 // jest.setup.ts
                                 import '@testing-library/jest-dom';
-                                ```
-                                and I am going to grab the jest.config file directly from the nextjs website and paste in the extra options that I selected yes to.
+                                `} />
+            and I am going to grab the jest.config file directly from the nextjs website and paste in the extra options that I selected yes to.
 
-                                ```ts
+            <Code codeString={`
                                 // jest.config.ts
                                 import type {Config} from 'jest'
                                 import nextJest from 'next/jest.js'
@@ -762,21 +751,21 @@ const handleClick = (userHandler) => {
 
                                             // createJestConfig is exported this way to ensure that next/jest can load the Next.js config which is async
                                             export default createJestConfig(config)
-                                            ```
+                                            `} />
 
-                                            the tests that we are writing for the button are pretty straight forward
-                                            we will check:
-                                            - the children is rendered
-                                            - the children when it is loading
-                                            - classnames can be passed through
-                                            - the onclick works
-                                            - handleClick is being called when the button is being clicked
-                                            - the type works and is a button type by default
-                                            - the ref is passed
-                                            - disabled states work
-                                            - aria-busy works
+            the tests that we are writing for the button are pretty straight forward
+            we will check:
+            - the children is rendered
+            - the children when it is loading
+            - classnames can be passed through
+            - the onclick works
+            - handleClick is being called when the button is being clicked
+            - the type works and is a button type by default
+            - the ref is passed
+            - disabled states work
+            - aria-busy works
 
-                                            ```tsx
+            <Code codeString={`
                                             import React from "react";
                                             import {render, screen, fireEvent} from "@testing-library/react";
                                         import Button from "../../../components/button";
@@ -837,18 +826,18 @@ describe("Base Button", () => {
                                             expect(mockHandler).toHaveBeenCalledWith(expect.any(Object));
   });
 });
-                                            ```
+                                            `} />
 
-                                            for the hook we want to check
-                                            - if no function is passed to handleClick, we get an early return
-                                            - passing a function to the handleClick works
-                                            - passing an async function to the handleClick works
-                                            - logging happens when an error occurs
-                                            - the error is re-thrown
+            for the hook we want to check
+            - if no function is passed to handleClick, we get an early return
+            - passing a function to the handleClick works
+            - passing an async function to the handleClick works
+            - logging happens when an error occurs
+            - the error is re-thrown
 
-                                            with the logging test, we can create a spy but it wont always be instantiated before the logging begins so we can create the spy in a beforeAll to ensure that it captures the log and it doesnt pollute the console.
+            with the logging test, we can create a spy but it wont always be instantiated before the logging begins so we can create the spy in a beforeAll to ensure that it captures the log and it doesnt pollute the console.
 
-                                            ```tsx
+            <Code codeString={`
                                             import {renderHook, act} from "@testing-library/react";
                                             import useButton from "../../../components/button/useButton";
 
@@ -960,23 +949,25 @@ describe("useButton", () => {
                                                     expect(consoleErrorSpy).not.toHaveBeenCalled();
     });   
 });
-                                                    ```
-                                                    This about wraps up the button base.
-                                                    So rounding the Button component up, We've:
+                                                    `} />
+            This about wraps up the button base.
+            So rounding the Button component up, We've:
 
-                                                    - Isolated logic in a custom hook
-                                                    - Ensured accessible styling
-                                                    - Created flexible variants; while
-                                                    - added comprehensive unit tests for the button.
+            - Isolated logic in a custom hook
+            - Ensured accessible styling
+            - Created flexible variants; while
+            - added comprehensive unit tests for the button.
 
-                                                    Next up, we'll take this button and extend it to create a toggle button,
-                                                    👉 **🎬 Demo Toggle Button on Button Page**
+            Next up, we'll take this button and extend it to create a toggle button,
+            👉 **🎬 Demo Toggle Button on Button Page**
 
-                                                    and I'll also show you how to set up Storybook to document and visualize
-                                                    all our design system components in one place.
+            and I'll also show you how to set up Storybook to document and visualize
+            all our design system components in one place.
 
-                                                    Thanks for watching! Be sure to like and subscribe — I’ll see you in the next one.
+            Thanks for watching! Be sure to like and subscribe — I’ll see you in the next one.
 
-                                                </Post>
-                                                )
+
+
+        </Post>
+    )
 }
