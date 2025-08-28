@@ -2,7 +2,7 @@
         max-height: 30rem;
         width: min(70ch, 100% - 2rem);
 
-        margin-inline: 2rem auto;
+        margin-inline: var(--layout-padding, 0) auto;
         padding: 0.25em 0.5em;
         border: 2px ridge var(--color-neutral-400);
         border-radius: 0.5rem;
@@ -34,10 +34,10 @@
     }
 
     .shiki-inline {
-        /* theme colors for github-dark */
-        background-color: #24292e;
+        /* theme colors */
+        background-color: #1c1e24;
         color: #e1e4e8;
-        /* theme colors for github-dark */
+        /* theme colors */
         border: 1px ridge var(--color-neutral-400);
         padding: 0.125em 0.2em;
         border-radius: 0.25rem;
