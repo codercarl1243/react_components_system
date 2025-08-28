@@ -1,4 +1,4 @@
-import { createHighlighter } from 'shiki';
+import { createHighlighter, type ThemeRegistration } from 'shiki';
 
 export const highlighter = await createHighlighter({
     themes: ['github-dark'],
@@ -8,7 +8,7 @@ export const highlighter = await createHighlighter({
 const baseTheme = highlighter.getTheme('github-dark');
 
 // Custom theme extending github-dark
-export const customGithubDark = {
+export const customGithubDark: ThemeRegistration = {
     ...baseTheme,
     settings: [
         ...(baseTheme.settings || []).filter(token => {
