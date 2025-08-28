@@ -2,7 +2,7 @@ import { Children } from "react";
 import Icon from "../icon";
 import { RiInformationLine } from "@remixicon/react";
 
-export default function PostNote({ children }: React.ComponentProps<'aside'>) {
+export default function PostNote({ children }: React.ComponentProps<'div'>) {
 
     const childArray = Children.toArray(children);
 
