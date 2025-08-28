@@ -6,7 +6,7 @@
     box-shadow:
         inset 2px 2px 4px rgba(0, 0, 0, 0.1),
         inset -2px -2px 4px rgba(255, 255, 255, 0.8);
-    border: 1px ridge var(--color-neutral-300);
+    border: var(--border-thin);
     border-radius: var(--radius-md);
 }
 

@@ -10,7 +10,7 @@
     background-color: var(--color-neutral-100);
     padding: 1em 0.5em;
     border-radius: var(--radius-sm);
-    border: 1px solid var(--color-primary-200);
+    border: var(--border-thin);
     box-shadow: 1px 1px 4px var(--color-neutral-400);
 
     &:focus-within {

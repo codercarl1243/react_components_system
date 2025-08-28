@@ -3,7 +3,7 @@
         width: min(70ch, 100% - 2rem);
         margin-inline: var(--layout-padding, 0) auto;
         padding: 0.25em 0.5em;
-        border: 2px ridge var(--color-neutral-400);
+        border: var(--border-thick);
         border-radius: var(--radius-md);
         overflow: auto;
 
@@ -41,7 +41,7 @@
         background-color: var(--color-code-dark);
         color: var(--color-code-light);
         /* theme colors */
-        border: 1px ridge var(--color-neutral-400);
+        border: var(--border-thin);
         padding: 0.125em 0.2em;
         border-radius: var(--radius-md);
     }

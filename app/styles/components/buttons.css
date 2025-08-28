@@ -2,7 +2,7 @@
         --button-color: currentColor;
         --button-font-size: 1rem;
         --button-bg-color: #fff;
-        --button-border: 1px solid currentColor;
+        --button-border: var(--border-thin);
         --button-outline: 0;
         --button-margin: 8px;
         --button-padding: 4px 8px;
