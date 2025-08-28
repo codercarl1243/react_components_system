@@ -35,14 +35,18 @@ export default function ButtonsBasePage() {
                     <li>Variants on the main component will receive individual files.</li>
                 </ul>
                 <Code lang="md" codeString={`components/
-├── button/
-│   ├── Button.tsx          // Main component
-│   ├── useButton.ts        // Logic hook
-│   ├── button.types.ts     // TypeScript types
-│   └── __tests__/          // Tests
+    └── button/
+        ├── Button.tsx          // Main component
+        ├── useButton.ts        // Logic hook
+        └── button.types.ts     // TypeScript types
+tests/                          
+└── components/
+    ├── useButton.test.tsx
+    └── button.test.tsx
+
 styles/
 └── components/
-└── button.css          // Styling
+    └── button.css              // Styling
                     `} />
 
                 <p>
@@ -77,10 +81,12 @@ export default function Button({children, ...props }){
                         If you're using an older version you would still need to use forwardRef to pass through Refs properly.</p>
 
                     <Code codeString={`const Button = forwardRef(({children, ...props }, ref) => {
-    return <button ref={ref} {...props}>{children}</button>
+    return <button ref={ref} {...props}>
+               {children}
+           </button>
 )}`} />
 
-                    <Link href="https://react.dev/blog/2024/12/05/react-19#ref-as-a-prop">see the original post</Link>
+                    <Link href="https://react.dev/blog/2024/12/05/react-19#ref-as-a-prop" style={{marginInlineStart: "auto"}}>see the original post</Link>
                 </PostNote>
 
 

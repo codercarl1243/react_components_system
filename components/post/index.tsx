@@ -6,14 +6,12 @@ import { PostPropsType } from "./post.type";
 export default function Post({ title, image, children }: PostPropsType) {
 
     return (
-        <article className="post">
+        <article className="post layout-wrapper">
             <PostBanner
                 title={title}
                 image={image}
             />
-            <section>
                 {children}
-            </section>
         </article>
     )
 }

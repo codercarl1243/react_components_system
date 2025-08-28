@@ -43,4 +43,9 @@
     grid-column: padding;
   }
 
+
+  .main-wrapper {
+    width: min(100%, var(--bp-xl));
+    margin-inline: auto;
+  }
 }
