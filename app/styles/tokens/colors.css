@@ -21,4 +21,7 @@
         --color-neutral-400: hsl(0, 0%, 46%);
         --color-neutral-600: hsl(0, 0%, 30%);
         --color-neutral-800: hsl(0, 0%, 15%);
+
+        --color-code-dark: hsl(225, 13%, 13%);
+        --color-code-light: hsl(214, 13%, 90%);
     }
