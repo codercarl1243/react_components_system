@@ -1,5 +1,5 @@
 import type { BundledLanguage } from 'shiki';
-import {customGithubDark, highlighter} from '@/components/code/highligher';
+import { customGithubDark, highlighter } from '@/components/code/highlighter';
 
 interface Props {
     codeString: string
@@ -8,17 +8,23 @@ interface Props {
     dataWidth?: "full" | "default"
 }
 
-export default async function Code({ 
-    codeString, 
-    lang = "tsx", 
+export default async function Code({
+    codeString,
+    lang = "tsx",
     inline = false,
     dataWidth = "default"
- }: Props) {
+}: Props) {
 
-    const out = highlighter.codeToHtml(codeString, {
-        lang: lang,
-        theme: customGithubDark
-    });
+    const loaded = new Set(highlighter.getLoadedLanguages?.() ?? []);
+    const safeLang = (loaded.has(lang) ? lang : 'plaintext') as BundledLanguage;
+
+    const out = highlighter.codeToHtml(
+        codeString,
+        {
+            lang: safeLang,
+            theme: customGithubDark
+        }
+    );
 
     if (!inline) {
         return <div data-width={dataWidth} className="shiki-wrapper" dangerouslySetInnerHTML={{ __html: out }} />
