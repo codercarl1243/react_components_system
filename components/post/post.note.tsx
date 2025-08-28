@@ -1,4 +1,4 @@
-import { Children, isValidElement } from "react";
+import { Children, isValidElement, JSX } from "react";
 import Icon from "../icon";
 import { RiInformationLine } from "@remixicon/react";
 
@@ -9,20 +9,22 @@ export default function PostNote({ children }: React.ComponentProps<'aside'>) {
     if (childArray.length === 0) return null;
 
     const [firstChild, ...restChildren] = childArray;
-
-    const isHeading =
-        isValidElement(firstChild) &&
-        typeof firstChild.type === "string" &&
-        ["h1", "h2", "h3", "h4", "h5", "h6"].includes(firstChild.type);
+const isHeading =
+    isValidElement(firstChild) &&
+    (
+        (typeof firstChild.type === "string" &&
+            ["h1", "h2", "h3", "h4", "h5", "h6"].includes(firstChild.type)) ||
+        ("headingLevel" in (firstChild.props as JSX.Element))
+    );
 
     return (
-        <aside className="post-note">
+        <div className="post-note flow-4" role="note">
             {isHeading ? (
                 <div
                     className="post-note__first"
                     style={{ display: "flex", alignItems: "flex-start", gap: "0.5rem" }}
                 >
-                    <Icon icon={RiInformationLine} size="sm" className="post-note__icon" />
+                    <Icon icon={RiInformationLine} size="lg" className="post-note__icon" />
                     <div>{firstChild}</div>
                 </div>
             ) : (
@@ -33,6 +35,6 @@ export default function PostNote({ children }: React.ComponentProps<'aside'>) {
                     {restChildren}
                 </div>
             }
-        </aside>
+        </div>
     );
 }
