@@ -29,7 +29,7 @@
 
         border: var(--button-border);
         border-color: var(--button-border-color, currentColor);
-        border-radius: 8px;
+        border-radius: var(--radius-md);
         box-shadow: var(--button-shadow);
         outline: var(--button-outline);
         outline-color: var(--button-outline-color, currentColor);

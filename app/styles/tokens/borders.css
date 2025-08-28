@@ -1,0 +1,13 @@
+:root {
+    --radius-none: 0;
+    /* 4px */
+    --radius-sm: 0.25rem;
+    /* 8px */
+    --radius-md: 0.5rem;
+    /* 16px */
+    --radius-lg: 1rem;
+    /* / circle */
+    --radius-circle: 50%;
+    /* pill */
+    --radius-full: 100vh;
+}

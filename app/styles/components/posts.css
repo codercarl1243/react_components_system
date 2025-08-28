@@ -1,5 +1,4 @@
 .post-note {
-    --border: 1px ridge var(--color-neutral-300);
     background-color: var(--color-neutral-800);
     color: var(--color-neutral-100);
     padding: 0.5em 0.5em;
@@ -7,7 +6,8 @@
     box-shadow:
         inset 2px 2px 4px rgba(0, 0, 0, 0.1),
         inset -2px -2px 4px rgba(255, 255, 255, 0.8);
-    border: 1px solid rgba(0, 0, 0, 0.1);
+    border: 1px ridge var(--color-neutral-300);
+    border-radius: var(--radius-md);
 }
 
 .post-note__first {
@@ -21,7 +21,7 @@
 
 .post-note__icon {
     fill: var(--note-heading-color);
-    background: radial-gradient(circle, var(--color-neutral-100) 0%, transparent 70%);
-    border-radius: 50%;
+    background: radial-gradient(circle, var(--color-neutral-100) 0%, transparent 60%);
+    border-radius: var(--radius-circle);
     padding: 0.25rem;
 }
