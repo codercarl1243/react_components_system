@@ -1,4 +1,3 @@
-@layer components {
     .shiki-wrapper pre {
         max-height: 30rem;
         width: min(70ch, 100% - 2rem);
@@ -43,4 +42,3 @@
         padding: 0.125em 0.2em;
         border-radius: 0.25rem;
     }
-}

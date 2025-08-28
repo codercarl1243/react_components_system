@@ -5,14 +5,12 @@
 
 @import url('./tokens/index.css') layer(tokens);
 @import url('./base/index.css') layer(base);
+@import url('./layout/index.css') layer(base);
 @import url('./components/index.css') layer(components);
 @import url('./utils/index.css') layer(utilities);
-@import url('./layout/index.css') layer(utilities);
 
 body {
     /* Styling purposes for demo only */
-    width: min(100%, 80rem);
-    margin-inline: auto;
     background: white;
     color: black;
 }

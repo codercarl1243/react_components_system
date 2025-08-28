@@ -1,5 +1,3 @@
-@layer utilities {
-
   .layout-wrapper {
     --layout-min-width: var(--bp-xs);
     --layout-max-width: var(--bp-xl);
@@ -48,4 +46,3 @@
     width: min(100%, var(--bp-xl));
     margin-inline: auto;
   }
-}

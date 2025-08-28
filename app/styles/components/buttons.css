@@ -1,4 +1,3 @@
-@layer base {
     .button {
         --button-color: currentColor;
         --button-font-size: 1rem;
@@ -83,6 +82,72 @@
             --button-margin: 12px;
         }
     }
+
+    .button {
+        --button-foreground: var(--color-neutral-800);  /* text */
+        --button-background: var(--color-neutral-100); /* background */
+        --button-accent: var(--color-neutral-600); /* borders & outlines */
+
+        --button-color: var(--button-foreground);
+        --button-bg-color: var(--button-background);
+        --button-outline-color: var(--button-accent);
+        --button-border-color: var(--button-accent);
+
+        &:disabled {
+            --button-foreground: var(--color-neutral-800);
+            --button-background: var(--color-neutral-300);
+            --button-accent: var(--color-neutral-400);
+        }
+
+        &[data-style="filled"] {
+            --button-foreground: var(--color-neutral-100);
+            --button-background: var(--color-neutral-600);
+            --button-accent: var(--color-neutral-800);
+        }
+
+        &[data-style="outline"] {
+            --button-foreground: var(--color-neutral-800);
+            --button-background: var(--color-neutral-100);
+            --button-accent: var(--color-neutral-600);
+        }
+    }
+
+    .button[data-variant="primary"] {
+         &[data-style="filled"] {
+            --button-background: var(--color-primary-600);
+            --button-accent: var(--color-primary-400);
+        }
+
+        &[data-style="outline"] {
+            --button-foreground: var(--color-primary-600);
+            --button-accent: var(--color-primary-400);
+        }
+    }
+        .button[data-variant="secondary"] {
+         &[data-style="filled"] {
+            --button-background: var(--color-secondary-600);
+            --button-accent: var(--color-secondary-400);
+        }
+
+        &[data-style="outline"] {
+            --button-foreground: var(--color-secondary-600);
+            --button-accent: var(--color-secondary-400);
+        }
+    }
+        .button[data-variant="accent"] {
+         &[data-style="filled"] {
+            --button-background: var(--color-accent-600);
+            --button-accent: var(--color-accent-400);
+        }
+
+        &[data-style="outline"] {
+            --button-foreground: var(--color-accent-600);
+            --button-accent: var(--color-accent-400);
+        }
+    }
+
+
+
 
     .button[data-style="filled"] {
         --button-color: var(--color-neutral-100);
@@ -244,8 +309,6 @@
             }
         }
     }
-
-}
 
 @media (prefers-reduced-motion: reduce) {
     .button {
