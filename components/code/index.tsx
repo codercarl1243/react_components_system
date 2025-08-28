@@ -1,5 +1,5 @@
 import type { BundledLanguage } from 'shiki';
-import { codeToHtml } from 'shiki';
+import {customGithubDark, highlighter} from '@/components/code/highligher';
 
 interface Props {
     codeString: string
@@ -13,9 +13,9 @@ export default async function Code({
     inline = false
  }: Props) {
 
-    const out = await codeToHtml(codeString, {
+    const out = highlighter.codeToHtml(codeString, {
         lang: lang,
-        theme: 'github-dark'
+        theme: customGithubDark
     });
 
     if (!inline) {
