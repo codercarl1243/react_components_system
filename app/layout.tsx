@@ -27,13 +27,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased layout-wrapper`}
       >
-        <Navigation />
+        <Navigation className="width-full" />
         <main id="main-content" tabIndex={-1}>
           {children}
         </main>
-        <Footer />
+        <Footer className="width-full" />
       </body>
     </html>
   );
