@@ -5,12 +5,14 @@ interface Props {
     codeString: string
     lang?: BundledLanguage;
     inline?: boolean;
+    dataWidth?: "full" | "default"
 }
 
 export default async function Code({ 
     codeString, 
     lang = "tsx", 
-    inline = false
+    inline = false,
+    dataWidth = "default"
  }: Props) {
 
     const out = highlighter.codeToHtml(codeString, {
@@ -19,10 +21,10 @@ export default async function Code({
     });
 
     if (!inline) {
-        return <div className="shiki-wrapper" dangerouslySetInnerHTML={{ __html: out }} />
+        return <div data-width={dataWidth} className="shiki-wrapper" dangerouslySetInnerHTML={{ __html: out }} />
     }
 
     const innerHtml = out.replace(/^.*?<code[^>]*>|<\/code>.*$/gs, "");
 
-    return <code className={`shiki-inline shiki`} dangerouslySetInnerHTML={{ __html: innerHtml }} />
+    return <code data-width={dataWidth} className={`shiki-inline shiki`} dangerouslySetInnerHTML={{ __html: innerHtml }} />
 }

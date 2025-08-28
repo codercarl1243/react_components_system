@@ -1,7 +1,6 @@
     .shiki-wrapper pre {
         max-height: 30rem;
         width: min(70ch, 100% - 2rem);
-
         margin-inline: var(--layout-padding, 0) auto;
         padding: 0.25em 0.5em;
         border: 2px ridge var(--color-neutral-400);
@@ -25,6 +24,10 @@
             border-radius: 3px;
         }
     }
+
+    .shiki-wrapper[data-width="full"] pre {
+            width: fit-content;
+        }
 
     @media (max-width: 768px) {
         .shiki-wrapper pre {
