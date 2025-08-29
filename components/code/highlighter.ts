@@ -95,6 +95,7 @@ class ShikiSingleton {
             this.highlighter = null;
         }
         this.customTheme = null;
+        this.initPromise = null;
         ShikiSingleton.instance = null;
     }
 }
