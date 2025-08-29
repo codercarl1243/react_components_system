@@ -7,7 +7,7 @@ interface Props {
     inline?: boolean;
     dataWidth?: "full" | "default"
 }
-
+// TODO: consider adding role="region" - if done, need to enforce an accessible name then.
 export default async function Code({
     codeString,
     lang = "tsx",
