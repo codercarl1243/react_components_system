@@ -1,36 +1,54 @@
 import type { BundledLanguage } from 'shiki';
-import { customGithubDark, highlighter } from '@/components/code/highlighter';
+import { getCustomGithubDark, getHighlighterSingleton } from '@/components/code/highlighter';
 
 interface Props {
     codeString: string
     lang?: "tsx" | "ts" | "css" | "md";
     inline?: boolean;
     dataWidth?: "full" | "default"
+    title?: string;
 }
-// TODO: consider adding role="region" - if done, need to enforce an accessible name then.
+
 export default async function Code({
     codeString,
     lang = "tsx",
     inline = false,
-    dataWidth = "default"
+    dataWidth = "default",
+    title
 }: Props) {
+    if (!codeString.trim()) {
+        return null;
+    }
 
-    const loaded = new Set(highlighter.getLoadedLanguages?.() ?? []);
-    const safeLang = (loaded.has(lang) ? lang : 'plaintext') as BundledLanguage;
+    const highlighter = await getHighlighterSingleton();
+    const customGithubDark = await getCustomGithubDark();
+
+    const loadedLanguages = new Set(highlighter.getLoadedLanguages?.() ?? []);
+    const safeLanguage = (loadedLanguages.has(lang) ? lang : 'plaintext') as BundledLanguage;
 
     const out = highlighter.codeToHtml(
         codeString,
         {
-            lang: safeLang,
+            lang: safeLanguage,
             theme: customGithubDark
         }
     );
 
     if (!inline) {
-        return <div data-width={dataWidth} className="shiki-wrapper" dangerouslySetInnerHTML={{ __html: out }} />
+        return <div
+            data-width={dataWidth}
+            className="shiki-wrapper"
+            {...(title && { 'aria-label': title, role: "region"  })}
+            dangerouslySetInnerHTML={{ __html: out }}
+        />
     }
 
     const innerHtml = out.replace(/^.*?<code[^>]*>|<\/code>.*$/gs, "");
 
-    return <code data-width={dataWidth} className={`shiki-inline shiki`} dangerouslySetInnerHTML={{ __html: innerHtml }} />
+    return <code
+        data-width={dataWidth}
+        className={`shiki-inline shiki`}
+        {...(title && { 'aria-label': title, role: "region" })}
+        dangerouslySetInnerHTML={{ __html: innerHtml }}
+    />
 }
