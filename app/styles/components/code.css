@@ -27,6 +27,7 @@
 
     .shiki-wrapper[data-width="full"] pre {
             width: fit-content;
+            max-width: 100%;
         }
 
     @media (max-width: 768px) {
