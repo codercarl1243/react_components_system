@@ -3,7 +3,7 @@ import { customGithubDark, highlighter } from '@/components/code/highlighter';
 
 interface Props {
     codeString: string
-    lang?: BundledLanguage;
+    lang?: "tsx" | "ts" | "css" | "md";
     inline?: boolean;
     dataWidth?: "full" | "default"
 }
