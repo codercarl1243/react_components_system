@@ -1,4 +1,4 @@
-import { Children } from "react";
+import { Children, useId } from "react";
 import Icon from "../icon";
 import { RiInformationLine } from "@remixicon/react";
 import clsx from "clsx";
@@ -11,12 +11,14 @@ export default function PostNote({ className, children, ...props }: React.Compon
 
     const [firstChild, ...restChildren] = childArray;
 
+    const id = useId();
+
     return (
-        <div className={clsx(className, "post-note flow-4 width-bleed")} role={"note"} {...props}>
+        <div className={clsx(className, "post-note flow-4 width-bleed")} role={"note"} aria-labelledby={id} {...props}>
 
             <div className="post-note__first">
                 <Icon icon={RiInformationLine} size={64} className="post-note__icon" />
-                {firstChild}
+                <span id={id}>{firstChild}</span>
             </div>
 
             {restChildren.length > 0 &&
