@@ -4,7 +4,7 @@ class ShikiSingleton {
     private static instance: ShikiSingleton | null = null;
     private highlighter: Highlighter | null = null;
     private customTheme: ThemeRegistration | null = null;
-    private isInitializing = false;
+    private initPromise: Promise<Highlighter> | null = null
 
     private constructor() {
         // Private constructor prevents direct instantiation
@@ -18,32 +18,21 @@ class ShikiSingleton {
     }
 
     async getHighlighter(): Promise<Highlighter> {
-        if (this.highlighter) {
-            return this.highlighter;
-        }
+        if (this.highlighter) return this.highlighter;
+        if (this.initPromise) return this.initPromise;
 
-        if (this.isInitializing) {
-            while (this.isInitializing) {
-                await new Promise(resolve => setTimeout(resolve, 10));
-            }
-            if (this.highlighter) {
-                return this.highlighter;
-            }
-        }
-
-        this.isInitializing = true;
-
-        try {
-            this.highlighter = await createHighlighter({
+            this.initPromise = createHighlighter({
                 themes: ["github-dark"],
                 langs: ["tsx", "ts", "css", "md"],
-            });
+            }).then((h) => {
+            this.highlighter = h;
+            if (process.env.NODE_ENV !== 'production') {
+                console.debug('Shiki highlighter created successfully');
+            }
+            return h;
+        });
             
-            console.log('Shiki highlighter created successfully');
-            return this.highlighter;
-        } finally {
-            this.isInitializing = false;
-        }
+          return this.initPromise;
     }
 
     async getCustomTheme(): Promise<ThemeRegistration> {
