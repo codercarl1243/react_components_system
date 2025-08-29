@@ -1,8 +1,9 @@
 import { Children } from "react";
 import Icon from "../icon";
 import { RiInformationLine } from "@remixicon/react";
+import clsx from "clsx";
 
-export default function PostNote({ children }: React.ComponentProps<'div'>) {
+export default function PostNote({ className, children, ...props }: React.ComponentProps<'div'>) {
 
     const childArray = Children.toArray(children);
 
@@ -11,7 +12,7 @@ export default function PostNote({ children }: React.ComponentProps<'div'>) {
     const [firstChild, ...restChildren] = childArray;
 
     return (
-        <div className="post-note flow-4 width-bleed" role="note">
+        <div className={clsx(className, "post-note flow-4 width-bleed")} role={"note"} {...props}>
 
             <div className="post-note__first">
                 <Icon icon={RiInformationLine} size={64} className="post-note__icon" />
