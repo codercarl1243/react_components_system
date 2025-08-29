@@ -4,6 +4,7 @@ import { RiInformationLine } from "@remixicon/react";
 import clsx from "clsx";
 
 export default function PostNote({ className, children, ...props }: React.ComponentProps<'div'>) {
+    const id = useId();
 
     const childArray = Children.toArray(children);
 
@@ -11,7 +12,6 @@ export default function PostNote({ className, children, ...props }: React.Compon
 
     const [firstChild, ...restChildren] = childArray;
 
-    const id = useId();
 
     return (
         <div className={clsx(className, "post-note flow-4 width-bleed")} role={"note"} aria-labelledby={id} {...props}>
