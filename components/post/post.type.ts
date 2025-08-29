@@ -1,3 +1,4 @@
+import type { ComponentProps } from "react";
 
 
 export type PostImageObjType = {
@@ -19,4 +20,4 @@ export type PostCardPropsType = {
     headingLevel: 2 | 3 | 4;
 };
 
-export type PostPropsType = PostType;
+export type PostPropsType = ComponentProps<'article'>;
