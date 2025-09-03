@@ -11,17 +11,17 @@ export default function PostNote({ className, children, ...props }: React.Compon
     if (childArray.length === 0) return null;
 
     const [firstChild, ...restChildren] = childArray;
+    const isDomElement = isValidElement(firstChild);
+    const labelId = isDomElement && (firstChild as any).props?.id
+        ? (firstChild as any).props.id
+        : id;
 
-    const firstChildWithId = isValidElement(firstChild)
-        ? cloneElement(firstChild, {
-            id,
-            // Merge existing id if present
-            ...((firstChild as JSX.Element).props.id && { id: `${(firstChild as JSX.Element).props.id} ${id}` })
-        })
-        : <span id={id}>{firstChild}</span>; // Fallback for text nodes
+    const firstChildWithId = isDomElement
+        ? cloneElement(firstChild as any, { id: labelId })
+        : <span id={labelId}>{firstChild}</span>; // Fallback for text nodes
 
     return (
-        <div className={clsx(className, "post-note flow-4 width-bleed")} role={"note"} aria-labelledby={id} {...props}>
+        <div className={clsx(className, "post-note flow-4 width-bleed")} role={"note"} aria-labelledby={labelId} {...props}>
 
             <div className="post-note__first">
                 <Icon icon={RiInformationLine} size={64} className="post-note__icon" />
