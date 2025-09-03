@@ -5,7 +5,7 @@ interface Props {
     codeString: string
     lang?: "tsx" | "ts" | "css" | "md";
     inline?: boolean;
-    dataWidth?: "full" | "default"
+    layout?: "full" | "bleed" | "content";
     title?: string;
 }
 
@@ -13,7 +13,7 @@ export default async function Code({
     codeString,
     lang = "tsx",
     inline = false,
-    dataWidth = "default",
+    layout = "content",
     title
 }: Props) {
     if (!codeString.trim()) {
@@ -36,8 +36,7 @@ export default async function Code({
 
     if (!inline) {
         return <div
-            data-width={dataWidth}
-            className="shiki-wrapper"
+            className={`shiki-wrapper width-${layout}`}
             {...(title && { 'aria-label': title, role: "region"  })}
             dangerouslySetInnerHTML={{ __html: out }}
         />
@@ -46,7 +45,6 @@ export default async function Code({
     const innerHtml = out.replace(/^.*?<code[^>]*>|<\/code>.*$/gs, "");
 
     return <code
-        data-width={dataWidth}
         className={`shiki-inline shiki`}
         {...(title && { 'aria-label': title, role: "region" })}
         dangerouslySetInnerHTML={{ __html: innerHtml }}

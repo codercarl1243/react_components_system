@@ -20,15 +20,21 @@ export default function PostNote({ className, children, ...props }: React.Compon
         ? cloneElement(firstChild as any, { id: labelId })
         : <span id={labelId}>{firstChild}</span>; // Fallback for text nodes
 
-    return (
-        <div className={clsx(className, "post-note flow-4 width-bleed")} role={"note"} aria-labelledby={labelId} {...props}>
 
+    // TODO: Consider makign the content expandable and hidden
+    return (
+        <div 
+        // data-expanded={"false"} 
+        className={clsx(className, "post-note width-bleed")} 
+        role={"note"} 
+        aria-labelledby={labelId} 
+        {...props}>
             <div className="post-note__first">
                 <Icon icon={RiInformationLine} size={64} className="post-note__icon" />
                 {firstChildWithId}
             </div>
             {restChildren.length > 0 &&
-                <div className="flow-4">
+                <div className="flow-4 post-note__content">
                     {restChildren}
                 </div>
             }
