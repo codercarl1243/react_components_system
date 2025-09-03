@@ -1,4 +1,4 @@
-import type { ComponentProps } from "react";
+import type { ComponentProps, ReactNode } from "react";
 
 
 export type PostImageObjType = {
@@ -9,7 +9,7 @@ export type PostImageObjType = {
 export type PostType = {
     title: string;
     image: PostImageObjType;
-    children: React.ReactNode;
+    children: ReactNode;
 };
 
 export type PostBannerPropsType = Pick<PostType, 'title' | 'image'>;
