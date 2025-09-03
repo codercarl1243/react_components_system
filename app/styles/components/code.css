@@ -1,12 +1,10 @@
-@layer components {
     .shiki-wrapper pre {
         max-height: 30rem;
         width: min(70ch, 100% - 2rem);
-
-        margin-inline: auto;
+        margin-inline: var(--layout-padding, 0) auto;
         padding: 0.25em 0.5em;
-        border: 2px ridge var(--color-neutral-400);
-        border-radius: 0.5rem;
+        border: var(--border-thick);
+        border-radius: var(--radius-md);
         overflow: auto;
 
         white-space: pre-wrap;
@@ -23,23 +21,28 @@
 
         &::-webkit-scrollbar-thumb {
             background-color: var(--color-neutral-100);
-            border-radius: 3px;
+            border-radius: var(--radius-sm);
         }
     }
+
+    .shiki-wrapper[data-width="full"] pre {
+            width: fit-content;
+            max-width: 100%;
+        }
 
     @media (max-width: 768px) {
         .shiki-wrapper pre {
             max-height: 24rem;
+            margin-inline: auto;
         }
     }
 
     .shiki-inline {
-        /* theme colors for github-dark */
-        background-color: #24292e;
-        color: #e1e4e8;
-        /* theme colors for github-dark */
-        border: 1px ridge var(--color-neutral-400);
+        /* theme colors */
+        background-color: var(--color-code-dark);
+        color: var(--color-code-light);
+        /* theme colors */
+        border: var(--border-thin);
         padding: 0.125em 0.2em;
-        border-radius: 0.25rem;
+        border-radius: var(--radius-md);
     }
-}

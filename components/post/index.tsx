@@ -1,19 +1,11 @@
-import React from "react"
-import PostBanner from "./post.banner";
-import { PostPropsType } from "./post.type";
+import clsx from "clsx";
+import type { PostPropsType } from "./post.type";
 
-
-export default function Post({ title, image, children }: PostPropsType) {
+export default function Post({ children, className, ...props }: PostPropsType) {
 
     return (
-        <article className="post">
-            <PostBanner
-                title={title}
-                image={image}
-            />
-            <section>
+            <article className={clsx("post", className)} {...props}>
                 {children}
-            </section>
-        </article>
+            </article>
     )
 }

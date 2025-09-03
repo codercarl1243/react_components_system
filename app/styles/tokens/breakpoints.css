@@ -1,9 +1,7 @@
-@layer tokens {
     :root {
-    --bp-xs: 20rem;  /* 320px */
-    --bp-sm: 35rem;  /* 560px */
-    --bp-md: 48rem;  /* 768px */
-    --bp-lg: 75rem;  /* 1200px */
-    --bp-xl: 90rem;  /* 1440px */
+    --bp-xs: 18.75rem;  /* 300px */
+    --bp-sm: 35rem;     /* 560px */
+    --bp-md: 48rem;     /* 768px */
+    --bp-lg: 75rem;     /* 1200px */
+    --bp-xl: 90rem;     /* 1440px */
     }
-}
