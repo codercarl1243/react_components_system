@@ -1,6 +1,5 @@
-"use client";
 import type { BundledLanguage } from 'shiki';
-import { useCodeHighlighter } from '@/components/code/context';
+import { getCustomGithubDark, getHighlighterSingleton } from '@/components/code/highlighter';
 
 interface Props {
     codeString: string
@@ -10,7 +9,7 @@ interface Props {
     title?: string;
 }
 
-export default function Code({
+export default async function Code({
     codeString,
     lang = "tsx",
     inline = false,
@@ -20,12 +19,10 @@ export default function Code({
     if (!codeString.trim()) {
         return null;
     }
-    const {theme, highlighter} = useCodeHighlighter();
 
-    if (!highlighter || !theme) {
-        return <code>Loading code snippet…</code>;
-    }
-    
+    const highlighter = await getHighlighterSingleton();
+    const customGithubDark = await getCustomGithubDark();
+
     const loadedLanguages = new Set(highlighter.getLoadedLanguages?.() ?? []);
     const safeLanguage = (loadedLanguages.has(lang) ? lang : 'plaintext') as BundledLanguage;
 
@@ -33,7 +30,7 @@ export default function Code({
         codeString,
         {
             lang: safeLanguage,
-            theme: theme
+            theme: customGithubDark
         }
     );
 
