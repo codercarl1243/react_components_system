@@ -1,0 +1,30 @@
+.post-sidebar {
+    display: none;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+    right: 0;
+    align-self: start;
+    box-shadow: -1px 4px 8px var(--color-neutral-200);
+}
+
+@media screen and (min-width: 56rem) {
+
+    .post-sidebar {
+      display: block;
+      position: sticky;
+    
+    }
+
+    .layout-wrapper {
+        --layout-max-width: var(--bp-lg);
+        margin-inline-start: 0;
+    }
+    
+    main {
+        display: grid;
+        grid-template-columns: 1fr max(250px, 30%);
+        grid-template-rows: 1fr;
+        column-gap: 0.25rem;
+    }
+}
