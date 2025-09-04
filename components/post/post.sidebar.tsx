@@ -1,4 +1,5 @@
 import { ComponentProps } from "react";
+import Heading from "@/components/heading";
 
 type TableOfContentsItem = {
     id: string;
@@ -26,17 +27,21 @@ export default function PostSideBar({
     if (!hasContents && !hasRelated && !hasExtras) return null;
 
     return (
-        <aside className="post-sidebar" {...props}>
+        <aside className="post-sidebar" {...props} >
             {/* Table of contents */}
             {hasContents && (
-                <nav className="post-sidebar__contents">
-                    <h2>Contents</h2>
-                    <ul>
+                <nav className="post-sidebar__contents" aria-labelledby="toc-heading">
+                    <Heading headingLevel={2} id="toc-heading">Table of contents</Heading>
+                    <ol>
                         {contents.map(item => {
-                            return <li key={item.id}><a href={item.href}>{item.label}</a></li>
+                            return (
+                                <li key={item.id}>
+                                    <a href={item.href}>{item.label}</a>
+                                </li>
+                            )
 
                         })}
-                    </ul>
+                    </ol>
                 </nav>
             )}
             {/* Related posts */}
@@ -44,7 +49,7 @@ export default function PostSideBar({
                 <section
                     className="post-sidebar__related"
                 >
-                    <h2>Related Posts</h2>
+                    <Heading headingLevel={2} >Related Posts</Heading>
                     <ul>
                         {relatedPosts.map((post) => (
                             <li key={post.href}>
@@ -59,7 +64,7 @@ export default function PostSideBar({
                 <section
                     className="post-sidebar__author"
                 >
-                    <h2>About the Author</h2>
+                    <Heading headingLevel={2} >About the Author</Heading>
                     <div className="author">
                         {author.avatarUrl && (
                             <img
