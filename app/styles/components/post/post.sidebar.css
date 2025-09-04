@@ -20,7 +20,7 @@
         margin-inline-start: 0;
     }
     
-    main {
+    main:has(.post-sidebar) {
         display: grid;
         grid-template-columns: 1fr max(250px, 30%);
         grid-template-rows: 1fr;
