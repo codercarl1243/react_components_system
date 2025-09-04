@@ -4,7 +4,7 @@ import type { ComponentProps } from "react";
 export default function Navigation(props: ComponentProps<'header'>) {
 
     return (
-        <header {...props}>
+        <header className="header" aria-label="Main" {...props}>
             <SkipLink />
             <nav>
                 nav
