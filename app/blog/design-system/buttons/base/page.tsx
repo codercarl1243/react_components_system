@@ -62,7 +62,7 @@ styles/
                     </p>
                     <ul>
                         <li><Link href="https://www.npmjs.com/package/@remixicon/react">RemixIcons</Link> to leverage their extensive and free library of icons</li>
-                        <li><Link href="https://www.npmjs.com/package/clsx">CLSX</Link> to handle class names</li>
+                        <li><Link href="https://www.npmjs.com/package/clsx">clsx</Link> to handle class names</li>
                         <li>and a number of Jest related packages to run tests (<Link href="https://www.npmjs.com/package/jest">jest</Link>, <Link href="https://www.npmjs.com/package/jest-environment-jsdom">jest-environment-jsdom</Link>, <Link href="https://www.npmjs.com/package/@testing-library/react">@testing-library/react</Link>, <Link href="https://www.npmjs.com/package/@testing-library/dom">@testing-library/dom</Link>, <Link href="https://www.npmjs.com/package/@testing-library/jest-dom">@testing-library/jest-dom</Link>, <Link href="https://www.npmjs.com/package/ts-node">ts-node</Link>, <Link href="https://www.npmjs.com/package/@types/jest">@types/jest</Link>)</li>
                     </ul>
                 </PostSection>
