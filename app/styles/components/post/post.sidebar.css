@@ -3,7 +3,6 @@
     top: 0;
     height: 100vh;
     overflow-y: auto;
-    right: 0;
     align-self: start;
     box-shadow: -1px 4px 8px var(--color-neutral-200);
 }
