@@ -2,7 +2,6 @@
     background-color: var(--color-neutral-800);
     color: var(--color-neutral-100);
     padding: 0.5em 0.5em;
-    margin-inline: auto;
     box-shadow:
         inset 2px 2px 4px rgba(0, 0, 0, 0.1),
         inset -2px -2px 4px rgba(255, 255, 255, 0.8);
@@ -25,3 +24,21 @@
     border-radius: var(--radius-circle);
     padding: 0.25rem;
 }
+
+
+
+/* .post-note__content {
+    max-height: 1px;
+    overflow: hidden;
+    transition: max-height 250ms ease-in-out;
+}
+
+.post-note[data-expanded="true"] .post-note__content {
+    max-height: 100%;
+} 
+    
+@media (prefers-reduced-motion: reduce) {
+  .post-note__content { transition: none; }
+}
+*/
+
