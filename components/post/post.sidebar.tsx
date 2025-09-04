@@ -11,7 +11,7 @@ type PostSideBarProps = {
     contents?: TableOfContentsItem[]
     relatedPosts?: { href: string; title: string }[];
     author?: { name: string; avatarUrl?: string; bio?: string };
-} & ComponentProps<'div'>;
+} & ComponentProps<'aside'>;
 
 export default function PostSideBar({
     contents = [],
