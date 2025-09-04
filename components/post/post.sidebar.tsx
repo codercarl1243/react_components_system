@@ -1,5 +1,6 @@
 import { ComponentProps } from "react";
 import Heading from "@/components/heading";
+import clsx from "clsx";
 
 type TableOfContentsItem = {
     id: string;
@@ -17,6 +18,7 @@ export default function PostSideBar({
     contents = [],
     relatedPosts = [],
     author,
+    className,
     children,
     ...props
 }: PostSideBarProps) {
@@ -27,7 +29,7 @@ export default function PostSideBar({
     if (!hasContents && !hasRelated && !hasExtras) return null;
 
     return (
-        <aside className="post-sidebar" {...props} >
+        <aside className={clsx("post-sidebar", className)} {...props} >
             {/* Table of contents */}
             {hasContents && (
                 <nav className="post-sidebar__contents" aria-labelledby="toc-heading">
@@ -69,7 +71,7 @@ export default function PostSideBar({
                         {author.avatarUrl && (
                             <img
                                 src={author.avatarUrl}
-                                alt={`Avatar of ${author.name}`}
+                                alt={author.name}
                                 className="author__avatar"
                                 loading="lazy"
                             />
