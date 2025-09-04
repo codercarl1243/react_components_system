@@ -1,12 +1,12 @@
   .layout-wrapper {
     --layout-min-width: var(--bp-xs);
-    --layout-max-width: var(--bp-lg);
+    --layout-max-width: var(--bp-xl);
     --layout-padding: clamp(1rem, 2vw, 2.5rem);
     --layout-bleed: clamp(1rem, 5.5vw, 5rem);
 
     display: grid;
     width: clamp(var(--layout-min-width), 100%, var(--layout-max-width));
-    margin-inline-end: auto;
+    margin-inline: auto;
 
     grid-template-columns:
       [padding-start] var(--layout-padding) [bleed-start] var(--layout-bleed) [content-start] 1fr [content-end] var(--layout-bleed) [bleed-end] var(--layout-padding) [padding-end];
