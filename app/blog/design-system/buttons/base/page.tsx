@@ -30,7 +30,7 @@ export default function ButtonsBasePage() {
                 </PostSection>
                 <hr />
                 <PostSection>
-                    <Heading headingLevel={2}>Project Structure</Heading>
+                    <Heading headingLevel={2} id="project-structure">Project Structure</Heading>
                     <p>
                         For ease of reference I will be following a basic format for files and folders:
                     </p>
@@ -68,7 +68,7 @@ styles/
                 </PostSection>
                 <hr />
                 <PostSection>
-                    <Heading headingLevel={2}>Starting Code</Heading>
+                    <Heading headingLevel={2} id="starting-code">Starting Code</Heading>
 
                     <p>Our starting point is a simple HTML button, which will be the foundation for building more complex buttons like toggles and switches, all the way to tablists and button panels.</p>
 
@@ -85,7 +85,7 @@ export default function Button({children, ...props }){
                         This has to be labelled as a client component because we'll handle interactions on the client side with functions that cant be serialized in the build step on the server. The ref is deliberately added to the props to communicate intent and the ability for the button to have a ref if the project has a use-case for it.
                     </p>
                     <PostNote>
-                        <Heading headingLevel={3}>React Ref inside of props and the deprecation of forwardRef</Heading>
+                        <Heading headingLevel={3} id="react-ref-deprecation">React Ref inside of props and the deprecation of forwardRef</Heading>
                         <p>As of React 19, the team came out and said that they would be deprecating forwardRef some time in the future and have prepared for that by adding the ability to just grab the ref from the props.
                             If you're using an older version you would still need to use forwardRef to pass through Refs properly.</p>
 
@@ -130,7 +130,7 @@ const Button = forwardRef<HTMLButtonElement, ComponentProps<"button">>(
                 </PostSection>
                 <hr />
                 <PostSection>
-                    <Heading headingLevel={2}>The onClick handler with Custom Hook</Heading>
+                    <Heading headingLevel={2} id="onclick-handler">The onClick handler with Custom Hook</Heading>
                     <p>
                         <span className="bold">Moving on to the interaction handling!</span> We will keep all the logic in a custom hook in <Code codeString={`./useButton.tsx`} inline />.
                     </p>
@@ -172,7 +172,7 @@ export default function ButtonsPage() {
 
                     {/* 👉 **🎬 Show console log: 'clicked'** */}
 
-                    <Heading headingLevel={3}>Adding Type-Safety</Heading>
+                    <Heading headingLevel={3} id="type-safety">Adding Type-Safety</Heading>
                     <p>lets quickly cover the questions that a QA or manager is going to ask us.</p>
                     <ol>
                         <li>What if we make a request to another service online?
@@ -241,7 +241,7 @@ return {handleClick};
                 </PostSection>
                 <hr />
                 <PostSection>
-                    <Heading headingLevel={2}>
+                    <Heading headingLevel={2} id="final-touches">
                         Final Touches
                     </Heading>
                     <p>
@@ -262,7 +262,7 @@ return {handleClick};
 
                 </PostSection>
                 <PostSection>
-                    <Heading headingLevel={2}>CSS Styling</Heading>
+                    <Heading headingLevel={2} id="css-styling">CSS Styling</Heading>
                     <PostNote>
                         <Heading headingLevel={3}>CSS Or Libraries??</Heading>
                         <p>to do this I am going to use good old CSS rather than any libraries. feel free to do whatever you prefer.</p>
