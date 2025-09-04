@@ -1,7 +1,7 @@
 .post-sidebar {
     display: none;
     top: 0;
-    height: 100vh;
+    height: 100dvh;
     overflow-y: auto;
     align-self: start;
     box-shadow: -1px 4px 8px var(--color-neutral-200);
