@@ -1,14 +1,15 @@
 .post-section {
     position: relative;
     padding-block-end: 2em;
-    &::after {
-        content: '';
-        position: absolute;
-        bottom: 1em;
-        height: 1px;
-        width: 50%;
-        margin-inline: 25%;
-        /* background-color: var(--color-neutral-200); */
-        box-shadow: 1px 4px 20px var(--color-neutral-800);
-    }
+}
+
+.post-section::after {
+    content: '';
+    position: absolute;
+    bottom: 1em;
+    height: 1px;
+    width: 50%;
+    margin-inline: 25%;
+    /* background-color: var(--color-neutral-200); */
+    box-shadow: 1px 4px 20px var(--color-neutral-800);
 }
