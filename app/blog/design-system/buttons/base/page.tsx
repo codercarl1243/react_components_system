@@ -590,10 +590,10 @@ outline: 1px solid currentColor;
     --button-color: var(--color-neutral-400);
     --button-border-color: var(--color-neutral-400);
 }}`} />
-                    the outline colour for the buttons cant be the current colour because a lot of the variants will end up with white text which results in white outlines and we have a white background.
+                   <p> the outline colour for the buttons cant be the current colour because a lot of the variants will end up with white text which results in white outlines and we have a white background.
 
                     and then we can hook into this for our 3 main variants (primary, secondary, and accent)
-                    I will just create the styling for one variant and copy that 2 more times and just change the wording; Now we could try to condense this sort of declaration down to 6 or 8 lines of css variables that change per variant but I find doing it this way is much easier for a developer to see exactly whats happening. This will come in handy later on as we use these color variants for our more complicated components
+                    I will just create the styling for one variant and copy that 2 more times and just change the wording; Now we could try to condense this sort of declaration down to 6 or 8 lines of css variables that change per variant but I find doing it this way is much easier for a developer to see exactly whats happening. This will come in handy later on as we use these color variants for our more complicated components</p>
 
                     <Code lang="css" codeString={`.button[data-variant="primary"] {
     --button-outline-color: var(--color-primary-200);
