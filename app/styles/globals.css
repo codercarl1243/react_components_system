@@ -8,9 +8,4 @@
 @import url('./layout/index.css') layer(base);
 @import url('./components/index.css') layer(components);
 @import url('./utils/index.css') layer(utilities);
-
-body {
-    /* Styling purposes for demo only */
-    background: white;
-    color: black;
-}
+@import url('./typography/index.css') layer(base);
