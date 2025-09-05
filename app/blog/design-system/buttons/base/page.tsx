@@ -202,7 +202,7 @@ return async (event) => {
     try {
         return await userHandler(event);
     } catch (err) {
-        console.error("Button click error:", err);
+        console.error("Button click error", err);
         throw err;
     }
 }}`} />
@@ -226,7 +226,7 @@ const handleClick =
                 // Await works for both sync and async handlers
                 return await userHandler(event);
             } catch (err) {
-                console.error("Button click error:", err);
+                console.error("Button click error", err);
                 throw err;
             }
         };
@@ -881,7 +881,7 @@ describe("useButton", () => {
             })
         ).rejects.toThrow(error);
 
-        expect(consoleErrorSpy).toHaveBeenCalledWith("Button click error:", error);
+        expect(consoleErrorSpy).toHaveBeenCalledWith("Button click error", error);
     });
 
     it("logs errors when async handler throws", async () => {
@@ -895,7 +895,7 @@ describe("useButton", () => {
             })
         ).rejects.toThrow(error);
 
-        expect(consoleErrorSpy).toHaveBeenCalledWith("Button click error:", error);
+        expect(consoleErrorSpy).toHaveBeenCalledWith("Button click error", error);
     });
 
     it("rethrows errors from the handler", async () => {
