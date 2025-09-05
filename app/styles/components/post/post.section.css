@@ -1,6 +1,6 @@
 .post-section {
     position: relative;
-    padding-block-end: 2em;
+    padding-block-end: calc(var(--spacing) * 4);
 }
 
 .post-section::after {
