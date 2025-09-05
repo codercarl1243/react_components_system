@@ -46,7 +46,7 @@ export default function ButtonsBasePage() {
     └── button/
         ├── Button.tsx          // Main component
         ├── useButton.ts        // Logic hook
-        └── button.types.ts     // TypeScript types
+        └── button.type.ts     // TypeScript types
 tests/                          
 └── components/
     ├── useButton.test.tsx
