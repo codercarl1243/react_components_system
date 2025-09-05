@@ -1,0 +1,4 @@
+
+.post__banner {
+    margin-block-end: calc(var(--spacing) * 4);
+}

@@ -2,5 +2,5 @@
 .header {
     height: 5rem;
     background-color: var(--color-primary-400);
-    color: var(--color-neutral-100)
+    color: var(--color-neutral-100);
 }

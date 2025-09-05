@@ -1,0 +1,17 @@
+.footer {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+
+    padding-block: calc(var(--spacing) * 4);
+    background-color: var(--color-primary-400);
+    color: var(--color-neutral-100);
+    z-index: 2;
+}
+
+.footer p {
+    margin: 0;
+    max-width: initial;
+}

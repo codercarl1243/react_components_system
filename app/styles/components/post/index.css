@@ -1,2 +1,5 @@
+@import './post.css';
 @import './post.note.css';
 @import './post.sidebar.css';
+@import './post.section.css';
+@import './post.banner.css';

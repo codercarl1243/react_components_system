@@ -8,11 +8,12 @@ export type PostImageObjType = {
 
 export type PostType = {
     title: string;
+    subtitle?: string;
     image: PostImageObjType;
     children: ReactNode;
 };
 
-export type PostBannerPropsType = Pick<PostType, 'title' | 'image'>;
+export type PostBannerPropsType = Pick<PostType, 'title' | 'image' | 'subtitle'>;
 
 export type PostCardPropsType = {
     variant?: "hero" | "default";

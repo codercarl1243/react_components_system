@@ -1,0 +1,17 @@
+.post-section {
+    position: relative;
+}
+
+.post-section::after {
+    content: '';
+    position: absolute;
+    bottom: calc(var(--spacing) * 8);
+    height: 1px;
+    width: min(80ch, 75%);
+    left: 0;
+    right: 0;
+    margin-inline: auto;
+    background-color: var(--color-neutral-200);
+    box-shadow: 1px 4px 10px var(--color-neutral-800);
+    pointer-events: none;
+}
