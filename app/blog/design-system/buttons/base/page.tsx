@@ -959,7 +959,9 @@ describe("useButton", () => {
 
                         Thanks for watching! Be sure to like and subscribe — I'll see you in the next one.
                     </p>
-
+                        <section>
+                            <Link href="./sliders">Next: Slider Buttons</Link>
+                        </section>
                 </PostSection>
             </Post>
             <PostSideBar
@@ -969,8 +971,9 @@ describe("useButton", () => {
                     { id: "react-ref-deprecation", href: "#react-ref-deprecation", label: "React Ref and forwardRef Deprecation" },
                     { id: "onclick-handler", href: "#onclick-handler", label: "The onClick Handler with Custom Hook" },
                     { id: "type-safety", href: "#type-safety", label: "Adding Type-Safety" },
-                    { id: "final-touches", href: "#final-touches", label: "Final Touches" },
                     { id: "css-styling", href: "#css-styling", label: "CSS Styling" },
+                    { id: "final-touches", href: "#final-touches", label: "Final Touches" },
+                    { id: "summary", href: "#summary", label: "Summary" },
                 ]}
             />
         </>
