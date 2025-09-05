@@ -596,7 +596,7 @@ outline: 1px solid currentColor;
                     I will just create the styling for one variant and copy that 2 more times and just change the wording; Now we could try to condense this sort of declaration down to 6 or 8 lines of css variables that change per variant but I find doing it this way is much easier for a developer to see exactly whats happening. This will come in handy later on as we use these color variants for our more complicated components
 
                     <Code lang="css" codeString={`.button[data-variant="primary"] {
-    --button-outline - color: var(--color-primary-200);
+    --button-outline-color: var(--color-primary-200);
 
     &[data-style="filled"] {
         --button-color: var(--color-neutral-100);
