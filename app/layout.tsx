@@ -5,12 +5,12 @@ import Footer from "@/components/layout/footer";
 import Header from "@/components/layout/header";
 
 const geistSans = Geist({
-  variable: "--font-geist-sans",
+  variable: "--font-main",
   subsets: ["latin"],
 });
 
 const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+  variable: "--font-accent",
   subsets: ["latin"],
 });
 
@@ -27,7 +27,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased main-wrapper`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased main-wrapper font-main text-base`}
       >
         <Header />
         <main id="main-content" tabIndex={-1}>
