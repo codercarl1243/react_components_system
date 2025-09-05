@@ -1,6 +1,6 @@
     .shiki-wrapper pre {
         max-height: 30rem;
-        padding: 0.25em 0.5em;
+        padding: 0.5em;
         border: var(--border-thick);
         border-radius: var(--radius-md);
         overflow: auto;
