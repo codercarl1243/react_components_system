@@ -39,7 +39,7 @@ export default function ButtonsBasePage() {
                         <li>A type file</li>
                         <li>A CSS file in the styles folder.</li>
                         <li>An index file for the component...</li>
-                        <li>and Depending **on** the component, we will create a custom Hook that handles all of the logic</li>
+                        <li>and Depending on the component, we will create a custom Hook that handles all of the logic</li>
                         <li>Variants on the main component will receive individual files.</li>
                     </ul>
                     <Code lang="md" codeString={`components/
@@ -297,7 +297,7 @@ className, onClick, disabled, ref, isLoading = false, type = "button", children,
                         </p>
                     </PostNote>
                     <p>
-                        We can also add a bit of **UX embellishment** here by applying margins around the button by default. This helps users with motor function challenges, such as:</p>
+                        We can also add a bit of <span className="italic">UX embellishment</span> here by applying margins around the button by default. This helps users with motor function challenges, such as:</p>
                     <ul>
                         <li>hand tremors</li>
                         <li>anyone using a device 1 handed</li>
