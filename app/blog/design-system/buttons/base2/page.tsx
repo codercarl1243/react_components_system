@@ -6,6 +6,9 @@ import PostBanner from "@/components/post/post.banner";
 import PostNote from "@/components/post/post.note";
 import PostSection from "@/components/post/post.section";
 import PostSideBar from "@/components/post/post.sidebar";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = { title: "Buttons · Design System" };
 
 export default function ButtonsBasePage() {
     return (
