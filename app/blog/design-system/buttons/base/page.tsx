@@ -19,7 +19,6 @@ export default function ButtonsBasePage() {
                         title={"The Button"}
                         image={{
                             src: "",
-                            alt: undefined
                         }}
                     />
                     <p>
