@@ -1,10 +1,11 @@
 import SkipLink from "@/components/skiplink";
+import clsx from "clsx";
 import type { ComponentProps } from "react";
 
-export default function Header(props: ComponentProps<'header'>) {
+export default function Header({className,...props}: ComponentProps<'header'>) {
 
     return (
-        <header className="header" aria-label="Main" {...props}>
+        <header className={clsx('header', className)} aria-label="Main" {...props}>
             <SkipLink />
             <nav>
                 nav
