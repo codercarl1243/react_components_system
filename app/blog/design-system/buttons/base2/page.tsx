@@ -13,18 +13,20 @@ export const metadata: Metadata = { title: "Buttons · Design System" };
 export default function ButtonsBasePage() {
     return (
         <>
-            <Post className="flow-8">
+            <Post className="flow-16">
                 <PostSection>
                     <PostBanner
                         title="The Button"
                         subtitle="Building a React Design System Foundation"
                         image={{
                             src: "",
-                            alt: undefined
                         }}
                     />
                     <p>
-                        This is the first in a series where we're building a comprehensive Button design system.
+                        This is the first in a series where we're building a comprehensive <span className="bold italic">Button design system</span>.
+                    </p>
+
+                    <p>
                         We'll create a flexible, accessible, and composable button system in React that serves as the
                         foundation for more complex components like toggles, switches, and button panels.
                     </p>
