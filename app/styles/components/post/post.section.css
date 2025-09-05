@@ -14,4 +14,5 @@
     margin-inline: auto;
     background-color: var(--color-neutral-200);
     box-shadow: 1px 4px 10px var(--color-neutral-800);
+    pointer-events: none;
 }
