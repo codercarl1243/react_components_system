@@ -1,7 +1,9 @@
-import { Children, useId, cloneElement, isValidElement, JSX } from "react";
+import { Children, useId, cloneElement, isValidElement, ReactElement } from "react";
 import Icon from "../icon";
 import { RiInformationLine } from "@remixicon/react";
 import clsx from "clsx";
+
+type ElementWithId = ReactElement<{ id?: string }>;
 
 export default function PostNote({ className, children, ...props }: React.ComponentProps<'div'>) {
     const id = useId();
@@ -12,23 +14,27 @@ export default function PostNote({ className, children, ...props }: React.Compon
 
     const [firstChild, ...restChildren] = childArray;
     const isDomElement = isValidElement(firstChild);
-    const labelId = isDomElement && (firstChild as any).props?.id
-        ? (firstChild as any).props.id
+    const getElementId = (element: ElementWithId): string | undefined => {
+        return element.props?.id;
+    };
+
+    const labelId = isDomElement && getElementId(firstChild as ElementWithId)
+        ? getElementId(firstChild as ElementWithId)
         : id;
 
     const firstChildWithId = isDomElement
-        ? cloneElement(firstChild as any, { id: labelId })
+        ? cloneElement(firstChild as ElementWithId, { id: labelId })
         : <span id={labelId}>{firstChild}</span>; // Fallback for text nodes
 
 
     // TODO: Consider makign the content expandable and hidden
     return (
-        <div 
-        // data-expanded={"false"} 
-        className={clsx(className, "post-note width-bleed")} 
-        role={"note"} 
-        aria-labelledby={labelId} 
-        {...props}>
+        <div
+            // data-expanded={"false"} 
+            className={clsx(className, "post-note width-bleed")}
+            role={"note"}
+            aria-labelledby={labelId}
+            {...props}>
             <div className="post-note__first">
                 <Icon icon={RiInformationLine} size={64} className="post-note__icon" />
                 {firstChildWithId}
