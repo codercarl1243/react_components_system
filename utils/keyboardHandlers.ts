@@ -1,4 +1,4 @@
-type KeyCallbackMap = {
+export type KeyCallbackMap = {
   [key: string]: () => void;
 };
 
