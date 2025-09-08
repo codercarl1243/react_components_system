@@ -13,18 +13,20 @@ interface CopyButtonProps {
 export function CopyButton({ text }: CopyButtonProps) {
     const [copied, setCopied] = useState(false);
     const [error, setError] = useState<boolean>(false);
-
-const copyToClipboard = async () => {
-    try {
-        await navigator.clipboard.writeText(text);
-        setCopied(true);
-        setError(false);
-        setTimeout(() => setCopied(false), 500);
-    } catch (err) {
-        setError(true);
-        console.error('Failed to copy text: ', err);
+    if (!navigator.clipboard) {
+        return null;
     }
-};
+    const copyToClipboard = async () => {
+        try {
+            await navigator.clipboard.writeText(text);
+            setCopied(true);
+            setError(false);
+            setTimeout(() => setCopied(false), 500);
+        } catch (err) {
+            setError(true);
+            console.error('Failed to copy text: ', err);
+        }
+    };
 
     return (
         <Button
