@@ -1,6 +1,19 @@
+    .shiki-wrapper {
+        position: relative;
+        & .button--copy {
+            position: absolute;
+            top: 0.25em;
+            right: 0.25em;
+            display: grid;
+            place-content: center;
+
+        }
+    }
+    
     .shiki-wrapper pre {
         max-height: 30rem;
         padding: 0.5em;
+        margin-block: 0;
         border: var(--border-thick);
         border-radius: var(--radius-md);
         overflow: auto;
@@ -22,10 +35,10 @@
         }
     }
 
-    .shiki-wrapper[data-width="full"] pre {
+    /* .shiki-wrapper[data-width="full"] pre {
             width: fit-content;
             max-width: 100%;
-        }
+        } */
 
     @media (max-width: 768px) {
         .shiki-wrapper pre {

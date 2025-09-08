@@ -50,7 +50,7 @@ export default function ButtonsBasePage() {
                     <Heading headingLevel={3} id="file-structure">File Structure</Heading>
                     <p>We'll follow a consistent pattern for organizing our components:</p>
 
-                    <Code lang="md" codeString={`components/
+                    <Code lang="md" copyEnabled={false} codeString={`components/
 └── button/
     ├── Button.tsx          // Main component
     ├── useButton.ts        // Logic hook
