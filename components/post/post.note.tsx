@@ -18,9 +18,7 @@ export default function PostNote({ className, children, ...props }: React.Compon
         return element.props?.id;
     };
 
-    const labelId = isDomElement && getElementId(firstChild as ElementWithId)
-        ? getElementId(firstChild as ElementWithId)
-        : id;
+    const labelId = isDomElement ? getElementId(firstChild as ElementWithId) : id;
 
     const firstChildWithId = isDomElement
         ? cloneElement(firstChild as ElementWithId, { id: labelId })
