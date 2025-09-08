@@ -1,4 +1,3 @@
-"use client";
 import { TabPanelProps } from "./tablist.type";
 import clsx from "clsx";
 
