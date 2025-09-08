@@ -1,3 +1,4 @@
+'use client';
 import { handleKey } from "@/utils/keyboardHandlers";
 import React, { ReactElement, useEffect, useRef, useState } from "react";
 import { TabListProps, TabPanelProps } from "./tablist.type";
