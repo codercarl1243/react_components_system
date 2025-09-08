@@ -75,6 +75,8 @@ export default function PostSideBar({
                                 alt={author.name}
                                 className="author__avatar"
                                 loading="lazy"
+                                width={100}
+                                height={100}
                             />
                         )}
 
