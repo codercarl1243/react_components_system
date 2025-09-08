@@ -1,9 +1,16 @@
 import type { ReactElement, ReactNode, HTMLAttributes } from "react";
 
-export type TabPanelProps = { 
-    label: ReactNode;
-    id: string;
-} & HTMLAttributes<HTMLDivElement>;
+type TabPanelWithLabel = {
+        label: ReactNode;
+        id: string;
+}
+
+type TabPanelSansLabel = {
+        label: never;
+        id: string;
+}
+
+export type TabPanelProps = TabPanelWithLabel | TabPanelSansLabel & HTMLAttributes<HTMLDivElement>;
 
 
 export type TabListProps = {
