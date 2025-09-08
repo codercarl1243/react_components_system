@@ -1,15 +1,16 @@
     .shiki-wrapper {
         position: relative;
-        & .button--copy {
-            position: absolute;
-            top: 0.25em;
-            right: 0.25em;
-            display: grid;
-            place-content: center;
-
-        }
     }
-    
+
+    .shiki-wrapper .button--copy {
+        position: absolute;
+        top: 0.25em;
+        right: 0.25em;
+        display: grid;
+        place-content: center;
+
+    }
+
     .shiki-wrapper pre {
         max-height: 30rem;
         padding: 0.5em;
