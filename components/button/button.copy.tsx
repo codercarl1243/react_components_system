@@ -1,10 +1,9 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Icon from '../icon';
 import { RiCheckFill, RiErrorWarningLine, RiFileCopyLine } from '@remixicon/react';
 import Button from '@/components/button';
-
 
 interface CopyButtonProps {
     text: string;
@@ -13,15 +12,24 @@ interface CopyButtonProps {
 export function CopyButton({ text }: CopyButtonProps) {
     const [copied, setCopied] = useState(false);
     const [error, setError] = useState<boolean>(false);
-    if (!navigator.clipboard) {
+    const [isSupported, setIsSupported] = useState<boolean | null>(null);
+
+    useEffect(() => {
+        // Check clipboard support after hydration
+        setIsSupported(!!navigator.clipboard);
+    }, []);
+
+    // Don't render anything until we've checked support
+    if (isSupported === null || !isSupported) {
         return null;
     }
+
     const copyToClipboard = async () => {
         try {
             await navigator.clipboard.writeText(text);
             setCopied(true);
             setError(false);
-            setTimeout(() => setCopied(false), 500);
+            setTimeout(() => setCopied(false), 1250);
         } catch (err) {
             setError(true);
             console.error('Failed to copy text: ', err);
