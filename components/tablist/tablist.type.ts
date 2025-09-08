@@ -1,16 +1,10 @@
 import type { ReactElement, ReactNode, HTMLAttributes, ComponentPropsWithRef } from "react";
 
-type TabPanelWithLabel = {
-        label: ReactNode;
-        id: string;
-}
+type BasePanel = ComponentPropsWithRef<'div'> & { id: string };
+type TabPanelWithLabel = BasePanel & {label: ReactNode;}
+type TabPanelSansLabel = BasePanel & { label: never;}
 
-type TabPanelSansLabel = {
-        label: never;
-        id: string;
-}
-
-export type TabPanelProps = (TabPanelWithLabel | TabPanelSansLabel) & ComponentPropsWithRef<'div'>
+export type TabPanelProps = TabPanelWithLabel | TabPanelSansLabel;
 
 export type TabListProps = {
     onChange?: (tabId: string) => void;
