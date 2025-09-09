@@ -1,7 +1,9 @@
 import type { ReactNode, HTMLAttributes, ComponentPropsWithRef } from "react";
 import { BaseButtonProps } from "../button/button.type";
 
-export interface TabProps extends BaseButtonProps {
+export interface TabProps extends Omit<BaseButtonProps,
+  'id' | 'role' | 'tabIndex' | 'aria-selected' | 'aria-controls'
+> {
   id: string;
   isSelected: boolean;
 }
@@ -11,9 +13,9 @@ export interface TabPanelProps extends ComponentPropsWithRef<'div'> {
 }
 
 export type TabItem = {
-    id: string;
-    panelContent: ReactNode;
-    tabLabel: ReactNode;
+  id: string;
+  panelContent: ReactNode;
+  tabLabel: ReactNode;
 }
 
 export interface TabListProps extends HTMLAttributes<HTMLDivElement> {
