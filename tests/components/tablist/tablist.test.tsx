@@ -52,7 +52,6 @@ jest.mock("../../../components/tablist/panel", () => {
                 data-testid={`panel-${id}`}
                 role="tabpanel"
                 hidden={hidden}
-                aria-hidden={hidden ? "true" : "false"}
             >
                 {children}
             </div>
