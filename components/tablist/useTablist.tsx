@@ -11,12 +11,10 @@ export default function useTablist(defaultTabId?: string) {
         return Array.from(
             tablistRef.current.querySelectorAll('[role="tab"]')
         )
-            .filter(tab => {
-                return (
-                    tab.getAttribute('aria-disabled') !== 'true' &&
-                    tab.getAttribute('disabled') !== 'true'
-                )
-            })
+            .filter(tab =>
+                tab.getAttribute('aria-disabled') !== 'true' &&
+                tab.getAttribute('disabled') !== 'true'
+            )
             .map(tab => ({
                 id: tab.id.replace('tab-', ''),
                 element: tab as HTMLElement
@@ -35,7 +33,7 @@ export default function useTablist(defaultTabId?: string) {
             }
             console.warn(`Tab with id "${activeId}" not found, falling back to first tab`);
         }
-        
+
         setActiveId(tabs[0].id);
     }, [activeId, getTabs]);
 
