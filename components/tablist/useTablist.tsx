@@ -28,18 +28,15 @@ export default function useTablist(defaultTabId?: string) {
         const tabs = getTabs();
         if (tabs.length === 0) return; // No tabs to work with
 
-        if (!activeId) {
-            // No active tab set, use first tab
-            setActiveId(tabs[0].id);
-        } else {
-            // Check if current activeId actually exists in the DOM
+        if (activeId) {
             const activeTabExists = tabs.some(tab => tab.id === activeId);
-            if (!activeTabExists) {
-                // Current activeId doesn't exist, fallback to first tab
-                console.warn(`Tab with id "${activeId}" not found, falling back to first tab`);
-                setActiveId(tabs[0].id);
+            if (activeTabExists) {
+                return;
             }
+            console.warn(`Tab with id "${activeId}" not found, falling back to first tab`);
         }
+        
+        setActiveId(tabs[0].id);
     }, [activeId, getTabs]);
 
     const focusTab = useCallback((id: string) => {
