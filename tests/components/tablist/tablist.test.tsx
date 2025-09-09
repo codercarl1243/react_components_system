@@ -187,7 +187,7 @@ describe("TabList", () => {
 
         // Content has tabpanels
         expect(content).not.toBeNull()
-        const panels = within(content).getAllByRole("tabpanel")
+        const panels = within(content).getAllByRole("tabpanel", { hidden: true })
         expect(panels).toHaveLength(sampleTabs.length)
     })
 })
