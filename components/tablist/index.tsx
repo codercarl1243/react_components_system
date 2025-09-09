@@ -15,7 +15,7 @@ export default function TabList({ defaultActiveTabId, tabs, orientation = "horiz
     if (!tabs?.length) return null;
 
     return (
-        <div className="tablist"  >
+        <div className="tablist">
             <div
                 className="tablist__header"
                 role="tablist"
