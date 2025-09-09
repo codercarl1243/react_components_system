@@ -25,9 +25,18 @@ export default function useTablist(defaultTabId?: string) {
 
     // Initialize active tab
     useEffect(() => {
+        const tabs = getTabs();
+        if (tabs.length === 0) return; // No tabs to work with
+
         if (!activeId) {
-            const tabs = getTabs();
-            if (tabs.length > 0) {
+            // No active tab set, use first tab
+            setActiveId(tabs[0].id);
+        } else {
+            // Check if current activeId actually exists in the DOM
+            const activeTabExists = tabs.some(tab => tab.id === activeId);
+            if (!activeTabExists) {
+                // Current activeId doesn't exist, fallback to first tab
+                console.warn(`Tab with id "${activeId}" not found, falling back to first tab`);
                 setActiveId(tabs[0].id);
             }
         }
@@ -35,7 +44,7 @@ export default function useTablist(defaultTabId?: string) {
 
     const focusTab = useCallback((id: string) => {
         const tabButton = document.getElementById(`tab-${id}`);
-        if (!tabButton || 
+        if (!tabButton ||
             tabButton.getAttribute('aria-disabled') === 'true' ||
             tabButton.getAttribute('disabled') === 'true'
         ) return;
