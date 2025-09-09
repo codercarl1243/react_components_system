@@ -25,4 +25,4 @@ export type TabListProps = Readonly<{
   orientation?: 'vertical' | 'horizontal';
   defaultActiveTabId?: string;
   // TODO: figure out what I want to do re: heading for the tablist which can be used as an aria label or a Heading element
-} & HTMLAttributes<HTMLDivElement>>;
+} & Omit<HTMLAttributes<HTMLDivElement>, 'role' | 'onKeyDown' | 'aria-orientation' | 'aria-label'>>;
