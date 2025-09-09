@@ -8,7 +8,7 @@ export interface TabProps extends Omit<BaseButtonProps,
   isSelected: boolean;
 }
 
-export interface TabPanelProps extends ComponentPropsWithRef<'div'> {
+export interface TabPanelProps extends Omit<ComponentPropsWithRef<'div'>, 'id' | 'role' | 'tabIndex' | 'aria-labelledby'> {
   id: string;
 }
 
