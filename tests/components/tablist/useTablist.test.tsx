@@ -211,7 +211,6 @@ describe("useTablist - focusing panels with Enter/Space", () => {
     const user = userEvent.setup();
     render(<TestTabs ids={["a", "b"]} defaultTabId="b" orientation="horizontal" />);
     const tabB = screen.getByRole("tab", { name: "Tab b" });
-    const panelB = screen.getByRole("tabpanel", { name: "" });
     (tabB as HTMLButtonElement).focus();
 
     await user.keyboard("{Enter}");
