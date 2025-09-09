@@ -3,8 +3,9 @@ import type { TabListProps } from "@/components/tablist/tablist.type";
 import Tab from "@/components/tablist/tab";
 import useTablist from "@/components/tablist/useTablist";
 import Panel from "@/components/tablist/panel";
+import clsx from "clsx";
 
-export default function TabList({ defaultActiveTabId, tabs, orientation = "horizontal", ...props }: TabListProps) {
+export default function TabList({ defaultActiveTabId, tabs, orientation = "horizontal", className, ...props }: TabListProps) {
 
     const { activeId,
         setActiveTab,
@@ -15,14 +16,13 @@ export default function TabList({ defaultActiveTabId, tabs, orientation = "horiz
     if (!tabs?.length) return null;
 
     return (
-        <div className="tablist">
+        <div className={clsx("tablist", className)} {...props}>
             <div
                 className="tablist__header"
                 role="tablist"
                 aria-orientation={orientation}
                 ref={tablistRef}
                 onKeyDown={handleKeyDown}
-                {...props}
             >
                 {tabs.map(item => (
                     <Tab
