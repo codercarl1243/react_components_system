@@ -1,8 +1,51 @@
-import TabListComponent from "./tablist";
-import TabPanel from "./panel";
-import type { TabListProps, TabPanelProps } from "./tablist.type";
-export type { TabListProps, TabPanelProps };
+'use client';
+import type { TabListProps } from "@/components/tablist/tablist.type";
+import Tab from "@/components/tablist/tab";
+import useTablist from "@/components/tablist/useTablist";
+import Panel from "@/components/tablist/panel";
+import clsx from "clsx";
 
-const TabList = Object.assign(TabListComponent, { Panel: TabPanel });
+export default function TabList({ defaultActiveTabId, tabs, orientation = "horizontal", className, ...props }: TabListProps) {
 
-export default TabList;
+    const { activeId,
+        setActiveTab,
+        tablistRef,
+        handleKeyDown
+    } = useTablist(defaultActiveTabId)
+
+    if (!tabs?.length) return null;
+
+    return (
+        <div className={clsx("tablist", className)} {...props}>
+            <div
+                className="tablist__header"
+                role="tablist"
+                aria-orientation={orientation}
+                ref={tablistRef}
+                onKeyDown={handleKeyDown}
+            >
+                {tabs.map(item => (
+                    <Tab
+                        key={item.id}
+                        id={item.id}
+                        isSelected={activeId === item.id}
+                        onClick={() => setActiveTab(item.id)}
+                    >
+                        {item.tabLabel}
+                    </Tab>
+                ))}
+            </div>
+            <div className="tablist__content">
+                {tabs.map(item => (
+                    <Panel
+                        key={`panel-${item.id}`}
+                        id={item.id}
+                        hidden={activeId !== item.id}
+                    >
+                        {item.panelContent}
+                    </Panel>
+                ))}
+            </div>
+        </div>
+    )
+}
