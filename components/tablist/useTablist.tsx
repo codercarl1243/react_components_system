@@ -51,7 +51,9 @@ export default function useTablist(defaultTabId?: string) {
 
     const handleKeyDown = useCallback((e: React.KeyboardEvent<HTMLDivElement>) => {
         const activeElement = document.activeElement as HTMLElement;
-        if (!activeElement?.getAttribute('role')?.includes('tab')) return;
+        const role = activeElement?.getAttribute('role');
+        if (role !== 'tab') return;
+        
         if (!tablistRef.current?.contains(activeElement)) return;
 
         const tabs = getTabs();
