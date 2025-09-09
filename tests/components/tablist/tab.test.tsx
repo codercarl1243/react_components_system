@@ -4,9 +4,10 @@
  */
 
 import React from "react"
-import { render, screen, fireEvent } from "@testing-library/react"
+import { render, screen } from "@testing-library/react"
 import Tab from "@/components/tablist/tab"
 import { type TabProps } from "@/components/tablist/tablist.type";
+import userEvent from "@testing-library/user-event";
 
 const setup = (override: Partial<React.ComponentProps<typeof Tab>> = {}) => {
     const onClickMock = jest.fn?.();
@@ -59,10 +60,10 @@ describe("Tab", () => {
         expect(className).toMatch(/\bcustom\b/)
     })
 
-    test("calls onClick when clicked", () => {
+    test("calls onClick when clicked", async () => {
         const onClick = jest.fn?.()
         const { button } = setup({ onClick })
-        fireEvent.click(button)
+        await userEvent.click(button)
         expect(onClick).toHaveBeenCalledTimes(1)
     })
 
