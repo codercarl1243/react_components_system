@@ -13,7 +13,7 @@ export default function useTablist(defaultTabId?: string) {
         )
             .filter(tab => {
                 return (
-                    tab.getAttribute('aria-disabled') !== 'true' ||
+                    tab.getAttribute('aria-disabled') !== 'true' &&
                     tab.getAttribute('disabled') !== 'true'
                 )
             })
