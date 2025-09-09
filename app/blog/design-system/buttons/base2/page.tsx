@@ -23,34 +23,36 @@ export default function ButtonsBasePage() {
                         }}
                     />
                     <p>
-                        This is the first in a series where we're building a comprehensive <span className="bold italic">Button design system</span>.
+                        This is the first in a series where we&apos;re building a comprehensive <span className="bold italic">Button design system</span>.
                     </p>
 
                     <p>
-                        We'll create a flexible, accessible, and composable button system in React that serves as the
+                        We&apos;ll create a flexible, accessible, and composable button system in React that serves as the
                         foundation for more complex components like toggles, switches, and button panels.
                     </p>
                 </PostSection>
 
                 <PostSection>
-                    <Heading headingLevel={2} id="what-were-building">What We're Building</Heading>
-                    <p>By the end of this post, you'll have:</p>
-                    <ul>
-                        <li>A type-safe, accessible base button component</li>
-                        <li>A reusable hook for handling button interactions</li>
-                        <li>CSS styling with built-in accessibility features</li>
-                        <li>Multiple button variants (primary, secondary, accent)</li>
-                        <li>Comprehensive test coverage</li>
-                    </ul>
+                    <Heading headingLevel={2} id="what-were-building">What We&apos;re Building</Heading>
+                    <div>
+                        <p>By the end of this post, you&apos;ll have:</p>
+                        <ul>
+                            <li>A type-safe, accessible base button component</li>
+                            <li>A reusable hook for handling button interactions</li>
+                            <li>CSS styling with built-in accessibility features</li>
+                            <li>Multiple button variants (primary, secondary, accent)</li>
+                            <li>Comprehensive test coverage</li>
+                        </ul>
+                    </div>
                 </PostSection>
 
                 <PostSection>
                     <Heading headingLevel={2} id="project-setup">Project Setup</Heading>
 
                     <Heading headingLevel={3} id="file-structure">File Structure</Heading>
-                    <p>We'll follow a consistent pattern for organizing our components:</p>
+                    <p>We&apos;ll follow a consistent pattern for organizing our components:</p>
 
-                    <Code lang="md" codeString={`components/
+                    <Code lang="md" copyEnabled={false} codeString={`components/
 └── button/
     ├── Button.tsx          // Main component
     ├── useButton.ts        // Logic hook
@@ -91,10 +93,10 @@ export default function Button({children, ...props}) {
     )
 }`} />
 
-                    <p>This needs to be a client component because we'll handle interactions that can't be serialized during server-side rendering.</p>
+                    <p>This needs to be a client component because we&apos;ll handle interactions that can&apos;t be serialized during server-side rendering.</p>
 
                     <Heading headingLevel={3} id="typescript-support">Adding TypeScript Support</Heading>
-                    <p>TypeScript needs to understand what props our button accepts. We'll use React's built-in type helper:</p>
+                    <p>TypeScript needs to understand what props our button accepts. We&apos;ll use React&apos;s built-in type helper:</p>
 
                     <Code codeString={`// button.type.ts
 import { ComponentPropsWithRef } from "react";
@@ -113,7 +115,7 @@ export default function Button({children, ref, ...props}) {
 
                     <PostNote>
                         <Heading headingLevel={4}>For React 18 and Earlier</Heading>
-                        <p>If you're using React 18 or earlier, you'll still need <Code inline codeString="forwardRef" />:</p>
+                        <p>If you&apos;re using React 18 or earlier, you&apos;ll still need <Code inline codeString="forwardRef" />:</p>
                         <Code codeString={`import { forwardRef } from "react";
 import type {ComponentProps} from 'react';
 
@@ -132,7 +134,7 @@ const Button = forwardRef<HTMLButtonElement, ComponentProps<"button">>(
                     <Heading headingLevel={2} id="interaction-logic">Adding Interaction Logic</Heading>
 
                     <Heading headingLevel={3} id="why-custom-hook">Why Use a Custom Hook?</Heading>
-                    <p>We'll separate our interaction logic into a custom hook for several reasons:</p>
+                    <p>We&apos;ll separate our interaction logic into a custom hook for several reasons:</p>
                     <ul>
                         <li>Easier testing of business logic</li>
                         <li>Reusable across different button variants</li>
@@ -172,7 +174,7 @@ export default function useButton() {
 }`} />
 
                     <Heading headingLevel={3} id="type-safety">Type Safety</Heading>
-                    <p>Let's add proper TypeScript types for our click handler:</p>
+                    <p>Let&apos;s add proper TypeScript types for our click handler:</p>
 
                     <Code codeString={`type ButtonClickHandler<T = void> = (
     event: React.MouseEvent<HTMLButtonElement>
@@ -317,7 +319,7 @@ export type ButtonProps = {
                         </p>
                         <p>
                             This sizing ensures that anyone using a touch device has a good chance to hit the button
-                            when they're trying to. Both iOS guidelines and Material Design use similar sizing.
+                            when they&apos;re trying to. Both iOS guidelines and Material Design use similar sizing.
                         </p>
                     </PostNote>
 
@@ -577,7 +579,7 @@ const config: Config = {
     coverageProvider: 'v8',
     coverageDirectory: "coverage",
     testEnvironment: 'jsdom',
-    moduleNameMapping: {
+    moduleNameMapper: {
         '^@/(.*)$': '<rootDir>/$1',
     },
     setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
@@ -737,13 +739,13 @@ export default function ButtonsPage() {
                 </PostSection>
 
                 <PostSection>
-                    <Heading headingLevel={2} id="whats-next">What's Next</Heading>
+                    <Heading headingLevel={2} id="whats-next">What&apos;s Next</Heading>
                     <p>
-                        In the next post, we'll extend this foundation to create toggle buttons and explore
+                        In the next post, we&apos;ll extend this foundation to create toggle buttons and explore
                         setting up Storybook to document our growing design system.
                     </p>
                     <p>
-                        The patterns we've established here will serve as the foundation for more complex
+                        The patterns we&apos;ve established here will serve as the foundation for more complex
                         components like button groups, tab lists, and interactive panels.
                     </p>
 

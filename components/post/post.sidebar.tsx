@@ -1,6 +1,7 @@
 import { ComponentProps } from "react";
 import Heading from "@/components/heading";
 import clsx from "clsx";
+import Image from "next/image";
 
 type TableOfContentsItem = {
     id: string;
@@ -69,11 +70,13 @@ export default function PostSideBar({
                     <Heading headingLevel={2} >About the Author</Heading>
                     <div className="author">
                         {author.avatarUrl && (
-                            <img
+                            <Image
                                 src={author.avatarUrl}
                                 alt={author.name}
                                 className="author__avatar"
                                 loading="lazy"
+                                width={100}
+                                height={100}
                             />
                         )}
 

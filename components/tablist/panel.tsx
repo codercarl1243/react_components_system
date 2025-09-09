@@ -1,7 +1,5 @@
-import { forwardRef } from "react";
 import { TabPanelProps } from "./tablist.type";
 import clsx from "clsx";
-
 
 /**
  * TabPanel Component
@@ -22,29 +20,22 @@ import clsx from "clsx";
  * ```
  * 
  * Notes:
- * - Do not rely on the `label` prop inside this component. It is for parent use only.
  * - The component should always be used inside a TabList for proper ARIA management.
  */
-export const TabPanel = forwardRef<HTMLDivElement, TabPanelProps>(
-    ({
-        children,
-        className,
-        label: _ignored,
-        ...props }, ref) => {
+export default function TabPanel({
+    children,
+    className,
+    ref,
+    ...props }: TabPanelProps) {
 
-        return (
-            <div
-                role="tabpanel"
-                className={clsx("tablist__content-panel", className)}
-                ref={ref}
-                {...props}
-            >
-                {children}
-            </div>
-        )
-    }
-)
-
-TabPanel.displayName = "TabPanel";
-
-export default TabPanel;
+    return (
+        <div
+            role="tabpanel"
+            className={clsx("tablist__content-panel", className)}
+            ref={ref}
+            {...props}
+        >
+            {children}
+        </div>
+    )
+} 

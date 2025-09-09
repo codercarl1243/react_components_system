@@ -81,15 +81,15 @@ export default function Button({children, ...props }){
                     />
 
                     <p>
-                        This has to be labelled as a client component because we'll handle interactions on the client side with functions that cant be serialized in the build step on the server. The ref is deliberately added to the props to communicate intent and the ability for the button to have a ref if the project has a use-case for it.
+                        This has to be labelled as a client component because we&apos;ll handle interactions on the client side with functions that cant be serialized in the build step on the server. The ref is deliberately added to the props to communicate intent and the ability for the button to have a ref if the project has a use-case for it.
                     </p>
                     <PostNote>
                         <Heading headingLevel={3} id="react-ref-deprecation">React Ref inside of props and the deprecation of forwardRef</Heading>
                         <p>As of React 19, the team came out and said that they would be deprecating forwardRef some time in the future and have prepared for that by adding the ability to just grab the ref from the props.
-                            If you're using an older version you would still need to use forwardRef to pass through Refs properly.</p>
+                            If you&apos;re using an older version you would still need to use forwardRef to pass through Refs properly.</p>
 
                         <Code layout="content" codeString={`import { forwardRef } from "react";
-import type {ComponentProps} from 'react';
+import type {ComponentProps} from "react";
                     
 const Button = forwardRef<HTMLButtonElement, ComponentProps<"button">>(
     ({children, ...props }, ref) => (
@@ -111,7 +111,7 @@ const Button = forwardRef<HTMLButtonElement, ComponentProps<"button">>(
                         Typescript will complain because it doesnt understand what these props are. We can use the intellisense of the code editor to see the return type of the component is a html button and it is receiving basic component attributes <strong>plus</strong> the ref. React provides for this sort of situation with a built-in type helper <Code inline codeString={` type BaseButtonProps = React.ComponentPropsWithRef<"button">;`} />.
                     </p>
                     <p>
-                        As we build out more complex buttons, their typing <strong>will</strong> build on the props being passed through here, so I am going to extract this into the buttons' type file.
+                        As we build out more complex buttons, their typing <strong>will</strong> build on the props being passed through here, so I am going to extract this into the buttons&apos; type file.
                     </p>
                     <Code codeString={`//button.type.ts
 import { ComponentPropsWithRef } from "react";
@@ -153,11 +153,11 @@ export type BaseButtonProps = ComponentPropsWithRef<"button">;`} />
     </button>
 }`} />
                     </div>
-                    <p>I'm just going to create a route for buttons and nextJS requires a page in here which I will render our button inside of.</p>
+                    <p>I&apos;m just going to create a route for buttons and nextJS requires a page in here which I will render our button inside of.</p>
 
                     {/* 👉 **🎬 Create a page file and navigate to 3000/buttons,** */}
 
-                    <Code codeString={`'use client'
+                    <Code codeString={`"use client"
 import Button from "@/components/button";
 
 export default function ButtonsPage() {
@@ -166,7 +166,6 @@ export default function ButtonsPage() {
             </div>
 }`} />
 
-                    {/* 👉 **🎬 Show console log: 'clicked'** */}
 
                     <Heading headingLevel={3} id="type-safety">Adding Type-Safety</Heading>
                     <p>lets quickly cover the questions that a QA or manager is going to ask us.</p>
@@ -249,7 +248,7 @@ return {handleClick};
                         <li>Add a loading state.
                             This will just be a prop passed through to the button and will ensure that every single button in the app will communicate state to the user in the same consistent manner.
                             <div>
-                                We can disable the button while it is loading, and add an aria-busy attribute to tell screen readers that this button is processing the click. Changing the text content from the original label to 'Loading...' provides clear feedback to all users about the current state.
+                                We can disable the button while it is loading, and add an aria-busy attribute to tell screen readers that this button is processing the click. Changing the text content from the original label to &quot;Loading...&quot; provides clear feedback to all users about the current state.
                             </div>
                         </li>
                         <li>Add some css styling to give us a clean button with some baked in accessibility</li>
@@ -285,7 +284,7 @@ className, onClick, disabled, ref, isLoading = false, type = "button", children,
                     <p>Because this is our base Button I am going to wrap all of this CSS inside a layer to ensure it can be overwritten easily.</p>
                     <Code codeString={`@layer base { }`} lang="css" />
 
-                    <p>lets ensure that we respect the WCAG's minimum target size requirements for interactive elements - <em>especially as the number of countries with some level of legal requirement in place is growing each year.</em> </p>
+                    <p>lets ensure that we respect the WCAG&apos;s minimum target size requirements for interactive elements - <em>especially as the number of countries with some level of legal requirement in place is growing each year.</em> </p>
                     <PostNote>
                         <Heading headingLevel={3}>Minimum target size</Heading>
                         <p>
@@ -304,9 +303,9 @@ className, onClick, disabled, ref, isLoading = false, type = "button", children,
                         <li>or just folks with larger-than-average fingers.</li>
                     </ul>
 
-                    <p>So I'm going to bump the <span className="bold">minimum height and width to 44px</span>, and add <span className="bold">8px of margin</span> around each button.
+                    <p>So I&apos;m going to bump the <span className="bold">minimum height and width to 44px</span>, and add <span className="bold">8px of margin</span> around each button.
 
-                        If you've used any touch device in the past year, you're already familiar with these sizes — both Android and iOS follow this success criterion.</p>
+                        If you&apos;ve used any touch device in the past year, you&apos;re already familiar with these sizes — both Android and iOS follow this success criterion.</p>
 
 
 
@@ -341,7 +340,7 @@ color: currentColor; /* Inherit text color from parent */
 
 /* 
     Font and text styling for consistency 
-    Fonts are not inherited by buttons and other inputs due to the differences in opinions in the browsers' default style sheets 
+    Fonts are not inherited by buttons and other inputs due to the differences in opinions in the browsers\' default style sheets 
 */
 font: inherit; /* Inherit font family, weight, etc. from parent */
 font-size: 1rem; /* Standardize font size for predictability */
@@ -370,7 +369,7 @@ border-color 0.2s ease,
 outline 0.2s ease;
 `} />
 
-                    <p>I'm going to take this opportunity to remove any transitions and animations if the user of the site has preferences against it.</p>
+                    <p>I&apos;m going to take this opportunity to remove any transitions and animations if the user of the site has preferences against it.</p>
 
                     <Code lang="css" codeString={`@media (prefers-reduced-motion: reduce) {
     .button {
@@ -379,12 +378,12 @@ outline 0.2s ease;
     }
 }`} />
 
-                    <p>lets give it a cursor of pointer to show the user that it is interactive, but we're only adding this to actual <Code inline={true} codeString={`<button>`} /> elements - because in some edge cases, we might style non-interactive elements to look like buttons for layout consistency. We don't want to imply interactivity with a hand cursor if clicking doesn't do anything.</p>
+                    <p>lets give it a cursor of pointer to show the user that it is interactive, but we&apos;re only adding this to actual <Code inline={true} codeString={`<button>`} /> elements - because in some edge cases, we might style non-interactive elements to look like buttons for layout consistency. We don&apos;t want to imply interactivity with a hand cursor if clicking doesn&apos;t do anything.</p>
 
                     <Code lang="css" codeString={`button{
-    /*dont add cursor: pointer to the button class.
-        we might style other non-interactive elements to look
-        like buttons/ boxes but we dont want to suggest interactivity
+    /*
+      dont add cursor: pointer to the button class.
+        we might style other non-interactive elements to look like button boxes but we dont want to suggest interactivity
     */
     cursor: pointer;
 }`} />
@@ -429,7 +428,7 @@ outline: 1px solid currentColor;
                     {/* 👉 **🎬 Replace button styling with CSS variables where possible.** */}
 
                     <p>
-                        Now that we have a good base. I'm going to quickly replace some of this css with css variables that can be used to customize our buttons moving forward.
+                        Now that we have a good base. I&apos;m going to quickly replace some of this css with css variables that can be used to customize our buttons moving forward.
                         a couple of these css statements reference css variables that wont be used at first but are now open for us to hook into.
                     </p>
                     <Code lang="css" codeString={`@layer base {
@@ -627,7 +626,7 @@ outline: 1px solid currentColor;
 
                     {/* 👉 **🎬 Create button variants on Button Page** */}
 
-                    <Code codeString={`'use client'
+                    <Code codeString={`"use client"
 import Button from "@/components/button";
 
 export default function DefaultButtons() {
@@ -666,11 +665,11 @@ export default function DefaultButtons() {
 }`} />
                     <p>
                         so I have gone ahead and added these buttons to the buttons page.
-                        we can see that the styling works nicely regardless of the button's state.
+                        we can see that the styling works nicely regardless of the button&apos;s state.
                     </p>
                     <PostNote>
-                        <p>In a design system, you will want to document and showcase all these variants in one place - that's where tools like Storybook really shine.
-                            We'll explore setting up Storybook for our design system in the future.</p>
+                        <p>In a design system, you will want to document and showcase all these variants in one place - that&apos;s where tools like Storybook really shine.
+                            We&apos;ll explore setting up Storybook for our design system in the future.</p>
                     </PostNote>
                 </PostSection>
 
@@ -699,32 +698,32 @@ export default function DefaultButtons() {
 
                     <Code codeString={`
 // jest.setup.ts
-import '@testing-library/jest-dom';
+import "@testing-library/jest-dom";
 `} />
                     <p>and I am going to grab the jest.config file directly from the nextjs website and paste in the extra options that I selected yes to.</p>
 
                     <Code codeString={`
 // jest.config.ts
-import type {Config} from 'jest'
-import nextJest from 'next/jest'
+import type {Config} from "jest"
+import nextJest from "next/jest"
 
 const createJestConfig = nextJest({
 // Provide the path to your Next.js app to load next.config.js and .env files in your test environment
-dir: './',
+dir: "./",
 })
 
 // Add any custom config to be passed to Jest
 const config: Config = {
 clearMocks: true,
 collectCoverage: true,
-coverageProvider: 'v8',
+coverageProvider: "v8",
 coverageDirectory: "coverage",
-testEnvironment: 'jsdom',
+testEnvironment: "jsdom",
 moduleNameMapper: {
-'^@/(.*)$': '<rootDir>/$1',
+"^@/(.*)$": "<rootDir>/$1",
 },
 // Add more setup options before each test is run
-setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
+setupFilesAfterEnv: ["<rootDir>/jest.setup.ts"],
 }
 
 // createJestConfig is exported this way to ensure that next/jest can load the Next.js config which is async
@@ -940,7 +939,7 @@ describe("useButton", () => {
                     <Heading headingLevel={2}>Summary</Heading>
                     <p>
                         This about wraps up the button base.
-                        So rounding the Button component up, We've:
+                        So rounding the Button component up, We&apos;ve:
                     </p>
                     <ul>
                         <li>Isolated logic in a custom hook</li>
@@ -950,13 +949,13 @@ describe("useButton", () => {
                     </ul>
 
                     <p>
-                        Next up, we'll take this button and extend it to create a toggle button,
+                        Next up, we&apos;ll take this button and extend it to create a toggle button,
                         {/* 👉 **🎬 Demo Toggle Button on Button Page** */}
 
-                        and I'll also show you how to set up Storybook to document and visualize
+                        and I&apos;ll also show you how to set up Storybook to document and visualize
                         all our design system components in one place.
 
-                        Thanks for watching! Be sure to like and subscribe — I'll see you in the next one.
+                        Thanks for watching! Be sure to like and subscribe — I&apos;ll see you in the next one.
                     </p>
                         <section>
                             <Link href="./sliders">Next: Slider Buttons</Link>

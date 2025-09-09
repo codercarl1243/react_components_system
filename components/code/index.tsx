@@ -1,5 +1,6 @@
 import type { BundledLanguage } from 'shiki';
 import { getCustomGithubDark, getHighlighterSingleton } from '@/components/code/highlighter';
+import { CopyButton } from '@/components/button/button.copy';
 
 interface Props {
     codeString: string
@@ -7,6 +8,7 @@ interface Props {
     inline?: boolean;
     layout?: "full" | "bleed" | "content";
     title?: string;
+    copyEnabled?: boolean;
 }
 
 export default async function Code({
@@ -14,7 +16,8 @@ export default async function Code({
     lang = "tsx",
     inline = false,
     layout = "content",
-    title
+    title,
+    copyEnabled = true
 }: Props) {
     if (!codeString.trim()) {
         return null;
@@ -36,10 +39,11 @@ export default async function Code({
 
     if (!inline) {
         return <div
-            className={`shiki-wrapper width-${layout}`}
-            {...(title && { 'aria-label': title, role: "region"  })}
-            dangerouslySetInnerHTML={{ __html: out }}
-        />
+            className={`shiki-wrapper width-${layout}`}>
+            {copyEnabled && <CopyButton text={codeString}/>}
+            <div {...(title && { 'aria-label': title, role: "region" })}
+                dangerouslySetInnerHTML={{ __html: out }} />
+        </div>
     }
 
     const innerHtml = out.replace(/^.*?<code[^>]*>|<\/code>.*$/gs, "");
