@@ -53,7 +53,7 @@ export default function useTablist(defaultTabId?: string) {
         const activeElement = document.activeElement as HTMLElement;
         const role = activeElement?.getAttribute('role');
         if (role !== 'tab') return;
-        
+
         if (!tablistRef.current?.contains(activeElement)) return;
 
         const tabs = getTabs();
@@ -90,8 +90,8 @@ export default function useTablist(defaultTabId?: string) {
             },
             Home: () => focusTab(tabs[0].id),
             End: () => focusTab(tabs[lastIndex].id),
-            Enter: () => focusPanel(activeId),
-            Space: () => focusPanel(activeId)
+            Enter: () => focusPanel(tabs[currentIndex].id),
+            Space: () => focusPanel(tabs[currentIndex].id)
         };
 
         handleKeyPress(e, keyMap);
