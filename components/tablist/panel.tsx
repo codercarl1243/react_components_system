@@ -5,8 +5,8 @@ export default function Panel({
     className,
     id,
     ref,
-    children,
-    ...props }: TabPanelProps) {
+    hidden,
+    children }: TabPanelProps) {
 
     return (
         <div
@@ -16,7 +16,7 @@ export default function Panel({
             role="tabpanel"
             aria-labelledby={`tab-${id}`}
             tabIndex={-1}
-            {...props}
+            hidden={hidden}
         >
             {children}
         </div>

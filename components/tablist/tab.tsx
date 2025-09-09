@@ -8,8 +8,8 @@ export default function Tab({
     className,
     id,
     ref,
-    children,
-    ...props }: TabProps) {
+    children
+}: TabProps) {
 
     return (
         <Button
@@ -21,7 +21,6 @@ export default function Tab({
             tabIndex={isSelected ? 0 : -1}
             onClick={onClick}
             className={clsx('tablist__header-tab', className)}
-            {...props}
         >
             {children}
         </Button>
