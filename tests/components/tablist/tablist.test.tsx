@@ -151,12 +151,13 @@ describe("TabList", () => {
         // ensure the event object is forwarded
         const evtArg = mockHandleKeyDown.mock.calls[0]?.[0]
         expect(evtArg).toBeTruthy()
-        expect((evtArg as KeyboardEvent).key || (evtArg as any).key).toBe("ArrowRight")
+        expect(evtArg).toHaveProperty("key", "ArrowRight");
     })
 
     it("binds the tablistRef to the header element", () => {
         // Re-mock useTablist to inject a shared ref we can assert on
         const sharedRef: React.MutableRefObject<HTMLDivElement | null> = { current: null }
+        // TODO: look into replacing this with jest.isolateModules(() => {}). tests returning value of null if this is used currently.
         jest.resetModules()
         jest.doMock("../../../components/tablist/useTablist", () => ({
             __esModule: true,
@@ -188,5 +189,6 @@ describe("TabList", () => {
         expect(content).not.toBeNull()
         const panels = within(content).getAllByRole("tabpanel", { hidden: true })
         expect(panels).toHaveLength(sampleTabs.length)
+        expect(screen.getAllByRole("tabpanel", { hidden: false })).toHaveLength(1);
     })
 })
