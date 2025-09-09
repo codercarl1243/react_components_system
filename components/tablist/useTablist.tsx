@@ -10,10 +10,17 @@ export default function useTablist(defaultTabId?: string) {
         if (!tablistRef.current) return [];
         return Array.from(
             tablistRef.current.querySelectorAll('[role="tab"]')
-        ).map(tab => ({
-            id: tab.id.replace('tab-', ''),
-            element: tab as HTMLElement
-        }));
+        )
+            .filter(tab => {
+                return (
+                    tab.getAttribute('aria-disabled') !== 'true' ||
+                    tab.getAttribute('disabled') !== 'true'
+                )
+            })
+            .map(tab => ({
+                id: tab.id.replace('tab-', ''),
+                element: tab as HTMLElement
+            }));
     }, []);
 
     // Initialize active tab
