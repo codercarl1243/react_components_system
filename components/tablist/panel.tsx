@@ -6,10 +6,12 @@ export default function Panel({
     id,
     ref,
     hidden,
-    children }: TabPanelProps) {
+    children,
+    ...props }: TabPanelProps) {
 
     return (
         <div
+            {...props}
             ref={ref}
             id={`panel-${id}`}
             className={clsx("tablist__content-panel", className)}

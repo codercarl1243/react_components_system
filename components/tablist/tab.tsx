@@ -8,11 +8,13 @@ export default function Tab({
     className,
     id,
     ref,
-    children
+    children,
+    ...props
 }: TabProps) {
 
     return (
         <Button
+            {...props}
             ref={ref}
             role="tab"
             id={`tab-${id}`}
