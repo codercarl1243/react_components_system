@@ -10,7 +10,7 @@ export interface TabPanelProps extends ComponentPropsWithRef<'div'> {
   id: string;
 }
 
-type TabItem = {
+export type TabItem = {
     id: string;
     panelContent: ReactNode;
     tabLabel: ReactNode;
