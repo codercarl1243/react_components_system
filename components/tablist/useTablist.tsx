@@ -75,18 +75,10 @@ export default function useTablist(defaultTabId?: string) {
                     focusTab(tabs[prev].id);
                 }
             },
-            Home: () => {
-                focusTab(tabs[0].id);
-            },
-            End: () => {
-                focusTab(tabs[lastIndex].id);
-            },
-            Enter: () => {
-                focusPanel(activeId);
-            },
-            " ": () => {
-                focusPanel(activeId);
-            },
+            Home: () => focusTab(tabs[0].id),
+            End: () => focusTab(tabs[lastIndex].id),
+            Enter: () => focusPanel(activeId),
+            Space: () => focusPanel(activeId)
         };
 
         handleKeyPress(e, keyMap);
