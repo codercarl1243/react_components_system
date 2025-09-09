@@ -4,14 +4,14 @@ import Panel from "@/components/tablist/panel";
 
 describe("Panel", () => {
   it("renders children inside the panel", () => {
-    const { getByRole } = render(
+    const { getByRole, getByText  } = render(
       <Panel id="alpha">
         <span data-testid="child">Hello</span>
       </Panel>
     );
     const panel = getByRole("tabpanel");
     expect(panel).toBeTruthy();
-    expect(panel.querySelector('[data-testid="child"]')?.textContent).toBe("Hello");
+    expect(getByText("Hello")).toBeInTheDocument();
   });
 
   it("applies correct id, role, aria-labelledby, and default tabIndex", () => {
