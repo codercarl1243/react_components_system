@@ -1,104 +1,102 @@
 'use client';
-import { handleKey } from "@/utils/keyboardHandlers";
-import React, { ReactElement, useEffect, useRef, useState } from "react";
-import { TabListProps, TabPanelProps } from "./tablist.type";
+import { handleKeyPress, type KeyCallbackMap } from "@/utils/keyboardHandlers";
+import { useRef, useState, useEffect, useCallback } from "react";
 
-type useTablistProps = {
-    tabs: TabListProps['children'];
-    orientation: TabListProps['orientation'];
-    controlledId?: string;
-    defaultActiveTabId?: string;
-    onChange?: (tabId: string) => void;
-}
+export default function useTablist(defaultTabId?: string) {
+    const tablistRef = useRef<HTMLDivElement>(null);
+    const [activeId, setActiveId] = useState<string | undefined>(defaultTabId);
 
-export default function useTabList({
-    tabs = [],
-    orientation,
-    controlledId,
-    defaultActiveTabId,
-    onChange
-}: useTablistProps
-) {
-    const tabArray = React.Children.toArray(tabs).filter(
-                        (child): child is ReactElement<TabPanelProps> =>
-                                React.isValidElement<TabPanelProps>(child) &&
-                                !!child.props.id &&
-                                child.props.label != null
-                        );
-    const [activeId, setActiveId] = useState<string | null>(() => {
-        if (controlledId !== undefined) return controlledId;
-        return defaultActiveTabId || tabArray[0]?.props.id || null;
-    });
+    const getTabs = useCallback(() => {
+        if (!tablistRef.current) return [];
+        return Array.from(
+            tablistRef.current.querySelectorAll('[role="tab"]')
+        ).map(tab => ({
+            id: tab.id.replace('tab-', ''),
+            element: tab as HTMLElement
+        }));
+    }, []);
 
-    const refs = useRef(tabArray.map(tab => ({
-        id: tab.props.id,
-        tabRef: React.createRef<HTMLButtonElement>(),
-        panelRef: React.createRef<HTMLDivElement>(),
-    })));
-
+    // Initialize active tab
     useEffect(() => {
-        if (controlledId !== undefined) {
-            setActiveId(controlledId);
-        }
-    }, [controlledId]);
-
-    const selectItem = () => {
-        if (!refs?.current) return;
-
-        const activePanel = refs.current.find(item => item.id === activeId);
-        activePanel?.panelRef.current?.focus();
-    };
-
-
-    const handleTabSelection = (id: string) => {
-        if (controlledId === undefined) {
-            setActiveId(id);
-        }
-        if (onChange) {
-            onChange(id);
-        }
-    }
-
-    const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
-
-        const currentIndex = refs.current.findIndex(tab => tab.id === activeId);
-        if (currentIndex < 0 || refs.current.length === 0) return;
-        const lastIndex = refs.current.length - 1;
-
-        const noop = () => { };
-
-        function moveNext() {
-            e.stopPropagation();
-            const newIndex = currentIndex === lastIndex ? 0 : currentIndex + 1;
-            handleTabSelection(refs.current[newIndex].id);
-        }
-        function movePrev() {
-            e.stopPropagation();
-            const newIndex = currentIndex === 0 ? lastIndex : currentIndex - 1;
-            handleTabSelection(refs.current[newIndex].id);
-        }
-
-        const keyMap = orientation === 'vertical'
-            ? {
-                ArrowDown: moveNext,
-                ArrowUp: movePrev,
-                ArrowRight: noop,
-                ArrowLeft: noop,
-                Tab: selectItem
+        if (!activeId) {
+            const tabs = getTabs();
+            if (tabs.length > 0) {
+                setActiveId(tabs[0].id);
             }
-            : {
-                ArrowRight: moveNext,
-                ArrowLeft: movePrev,
-                ArrowDown: noop,
-                ArrowUp: noop,
-                Tab: selectItem
-            };
+        }
+    }, [activeId, getTabs]);
 
-        handleKey(e, keyMap);
-    };
+    const focusTab = useCallback((id: string) => {
+        const tabButton = document.getElementById(`tab-${id}`);
+        tabButton?.focus();
+        setActiveId(id);
+    }, []);
+
+    const focusPanel = useCallback((id: string | undefined) => {
+        if (!id) return;
+        const panel = document.getElementById(`panel-${id}`);
+        panel?.focus();
+    }, []);
+
+    const handleKeyDown = useCallback((e: React.KeyboardEvent<HTMLDivElement>) => {
+        const activeElement = document.activeElement as HTMLElement;
+        if (!activeElement?.getAttribute('role')?.includes('tab')) return;
+        if (!tablistRef.current?.contains(activeElement)) return;
+
+        const tabs = getTabs();
+        const currentIndex = tabs.findIndex(tab => tab.id === activeId);
+        if (currentIndex === -1) return;
+
+        const orientation = tablistRef.current?.getAttribute('aria-orientation') || 'horizontal';
+        const lastIndex = tabs.length - 1;
+
+        const keyMap: KeyCallbackMap = {
+            ArrowRight: () => {
+                if (orientation === 'horizontal') {
+                    const next = (currentIndex + 1) % tabs.length;
+                    focusTab(tabs[next].id);
+                }
+            },
+            ArrowLeft: () => {
+                if (orientation === 'horizontal') {
+                    const prev = (currentIndex - 1 + tabs.length) % tabs.length;
+                    focusTab(tabs[prev].id);
+                }
+            },
+            ArrowDown: () => {
+                if (orientation === 'vertical') {
+                    const next = (currentIndex + 1) % tabs.length;
+                    focusTab(tabs[next].id);
+                }
+            },
+            ArrowUp: () => {
+                if (orientation === 'vertical') {
+                    const prev = (currentIndex - 1 + tabs.length) % tabs.length;
+                    focusTab(tabs[prev].id);
+                }
+            },
+            Home: () => {
+                focusTab(tabs[0].id);
+            },
+            End: () => {
+                focusTab(tabs[lastIndex].id);
+            },
+            Enter: () => {
+                focusPanel(activeId);
+            },
+            " ": () => {
+                focusPanel(activeId);
+            },
+        };
+
+        handleKeyPress(e, keyMap);
+    }, [activeId, getTabs, focusTab, focusPanel]);
 
 
     return {
-        activeId, handleTabSelection, handleKeyDown, refs, validChildren: tabArray
-    }
+        activeId,
+        setActiveTab: setActiveId,
+        tablistRef,
+        handleKeyDown
+    };
 }

@@ -2,8 +2,8 @@ export type KeyCallbackMap = {
   [key: string]: () => void;
 };
 
-export function handleKey(
-  event: React.KeyboardEvent,
+export function handleKeyPress(
+  event: React.KeyboardEvent | KeyboardEvent,
   keyMap: KeyCallbackMap
 ) {
   const callback = keyMap[event.key];
