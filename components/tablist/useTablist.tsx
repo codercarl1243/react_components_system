@@ -35,7 +35,11 @@ export default function useTablist(defaultTabId?: string) {
 
     const focusTab = useCallback((id: string) => {
         const tabButton = document.getElementById(`tab-${id}`);
-        tabButton?.focus();
+        if (!tabButton || 
+            tabButton.getAttribute('aria-disabled') === 'true' ||
+            tabButton.getAttribute('disabled') === 'true'
+        ) return;
+        tabButton.focus();
         setActiveId(id);
     }, []);
 
