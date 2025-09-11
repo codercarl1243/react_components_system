@@ -1,16 +1,15 @@
-import { IconProps, sizeMap } from "./icon.type";
+import { IconProps, sizeMap } from './icon.type'
 
-export default function Icon({
+export default function Icon ({
   icon: IconComponent,
-  size = "md",
-  color = "currentColor",
+  size = 'md',
+  color = 'currentColor',
   ...props
 }: IconProps) {
-
   const resolvedSize =
-    typeof size === "string" && size in sizeMap
+    typeof size === 'string' && size in sizeMap
       ? sizeMap[size as keyof typeof sizeMap]
-      : size;
+      : size
 
   return (
     <IconComponent
@@ -21,5 +20,5 @@ export default function Icon({
       focusable="false"
       {...props}
     />
-  );
+  )
 }

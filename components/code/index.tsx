@@ -1,56 +1,56 @@
-import type { BundledLanguage } from 'shiki';
-import { getCustomGithubDark, getHighlighterSingleton } from '@/components/code/highlighter';
-import { CopyButton } from '@/components/button/button.copy';
+import type { BundledLanguage } from 'shiki'
+import { getCustomGithubDark, getHighlighterSingleton } from '@/components/code/highlighter'
+import { CopyButton } from '@/components/button/button.copy'
 
 interface Props {
     codeString: string
-    lang?: "tsx" | "ts" | "css" | "md";
+    lang?: 'tsx' | 'ts' | 'css' | 'md';
     inline?: boolean;
-    layout?: "full" | "bleed" | "content";
+    layout?: 'full' | 'bleed' | 'content';
     title?: string;
     copyEnabled?: boolean;
 }
 
-export default async function Code({
-    codeString,
-    lang = "tsx",
-    inline = false,
-    layout = "content",
-    title,
-    copyEnabled = true
+export default async function Code ({
+  codeString,
+  lang = 'tsx',
+  inline = false,
+  layout = 'content',
+  title,
+  copyEnabled = true
 }: Props) {
-    if (!codeString.trim()) {
-        return null;
+  if (!codeString.trim()) {
+    return null
+  }
+
+  const highlighter = await getHighlighterSingleton()
+  const customGithubDark = await getCustomGithubDark()
+
+  const loadedLanguages = new Set(highlighter.getLoadedLanguages?.() ?? [])
+  const safeLanguage = (loadedLanguages.has(lang) ? lang : 'plaintext') as BundledLanguage
+
+  const out = highlighter.codeToHtml(
+    codeString,
+    {
+      lang: safeLanguage,
+      theme: customGithubDark
     }
+  )
 
-    const highlighter = await getHighlighterSingleton();
-    const customGithubDark = await getCustomGithubDark();
-
-    const loadedLanguages = new Set(highlighter.getLoadedLanguages?.() ?? []);
-    const safeLanguage = (loadedLanguages.has(lang) ? lang : 'plaintext') as BundledLanguage;
-
-    const out = highlighter.codeToHtml(
-        codeString,
-        {
-            lang: safeLanguage,
-            theme: customGithubDark
-        }
-    );
-
-    if (!inline) {
-        return <div
+  if (!inline) {
+    return <div
             className={`shiki-wrapper width-${layout}`}>
             {copyEnabled && <CopyButton text={codeString}/>}
-            <div {...(title && { 'aria-label': title, role: "region" })}
+            <div {...(title && { 'aria-label': title, role: 'region' })}
                 dangerouslySetInnerHTML={{ __html: out }} />
         </div>
-    }
+  }
 
-    const innerHtml = out.replace(/^.*?<code[^>]*>|<\/code>.*$/gs, "");
+  const innerHtml = out.replace(/^.*?<code[^>]*>|<\/code>.*$/gs, '')
 
-    return <code
-        className={`shiki-inline shiki`}
-        {...(title && { 'aria-label': title, role: "region" })}
+  return <code
+        className={'shiki-inline shiki'}
+        {...(title && { 'aria-label': title, role: 'region' })}
         dangerouslySetInnerHTML={{ __html: innerHtml }}
     />
 }

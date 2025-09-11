@@ -1,42 +1,42 @@
-'use client';
+'use client'
 
-import { useState, useEffect } from 'react';
-import Icon from '../icon';
-import { RiCheckFill, RiErrorWarningLine, RiFileCopyLine } from '@remixicon/react';
-import Button from '@/components/button';
+import { useState, useEffect } from 'react'
+import Icon from '../icon'
+import { RiCheckFill, RiErrorWarningLine, RiFileCopyLine } from '@remixicon/react'
+import Button from '@/components/button'
 
 interface CopyButtonProps {
     text: string;
 }
 
-export function CopyButton({ text }: CopyButtonProps) {
-    const [copied, setCopied] = useState(false);
-    const [error, setError] = useState<boolean>(false);
-    const [isSupported, setIsSupported] = useState<boolean | null>(null);
+export function CopyButton ({ text }: CopyButtonProps) {
+  const [copied, setCopied] = useState(false)
+  const [error, setError] = useState<boolean>(false)
+  const [isSupported, setIsSupported] = useState<boolean | null>(null)
 
-    useEffect(() => {
-        // Check clipboard support after hydration
-        setIsSupported(!!navigator.clipboard);
-    }, []);
+  useEffect(() => {
+    // Check clipboard support after hydration
+    setIsSupported(!!navigator.clipboard)
+  }, [])
 
-    // Don't render anything until we've checked support
-    if (isSupported === null || !isSupported) {
-        return null;
+  // Don't render anything until we've checked support
+  if (isSupported === null || !isSupported) {
+    return null
+  }
+
+  const copyToClipboard = async () => {
+    try {
+      await navigator.clipboard.writeText(text)
+      setCopied(true)
+      setError(false)
+      setTimeout(() => setCopied(false), 1250)
+    } catch (err) {
+      setError(true)
+      console.error('Failed to copy text: ', err)
     }
+  }
 
-    const copyToClipboard = async () => {
-        try {
-            await navigator.clipboard.writeText(text);
-            setCopied(true);
-            setError(false);
-            setTimeout(() => setCopied(false), 1250);
-        } catch (err) {
-            setError(true);
-            console.error('Failed to copy text: ', err);
-        }
-    };
-
-    return (
+  return (
         <Button
             onClick={copyToClipboard}
             data-styled='outlined'
@@ -45,13 +45,17 @@ export function CopyButton({ text }: CopyButtonProps) {
             className='button--copy'
             disabled={error}
         >
-            {error ? (
+            {error
+              ? (
                 <Icon icon={RiErrorWarningLine} size={24} color={'red'} />
-            ) : copied ? (
+                )
+              : copied
+                ? (
                 <Icon icon={RiCheckFill} size={24} color={'green'} />
-            ) : (
+                  )
+                : (
                 <Icon icon={RiFileCopyLine} size={24} />
-            )}
+                  )}
         </Button>
-    );
+  )
 }

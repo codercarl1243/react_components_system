@@ -1,22 +1,22 @@
-'use client';
-import type { TabListProps } from "@/components/tablist/tablist.type";
-import Tab from "@/components/tablist/tab";
-import useTablist from "@/components/tablist/useTablist";
-import Panel from "@/components/tablist/panel";
-import clsx from "clsx";
+'use client'
+import type { TabListProps } from '@/components/tablist/tablist.type'
+import Tab from '@/components/tablist/tab'
+import useTablist from '@/components/tablist/useTablist'
+import Panel from '@/components/tablist/panel'
+import clsx from 'clsx'
 
-export default function TabList({ defaultActiveTabId, tabs, orientation = "horizontal", className, ...props }: TabListProps) {
+export default function TabList ({ defaultActiveTabId, tabs, orientation = 'horizontal', className, ...props }: TabListProps) {
+  const {
+    activeId,
+    setActiveTab,
+    tablistRef,
+    handleKeyDown
+  } = useTablist(defaultActiveTabId)
 
-    const { activeId,
-        setActiveTab,
-        tablistRef,
-        handleKeyDown
-    } = useTablist(defaultActiveTabId)
+  if (!tabs?.length) return null
 
-    if (!tabs?.length) return null;
-
-    return (
-        <div className={clsx("tablist", className)} {...props}>
+  return (
+        <div className={clsx('tablist', className)} {...props}>
             <div
                 className="tablist__header"
                 role="tablist"
@@ -47,5 +47,5 @@ export default function TabList({ defaultActiveTabId, tabs, orientation = "horiz
                 ))}
             </div>
         </div>
-    )
+  )
 }

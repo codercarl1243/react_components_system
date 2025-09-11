@@ -1,5 +1,5 @@
-import type { ReactNode, HTMLAttributes, ComponentPropsWithRef } from "react";
-import { BaseButtonProps } from "../button/button.type";
+import type { ReactNode, HTMLAttributes, ComponentPropsWithRef } from 'react'
+import { BaseButtonProps } from '../button/button.type'
 
 export type TabProps = Readonly<{
   id: string;

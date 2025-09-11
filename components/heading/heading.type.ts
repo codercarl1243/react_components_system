@@ -1,4 +1,4 @@
-import type { ComponentProps, ReactNode } from "react";
+import type { ComponentProps, ReactNode } from 'react'
 
 export type HeadingLevelsType = 1 | 2 | 3 | 4;
 
