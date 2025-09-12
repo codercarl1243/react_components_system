@@ -1,9 +1,3 @@
-/* eslint-env jest */
-/**
- * These tests validate attributes, state-driven behavior (tabIndex, aria-selected),
- * className merging, children rendering, click handling, and prop forwarding.
- */
-
 import React from 'react'
 import { render, screen } from '@testing-library/react'
 import Tab from '@/components/tablist/tab'

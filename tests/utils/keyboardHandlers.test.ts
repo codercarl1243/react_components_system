@@ -1,5 +1,3 @@
-/* eslint-env jest */
-// Focus: Validates behavior of handleKeyPress for mapped/unmapped keys, ordering, error propagation, and edge cases.
 import { handleKeyPress, type KeyCallbackMap } from '@/utils/keyboardHandlers'
 
 describe('handleKeyPress', () => {
@@ -28,7 +26,7 @@ describe('handleKeyPress', () => {
       }
     } as KeyCallbackMap
 
-    handleKeyPress(ctx.event as any, keyMap)
+    handleKeyPress(ctx.event, keyMap)
     expect(callOrder).toEqual(['callback'])
     expect(ctx.prevented).toBe(true)
   })
@@ -40,7 +38,7 @@ describe('handleKeyPress', () => {
       Escape: () => { sideEffects.called = true }
     } as KeyCallbackMap
 
-    handleKeyPress(ctx.event as any, keyMap)
+    handleKeyPress(ctx.event, keyMap)
     expect(sideEffects.called).toBe(false)
     expect(ctx.prevented).toBe(false)
   })
@@ -54,7 +52,7 @@ describe('handleKeyPress', () => {
       a: () => calls.push('a')
     } as KeyCallbackMap
 
-    handleKeyPress(ctx.event as any, keyMap)
+    handleKeyPress(ctx.event, keyMap)
     expect(calls).toEqual(['Escape'])
     expect(ctx.prevented).toBe(true)
   })
@@ -66,7 +64,7 @@ describe('handleKeyPress', () => {
       a: () => calls.push("lower-a"),
     } as KeyCallbackMap;
 
-    handleKeyPress(ctx.event as any, keyMap);
+    handleKeyPress(ctx.event, keyMap);
     expect(calls).toEqual(["lower-a"]); // match for uppercase 'A' due to canonicalization
     expect(ctx.prevented).toBe(true);
   });
@@ -84,7 +82,7 @@ describe('handleKeyPress', () => {
     } as KeyCallbackMap
 
     try {
-      handleKeyPress(ctx.event as any, keyMap)
+      handleKeyPress(ctx.event, keyMap)
     } catch (e: any) {
       expect(e).toBeInstanceOf(Error)
       expect(e.message).toBe('boom')
@@ -97,7 +95,7 @@ describe('handleKeyPress', () => {
     const ctx = makeEvent('Enter')
     const keyMap = {} as KeyCallbackMap
 
-    handleKeyPress(ctx.event as any, keyMap)
+    handleKeyPress(ctx.event, keyMap)
     expect(ctx.prevented).toBe(false)
   })
 

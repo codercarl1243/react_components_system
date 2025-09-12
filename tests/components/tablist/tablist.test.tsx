@@ -1,16 +1,3 @@
-/* eslint-env jest */
-/**
- * Tests for TabList component
- *
- * These tests validate:
- *  - Rendering behavior with/without tabs
- *  - ARIA roles and aria-orientation
- *  - Integration with useTablist hook (mocked)
- *  - Click and keyboard interactions
- *  - Panel visibility toggling via "hidden" prop
- *  - Prop spreading onto the tablist header
- */
-
 import React from 'react'
 import { fireEvent, render, screen, within } from '@testing-library/react'
 import TabList from '@/components/tablist/index'

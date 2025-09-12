@@ -1,5 +1,3 @@
-/* eslint-env jest */
-
 import React, { useEffect, useImperativeHandle, forwardRef } from 'react'
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
@@ -15,7 +13,7 @@ if (doMock && mockFn) {
   const handleKeyPressMock = mockFn((e: KeyboardEvent | any, map: Record<string, () => void>) => {
     const key = (e.key ?? e.code ?? '').toString()
     if (key in map) {
-      map[key]!()
+      map[key]()
     }
   })
 
@@ -157,7 +155,7 @@ describe('useTablist - horizontal keyboard navigation', () => {
     const tabA = screen.getByRole('tab', { name: 'Tab a' })
     const tabD = screen.getByRole('tab', { name: 'Tab d' });
 
-    (screen.getByRole('tab', { name: 'Tab c' }) as HTMLButtonElement).focus()
+    (screen.getByRole('tab', { name: 'Tab c' })).focus()
 
     await user.keyboard('{Home}')
     expect(screen.getByTestId('active-id').textContent).toBe('a')
@@ -256,7 +254,7 @@ describe('useTablist - guard conditions and resilience', () => {
 
     // Restore to a valid id and ensure navigation resumes
     rerender(<TestTabs ids={['a', 'b']} defaultTabId="a" orientation="horizontal" overrideActiveId="a" />);
-    (screen.getByRole('tab', { name: 'Tab a' }) as HTMLButtonElement).focus()
+    (screen.getByRole('tab', { name: 'Tab a' })).focus()
     await user.keyboard('{ArrowRight}')
     expect(screen.getByTestId('active-id').textContent).toBe('b')
   })
