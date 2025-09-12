@@ -1,4 +1,4 @@
-import { ComponentProps } from 'react'
+import { Children, type ComponentProps } from 'react'
 import Heading from '@/components/heading'
 import clsx from 'clsx'
 import Image from 'next/image'
@@ -25,7 +25,7 @@ export default function PostSideBar ({
 }: PostSideBarProps) {
   const hasContents = contents.length > 0
   const hasRelated = relatedPosts.length > 0
-  const hasExtras = author || children
+  const hasExtras = author || Children.count(children) > 0
 
   if (!hasContents && !hasRelated && !hasExtras) return null
 
