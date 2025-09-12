@@ -1,11 +1,13 @@
 import { KeyboardEvent as ReactKeyBoardEvent } from 'react'
 
+export type EventType = ReactKeyBoardEvent | KeyboardEvent;
+
 export type KeyCallbackMap = {
-  [key: string]: (e?: ReactKeyBoardEvent | KeyboardEvent) => void;
+  [key: string]: (e?: EventType) => void;
 };
 
-export function handleKeyPress (
-  event: ReactKeyBoardEvent | KeyboardEvent,
+export function handleKeyPress(
+  event: EventType,
   keyMap: KeyCallbackMap
 ) {
   // Canonicalise: single chars -> lower-case, keep named keys verbatim.
