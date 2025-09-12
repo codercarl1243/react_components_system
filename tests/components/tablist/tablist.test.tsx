@@ -1,4 +1,4 @@
-/* global describe, it, expect, jest, beforeEach */
+/* eslint-env jest */
 /**
  * Tests for TabList component
  *

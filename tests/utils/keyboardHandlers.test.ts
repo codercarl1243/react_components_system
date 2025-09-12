@@ -1,4 +1,4 @@
-/* global describe, it, expect */
+/* eslint-env jest */
 // Focus: Validates behavior of handleKeyPress for mapped/unmapped keys, ordering, error propagation, and edge cases.
 import { handleKeyPress, type KeyCallbackMap } from '@/utils/keyboardHandlers'
 

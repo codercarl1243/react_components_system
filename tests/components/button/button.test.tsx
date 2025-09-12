@@ -1,4 +1,4 @@
-/* global describe, expect, test, jest */
+/* eslint-env jest */
 import Button from '@/components/button'
 import { fireEvent, render, screen } from '@testing-library/react'
 import React from 'react'

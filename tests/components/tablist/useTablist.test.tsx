@@ -1,4 +1,4 @@
-/* global describe, it, expect */
+/* eslint-env jest */
 
 import React, { useEffect, useImperativeHandle, forwardRef } from 'react'
 import { render, screen } from '@testing-library/react'

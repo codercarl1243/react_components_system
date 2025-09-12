@@ -1,4 +1,4 @@
-/* global describe, beforeAll, beforeEach, afterAll, expect, test, jest */
+/* eslint-env jest */
 import useButton from '@/components/button/useButton'
 import { renderHook } from '@testing-library/react'
 import React, { act } from 'react'

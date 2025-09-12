@@ -1,4 +1,4 @@
-/* global describe, expect, test, jest */
+/* eslint-env jest */
 /**
  * These tests validate attributes, state-driven behavior (tabIndex, aria-selected),
  * className merging, children rendering, click handling, and prop forwarding.
