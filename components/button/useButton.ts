@@ -10,7 +10,7 @@ export default function useButton () {
       if (!userHandler) return
       try {
         return await userHandler(event)
-      } catch (err) {
+      } catch (err: unknown) {
         console.error('Button click error', err)
         throw err
       }
