@@ -13,10 +13,14 @@ export function handleKeyPress(
   // Canonicalise: single chars -> lower-case, keep named keys verbatim.
   const raw = event.key
   const key = raw && raw.length === 1 ? raw.toLowerCase() : raw
+  const alias =
+    key === ' ' ? 'Space'
+      : key === 'Spacebar' ? 'Space'
+        : key === 'Esc' ? 'Escape'
+          : undefined
+          
   const callback =
-    keyMap[key] ??
-    // Common aliases for space
-    (key === ' ' ? keyMap.Space : undefined)
+    keyMap[key] ?? (alias ? keyMap[alias] : undefined)
 
   if (!callback) return
 
