@@ -59,17 +59,17 @@ describe('handleKeyPress', () => {
     expect(ctx.prevented).toBe(true)
   })
 
-  //   it("matches keys case-sensitively (e.g., 'a' \!== 'A')", () => {
-  //     const ctx = makeEvent("A");
-  //     const calls: string[] = [];
-  //     const keyMap = {
-  //       a: () => calls.push("lower-a"),
-  //     } as KeyCallbackMap;
+  it("matches single-character keys case-insensitively (e.g., 'a' === 'A')", () => {
+    const ctx = makeEvent("A");
+    const calls: string[] = [];
+    const keyMap = {
+      a: () => calls.push("lower-a"),
+    } as KeyCallbackMap;
 
-  //     handleKeyPress(ctx.event as any, keyMap);
-  //     expect(calls).toEqual([]); // no match for uppercase 'A'
-  //     expect(ctx.prevented).toBe(false);
-  //   });
+    handleKeyPress(ctx.event as any, keyMap);
+    expect(calls).toEqual(["lower-a"]); // match for uppercase 'A' due to canonicalization
+    expect(ctx.prevented).toBe(true);
+  });
 
   it('still prevents default before propagating an error thrown by the callback', () => {
     const ctx = makeEvent('Escape')
@@ -99,5 +99,29 @@ describe('handleKeyPress', () => {
 
     handleKeyPress(ctx.event as any, keyMap)
     expect(ctx.prevented).toBe(false)
+  })
+
+  it('should call callback for "Space" alias when key is " "', () => {
+    const cb = jest.fn()
+    const event = { key: ' ', preventDefault: jest.fn() }
+    handleKeyPress(event as any, { Space: cb })
+    expect(cb).toHaveBeenCalledWith(event)
+    expect(event.preventDefault).toHaveBeenCalled()
+  })
+
+  it('should call callback for "Space" alias when key is "Spacebar"', () => {
+    const cb = jest.fn()
+    const event = { key: 'Spacebar', preventDefault: jest.fn() }
+    handleKeyPress(event as any, { Space: cb })
+    expect(cb).toHaveBeenCalledWith(event)
+    expect(event.preventDefault).toHaveBeenCalled()
+  })
+
+  it('should call callback for "Escape" alias when key is "Esc"', () => {
+    const cb = jest.fn()
+    const event = { key: 'Esc', preventDefault: jest.fn() }
+    handleKeyPress(event as any, { Escape: cb })
+    expect(cb).toHaveBeenCalledWith(event)
+    expect(event.preventDefault).toHaveBeenCalled()
   })
 })
