@@ -83,10 +83,14 @@
         }
     }
 
+    /* TODO update these styles because they are not good */
     .button {
-        --button-foreground: var(--color-neutral-800);  /* text */
-        --button-background: var(--color-neutral-100); /* background */
-        --button-accent: var(--color-neutral-600); /* borders & outlines */
+        --button-foreground: var(--color-neutral-800);
+        /* text */
+        --button-background: var(--color-neutral-100);
+        /* background */
+        --button-accent: var(--color-neutral-600);
+        /* borders & outlines */
 
         --button-color: var(--button-foreground);
         --button-bg-color: var(--button-background);
@@ -113,7 +117,7 @@
     }
 
     .button[data-variant="primary"] {
-         &[data-style="filled"] {
+        &[data-style="filled"] {
             --button-background: var(--color-primary-600);
             --button-accent: var(--color-primary-400);
         }
@@ -123,8 +127,9 @@
             --button-accent: var(--color-primary-400);
         }
     }
-        .button[data-variant="secondary"] {
-         &[data-style="filled"] {
+
+    .button[data-variant="secondary"] {
+        &[data-style="filled"] {
             --button-background: var(--color-secondary-600);
             --button-accent: var(--color-secondary-400);
         }
@@ -134,8 +139,9 @@
             --button-accent: var(--color-secondary-400);
         }
     }
-        .button[data-variant="accent"] {
-         &[data-style="filled"] {
+
+    .button[data-variant="accent"] {
+        &[data-style="filled"] {
             --button-background: var(--color-accent-600);
             --button-accent: var(--color-accent-400);
         }
@@ -310,9 +316,9 @@
         }
     }
 
-@media (prefers-reduced-motion: reduce) {
-    .button {
-        transition: none !important;
-        animation: none !important;
+    @media (prefers-reduced-motion: reduce) {
+        .button {
+            transition: none !important;
+            animation: none !important;
+        }
     }
-}

@@ -39,7 +39,8 @@ export function CopyButton ({ text }: CopyButtonProps) {
   return (
         <Button
             onClick={copyToClipboard}
-            data-styled='outlined'
+            data-style={copied ? 'outline' : 'filled'}
+            data-variant={copied ? undefined : 'accent'}
             aria-label="Copy to clipboard"
             title={error ? 'Copy failed' : copied ? 'Copied!' : 'Copy to clipboard'}
             className='button--copy'

@@ -40,7 +40,7 @@ export default async function Code ({
   if (!inline) {
     return <div
             className={`shiki-wrapper width-${layout}`}>
-            {copyEnabled && <CopyButton text={codeString} data-style="filled" data-variant="accent"/>}
+            {copyEnabled && <CopyButton text={codeString} />}
             <div {...(title && { 'aria-label': title, role: 'region' })}
                 dangerouslySetInnerHTML={{ __html: out }} />
         </div>
