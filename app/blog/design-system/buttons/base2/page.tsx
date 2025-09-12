@@ -749,7 +749,7 @@ export default function ButtonsPage() {
                         components like button groups, tab lists, and interactive panels.
                     </p>
 
-                    <Link href="./sliders">Next: Slider Buttons</Link>
+                    <Link href="/blog/design-system/buttons/sliders">Next: Slider Buttons</Link>
                 </PostSection>
             </Post>
 
