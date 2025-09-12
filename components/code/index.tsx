@@ -50,7 +50,7 @@ export default async function Code ({
 
   return <code
         className={'shiki-inline shiki'}
-        {...(title && { 'aria-label': title, role: 'region' })}
+        {...(title && { 'aria-label': title})}
         dangerouslySetInnerHTML={{ __html: innerHtml }}
     />
 }
