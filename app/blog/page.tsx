@@ -18,9 +18,8 @@ export default function BlogPage () {
             <h1>Blogs</h1>
             <p>Welcome to my blog page</p>
             <TabList
-                // defaultActiveTabId="panel1"
+                defaultActiveTabId="panel1"
                 orientation="horizontal"
-                defaultActiveTabId="check"
                 tabs={[
                   {
                     id: 'panel1',
