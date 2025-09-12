@@ -2,7 +2,7 @@
 import { handleKeyPress, type KeyCallbackMap } from '@/utils/keyboardHandlers'
 import { useRef, useState, useEffect, useCallback, type KeyboardEvent } from 'react'
 
-export default function useTablist (defaultTabId?: string) {
+export default function useTablist(defaultTabId?: string) {
   const tablistRef = useRef<HTMLDivElement>(null)
   const [activeId, setActiveId] = useState<string | undefined>(defaultTabId)
 
@@ -13,7 +13,7 @@ export default function useTablist (defaultTabId?: string) {
     )
       .filter(tab =>
         tab.getAttribute('aria-disabled') !== 'true' &&
-                tab.getAttribute('disabled') !== 'true'
+        tab.getAttribute('disabled') !== 'true'
       )
       .map(tab => ({
         id: tab.id.replace('tab-', ''),
@@ -31,7 +31,10 @@ export default function useTablist (defaultTabId?: string) {
       if (activeTabExists) {
         return
       }
-      console.warn(`Tab with id "${activeId}" not found, falling back to first tab`)
+      if (process.env.NODE_ENV !== 'production') {
+        // eslint-disable-next-line no-console
+        console.warn(`Tab with id "${activeId}" not found, falling back to first tab`)
+      }
     }
 
     setActiveId(tabs[0].id)
@@ -40,8 +43,8 @@ export default function useTablist (defaultTabId?: string) {
   const focusTab = useCallback((id: string) => {
     const tabButton = document.getElementById(`tab-${id}`)
     if (!tabButton ||
-            tabButton.getAttribute('aria-disabled') === 'true' ||
-            tabButton.getAttribute('disabled') === 'true'
+      tabButton.getAttribute('aria-disabled') === 'true' ||
+      tabButton.getAttribute('disabled') === 'true'
     ) return
     tabButton.focus()
     setActiveId(id)
