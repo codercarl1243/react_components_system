@@ -11,6 +11,6 @@ export type PresetSize = keyof typeof sizeMap;
 
 export type IconProps = {
   icon: ElementType;
-  size?: PresetSize | number | string;
+  size?: PresetSize | number;
   color?: string;
 } & SVGProps<SVGSVGElement>;
