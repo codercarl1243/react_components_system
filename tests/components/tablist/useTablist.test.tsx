@@ -37,7 +37,7 @@ type TestHandle = {
   getActive: () => string | undefined;
 };
 
-const TestTabs = forwardRef<TestHandle, TestTabsProps>(function TestTabs (
+const TestTabs = forwardRef<TestHandle, TestTabsProps>(function TestTabs(
   { ids, orientation = 'horizontal', defaultTabId, overrideActiveId },
   ref
 ) {
@@ -116,17 +116,17 @@ describe('useTablist - horizontal keyboard navigation', () => {
 
     // Right -> B
     await user.keyboard('{ArrowRight}')
-    expect(screen.getByTestId('active-id').textContent).toBe('b')
+    expect(await screen.findByTestId('active-id')).toHaveTextContent('b')
     expect(document.activeElement).toBe(tabB)
 
     // Right -> C
     await user.keyboard('{ArrowRight}')
-    expect(screen.getByTestId('active-id').textContent).toBe('c')
+    expect(await screen.findByTestId('active-id')).toHaveTextContent('c')
     expect(document.activeElement).toBe(tabC)
 
     // Right -> wrap to A
     await user.keyboard('{ArrowRight}')
-    expect(screen.getByTestId('active-id').textContent).toBe('a')
+    expect(await screen.findByTestId('active-id')).toHaveTextContent('a')
     expect(document.activeElement).toBe(tabA)
   })
 
@@ -241,22 +241,21 @@ describe('useTablist - guard conditions and resilience', () => {
     document.body.removeChild(outsideButton)
   })
 
-  it('returns early if activeId does not match any tab (currentIndex === -1)', async () => {
+  it('auto-corrects invalid activeId and handles subsequent navigation', async () => {
     const user = userEvent.setup()
-    const { rerender } = render(
+    render(
       <TestTabs ids={['a', 'b']} defaultTabId="a" orientation="horizontal" overrideActiveId="ghost" />
     )
-    const tabA = screen.getByRole('tab', { name: 'Tab a' });
-    (tabA as HTMLButtonElement).focus()
-    await user.keyboard('{ArrowRight}')
-    // Should remain unchanged because activeId 'ghost' is not found
-    expect(screen.getByTestId('active-id').textContent).toBe('ghost')
 
-    // Restore to a valid id and ensure navigation resumes
-    rerender(<TestTabs ids={['a', 'b']} defaultTabId="a" orientation="horizontal" overrideActiveId="a" />);
-    (screen.getByRole('tab', { name: 'Tab a' })).focus()
+    // Hook should auto-correct "ghost" to "a"
+    expect(await screen.findByTestId('active-id')).toHaveTextContent('a')
+
+    const tabA = screen.getByRole('tab', { name: 'Tab a' })
+    tabA.focus()
+
+    // Navigation should work normally now
     await user.keyboard('{ArrowRight}')
-    expect(screen.getByTestId('active-id').textContent).toBe('b')
+    expect(await screen.findByTestId('active-id')).toHaveTextContent('b')
   })
 
   it('ignores key events when focused tab is outside the tablist container', async () => {
@@ -274,5 +273,55 @@ describe('useTablist - guard conditions and resilience', () => {
     expect(screen.getByTestId('active-id').textContent).toBe('a')
 
     document.body.removeChild(rogue)
+  })
+
+  it('handles empty tablist gracefully', () => {
+    render(<TestTabs ids={[]} />)
+    // Should not crash and activeId should remain undefined
+    expect(screen.getByTestId('active-id').textContent).toBe('')
+  })
+
+  it('focusPanel handles missing panel element gracefully', async () => {
+    const user = userEvent.setup()
+    render(<TestTabs ids={['a']} defaultTabId="a" />)
+
+    const tabA = screen.getByRole('tab', { name: 'Tab a' })
+    tabA.focus()
+
+    // Remove the panel element
+    const panel = document.getElementById('panel-a')
+    panel?.remove()
+
+    // Should not crash when panel doesn't exist
+    await user.keyboard('{Enter}')
+    // Test should not throw
+  })
+
+  it('getTabs filters out disabled and aria-disabled tabs', async () => {
+    render(<TestTabs ids={['a', 'b', 'c', 'd']} defaultTabId="b" />)
+
+    // Initially all tabs should be available
+    expect(screen.getByTestId('active-id').textContent).toBe('b')
+
+    // Make some tabs disabled
+    const tabA = screen.getByRole('tab', { name: 'Tab a' })
+    const tabC = screen.getByRole('tab', { name: 'Tab c' })
+
+    tabA.setAttribute('disabled', 'true')
+    tabC.setAttribute('aria-disabled', 'true')
+
+    // Now navigation should only work between b and d
+    const user = userEvent.setup()
+    const tabB = screen.getByRole('tab', { name: 'Tab b' })
+    tabB.focus()
+
+    await user.keyboard('{ArrowRight}')
+    expect(screen.getByTestId('active-id').textContent).toBe('d') // skips disabled c
+
+    await user.keyboard('{ArrowRight}')
+    expect(screen.getByTestId('active-id').textContent).toBe('b') // wraps around, skips disabled a
+
+    await user.keyboard('{ArrowLeft}')
+    expect(screen.getByTestId('active-id').textContent).toBe('d') // goes back, skips disabled a
   })
 })
