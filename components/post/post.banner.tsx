@@ -4,7 +4,7 @@ import Heading from '@/components/heading'
 
 export default function PostBanner ({ title, subtitle, image }: PostBannerPropsType) {
   return (
-        <div className="post__banner font-accent ">
+        <div className="post__banner font-accent">
 
             {image?.src
               ? (
