@@ -15,33 +15,33 @@ type PostSideBarProps = {
     author?: { name: string; avatarUrl?: string; bio?: string };
 } & ComponentProps<'aside'>;
 
-export default function PostSideBar ({
-  contents = [],
-  relatedPosts = [],
-  author,
-  className,
-  children,
-  ...props
+export default function PostSideBar({
+    contents = [],
+    relatedPosts = [],
+    author,
+    className,
+    children,
+    ...props
 }: PostSideBarProps) {
-  const hasContents = contents.length > 0
-  const hasRelated = relatedPosts.length > 0
-  const hasExtras = author || Children.count(children) > 0
+    const hasContents = contents.length > 0
+    const hasRelated = relatedPosts.length > 0
+    const hasExtras = author || Children.count(children) > 0
 
-  if (!hasContents && !hasRelated && !hasExtras) return null
+    if (!hasContents && !hasRelated && !hasExtras) return null
 
-  return (
-        <aside className={clsx('post-sidebar', className)} {...props} >
+    return (
+        <aside className={clsx('post-sidebar', className)} {...props}>
             {/* Table of contents */}
             {hasContents && (
                 <nav className="post-sidebar__contents" aria-labelledby="toc-heading">
                     <Heading headingLevel={2} id="toc-heading">Table of contents</Heading>
                     <ol>
                         {contents.map(item => {
-                          return (
+                            return (
                                 <li key={item.id}>
                                     <a href={item.href}>{item.label}</a>
                                 </li>
-                          )
+                            )
                         })}
                     </ol>
                 </nav>
@@ -97,5 +97,5 @@ export default function PostSideBar ({
             )}
             {children}
         </aside>
-  )
+    )
 }
