@@ -4,8 +4,8 @@
 
     .shiki-wrapper .button--copy {
         position: absolute;
-        top: 0.25em;
-        right: 0.25em;
+        top: 0;
+        right: 0;
         display: grid;
         place-content: center;
 
