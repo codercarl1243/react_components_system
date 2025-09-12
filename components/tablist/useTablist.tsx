@@ -38,15 +38,18 @@ export default function useTablist(defaultTabId?: string) {
     }
 
     setActiveId(tabs[0].id)
-  }, [activeId, getTabs])
+  }, [activeId])
 
   const focusTab = useCallback((id: string) => {
-    const tabButton = document.getElementById(`tab-${id}`)
-    if (!tabButton ||
-      tabButton.getAttribute('aria-disabled') === 'true' ||
-      tabButton.getAttribute('disabled') === 'true'
+    if (!id) return
+    const tabs = getTabs()
+    const tab = tabs.find(t => t.id === id)
+    if (!tab ||
+      tab.element.getAttribute('aria-disabled') === 'true' ||
+      tab.element.getAttribute('disabled') === 'true'
     ) return
-    tabButton.focus()
+
+    tab.element.focus()
     setActiveId(id)
   }, [])
 
