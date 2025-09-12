@@ -1,5 +1,6 @@
 import clsx from 'clsx'
-import type { HeadingPropsType, HeadingTag } from './heading.type'
+import type { HeadingPropsType } from './heading.type'
+import { createElement } from 'react'
 
 const getSizeClass = (level: number): string => {
   switch (level) {
@@ -20,12 +21,14 @@ export default function Heading({
   ...props
 }: HeadingPropsType) {
 
-  const Tag = `h${headingLevel}` as HeadingTag
+  const Tag = `h${headingLevel}`;
 
-  return <Tag className={clsx(
-    'font-main',
-    getSizeClass(headingLevel),
-    className
-  )}
-    {...props}>{children}</Tag>
+  return createElement(
+    `h${headingLevel}`,
+    {
+      className: clsx('font-main', getSizeClass(headingLevel), className),
+      ...props
+    },
+    children
+  )
 }

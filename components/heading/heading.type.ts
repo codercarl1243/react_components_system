@@ -1,6 +1,6 @@
 import type { ComponentProps, ReactNode } from 'react'
 
-export type HeadingLevelsType = 1 | 2 | 3 | 4;
+export type HeadingLevelsType = 1 | 2 | 3 | 4 | 5 | 6;
 
 export type HeadingTag = `h${HeadingLevelsType}`;
 
