@@ -1,4 +1,4 @@
-import { KeyboardEvent as ReactKeyBoardEvent } from 'react'
+import type { KeyboardEvent as ReactKeyBoardEvent } from 'react'
 
 export type KeyPressEventType = ReactKeyBoardEvent | KeyboardEvent;
 
