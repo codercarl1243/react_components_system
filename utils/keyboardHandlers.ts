@@ -5,7 +5,8 @@ export function handleKeyPress(
   keyMap: KeyPressCallbackMap
 ) {
   // Canonicalise: single chars -> lower-case, keep named keys verbatim.
-  const raw = event.key
+  const raw = event.key ?? event.code
+  if (!raw) return
   const key = raw && raw.length === 1 ? raw.toLowerCase() : raw
   const alias = getKeyAlias(key);
 
