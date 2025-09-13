@@ -7,7 +7,7 @@ import prettierConfig from 'eslint-config-prettier';
 export default [
   // Base JavaScript configuration
   js.configs.recommended,
-  
+
   // Global ignores
   {
     ignores: [
@@ -17,13 +17,7 @@ export default [
       'build/**',
       'dist/**',
       '.env*',
-      '*.config.js',
-      '*.config.mjs',
-      'coverage/**',
-      'jest.config.js',
-      'next.config.js',
-      'tailwind.config.js',
-      'postcss.config.js'
+      'coverage/**'
     ]
   },
 
@@ -63,13 +57,13 @@ export default [
       // TypeScript specific rules
       ...tsPlugin.configs.recommended.rules,
       ...tsPlugin.configs['recommended-requiring-type-checking'].rules,
-      
+
       // Next.js specific rules
       ...nextPlugin.configs.recommended.rules,
       ...nextPlugin.configs['core-web-vitals'].rules,
 
       // Custom TypeScript rules
-      '@typescript-eslint/no-unused-vars': ['error', { 
+      '@typescript-eslint/no-unused-vars': ['error', {
         argsIgnorePattern: '^_',
         varsIgnorePattern: '^_'
       }],
@@ -99,12 +93,6 @@ export default [
       'no-trailing-spaces': 'error',
       'eol-last': 'error',
       'no-multiple-empty-lines': ['error', { max: 1 }],
-
-      // React specific rules (since you have React dependencies)
-      'react/jsx-uses-react': 'off', // Not needed with React 17+
-      'react/react-in-jsx-scope': 'off', // Not needed with React 17+
-      'react/prop-types': 'off', // Using TypeScript instead
-      'react/display-name': 'off'
     }
   },
 
@@ -127,7 +115,7 @@ export default [
       }
     },
     rules: {
-      'no-unused-vars': ['error', { 
+      'no-unused-vars': ['error', {
         argsIgnorePattern: '^_',
         varsIgnorePattern: '^_'
       }],
