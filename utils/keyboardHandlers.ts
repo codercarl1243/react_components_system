@@ -1,14 +1,8 @@
-import { KeyboardEvent as ReactKeyBoardEvent } from 'react'
-
-export type EventType = ReactKeyBoardEvent | KeyboardEvent;
-
-export type KeyCallbackMap = {
-  [key: string]: (e?: EventType) => void;
-};
+import type { KeyPressCallbackMap, KeyPressEventType } from "@/utils/keyboardHandlers.type"
 
 export function handleKeyPress(
-  event: EventType,
-  keyMap: KeyCallbackMap
+  event: KeyPressEventType,
+  keyMap: KeyPressCallbackMap
 ) {
   // Canonicalise: single chars -> lower-case, keep named keys verbatim.
   const raw = event.key
