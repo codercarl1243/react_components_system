@@ -47,7 +47,7 @@ describe('Panel', () => {
   })
 
   it('handles numeric-like id values (coerced to string)', () => {
-    const { container } = render(<Panel id={'0' as any}>content</Panel>)
+    const { container } = render(<Panel id='0'>content</Panel>)
     const el = container.querySelector('#panel-0') as HTMLDivElement
     expect(el).toBeTruthy()
     expect(el.getAttribute('aria-labelledby')).toBe('tab-0')
