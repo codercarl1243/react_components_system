@@ -16,7 +16,7 @@ describe('handleKeyPress', () => {
       'a': mockCallback
     }
     const event = {
-      code: 'a',
+      code: 'KeyA',
       preventDefault: jest.fn(),
     } as unknown as KeyPressEventType
     
@@ -38,7 +38,7 @@ describe('handleKeyPress', () => {
     expect(mockCallback).not.toHaveBeenCalled()
     expect(event.preventDefault).not.toHaveBeenCalled()
   });
-  
+
   it('calls preventDefault and then invokes the mapped callback when the key exists', () => {
     const mockCallback = jest.fn()
     const keyMap: KeyPressCallbackMap = {
