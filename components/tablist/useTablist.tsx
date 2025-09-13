@@ -1,5 +1,6 @@
 'use client'
-import { handleKeyPress, type KeyCallbackMap } from '@/utils/keyboardHandlers'
+import { handleKeyPress } from '@/utils/keyboardHandlers'
+import type { KeyPressCallbackMap } from '@/utils/keyboardHandlers.type'
 import { useRef, useState, useEffect, useCallback, type KeyboardEvent } from 'react'
 
 export default function useTablist(defaultTabId?: string) {
@@ -73,7 +74,7 @@ export default function useTablist(defaultTabId?: string) {
     const orientation = tablistRef.current?.getAttribute('aria-orientation') || 'horizontal'
     const lastIndex = tabs.length - 1
 
-    const keyMap: KeyCallbackMap = {
+    const keyMap: KeyPressCallbackMap = {
       ArrowRight: () => {
         if (orientation === 'horizontal') {
           const next = (currentIndex + 1) % tabs.length
