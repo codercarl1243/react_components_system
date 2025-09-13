@@ -13,8 +13,12 @@ export default function useButton() {
         const result = userHandler(event)
 
         // Log promise rejections without interfering
-        if (result instanceof Promise) {
-          result.catch((err) => {
+        if (
+          result &&
+          typeof result === 'object' &&
+          typeof (result as { then?: unknown }).then === 'function'
+        ) {
+          void Promise.resolve(result).catch((err) => {
             if (process.env.NODE_ENV !== 'production') {
               // eslint-disable-next-line no-console
               console.error('Button click error', err)
