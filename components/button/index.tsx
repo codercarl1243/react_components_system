@@ -28,7 +28,7 @@ export default function Button ({
             {...props}
             data-testid="base-button"
         >
-            {isLoading ? loadingText : children}
+            {isLoading ?  <span aria-live="polite">{loadingText}</span> : children}
         </button>
   )
 }
