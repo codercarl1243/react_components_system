@@ -10,19 +10,29 @@ describe('handleKeyPress', () => {
     } as unknown as KeyPressEventType
   }
 
-  it('if no event key is available, event.code will be used', () => {
+  it('if no event key is available, event.code will be used (but code values like "KeyA" are not aliased)', () => {
     const mockCallback = jest.fn()
     const keyMap: KeyPressCallbackMap = {
-      'a': mockCallback
+      'KeyA': mockCallback // Only matches code, not alias
     }
     const event = {
       code: 'KeyA',
       preventDefault: jest.fn(),
     } as unknown as KeyPressEventType
-    
-    handleKeyPress(event, keyMap)
 
+    handleKeyPress(event, keyMap)
     expect(mockCallback).toHaveBeenCalledWith(event)
+
+    // Aliases like "Spacebar" or "Esc" only work with event.key, not event.code
+    const aliasCallback = jest.fn()
+    const aliasMap: KeyPressCallbackMap = { 'Space': aliasCallback }
+    const eventWithCode = {
+      code: 'Spacebar',
+      preventDefault: jest.fn(),
+    } as unknown as KeyPressEventType
+
+    handleKeyPress(eventWithCode, aliasMap)
+    expect(aliasCallback).not.toHaveBeenCalled()
   });
   it('returns early if neither event.key nor event.code is available', () => {
     const mockCallback = jest.fn()

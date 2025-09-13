@@ -4,6 +4,12 @@ export function handleKeyPress(
   event: KeyPressEventType,
   keyMap: KeyPressCallbackMap
 ) {
+  // TODO: update the raw key to specifically only use event.key in future versions
+  // as event.code is not consistent across keyboard layouts and does not support aliases.
+  // However, this would be a breaking change.
+
+  if (!event) return
+  if (!keyMap || Object.keys(keyMap).length === 0) return
   // Canonicalise: single chars -> lower-case, keep named keys verbatim.
   const raw = event.key ?? event.code
   if (!raw) return
