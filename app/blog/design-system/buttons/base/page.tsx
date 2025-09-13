@@ -1,24 +1,22 @@
-import Code from "@/components/code";
-import Heading from "@/components/heading";
-import Link from "@/components/link";
-import Post from "@/components/post";
-import PostBanner from "@/components/post/post.banner";
-import PostNote from "@/components/post/post.note";
-import PostSection from "@/components/post/post.section";
-import PostSideBar from "@/components/post/post.sidebar";
+import Code from '@/components/code'
+import Heading from '@/components/heading'
+import Link from '@/components/link'
+import Post from '@/components/post'
+import PostBanner from '@/components/post/post.banner'
+import PostNote from '@/components/post/post.note'
+import PostSection from '@/components/post/post.section'
+import PostSideBar from '@/components/post/post.sidebar'
 
-
-export default function ButtonsBasePage() {
-
-    return (
+export default function ButtonsBasePage () {
+  return (
         <>
 
             <Post className="flow-8">
                 <PostSection>
                     <PostBanner
-                        title={"The Button"}
+                        title={'The Button'}
                         image={{
-                            src: "",
+                          src: ''
                         }}
                     />
                     <p>
@@ -99,16 +97,15 @@ const Button = forwardRef<HTMLButtonElement, ComponentProps<"button">>(
     )
 )`} />
 
-                        <Link href="https://react.dev/blog/2024/12/05/react-19#ref-as-a-prop" style={{ marginInlineStart: "auto" }}>see the original post</Link>
+                        <Link href="https://react.dev/blog/2024/12/05/react-19#ref-as-a-prop" style={{ marginInlineStart: 'auto' }}>see the original post</Link>
                     </PostNote>
-
 
                     <Code codeString={`export default function Button({children, ref, ...props }){
     return <button ref={ref} {...props}>{children}</button>
 }`} />
 
                     <p>
-                        Typescript will complain because it doesnt understand what these props are. We can use the intellisense of the code editor to see the return type of the component is a html button and it is receiving basic component attributes <strong>plus</strong> the ref. React provides for this sort of situation with a built-in type helper <Code inline codeString={` type BaseButtonProps = React.ComponentPropsWithRef<"button">;`} />.
+                        Typescript will complain because it doesnt understand what these props are. We can use the intellisense of the code editor to see the return type of the component is a html button and it is receiving basic component attributes <strong>plus</strong> the ref. React provides for this sort of situation with a built-in type helper <Code inline codeString={' type BaseButtonProps = React.ComponentPropsWithRef<"button">;'} />.
                     </p>
                     <p>
                         As we build out more complex buttons, their typing <strong>will</strong> build on the props being passed through here, so I am going to extract this into the buttons&apos; type file.
@@ -130,7 +127,7 @@ export type BaseButtonProps = ComponentPropsWithRef<"button">;`} />
                 <PostSection>
                     <Heading headingLevel={2} id="onclick-handler">The onClick handler with Custom Hook</Heading>
                     <p>
-                        <span className="bold">Moving on to the interaction handling!</span> We will keep all the logic in a custom hook in <Code codeString={`./useButton.tsx`} inline />.
+                        <span className="bold">Moving on to the interaction handling!</span> We will keep all the logic in a custom hook in <Code codeString={'./useButton.tsx'} inline />.
                     </p>
 
                     <div>
@@ -165,7 +162,6 @@ export default function ButtonsPage() {
                 <Button className="check">Here</Button>
             </div>
 }`} />
-
 
                     <Heading headingLevel={3} id="type-safety">Adding Type-Safety</Heading>
                     <p>lets quickly cover the questions that a QA or manager is going to ask us.</p>
@@ -206,7 +202,7 @@ return async (event) => {
 }}`} />
                     <p>
                         Finally onto the type safety of our onClick handler.
-                        {/* TODO add image of intellisense maybe?*/}
+                        {/* TODO add image of intellisense maybe? */}
                         If we hover over the onclick attribute of the button element, we get all the types we need.
                         The event originates from a <Code lang="tsx" codeString="HTMLButtonElement" inline /> and is a <Code lang="tsx" codeString="MouseEvent" inline />.
                     </p>
@@ -282,7 +278,7 @@ className, onClick, disabled, ref, isLoading = false, type = "button", children,
 }`} />
 
                     <p>Because this is our base Button I am going to wrap all of this CSS inside a layer to ensure it can be overwritten easily.</p>
-                    <Code codeString={`@layer base { }`} lang="css" />
+                    <Code codeString={'@layer base { }'} lang="css" />
 
                     <p>lets ensure that we respect the WCAG&apos;s minimum target size requirements for interactive elements - <em>especially as the number of countries with some level of legal requirement in place is growing each year.</em> </p>
                     <PostNote>
@@ -307,8 +303,6 @@ className, onClick, disabled, ref, isLoading = false, type = "button", children,
 
                         If you&apos;ve used any touch device in the past year, you&apos;re already familiar with these sizes — both Android and iOS follow this success criterion.</p>
 
-
-
                     <Code lang="css" codeString={`/* 
     WCAG Target Size Requirements
     https://www.wcag.com/developers/2-5-8-target-size-minimum-level-aa/ 
@@ -320,8 +314,6 @@ min-height: 44px;
 min-width: 44px;
 margin: 8px;`} />
                     <p>lets zoom through this next part. we are going reset the styling to remove any padding, borders, and appearances.</p>
-
-
 
                     <Heading headingLevel={3}>CSS Reset</Heading>
                     <Code lang="css" codeString={`
@@ -340,7 +332,7 @@ color: currentColor; /* Inherit text color from parent */
 
 /* 
     Font and text styling for consistency 
-    Fonts are not inherited by buttons and other inputs due to the differences in opinions in the browsers\' default style sheets 
+    Fonts are not inherited by buttons and other inputs due to the differences in opinions in the browsers' default style sheets 
 */
 font: inherit; /* Inherit font family, weight, etc. from parent */
 font-size: 1rem; /* Standardize font size for predictability */
@@ -378,7 +370,7 @@ outline 0.2s ease;
     }
 }`} />
 
-                    <p>lets give it a cursor of pointer to show the user that it is interactive, but we&apos;re only adding this to actual <Code inline={true} codeString={`<button>`} /> elements - because in some edge cases, we might style non-interactive elements to look like buttons for layout consistency. We don&apos;t want to imply interactivity with a hand cursor if clicking doesn&apos;t do anything.</p>
+                    <p>lets give it a cursor of pointer to show the user that it is interactive, but we&apos;re only adding this to actual <Code inline={true} codeString={'<button>'} /> elements - because in some edge cases, we might style non-interactive elements to look like buttons for layout consistency. We don&apos;t want to imply interactivity with a hand cursor if clicking doesn&apos;t do anything.</p>
 
                     <Code lang="css" codeString={`button{
     /*
@@ -673,7 +665,6 @@ export default function DefaultButtons() {
                     </PostNote>
                 </PostSection>
 
-
                 <PostSection>
                     <Heading headingLevel={2}>Testing</Heading>
 
@@ -682,7 +673,7 @@ export default function DefaultButtons() {
                     <p>links to these packages are down in the description. NextJS also has a helpful install line to copy if you wanted to follow their guide <Link href="https://nextjs.org/docs/app/guides/testing/jest">https://nextjs.org/docs/app/guides/testing/jest</Link></p>
 
                     {/* make it so we can copy this string */}
-                    <Code codeString={`npm install -D jest jest-environment-jsdom @testing-library/react @testing-library/dom @testing-library/jest-dom ts-node @types/jest`} />
+                    <Code codeString={'npm install -D jest jest-environment-jsdom @testing-library/react @testing-library/dom @testing-library/jest-dom ts-node @types/jest'} />
 
                     <p>I am going to go through the basic setup.</p>
                     <Code codeString={`> Would you like to use Typescript for the configuration file? > Y;
@@ -964,17 +955,17 @@ describe("useButton", () => {
             </Post>
             <PostSideBar
                 contents={[
-                    { id: "project-structure", href: "#project-structure", label: "Project Structure" },
-                    { id: "starting-code", href: "#starting-code", label: "Starting Code" },
-                    { id: "react-ref-deprecation", href: "#react-ref-deprecation", label: "React Ref and forwardRef Deprecation" },
-                    { id: "onclick-handler", href: "#onclick-handler", label: "The onClick Handler with Custom Hook" },
-                    { id: "type-safety", href: "#type-safety", label: "Adding Type-Safety" },
-                    { id: "css-styling", href: "#css-styling", label: "CSS Styling" },
-                    { id: "final-touches", href: "#final-touches", label: "Final Touches" },
-                    { id: "summary", href: "#summary", label: "Summary" },
+                  { id: 'project-structure', href: '#project-structure', label: 'Project Structure' },
+                  { id: 'starting-code', href: '#starting-code', label: 'Starting Code' },
+                  { id: 'react-ref-deprecation', href: '#react-ref-deprecation', label: 'React Ref and forwardRef Deprecation' },
+                  { id: 'onclick-handler', href: '#onclick-handler', label: 'The onClick Handler with Custom Hook' },
+                  { id: 'type-safety', href: '#type-safety', label: 'Adding Type-Safety' },
+                  { id: 'css-styling', href: '#css-styling', label: 'CSS Styling' },
+                  { id: 'final-touches', href: '#final-touches', label: 'Final Touches' },
+                  { id: 'summary', href: '#summary', label: 'Summary' }
                 ]}
             />
         </>
 
-    )
+  )
 }

@@ -1,18 +1,17 @@
-import clsx from "clsx";
-import Button from "../button";
-import { TabProps } from "./tablist.type";
+import clsx from 'clsx'
+import Button from '../button'
+import { TabProps } from './tablist.type'
 
-export default function Tab({
-    isSelected,
-    onClick,
-    className,
-    id,
-    ref,
-    children,
-    ...props
+export default function Tab ({
+  isSelected,
+  onClick,
+  className,
+  id,
+  ref,
+  children,
+  ...props
 }: TabProps) {
-
-    return (
+  return (
         <Button
             {...props}
             ref={ref}
@@ -26,5 +25,5 @@ export default function Tab({
         >
             {children}
         </Button>
-    )
+  )
 }

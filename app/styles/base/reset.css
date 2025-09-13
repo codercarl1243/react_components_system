@@ -51,9 +51,6 @@ ol[role='list'] {
 body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  /* font-family: var(--font-main) system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue",
-   Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
-   "Noto Color Emoji", sans-serif; */
   min-height: 100dvh;
   line-height: 1.5;
 }

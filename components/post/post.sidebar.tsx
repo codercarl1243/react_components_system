@@ -1,7 +1,7 @@
-import { ComponentProps } from "react";
-import Heading from "@/components/heading";
-import clsx from "clsx";
-import Image from "next/image";
+import { Children, type ComponentProps } from 'react'
+import Heading from '@/components/heading'
+import clsx from 'clsx'
+import Image from 'next/image'
 
 type TableOfContentsItem = {
     id: string;
@@ -23,14 +23,14 @@ export default function PostSideBar({
     children,
     ...props
 }: PostSideBarProps) {
-    const hasContents = contents.length > 0;
-    const hasRelated = relatedPosts.length > 0;
-    const hasExtras = author || children;
+    const hasContents = contents.length > 0
+    const hasRelated = relatedPosts.length > 0
+    const hasExtras = author || Children.count(children) > 0
 
-    if (!hasContents && !hasRelated && !hasExtras) return null;
+    if (!hasContents && !hasRelated && !hasExtras) return null
 
     return (
-        <aside className={clsx("post-sidebar", className)} {...props} >
+        <aside className={clsx('post-sidebar', className)} {...props}>
             {/* Table of contents */}
             {hasContents && (
                 <nav className="post-sidebar__contents" aria-labelledby="toc-heading">
@@ -42,7 +42,6 @@ export default function PostSideBar({
                                     <a href={item.href}>{item.label}</a>
                                 </li>
                             )
-
                         })}
                     </ol>
                 </nav>

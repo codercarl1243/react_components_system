@@ -1,17 +1,17 @@
-import Code from "@/components/code";
-import Heading from "@/components/heading";
-import Link from "@/components/link";
-import Post from "@/components/post";
-import PostBanner from "@/components/post/post.banner";
-import PostNote from "@/components/post/post.note";
-import PostSection from "@/components/post/post.section";
-import PostSideBar from "@/components/post/post.sidebar";
-import type { Metadata } from "next";
+import Code from '@/components/code'
+import Heading from '@/components/heading'
+import Link from '@/components/link'
+import Post from '@/components/post'
+import PostBanner from '@/components/post/post.banner'
+import PostNote from '@/components/post/post.note'
+import PostSection from '@/components/post/post.section'
+import PostSideBar from '@/components/post/post.sidebar'
+import type { Metadata } from 'next'
 
-export const metadata: Metadata = { title: "Buttons · Design System" };
+export const metadata: Metadata = { title: 'Buttons · Design System' }
 
-export default function ButtonsBasePage() {
-    return (
+export default function ButtonsBasePage () {
+  return (
         <>
             <Post className="flow-16">
                 <PostSection>
@@ -19,7 +19,7 @@ export default function ButtonsBasePage() {
                         title="The Button"
                         subtitle="Building a React Design System Foundation"
                         image={{
-                            src: "",
+                          src: ''
                         }}
                     />
                     <p>
@@ -562,7 +562,7 @@ export type ButtonProps = {
                     <Heading headingLevel={3} id="jest-setup">Setting Up Jest</Heading>
                     <p>Install testing dependencies:</p>
 
-                    <Code codeString={`npm install -D jest jest-environment-jsdom @testing-library/react @testing-library/dom @testing-library/jest-dom ts-node @types/jest`} />
+                    <Code codeString={'npm install -D jest jest-environment-jsdom @testing-library/react @testing-library/dom @testing-library/jest-dom ts-node @types/jest'} />
 
                     <p>Configure Jest:</p>
                     <Code codeString={`// jest.config.ts
@@ -749,26 +749,26 @@ export default function ButtonsPage() {
                         components like button groups, tab lists, and interactive panels.
                     </p>
 
-                    <Link href="./sliders">Next: Slider Buttons</Link>
+                    <Link href="/blog/design-system/buttons/sliders">Next: Slider Buttons</Link>
                 </PostSection>
             </Post>
 
             <PostSideBar
                 contents={[
-                    { id: "what-were-building", href: "#what-were-building", label: "What We're Building" },
-                    { id: "project-setup", href: "#project-setup", label: "Project Setup" },
-                    { id: "building-foundation", href: "#building-foundation", label: "Building the Foundation" },
-                    { id: "interaction-logic", href: "#interaction-logic", label: "Adding Interaction Logic" },
-                    { id: "essential-features", href: "#essential-features", label: "Essential Button Features" },
-                    { id: "accessible-styling", href: "#accessible-styling", label: "Accessible Styling" },
-                    { id: "flexible-styling", href: "#flexible-styling", label: "Flexible Styling System" },
-                    { id: "testing-strategy", href: "#testing-strategy", label: "Testing Strategy" },
-                    { id: "usage-examples", href: "#usage-examples", label: "Usage Examples" },
-                    { id: "what-we-built", href: "#what-we-built", label: "What We Built" },
-                    { id: "whats-next", href: "#whats-next", label: "What's Next" }
+                  { id: 'what-were-building', href: '#what-were-building', label: "What We're Building" },
+                  { id: 'project-setup', href: '#project-setup', label: 'Project Setup' },
+                  { id: 'building-foundation', href: '#building-foundation', label: 'Building the Foundation' },
+                  { id: 'interaction-logic', href: '#interaction-logic', label: 'Adding Interaction Logic' },
+                  { id: 'essential-features', href: '#essential-features', label: 'Essential Button Features' },
+                  { id: 'accessible-styling', href: '#accessible-styling', label: 'Accessible Styling' },
+                  { id: 'flexible-styling', href: '#flexible-styling', label: 'Flexible Styling System' },
+                  { id: 'testing-strategy', href: '#testing-strategy', label: 'Testing Strategy' },
+                  { id: 'usage-examples', href: '#usage-examples', label: 'Usage Examples' },
+                  { id: 'what-we-built', href: '#what-we-built', label: 'What We Built' },
+                  { id: 'whats-next', href: '#whats-next', label: "What's Next" }
                 ]}
             />
         </>
 
-    )
+  )
 }
