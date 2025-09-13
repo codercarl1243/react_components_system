@@ -11,6 +11,7 @@ export default function Button ({
   type = 'button',
   disabled,
   isLoading = false,
+  loadingText = 'Loading',
   ref,
   ...props
 }: BaseButtonProps) {
@@ -27,7 +28,7 @@ export default function Button ({
             {...props}
             data-testid="base-button"
         >
-            {isLoading ? 'Loading' : children}
+            {isLoading ? loadingText : children}
         </button>
   )
 }
