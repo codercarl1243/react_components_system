@@ -197,7 +197,7 @@ describe('handleKeyPress', () => {
       'Tab', 'a', 'ArrowLeft', 'Escape', 'Space', 'Delete'
     ]
 
-    it.each(aliasTestCases)('returns "%s" for key "%s"', (input, expected) => {
+    it.each(aliasTestCases)('returns "%s" for input "%s"', (input, expected) => {
       expect(getKeyAlias(input)).toBe(expected)
     })
 
