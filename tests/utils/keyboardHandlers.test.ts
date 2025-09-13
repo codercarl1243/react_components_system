@@ -1,125 +1,248 @@
-import { handleKeyPress, type KeyCallbackMap } from '@/utils/keyboardHandlers'
+import { getKeyAlias, handleKeyPress } from '@/utils/keyboardHandlers'
+import type { KeyPressCallbackMap, KeyPressEventType } from '@/utils/keyboardHandlers.type'
 
 describe('handleKeyPress', () => {
   // Helper to create a minimal KeyboardEvent-like object with tracking
-  function makeEvent (key: string) {
-    let prevented = false
-    const event: any = {
-      key,
-      preventDefault: () => { prevented = true }
-    }
+  function makeEvent(key: string): KeyPressEventType {
     return {
-      event,
-      get prevented () { return prevented },
-      reset: () => { prevented = false }
-    }
+      key,
+      preventDefault: jest.fn(),
+    } as unknown as KeyPressEventType
   }
 
+  it('if no event key is available, event.code will be used (but code values like "KeyA" are not aliased)', () => {
+    const mockCallback = jest.fn()
+    const keyMap: KeyPressCallbackMap = {
+      'KeyA': mockCallback // Only matches code, not alias
+    }
+    const event = {
+      code: 'KeyA',
+      preventDefault: jest.fn(),
+    } as unknown as KeyPressEventType
+
+    handleKeyPress(event, keyMap)
+    expect(mockCallback).toHaveBeenCalledWith(event)
+
+    // Aliases like "Spacebar" or "Esc" only work with event.key, not event.code
+    const aliasCallback = jest.fn()
+    const aliasMap: KeyPressCallbackMap = { 'Space': aliasCallback }
+    const eventWithCode = {
+      code: 'Spacebar',
+      preventDefault: jest.fn(),
+    } as unknown as KeyPressEventType
+
+    handleKeyPress(eventWithCode, aliasMap)
+    expect(aliasCallback).not.toHaveBeenCalled()
+  });
+  it('returns early if neither event.key nor event.code is available', () => {
+    const mockCallback = jest.fn()
+    const keyMap: KeyPressCallbackMap = {
+      'a': mockCallback
+    }
+    const event = {
+      preventDefault: jest.fn(),
+    } as unknown as KeyPressEventType
+    
+    handleKeyPress(event, keyMap)
+
+    expect(mockCallback).not.toHaveBeenCalled()
+    expect(event.preventDefault).not.toHaveBeenCalled()
+  });
+
   it('calls preventDefault and then invokes the mapped callback when the key exists', () => {
-    const ctx = makeEvent('Enter')
-    const callOrder: string[] = []
-    const keyMap = {
-      Enter: () => {
-        // this should run after preventDefault
-        callOrder.push('callback')
-        expect(ctx.prevented).toBe(true)
-      }
-    } as KeyCallbackMap
+    const mockCallback = jest.fn()
+    const keyMap: KeyPressCallbackMap = {
+      'a': mockCallback
+    }
+    const event = makeEvent('a')
 
-    handleKeyPress(ctx.event, keyMap)
-    expect(callOrder).toEqual(['callback'])
-    expect(ctx.prevented).toBe(true)
+    handleKeyPress(event, keyMap)
+
+    expect(event.preventDefault).toHaveBeenCalled()
+    expect(mockCallback).toHaveBeenCalledWith(event)
+
+    // verify preventDefault was called before the callback
+    const preventDefaultCall = (event.preventDefault as jest.Mock).mock.invocationCallOrder[0]
+    const callbackCall = mockCallback.mock.invocationCallOrder[0]
+    expect(preventDefaultCall).toBeLessThan(callbackCall)
   })
 
-  it('does nothing (does not prevent default or call any callback) for unmapped keys', () => {
-    const ctx = makeEvent('Enter')
-    const sideEffects: { called: boolean } = { called: false }
-    const keyMap = {
-      Escape: () => { sideEffects.called = true }
-    } as KeyCallbackMap
+  it('returns early (does not prevent default or call any callback) for unmapped keys', () => {
+    const mockCallback = jest.fn()
+    const keyMap: KeyPressCallbackMap = {
+      'a': mockCallback
+    }
+    const event = makeEvent('unmappedKey')
 
-    handleKeyPress(ctx.event, keyMap)
-    expect(sideEffects.called).toBe(false)
-    expect(ctx.prevented).toBe(false)
+    handleKeyPress(event, keyMap)
+
+    expect(event.preventDefault).not.toHaveBeenCalled()
+    expect(mockCallback).not.toHaveBeenCalled()
+  })
+  it('returns early for unmapped keys with empty keyMap', () => {
+    const keyMap: KeyPressCallbackMap = {}
+    const event = makeEvent('anyKey')
+
+    handleKeyPress(event, keyMap)
+
+    expect(event.preventDefault).not.toHaveBeenCalled()
   })
 
-  it('invokes only the callback corresponding to the pressed key when multiple mappings exist', () => {
-    const ctx = makeEvent('Escape')
-    const calls: string[] = []
-    const keyMap = {
-      Enter: () => calls.push('Enter'),
-      Escape: () => calls.push('Escape'),
-      a: () => calls.push('a')
-    } as KeyCallbackMap
+  it('invokes the correct callback', () => {
+    const mockCallbackA = jest.fn()
+    const mockCallbackB = jest.fn()
+    const mockCallbackC = jest.fn()
+    const keyMap: KeyPressCallbackMap = {
+      'a': mockCallbackA,
+      'b': mockCallbackB,
+      'c': mockCallbackC
+    }
+    const event = makeEvent('b')
 
-    handleKeyPress(ctx.event, keyMap)
-    expect(calls).toEqual(['Escape'])
-    expect(ctx.prevented).toBe(true)
+    handleKeyPress(event, keyMap)
+
+    expect(mockCallbackB).toHaveBeenCalledWith(event)
+    expect(mockCallbackA).not.toHaveBeenCalled()
+    expect(mockCallbackC).not.toHaveBeenCalled()
   })
 
   it("matches single-character keys case-insensitively (e.g., 'a' === 'A')", () => {
-    const ctx = makeEvent("A");
-    const calls: string[] = [];
-    const keyMap = {
-      a: () => calls.push("lower-a"),
-    } as KeyCallbackMap;
-
-    handleKeyPress(ctx.event, keyMap);
-    expect(calls).toEqual(["lower-a"]); // match for uppercase 'A' due to canonicalization
-    expect(ctx.prevented).toBe(true);
-  });
-
-  it('still prevents default before propagating an error thrown by the callback', () => {
-    const ctx = makeEvent('Escape')
-    const keyMap = {
-      Escape: () => {
-        // preventDefault should have been called before this throws
-        if (!ctx.prevented) {
-          throw new Error('preventDefault not called first')
-        }
-        throw new Error('boom')
-      }
-    } as KeyCallbackMap
-
-    try {
-      handleKeyPress(ctx.event, keyMap)
-    } catch (e: any) {
-      expect(e).toBeInstanceOf(Error)
-      expect(e.message).toBe('boom')
+    const mockCallback = jest.fn()
+    const keyMap: KeyPressCallbackMap = {
+      'a': mockCallback
     }
-    // Regardless of the thrown error, preventDefault should have been called first
-    expect(ctx.prevented).toBe(true)
+    const event = makeEvent('A')
+
+    handleKeyPress(event, keyMap)
+
+    expect(event.preventDefault).toHaveBeenCalled()
+    expect(mockCallback).toHaveBeenCalledWith(event)
+  })
+  it('supports both lowercase and uppercase keys in keyMap', () => {
+    const mockCallbackLower = jest.fn()
+    const mockCallbackUpper = jest.fn()
+    const keyMap: KeyPressCallbackMap = {
+      'a': mockCallbackLower,
+      'B': mockCallbackUpper
+    }
+
+    // Lowercase key in map, uppercase input
+    handleKeyPress(makeEvent('A'), keyMap)
+    expect(mockCallbackLower).toHaveBeenCalled()
+
+    // Uppercase key in map, lowercase input  
+    handleKeyPress(makeEvent('b'), keyMap)
+    expect(mockCallbackUpper).not.toHaveBeenCalled()
+    // Uppercase key in map, Uppercase input  
+    handleKeyPress(makeEvent('B'), keyMap)
+    expect(mockCallbackUpper).toHaveBeenCalled()
   })
 
-  it('handles an empty key map gracefully (no preventDefault, no callback)', () => {
-    const ctx = makeEvent('Enter')
-    const keyMap = {} as KeyCallbackMap
-
-    handleKeyPress(ctx.event, keyMap)
-    expect(ctx.prevented).toBe(false)
+  // Test all alias return statements
+  it('uses Space alias when Spacebar is pressed', () => {
+    const mockCallback = jest.fn()
+    const keyMap: KeyPressCallbackMap = { 'Space': mockCallback }
+    handleKeyPress(makeEvent('Spacebar'), keyMap)
+    expect(mockCallback).toHaveBeenCalled()
   })
 
-  it('should call callback for "Space" alias when key is " "', () => {
-    const cb = jest.fn()
-    const event = { key: ' ', preventDefault: jest.fn() }
-    handleKeyPress(event as any, { Space: cb })
-    expect(cb).toHaveBeenCalledWith(event)
+  it('uses Escape alias when Esc is pressed', () => {
+    const mockCallback = jest.fn()
+    const keyMap: KeyPressCallbackMap = { 'Escape': mockCallback }
+    handleKeyPress(makeEvent('Esc'), keyMap)
+    expect(mockCallback).toHaveBeenCalled()
+  })
+
+  it('uses Delete alias when Del is pressed', () => {
+    const mockCallback = jest.fn()
+    const keyMap: KeyPressCallbackMap = { 'Delete': mockCallback }
+    handleKeyPress(makeEvent('Del'), keyMap)
+    expect(mockCallback).toHaveBeenCalled()
+  })
+
+  it('uses ArrowLeft alias when Left is pressed', () => {
+    const mockCallback = jest.fn()
+    const keyMap: KeyPressCallbackMap = { 'ArrowLeft': mockCallback }
+    handleKeyPress(makeEvent('Left'), keyMap)
+    expect(mockCallback).toHaveBeenCalled()
+  })
+
+  it('uses ArrowRight alias when Right is pressed', () => {
+    const mockCallback = jest.fn()
+    const keyMap: KeyPressCallbackMap = { 'ArrowRight': mockCallback }
+    handleKeyPress(makeEvent('Right'), keyMap)
+    expect(mockCallback).toHaveBeenCalled()
+  })
+
+  it('uses ArrowUp alias when Up is pressed', () => {
+    const mockCallback = jest.fn()
+    const keyMap: KeyPressCallbackMap = { 'ArrowUp': mockCallback }
+    handleKeyPress(makeEvent('Up'), keyMap)
+    expect(mockCallback).toHaveBeenCalled()
+  })
+
+  it('uses ArrowDown alias when Down is pressed', () => {
+    const mockCallback = jest.fn()
+    const keyMap: KeyPressCallbackMap = { 'ArrowDown': mockCallback }
+    handleKeyPress(makeEvent('Down'), keyMap)
+    expect(mockCallback).toHaveBeenCalled()
+  })
+
+  it('uses Enter alias when Return is pressed', () => {
+    const mockCallback = jest.fn()
+    const keyMap: KeyPressCallbackMap = { 'Enter': mockCallback }
+    handleKeyPress(makeEvent('Return'), keyMap)
+    expect(mockCallback).toHaveBeenCalled()
+  })
+
+  it('uses Control alias when Ctrl is pressed', () => {
+    const mockCallback = jest.fn()
+    const keyMap: KeyPressCallbackMap = { 'Control': mockCallback }
+    handleKeyPress(makeEvent('Ctrl'), keyMap)
+    expect(mockCallback).toHaveBeenCalled()
+  })
+
+  it('prevent default is called before propagating an error thrown by the callback', () => {
+    const throwingCallback = jest.fn(() => {
+      throw new Error('Callback error')
+    })
+    const keyMap: KeyPressCallbackMap = {
+      'a': throwingCallback
+    }
+    const event = makeEvent('a')
+
+    expect(() => handleKeyPress(event, keyMap)).toThrow('Callback error')
     expect(event.preventDefault).toHaveBeenCalled()
   })
 
-  it('should call callback for "Space" alias when key is "Spacebar"', () => {
-    const cb = jest.fn()
-    const event = { key: 'Spacebar', preventDefault: jest.fn() }
-    handleKeyPress(event as any, { Space: cb })
-    expect(cb).toHaveBeenCalledWith(event)
-    expect(event.preventDefault).toHaveBeenCalled()
-  })
+  describe('getKeyAlias', () => {
+    const aliasTestCases = [
+      // [input, expected]
+      [' ', 'Space'],
+      ['Spacebar', 'Space'],
+      ['Esc', 'Escape'],
+      ['Del', 'Delete'],
+      ['Left', 'ArrowLeft'],
+      ['Right', 'ArrowRight'],
+      ['Up', 'ArrowUp'],
+      ['Down', 'ArrowDown'],
+      ['Enter', 'Enter'],
+      ['Return', 'Enter'],
+      ['Control', 'Control'],
+      ['Ctrl', 'Control'],
+    ] as const
 
-  it('should call callback for "Escape" alias when key is "Esc"', () => {
-    const cb = jest.fn()
-    const event = { key: 'Esc', preventDefault: jest.fn() }
-    handleKeyPress(event as any, { Escape: cb })
-    expect(cb).toHaveBeenCalledWith(event)
-    expect(event.preventDefault).toHaveBeenCalled()
+    const noAliasTestCases = [
+      'Tab', 'a', 'ArrowLeft', 'Escape', 'Space', 'Delete'
+    ]
+
+    it.each(aliasTestCases)('returns "%s" for input "%s"', (input, expected) => {
+      expect(getKeyAlias(input)).toBe(expected)
+    })
+
+    it.each(noAliasTestCases)('returns undefined for non-aliased key "%s"', (key) => {
+      expect(getKeyAlias(key)).toBeUndefined()
+    })
+    
   })
 })

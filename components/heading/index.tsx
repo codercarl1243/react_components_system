@@ -21,8 +21,6 @@ export default function Heading({
   ...props
 }: HeadingPropsType) {
 
-  const Tag = `h${headingLevel}`;
-
   return createElement(
     `h${headingLevel}`,
     {

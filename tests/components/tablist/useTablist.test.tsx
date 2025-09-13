@@ -2,15 +2,15 @@ import React, { useEffect, useImperativeHandle, forwardRef } from 'react'
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import useTablist from '@/components/tablist/useTablist'
+import type { KeyPressCallbackMap, KeyPressEventType } from '@/utils/keyboardHandlers.type'
 
-// Cross-framework mock helpers: prefer vi.* if available, else fall back to jest.*
-const mockFn = (globalThis as any).jest?.fn
-const doMock = (globalThis as any).jest?.mock
+const mockFn = globalThis.jest?.fn
+const doMock = globalThis.jest?.mock
 
 // Mock "@/utils/keyboardHandlers" so key callbacks actually execute in tests
 
 if (doMock && mockFn) {
-  const handleKeyPressMock = mockFn((e: KeyboardEvent | any, map: Record<string, () => void>) => {
+  const handleKeyPressMock = mockFn((e: KeyPressEventType, map: KeyPressCallbackMap) => {
     const key = (e.key ?? e.code ?? '').toString()
     if (key in map) {
       map[key]()
@@ -18,7 +18,7 @@ if (doMock && mockFn) {
   })
 
   doMock('../../../utils/keyboardHandlers', () => ({
-    handleKeyPress: (e: KeyboardEvent | any, map: Record<string, () => void>) =>
+    handleKeyPress: (e: KeyPressEventType, map: KeyPressCallbackMap) =>
       handleKeyPressMock(e, map)
   }))
 }
@@ -59,7 +59,7 @@ const TestTabs = forwardRef<TestHandle, TestTabsProps>(function TestTabs(
         role="tablist"
         aria-orientation={orientation}
         ref={tablistRef}
-        onKeyDown={handleKeyDown as any}
+        onKeyDown={handleKeyDown}
         aria-label="test-tablist"
         data-active-id={activeId ?? ''}
       >

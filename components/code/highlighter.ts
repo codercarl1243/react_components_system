@@ -27,6 +27,7 @@ class ShikiSingleton {
     }).then((h) => {
       this.highlighter = h
       if (process.env.NODE_ENV !== 'production') {
+        // eslint-disable-next-line no-console
         console.debug('Shiki highlighter created successfully')
       }
       return h
