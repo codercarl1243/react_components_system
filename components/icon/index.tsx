@@ -8,7 +8,7 @@ export default function Icon({
 }: IconProps) {
   const resolvedSize =
     typeof size === 'string' && size in sizeMap
-      ? sizeMap[size as keyof typeof sizeMap]
+      ? sizeMap[size]
       : size
 
   const isDecorative = !(props['aria-label'] || props['aria-labelledby']);
