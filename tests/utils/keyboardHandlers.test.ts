@@ -10,6 +10,35 @@ describe('handleKeyPress', () => {
     } as unknown as KeyPressEventType
   }
 
+  it('if no event key is available, event.code will be used', () => {
+    const mockCallback = jest.fn()
+    const keyMap: KeyPressCallbackMap = {
+      'a': mockCallback
+    }
+    const event = {
+      code: 'a',
+      preventDefault: jest.fn(),
+    } as unknown as KeyPressEventType
+    
+    handleKeyPress(event, keyMap)
+
+    expect(mockCallback).toHaveBeenCalledWith(event)
+  });
+  it('returns early if neither event.key nor event.code is available', () => {
+    const mockCallback = jest.fn()
+    const keyMap: KeyPressCallbackMap = {
+      'a': mockCallback
+    }
+    const event = {
+      preventDefault: jest.fn(),
+    } as unknown as KeyPressEventType
+    
+    handleKeyPress(event, keyMap)
+
+    expect(mockCallback).not.toHaveBeenCalled()
+    expect(event.preventDefault).not.toHaveBeenCalled()
+  });
+  
   it('calls preventDefault and then invokes the mapped callback when the key exists', () => {
     const mockCallback = jest.fn()
     const keyMap: KeyPressCallbackMap = {
