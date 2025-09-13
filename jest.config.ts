@@ -13,6 +13,7 @@ const config: Config = {
   coverageProvider: 'v8',
   coverageDirectory: 'coverage',
   testEnvironment: 'jsdom',
+  silent: true, // Prevent jest from logging to the console
   moduleNameMapper: {
     '^@/(.*)$': '<rootdir>/$1'
   },
