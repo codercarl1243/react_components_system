@@ -1,4 +1,5 @@
 import Code from '@/components/code'
+import FunHighlight from '@/components/decorations/FunHighlight'
 import Heading from '@/components/heading'
 import Link from '@/components/link'
 import Post from '@/components/post'
@@ -27,7 +28,7 @@ export default function ButtonsBasePage () {
                     </p>
 
                     <p>
-                        We&apos;ll create a flexible, accessible, and composable button system in React that serves as the
+                        We&apos;ll create a <FunHighlight>flexible</FunHighlight>, <FunHighlight>accessible</FunHighlight>, and <FunHighlight>composable</FunHighlight> button system in React that serves as the
                         foundation for more complex components like toggles, switches, and button panels.
                     </p>
                 </PostSection>
