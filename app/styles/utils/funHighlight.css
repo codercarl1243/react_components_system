@@ -1,0 +1,97 @@
+.fun-highlight {
+    position: relative;
+    display: inline;
+    z-index: 1;
+    text-shadow: 0 0 0.5px currentColor, 0 0 0.5px currentColor;
+
+    &:before {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 0%;
+        height: 120%;
+        border-radius: 50px;
+        opacity: 0.35;
+        z-index: -1;
+        transform: translate(-50%, -50%) rotate(var(--rotation, -2deg));
+        background: var(--background, currentColor);
+        transform-origin: center;
+        transition: width 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    }
+}
+
+/* section:focus-within  */
+.fun-highlight:not(.individual),
+section:hover .fun-highlight:not(.individual) {
+    text-shadow: 0 0 0.5px currentColor, 0 0 0.5px currentColor;
+    /* color: var(--color-neutral-800); */
+
+    &:before {
+        width: 110%;
+        transform-origin: bottom left;
+    }
+}
+
+.fun-highlight.individual:hover {
+    text-shadow: 0 0 0.5px currentColor, 0 0 0.5px currentColor;
+    /* color: var(--color-neutral-800); */
+
+    &:before {
+        width: 110%;
+        transform-origin: bottom left;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    .fun-highlight::before,
+    .fun-highlight.individual::before {
+        transition: none;
+    }
+}
+
+.fun-highlight:nth-of-type(9n+1) {
+    --rotation: -3deg;
+    --background: var(--color-emphasis-100);
+}
+
+.fun-highlight:nth-of-type(9n+2) {
+    --rotation: 1deg;
+    --background: var(--color-emphasis-200);
+}
+
+.fun-highlight:nth-of-type(9n+3) {
+    --rotation: -1deg;
+    --background: var(--color-emphasis-300);
+}
+
+.fun-highlight:nth-of-type(9n+4) {
+    --rotation: 2deg;
+    --background: var(--color-emphasis-400);
+}
+
+.fun-highlight:nth-of-type(9n+5) {
+    --rotation: -2deg;
+    --background: var(--color-emphasis-500);
+}
+
+.fun-highlight:nth-of-type(9n+6) {
+    --rotation: 3deg;
+    --background: var(--color-emphasis-600);
+}
+
+.fun-highlight:nth-of-type(9n+7) {
+    --rotation: 0deg;
+    --background: var(--color-emphasis-700);
+}
+
+.fun-highlight:nth-of-type(9n+8) {
+    --rotation: -1deg;
+    --background: var(--color-emphasis-800);
+}
+
+.fun-highlight:nth-of-type(9n+9) {
+    --rotation: 1deg;
+    --background: var(--color-emphasis-900);
+}
