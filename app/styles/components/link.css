@@ -1,0 +1,31 @@
+.link {
+    color: var(--link-color, currentColor);
+    text-decoration: underline;
+    text-decoration-color: var(--link-underline-color, currentColor);
+    text-decoration-thickness: 0.125em;
+    text-underline-offset: 0.2em;
+    transition: text-decoration-color 0.2s ease;
+}
+
+.link:hover,
+.link:focus-visible {
+    text-decoration: underline dotted;
+}
+
+a:not([class]):hover,
+a:not([class]):focus-visible {
+    text-decoration-color: var(--color-primary-600);
+}
+
+/* Optional: Remove underline and add on hover instead */
+.link-subtle {
+    color: var(--color-primary-500);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-bottom-color 0.2s ease;
+}
+
+.link-subtle:hover,
+.link-subtle:focus-visible {
+    border-bottom-color: var(--color-primary-400);
+}
