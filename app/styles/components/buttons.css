@@ -1,12 +1,5 @@
-/* Base button styles */
+/* Base button styles - Layout, sizing, and UX patterns */
 .button {
-    /* Base CSS custom properties */
-    --button-color: var(--color-neutral-800);
-    --button-bg-color: var(--color-neutral-100);
-    --button-border-color: var(--color-neutral-600);
-    --button-outline-color: var(--color-neutral-400);
-    --button-shadow: none;
-
     /* Layout properties */
     --button-font-size: 1rem;
     --button-margin: 8px;
@@ -31,12 +24,12 @@
     outline: 0;
     box-shadow: none;
 
-    /* Apply custom properties */
-    background-color: var(--button-bg-color);
-    color: var(--button-color);
-    border-color: var(--button-border-color);
-    box-shadow: var(--button-shadow);
-    outline-color: var(--button-outline-color);
+    /* Apply color properties (defined in second declaration) */
+    background-color: var(--button-bg-color, transparent);
+    color: var(--button-color, currentColor);
+    border-color: var(--button-border-color, currentColor);
+    box-shadow: var(--button-shadow, none);
+    outline-color: var(--button-outline-color, currentColor);
     outline-offset: var(--button-outline-offset);
 
     /* Typography */
@@ -54,24 +47,26 @@
         outline 0.2s ease,
         box-shadow 0.2s ease;
 
-    /* Interactive states */
+    /* Interactive states - UX communication through outlines and transforms */
     &:hover {
-        outline: 1px solid var(--button-outline-color);
+        outline: 1px solid var(--button-outline-color, currentColor);
         box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2);
     }
 
     &:focus-visible {
-        outline: 2px solid var(--button-outline-color);
+        outline: 2px solid var(--button-outline-color, currentColor);
         outline-offset: var(--button-outline-offset);
         box-shadow: none;
     }
 
     &:active {
-        outline: 1px dotted var(--button-outline-color);
+        outline: 1px dotted var(--button-outline-color, currentColor);
         transform: translateY(1px);
     }
 
     &:disabled {
+        --button-bg-color: var(--color-neutral-200);
+        --button-color: var(--color-neutral-600);
         cursor: not-allowed;
 
         &:hover,
@@ -105,68 +100,56 @@ button.button {
     }
 }
 
-/* Style Variants */
-.button {
-    --button-color: var(--button-foreground, var(--color-neutral-800));
-    --button-bg-color: var(--button-background, var(--color-neutral-100));
-    --button-border-color: var(--button-accent, var(--color-neutral-600));
-    --button-outline-color: var(--button-accent, var(--color-neutral-600));
+/* Color system - Semantic color tokens and their application */
 
-    &:not(:disabled):hover {
-        --button-color: var(--button-background, var(--color-neutral-800));
-        --button-bg-color: var(--button-foreground, var(--color-neutral-100));
-    }
-
-    &:disabled {
-        --button-foreground: var(--color-neutral-800);
-        --button-background: var(--color-neutral-200);
-        --button-accent: var(--color-neutral-400);
-    }
-}
-
-/* Filled style - button has solid background */
+/* Filled style - solid background with contrasting text */
 .button[data-style="filled"] {
-    /* foreground wont change in filled */
+    --button-color: var(--button-primary-color);
+    --button-bg-color: var(--button-secondary-color);
+    --button-border-color: var(--button-accent-color);
+    --button-outline-color: var(--button-accent-color);
 
-    --button-foreground: var(--color-neutral-100);
-    --button-background: var(--color-neutral-800);
-    --button-accent: var(--color-neutral-600);
-
-    &[data-variant="primary"] {
-        --button-background: var(--color-primary-600);
-        --button-accent: var(--color-primary-400);
-    }
-
-    &[data-variant="secondary"] {
-        --button-background: var(--color-secondary-600);
-        --button-accent: var(--color-secondary-400);
-    }
-
-    &[data-variant="accent"] {
-        --button-background: var(--color-accent-600);
-        --button-accent: var(--color-accent-400);
+    &:not([data-variant]):disabled {
+        --button-secondary-color: var(--color-neutral-200);
+        --button-primary-color: var(--color-neutral-600);
+        --button-accent-color: var(--color-neutral-400);
     }
 }
 
+/* Outline style - transparent background with colored border/text */
 .button[data-style="outline"] {
-    /* background wont change in outline */
-    --button-background: var(--color-neutral-100);
+    --button-color: var(--button-secondary-color);
+    --button-bg-color: var(--button-primary-color);
+    --button-border-color: var(--button-accent-color);
+    --button-outline-color: var(--button-accent-color);
 
-    --button-foreground: var(--color-neutral-800);
-    --button-accent: var(--color-neutral-600);
-
-    &[data-variant="primary"] {
-        --button-foreground: var(--color-primary-600);
-        --button-accent: var(--color-primary-400);
+    &:not([data-variant]):disabled {
+        --button-secondary-color: var(--color-neutral-400);
+        --button-accent-color: var(--color-neutral-300);
     }
+}
 
-    &[data-variant="secondary"] {
-        --button-foreground: var(--color-secondary-600);
-        --button-accent: var(--color-secondary-400);
-    }
+/* Color Variants */
+.button {
+    --button-primary-color: var(--color-neutral-100);
+    --button-secondary-color: var(--color-neutral-800);
+    --button-accent-color: var(--color-neutral-600);
+}
 
-    &[data-variant="accent"] {
-        --button-foreground: var(--color-accent-600);
-        --button-accent: var(--color-accent-400);
-    }
+.button[data-variant="primary"] {
+    --button-primary-color: var(--color-neutral-100);
+    --button-secondary-color: var(--color-primary-400);
+    --button-accent-color: var(--color-primary-600);
+}
+
+.button[data-variant="secondary"] {
+    --button-primary-color: var(--color-neutral-100);
+    --button-secondary-color: var(--color-secondary-400);
+    --button-accent-color: var(--color-secondary-600);
+}
+
+.button[data-variant="accent"] {
+    --button-primary-color: var(--color-neutral-100);
+    --button-secondary-color: var(--color-accent-400);
+    --button-accent-color: var(--color-accent-600);
 }
