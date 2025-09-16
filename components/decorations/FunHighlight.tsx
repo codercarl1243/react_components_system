@@ -3,20 +3,20 @@ import { ComponentProps } from "react";
 
 type FunUnderlineProps = {
     children: React.ReactNode;
-    color?: string;
     className?: string;
     individual?: boolean;
 } & ComponentProps<'span'>;
 
 export default function FunHighlight({ children,
-    color = 'currentColor',
     className = '',
-    individual = false
+    individual = false,
+    ...props
 }: FunUnderlineProps) {
 
     return (
         <span
             className={clsx(className, 'fun-highlight', { "individual": individual })}
+            {...props}
         >
             {children}
         </span>
