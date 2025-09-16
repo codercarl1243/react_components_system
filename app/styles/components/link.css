@@ -9,7 +9,7 @@
 
 .link:hover,
 .link:focus-visible {
-    text-decoration: underline dotted;
+    text-decoration-style: dotted;
 }
 
 a:not([class]):hover,
