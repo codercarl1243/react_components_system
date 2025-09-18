@@ -1,5 +1,5 @@
 'use client';
-import { Children, type ComponentProps } from 'react'
+import { Children, useMemo, type ComponentProps } from 'react'
 import Heading from '@/components/heading'
 import clsx from 'clsx'
 import Image from 'next/image'
@@ -29,7 +29,7 @@ export default function PostSideBar({
     const hasContents = contents.length > 0
     const hasRelated = relatedPosts.length > 0
     const hasExtras = author || Children.count(children) > 0
-    const ids = contents.map(item => item.id).filter(Boolean);
+    const ids = useMemo(() => contents.map((item) => item.id), [contents]);
     const { activeId } = useScrollSpy({ ids: ids });
 
     if (!hasContents && !hasRelated && !hasExtras) return null
