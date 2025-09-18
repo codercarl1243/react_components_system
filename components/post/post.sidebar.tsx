@@ -1,7 +1,10 @@
+'use client';
 import { Children, type ComponentProps } from 'react'
 import Heading from '@/components/heading'
 import clsx from 'clsx'
 import Image from 'next/image'
+import { usePost } from '@/components/post/usePost';
+import Link from '@/components/link';
 
 type TableOfContentsItem = {
     id: string;
@@ -26,20 +29,36 @@ export default function PostSideBar({
     const hasContents = contents.length > 0
     const hasRelated = relatedPosts.length > 0
     const hasExtras = author || Children.count(children) > 0
-
+    const { activeId } = usePost();
     if (!hasContents && !hasRelated && !hasExtras) return null
-
+    const handleContentsClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+        e.preventDefault();
+        const element = document.querySelector(href);
+        if (element) {
+            element.scrollIntoView({
+                behavior: 'instant',
+                block: 'start'
+            });
+        }
+    };
     return (
-        <aside className={clsx('post-sidebar', className)} {...props}>
+        <aside className={clsx('post-sidebar flow-8', className)} {...props}>
             {/* Table of contents */}
             {hasContents && (
-                <nav className="post-sidebar__contents" aria-labelledby="toc-heading">
+                <nav className="post-sidebar__contents flow-4" aria-labelledby="toc-heading">
                     <Heading headingLevel={2} id="toc-heading">Table of contents</Heading>
-                    <ol>
+                    <ol className='toc-list'>
                         {contents.map(item => {
+                            const isActive = activeId === item.id;
                             return (
-                                <li key={item.id}>
-                                    <a href={item.href}>{item.label}</a>
+                                <li key={item.id} className={clsx('toc-item', { 'toc-item--active': isActive })}>
+                                    <Link
+                                        href={item.href}
+                                        className={clsx('toc-link', {'toc-link--active': isActive })}
+                                        onClick={(e) => handleContentsClick(e, item.href)}
+                                    >
+                                        {item.label}
+                                    </Link>
                                 </li>
                             )
                         })}
