@@ -1,11 +1,13 @@
 .post-section {
+    --post-section-spacer: calc(var(--spacing) * 16);
     position: relative;
+
 }
 
 .post-section::after {
     content: '';
     position: absolute;
-    bottom: calc(var(--spacing) * -6);
+    bottom: calc(var(--post-section-spacer) / -2);
     height: 1px;
     width: min(80ch, 75%);
     left: 0;
@@ -14,4 +16,8 @@
     background-color: var(--color-neutral-200);
     box-shadow: 1px 4px 10px var(--color-neutral-800);
     pointer-events: none;
+}
+
+.post-section+.post-section {
+    margin-block-start: var(--post-section-spacer);
 }
