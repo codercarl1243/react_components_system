@@ -13,5 +13,8 @@
 
 .footer p {
     margin: 0;
-    max-width: initial;
+    gap: 0.5em;
+}
+.footer p span {
+    margin-inline: 0.5em;
 }
