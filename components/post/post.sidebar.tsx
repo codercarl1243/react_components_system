@@ -29,17 +29,23 @@ export default function PostSideBar({
     const hasContents = contents.length > 0
     const hasRelated = relatedPosts.length > 0
     const hasExtras = author || Children.count(children) > 0
-    const { activeId } = useScrollSpy({ids: contents.length ? contents.map(item => item.id) : []});
+    const ids = contents.map(item => item.id).filter(Boolean);
+    const { activeId } = useScrollSpy({ ids: ids });
+
     if (!hasContents && !hasRelated && !hasExtras) return null
+
     const handleContentsClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
         e.preventDefault();
         const element = document.querySelector(href);
-        if (element) {
-            element.scrollIntoView({
-                behavior: 'instant',
-                block: 'start'
-            });
-        }
+        if (!element) return;
+        const reduced = window.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches;
+        element.scrollIntoView({
+            behavior: reduced ? 'auto' : 'smooth',
+            block: 'start',
+            inline: 'nearest',
+
+        });
+
     };
     return (
         <aside className={clsx('post-sidebar flow-8', className)} {...props}>
@@ -54,7 +60,7 @@ export default function PostSideBar({
                                 <li key={item.id} className={clsx('toc-item', { 'toc-item--active': isActive })}>
                                     <Link
                                         href={item.href}
-                                        className={clsx('toc-link', {'toc-link--active': isActive })}
+                                        className={clsx('toc-link', { 'toc-link--active': isActive })}
                                         onClick={(e) => handleContentsClick(e, item.href)}
                                     >
                                         {item.label}
@@ -74,7 +80,7 @@ export default function PostSideBar({
                     <ul>
                         {relatedPosts.map((post) => (
                             <li key={post.href}>
-                                <a href={post.href}>{post.title}</a>
+                                <Link href={post.href}>{post.title}</Link>
                             </li>
                         ))}
                     </ul>
