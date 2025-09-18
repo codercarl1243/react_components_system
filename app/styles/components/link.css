@@ -11,7 +11,15 @@
 .link:focus-visible {
     text-decoration-style: dotted;
 }
+.external {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.2em;
+}
 
+.external .icon {
+    flex-shrink: 0;
+}
 a:not([class]):hover,
 a:not([class]):focus-visible {
     text-decoration-color: var(--color-primary-600);

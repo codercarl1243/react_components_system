@@ -2,8 +2,9 @@ import NextLink from 'next/link'
 import React from 'react'
 import Icon from '../icon'
 import { RiExternalLinkLine } from '@remixicon/react'
+import clsx from 'clsx'
 
-export default function Link ({ children, href, ...props }: React.ComponentProps<'a'>) {
+export default function Link({ children, className, href, ...props }: React.ComponentProps<'a'>) {
   if (!href) return <>{children}</>
 
   const schemeMatch = href.match(/^([a-zA-Z][a-zA-Z+.-]*):/)
@@ -20,14 +21,14 @@ export default function Link ({ children, href, ...props }: React.ComponentProps
 
   if (isExternal && (!scheme || SAFE_EXTERNAL.has(scheme))) {
     return (
-      <a href={href} rel="noopener noreferrer" {...props}>
+      <a href={href} rel="noopener noreferrer" className={clsx(className, 'link external')} {...props}>
         {children}{' '}
-        <Icon color={'currentColor'} icon={RiExternalLinkLine} size={'sm'} />
+        <Icon color={'currentColor'} icon={RiExternalLinkLine} size={'sm'} className='icon' />
       </a>
     )
   }
   return (
-    <NextLink href={href} {...props}>{children}</NextLink>
+    <NextLink href={href} className={clsx(className, 'link external')} {...props}>{children}</NextLink>
   )
 }
 
