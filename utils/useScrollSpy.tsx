@@ -1,16 +1,19 @@
 'use client';
 import { useEffect, useState } from 'react';
 
+const DEFAULT_THRESHOLD = [0, 0.25, 0.5, 0.75, 1] as const;
+const DEFAULT_ROOT_MARGIN = '-10% 0px -60% 0px' as const;
+
 type UseScrollSpyOptions = {
   ids: string[];
-  threshold?: number[];
+  threshold?: readonly number[];
   rootMargin?: string;
 };
 
 export function useScrollSpy({
   ids,
-  threshold = [0, 0.25, 0.5, 0.75, 1.0],
-  rootMargin = '0px 0px -50% 0px',
+  threshold = DEFAULT_THRESHOLD,
+  rootMargin = DEFAULT_ROOT_MARGIN,
 }: UseScrollSpyOptions) {
   const [activeId, setActiveId] = useState<string | null>(null);
 
