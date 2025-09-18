@@ -19,7 +19,9 @@ export function useScrollSpy({
 
   useEffect(() => {
     if (!ids.length) return;
-
+    if (typeof window === 'undefined' || !('IntersectionObserver' in window)) {
+      return;
+    }
     const ratios = new Map<string, { ratio: number; top: number }>();
 
     const observer = new IntersectionObserver(
