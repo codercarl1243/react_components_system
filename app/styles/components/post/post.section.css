@@ -1,7 +1,8 @@
 .post-section {
     --post-section-spacer: calc(var(--spacing) * 16);
     position: relative;
-    min-height: 80dvh;
+    min-height: 50vh;
+    min-height: 50dvh;
     display: grid;
     align-content: start;
     padding-block: calc(var(--spacing) * 8);

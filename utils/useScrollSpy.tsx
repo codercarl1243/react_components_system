@@ -2,7 +2,7 @@
 import { useEffect, useState } from 'react';
 
 const DEFAULT_THRESHOLD = [0, 0.25, 0.5, 0.75, 1] as const;
-const DEFAULT_ROOT_MARGIN = '-10% 0px -60% 0px' as const;
+const DEFAULT_ROOT_MARGIN = '0% 0px -60% 0px' as const;
 
 type UseScrollSpyOptions = {
   ids: string[];
@@ -52,7 +52,7 @@ export function useScrollSpy({
           setActiveId(bestId);
         }
       },
-      { threshold, rootMargin }
+      { rootMargin }
     );
 
     ids.forEach((id) => {
@@ -77,7 +77,7 @@ export function useScrollSpy({
     }
 
     return () => observer.disconnect();
-  }, [ids, threshold, rootMargin]);
+  }, [ids, rootMargin]);
 
   return { activeId };
 }
