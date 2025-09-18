@@ -1,6 +1,18 @@
 'use client';
 import { useEffect, useState } from 'react';
 
+/**
+ * Tracks which in-page section (from the post table of contents) is currently active.
+ *
+ * Observes sections referenced by anchors inside the `.post-sidebar__contents` TOC and updates
+ * `activeId` to the id of the most prominently visible section. Visibility is determined via an
+ * IntersectionObserver; when multiple sections intersect, the hook prefers the one with the higher
+ * intersection ratio and, for near-equal ratios, the section that appears higher on the page.
+ *
+ * The observer is created on mount and disconnected on unmount.
+ *
+ * @returns An object containing `activeId` — the current active section id (empty string if none).
+ */
 export function usePost() {
   const [activeId, setActiveId] = useState('');
 
