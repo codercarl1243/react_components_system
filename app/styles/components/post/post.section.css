@@ -1,11 +1,20 @@
 .post-section {
+    --post-section-spacer: calc(var(--spacing) * 16);
     position: relative;
+    min-height: 50vh;
+    min-height: 50dvh;
+    display: grid;
+    align-content: start;
+    padding-block: calc(var(--spacing) * 8);
+}
+.post-section h2, .post-section h3 {
+    scroll-margin-block-start: calc(var(--spacing) * 12);
 }
 
-.post-section::after {
+.post-section:not(:last-of-type)::after {
     content: '';
     position: absolute;
-    bottom: calc(var(--spacing) * 8);
+    bottom: calc(var(--post-section-spacer) / -2);
     height: 1px;
     width: min(80ch, 75%);
     left: 0;
@@ -14,4 +23,8 @@
     background-color: var(--color-neutral-200);
     box-shadow: 1px 4px 10px var(--color-neutral-800);
     pointer-events: none;
+}
+
+.post-section+.post-section {
+    margin-block-start: var(--post-section-spacer);
 }

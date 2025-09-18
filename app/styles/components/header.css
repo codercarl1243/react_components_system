@@ -1,6 +1,31 @@
-
 .header {
     height: 5rem;
     background-color: var(--color-primary-400);
     color: var(--color-neutral-100);
+    display: flex;
+    align-items: center;
+    padding: 0 1rem;
+}
+
+.header nav {
+    display: flex;
+    gap: 1.5rem;
+    margin-left: auto;
+}
+
+.header nav a {
+    color: var(--color-neutral-100);
+    font-size: 1.125rem;
+    transition: color 0.3s ease;
+
+    &:not(:hover, :focus-visible) {
+        text-decoration: none;
+
+    }
+}
+
+.header nav a.active {
+    font-weight: bold;
+    text-decoration: underline;
+
 }

@@ -1,4 +1,6 @@
 import Button from '@/components/button'
+import Link from '@/components/link'
+import TabList from '@/components/tablist'
 
 export default function Home () {
   return (
@@ -47,6 +49,40 @@ export default function Home () {
         <Button data-style="filled" data-variant="accent" disabled>filled button</Button>
         <Button data-style="filled" data-variant="accent" isLoading>filled button</Button>
       </fieldset>
+
+           <TabList
+                defaultActiveTabId="panel1"
+                orientation="horizontal"
+                tabs={[
+                  {
+                    id: 'panel1',
+                    tabLabel: 'coding',
+                    panelContent: (
+                            <Link href="/categories/coding">
+                                show all of the posts to do with coding
+                            </Link>
+                    )
+                  },
+                  {
+                    id: 'panel2',
+                    tabLabel: 'accessibility',
+                    panelContent: (
+                            <Link href="/categories/accessibility">
+                                show all of the posts to do with accessibility
+                            </Link>
+                    )
+                  },
+                  {
+                    id: 'panel3',
+                    tabLabel: 'design-system',
+                    panelContent: (
+                            <Link href="/categories/design-systems">
+                                show all of the posts to do with design systems
+                            </Link>
+                    )
+                  }
+                ]}
+            />
     </>
   )
 }

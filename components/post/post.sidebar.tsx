@@ -1,7 +1,10 @@
-import { Children, type ComponentProps } from 'react'
+'use client';
+import { Children, useMemo, type ComponentProps } from 'react'
 import Heading from '@/components/heading'
 import clsx from 'clsx'
 import Image from 'next/image'
+import { useScrollSpy } from '@/utils/useScrollSpy';
+import Link from '@/components/link';
 
 type TableOfContentsItem = {
     id: string;
@@ -14,7 +17,21 @@ type PostSideBarProps = {
     relatedPosts?: { href: string; title: string }[];
     author?: { name: string; avatarUrl?: string; bio?: string };
 } & ComponentProps<'aside'>;
-
+/**
+ * Render a post sidebar with an optional table of contents, related posts and author box.
+ *
+ * The component returns null if there is nothing to render.
+ *  
+ * The table of contents highlights the currently active section (from `usePost().activeId`) and intercepts clicks to smoothly
+ * scroll the target element into view instead of performing the default navigation.
+ *
+ * @param contents - Array of table-of-contents entries; each item should contain `id`, `href` and `label`.
+ * @param relatedPosts - Array of related post entries with `{ href, title }`.
+ * @param author - Optional author metadata; expected fields: `name`, and optionally `avatarUrl` and `bio`.
+ * @param className - Additional class names to apply to the root <aside>.
+ * @param children - Any additional nodes to render inside the sidebar (rendered after other sections).
+ * @returns The sidebar element or `null` when there are no sections to show.
+ */
 export default function PostSideBar({
     contents = [],
     relatedPosts = [],
@@ -26,20 +43,42 @@ export default function PostSideBar({
     const hasContents = contents.length > 0
     const hasRelated = relatedPosts.length > 0
     const hasExtras = author || Children.count(children) > 0
+    const ids = useMemo(() => contents.map((item) => item.id), [contents]);
+    const { activeId } = useScrollSpy({ ids: ids });
 
     if (!hasContents && !hasRelated && !hasExtras) return null
 
+    const handleContentsClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+        e.preventDefault();
+        const element = document.querySelector(href);
+        if (!element) return;
+        const reduced = window.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches;
+        element.scrollIntoView({
+            behavior: reduced ? 'auto' : 'smooth',
+            block: 'start',
+            inline: 'nearest',
+
+        });
+
+    };
     return (
-        <aside className={clsx('post-sidebar', className)} {...props}>
+        <aside className={clsx('post-sidebar flow-8', className)} {...props}>
             {/* Table of contents */}
             {hasContents && (
-                <nav className="post-sidebar__contents" aria-labelledby="toc-heading">
+                <nav className="post-sidebar__contents flow-4" aria-labelledby="toc-heading">
                     <Heading headingLevel={2} id="toc-heading">Table of contents</Heading>
-                    <ol>
+                    <ol className='toc-list'>
                         {contents.map(item => {
+                            const isActive = activeId === item.id;
                             return (
-                                <li key={item.id}>
-                                    <a href={item.href}>{item.label}</a>
+                                <li key={item.id} className={clsx('toc-item', { 'toc-item--active': isActive })}>
+                                    <Link
+                                        href={item.href}
+                                        className={clsx('toc-link', { 'toc-link--active': isActive })}
+                                        onClick={(e) => handleContentsClick(e, item.href)}
+                                    >
+                                        {item.label}
+                                    </Link>
                                 </li>
                             )
                         })}
@@ -55,7 +94,7 @@ export default function PostSideBar({
                     <ul>
                         {relatedPosts.map((post) => (
                             <li key={post.href}>
-                                <a href={post.href}>{post.title}</a>
+                                <Link href={post.href}>{post.title}</Link>
                             </li>
                         ))}
                     </ul>
