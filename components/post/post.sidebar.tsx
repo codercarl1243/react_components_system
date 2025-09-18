@@ -3,7 +3,7 @@ import { Children, type ComponentProps } from 'react'
 import Heading from '@/components/heading'
 import clsx from 'clsx'
 import Image from 'next/image'
-import { usePost } from '@/components/post/usePost';
+import { useScrollSpy } from '@/utils/useScrollSpy';
 import Link from '@/components/link';
 
 type TableOfContentsItem = {
@@ -29,7 +29,7 @@ export default function PostSideBar({
     const hasContents = contents.length > 0
     const hasRelated = relatedPosts.length > 0
     const hasExtras = author || Children.count(children) > 0
-    const { activeId } = usePost();
+    const { activeId } = useScrollSpy({ids: contents.length ? contents.map(item => item.id) : []});
     if (!hasContents && !hasRelated && !hasExtras) return null
     const handleContentsClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
         e.preventDefault();
