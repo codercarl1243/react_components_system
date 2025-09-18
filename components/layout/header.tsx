@@ -12,9 +12,9 @@ export default function Header({ className, ...props }: ComponentProps<'header'>
     <header className={clsx('header', className)} {...props}>
       <SkipLink />
       <nav aria-label="Primary">
-        <Link href="/" className={clsx({ 'active': pathname === '/' })} aria-current={pathname === '/' ? 'true' : undefined}>Home</Link>
-        <Link href="/blog" className={clsx({ 'active': pathname.startsWith('/blog') })} aria-current={pathname === '/blog' ? 'true' : undefined}>Blog</Link>
-        <Link href="/about" className={clsx({ 'active': pathname === '/about' })} aria-current={pathname === '/about' ? 'true' : undefined}>About</Link>
+        <Link href="/" className={clsx({ 'active': pathname === '/' })} aria-current={pathname === '/' ? 'page' : undefined}>Home</Link>
+        <Link href="/blog" className={clsx({ 'active': pathname.startsWith('/blog/') })} aria-current={pathname === '/blog' ? 'page' : undefined}>Blog</Link>
+        <Link href="/about" className={clsx({ 'active': pathname === '/about' })} aria-current={pathname === '/about' ? 'page' : undefined}>About</Link>
       </nav>
     </header>
   )
