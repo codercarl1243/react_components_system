@@ -14,30 +14,29 @@ export function usePost() {
       const href = link.getAttribute('href');
       return href ? href.substring(1) : '';
     }).filter(Boolean);
-
     if (!contentIds.length) return;
+    
+    setActiveId(contentIds[0]);
 
+    const ratios = new Map<string, { ratio: number; top: number }>();
     const observer = new IntersectionObserver(
       (entries) => {
-        // Find the entry with the highest intersection ratio that's actually intersecting
-        const visibleEntries = entries.filter(entry => entry.isIntersecting);
-        
-        if (visibleEntries.length > 0) {
-          // Sort by intersection ratio and position to get the most prominent section
-          const mostVisible = visibleEntries.reduce((prev, current) => {
-            // Prefer sections that are more visible (higher intersection ratio)
-            if (current.intersectionRatio > prev.intersectionRatio) {
-              return current;
-            }
-            // If intersection ratios are similar, prefer the one higher up on the page
-            if (Math.abs(current.intersectionRatio - prev.intersectionRatio) < 0.1) {
-              return current.boundingClientRect.top < prev.boundingClientRect.top ? current : prev;
-            }
-            return prev;
-          });
-          
-          setActiveId(mostVisible.target.id);
+        for (const e of entries) {
+          const id = e.target.id;
+          const ratio = e.isIntersecting ? e.intersectionRatio : 0;
+          ratios.set(id, { ratio, top: e.boundingClientRect.top });
         }
+        // Evaluate across all tracked sections
+        let bestId = '';
+        let best = { ratio: -1, top: Number.POSITIVE_INFINITY };
+        for (const id of contentIds) {
+          const curr = ratios.get(id) ?? { ratio: 0, top: Number.POSITIVE_INFINITY };
+          if (curr.ratio > best.ratio || (Math.abs(curr.ratio - best.ratio) < 0.1 && curr.top < best.top)) {
+            best = curr;
+            bestId = id;
+          }
+        }
+        if (bestId) setActiveId(bestId);
       },
       {
         // Trigger when 20% of the section is visible
@@ -58,5 +57,5 @@ export function usePost() {
     return () => observer.disconnect();
   }, []);
 
-  return {activeId};
+  return { activeId };
 }
