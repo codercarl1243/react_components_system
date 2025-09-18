@@ -28,7 +28,7 @@ export default function Link({ children, className, href, ...props }: React.Comp
     )
   }
   return (
-    <NextLink href={href} className={clsx(className, 'link external')} {...props}>{children}</NextLink>
+    <NextLink href={href} className={clsx(className, 'link internal')} {...props}>{children}</NextLink>
   )
 }
 
