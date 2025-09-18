@@ -28,7 +28,7 @@ export default function RootLayout ({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased main-wrapper font-main text-base`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased main-wrapper font-main text-base flow-8`}
       >
         <Header />
         <main id="main-content" tabIndex={-1} className="flow-8">
