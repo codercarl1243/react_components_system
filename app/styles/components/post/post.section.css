@@ -11,7 +11,7 @@
     scroll-margin-block-start: calc(var(--spacing) * 12);
 }
 
-.post-section::after {
+.post-section:not(:last-of-type)::after {
     content: '';
     position: absolute;
     bottom: calc(var(--post-section-spacer) / -2);
