@@ -59,7 +59,6 @@ export default function PostSideBar({
             inline: 'nearest',
 
         });
-
     };
     return (
         <aside className={clsx('post-sidebar flow-8', className)} {...props}>
@@ -73,7 +72,7 @@ export default function PostSideBar({
                             return (
                                 <li key={item.id} className={clsx('toc-item', { 'toc-item--active': isActive })}>
                                     <Link
-                                        href={item.href}
+                                        href={item.href + "-heading"}
                                         className={clsx('toc-link', { 'toc-link--active': isActive })}
                                         onClick={(e) => handleContentsClick(e, item.href)}
                                     >

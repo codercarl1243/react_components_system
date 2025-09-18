@@ -15,9 +15,10 @@ export default function ButtonsBasePage () {
   return (
         <>
             <Post className="">
-                <PostSection>
+                <PostSection id="the-button">
                     <PostBanner
                         title="The Button"
+                        headingId="the-button-heading"
                         subtitle="Building a React Design System Foundation"
                         image={{
                           src: ''
@@ -33,8 +34,8 @@ export default function ButtonsBasePage () {
                     </p>
                 </PostSection>
 
-                <PostSection>
-                    <Heading headingLevel={2} id="what-were-building">What We&apos;re Building</Heading>
+                <PostSection id="what-were-building">
+                    <Heading headingLevel={2} id="what-were-building-heading">What We&apos;re Building</Heading>
                     <div>
                         <p>By the end of this post, you&apos;ll have:</p>
                         <ul>
@@ -47,8 +48,8 @@ export default function ButtonsBasePage () {
                     </div>
                 </PostSection>
 
-                <PostSection>
-                    <Heading headingLevel={2} id="project-setup">Project Setup</Heading>
+                <PostSection id="project-setup">
+                    <Heading headingLevel={2} id="project-setup-heading">Project Setup</Heading>
 
                     <Heading headingLevel={3} id="file-structure">File Structure</Heading>
                     <p>We&apos;ll follow a consistent pattern for organizing our components:</p>
@@ -79,8 +80,8 @@ styles/
 npm install -D jest jest-environment-jsdom @testing-library/react @testing-library/dom @testing-library/jest-dom ts-node @types/jest`}/>
                 </PostSection>
 
-                <PostSection>
-                    <Heading headingLevel={2} id="building-foundation">Building the Foundation</Heading>
+                <PostSection id="building-foundation">
+                    <Heading headingLevel={2} id="building-foundation-heading">Building the Foundation</Heading>
 
                     <Heading headingLevel={3} id="starting-simple">Starting Simple</Heading>
                     <p>Our button begins as a simple HTML button that passes through all standard props:</p>
@@ -133,8 +134,8 @@ const Button = forwardRef<HTMLButtonElement, ComponentProps<"button">>(
                     </PostNote>
                 </PostSection>
 
-                <PostSection>
-                    <Heading headingLevel={2} id="interaction-logic">Adding Interaction Logic</Heading>
+                <PostSection id="interaction-logic">
+                    <Heading headingLevel={2} id="interaction-logic-heading">Adding Interaction Logic</Heading>
 
                     <Heading headingLevel={3} id="why-custom-hook">Why Use a Custom Hook?</Heading>
                     <p>We&apos;ll separate our interaction logic into a custom hook for several reasons:</p>
@@ -226,8 +227,8 @@ export default function Button({children, onClick, ref, ...props}) {
 }`} />
                 </PostSection>
 
-                <PostSection>
-                    <Heading headingLevel={2} id="essential-features">Essential Button Features</Heading>
+                <PostSection id="essential-features">
+                    <Heading headingLevel={2} id="essential-features-heading">Essential Button Features</Heading>
 
                     <Heading headingLevel={3} id="preventing-form-submission">Preventing Accidental Form Submission</Heading>
                     <p>Set a default button type to prevent accidental form submissions:</p>
@@ -288,8 +289,8 @@ export type ButtonProps = {
 } & React.ComponentPropsWithRef<"button">`} />
                 </PostSection>
 
-                <PostSection>
-                    <Heading headingLevel={2} id="accessible-styling">Accessible Styling</Heading>
+                <PostSection id="accessible-styling">
+                    <Heading headingLevel={2} id="accessible-styling-heading">Accessible Styling</Heading>
 
                     <Heading headingLevel={3} id="wcag-compliance">WCAG Compliance Foundation</Heading>
                     <p>Our CSS starts with accessibility requirements:</p>
@@ -415,8 +416,8 @@ export type ButtonProps = {
 }`} />
                 </PostSection>
 
-                <PostSection>
-                    <Heading headingLevel={2} id="flexible-styling">Flexible Styling System</Heading>
+                <PostSection id="flexible-styling">
+                    <Heading headingLevel={2} id="flexible-styling-heading">Flexible Styling System</Heading>
 
                     <Heading headingLevel={3} id="css-variables">CSS Custom Properties</Heading>
                     <p>Replace hardcoded values with CSS variables for easy customization:</p>
@@ -559,8 +560,8 @@ export type ButtonProps = {
 }`} />
                 </PostSection>
 
-                <PostSection>
-                    <Heading headingLevel={2} id="testing-strategy">Testing Strategy</Heading>
+                <PostSection id="testing-strategy">
+                    <Heading headingLevel={2} id="testing-strategy-heading">Testing Strategy</Heading>
 
                     <Heading headingLevel={3} id="jest-setup">Setting Up Jest</Heading>
                     <p>Install testing dependencies:</p>
@@ -681,8 +682,8 @@ describe("useButton", () => {
 });`} />
                 </PostSection>
 
-                <PostSection>
-                    <Heading headingLevel={2} id="usage-examples">Usage Examples</Heading>
+                <PostSection id="usage-examples">
+                    <Heading headingLevel={2} id="usage-examples-heading">Usage Examples</Heading>
 
                     <Code codeString={`'use client'
 import Button from "@/components/button";
@@ -705,8 +706,8 @@ export default function ButtonsPage() {
 }`} />
                 </PostSection>
 
-                <PostSection>
-                    <Heading headingLevel={2} id="what-we-built">What We Built</Heading>
+                <PostSection id="what-we-built">
+                    <Heading headingLevel={2} id="what-we-built-heading">What We Built</Heading>
                     <p>Our base button component now provides:</p>
 
                     <p><strong>Accessibility</strong></p>
@@ -741,8 +742,8 @@ export default function ButtonsPage() {
                     </ul>
                 </PostSection>
 
-                <PostSection>
-                    <Heading headingLevel={2} id="whats-next">What&apos;s Next</Heading>
+                <PostSection id="whats-next">
+                    <Heading headingLevel={2} id="whats-next-heading">What&apos;s Next</Heading>
                     <p>
                         In the next post, we&apos;ll extend this foundation to create toggle buttons and explore
                         setting up Storybook to document our growing design system.

@@ -13,7 +13,7 @@ export type PostType = {
     children: ReactNode;
 };
 
-export type PostBannerPropsType = Pick<PostType, 'title' | 'image' | 'subtitle'>;
+export type PostBannerPropsType = Pick<PostType, 'title' | 'image' | 'subtitle'> & {headingId?: string};
 
 export type PostCardPropsType = {
     variant?: 'hero' | 'default';
