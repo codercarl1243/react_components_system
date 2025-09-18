@@ -41,15 +41,25 @@
     animation: slideIn 0.4s cubic-bezier(0.5, 1.5, 0.25, 2);
 }
 
+@media (prefers-reduced-motion: reduce) {
+    .toc-item {
+        transition: none;
+    }
+
+    .toc-item--active::before {
+        animation: none;
+    }
+}
+
 @keyframes slideIn {
     from {
         opacity: 0;
-        height: 0%;
+        height: 0;
     }
 
     to {
         opacity: 1;
-        height: 100%;
+        height: 0.9lh;
     }
 }
 
