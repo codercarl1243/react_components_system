@@ -1,19 +1,26 @@
 'use client';
 import { useEffect, useState } from 'react';
 
-const DEFAULT_THRESHOLD = [0, 0.25, 0.5, 0.75, 1] as const;
+const DEFAULT_THRESHOLD = [0, 0.25, 0.5, 0.75, 1];
 const DEFAULT_ROOT_MARGIN = '0% 0px -60% 0px' as const;
 
 type UseScrollSpyOptions = {
   ids: string[];
-  threshold?: readonly number[];
-  rootMargin?: string;
 };
-
+/**
+ * Tracks which in-page section (from the post table of contents) is currently active.
+ *
+ * Observes sections referenced by anchors inside the `.post-sidebar__contents` TOC and updates
+ * `activeId` to the id of the most prominently visible section. Visibility is determined via an
+ * IntersectionObserver; when multiple sections intersect, the hook prefers the one with the higher
+ * intersection ratio and, for near-equal ratios, the section that appears higher on the page.
+ *
+ * The observer is created on mount and disconnected on unmount.
+ *
+ * @returns An object containing `activeId` — the current active section id (empty string if none).
+ */
 export function useScrollSpy({
-  ids,
-  threshold = DEFAULT_THRESHOLD,
-  rootMargin = DEFAULT_ROOT_MARGIN,
+  ids
 }: UseScrollSpyOptions) {
   const [activeId, setActiveId] = useState<string | null>(null);
 
@@ -54,7 +61,7 @@ export function useScrollSpy({
           setActiveId(bestId);
         }
       },
-      { rootMargin }
+      {threshold: DEFAULT_THRESHOLD, rootMargin: DEFAULT_ROOT_MARGIN }
     );
 
     ids.forEach((id) => {
@@ -79,7 +86,7 @@ export function useScrollSpy({
     }
 
     return () => observer.disconnect();
-  }, [ids, rootMargin]);
+  }, [ids, DEFAULT_ROOT_MARGIN]);
 
   return { activeId };
 }
