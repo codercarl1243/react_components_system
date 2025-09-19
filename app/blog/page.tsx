@@ -1,7 +1,5 @@
-// import PostCard from "@/components/post/post.card";
-import TabList from '@/components/tablist'
-import Link from '@/components/link'
 import Heading from '@/components/heading'
+import PostCard from '@/components/post/post.card'
 
 export default function BlogPage () {
   return (
@@ -9,16 +7,104 @@ export default function BlogPage () {
             <Heading headingLevel={1}>Blogs</Heading>
             <div className="blog--page__banner">
                 {/* TODO: Populate with recent posts (cards) **/}
-                <ul>
+                <ul className='post-card__list'>
                     <li>
-                      <Link href="/blog/design-system/buttons">
-                    Buttons - the base of every button
-                    </Link>
+                      <PostCard 
+                      headingLevel={2}
+                      variant="hero" 
+                      post={{
+                        title: 'Buttons - the base of every button', 
+                        image: {
+                          src: '/images/blog/button-base.png', 
+                          alt: 'A collection of buttons showing different states and styles'}, 
+                        slug: 'design-system/buttons'}}
+                      />
                     </li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
+                                        <li>
+                      <PostCard 
+                      headingLevel={2}
+                      variant="hero" 
+                      post={{
+                        title: 'Buttons - the base of every button', 
+                        image: {
+                          src: '/images/blog/button-base.png', 
+                          alt: 'A collection of buttons showing different states and styles'}, 
+                        slug: 'design-system/buttons'}}
+                      />
+                    </li>
+                                        <li>
+                      <PostCard 
+                      headingLevel={2}
+                      variant="hero" 
+                      post={{
+                        title: 'Buttons - the base of every button', 
+                        image: {
+                          src: '/images/blog/button-base.png', 
+                          alt: 'A collection of buttons showing different states and styles'}, 
+                        slug: 'design-system/buttons'}}
+                      />
+                    </li>
+                                        <li>
+                      <PostCard 
+                      headingLevel={2}
+                      variant="hero" 
+                      post={{
+                        title: 'Buttons - the base of every button', 
+                        image: {
+                          src: '/images/blog/button-base.png', 
+                          alt: 'A collection of buttons showing different states and styles'}, 
+                        slug: 'design-system/buttons'}}
+                      />
+                    </li>
+                                        <li>
+                      <PostCard 
+                      headingLevel={2}
+                      variant="hero" 
+                      post={{
+                        title: 'Buttons - the base of every button', 
+                        image: {
+                          src: '/images/blog/button-base.png', 
+                          alt: 'A collection of buttons showing different states and styles'}, 
+                        slug: 'design-system/buttons'}}
+                      />
+                    </li>
+                                        <li>
+                      <PostCard 
+                      headingLevel={2}
+                      variant="hero" 
+                      post={{
+                        title: 'Buttons - the base of every button', 
+                        image: {
+                          src: '/images/blog/button-base.png', 
+                          alt: 'A collection of buttons showing different states and styles'}, 
+                        slug: 'design-system/buttons'}}
+                      />
+                    </li>
+                                                            <li>
+                      <PostCard 
+                      headingLevel={2}
+                      variant="hero" 
+                      post={{
+                        title: 'Buttons - the base of every button', 
+                        image: {
+                          src: '/images/blog/button-base.png', 
+                          alt: 'A collection of buttons showing different states and styles'}, 
+                        slug: 'design-system/buttons'}}
+                      />
+                    </li>
+                                                            <li>
+                      <PostCard 
+                      headingLevel={2}
+                      variant="hero" 
+                      post={{
+                        title: 'Buttons - the base of every button', 
+                        image: {
+                          src: '/images/blog/button-base.png', 
+                          alt: 'A collection of buttons showing different states and styles'}, 
+                        slug: 'design-system/buttons'}}
+                      />
+                    </li>
+                    
                 </ul>
             </div>
             {/* <p>Welcome to my blog page</p>
