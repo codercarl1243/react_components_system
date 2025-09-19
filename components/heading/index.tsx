@@ -16,6 +16,7 @@ const getSizeClass = (level: number): string => {
 
 export default function Heading({
   headingLevel = 3,
+  headingSize = headingLevel,
   children,
   className,
   ...props
@@ -24,7 +25,7 @@ export default function Heading({
   return createElement(
     `h${headingLevel}`,
     {
-      className: clsx('font-main', getSizeClass(headingLevel), className),
+      className: clsx('font-main', getSizeClass(headingSize), className),
       ...props
     },
     children
