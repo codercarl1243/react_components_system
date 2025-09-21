@@ -7,18 +7,17 @@ const LONG_PRESS_THRESHOLD = 200 // milliseconds
 
 export default function usePostCard(href: string) {
     const router = useRouter()
-    const mouseDownTimeRef = useRef<number>(0)
+    const mouseDownTimeRef = useRef<number | null>(null)
 
     const navigate = () => router.push(href)
 
     const handleClick = (e: React.MouseEvent) => {
-        if (e.button !== 0) {
-        // Don't prevent default - let browser handle back/forward/middle-click etc.
-        return
-    }
+        // Let the browser handle new-tab / window behaviour
+        if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return
+
         // Don't navigate if it was a long press (for text selection etc)
-        const holdDuration = Date.now() - mouseDownTimeRef.current
-        const wasLongPress = holdDuration > LONG_PRESS_THRESHOLD
+        const mouseDownAt = mouseDownTimeRef.current
+        const wasLongPress = mouseDownAt !== null && (Date.now() - mouseDownAt) > LONG_PRESS_THRESHOLD
 
         if (wasLongPress) return
 
@@ -30,7 +29,7 @@ export default function usePostCard(href: string) {
     }
 
     const handleMouseUp = () => {
-        mouseDownTimeRef.current = 0
+        mouseDownTimeRef.current = null
     }
 
     /** BUGGY TODO: fix before using */
