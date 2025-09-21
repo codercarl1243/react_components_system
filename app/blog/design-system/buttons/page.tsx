@@ -11,6 +11,16 @@ import type { Metadata } from 'next'
 
 export const metadata: Metadata = { title: 'Buttons · Design System' }
 
+/**
+ * Page component that renders the "Buttons" design-system guide.
+ *
+ * Renders a structured article built from Post, PostSection and related layout components
+ * describing a base Button implementation: project setup, TypeScript support, interaction
+ * logic (useButton hook), accessibility-minded styling, variants, testing strategy and usage
+ * examples. Also includes a PostSideBar with in-page navigation anchors.
+ *
+ * @returns A JSX element containing the full Buttons guide page.
+ */
 export default function ButtonsBasePage () {
   return (
         <>

@@ -8,16 +8,19 @@ type UseScrollSpyOptions = {
   ids: string[];
 };
 /**
- * Tracks which in-page section (from the post table of contents) is currently active.
+ * Hook that tracks which in-page section id is currently active based on visibility.
  *
- * Observes sections referenced by anchors inside the `.post-sidebar__contents` TOC and updates
- * `activeId` to the id of the most prominently visible section. Visibility is determined via an
- * IntersectionObserver; when multiple sections intersect, the hook prefers the one with the higher
- * intersection ratio and, for near-equal ratios, the section that appears higher on the page.
+ * Uses an IntersectionObserver to watch the provided ids' elements and sets `activeId`
+ * to the id of the most prominently visible section. Selection rules:
+ * - Prefer the section with the highest intersection ratio.
+ * - If intersection ratios are within 0.1 of each other, prefer the section whose top
+ *   edge is closest to the 40% viewport line (i.e. window.innerHeight * 0.4).
  *
- * The observer is created on mount and disconnected on unmount.
+ * On initial run, if no active id has been set, the hook will set `activeId` to the
+ * first id whose element's top lies within the viewport. The observer is disconnected
+ * on cleanup.
  *
- * @returns An object containing `activeId` — the current active section id (empty string if none).
+ * @returns The currently active section id, or `null` when none is active.
  */
 export function useScrollSpy({
   ids

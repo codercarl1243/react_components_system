@@ -5,6 +5,14 @@ import clsx from 'clsx'
 
 type ElementWithId = ReactElement<{ id?: string }>;
 
+/**
+ * Type guard that checks whether a value is a React element with a props object (ElementWithId).
+ *
+ * Returns true for non-null React elements whose `props` property exists and is an object.
+ *
+ * @param element - Value to test.
+ * @returns `true` if `element` is a React element with a non-null `props` object; otherwise `false`.
+ */
 function isDomElement(element: unknown): element is ElementWithId {
   return (
     isValidElement(element) &&

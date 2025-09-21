@@ -1,6 +1,15 @@
 import Heading from '@/components/heading'
 import PostCard from '@/components/post/post.card'
 
+/**
+ * Renders the blog listing page.
+ *
+ * Displays a level-1 page heading and a banner section containing a list of hero PostCard components.
+ * The banner currently contains static placeholder PostCard entries and includes a TODO to populate it
+ * with recent posts (cards) dynamically.
+ *
+ * @returns The blog page JSX fragment.
+ */
 export default function BlogPage () {
   return (
         <>
