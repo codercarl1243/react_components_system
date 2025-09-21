@@ -32,8 +32,11 @@ export default function TableOfContents({ items }: ToCProps) {
             behavior: reduced ? 'auto' : 'smooth',
             block: 'start',
             inline: 'nearest',
-
         });
+        // Update the URL hash without jumping 
+        if (history.replaceState) {
+            history.replaceState(null, '', href);
+        }
     };
 
     return (
@@ -47,7 +50,7 @@ export default function TableOfContents({ items }: ToCProps) {
                             <Link
                                 href={item.href + "-heading"}
                                 className={clsx('toc-link', { 'toc-link--active': isActive })}
-                                onClick={(e) => handleContentsClick(e, item.href)}
+                                onClick={(e) => handleContentsClick(e, item.href + "-heading")}
                             >
                                 {item.label}
                             </Link>
