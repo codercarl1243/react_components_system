@@ -2,14 +2,13 @@
 
 import Image from 'next/image'
 import type { PostCardPropsType } from './post.type'
-import { useId } from 'react'
 import Link from '@/components/link'
 import Heading from '@/components/heading'
 import usePostCard from './usePostCard'
 
 export default function PostCard({ variant = 'default', post, headingLevel = 3 }: PostCardPropsType) {
     const { image, title } = post
-    const id = useId()
+
     const postCardSlug = `/blog/${post.slug}`
 
     const { handleClick, handleMouseDown, handleMouseUp } = usePostCard(postCardSlug)
@@ -27,7 +26,7 @@ export default function PostCard({ variant = 'default', post, headingLevel = 3 }
                 data-variant="accent"
                 headingLevel={headingLevel}
                 headingSize={4}>
-                <Link href={`/blog/${post.slug}`} aria-describedby={id}>{title}</Link>
+                <Link href={`/blog/${post.slug}`}>{title}</Link>
             </Heading>
 
             <Image
