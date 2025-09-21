@@ -1,24 +1,24 @@
 'use client';
 import { useEffect, useState } from 'react';
 
-const DEFAULT_THRESHOLD = [0, 0.25, 0.5, 0.75, 1];
-const DEFAULT_ROOT_MARGIN = '0% 0px -60% 0px' as const;
+const DEFAULT_THRESHOLD = [0, 0.25, 0.5, 0.65, 1];
+const DEFAULT_ROOT_MARGIN = '-20% 0px -40% 0px' as const;
 
 type UseScrollSpyOptions = {
   ids: string[];
 };
 /**
- * Tracks which in-page section (from the post table of contents) is currently active.
- *
- * Observes sections referenced by anchors inside the `.post-sidebar__contents` TOC and updates
- * `activeId` to the id of the most prominently visible section. Visibility is determined via an
- * IntersectionObserver; when multiple sections intersect, the hook prefers the one with the higher
- * intersection ratio and, for near-equal ratios, the section that appears higher on the page.
- *
- * The observer is created on mount and disconnected on unmount.
- *
- * @returns An object containing `activeId` — the current active section id (empty string if none).
- */
+* Hook that tracks which in-page section id is currently active based on visibility.
+* Uses an IntersectionObserver to watch the provided ids' elements and sets `activeId`
+* to the id of the most prominently visible section. Selection rules:
+* - Prefer the section with the highest intersection ratio.
+* - If intersection ratios are within 0.1 of each other, prefer the section whose top
+*   edge is closest to the 40% viewport line (i.e. window.innerHeight * 0.4).
+*  * On initial run, if no active id has been set, the hook will set `activeId` to the
+* first id whose element's top lies within the viewport. The observer is disconnected
+* on cleanup.
+*  @returns The currently active section id, or `null` when none is active.
+*/
 export function useScrollSpy({
   ids
 }: UseScrollSpyOptions) {
@@ -61,7 +61,7 @@ export function useScrollSpy({
           setActiveId(bestId);
         }
       },
-      {threshold: DEFAULT_THRESHOLD, rootMargin: DEFAULT_ROOT_MARGIN }
+      { threshold: DEFAULT_THRESHOLD, rootMargin: DEFAULT_ROOT_MARGIN }
     );
 
     ids.forEach((id) => {
@@ -86,7 +86,7 @@ export function useScrollSpy({
     }
 
     return () => observer.disconnect();
-  }, [ids, DEFAULT_ROOT_MARGIN]);
+  }, [ids]);
 
   return { activeId };
 }

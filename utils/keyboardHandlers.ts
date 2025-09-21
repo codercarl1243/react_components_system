@@ -1,22 +1,30 @@
 import type { KeyPressCallbackMap, KeyPressEventType } from "@/utils/keyboardHandlers.type"
 
+
+/**
+ * Invoke a registered callback for a keyboard event if a matching key is found in the map.
+ *
+ * Canonicalises the event key (single characters are lower-cased; named keys kept verbatim),
+ * looks up the callback in `keyMap` using the canonical key or a known alias, then prevents the
+ * event's default action and calls the callback with the original event.
+ *
+ * @param event - The keyboard event to handle; function returns immediately if falsy or if `event.key` is missing.
+ * @param keyMap - Mapping of key names to callbacks. If empty or no matching key/alias exists, nothing happens.
+ */
 export function handleKeyPress(
   event: KeyPressEventType,
   keyMap: KeyPressCallbackMap
 ) {
-  // TODO: update the raw key to specifically only use event.key in future versions
-  // as event.code is not consistent across keyboard layouts and does not support aliases.
-  // However, this would be a breaking change.
 
   if (!event) return
   if (!keyMap || Object.keys(keyMap).length === 0) return
   // Canonicalise: single chars -> lower-case, keep named keys verbatim.
-  const raw = event.key ?? event.code
-  if (!raw) return
-  const key = raw && raw.length === 1 ? raw.toLowerCase() : raw
+  let key = event.key
+  if (!key) return
+  key = key && key.length === 1 ? key.toLowerCase() : key
   const alias = getKeyAlias(key);
 
-  const callback = keyMap[raw] ?? keyMap[key] ?? (alias ? keyMap[alias] : undefined)
+  const callback = keyMap[key] ?? (alias ? keyMap[alias] : undefined)
 
   if (!callback) return
 

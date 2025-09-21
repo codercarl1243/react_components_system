@@ -5,6 +5,14 @@ import clsx from 'clsx'
 
 type ElementWithId = ReactElement<{ id?: string }>;
 
+/**
+ * Type guard that checks whether a value is a React element with a props object (ElementWithId).
+ *
+ * Returns true for non-null React elements whose `props` property exists and is an object.
+ *
+ * @param element - Value to test.
+ * @returns `true` if `element` is a React element with a non-null `props` object; otherwise `false`.
+ */
 function isDomElement(element: unknown): element is ElementWithId {
   return (
     isValidElement(element) &&
@@ -15,7 +23,34 @@ function isDomElement(element: unknown): element is ElementWithId {
     element.props !== null
   )
 }
-
+/**
+ * A prominently styled note component for highlighting important information within blog posts.
+ * 
+ * This component creates an accessible, visually distinct callout box with an information icon.
+ * It automatically handles accessibility by labelling via `aria-labelledby` using the first child, and provides
+ * semantic structure with ARIA roles. The component intelligently manages IDs for proper
+ * accessibility relationships.
+ * 
+ * @component
+ * @example
+ * ```tsx
+ * <PostNote>
+ *   <Heading headingLevel={4}>Important Note</Heading>
+ *   <p>This is some important information that readers should pay attention to.</p>
+ * </PostNote>
+ * ```
+ * 
+ * @param children - The content to display in the note. The first child serves as the labelling element referenced by `aria-labelledby`. Can include headings, paragraphs, code blocks, links, and other content.
+ * @param className - Additional CSS class names to apply to the note container. These are merged with the default 'post-note width-bleed' classes.
+ * @param props - All other standard HTML div element attributes (id, data-*, aria-*, etc.)
+ * 
+ * @returns A styled note container with an information icon, or null if no children are provided.
+ * 
+ * **Future Considerations:**
+ * - Contains TODO for potential expandable/collapsible functionality
+ * - Structure supports future enhancement without breaking changes
+ * 
+ */
 export default function PostNote({ className, children, ...props }: ComponentProps<'div'>) {
   const id = useId()
   const childArray = Children.toArray(children)
@@ -42,7 +77,7 @@ export default function PostNote({ className, children, ...props }: ComponentPro
       aria-labelledby={labelId}
       {...props}>
       <div className="post-note__first">
-        <Icon icon={RiInformationLine} size={64} className="post-note__icon" />
+        <Icon icon={RiInformationLine} size={64} className="post-note__icon"  />
         {firstChildWithId}
       </div>
       {restChildren.length > 0 &&

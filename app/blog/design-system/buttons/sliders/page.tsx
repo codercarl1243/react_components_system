@@ -2,7 +2,7 @@
 import Post from '@/components/post'
 import PostBanner from '@/components/post/post.banner'
 import PostSection from '@/components/post/post.section'
-import PostSideBar from '@/components/post/post.sidebar'
+import PostSideBar from '@/components/post/sidebar'
 
 import type { Metadata } from 'next'
 
