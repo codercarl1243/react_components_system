@@ -2,19 +2,14 @@ import Heading from "@/components/heading";
 import Image from 'next/image'
 import type {Author} from '@/components/post/sidebar/sidebar.type';
 
-type AuthorProps = {
+type SidebarAuthorProps = {
     author: Author
 }
 
-
-
-export default function Author({author}: AuthorProps){
-
+export default function SidebarAuthor({author}: SidebarAuthorProps){
 
     return (
-        <section
-                    className="post-sidebar__author"
-                >
+        <section className="post-sidebar__author">
                     <Heading headingLevel={2} >About the Author</Heading>
                     <div className="author">
                         {author.avatarUrl && (
