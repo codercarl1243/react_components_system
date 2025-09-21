@@ -69,7 +69,7 @@ export default function PostNote({ className, children, ...props }: ComponentPro
       aria-labelledby={labelId}
       {...props}>
       <div className="post-note__first">
-        <Icon icon={RiInformationLine} size={64} className="post-note__icon" />
+        <Icon icon={RiInformationLine} size={64} className="post-note__icon" aria-hidden={true} focusable={false} />
         {firstChildWithId}
       </div>
       {restChildren.length > 0 &&
