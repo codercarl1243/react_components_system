@@ -22,9 +22,11 @@ export default function usePostCard(href: string) {
     const navigate = () => router.push(href)
 
     const handleClick = (e: React.MouseEvent) => {
+        if (e.defaultPrevented) return
+        const target = e.target as HTMLElement | null
+        if (target?.closest('a,button,[role="button"],input,textarea,select')) return
         // Let the browser handle new-tab / window behaviour
         if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return
-
         // Don't navigate if it was a long press (for text selection etc)
         const mouseDownAt = mouseDownTimeRef.current
         const wasLongPress = mouseDownAt !== null && (Date.now() - mouseDownAt) > LONG_PRESS_THRESHOLD
