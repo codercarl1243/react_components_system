@@ -8,9 +8,12 @@ export type TableOfContentsItem = {
 };
 
 export type Author = { name: string; avatarUrl?: string; bio?: string };
-export type relatedPosts = { href: string; title: string }[];
+
+export type RelatedPost = { href: string; title: string };
+export type RelatedPosts = RelatedPost[];
+
 export type PostSideBarProps = {
     contents?: TableOfContentsItem[]
-    relatedPosts?: relatedPosts;
+    relatedPosts?: RelatedPosts;
     author?: Author;
 } & ComponentProps<'aside'>;
