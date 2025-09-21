@@ -1,3 +1,4 @@
+'use client';
 import Heading from "@/components/heading";
 import Link from '@/components/link';
 import clsx from "clsx";
