@@ -19,7 +19,7 @@ function isDomElement(element: unknown): element is ElementWithId {
  * A prominently styled note component for highlighting important information within blog posts.
  * 
  * This component creates an accessible, visually distinct callout box with an information icon.
- * It automatically handles accessibility by using the first child as an aria-label and provides
+ * It automatically handles accessibility by labelling via `aria-labelledby` using the first child, and provides
  * semantic structure with ARIA roles. The component intelligently manages IDs for proper
  * accessibility relationships.
  * 
@@ -32,7 +32,7 @@ function isDomElement(element: unknown): element is ElementWithId {
  * </PostNote>
  * ```
  * 
- * @param children - The content to display in the note. The first child is used as the aria-label for accessibility. Can include headings, paragraphs, code blocks, links, and other content.
+ * @param children - The content to display in the note. The first child serves as the labelling element referenced by `aria-labelledby`. Can include headings, paragraphs, code blocks, links, and other content.
  * @param className - Additional CSS class names to apply to the note container. These are merged with the default 'post-note width-bleed' classes.
  * @param props - All other standard HTML div element attributes (id, data-*, aria-*, etc.)
  * 
