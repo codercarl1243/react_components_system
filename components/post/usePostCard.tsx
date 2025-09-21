@@ -44,6 +44,10 @@ export default function usePostCard(href: string) {
         mouseDownTimeRef.current = null
     }
 
+    const handleMouseLeave = () => {
+        mouseDownTimeRef.current = null
+    }
+
     /** BUGGY TODO: fix before using */
     // const handleContextMenu = (e: React.MouseEvent) => {
     //     console.log("handleContextMenu", e)
@@ -63,5 +67,5 @@ export default function usePostCard(href: string) {
     //         }));
     //     }
     // };
-    return { handleClick, handleMouseDown, handleMouseUp }
+    return { handleClick, handleMouseDown, handleMouseUp, handleMouseLeave }
 }

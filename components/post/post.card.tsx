@@ -22,7 +22,7 @@ export default function PostCard({ variant = 'default', post, headingLevel = 3 }
 
     const postCardSlug = `/blog/${post.slug}`
 
-    const { handleClick, handleMouseDown, handleMouseUp } = usePostCard(postCardSlug)
+    const { handleClick, handleMouseDown, handleMouseUp, handleMouseLeave } = usePostCard(postCardSlug)
 
     return (
         <article
@@ -31,6 +31,7 @@ export default function PostCard({ variant = 'default', post, headingLevel = 3 }
             className="post-card"
             onMouseDown={handleMouseDown}
             onMouseUp={handleMouseUp}
+            onMouseLeave={handleMouseLeave}
         >
             <Heading className="post-card__title button"
                 data-styled="filled"
