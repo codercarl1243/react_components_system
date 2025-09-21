@@ -12,8 +12,8 @@ import { PostSideBarProps } from './sidebar.type';
  *
  * The component returns null if there is nothing to render.
  *  
- * The table of contents highlights the currently active section (from `usePost().activeId`) and intercepts clicks to smoothly
- * scroll the target element into view instead of performing the default navigation.
+ * The table of contents highlights the currently active section via `useScrollSpy` and intercepts clicks to smoothly
+ * scroll the target element into view instead of default navigation.
  *
  * @param contents - Array of table-of-contents entries; each item should contain `id`, `href` and `label`.
  * @param relatedPosts - Array of related post entries with `{ href, title }`.

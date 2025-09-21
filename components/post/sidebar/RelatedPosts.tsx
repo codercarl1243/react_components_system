@@ -1,9 +1,6 @@
 import Heading from "@/components/heading";
 import Link from "@/components/link";
-
-type RelatedPostsProps = {
-    posts: { title: string; href: string }[]
-}
+import { type RelatedPosts } from "@/components/post/sidebar/sidebar.type";
 
 /**
  * Render a list of related posts with links.
@@ -11,6 +8,8 @@ type RelatedPostsProps = {
  * @param posts - Array of related post entries with `{ href, title }`.
  * @returns The related posts section or `null` when there are no posts.
  */
+
+type RelatedPostsProps = {posts: RelatedPosts}
 
 export default function RelatedPosts({posts}: RelatedPostsProps) {
 
