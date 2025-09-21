@@ -9,7 +9,7 @@ import { type RelatedPosts as RelatedPostsType } from "@/components/post/sidebar
  * @returns The related posts section or `null` when there are no posts.
  */
 
-type RelatedPostsProps = {posts: RelatedPostsType[]}
+type RelatedPostsProps = {posts: RelatedPostsType}
 
 export default function RelatedPosts({posts}: RelatedPostsProps) {
 
