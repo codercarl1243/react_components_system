@@ -1,7 +1,7 @@
 'use client'
 
 import { useRouter } from 'next/navigation'
-import { useRef } from 'react'
+import { useRef, type MouseEvent as ReactMouseEvent } from 'react'
 
 const LONG_PRESS_THRESHOLD = 200 // milliseconds
 /**
@@ -20,7 +20,7 @@ export default function usePostCard(href: string) {
 
     const navigate = () => router.push(href)
 
-    const handleClick = (e: React.MouseEvent) => {
+    const handleClick = (e: ReactMouseEvent<HTMLElement>) => {
         if (e.defaultPrevented) return
         const target = e.target as HTMLElement | null
         if (target?.closest('a,button,[role="button"],input,textarea,select')) return
