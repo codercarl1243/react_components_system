@@ -12,14 +12,13 @@ export default function PostCard({ variant = 'default', post, headingLevel = 3 }
     const id = useId()
     const postCardSlug = `/blog/${post.slug}`
 
-    const { handleContextMenu, handleClick, handleMouseDown, handleMouseUp } = usePostCard(postCardSlug)
+    const { handleClick, handleMouseDown, handleMouseUp } = usePostCard(postCardSlug)
 
     return (
         <article
             data-variant={variant}
             onClick={handleClick}
             className="post-card"
-            onContextMenu={handleContextMenu}
             onMouseDown={handleMouseDown}
             onMouseUp={handleMouseUp}
         >

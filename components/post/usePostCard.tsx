@@ -34,23 +34,24 @@ export default function usePostCard(href: string) {
         mouseDownTimeRef.current = 0
     }
 
-    const handleContextMenu = (e: React.MouseEvent) => {
-        console.log("handleContextMenu", e)
-        // Don't interfere if they right-clicked the actual link
-        // if ((e.target as HTMLElement).closest('a')) {
-        //     return; // Let the link handle it naturally
-        // }
+    /** BUGGY TODO: fix before using */
+    // const handleContextMenu = (e: React.MouseEvent) => {
+    //     console.log("handleContextMenu", e)
+    //     // Don't interfere if they right-clicked the actual link
+    //     // if ((e.target as HTMLElement).closest('a')) {
+    //     //     return; // Let the link handle it naturally
+    //     // }
 
-        // For right-clicks elsewhere on card, redirect to the link
-        const link = e.currentTarget.querySelector('a');
-        if (link) {
-            const rect = link.getBoundingClientRect();
-            link.dispatchEvent(new MouseEvent('contextmenu', {
-                bubbles: true,
-                clientX: rect.left + rect.width / 2,
-                clientY: rect.top + rect.height / 2,
-            }));
-        }
-    };
+    //     // For right-clicks elsewhere on card, redirect to the link
+    //     const link = e.currentTarget.querySelector('a');
+    //     if (link) {
+    //         const rect = link.getBoundingClientRect();
+    //         link.dispatchEvent(new MouseEvent('contextmenu', {
+    //             bubbles: true,
+    //             clientX: rect.left + rect.width / 2,
+    //             clientY: rect.top + rect.height / 2,
+    //         }));
+    //     }
+    // };
     return { handleClick, handleMouseDown, handleMouseUp, handleContextMenu }
 }
