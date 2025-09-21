@@ -8,19 +8,21 @@ import { PostSideBarProps } from './sidebar.type';
 
 
 /**
- * Render a post sidebar with an optional table of contents, related posts and author box.
+ * Render a post sidebar containing an optional table of contents, related posts and an author box.
  *
- * The component returns null if there is nothing to render.
- *  
- * The table of contents highlights the currently active section via `useScrollSpy` and intercepts clicks to smoothly
- * scroll the target element into view instead of default navigation.
- *
- * @param contents - Array of table-of-contents entries; each item should contain `id`, `href` and `label`.
- * @param relatedPosts - Array of related post entries with `{ href, title }`.
- * @param author - Optional author metadata; expected fields: `name`, and optionally `avatarUrl` and `bio`.
- * @param className - Additional class names to apply to the root <aside>.
- * @param children - Any additional nodes to render inside the sidebar (rendered after other sections).
- * @returns The sidebar element or `null` when there are no sections to show.
+* The component returns `null` when there are no contents, related posts or extra children/author to show.
+* The table of contents highlights the currently active section (from the scroll spy) and intercepts clicks
+* to scroll the target element into view using smooth scrolling when the user does not prefer reduced motion.
+*
+* Note: link hrefs rendered for TOC items are `item.href + "-heading"`, while the click handler locates and scrolls
+* to the element using the original `item.href`.
+*
+* @param contents - Table-of-contents entries (each with `id`, `href` and `label`); defaults to an empty array.
+* @param relatedPosts - Related post entries with `{ href, title }`; defaults to an empty array.
+* @param author - Optional author metadata with `name` and optional `avatarUrl` and `bio`.
+* @param className - Optional additional class names applied to the root <aside>.
+* @param children - Additional nodes rendered after the sidebar sections.
+* @returns The sidebar element, or `null` when nothing should be rendered.
  */
 export default function PostSideBar({
     contents = [],

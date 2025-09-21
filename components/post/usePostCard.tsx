@@ -4,7 +4,17 @@ import { useRouter } from 'next/navigation'
 import { useRef } from 'react'
 
 const LONG_PRESS_THRESHOLD = 200 // milliseconds
-
+/**
+ * Hook providing event handlers for a post/card that delegate navigation and context-menu behaviour to an inner link.
+ *
+ * The handlers:
+ * - handleClick: navigates to `href` on a left-click unless the press duration exceeds the long-press threshold (used to allow text selection and other long-press interactions). Non-left clicks are ignored to allow default browser behaviour (e.g. middle-click, back/forward).
+ * - handleMouseDown / handleMouseUp: track press duration used by `handleClick`.
+ * - handleContextMenu: if the user right-clicks the card (but not the link itself), dispatches a synthetic `contextmenu` event at the centre of the inner anchor so the link's context menu actions (open in new tab, copy link, etc.) are available.
+ *
+ * @param href - Target URL to navigate to when an ordinary left-click is detected.
+ * @returns An object containing { handleClick, handleMouseDown, handleMouseUp, handleContextMenu } event handlers for attaching to the card element.
+ */
 export default function usePostCard(href: string) {
     const router = useRouter()
     const mouseDownTimeRef = useRef<number | null>(null)
