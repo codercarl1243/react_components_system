@@ -12,7 +12,6 @@ export default function usePostCard(href: string) {
     const navigate = () => router.push(href)
 
     const handleClick = (e: React.MouseEvent) => {
-        console.log("e.button", e.button)
         if (e.button !== 0) {
         // Don't prevent default - let browser handle back/forward/middle-click etc.
         return
@@ -53,5 +52,5 @@ export default function usePostCard(href: string) {
     //         }));
     //     }
     // };
-    return { handleClick, handleMouseDown, handleMouseUp, handleContextMenu }
+    return { handleClick, handleMouseDown, handleMouseUp }
 }
