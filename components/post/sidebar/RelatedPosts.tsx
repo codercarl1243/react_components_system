@@ -13,7 +13,7 @@ type RelatedPostsProps = {posts: RelatedPosts}
 
 export default function RelatedPosts({posts}: RelatedPostsProps) {
 
-    if (posts.length === 0) return null;
+    if (!posts?.length) return null;
 
     return (
         <section
