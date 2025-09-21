@@ -15,7 +15,7 @@ export default function SidebarAuthor({author}: SidebarAuthorProps){
                         {author.avatarUrl && (
                             <Image
                                 src={author.avatarUrl}
-                                alt={author.name}
+                                alt=""
                                 className="author__avatar"
                                 loading="lazy"
                                 width={100}
