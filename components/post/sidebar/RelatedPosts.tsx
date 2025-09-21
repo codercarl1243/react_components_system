@@ -18,8 +18,9 @@ export default function RelatedPosts({posts}: RelatedPostsProps) {
     return (
         <section
             className="post-sidebar__related"
+            aria-labelledby="related-posts-heading"
         >
-            <Heading headingLevel={2} >Related Posts</Heading>
+            <Heading headingLevel={2} id="related-posts-heading">Related Posts</Heading>
             <ul>
                 {posts.map((post) => (
                     <li key={post.href}>
