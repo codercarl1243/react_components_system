@@ -11,7 +11,7 @@ import usePostCard from './usePostCard'
  * The entire card is clickable and navigates to the post URL.
  * Handles long-presses to allow text selection without navigation.
  * 
- * @param variant - Visual variant of the card, e.g. 'default' or 'hero'.
+ * @param variant - Visual variant of the card, e.g. 'card' or 'featured'.
  * @param post - Post data including `slug`, `title`, and `image`.
  * @param headingLevel - Semantic heading level for the title (1-6). Defaults to 3.
  * @returns The post card component.
