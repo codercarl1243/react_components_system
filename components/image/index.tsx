@@ -4,6 +4,7 @@ import { type TImage } from "@/components/image/image.type";
 import NextImage from 'next/image';
 import { clsx } from 'clsx';
 import { imageVariants } from "@/components/image/imageVariants";
+import { useState } from "react";
 
 /**
  * Enhanced Image component that wraps Next.js Image with predefined variants
@@ -37,6 +38,8 @@ import { imageVariants } from "@/components/image/imageVariants";
  */
 export default function Image({ variant, src, alt, ...props }: TImage) {
 
+    const [isLoading, setIsLoading] = useState(true);
+
     const {
         width,
         height,
@@ -48,7 +51,12 @@ export default function Image({ variant, src, alt, ...props }: TImage) {
 
     return (
         <NextImage
-            className={clsx('image', variant && `image--${variant}`, props.className)}
+            className={clsx(
+                'image',
+                variant && `image--${variant}`,
+                isLoading && 'image-loading',
+                props.className
+            )}
             src={src}
             alt={alt}
             sizes={sizes}
@@ -59,6 +67,8 @@ export default function Image({ variant, src, alt, ...props }: TImage) {
             placeholder={props.placeholder || 'blur'}
             blurDataURL={props.blurDataURL || variantBlurDataURL}
             quality={props.quality ?? variantQuality}
+            onLoad={() => setIsLoading(false)}
+            onError={() => setIsLoading(false)}
             {...props}
         />
     );
