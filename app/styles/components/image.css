@@ -2,12 +2,9 @@
     width: 100%;
     height: auto;
     object-fit: cover;
-    image-rendering: auto;
     transition: opacity 0.3s ease-in-out;
     vertical-align: middle;
     font-style: italic;
-    background-repeat: no-repeat;
-    background-size: cover;
     shape-margin: 0.75rem;
     position: relative;
     /* Ensure it sits below the loading shimmer */
@@ -34,8 +31,7 @@
             transparent,
             rgba(255, 255, 255, 0.4),
             transparent);
-    animation: shimmer 1.5s;
-    animation-iteration-count: 3;
+    animation: shimmer 1.5s linear infinite;
     z-index: 1;
     pointer-events: none;
     transition: opacity 0.3s ease-in-out;
@@ -125,10 +121,6 @@
 }
 
 @media (prefers-color-scheme: dark) {
-    .image {
-        opacity: 0.95;
-    }
-
     .image--card {
         box-shadow: 0 1px 3px 0 rgb(255 255 255 / 0.1), 0 1px 2px -1px rgb(255 255 255 / 0.05);
     }
