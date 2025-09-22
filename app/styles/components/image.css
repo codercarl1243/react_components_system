@@ -1,14 +1,17 @@
 .image {
-    width: 100%;
-    height: auto;
-    object-fit: cover;
-    transition: opacity 0.3s ease-in-out;
-    vertical-align: middle;
-    font-style: italic;
-    shape-margin: 0.75rem;
     position: relative;
     /* Ensure it sits below the loading shimmer */
     z-index: 0;
+}
+
+.image > img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    vertical-align: middle;
+    font-style: italic;
+    shape-margin: 0.75rem;
+    transition: opacity 0.3s ease-in-out;
 }
 
 .image-wrapper {
