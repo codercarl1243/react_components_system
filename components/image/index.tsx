@@ -39,11 +39,11 @@ import { type SyntheticEvent, useState } from "react";
 export default function Image({ variant, src, alt, ...props }: TImage) {
 
     const [isLoading, setIsLoading] = useState(true);
-
+    const { className, sizes, width, height, priority, placeholder, blurDataURL, quality } = props
     const {
-        width,
-        height,
-        sizes,
+        width: variantWidth,
+        height: variantHeight,
+        sizes: variantSizes,
         aspectRatio,
         blurDataURL: variantBlurDataURL,
         quality: variantQuality
@@ -67,21 +67,21 @@ export default function Image({ variant, src, alt, ...props }: TImage) {
         >
             <NextImage
                 className={clsx(
-                    props.className,
+                    className,
                     'image',
                     variant && `image--${variant}`,
                 )}
                 data-loading={isLoading}
                 src={src}
                 alt={alt}
-                sizes={props.sizes ?? sizes}
-                width={props.width ?? width}
-                height={props.height ?? height}
+                sizes={sizes ?? variantSizes}
+                width={width ?? variantWidth}
+                height={height ?? variantHeight}
                 style={{ aspectRatio, ...props.style }}
-                priority={props.priority ?? (variant === 'hero' || variant === "banner" || variant === "featured")}
-                placeholder={props.placeholder || 'blur'}
-                blurDataURL={props.blurDataURL || variantBlurDataURL}
-                quality={props.quality ?? variantQuality}
+                priority={priority ?? (variant === 'hero' || variant === "banner" || variant === "featured")}
+                placeholder={placeholder || 'blur'}
+                blurDataURL={blurDataURL || variantBlurDataURL}
+                quality={quality ?? variantQuality}
                 onLoad={handleOnLoad}
                 onError={handleOnError}
                 {...props}
