@@ -66,7 +66,7 @@
 
     &:disabled {
         --button-bg-color: var(--color-neutral-200);
-        --button-color: var(--color-neutral-600);
+        --button-color: var(--color-neutral-500);
         cursor: not-allowed;
 
         &:hover,
@@ -114,6 +114,11 @@ button.button {
         --button-primary-color: var(--color-neutral-600);
         --button-accent-color: var(--color-neutral-400);
     }
+
+    &:disabled {
+        --button-color: var(--color-neutral-600);
+    }
+
 }
 
 /* Outline style - transparent background with colored border/text */
@@ -126,6 +131,10 @@ button.button {
     &:not([data-variant]):disabled {
         --button-secondary-color: var(--color-neutral-400);
         --button-accent-color: var(--color-neutral-300);
+    }
+
+    &:disabled {
+        --button-color: var(--color-neutral-400);
     }
 }
 
@@ -140,16 +149,31 @@ button.button {
     --button-primary-color: var(--color-neutral-100);
     --button-secondary-color: var(--color-primary-400);
     --button-accent-color: var(--color-primary-600);
+
+    &:disabled {
+        --button-secondary-color: var(--color-primary-100);
+        --button-accent-color: var(--color-primary-400);
+    }
 }
 
 .button[data-variant="secondary"] {
     --button-primary-color: var(--color-neutral-100);
     --button-secondary-color: var(--color-secondary-400);
     --button-accent-color: var(--color-secondary-600);
+
+    &:disabled {
+        --button-secondary-color: var(--color-secondary-100);
+        --button-accent-color: var(--color-secondary-400);
+    }
 }
 
 .button[data-variant="accent"] {
     --button-primary-color: var(--color-neutral-100);
     --button-secondary-color: var(--color-accent-400);
     --button-accent-color: var(--color-accent-600);
+
+    &:disabled {
+        --button-secondary-color: var(--color-accent-100);
+        --button-accent-color: var(--color-accent-400);
+    }
 }
