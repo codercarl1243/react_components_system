@@ -39,7 +39,7 @@ import { type SyntheticEvent, useState } from "react";
 export default function Image({ variant, src, alt, ...props }: TImage) {
 
     const [isLoading, setIsLoading] = useState(true);
-    const { className, sizes, width, style, height, priority, placeholder, blurDataURL, quality } = props
+    const { className, sizes, width, style, height, priority, placeholder, blurDataURL, quality, ...rest } = props
     const {
         width: variantWidth,
         height: variantHeight,
@@ -85,7 +85,7 @@ export default function Image({ variant, src, alt, ...props }: TImage) {
                 quality={quality ?? variantQuality}
                 onLoad={handleOnLoad}
                 onError={handleOnError}
-                {...props}
+                {...rest}
             />
         </span>
     );
