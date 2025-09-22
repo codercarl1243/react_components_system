@@ -21,7 +21,7 @@ export default function ButtonsBasePage () {
                         headingId="the-button-heading"
                         subtitle="Building a React Design System Foundation"
                         image={{
-                          src: ''
+                          src: 'globe.svg'
                         }}
                     />
                     <p>

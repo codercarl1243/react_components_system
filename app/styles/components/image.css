@@ -135,7 +135,7 @@
 @media (prefers-reduced-motion: reduce) {
 
     .image,
-    .image::before {
+    .image-wrapper::before  {
         transition: none !important;
         animation: none !important;
     }
