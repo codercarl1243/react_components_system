@@ -4,7 +4,7 @@ import { type TImage } from "@/components/image/image.type";
 import NextImage from 'next/image';
 import { clsx } from 'clsx';
 import { imageVariants } from "@/components/image/imageVariants";
-import { useState } from "react";
+import { type SyntheticEvent, useState } from "react";
 
 /**
  * Enhanced Image component that wraps Next.js Image with predefined variants
@@ -49,26 +49,35 @@ export default function Image({ variant, src, alt, ...props }: TImage) {
         quality: variantQuality
     } = imageVariants[variant ?? "default"];
 
+    function handleOnLoad(event: SyntheticEvent<HTMLImageElement, Event>) {
+        props?.onLoad?.(event);
+        setIsLoading(false)
+    }
+    function handleOnError(event: SyntheticEvent<HTMLImageElement, Event>) {
+        props.onError?.(event);
+        setIsLoading(false)
+    }
+
     return (
         <NextImage
             className={clsx(
+                props.className,
                 'image',
                 variant && `image--${variant}`,
-                isLoading && 'image-loading',
-                props.className
+                isLoading && 'image-loading'
             )}
             src={src}
             alt={alt}
-            sizes={sizes}
-            width={width}
-            height={height}
+            sizes={props.sizes ?? sizes}
+            width={props.width ?? width}
+            height={props.height ?? height}
             style={{ aspectRatio, ...props.style }}
             priority={props.priority ?? (variant === 'hero' || variant === "banner" || variant === "featured")}
             placeholder={props.placeholder || 'blur'}
             blurDataURL={props.blurDataURL || variantBlurDataURL}
             quality={props.quality ?? variantQuality}
-            onLoad={() => setIsLoading(false)}
-            onError={() => setIsLoading(false)}
+            onLoad={handleOnLoad}
+            onError={handleOnError}
             {...props}
         />
     );
