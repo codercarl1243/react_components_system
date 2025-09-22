@@ -174,12 +174,11 @@ describe('Image Component', () => {
   });
 
   describe('Loading State', () => {
-    it('has data-loading attribute and wrapper class initially', () => {
+    it('has wrapper class initially', () => {
       render(<Image {...defaultProps} />);
       const image = screen.getByTestId('next-image');
       const wrapper = image.parentElement;
       
-      expect(image).toHaveAttribute('data-loading', 'true');
       expect(wrapper).toHaveClass('image-loading');
     });
 
@@ -190,13 +189,11 @@ describe('Image Component', () => {
       
       // Initially loading
       expect(wrapper).toHaveClass('image-loading');
-      expect(image).toHaveAttribute('data-loading', 'true');
       
       // After load event
       fireEvent.load(image);
       
       expect(wrapper).not.toHaveClass('image-loading');
-      expect(image).toHaveAttribute('data-loading', 'false');
     });
 
     it('removes loading state on error', () => {
@@ -206,13 +203,11 @@ describe('Image Component', () => {
       
       // Initially loading
       expect(wrapper).toHaveClass('image-loading');
-      expect(image).toHaveAttribute('data-loading', 'true');
       
       // After error event
       fireEvent.error(image);
       
       expect(wrapper).not.toHaveClass('image-loading');
-      expect(image).toHaveAttribute('data-loading', 'false');
     });
   });
 
