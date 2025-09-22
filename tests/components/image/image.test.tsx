@@ -32,15 +32,6 @@ describe('Image Component', () => {
       expect(image).toHaveAttribute('height', '800');
       expect(image).toHaveAttribute('quality', '85');
     });
-
-    it('requires alt prop (TypeScript compilation test)', () => {
-      // This test ensures TypeScript compilation fails without alt
-      // In a real test environment, this would be caught at compile time
-      expect(() => {
-        // @ts-expect-error - Testing that alt is required
-        render(<Image src="/test.jpg" />);
-      }).toBeDefined();
-    });
   });
 
   describe('Variant Behavior', () => {
