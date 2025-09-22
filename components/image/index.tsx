@@ -68,11 +68,8 @@ export default function Image({ variant, src, alt, ...props }: TImage) {
         >
             <NextImage
                 className={clsx(
-                    
-                    // 'image',
                     variant && `image--${variant}`,
                 )}
-                data-loading={isLoading}
                 src={src}
                 alt={alt}
                 sizes={sizes ?? variantSizes}
