@@ -59,26 +59,33 @@ export default function Image({ variant, src, alt, ...props }: TImage) {
     }
 
     return (
-        <NextImage
+        <span
             className={clsx(
-                props.className,
-                'image',
-                variant && `image--${variant}`,
+                'image-wrapper',
                 isLoading && 'image-loading'
             )}
-            src={src}
-            alt={alt}
-            sizes={props.sizes ?? sizes}
-            width={props.width ?? width}
-            height={props.height ?? height}
-            style={{ aspectRatio, ...props.style }}
-            priority={props.priority ?? (variant === 'hero' || variant === "banner" || variant === "featured")}
-            placeholder={props.placeholder || 'blur'}
-            blurDataURL={props.blurDataURL || variantBlurDataURL}
-            quality={props.quality ?? variantQuality}
-            onLoad={handleOnLoad}
-            onError={handleOnError}
-            {...props}
-        />
+        >
+            <NextImage
+                className={clsx(
+                    props.className,
+                    'image',
+                    variant && `image--${variant}`,
+                )}
+                data-loading={isLoading}
+                src={src}
+                alt={alt}
+                sizes={props.sizes ?? sizes}
+                width={props.width ?? width}
+                height={props.height ?? height}
+                style={{ aspectRatio, ...props.style }}
+                priority={props.priority ?? (variant === 'hero' || variant === "banner" || variant === "featured")}
+                placeholder={props.placeholder || 'blur'}
+                blurDataURL={props.blurDataURL || variantBlurDataURL}
+                quality={props.quality ?? variantQuality}
+                onLoad={handleOnLoad}
+                onError={handleOnError}
+                {...props}
+            />
+        </span>
     );
 }
