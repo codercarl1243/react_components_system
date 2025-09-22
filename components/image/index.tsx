@@ -39,7 +39,7 @@ import { type SyntheticEvent, useState } from "react";
 export default function Image({ variant, src, alt, ...props }: TImage) {
 
     const [isLoading, setIsLoading] = useState(true);
-    const { className, sizes, width, height, priority, placeholder, blurDataURL, quality } = props
+    const { className, sizes, width, style, height, priority, placeholder, blurDataURL, quality } = props
     const {
         width: variantWidth,
         height: variantHeight,
@@ -61,14 +61,15 @@ export default function Image({ variant, src, alt, ...props }: TImage) {
     return (
         <span
             className={clsx(
-                'image-wrapper',
-                isLoading && 'image-loading'
+                'image-wrapper image',
+                isLoading && 'image-loading',
+                className
             )}
         >
             <NextImage
                 className={clsx(
-                    className,
-                    'image',
+                    
+                    // 'image',
                     variant && `image--${variant}`,
                 )}
                 data-loading={isLoading}
@@ -77,7 +78,7 @@ export default function Image({ variant, src, alt, ...props }: TImage) {
                 sizes={sizes ?? variantSizes}
                 width={width ?? variantWidth}
                 height={height ?? variantHeight}
-                style={{ aspectRatio, ...props.style }}
+                style={{ aspectRatio, ...style }}
                 priority={priority ?? (variant === 'hero' || variant === "banner" || variant === "featured")}
                 placeholder={placeholder || 'blur'}
                 blurDataURL={blurDataURL || variantBlurDataURL}
