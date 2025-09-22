@@ -1,0 +1,152 @@
+.image {
+    position: relative;
+    /* Ensure it sits below the loading shimmer */
+    z-index: 0;
+}
+
+.image > img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    vertical-align: middle;
+    font-style: italic;
+    shape-margin: 0.75rem;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.image-wrapper {
+    position: relative;
+    overflow: hidden;
+    border: 1px solid transparent;
+    transition: border-color 0.3s ease-in-out, background-color 0.3s ease-in-out;
+    background-color: transparent;
+}
+
+.image-wrapper::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    background: linear-gradient(90deg,
+            transparent,
+            rgba(255, 255, 255, 0.4),
+            transparent);
+    animation: shimmer 1.5s linear infinite;
+    z-index: 1;
+    pointer-events: none;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.image-wrapper.image-loading {
+    background-color: var(--color-neutral-200);
+    border-color: var(--color-primary-600);
+}
+
+.image-wrapper.image-loading::before {
+    opacity: 1;
+}
+
+@keyframes shimmer {
+    0% {
+        left: -100%;
+    }
+
+    100% {
+        left: 100%;
+    }
+}
+
+.image--logo {
+    object-fit: contain;
+    min-width: 80px;
+    min-height: 80px;
+}
+
+.image--rectangleLogo {
+    object-fit: contain;
+    min-width: 200px;
+    min-height: 50px;
+}
+
+.image--card {
+    border-radius: 0.5rem;
+    box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.image--card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+}
+
+.image--featured,
+.image--hero {
+    width: 100%;
+    object-fit: cover;
+    border-radius: 0.75rem;
+    min-height: 300px;
+}
+
+.image--banner {
+    width: 100%;
+    object-fit: cover;
+    border-radius: 0.5rem;
+    min-height: 200px;
+}
+
+.image--general {
+    border-radius: 0.375rem;
+}
+
+@media (max-width: 768px) {
+
+    .image--hero,
+    .image--featured {
+        min-height: 200px;
+        border-radius: 0.5rem;
+    }
+
+    .image--banner {
+        min-height: 150px;
+        border-radius: 0.375rem;
+    }
+
+    .image--card {
+        border-radius: 0.375rem;
+    }
+
+    .image--card:hover {
+        transform: none;
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+    .image--card {
+        box-shadow: 0 1px 3px 0 rgb(255 255 255 / 0.1), 0 1px 2px -1px rgb(255 255 255 / 0.05);
+    }
+}
+
+@media (prefers-contrast: high) {
+    .image--card {
+        border: 1px solid currentColor;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    .image,
+    .image-wrapper::before  {
+        transition: none !important;
+        animation: none !important;
+    }
+}
+
+@media print {
+    .image {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+}

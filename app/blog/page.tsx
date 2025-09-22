@@ -11,11 +11,11 @@ export default function BlogPage () {
                     <li>
                       <PostCard 
                       headingLevel={2}
-                      variant="hero" 
+                      variant="featured" 
                       post={{
                         title: 'Buttons - the base of every button', 
                         image: {
-                          src: '/images/blog/button-base.png', 
+                          src: 'globe.svg', 
                           alt: 'A collection of buttons showing different states and styles'}, 
                         slug: 'design-system/buttons'}}
                       />
@@ -23,11 +23,11 @@ export default function BlogPage () {
                                         <li>
                       <PostCard 
                       headingLevel={2}
-                      variant="hero" 
+                      variant="card" 
                       post={{
                         title: 'Buttons - the base of every button', 
                         image: {
-                          src: '/images/blog/button-base.png', 
+                          src: 'globe.svg', 
                           alt: 'A collection of buttons showing different states and styles'}, 
                         slug: 'design-system/buttons'}}
                       />
@@ -35,11 +35,11 @@ export default function BlogPage () {
                                         <li>
                       <PostCard 
                       headingLevel={2}
-                      variant="hero" 
+                      variant="card" 
                       post={{
                         title: 'Buttons - the base of every button', 
                         image: {
-                          src: '/images/blog/button-base.png', 
+                          src: 'globe.svg', 
                           alt: 'A collection of buttons showing different states and styles'}, 
                         slug: 'design-system/buttons'}}
                       />
@@ -47,11 +47,11 @@ export default function BlogPage () {
                                         <li>
                       <PostCard 
                       headingLevel={2}
-                      variant="hero" 
+                      variant="card" 
                       post={{
                         title: 'Buttons - the base of every button', 
                         image: {
-                          src: '/images/blog/button-base.png', 
+                          src: 'globe.svg', 
                           alt: 'A collection of buttons showing different states and styles'}, 
                         slug: 'design-system/buttons'}}
                       />
@@ -59,11 +59,11 @@ export default function BlogPage () {
                                         <li>
                       <PostCard 
                       headingLevel={2}
-                      variant="hero" 
+                      variant="card" 
                       post={{
                         title: 'Buttons - the base of every button', 
                         image: {
-                          src: '/images/blog/button-base.png', 
+                          src: 'globe.svg', 
                           alt: 'A collection of buttons showing different states and styles'}, 
                         slug: 'design-system/buttons'}}
                       />
@@ -71,11 +71,11 @@ export default function BlogPage () {
                                         <li>
                       <PostCard 
                       headingLevel={2}
-                      variant="hero" 
+                      variant="card" 
                       post={{
                         title: 'Buttons - the base of every button', 
                         image: {
-                          src: '/images/blog/button-base.png', 
+                          src: 'globe.svg', 
                           alt: 'A collection of buttons showing different states and styles'}, 
                         slug: 'design-system/buttons'}}
                       />
@@ -83,11 +83,11 @@ export default function BlogPage () {
                                                             <li>
                       <PostCard 
                       headingLevel={2}
-                      variant="hero" 
+                      variant="card" 
                       post={{
                         title: 'Buttons - the base of every button', 
                         image: {
-                          src: '/images/blog/button-base.png', 
+                          src: 'globe.svg', 
                           alt: 'A collection of buttons showing different states and styles'}, 
                         slug: 'design-system/buttons'}}
                       />
@@ -95,11 +95,11 @@ export default function BlogPage () {
                                                             <li>
                       <PostCard 
                       headingLevel={2}
-                      variant="hero" 
+                      variant="card" 
                       post={{
                         title: 'Buttons - the base of every button', 
                         image: {
-                          src: '/images/blog/button-base.png', 
+                          src: 'globe.svg', 
                           alt: 'A collection of buttons showing different states and styles'}, 
                         slug: 'design-system/buttons'}}
                       />

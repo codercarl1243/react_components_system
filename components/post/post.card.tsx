@@ -1,6 +1,6 @@
 'use client';
 
-import Image from 'next/image'
+import Image from '@/components/image'
 import type { PostCardPropsType } from './post.type'
 import Link from '@/components/link'
 import Heading from '@/components/heading'
@@ -11,13 +11,13 @@ import usePostCard from './usePostCard'
  * The entire card is clickable and navigates to the post URL.
  * Handles long-presses to allow text selection without navigation.
  * 
- * @param variant - Visual variant of the card, e.g. 'default' or 'hero'.
+ * @param variant - Visual variant of the card, e.g. 'card' or 'featured'.
  * @param post - Post data including `slug`, `title`, and `image`.
  * @param headingLevel - Semantic heading level for the title (1-6). Defaults to 3.
  * @returns The post card component.
  */
 
-export default function PostCard({ variant = 'default', post, headingLevel = 3 }: PostCardPropsType) {
+export default function PostCard({ variant = 'card', post, headingLevel = 3 }: PostCardPropsType) {
     const { image, title } = post
 
     const postCardSlug = `/blog/${post.slug}`
@@ -33,7 +33,7 @@ export default function PostCard({ variant = 'default', post, headingLevel = 3 }
             onMouseUp={handleMouseUp}
             onMouseLeave={handleMouseLeave}
         >
-            <Heading className="post-card__title button"
+            <Heading className="post-card__title"
                 data-styled="filled"
                 data-variant="accent"
                 headingLevel={headingLevel}
@@ -44,11 +44,8 @@ export default function PostCard({ variant = 'default', post, headingLevel = 3 }
             <Image
                 src={image.src}
                 alt={image.alt ?? ''}
-                height={300}
-                width={400}
-                sizes="(max-width: 768px) 100vw, 400px"
-                priority={variant === 'hero'}
                 className='post-card__image'
+                variant={variant}
             />
         </article>
     )

@@ -16,7 +16,7 @@ export type PostType = {
 export type PostBannerPropsType = Pick<PostType, 'title' | 'image' | 'subtitle'> & {headingId?: string};
 
 export type PostCardPropsType = {
-    variant?: 'hero' | 'default';
+    variant?: 'featured' | 'card';
     post: Pick<PostType, 'title' | 'image'> & {slug: string};
     headingLevel: Exclude<HeadingLevelsType, 1>;
 };
