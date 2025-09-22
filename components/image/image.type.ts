@@ -1,7 +1,6 @@
-import NextImage from 'next/image';
-import { type ComponentProps } from 'react';
+import type { ImageProps as NextImageProps } from 'next/image';
 
-export type TNextImageProps = ComponentProps<typeof NextImage>;
+export type TNextImageProps = NextImageProps;
 
 export type ImageVariant = 
   | 'logo'
