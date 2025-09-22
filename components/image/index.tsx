@@ -39,7 +39,7 @@ import { type SyntheticEvent, useState } from "react";
 export default function Image({ variant, src, alt, ...props }: TImage) {
 
     const [isLoading, setIsLoading] = useState(true);
-    const { className, sizes, width, style, height, priority, placeholder, blurDataURL, quality, ...rest } = props
+    const { className, sizes, width, style, height, priority, placeholder, blurDataURL, quality, onLoad, onError, ...rest } = props
     const {
         width: variantWidth,
         height: variantHeight,
@@ -50,11 +50,11 @@ export default function Image({ variant, src, alt, ...props }: TImage) {
     } = imageVariants[variant ?? "default"];
 
     function handleOnLoad(event: SyntheticEvent<HTMLImageElement, Event>) {
-        props?.onLoad?.(event);
+        onLoad?.(event);
         setIsLoading(false)
     }
     function handleOnError(event: SyntheticEvent<HTMLImageElement, Event>) {
-        props.onError?.(event);
+        onError?.(event);
         setIsLoading(false)
     }
 
