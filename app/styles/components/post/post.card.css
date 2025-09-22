@@ -25,7 +25,4 @@
 
 .post-card__image {
     order: 0;
-    border: 1px solid purple; /* For testing purposes */;
-    object-fit: cover;
-
 }
