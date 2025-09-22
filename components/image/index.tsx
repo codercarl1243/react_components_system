@@ -80,8 +80,8 @@ export default function Image({ variant, src, alt, ...props }: TImage) {
                 height={height ?? variantHeight}
                 style={{ aspectRatio, ...style }}
                 priority={priority ?? (variant === 'hero' || variant === "banner" || variant === "featured")}
-                placeholder={placeholder || 'blur'}
-                blurDataURL={blurDataURL || variantBlurDataURL}
+                placeholder={placeholder ?? 'blur'}
+                blurDataURL={blurDataURL ?? variantBlurDataURL}
                 quality={quality ?? variantQuality}
                 onLoad={handleOnLoad}
                 onError={handleOnError}
