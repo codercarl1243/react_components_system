@@ -1,6 +1,5 @@
-@layer tokens {
-    :root {
-         /* Primary (Blue) */
+:root {
+        /* Primary (Blue) */
         --color-primary-200: hsl(212, 61%, 61%);
         --color-primary-400: hsl(212, 70%, 48%);
         --color-primary-600: hsl(212, 85%, 22%);
@@ -22,5 +21,18 @@
         --color-neutral-400: hsl(0, 0%, 46%);
         --color-neutral-600: hsl(0, 0%, 30%);
         --color-neutral-800: hsl(0, 0%, 15%);
+
+        --color-code-dark: hsl(225, 13%, 13%);
+        --color-code-light: hsl(214, 13%, 90%);
+
+        /* Emphasis colors */
+        --color-emphasis-100: hsl(75, 85%, 60%);
+        --color-emphasis-200: hsl(262, 83%, 58%);
+        --color-emphasis-300: hsl(172, 66%, 50%);
+        --color-emphasis-400: hsl(16, 84%, 60%);
+        --color-emphasis-500: hsl(330, 81%, 60%);
+        --color-emphasis-600: hsl(198, 93%, 60%);
+        --color-emphasis-700: hsl(142, 71%, 45%);
+        --color-emphasis-800: hsl(234, 89%, 74%);
+        --color-emphasis-900: hsl(45, 93%, 58%);
     }
-}
