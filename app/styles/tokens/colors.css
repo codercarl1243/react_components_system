@@ -1,15 +1,15 @@
     :root {
         /* 
-            100 + neutral-600/700/800
-            200 + neutral-500/600/700/800
-            400 + neutral-100/200
-            600 + neutral-100/200/300
+            100 as background + neutral-600/700/800 as foreground(text)
+            200 as background + neutral-500/600/700/800 as foreground(text)
+            400 as background + neutral-100/200 as foreground(text)
+            600 as background + neutral-100/200/300 as foreground(text)
         */
         /* Primary (Blue) */
-        --color-primary-100: hsl(203, 31%, 95%);
-        --color-primary-200: hsl(211, 38%, 88%);
-        --color-primary-400: hsl(212, 75%, 40%);
-        --color-primary-600: hsl(212, 76%, 28%);
+        --color-primary-100: #eef3f6;
+        --color-primary-200: #d5e0ec;
+        --color-primary-400: #1961b3;
+        --color-primary-600: #11447e;
 
         /* Secondary (Green) */
         --color-secondary-100: hsl(155, 33%, 93%);
@@ -24,7 +24,7 @@
         --color-accent-600: hsl(314, 71%, 28%);
 
         /* Neutral colors */
-        --color-neutral-100: hsl(0, 0%, 100%);
+        --color-neutral-100: hsl(249, 64%, 98%);
         --color-neutral-200: hsl(0, 0%, 88%);
         --color-neutral-300: hsl(0, 0%, 70%);
         --color-neutral-400: hsl(0, 0%, 46%);
@@ -32,7 +32,7 @@
         --color-neutral-600: hsl(0, 0%, 30%);
         --color-neutral-700: hsl(0, 0%, 24%);
         --color-neutral-800: hsl(0, 0%, 15%);
-        --color-neutral-900: hsl(0, 0%, 0%);
+        --color-neutral-900: hsl(249, 64%, 5%);
 
         --color-code-dark: hsl(225, 13%, 13%);
         --color-code-light: hsl(214, 13%, 90%);
