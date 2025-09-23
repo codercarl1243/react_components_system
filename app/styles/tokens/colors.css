@@ -24,7 +24,7 @@
         --color-accent-600: hsl(314, 71%, 28%);
 
         /* Neutral colors */
-        --color-neutral-100: hsl(249, 64%, 98%);
+        --color-neutral-100: hsl(0, 0%, 100%);
         --color-neutral-200: hsl(0, 0%, 88%);
         --color-neutral-300: hsl(0, 0%, 70%);
         --color-neutral-400: hsl(0, 0%, 46%);
