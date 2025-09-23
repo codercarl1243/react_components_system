@@ -6,10 +6,10 @@
             600 as background + neutral-100/200/300 as foreground(text)
         */
         /* Primary (Blue) */
-        --color-primary-100: #eef3f6;
-        --color-primary-200: #d5e0ec;
-        --color-primary-400: #1961b3;
-        --color-primary-600: #11447e;
+        --color-primary-100: hsl(203, 31%, 95%);
+        --color-primary-200: hsl(211, 38%, 88%);
+        --color-primary-400: hsl(212, 75%, 40%);
+        --color-primary-600: hsl(212, 76%, 28%);
 
         /* Secondary (Green) */
         --color-secondary-100: hsl(155, 33%, 93%);
