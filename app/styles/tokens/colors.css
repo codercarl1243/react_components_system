@@ -1,21 +1,27 @@
     :root {
+        /* 
+            100 as background + neutral-600/700/800 as foreground(text)
+            200 as background + neutral-500/600/700/800 as foreground(text)
+            400 as background + neutral-100/200 as foreground(text)
+            600 as background + neutral-100/200/300 as foreground(text)
+        */
         /* Primary (Blue) */
-        --color-primary-100: hsl(212, 55%, 85%);
-        --color-primary-200: hsl(212, 61%, 61%);
-        --color-primary-400: hsl(212, 70%, 48%);
-        --color-primary-600: hsl(212, 85%, 22%);
+        --color-primary-100: hsl(203, 31%, 95%);
+        --color-primary-200: hsl(211, 38%, 88%);
+        --color-primary-400: hsl(212, 75%, 40%);
+        --color-primary-600: hsl(212, 76%, 28%);
 
         /* Secondary (Green) */
-        --color-secondary-100: hsl(154, 35%, 85%);
-        --color-secondary-200: hsl(154, 30%, 55%);
-        --color-secondary-400: hsl(155, 45%, 35%);
-        --color-secondary-600: hsl(154, 80%, 20%);
+        --color-secondary-100: hsl(155, 33%, 93%);
+        --color-secondary-200: hsl(153, 29%, 84%);
+        --color-secondary-400: hsl(155, 65%, 26%);
+        --color-secondary-600: hsl(155, 67%, 18%);
 
         /* Accent (Pink) */
-        --color-accent-100: hsl(314, 25%, 85%);
-        --color-accent-200: hsl(314, 30%, 55%);
-        --color-accent-400: hsl(314, 80%, 47%);
-        --color-accent-600: hsl(314, 80%, 24%);
+        --color-accent-100: hsl(327, 22%, 90%);
+        --color-accent-200: hsl(316, 25%, 88%);
+        --color-accent-400: hsl(314, 71%, 41%);
+        --color-accent-600: hsl(314, 71%, 28%);
 
         /* Neutral colors */
         --color-neutral-100: hsl(0, 0%, 100%);
@@ -26,6 +32,7 @@
         --color-neutral-600: hsl(0, 0%, 30%);
         --color-neutral-700: hsl(0, 0%, 24%);
         --color-neutral-800: hsl(0, 0%, 15%);
+        --color-neutral-900: hsl(249, 64%, 5%);
 
         --color-code-dark: hsl(225, 13%, 13%);
         --color-code-light: hsl(214, 13%, 90%);
