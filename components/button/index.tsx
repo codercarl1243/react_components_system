@@ -3,8 +3,9 @@
 import clsx from 'clsx'
 import { BaseButtonProps } from './button.type'
 import useButton from './useButton'
+import Ellipsis from '../ellipsis'
 
-export default function Button ({
+export default function Button({
   className,
   children,
   onClick,
@@ -18,17 +19,18 @@ export default function Button ({
   const { handleClick } = useButton()
 
   return (
-        <button
-            className={clsx(className, 'button')}
-            onClick={handleClick(onClick)}
-            disabled={isLoading || disabled}
-            ref={ref}
-            type={type}
-            aria-busy={isLoading}
-            {...props}
-            data-testid="base-button"
-        >
-            {isLoading ?  <span aria-live="polite">{loadingText}</span> : children}
-        </button>
+    <button
+      {...props}
+      className={clsx(className, 'button')}
+      onClick={handleClick(onClick)}
+      disabled={isLoading || disabled}
+      data-loading={isLoading}
+      ref={ref}
+      type={type}
+      aria-busy={isLoading}
+      data-testid="base-button"
+    >
+      {isLoading ? <span aria-live="polite" className='loading-text'>{loadingText}<Ellipsis /></span> : children}
+    </button>
   )
 }
