@@ -176,7 +176,7 @@ export function BaseButtonExample() {
         }
         return (
             <div
-                className="sparkle"
+                className="splatter"
                 style={styleObject}
             />
         )
