@@ -52,7 +52,7 @@ export function BaseButtonExample() {
             cooldownRef.current = false;
             setIsLoading(false);
             pendingTimeoutsRef.current.delete(cooldownT);
-        }, 500);
+        }, 300);
 
         pendingTimeoutsRef.current.add(cooldownT);
 
