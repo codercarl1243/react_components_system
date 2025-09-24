@@ -2,10 +2,10 @@
 export default function Ellipsis(){
 
     return (
-        <div className="ellipsis">
+        <span className="ellipsis"  aria-hidden="true" role="presentation">
             <span />
             <span />
             <span />
-        </div>
+        </span>
     )
 }

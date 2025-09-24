@@ -141,12 +141,6 @@ button.button {
     .button {
         transition: none !important;
         animation: none !important;
-
-        /* Static ellipsis for reduced motion */
-        &[data-loading="true"] .loading-text::after {
-            animation: none !important;
-            content: '...' !important;
-        }
     }
 }
 
