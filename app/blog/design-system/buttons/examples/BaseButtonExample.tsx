@@ -37,6 +37,7 @@ export function BaseButtonExample() {
     const [sparkles, setSparkles] = useState<TSparkle[]>([]);
 
     const timeoutsRef = useRef<TimeoutRef>(new Map());
+    const pendingTimeoutsRef = useRef<Set<NodeJS.Timeout>>(new Set())
     const cooldownRef = useRef<boolean>(false);
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const bubbleIdCounter = useRef(0);
@@ -47,10 +48,13 @@ export function BaseButtonExample() {
         cooldownRef.current = true;
         setIsLoading(true);
 
-        setTimeout(() => {
+        const cooldownT = setTimeout(() => {
             cooldownRef.current = false;
             setIsLoading(false);
-        }, 250);
+            pendingTimeoutsRef.current.delete(cooldownT);
+        }, 500);
+
+        pendingTimeoutsRef.current.add(cooldownT);
 
         const LIFE_TIME = 3000 + Math.random() * 4000; // 3-7s
         const POP_DURATION = 400;
@@ -92,6 +96,7 @@ export function BaseButtonExample() {
         // Store timeouts for cleanup
         timeoutsRef.current.set(bubble.id, { removeFromDOMTimeout, popTimeout });
     };
+
     const createSplatter = (bubbleElement: HTMLElement, bubbleColor: string, bubbleSize: number) => {
         const rect = bubbleElement.getBoundingClientRect();
         const centerX = rect.left + rect.width / 2;
@@ -119,12 +124,15 @@ export function BaseButtonExample() {
         setSparkles(prev => [...prev, ...newSparkles]);
 
         // Remove sparkles after animation
-        setTimeout(() => {
+        const sparkleCleanupT = setTimeout(() => {
             setSparkles(prev => prev.filter(sparkle =>
                 !newSparkles.some(newSparkle => newSparkle.id === sparkle.id)
             ));
+            pendingTimeoutsRef.current.delete(sparkleCleanupT);
         }, 800);
+        pendingTimeoutsRef.current.add(sparkleCleanupT);
     };
+
     const generateBubble = ({ id, left, top, size, cssColorVar, floatAnimation, animationLength, isPopping }: TBubble) => {
         return (
             <div
@@ -134,7 +142,7 @@ export function BaseButtonExample() {
                 style={{
                     left: left,
                     top: top,
-                    animation: `${floatAnimation} ${animationLength}ms cubic-bezier(0.25, 0.1, 0.25, 1) forwards`,
+                    animation: `${floatAnimation} ${animationLength}ms linear forwards`,
                 }}
             >
                 <div
@@ -172,7 +180,6 @@ export function BaseButtonExample() {
                 }}
             />
         )
-
     }
 
     // Cleanup on unmount
@@ -183,6 +190,8 @@ export function BaseButtonExample() {
                 clearTimeout(timeout.popTimeout);
             });
             timeoutsRef.current.clear();
+            pendingTimeoutsRef.current.forEach(clearTimeout);
+            pendingTimeoutsRef.current.clear()
         };
     }, []);
 
