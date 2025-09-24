@@ -39,11 +39,17 @@
     pointer-events: none;
     z-index: 1001;
     animation: splatterOut 800ms ease-out forwards;
-    /* box-shadow: 0 0 6px rgba(255, 235, 59, 0.8); */
     box-shadow: 0 0 6px rgba(53, 148, 155, 0.5);
-
 }
 
+@media (prefers-reduced-motion: reduce) {
+  .bubble,
+  .bubble-inner,
+  .splatter {
+    animation: none !important;
+    transition: none !important;
+  }
+}
 @keyframes float1 {
     0% {
         transform: translate(0, 0) rotate(0deg);
