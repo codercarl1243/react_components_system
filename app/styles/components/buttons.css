@@ -143,9 +143,11 @@ button.button {
         animation: none !important;
 
         /* Static ellipsis for reduced motion */
-        &[data-loading="true"] .loading-text::after {
+        &[data-loading="true"] .ellipsis span {
             animation: none !important;
             content: '...' !important;
+            opacity: 1 !important;
+            transform: none !important;
         }
     }
 }
