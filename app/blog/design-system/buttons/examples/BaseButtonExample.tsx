@@ -136,7 +136,6 @@ export function BaseButtonExample() {
     const generateBubble = ({ id, left, top, size, cssColorVar, floatAnimation, animationLength, isPopping }: TBubble) => {
         return (
             <div
-                key={id}
                 data-bubble-id={id}
                 className={`bubble`}
                 style={{
@@ -161,23 +160,24 @@ export function BaseButtonExample() {
         );
     };
 
+    type CSSWithVars = React.CSSProperties & Record<'--end-x' | '--end-y', string>;
     const generateSparkle = ({
-        id, x, y, size, delay, endX, endY, color
+        x, y, size, delay, endX, endY, color
     }: TSparkle) => {
+        const styleObject: CSSWithVars = {
+            left: `${x}px`,
+            top: `${y}px`,
+            width: size,
+            height: size,
+            animationDelay: delay,
+            background: `radial-gradient(circle, #ffffff 0%, var(${color}) 50%, transparent 70%)`,
+            ['--end-x']: `${endX - x}px`,
+            ['--end-y']: `${endY - y}px`,
+        }
         return (
             <div
-                key={id}
                 className="sparkle"
-                style={{
-                    left: `${x}px`,
-                    top: `${y}px`,
-                    width: size,
-                    height: size,
-                    animationDelay: delay,
-                    background: `radial-gradient(circle, #ffffff 0%, var(${color}) 50%, transparent 70%)`,
-                    ['--end-x' as any]: `${endX - x}px`,
-                    ['--end-y' as any]: `${endY - y}px`,
-                }}
+                style={styleObject}
             />
         )
     }
