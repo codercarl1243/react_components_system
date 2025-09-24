@@ -161,8 +161,8 @@ export function BaseButtonExample() {
     };
 
     type CSSWithVars = React.CSSProperties & Record<'--end-x' | '--end-y', string>;
-    const generateSparkle = ({
-        x, y, size, delay, endX, endY, color
+    const generateSplatter = ({
+       x, y, size, delay, endX, endY, color
     }: TSparkle) => {
         const styleObject: CSSWithVars = {
             left: `${x}px`,
@@ -212,7 +212,7 @@ export function BaseButtonExample() {
                 Blow a Bubble
             </Button>
             {bubbles.map((bubble) => <div key={bubble.id}>{generateBubble(bubble)}</div>)}
-            {sparkles.map((sparkle) => <div key={sparkle.id}>{generateSparkle(sparkle)}</div>)}
+            {sparkles.map((sparkle) => <div key={sparkle.id}>{generateSplatter(sparkle)}</div>)}
         </div>
     )
 }
