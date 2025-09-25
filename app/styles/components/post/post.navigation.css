@@ -1,0 +1,147 @@
+/* PostNavigation CSS */
+.post-navigation {
+  margin: 2rem 0;
+  padding: 1rem 0;
+  border-top: 1px solid #e0e0e0;
+}
+
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  max-width: 100%;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  
+  &:hover {
+    transform: translateY(-2px);
+  }
+  
+  &:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 2px;
+    border-radius: 12px;
+  }
+}
+
+.nav-card {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem;
+  min-height: 50px;
+  min-width: 50px;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  background: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease;
+}
+
+.nav-link:hover .nav-card {
+  border-color: #007acc;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.nav-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  min-width: 0; /* Allow text to truncate if needed */
+}
+
+.nav-label {
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #666;
+}
+
+.nav-title {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #333;
+  line-height: 1.3;
+  
+  /* Truncate long titles */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 200px;
+}
+
+.nav-icon {
+  flex-shrink: 0;
+  color: #007acc;
+  transition: color 0.2s ease;
+}
+
+.nav-link:hover .nav-icon {
+  color: #005c99;
+}
+
+/* Previous link - icon on left */
+.nav-link--previous .nav-card {
+  flex-direction: row;
+}
+
+/* Next link - icon on right */  
+.nav-link--next .nav-card {
+  flex-direction: row-reverse;
+}
+
+.nav-link--next .nav-content {
+  text-align: right;
+}
+
+/* Handle cases with only one link */
+.nav-link:only-child {
+  margin-left: auto;
+}
+
+.nav-link--previous:only-child {
+  margin-left: 0;
+  margin-right: auto;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 640px) {
+  .nav-container {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  
+  .nav-card {
+    justify-content: center;
+    width: 100%;
+    max-width: 280px;
+  }
+  
+  .nav-title {
+    max-width: 180px;
+  }
+  
+  .nav-link:only-child,
+  .nav-link--previous:only-child {
+    margin: 0;
+  }
+}
+
+/* Respect user motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .nav-link,
+  .nav-card,
+  .nav-icon {
+    transition: none;
+  }
+  
+  .nav-link:hover {
+    transform: none;
+  }
+}
