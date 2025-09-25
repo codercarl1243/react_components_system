@@ -1,6 +1,5 @@
-// PostNavigation.tsx
-import Link from 'next/link'
 import { RiArrowLeftLine, RiArrowRightLine } from '@remixicon/react'
+import Link from '@/components/link'
 import Icon from '@/components/icon'
 
 interface NavigationLink {
