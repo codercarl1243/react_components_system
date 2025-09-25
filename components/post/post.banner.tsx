@@ -1,4 +1,4 @@
-import Image from 'next/image'
+import Image from '@/components/image'
 import type { PostBannerPropsType } from '@/components/post/post.type'
 import Heading from '@/components/heading'
 
@@ -27,17 +27,19 @@ import Heading from '@/components/heading'
  * 
  * @returns A banner section containing the hero image (if provided), main heading (h1), and subtitle (if provided).
  */
-export default function PostBanner ({ title, headingId, subtitle, image }: PostBannerPropsType) {
+export default function PostBanner({ title, headingId, subtitle, image }: PostBannerPropsType) {
   return (
-        <div className="post__banner font-accent">
+    <div className="post__banner font-accent width-full">
 
-            {image?.src
-              ? (
-                <Image src={image.src} alt={image.alt ?? ''} height={400} width={1200} />
-                )
-              : null}
-            <Heading headingLevel={1} id={headingId}>{title}</Heading>
-            {subtitle && <p className="italic text-lg">{subtitle}</p>}
-        </div>
+      {image?.src
+        ? (
+          <Image src={image.src} alt={image.alt ?? ''} variant='banner' className='post__banner__image' />
+        )
+        : null}
+      <div className='post__banner__text'>
+        <Heading headingLevel={1} id={headingId} className='post__banner__text-heading'>{title}</Heading>
+        {subtitle && <p className="italic text-lg post__banner__text-subtitle">{subtitle}</p>}
+      </div>
+    </div>
   )
 }
