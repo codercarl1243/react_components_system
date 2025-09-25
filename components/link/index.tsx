@@ -1,8 +1,8 @@
 import NextLink from 'next/link'
-import React from 'react'
 import Icon from '../icon'
 import { RiExternalLinkLine } from '@remixicon/react'
 import clsx from 'clsx'
+import { ComponentProps } from 'react'
 
 /**
  * Render a link that chooses between an external <a> (with security attributes and an external icon),
@@ -20,7 +20,7 @@ import clsx from 'clsx'
  *   - otherwise: render Next.js client-side link.
  * @returns A React element representing the appropriate link (or plain children).
  */
-export default function Link({ children, className, href, ...props }: React.ComponentProps<'a'>) {
+export default function Link({ children, className, href, ...props }: ComponentProps<'a'>) {
   if (!href) return <>{children}</>
 
   const schemeMatch = href.match(/^([a-zA-Z][a-zA-Z+.-]*):/)
