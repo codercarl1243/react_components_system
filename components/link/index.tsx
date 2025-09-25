@@ -2,7 +2,7 @@ import NextLink from 'next/link'
 import Icon from '../icon'
 import { RiExternalLinkLine } from '@remixicon/react'
 import clsx from 'clsx'
-import { ComponentProps } from 'react'
+import { type ComponentProps } from 'react'
 
 /**
  * Render a link that chooses between an external <a> (with security attributes and an external icon),
