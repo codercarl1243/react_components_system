@@ -19,8 +19,8 @@
   
   display: grid;
   grid-template-columns:  repeat(3, 1fr);
-  grid-template-rows:  repeat(3, 1fr);
-  
+  grid-template-rows:  auto auto;
+  row-gap: var(--spacing);  
 
   align-items: center;
   justify-items: center;
@@ -47,15 +47,6 @@
   }
   
   .post__banner__text {
-    padding:  0.5rem 1rem; /* Less padding on smaller screens */
-    grid-template-rows: repeat(2, 1fr); /* Adjust internal grid to 2 rows */
-  }
-  
-  .post__banner__text-heading {
-    grid-row: 1;
-  }
-  
-  .post__banner__text-subtitle {
-    grid-row: 2;
+    padding:  0.5rem 1rem;
   }
 }
