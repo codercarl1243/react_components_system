@@ -28,6 +28,7 @@ export default function PostNavigation({ previous, next }: PostNavigationProps) 
                         href={previous.href}
                         className="nav-link nav-link--previous"
                         aria-label={`Previous: ${previous.title}`}
+                        rel="prev"
                     >
                         <div className="nav-card">
                             <Icon icon={RiArrowLeftLine} size={20} />
@@ -44,6 +45,7 @@ export default function PostNavigation({ previous, next }: PostNavigationProps) 
                         href={next.href}
                         className="nav-link nav-link--next"
                         aria-label={`Next: ${next.title}`}
+                        rel="next"
                     >
                         <div className="nav-card">
                             <div className="nav-content">
