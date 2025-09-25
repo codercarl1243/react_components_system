@@ -31,14 +31,14 @@
   grid-column: 1 / -1;
   grid-row: 1; 
   text-align: center;
-  background-color: rgb(255, 255, 255);
+  background-color: var(--color-neutral-100);
 }
 
 .post__banner__text-subtitle {
   grid-column: 1 / -1;
   grid-row: 2;
   text-align: center;
-  background-color: rgb(255, 255, 255);
+  background-color: var(--color-neutral-100);
 }
 
 @media (max-width: 35rem) {
