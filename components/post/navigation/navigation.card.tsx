@@ -3,11 +3,12 @@ import clsx from "clsx";
 import type { ComponentProps, ReactNode } from "react";
 
 type NavigationCardProps = {
-    label?: ReactNode
-    heading: ReactNode
-    children?: ReactNode
-    className?: string
-} & ComponentProps<'a'>;
+    href: string;
+    label?: ReactNode;
+    heading: ReactNode;
+    children?: ReactNode;
+    className?: string;
+} & Omit<ComponentProps<'a'>, 'href' | 'children' | 'className'>;
 
 export default function NavigationCard({ href, label, heading, children, className, ...props }: NavigationCardProps) {
 
