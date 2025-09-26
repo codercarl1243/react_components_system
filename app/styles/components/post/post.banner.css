@@ -44,6 +44,7 @@
 @media (max-width: 35rem) {
   .post__banner {
     grid-template-rows: repeat(3, 1fr);
+    aspect-ratio: auto;
   }
   
   .post__banner__text {
