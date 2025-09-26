@@ -5,10 +5,12 @@ import Link from "@/components/link";
 import List from "@/components/list";
 import Post from "@/components/post";
 import PostBanner from "@/components/post/post.banner";
-import PostNavigation from "@/components/post/post.navigation";
+import PostNavigation from "@/components/post/navigation";
 import PostSection from "@/components/post/post.section";
 import PostSideBar from "@/components/post/sidebar";
 import { type Metadata } from "next";
+import { RiAccessibilityLine, RiErrorWarningLine, RiFlaskLine } from "@remixicon/react";
+import Icon from "@/components/icon";
 
 export const metadata: Metadata = { title: 'Buttons · Design System' }
 
@@ -40,7 +42,6 @@ export default function ButtonsBasePage() {
                         <li>A type-safe, accessible base button component</li>
                         <li>A reusable hook for handling button interactions</li>
                         <li>CSS styling with built-in accessibility features</li>
-                        <li>Multiple button variants (primary, secondary, accent)</li>
                         <li>Comprehensive test coverage</li>
                     </List>
                 </PostSection>
@@ -66,11 +67,12 @@ export default function ButtonsBasePage() {
         └── component.css`} />
 
                     <Heading headingLevel={3} id="dependencies">Dependencies</Heading>
-                    <p>Install these additional packages:</p>
+                    <p>I have installed a couple of additional packages:</p>
                     <List>
-                        <li><Link href="https://www.npmjs.com/package/@remixicon/react">RemixIcons</Link> - Extensive free icon library</li>
-                        <li><Link href="https://www.npmjs.com/package/clsx">clsx</Link> - Conditional class name utility</li>
+                        <li><Link className="bold" href="https://www.npmjs.com/package/@remixicon/react">RemixIcons</Link> to leverage their extensive and free library of icons</li>
+                        <li><Link className="bold" href="https://www.npmjs.com/package/clsx">CLSX</Link>to handle class names</li>
                     </List>
+                    <p className="italic">later in this post we will use Jest to run tests.</p>
                     <Code codeString={`npm install @remixicon/react clsx`} />
 
                 </PostSection>
@@ -82,7 +84,7 @@ export default function ButtonsBasePage() {
                 </PostSection>
 
                 <PostSection id="essential-features">
-                    <Heading headingLevel={2} id="essential-features-heading">Essential Button Features</Heading>
+                    <Heading headingLevel={2} id="essential-features-heading">Essential Features</Heading>
                 </PostSection>
 
 
@@ -107,36 +109,40 @@ export default function ButtonsBasePage() {
                     <Heading headingLevel={2} id="what-we-built-heading">What We Built</Heading>
                     <p>Our base button component now provides:</p>
 
-                    <p><strong>Accessibility</strong></p>
-                    <ul>
-                        <li>WCAG AAA compliant target sizes (44x44px minimum)</li>
-                        <li>Proper focus management and keyboard navigation</li>
-                        <li>Screen reader support with <Code inline codeString="aria-busy" /></li>
-                        <li>Respect for user motion preferences</li>
-                    </ul>
-
-                    <p><strong>Flexibility</strong></p>
-                    <ul>
+                    <Heading headingLevel={3} id="what-we-built__core" className="heading-w-icon"><Icon icon={RiErrorWarningLine} color={"var(--color-primary-400)"} size={32} />Core Features</Heading>
+                    <List aria-labelledby="what-we-built__core">
+                        <li>Type-safe component with TypeScript</li>
+                        <li>Clean separation of logic and presentation</li>
+                        <li>Reusable custom hook for interactions</li>
                         <li>CSS custom properties for easy theming</li>
                         <li>Multiple style variants (filled, outline)</li>
                         <li>Color variants (primary, secondary, accent)</li>
-                        <li>Extensible for future component variants</li>
-                    </ul>
-
-                    <p><strong>Reliability</strong></p>
-                    <ul>
                         <li>Comprehensive error handling</li>
-                        <li>Type safety with TypeScript</li>
                         <li>Async operation support</li>
                         <li>Full test coverage</li>
-                    </ul>
+                    </List>
 
-                    <p><strong>Developer Experience</strong></p>
-                    <ul>
+                    <Heading headingLevel={3} id="what-we-built__accessibility" className="heading-w-icon"><Icon icon={RiAccessibilityLine} color={"var(--color-primary-400)"} size={32} />Accessibility Checklist</Heading>
+                    <p>Our button implementation meets these accessibility standards:</p>
+                    <List aria-labelledby="what-we-built__accessibility">
+                        <li>AAA target size (44x44px minimum)</li>
+                        <li>No reliance on color alone for meaning</li>
+                        <li>Proper focus management and keyboard navigation</li>
+                        <li>Properly disabled state communicated</li>
+                        <li>Screen reader support with <Code inline codeString="aria-busy" /></li>
+                        <li>Touch-friendly margins for motor accessibility</li>
+                    </List>
+
+
+                    <Heading headingLevel={3} id="what-we-built__DX" className="heading-w-icon"><Icon icon={RiFlaskLine} color={"var(--color-primary-400)"} size={32} />Developer Experience</Heading>
+                    <List aria-labelledby="what-we-built__DX">
                         <li>Clean separation of logic and presentation</li>
-                        <li>Reusable custom hook</li>
                         <li>Consistent API across all variants</li>
-                    </ul>
+                        <li>Comprehensive error handling</li>
+                        <li>Type safety with TypeScript</li>
+                        <li>Full test coverage</li>
+                    </List>
+
                 </PostSection>
 
                 <PostSection id="whats-next">
@@ -149,15 +155,15 @@ export default function ButtonsBasePage() {
                         The patterns we&apos;ve established here will serve as the foundation for more complex
                         components like button groups, tab lists, and interactive panels.
                     </p>
-                    <PostNavigation 
-                    previous={{
-                        href: "/blog/design-system/buttons/sliders",
-                        title: "Slider Buttons"
-                    }}
-                    next={{
-                        href: "/blog/design-system/buttons/sliders",
-                        title: "Slider Buttons"
-                    }} />
+                    <PostNavigation
+                        previous={{
+                            href: "/blog/design-system/buttons/sliders",
+                            heading: "Slider Buttons"
+                        }}
+                        next={{
+                            href: "/blog/design-system/buttons/sliders",
+                            heading: "Slider Buttons"
+                        }} />
 
 
                 </PostSection>
@@ -168,12 +174,18 @@ export default function ButtonsBasePage() {
                     { id: 'what-were-building', href: '#what-were-building', label: "What We're Building" },
                     { id: 'project-setup', href: '#project-setup', label: 'Project Setup' },
                     { id: 'building-foundation', href: '#building-foundation', label: 'Building the Foundation' },
-                    { id: 'essential-features', href: '#essential-features', label: 'Essential Button Features' },
+                    { id: 'essential-features', href: '#essential-features', label: 'Essential Features' },
                     { id: 'interaction-logic', href: '#interaction-logic', label: 'Interaction Logic' },
-                    { id: 'accessible-styling', href: '#accessible-styling', label: 'CSS Styling' },
+                    { id: 'accessible-styling', href: '#accessible-styling', label: 'Styling' },
                     { id: 'testing', href: '#testing', label: 'Testing' },
                     { id: 'what-we-built', href: '#what-we-built', label: 'What We Built' },
                     { id: 'whats-next', href: '#whats-next', label: "What's Next" }
+                ]}
+                relatedPosts={[
+                    { href: "/blog/design-system/buttons/sliders", title: "Slider Buttons" },
+                    { href: "/blog/design-system/buttons/sliders", title: "Slider Buttons" },
+                    { href: "/blog/design-system/buttons/sliders", title: "Slider Buttons" },
+                    { href: "/blog/design-system/buttons/sliders", title: "Slider Buttons" }
                 ]}
             />
 

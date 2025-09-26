@@ -8,20 +8,21 @@ import PostNote from '@/components/post/post.note'
 import PostSection from '@/components/post/post.section'
 import PostSideBar from '@/components/post/sidebar'
 import type { Metadata } from 'next'
+import { BaseButtonExample } from './examples/BaseButtonExample'
 
 export const metadata: Metadata = { title: 'Buttons · Design System' }
 
 export default function ButtonsBasePage () {
   return (
         <>
-            <Post className="">
+            <Post>
                 <PostSection id="the-button">
                     <PostBanner
                         title="The Button"
-                        headingId="the-button-heading"
                         subtitle="Building a React Design System Foundation"
+                        headingId="the-button-heading"
                         image={{
-                          src: 'globe.svg'
+                          src: '/mountainRangeBanner_1200x400.png'
                         }}
                     />
                     <p>
@@ -32,6 +33,8 @@ export default function ButtonsBasePage () {
                         We&apos;ll create a <FunHighlight>flexible</FunHighlight>, <FunHighlight>accessible</FunHighlight>, and <FunHighlight>composable</FunHighlight> button system in React that serves as the
                         foundation for more complex components like toggles, switches, and button panels.
                     </p>
+                    <p>What we are creating:</p>
+                    <BaseButtonExample />
                 </PostSection>
 
                 <PostSection id="what-were-building">
