@@ -3,7 +3,7 @@ import clsx from "clsx";
 import type { ComponentProps, ReactNode } from "react";
 
 type NavigationCardProps = {
-    label: ReactNode
+    label?: ReactNode
     heading: ReactNode
     children?: ReactNode
     className?: string
@@ -13,7 +13,7 @@ export default function NavigationCard({ href, label, heading, children, classNa
 
     return (
         <Link href={href} className={clsx('navigation__card', className)} {...props}>
-            <span className="navigation__card-label">{label}</span>
+            {label && <span className="navigation__card-label">{label}</span>}
             <span className="navigation__card-heading">{heading}</span>
             {children}
         </Link>
