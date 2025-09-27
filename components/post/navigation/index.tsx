@@ -19,7 +19,7 @@ export default function PostNavigation({ previous, next }: PostNavigationProps) 
 
     return (
         <nav
-            className="post-navigation"
+            className="post-navigation width-full"
             aria-label="Post navigation"
         >
                 {previous && (
