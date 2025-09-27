@@ -1,6 +1,6 @@
 .post-navigation {
   margin: calc(var(--spacing) * 8) 0;
-  padding: calc(var(--spacing) * 4) 0;
+  padding: calc(var(--spacing) * 4) calc(var(--spacing) * 2);
 
   display: flex;
   justify-content: space-between;
@@ -10,14 +10,15 @@
 }
 
 .navigation__card {
+  display: grid;
+  place-content: center;
+  min-height: 5rem;
   border-radius: 1rem;
   padding: calc(var(--spacing) * 4);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   border: 1px solid transparent;
   transition: box-shadow 0.2s ease, border-color 0.2s ease;
   display: grid;
-  grid-template-columns: fit-content 1fr fit-content;
-  grid-template-rows: auto auto;
   gap: calc(var(--spacing) * 2);
 
   &:hover {
@@ -34,42 +35,58 @@
   }
 }
 
-.navigation__card .navigation__card-label {
-  grid-column: 2;
-  grid-row: 1;
+/*  previous and next buttons for bottom of blog */
+.post-navigation .navigation__card {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+  min-width: 200px;
+  gap: 0.5rem;
+}
 
+.post-navigation .navigation__card-label {
   font-size: var(--font-size-sm);
   font-weight: 300;
-  text-decoration-line: none;
+  order: 2;
 }
 
-.navigation__card .navigation__card-heading {
-  grid-column: 2;
-  grid-row: 2;
-  padding: 0.5em;
+.post-navigation .navigation__card-heading {
+  font-size: var(--font-size-base);
+  font-weight: 600;
+  order: 3;
+  flex-basis: 100%;
+  text-align: center
 }
 
-
-.navigation__card.navigation__card--prev svg {
-  grid-column: 1;
+.post-navigation .navigation__card svg {
+  order: 1;
 }
 
-.navigation__card.navigation__card--next {
-  text-align: right;
+.post-navigation .navigation__card--previous {
+  flex-direction: row-reverse;
+}
 
-  svg {
-    grid-column: 3;
+.post-navigation .navigation__card--previous .navigation__card-label {
+  order: 1;
+}
+
+.post-navigation .navigation__card--previous svg {
+  order: 2;
+}
+
+@media screen and (max-width: 35rem) {
+  .post-navigation .navigation__card-heading {
+    font-size: var(--font-size-lg);
   }
-
 }
-
 
 /* Respect user motion preferences */
- @media (prefers-reduced-motion: reduce) {
+@media (prefers-reduced-motion: reduce) {
   .navigation__card {
     transition: none;
   }
-  
+
   .navigation__card:hover {
     transform: none;
   }

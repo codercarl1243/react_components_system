@@ -92,22 +92,30 @@
         column-gap: var(--spacing);
     }
 }
+.post-sidebar__related {
+    text-align: center;
+}
 
 .post-sidebar__related__list {
-        padding: calc(var(--spacing) * 2);
-        display: grid;
-        grid-auto-columns: fit-content;
-        grid-auto-flow: column;
-        gap: calc(var(--spacing) * 2);
-        overflow-x: scroll;
-  mask: linear-gradient(90deg, transparent, white 20px, white calc(100% - 20px), transparent);
+    padding: calc(var(--spacing) * 2);
+    display: grid;
+    grid-auto-columns: 15rem;
+    grid-auto-flow: column;
+    gap: calc(var(--spacing) * 2);
+    overflow-x: auto;
+    mask: linear-gradient(90deg, transparent, white 20px, white calc(100% - 2rem), transparent);
 }
 
 @keyframes scroll-horizontal {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(-50%);
+    }
 }
 
 .related-list:hover {
-  animation-play-state: paused;
+    animation-play-state: paused;
 }
