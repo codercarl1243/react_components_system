@@ -35,7 +35,7 @@ export default function Heading({
   return createElement(
     `h${headingLevel}`,
     {
-      className: clsx('font-main', getSizeClass(headingSize), className),
+      className: clsx('font-main heading', className, getSizeClass(headingSize)),
       ...props
     },
     children

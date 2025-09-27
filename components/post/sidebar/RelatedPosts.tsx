@@ -1,5 +1,6 @@
 import Heading from "@/components/heading";
-import Link from "@/components/link";
+import List from "@/components/list";
+import NavigationCard from "@/components/post/navigation/navigation.card";
 import { type RelatedPosts as RelatedPostsType } from "@/components/post/sidebar/sidebar.type";
 
 /**
@@ -21,13 +22,13 @@ export default function RelatedPosts({posts}: RelatedPostsProps) {
             aria-labelledby="related-posts-heading"
         >
             <Heading headingLevel={2} id="related-posts-heading">Related Posts</Heading>
-            <ul>
-                {posts.map((post) => (
-                    <li key={post.href}>
-                        <Link href={post.href}>{post.title}</Link>
+            <List role="list" className="post-sidebar__related__list">
+                {posts.map((post, idx) => (
+                    <li key={post.href + idx}>
+                        <NavigationCard href={post.href} heading={post.title} />
                     </li>
                 ))}
-            </ul>
+            </List>
         </section>
     )
 }
