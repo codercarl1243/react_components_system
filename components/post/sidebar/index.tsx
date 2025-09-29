@@ -35,13 +35,14 @@ export default function PostSideBar({
     children,
     ...props
 }: PostSideBarProps) {
+    
+    const { handleSideBarOpenState, sidebarIsOpen, sidebarRef, openButtonRef } = useSidebar()
 
     const hasContents = contents.length > 0;
     const hasRelated = relatedPosts.length > 0;
     const hasExtras = author || Children.count(children) > 0;
 
     if (!hasContents && !hasRelated && !hasExtras) return null;
-    const { handleSideBarOpenState, sidebarIsOpen, sidebarRef, openButtonRef } = useSidebar()
 
     return (
         <div className='side-bar-wrapper'>
