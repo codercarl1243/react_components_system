@@ -48,12 +48,12 @@ export default [
         // Next.js globals
         React: 'readonly',
         NodeJS: 'readonly',
-        setTimeout: "writable",
-        clearTimeout: "writable",
-        setInterval: "writable",
-        clearInterval: "writable",
-        history: "writable",
-        navigator: "writable",
+        setTimeout: "readonly",
+        clearTimeout: "readonly",
+        setInterval: "readonly",
+        clearInterval: "readonly",
+        history: "readonly",
+        navigator: "readonly",
       }
     },
     plugins: {
