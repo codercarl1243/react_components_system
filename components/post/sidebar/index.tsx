@@ -5,7 +5,10 @@ import ToC from './TableOfContents';
 import RelatedPosts from './RelatedPosts';
 import Author from './author';
 import { PostSideBarProps } from './sidebar.type';
-
+import Button from '@/components/button';
+import { RiCloseFill, RiMenuFold3Line, RiMenuUnfold3Line } from '@remixicon/react';
+import Icon from '@/components/icon';
+import useSidebar from '@/components/post/sidebar/useSidebar';
 
 /**
  * Render a post sidebar containing an optional table of contents, related posts and an author box.
@@ -32,22 +35,56 @@ export default function PostSideBar({
     children,
     ...props
 }: PostSideBarProps) {
-    const hasContents = contents.length > 0
-    const hasRelated = relatedPosts.length > 0
-    const hasExtras = author || Children.count(children) > 0
 
-    if (!hasContents && !hasRelated && !hasExtras) return null
+    const hasContents = contents.length > 0;
+    const hasRelated = relatedPosts.length > 0;
+    const hasExtras = author || Children.count(children) > 0;
 
+    if (!hasContents && !hasRelated && !hasExtras) return null;
+    const { handleSideBarOpenState, sidebarIsOpen, sidebarRef, openButtonRef } = useSidebar()
 
     return (
-        <aside className={clsx('post-sidebar flow-8', className)} {...props}>
-            {/* Table of contents */}
-            {hasContents && <ToC items={contents} />}
-            {/* Related posts */}
-            {hasRelated && <RelatedPosts posts={relatedPosts} />}
-            {/* Author info */}
-            {author && <Author author={author} />}
-            {children}
-        </aside>
+        <div className='side-bar-wrapper'>
+            <Button
+                ref={openButtonRef}
+                onClick={() => handleSideBarOpenState()}
+                className='sidebar-toggle-button--open'
+                aria-controls='sideBar'
+                aria-expanded={sidebarIsOpen}
+                aria-label="Open table of contents"
+                data-style='filled'
+                data-variant='primary'
+            >
+                <Icon icon={RiMenuFold3Line} color={"var(--color-neutral-100)"} />
+                <span>Contents</span>
+            </Button>
+            <aside
+                ref={sidebarRef}
+                data-isopen={sidebarIsOpen}
+                id="sideBar"
+                className={clsx('post-sidebar flow-8', className)}
+                {...props}
+            >
+                <Button
+                    onClick={() => handleSideBarOpenState()}
+                    className='sidebar-toggle-button--close'
+                    aria-controls='sideBar'
+                    aria-expanded={sidebarIsOpen}
+                    data-style='filled'
+                    data-variant='primary'
+                >
+                    <Icon icon={RiMenuUnfold3Line} color={"var(--color-neutral-100)"} />
+                    <span className="sr-only">Close table of</span>
+                    <span>Contents</span>
+                </Button>
+                {/* Table of contents */}
+                {hasContents && <ToC items={contents} />}
+                {/* Related posts */}
+                {hasRelated && <RelatedPosts posts={relatedPosts} />}
+                {/* Author info */}
+                {author && <Author author={author} />}
+                {children}
+            </aside>
+        </div>
     )
 }
