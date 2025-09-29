@@ -8,7 +8,6 @@
 .ellipsis span {
   width: 0.4em;
   height: 0.4em;
-  align-self: center;
   border-radius: 50%;
   background-color: currentColor;
   display: inline-block;
