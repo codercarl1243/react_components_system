@@ -5,7 +5,7 @@ import { type RefObject, useEffect, useRef, useState } from 'react'
 
 type SidebarType = {
     sidebarIsOpen: boolean;
-    handleSideBarOpenState: (state?: boolean | undefined) => void;
+    handleSideBarOpenState: (state?: boolean) => void;
     openButtonRef: RefObject<HTMLButtonElement | null>;
     sidebarRef: RefObject<HTMLElement | null>;
 }

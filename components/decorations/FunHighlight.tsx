@@ -15,7 +15,7 @@ export default function FunHighlight({ children,
 
     return (
         <span
-            className={clsx(className, 'fun-highlight', { "individual": individual })}
+            className={clsx(className, 'fun-highlight', { individual })}
             {...props}
         >
             {children}

@@ -20,7 +20,7 @@ type ToCProps = {
 export default function TableOfContents({ items }: ToCProps) {
 
     const ids = useMemo(() => items.map((item) => item.id), [items]);
-    const { activeId } = useScrollSpy({ ids: ids });
+    const { activeId } = useScrollSpy({ ids });
 
     if (items.length === 0) return null;
 
@@ -49,9 +49,9 @@ export default function TableOfContents({ items }: ToCProps) {
                     return (
                         <li key={item.id} className={clsx('toc-item', { 'toc-item--active': isActive })}>
                             <Link
-                                href={item.href + "-heading"}
+                                href={`${item.href}-heading`}
                                 className={clsx('toc-link', { 'toc-link--active': isActive })}
-                                onClick={(e) => handleContentsClick(e, item.href + "-heading")}
+                                onClick={(e) => handleContentsClick(e, `${item.href}-heading`)}
                             >
                                 {item.label}
                             </Link>

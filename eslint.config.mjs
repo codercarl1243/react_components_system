@@ -46,7 +46,13 @@ export default [
         __filename: 'readonly',
         global: 'readonly',
         // Next.js globals
-        React: 'readonly'
+        React: 'readonly',
+        NodeJS: 'readonly',
+        setTimeout: "writable",
+        clearTimeout: "writable",
+        setInterval: "writable",
+        clearInterval: "writable",
+        history: "writable",
       }
     },
     plugins: {
