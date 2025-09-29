@@ -35,7 +35,7 @@ export default function PostSideBar({
     children,
     ...props
 }: PostSideBarProps) {
-    
+
     const { handleSideBarOpenState, sidebarIsOpen, sidebarRef, openButtonRef } = useSidebar()
 
     const hasContents = contents.length > 0;
@@ -73,8 +73,8 @@ export default function PostSideBar({
                     data-style='filled'
                 >
                     <Icon icon={RiMenuUnfold3Line} color={"var(--color-neutral-100)"} />
-                    <span className="sr-only">Close table of</span>
-                    <span>Contents</span>
+                    <span className="sr-only">Close table of contents</span>
+                    <span aria-hidden="true">Contents</span>
                 </Button>
                 {/* Table of contents */}
                 {hasContents && <ToC items={contents} />}
