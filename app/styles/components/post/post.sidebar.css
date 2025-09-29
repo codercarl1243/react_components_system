@@ -128,7 +128,7 @@
         height: 100dvh;
         top: 0;
         right: 0;
-        background: white;
+        background: var(--color-neutral-100);
         z-index: 999;
         overflow-y: auto;
         box-shadow: -4px 0 12px rgba(0, 0, 0, 0.15);
@@ -140,13 +140,12 @@
 
     .post-sidebar[data-isopen="false"] {
         right: calc(var(--post-sidebar-width) * -2);
-        animation: slideRightToLeft 0.3s ease-out reverse;
     }
 
 
     /* Add padding to sidebar content for close button */
     .post-sidebar__contents {
-        padding-block-start: 1em;
+        padding-block-start: 2rem;
     }
 
     /* Adjust related posts layout for mobile */
@@ -157,7 +156,6 @@
         mask: none;
     }
 
-    /* Optional: Backdrop overlay when sidebar is open */
     .side-bar-wrapper::before {
         content: '';
         position: fixed;

@@ -53,7 +53,6 @@ export default function PostSideBar({
                 aria-expanded={sidebarIsOpen}
                 aria-label="Open table of contents"
                 data-style='filled'
-                data-variant='primary'
             >
                 <Icon icon={RiMenuFold3Line} color={"var(--color-neutral-100)"} />
                 <span>Contents</span>
@@ -71,7 +70,6 @@ export default function PostSideBar({
                     aria-controls='sideBar'
                     aria-expanded={sidebarIsOpen}
                     data-style='filled'
-                    data-variant='primary'
                 >
                     <Icon icon={RiMenuUnfold3Line} color={"var(--color-neutral-100)"} />
                     <span className="sr-only">Close table of</span>
