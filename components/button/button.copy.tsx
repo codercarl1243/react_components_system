@@ -32,6 +32,8 @@ export function CopyButton({ text }: CopyButtonProps) {
       setTimeout(() => setCopied(false), 1250)
     } catch (err) {
       setError(true)
+      // eslint-disable-next-line no-console
+      console.log("error copying content to clipboard", err)
     }
   }
 
