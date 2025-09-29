@@ -1,7 +1,7 @@
 'use client'
 import SkipLink from '@/components/skiplink'
 import clsx from 'clsx'
-import { useState, type ComponentProps } from 'react'
+import { useEffect, useState, type ComponentProps } from 'react'
 import Link from '@/components/link'
 import { usePathname } from 'next/navigation'
 import { RiCloseLargeLine, RiMenuLine } from '@remixicon/react'
@@ -19,9 +19,16 @@ export default function Header({ className, ...props }: ComponentProps<'header'>
   const pathname = usePathname()
   const [menuIsOpen, setMenuIsOpen] = useState<boolean>(false);
 
-  const handleMenuOpenState = () => {
-    setMenuIsOpen(prev => !prev)
-  }
+
+  const handleMenuOpenState = (state?: boolean) => {
+    setMenuIsOpen(prev => state !== undefined ? state : !prev);
+  };
+
+  useEffect(() => {
+    return () => {
+      handleMenuOpenState(false)
+    }
+  }, [pathname])
 
   return (
     <header className={clsx('header', className)} {...props}>
@@ -30,7 +37,7 @@ export default function Header({ className, ...props }: ComponentProps<'header'>
         className='header__menu-button--open'
         aria-controls='primary-nav'
         aria-expanded={menuIsOpen}
-        onClick={handleMenuOpenState}
+        onClick={() => handleMenuOpenState()}
         data-style='filled'
         data-variant='primary'
       >
@@ -46,7 +53,7 @@ export default function Header({ className, ...props }: ComponentProps<'header'>
           className='header__menu-button--close'
           aria-controls='primary-nav'
           aria-expanded={menuIsOpen}
-          onClick={handleMenuOpenState}
+          onClick={() => handleMenuOpenState()}
           data-style='filled'
           data-variant='primary'
         >
@@ -61,7 +68,7 @@ export default function Header({ className, ...props }: ComponentProps<'header'>
         </Link>
         <Link
           href="/blog"
-          className={clsx({ 'active': pathname.startsWith('/blog/') })}
+          className={clsx({ 'active': pathname.startsWith('/blog') })}
           aria-current={pathname === '/blog' ? 'page' : undefined}
         >
           Blog
