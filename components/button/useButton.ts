@@ -1,8 +1,4 @@
-import { type MouseEvent } from 'react'
-
-type MouseEventType = MouseEvent<HTMLButtonElement>;
-
-type ButtonClickHandler<T = void> = (event: MouseEventType) => T;
+import type { ButtonClickHandler, MouseEventType } from '@/components/button/button.type';
 
 export default function useButton() {
   const handleClick = <T = void>(userHandler?: ButtonClickHandler<T>) =>

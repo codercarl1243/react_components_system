@@ -1,31 +1,104 @@
 .header {
     height: 5rem;
-    background-color: var(--color-primary-400);
+    background-color: var(--color-primary-200);
     color: var(--color-neutral-100);
     display: flex;
     align-items: center;
     padding: 0 1rem;
 }
 
-.header nav {
+.nav__primary {
     display: flex;
     gap: 1.5rem;
     margin-left: auto;
 }
 
-.header nav a {
+.nav__primary a {
     color: var(--color-neutral-100);
     font-size: 1.125rem;
     transition: color 0.3s ease;
 
     &:not(:hover, :focus-visible) {
         text-decoration: none;
-
     }
 }
 
-.header nav a.active {
+.nav__primary a.active {
     font-weight: bold;
     text-decoration: underline;
+}
 
+.header__menu-button--open,
+.header__menu-button--close {
+    display: none;
+}
+
+@media screen and (max-width: 56rem) {
+    .header {
+        position: relative;
+        isolation: isolate;
+        z-index: 2;
+    }
+
+    .header__menu-button--close,
+    .header__menu-button--open {
+        display: flex;
+        align-items: center;
+        gap: calc(var(--spacing) * 2);
+    }
+
+    .header__menu-button--open {
+        position: fixed;
+        top: 0;
+        left: 0;
+    }
+    .header__menu-button--close {
+        margin-inline-end: auto;
+    }
+
+    .nav__primary {
+        --nav-width: min(90vw, 300px);
+        position: fixed;
+        width: var(--nav-width);
+        height: 100dvh;
+        top: 0;
+        left: 0;
+        background-color: var(--color-neutral-100);
+        z-index: 999;
+        overflow-y: auto;
+        box-shadow: -4px 0 12px rgba(0, 0, 0, 0.15);
+        transition: left 250ms ease-in-out;
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .nav__primary a {
+        color: var(--color-primary-400);
+    }
+
+    .nav__primary a:first-of-type {
+        padding-block-start: 2rem;
+    }
+
+    .nav__primary[data-isopen="false"] {
+        left: calc(-2 * var(--nav-width));
+    }
+
+    .header::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        opacity: 0;
+        height: 100vh;
+        background: var(--color-neutral-800);
+        z-index: -1;
+    }
+
+    .header:has(.nav__primary[data-isopen="true"])::before {
+        width: 100vw;
+        opacity: 0.8;
+    }
 }

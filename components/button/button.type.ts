@@ -1,8 +1,13 @@
-import { ComponentPropsWithRef, ReactNode } from 'react'
+import { ComponentPropsWithRef, ReactNode, type MouseEvent } from 'react'
+
+export type MouseEventType = MouseEvent<HTMLButtonElement>;
+
+export type ButtonClickHandler<T = void> = (event: MouseEventType) => T | Promise<T>;
 
 export type BaseButtonProps = {
     isLoading?: boolean;
     loadingText?: ReactNode;
     'data-style'?: 'outlined' | 'filled';
     'data-variant'?: 'primary' | 'secondary' | 'accent';
-} & ComponentPropsWithRef<'button'>;
+    onClick?: ButtonClickHandler;
+} & Omit<ComponentPropsWithRef<'button'>, 'onClick'>;

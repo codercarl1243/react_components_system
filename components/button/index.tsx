@@ -22,7 +22,7 @@ export default function Button({
     <button
       {...props}
       className={clsx(className, 'button')}
-      onClick={handleClick(onClick)}
+      onClick={(event) => void handleClick(onClick)(event)}
       disabled={isLoading || disabled}
       data-loading={isLoading}
       ref={ref}

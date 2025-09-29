@@ -59,16 +59,16 @@ export function BaseButtonExample() {
         const LIFE_TIME = 3000 + Math.random() * 4000; // 3-7s
         const POP_DURATION = 400;
         const BUBBLE_ID = `bubble-${bubbleIdCounter.current++}`;
-        const BUBBLE_COLOR = '--color-emphasis-' + (Math.floor(Math.random() * 9) + 1) * 100
+        const BUBBLE_COLOR = `--color-emphasis-${  (Math.floor(Math.random() * 9) + 1) * 100}`
         const BUBBLE_SIZE = 20 + Math.random() * 40;
 
         const bubble: TBubble = {
             id: BUBBLE_ID,
-            left: 10 + Math.random() * 80 + 'vw',
-            top: 10 + Math.random() * 80 + 'vh',
-            size: BUBBLE_SIZE + 'px',
+            left: `${10 + Math.random() * 80  }vw`,
+            top: `${10 + Math.random() * 80  }vh`,
+            size: `${BUBBLE_SIZE  }px`,
             cssColorVar: BUBBLE_COLOR,
-            floatAnimation: 'float' + (Math.floor(Math.random() * 3) + 1),
+            floatAnimation: `float${  Math.floor(Math.random() * 3) + 1}`,
             animationLength: LIFE_TIME,
             isPopping: false
         };
@@ -139,8 +139,8 @@ export function BaseButtonExample() {
                 data-bubble-id={id}
                 className={`bubble`}
                 style={{
-                    left: left,
-                    top: top,
+                    left,
+                    top,
                     animation: `${floatAnimation} ${animationLength}ms linear forwards`,
                 }}
             >
