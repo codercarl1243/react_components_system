@@ -6,10 +6,10 @@ import { RiCheckFill, RiErrorWarningLine, RiFileCopyLine } from '@remixicon/reac
 import Button from '@/components/button'
 
 interface CopyButtonProps {
-    text: string;
+  text: string;
 }
 
-export function CopyButton ({ text }: CopyButtonProps) {
+export function CopyButton({ text }: CopyButtonProps) {
   const [copied, setCopied] = useState(false)
   const [error, setError] = useState<boolean>(false)
   const [isSupported, setIsSupported] = useState<boolean | null>(null)
@@ -32,31 +32,30 @@ export function CopyButton ({ text }: CopyButtonProps) {
       setTimeout(() => setCopied(false), 1250)
     } catch (err) {
       setError(true)
-      console.error('Failed to copy text: ', err)
     }
   }
 
   return (
-        <Button
-            onClick={copyToClipboard}
-            data-style={copied ? 'outlined' : 'filled'}
-            data-variant={copied ? undefined : 'accent'}
-            aria-label="Copy to clipboard"
-            title={error ? 'Copy failed' : copied ? 'Copied!' : 'Copy to clipboard'}
-            className='button--copy'
-            disabled={error}
-        >
-            {error
-              ? (
-                <Icon icon={RiErrorWarningLine} size={24} color={'red'} />
-                )
-              : copied
-                ? (
-                <Icon icon={RiCheckFill} size={24} color={'green'} />
-                  )
-                : (
-                <Icon icon={RiFileCopyLine} size={24} />
-                  )}
-        </Button>
+    <Button
+      onClick={copyToClipboard}
+      data-style={copied ? 'outlined' : 'filled'}
+      data-variant={copied ? undefined : 'accent'}
+      aria-label="Copy to clipboard"
+      title={error ? 'Copy failed' : copied ? 'Copied!' : 'Copy to clipboard'}
+      className='button--copy'
+      disabled={error}
+    >
+      {error
+        ? (
+          <Icon icon={RiErrorWarningLine} size={24} color={'red'} />
+        )
+        : copied
+          ? (
+            <Icon icon={RiCheckFill} size={24} color={'green'} />
+          )
+          : (
+            <Icon icon={RiFileCopyLine} size={24} />
+          )}
+    </Button>
   )
 }

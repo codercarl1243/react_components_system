@@ -53,6 +53,7 @@ export default [
         setInterval: "writable",
         clearInterval: "writable",
         history: "writable",
+        navigator: "writable",
       }
     },
     plugins: {
