@@ -24,9 +24,7 @@ export default function useSidebar(): SidebarType {
     useFocusTrap({ containerRef: sidebarRef, isActive: sidebarIsOpen });
 
     useEffect(() => {
-        return () => {
             setSidebarIsOpen(false)
-        }
     }, [pathname])
     
     useEffect(() => {

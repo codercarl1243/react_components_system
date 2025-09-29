@@ -25,9 +25,7 @@ export default function Header({ className, ...props }: ComponentProps<'header'>
   };
 
   useEffect(() => {
-    return () => {
       handleMenuOpenState(false)
-    }
   }, [pathname])
 
   return (
