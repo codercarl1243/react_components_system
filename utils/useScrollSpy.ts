@@ -80,7 +80,7 @@ export function useScrollSpy({
             : null;
         })
         .filter((item): item is { id: string; top: number } => item !== null)
-        .sort((a, b) => a!.top - b!.top)[0];
+        .sort((a, b) => a.top - b.top)[0];
 
       if (firstVisible) setActiveId(firstVisible.id);
     }
