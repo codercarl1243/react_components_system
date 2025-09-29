@@ -1,6 +1,7 @@
 'use client';
 import { handleKeyPress } from '@/utils/keyboardHandlers';
 import { useFocusTrap } from '@/utils/useFocusTrap';
+import { usePathname } from 'next/navigation';
 import { type RefObject, useEffect, useRef, useState } from 'react'
 
 type SidebarType = {
@@ -14,6 +15,7 @@ export default function useSidebar(): SidebarType {
     const sidebarRef = useRef<HTMLElement | null>(null);
     const openButtonRef = useRef<HTMLButtonElement>(null);
     const [sidebarIsOpen, setSidebarIsOpen] = useState(false);
+    const pathname = usePathname()
 
     const handleSideBarOpenState = (state?: boolean) => {
         setSidebarIsOpen(prev => state !== undefined ? state : !prev);
@@ -21,6 +23,12 @@ export default function useSidebar(): SidebarType {
 
     useFocusTrap({ containerRef: sidebarRef, isActive: sidebarIsOpen });
 
+    useEffect(() => {
+        return () => {
+            setSidebarIsOpen(false)
+        }
+    }, [pathname])
+    
     useEffect(() => {
         function handleKeyDown(event: KeyboardEvent) {
             if (!sidebarIsOpen) return;
