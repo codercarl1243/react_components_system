@@ -96,6 +96,13 @@ export default function ButtonsBasePage() {
                 <PostSection id="accessible-styling">
                     <Heading headingLevel={2} id="accessible-styling-heading">CSS Styling</Heading>
                     <Heading headingLevel={3} id="accessibility-ux">Better Accessibility & UX</Heading>
+                    {/* minimum touch target size */}
+                    {/* benefits of adding margin around the button */}
+                    {/* benefits of using aria-disabled when loading */}
+                    {/* explain why we dont use aria-loading */}
+                    {/* good reads on topic: 
+                    https://adrianroselli.com/2021/01/multi-function-button.html - in depth article on creating a button. plain html,js,css example code is quite complicated imo
+                    */}
                     <Heading headingLevel={3} id="reset-base-styles">Reset and Base Styles</Heading>
                     <Heading headingLevel={3} id="user-preferences">User Preferences</Heading>
                     <Heading headingLevel={3} id="variants">Adding Variants</Heading>
@@ -187,6 +194,7 @@ export default function ButtonsBasePage() {
                     { href: "/blog/design-system/buttons/sliders", title: "Slider Buttons" },
                     { href: "/blog/design-system/buttons/sliders", title: "Slider Buttons" }
                 ]}
+                author={{avatarUrl: '/window.svg', name: "carl davidson"}}
             />
 
         </>
