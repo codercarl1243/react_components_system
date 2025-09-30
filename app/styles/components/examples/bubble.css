@@ -1,9 +1,13 @@
 .bubble {
     position: fixed;
     border-radius: 50%;
-    pointer-events: none;
     z-index: 1000;
     animation: float1 6000ms ease-in-out infinite;
+    &:hover {
+        .bubble-inner {
+            scale: 1.25;
+        }
+    }
 }
 
 .bubble-inner {
