@@ -19,7 +19,7 @@ export default function Button({
 
   function onClickHandler(event: MouseEventType) {
 
-    if (isLoading) {
+    if (isLoading || disabled) {
       event.preventDefault();
       return;
     }
@@ -31,7 +31,6 @@ export default function Button({
       {...props}
       className={clsx(className, 'button')}
       onClick={onClickHandler}
-      disabled={disabled}
       aria-disabled={isLoading || disabled}
       data-loading={isLoading}
       ref={ref}
