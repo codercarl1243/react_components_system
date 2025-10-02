@@ -19,7 +19,7 @@ export default function Button({
 
   function onClickHandler(event: MouseEventType) {
 
-    if (isLoading || disabled) {
+    if (isLoading) {
       event.preventDefault();
       return;
     }
