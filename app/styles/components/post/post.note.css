@@ -1,44 +1,33 @@
 .post-note {
-    background-color: var(--color-neutral-800);
-    color: var(--color-neutral-100);
+    --note-color: var(--color-neutral-100);
+    --note-background-color:  var(--color-neutral-600);
+    position: relative;
+    background-color: var(--note-background-color);
+    color: var(--note-color);
     padding: 0.5em 0.5em;
+    padding-block: 1.25em;
     box-shadow:
-        inset 2px 2px 4px rgba(0, 0, 0, 0.1),
+        inset 2px 2px 4px rgba(153, 105, 105, 0.1),
         inset -2px -2px 4px rgba(255, 255, 255, 0.8);
     border: var(--border-thin);
     border-radius: var(--radius-md);
 }
 
-.post-note__first {
-    --note-heading-color: var(--color-primary-400);
-
-    display: flex;
-    align-items: center;
-    gap: 0.5em;
-    color: var(--note-heading-color);
-}
-
 .post-note__icon {
-    fill: var(--note-heading-color);
-    background: radial-gradient(circle, var(--color-neutral-100) 0%, transparent 60%);
+    background: var(--note-background-color);
     border-radius: var(--radius-circle);
-    padding: 0.25rem;
+    position: absolute;
+    top: -0.5em;
+    left: -0.5em;
 }
 
-
-
-/* .post-note__content {
-    max-height: 1px;
-    overflow: hidden;
-    transition: max-height 250ms ease-in-out;
-}
-
+/* 
 .post-note[data-expanded="true"] .post-note__content {
     max-height: 100%;
 } 
     
 @media (prefers-reduced-motion: reduce) {
   .post-note__content { transition: none; }
-}
-*/
+} */
+
 
