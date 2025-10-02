@@ -21,7 +21,7 @@
   }
 
   .layout-wrapper>* {
-    grid-column: content-start;
+    grid-column: content;
   }
 
   .layout-wrapper>.width-content {
