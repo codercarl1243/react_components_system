@@ -23,7 +23,7 @@ export default function Button({
       event.preventDefault();
       return;
     }
-    void handleClick(onClick)(event)
+    handleClick(onClick)(event)
   }
 
   return (
