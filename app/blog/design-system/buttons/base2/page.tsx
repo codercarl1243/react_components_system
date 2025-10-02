@@ -11,6 +11,7 @@ import PostSideBar from "@/components/post/sidebar";
 import { type Metadata } from "next";
 import { RiAccessibilityLine, RiErrorWarningLine, RiFlaskLine } from "@remixicon/react";
 import Icon from "@/components/icon";
+import PostNote from "@/components/post/post.note";
 
 export const metadata: Metadata = { title: 'Buttons · Design System' }
 
@@ -18,7 +19,7 @@ export default function ButtonsBasePage() {
     return (
         <>
             <Post>
-                <PostSection id="the-button">
+                <PostSection id="what-were-building">
                     <PostBanner
                         title="The Button"
                         subtitle="Building a React Design System Foundation"
@@ -27,15 +28,16 @@ export default function ButtonsBasePage() {
                             src: '/mountainRangeBanner_1200x400.png'
                         }}
                     />
-
-                </PostSection>
-                <PostSection id="what-were-building">
                     <Heading headingLevel={2} id="what-were-building-heading">What We&apos;re Building</Heading>
                     <p>
-                        This is the first in a series where we&apos;re building a <span className="italic">comprehensive <span className="bold">Button</span> design system</span>.
+                        This is the first in a series where we&apos;re building a comprehensive <span className="bold">Button design system</span>.
                     </p>
                     <p>
-                        We&apos;ll create a <FunHighlight>flexible</FunHighlight>, <FunHighlight>accessible</FunHighlight>, and <FunHighlight>composable</FunHighlight> button system in React that serves as the foundation for more complex components like toggles, switches, and button panels.
+                        We&apos;ll create a <FunHighlight>flexible</FunHighlight>, <FunHighlight>accessible</FunHighlight>, and <FunHighlight>composable</FunHighlight> button system in React
+                        {/* Add links to content
+                        that serves as the foundation for more complex components like <Link>toggles</Link>, <Link>switches</Link>, and button <Link>panels</Link>.
+                        */}
+                        that serves as the foundation for more complex components like toggles, switches, and panels.
                     </p>
                     <p>By the end of this post, you&apos;ll have:</p>
                     <List>
@@ -53,59 +55,241 @@ export default function ButtonsBasePage() {
 
                     <Code lang="md" copyEnabled={false} codeString={`components/
     └── button/
-        ├── component.tsx              
+        ├── button.tsx              
         ├── hook.ts
-        └── component.type.ts
+        └── button.type.ts
 
     tests/                          
     └── components/
-        ├── hook.test.tsx
-        └── component.test.tsx
+        ├── useButton.test.tsx
+        └── Button.test.tsx
 
     styles/
     └── components/
-        └── component.css`} />
-
+        └── button.css`} />
+                    <p>This structure keeps related code together while maintaining clear boundaries between logic, types, and presentation.</p>
                     <Heading headingLevel={3} id="dependencies">Dependencies</Heading>
                     <p>I have installed a couple of additional packages:</p>
                     <List>
                         <li><Link className="bold" href="https://www.npmjs.com/package/@remixicon/react">RemixIcons</Link> to leverage their extensive and free library of icons</li>
-                        <li><Link className="bold" href="https://www.npmjs.com/package/clsx">CLSX</Link>to handle class names</li>
+                        <li><Link className="bold" href="https://www.npmjs.com/package/clsx">CLSX</Link>to handle class names conditionally</li>
                     </List>
-                    <p className="italic">later in this post we will use Jest to run tests.</p>
-                    <Code codeString={`npm install @remixicon/react clsx`} />
+                    <Code lang="bash" codeString={`npm install @remixicon/react clsx`} />
+                    <PostNote className="italic">Later in this post we will use <Link className="bold" href="https://jestjs.io/docs/getting-started">Jest</Link> to run tests.</PostNote>
 
                 </PostSection>
                 <PostSection id="building-foundation">
                     <Heading headingLevel={2} id="building-foundation-heading">Building the Foundation</Heading>
-                    <Heading headingLevel={3} id="starting-simple">Starting Simple</Heading>
+                    <Heading headingLevel={3} id="starting-simple">Starting Simple: The Component</Heading>
+                    <p>Let's start with the component itself. Our Button component needs to handle several responsibilities:</p>
+                    <List>
+                        <li>Managing click events (both sync and async)</li>
+                        <li>Communicating loading states</li>
+                        <li>Maintaining accessibility attributes</li>
+                        <li>Forwarding refs properly; and</li>
+                        <li>Preventing interaction when disabled or loading</li>
+                    </List>
 
+                    <p>Here's how we structure it:</p>
+                    <PostNote>We're using a custom hook called
+                        <Code codeString="useButton" inline copyEnabled={false} /> to handle click logic - we'll explore
+                        that in detail in the next section.)</PostNote>
+                    <Code codeString={`'use client'
+
+import clsx from 'clsx'
+import { BaseButtonProps, MouseEventType } from './button.type'
+import Spinner from '@/components/utilities/spinner' // custom spinner but this can be anything
+
+export default function Button({
+className,
+children,
+onClick,
+type = 'button',
+disabled = false,
+isLoading = false,
+ref,
+...props
+}: BaseButtonProps) {
+
+const { handleClick } = useButton() // We'll explore this hook shortly
+
+function onClickHandler(event: MouseEventType) {
+  if (isLoading || disabled) {
+    event.preventDefault();
+    return;
+  }
+  handleClick(onClick)(event)
+}
+
+return (
+    <button
+        {...props}
+        className={clsx(className, 'button')}
+        onClick={onClickHandler}
+        disabled={disabled}
+        aria-disabled={isLoading || disabled}
+        data-loading={isLoading}
+        ref={ref}
+        type={type}
+    >
+        {children}
+        {isLoading && <Spinner />}
+    </button>
+)}`} />
+
+                    <Heading headingLevel={4}>Key Decisions</Heading>
+                    <List>
+                        <li><Code codeString={`clsx(className, 'button')`} inline copyEnabled={false} /> - Combines user-provided classes with our base class, giving consumers flexibility while maintaining defaults</li>
+                        <li><Code codeString={`isLoading || disabled`} inline copyEnabled={false} /> - Prevents click handlers from firing during loading or disabled states, even though we use <Code codeString={`aria-disabled`} inline copyEnabled={false} /> </li>
+                        <li><Code codeString={`event.preventDefault()`} inline copyEnabled={false} /> - Stops any default behavior when the button shouldn't be interactive</li>
+                        <li><Code codeString={`ref`} inline copyEnabled={false} /> - React 19 allows refs to be passed as regular props without <Code codeString={`forwardRef`} inline copyEnabled={false} /></li>
+                        <li><Code codeString={`data-loading`} inline copyEnabled={false} /> - Provides a styling hook for loading states without relying on JavaScript</li>
+                        <li>Both <Code codeString={`disabled`} inline copyEnabled={false} /> and <Code codeString={`aria-disabled`} inline copyEnabled={false} /> - We'll explain this choice in the accessibility section</li>
+                    </List>
                     <Heading headingLevel={3} id="typescript-support">Adding TypeScript Support</Heading>
-                </PostSection>
+                    <p>Type safety helps catch errors early and provides excellent autocomplete for consumers. Our type definitions need to:</p>
+                    <List>
+                        <li>Support both synchronous and asynchronous click handlers</li>
+                        <li>Extend native button props without conflicts</li>
+                        <li>Allow custom data attributes for styling</li>
+                        <li>Properly type mouse events</li>
+                    </List>
+                    <Code codeString={`import type { ComponentPropsWithRef, MouseEvent } from 'react'
 
-                <PostSection id="essential-features">
-                    <Heading headingLevel={2} id="essential-features-heading">Essential Features</Heading>
-                </PostSection>
+export type MouseEventType = MouseEvent<HTMLButtonElement>;
 
+export type ButtonClickHandler<T = void> = (event: MouseEventType) => T | Promise<T>;
+
+export type BaseButtonProps = {
+    isLoading?: boolean;
+    'data-style'?: 'outlined' | 'filled';Omit<ComponentPropsWithRef<'button'>, 'onClick'>
+    'data-variant'?: 'primary' | 'secondary' | 'accent';
+    onClick?: ButtonClickHandler;
+} & Omit<ComponentPropsWithRef<'button'>, 'onClick'>;`} />
+                    <Heading>Types Breakdown</Heading>
+                    <List>
+                        <li><Code codeString={`MouseEventType`} inline copyEnabled={false} /> - Alias for cleaner code and easier updates if we need to change event types</li>
+                        <li><Code codeString={`ButtonClickHandler<T = void>`} inline copyEnabled={false} /> - Supports both void functions and functions that return values (including Promises). The generic allows type inference at the call site</li>
+                        <li><Code codeString={`Omit<ComponentPropsWithRef<'button'>, 'onClick'>`} inline copyEnabled={false} /> - Inherits all native button props (className, aria-*, data-*, etc.) while replacing onClick with our typed version</li>
+                    </List>
+                </PostSection>
 
                 <PostSection id="interaction-logic">
                     <Heading headingLevel={2} id="interaction-logic-heading">Interaction Logic</Heading>
+
+                    <p>Our button needs to handle both synchronous and asynchronous click handlers gracefully. We will extract this logic into a custom hook for several reasons:</p>
+                    <List>
+                        {/* <li>Reusability - Other components (like <Link>toggle buttons</Link>) will need the same logic</li> */}
+                        <li><span className="bold">Reusability</span> - Other components (like toggle buttons) will need the same logic</li>
+                        <li><span className="bold">Testability</span> - Isolated logic is easier to test</li>
+                        <li><span className="bold">Separation of concerns</span> - Component handles rendering, hook handles behavior</li>
+                        <li><span className="bold">Error handling</span> - Centralized error logging for debugging</li>
+                    </List>
+                    <p>The hook needs to:</p>
+                    <List ordered>
+                        <li>Accept any click handler (sync or async)</li>
+                        <li>Catch and log errors without breaking the UI</li>
+                        <li>Handle promise rejections properly</li>
+                        <li>Return the result for testing purposes</li>
+                    </List>
+                    <Code codeString={`import type { ButtonClickHandler, MouseEventType } from '@/components/button/button.type';
+
+export default function useButton() {
+    const handleClick = <T = void>(userHandler?: ButtonClickHandler<T>) =>
+    (event: MouseEventType): T | Promise<T> | undefined => {
+        if (!userHandler) return
+
+        try {
+        const result = userHandler(event)
+
+        // Log promise rejections without interfering
+        if (
+            result &&
+            typeof result === 'object' &&
+            typeof (result as { then?: unknown }).then === 'function'
+        ) {
+            void Promise.resolve(result).catch((err) => {
+                    // This is where you would hook into a logging service
+            })
+        }
+
+        return result
+        } catch (err) {
+            // This is where you would hook into a logging service
+        throw err
+        }
+    }
+
+    return { handleClick }
+}`} />
+
+                    <Heading>Why this approach</Heading>
+                    <List>
+                        <li><span className="bold">Curried function</span> - <Code codeString="handleClick(onClick)(event)" inline copyEnabled={false} /> allows us to configure the handler once and reuse it</li>
+                        <li><span className="bold">Duck typing for Promises</span> - We check for a then method rather than using <Code codeString="instanceof Promise" inline copyEnabled={false} /> because the handler might return a Promise-like object</li>
+                        <li><span className="bold"><Code codeString="void" inline copyEnabled={false} /> operator</span> - tells TypeScript and ESLint: "Yes, I know this returns a Promise. I'm intentionally ignoring it".</li>
+                        <li><span className="bold">Logging</span> - Errors are logged as needed. this is one of the main reasons we are creating this hook rather than using the native event handler</li>
+                        <li><span className="bold">Re-throw synchronous errors</span> - Allows React error boundaries to catch them</li>
+                    </List>
+                    <PostNote>
+                        typing the <Code codeString="Promise.resolve" inline copyEnabled={false} /> is a deliberate choice for fire-and-forget error logging that doesn't interfere with the handler's return value or the component that ends up handling it.
+                    </PostNote>
                 </PostSection>
 
+                <PostSection>
+                    <Heading headingLevel={2}>Accessibility Requirements</Heading>
 
-                <PostSection id="accessible-styling">
-                    <Heading headingLevel={2} id="accessible-styling-heading">CSS Styling</Heading>
-                    <Heading headingLevel={3} id="accessibility-ux">Better Accessibility & UX</Heading>
-                    {/* minimum touch target size */}
+                    <Heading headingLevel={3}>WCAG</Heading>
+                    {/*  give references to common wcag success criteria that could apply to buttons 
+                        1.1.1: Non-text Content
+                        1.3.1: Info and Relationships
+                        1.4.1: Use of Color
+                        1.4.3: Contrast (Minimum)
+                        1.4.4: Resize text
+                        1.4.11: Non-text Contrast
+                        1.4.12: Text Spacing
+                        2.1.1: Keyboard
+                        2.2.2: Pause, Stop, Hide
+                        2.4.3: Focus Order
+                        2.4.6: Headings and Labels
+                        2.4.7: Focus Visible
+                        2.5.3: Label in Name
+                        2.5.5: Target Size (AAA)
+                        3.3.1: Error Identification
+                        3.3.2: Labels or Instructions
+                        4.1.1: Parsing
+                        4.1.2: Name, Role, Value
+                        4.1.3 Status Messages 
+                    */}
+                    {/* explain why we dont use aria-loading - does this belong here or under ux/ui?? */}
+
+                    <Heading headingLevel={3}>How UX/UI adds</Heading>
+                    {/* Explain how WCAG doesnt cover all bases */}
                     {/* benefits of adding margin around the button */}
-                    {/* benefits of using aria-disabled when loading */}
-                    {/* explain why we dont use aria-loading */}
+                    {/* contrast requirements dont consider disabled buttons but they should */}
+                    {/* Assistive technology is great but they dont work in every situation */}
+                    {/* changing content/text content doesnt always end with the user knowing it has changed */}
+                    {/* Disabling a button results in it being removed from the accessibility tree and shifts tab-order 
+                            aria-disabled doesnt
+                            explain - benefits of using aria-disabled when loading
+                            how to do this while preventing user interactions like it is a disabled button
+                    */}
+                    {/* Keeping the button size consistent and how this prevents chaotic UIs, the rare case where a button needs to be larger or smaller should
+                        probably be treated as its own component and have own styling i.e. toolbar/icon, CTA
+                    */}
                     {/* good reads on topic: 
                     https://adrianroselli.com/2021/01/multi-function-button.html - in depth article on creating a button. plain html,js,css example code is quite complicated imo
                     */}
+                </PostSection>
+                <PostSection id="CSS-styling">
+                    <Heading headingLevel={2} id="CSS-styling-heading">CSS Styling</Heading>
                     <Heading headingLevel={3} id="reset-base-styles">Reset and Base Styles</Heading>
-                    <Heading headingLevel={3} id="user-preferences">User Preferences</Heading>
                     <Heading headingLevel={3} id="variants">Adding Variants</Heading>
+
+                    {/*
+                        Do I need this section? 
+                    <Heading headingLevel={3} id="user-preferences">User Preferences</Heading> 
+                    */}
                 </PostSection>
 
                 <PostSection id="testing">
@@ -163,10 +347,6 @@ export default function ButtonsBasePage() {
                         components like button groups, tab lists, and interactive panels.
                     </p>
                     <PostNavigation
-                        previous={{
-                            href: "/blog/design-system/buttons/sliders",
-                            heading: "Slider Buttons"
-                        }}
                         next={{
                             href: "/blog/design-system/buttons/sliders",
                             heading: "Slider Buttons"
@@ -183,18 +363,19 @@ export default function ButtonsBasePage() {
                     { id: 'building-foundation', href: '#building-foundation', label: 'Building the Foundation' },
                     { id: 'essential-features', href: '#essential-features', label: 'Essential Features' },
                     { id: 'interaction-logic', href: '#interaction-logic', label: 'Interaction Logic' },
-                    { id: 'accessible-styling', href: '#accessible-styling', label: 'Styling' },
+                    { id: 'CSS-styling', href: '#css-styling', label: 'Styling' },
                     { id: 'testing', href: '#testing', label: 'Testing' },
                     { id: 'what-we-built', href: '#what-we-built', label: 'What We Built' },
                     { id: 'whats-next', href: '#whats-next', label: "What's Next" }
                 ]}
+                // Fillers
                 relatedPosts={[
                     { href: "/blog/design-system/buttons/sliders", title: "Slider Buttons" },
                     { href: "/blog/design-system/buttons/sliders", title: "Slider Buttons" },
                     { href: "/blog/design-system/buttons/sliders", title: "Slider Buttons" },
                     { href: "/blog/design-system/buttons/sliders", title: "Slider Buttons" }
                 ]}
-                author={{avatarUrl: '/window.svg', name: "carl davidson"}}
+                author={{ avatarUrl: '/window.svg', name: "carl davidson" }}
             />
 
         </>
