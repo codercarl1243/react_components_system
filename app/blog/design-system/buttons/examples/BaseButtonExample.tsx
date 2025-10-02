@@ -109,7 +109,7 @@ export function BaseButtonExample() {
         const bubbleElement = document.querySelector(`[data-bubble-id="${bubbleId}"]`) as HTMLElement;
         // Find bubble in state
         const bubble = bubbles.find(b => b.id === bubbleId);
-        if (!bubble) return;
+        if (!bubble || !bubbleElement) return;
 
         removeBubble(bubbleId)
         createSplatter(bubbleElement, bubble.cssColorVar, parseInt(bubble.size));
@@ -234,9 +234,6 @@ export function BaseButtonExample() {
                 aria-describedby="bubble-description"
 
             >
-                <Icon icon={RiBubbleChartLine} />
-                <Icon icon={RiWindyLine} />
-
                 {isLoading ? <Icon icon={RiBubbleChartLine} /> : <Icon icon={RiWindyLine} />}
                 <span>{isLoading ? loadingText : text}</span>
             </Button>
