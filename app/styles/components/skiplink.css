@@ -19,8 +19,9 @@
 
     &:hover,
     &:focus-visible {
-        background-color: var(--color-primary-600);
-        color: var(--color-neutral-400);
+        background-color: var(--color-primary-100);
+        color: var(--color-primary-600);
+        border-style: dashed;
     }
 
     &:focus-visible {
