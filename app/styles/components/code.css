@@ -1,5 +1,6 @@
     .shiki-wrapper {
         position: relative;
+        font-size: 1rem;
     }
 
     .shiki-wrapper .button--copy {
@@ -13,7 +14,7 @@
 
     .shiki-wrapper pre {
         max-height: 30rem;
-        padding: 1.5em 0.5em;
+        padding: 1.15em 0.5em;
         padding-inline-end: 3em;
         margin-block: 0;
         border: var(--border-thick);
