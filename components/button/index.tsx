@@ -2,8 +2,8 @@
 
 import clsx from 'clsx'
 import { BaseButtonProps, MouseEventType } from './button.type'
-import useButton from './useButton'
-import Ellipsis from '../ellipsis'
+import useButton from '@/components/button/useButton'
+import Spinner from '@/components/utilities/spinner'
 
 export default function Button({
   className,
@@ -39,7 +39,7 @@ export default function Button({
       data-testid="base-button"
     >
       {children}
-      {/* {isLoading && <Ellipsis />} */}
+      {isLoading && <Spinner />}
     </button>
   )
 }
