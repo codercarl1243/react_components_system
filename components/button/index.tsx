@@ -1,7 +1,7 @@
 'use client'
 
 import clsx from 'clsx'
-import { BaseButtonProps, MouseEventType } from './button.type'
+import { BaseButtonProps } from './button.type'
 import useButton from './useButton'
 import Ellipsis from '../ellipsis'
 
@@ -10,36 +10,27 @@ export default function Button({
   children,
   onClick,
   type = 'button',
-  disabled = false,
+  disabled,
   isLoading = false,
+  loadingText = 'Loading',
   ref,
   ...props
 }: BaseButtonProps) {
   const { handleClick } = useButton()
 
-  function onClickHandler(event: MouseEventType) {
-
-    if (isLoading || disabled) {
-      event.preventDefault();
-      return;
-    }
-    void handleClick(onClick)(event)
-  }
-
   return (
     <button
       {...props}
       className={clsx(className, 'button')}
-      onClick={onClickHandler}
-      disabled={disabled}
-      aria-disabled={isLoading || disabled}
+      onClick={(event) => void handleClick(onClick)(event)}
+      disabled={isLoading || disabled}
       data-loading={isLoading}
       ref={ref}
       type={type}
+      aria-busy={isLoading}
       data-testid="base-button"
     >
-      {children}
-      {/* {isLoading && <Ellipsis />} */}
+      {isLoading ? <span aria-live="polite" className='loading-text'>{loadingText}<Ellipsis /></span> : children}
     </button>
   )
 }

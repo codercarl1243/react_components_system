@@ -6,6 +6,7 @@ export type ButtonClickHandler<T = void> = (event: MouseEventType) => T | Promis
 
 export type BaseButtonProps = {
     isLoading?: boolean;
+    loadingText?: ReactNode;
     'data-style'?: 'outlined' | 'filled';
     'data-variant'?: 'primary' | 'secondary' | 'accent';
     onClick?: ButtonClickHandler;

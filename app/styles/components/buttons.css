@@ -14,8 +14,6 @@
     /* Layout */
     margin: var(--button-margin);
     padding: var(--button-padding);
-    display: flex;
-    align-items: center;
 
     /* Reset browser defaults */
     -webkit-appearance: none;
@@ -68,7 +66,7 @@
 
     &:disabled {
         --button-bg-color: var(--color-neutral-200);
-        --button-color: var(--color-neutral-800);
+        --button-color: var(--color-neutral-500);
         --button-border-color: var(--color-neutral-400);
         cursor: not-allowed;
 
@@ -82,23 +80,46 @@
     }
 
     &[data-loading="true"] {
-        position: relative;
+        --button-bg-color: var(--color-neutral-200);
+        --button-color: var(--color-neutral-800);
+        --button-border-color: var(--color-neutral-600);
         cursor: wait;
-        display: flex;
 
-    .ellipsis {
-        position: absolute;
-        left: 50%;
-        top: 50%;
-        transform: translate(-50%, -50%);
-        pointer-events: none;
-    }
+        /* make sure that the loading animations or ellipsis etc. remain on the same baseline */
+        .loading-text {
+            display: flex;
+            gap: 0.3ch;
+        }
 
-        &:hover:not(:focus-visible) {
+        &:hover,
+        &:focus-visible,
+        &:active {
             outline: none;
             box-shadow: none;
             transform: none;
         }
+    }
+}
+
+@keyframes ellipsis {
+    0% {
+        width: 0ch
+    }
+
+    25% {
+        width: 0.5ch
+    }
+
+    50% {
+        width: 0.75ch
+    }
+
+    75% {
+        width: 1.15ch
+    }
+
+    100% {
+        width: 0ch
     }
 }
 
@@ -132,6 +153,11 @@ button.button {
     --button-border-color: var(--button-accent-color);
     --button-outline-color: var(--button-accent-color);
 
+    &:not([data-variant]):disabled {
+        --button-secondary-color: var(--color-neutral-200);
+        --button-primary-color: var(--color-neutral-600);
+        --button-accent-color: var(--color-neutral-400);
+    }
 }
 
 /* Outline style - transparent background with colored border/text */
@@ -140,6 +166,11 @@ button.button {
     --button-bg-color: var(--button-primary-color);
     --button-border-color: var(--button-accent-color);
     --button-outline-color: var(--button-accent-color);
+
+    &:not([data-variant]):disabled {
+        --button-secondary-color: var(--color-neutral-400);
+        --button-accent-color: var(--color-neutral-300);
+    }
 }
 
 /* Color Variants */
@@ -147,26 +178,19 @@ button.button {
     --button-primary-color: var(--color-neutral-100);
     --button-secondary-color: var(--color-neutral-800);
     --button-accent-color: var(--color-neutral-600);
-
-    /* &[data-loading="true"] {
-        --button-color: var(--color-neutral-600);
-        --button-bg-color: var(--color-neutral-100);
-        --button-border-color: var(--color-neutral-200);
-        --button-outline-color: var(--color-neutral-200);
-    } */
 }
 
 .button[data-variant="primary"] {
     --button-primary-color: var(--color-neutral-100);
     --button-secondary-color: var(--color-primary-400);
     --button-accent-color: var(--color-primary-600);
-    /* 
+
     &[data-loading="true"] {
         --button-color: var(--color-primary-600);
         --button-bg-color: var(--color-primary-100);
         --button-border-color: var(--color-primary-200);
         --button-outline-color: var(--color-primary-200);
-    } */
+    }
 }
 
 .button[data-variant="secondary"] {
@@ -174,23 +198,23 @@ button.button {
     --button-secondary-color: var(--color-secondary-400);
     --button-accent-color: var(--color-secondary-600);
 
-    /* &[data-loading="true"] {
+    &[data-loading="true"] {
         --button-color: var(--color-secondary-600);
         --button-bg-color: var(--color-secondary-100);
         --button-border-color: var(--color-secondary-200);
         --button-outline-color: var(--color-secondary-200);
-    } */
+    }
 }
 
 .button[data-variant="accent"] {
     --button-primary-color: var(--color-neutral-100);
     --button-secondary-color: var(--color-accent-400);
     --button-accent-color: var(--color-accent-600);
-    /* 
+
     &[data-loading="true"] {
         --button-color: var(--color-accent-600);
         --button-bg-color: var(--color-accent-100);
         --button-border-color: var(--color-accent-200);
         --button-outline-color: var(--color-accent-200);
-    } */
+    }
 }

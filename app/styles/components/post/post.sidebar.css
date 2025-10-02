@@ -61,10 +61,6 @@
     background-color: var(--color-primary-400);
 }
 
-
-.post-sidebar__contents {
-    padding-block-start: calc(var(--spacing) * 10);
-}
 /*  DESKTOP */
 @media screen and (min-width: 56rem) {
     .layout-wrapper {
@@ -121,12 +117,8 @@
     }
 
     .sidebar-toggle-button--close {
-        /* margin-block-end: 0;
-         */
-         
-        /* margin-inline-end: auto; */
-        border-radius: 0;
-        margin-inline: 0;
+        margin-block-end: 0;
+        margin-inline-start: auto;
     }
 
     .post-sidebar {
@@ -145,15 +137,16 @@
         flex-direction: column;
         align-items: center;
     }
-    .post-sidebar > * {
-        width: 100%;
-        padding-inline: calc(var(--spacing) * 4);
-    }
 
     .post-sidebar[data-isopen="false"] {
         right: calc(var(--post-sidebar-width) * -2);
     }
 
+
+    /* Add padding to sidebar content for close button */
+    .post-sidebar__contents {
+        padding-block-start: 2rem;
+    }
 
     /* Adjust related posts layout for mobile */
     .post-sidebar[data-isopen="true"] .post-sidebar__related__list {

@@ -1,7 +1,5 @@
 'use client';
 import Button from "@/components/button";
-import Icon from "@/components/icon";
-import { RiBubbleChartLine, RiWindyLine } from "@remixicon/react";
 import { useEffect, useRef, useState } from "react";
 
 type TBubble = {
@@ -44,16 +42,6 @@ export function BaseButtonExample() {
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const bubbleIdCounter = useRef(0);
 
-    const removeBubble = (bubbleId: string) => {
-        setBubbles(prev => prev.filter(b => b.id !== bubbleId));
-        const timeouts = timeoutsRef.current.get(bubbleId);
-        if (timeouts) {
-            clearTimeout(timeouts.removeFromDOMTimeout);
-            clearTimeout(timeouts.popTimeout);
-            timeoutsRef.current.delete(bubbleId);
-        }
-    };
-
     const addBubble = () => {
         if (cooldownRef.current) return;
 
@@ -71,16 +59,16 @@ export function BaseButtonExample() {
         const LIFE_TIME = 3000 + Math.random() * 4000; // 3-7s
         const POP_DURATION = 400;
         const BUBBLE_ID = `bubble-${bubbleIdCounter.current++}`;
-        const BUBBLE_COLOR = `--color-emphasis-${(Math.floor(Math.random() * 9) + 1) * 100}`
+        const BUBBLE_COLOR = `--color-emphasis-${  (Math.floor(Math.random() * 9) + 1) * 100}`
         const BUBBLE_SIZE = 20 + Math.random() * 40;
 
         const bubble: TBubble = {
             id: BUBBLE_ID,
-            left: `${10 + Math.random() * 80}vw`,
-            top: `${10 + Math.random() * 80}vh`,
-            size: `${BUBBLE_SIZE}px`,
+            left: `${10 + Math.random() * 80  }vw`,
+            top: `${10 + Math.random() * 80  }vh`,
+            size: `${BUBBLE_SIZE  }px`,
             cssColorVar: BUBBLE_COLOR,
-            floatAnimation: `float${Math.floor(Math.random() * 3) + 1}`,
+            floatAnimation: `float${  Math.floor(Math.random() * 3) + 1}`,
             animationLength: LIFE_TIME,
             isPopping: false
         };
@@ -100,20 +88,15 @@ export function BaseButtonExample() {
             }
         }, LIFE_TIME - POP_DURATION);
 
-        const removeFromDOMTimeout = setTimeout(() => removeBubble(BUBBLE_ID), LIFE_TIME);
+        const removeFromDOMTimeout = setTimeout(() => {
+            setBubbles((prev) => prev.filter((b) => b.id !== bubble.id));
+            timeoutsRef.current.delete(BUBBLE_ID);
+        }, LIFE_TIME);
 
         // Store timeouts for cleanup
         timeoutsRef.current.set(bubble.id, { removeFromDOMTimeout, popTimeout });
     };
-    const popBubble = (bubbleId: string) => {
-        const bubbleElement = document.querySelector(`[data-bubble-id="${bubbleId}"]`) as HTMLElement;
-        // Find bubble in state
-        const bubble = bubbles.find(b => b.id === bubbleId);
-        if (!bubble) return;
 
-        removeBubble(bubbleId)
-        createSplatter(bubbleElement, bubble.cssColorVar, parseInt(bubble.size));
-    }
     const createSplatter = (bubbleElement: HTMLElement, bubbleColor: string, bubbleSize: number) => {
         const rect = bubbleElement.getBoundingClientRect();
         const centerX = rect.left + rect.width / 2;
@@ -161,14 +144,12 @@ export function BaseButtonExample() {
                     animation: `${floatAnimation} ${animationLength}ms linear forwards`,
                 }}
             >
-                <Button
+                <div
                     className="bubble-inner"
-                    onClick={() => popBubble(id)}
                     style={{
                         width: size,
                         height: size,
                         backgroundColor: `color-mix(in srgb, var(${cssColorVar}) 40%, transparent)`,
-                        outlineColor: `var(${cssColorVar})`,
                         borderColor: `var(${cssColorVar})`,
                         animation: isPopping
                             ? `rotate ${animationLength}ms cubic-bezier(0.25, 0.1, 0.25, 1) forwards, pop 400ms cubic-bezier(0.25, -1, 0, 1) forwards`
@@ -181,7 +162,7 @@ export function BaseButtonExample() {
 
     type CSSWithVars = React.CSSProperties & Record<'--end-x' | '--end-y', string>;
     const generateSplatter = ({
-        x, y, size, delay, endX, endY, color
+       x, y, size, delay, endX, endY, color
     }: TSparkle) => {
         const styleObject: CSSWithVars = {
             left: `${x}px`,
@@ -201,8 +182,6 @@ export function BaseButtonExample() {
         )
     }
 
-
-
     // Cleanup on unmount
     useEffect(() => {
         return () => {
@@ -216,29 +195,21 @@ export function BaseButtonExample() {
         };
     }, []);
 
-    const loadingText = "Taking a breath";
-    const text = "Blow a Bubble";
     return (
         <div className="button-example--base">
-            <p id="bubble-description">
+            <p id="bubble-description" className="sr-only">
                 Creates a decorative bubble that floats upward and disappears with sparkles
-                <span className="sr-only" role="status">
-                    {isLoading ? loadingText : text}
-                </span>
             </p>
             <Button
                 onClick={addBubble}
                 isLoading={isLoading}
+                loadingText="Taking a breath"
                 data-style="outlined"
                 data-variant="accent"
+                aria-label={isLoading ? "Creating bubble animation" : "Create floating bubble animation"}
                 aria-describedby="bubble-description"
-
             >
-                <Icon icon={RiBubbleChartLine} />
-                <Icon icon={RiWindyLine} />
-
-                {isLoading ? <Icon icon={RiBubbleChartLine} /> : <Icon icon={RiWindyLine} />}
-                <span>{isLoading ? loadingText : text}</span>
+                Blow a Bubble
             </Button>
             {bubbles.map((bubble) => <div key={bubble.id}>{generateBubble(bubble)}</div>)}
             {sparkles.map((sparkle) => <div key={sparkle.id}>{generateSplatter(sparkle)}</div>)}
