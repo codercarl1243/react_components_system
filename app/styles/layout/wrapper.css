@@ -22,6 +22,8 @@
 
   .layout-wrapper>* {
     grid-column: content;
+    width: 100%;
+    min-width: 0;
   }
 
   .layout-wrapper>.width-content {
