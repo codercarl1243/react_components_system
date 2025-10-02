@@ -1,6 +1,6 @@
 .post-note {
-    --note-color: var(--color-neutral-100);
-    --note-background-color:  var(--color-neutral-600);
+    --note-color: var(--color-neutral-800);
+    --note-background-color: var(--color-neutral-200);
     position: relative;
     background-color: var(--note-background-color);
     color: var(--note-color);
