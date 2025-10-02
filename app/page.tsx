@@ -16,7 +16,7 @@ export default function Home () {
       <fieldset>
         <legend>Filled Button</legend>
         <Button data-style="filled">filled button</Button>
-        <Button data-style="filled"disabled>disabled button</Button>
+        <Button data-style="filled" disabled>disabled button</Button>
         <Button data-style="filled" isLoading>filled button</Button>
 
       </fieldset>
