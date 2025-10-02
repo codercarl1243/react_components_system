@@ -2,7 +2,7 @@ import type { ButtonClickHandler, MouseEventType } from '@/components/button/but
 
 export default function useButton() {
   const handleClick = <T = void>(userHandler?: ButtonClickHandler<T>) =>
-    (event: MouseEventType) => {
+    (event: MouseEventType): T | Promise<T> | undefined => {
       if (!userHandler) return
 
       try {
