@@ -1,4 +1,4 @@
-import { ComponentPropsWithRef, ReactNode, type MouseEvent } from 'react'
+import type { ComponentPropsWithRef, MouseEvent } from 'react'
 
 export type MouseEventType = MouseEvent<HTMLButtonElement>;
 
