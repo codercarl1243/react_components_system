@@ -16,11 +16,16 @@ export default function Home () {
       <fieldset>
         <legend>Filled Button</legend>
         <Button data-style="filled">filled button</Button>
+        <Button data-style="filled"disabled>disabled button</Button>
+        <Button data-style="filled" isLoading>filled button</Button>
+
       </fieldset>
 
       <fieldset>
         <legend>outline Button</legend>
         <Button data-style="outlined">outline button</Button>
+        <Button data-style="outlined" disabled>outline button</Button>
+        <Button data-style="outlined" isLoading>outline button</Button>
       </fieldset>
       <fieldset>
         <legend>Primary Button</legend>
