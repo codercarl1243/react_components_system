@@ -4,8 +4,8 @@
     position: relative;
     background-color: var(--note-background-color);
     color: var(--note-color);
-    padding: 0.5em 0.5em;
-    padding-block: 1.25em;
+    padding-block: 1.25em 1em; 
+    padding-inline: clamp(0.5em, 0.5em + 0.5vw ,1em);
     box-shadow:
         inset 2px 2px 4px rgba(153, 105, 105, 0.1),
         inset -2px -2px 4px rgba(255, 255, 255, 0.8);
