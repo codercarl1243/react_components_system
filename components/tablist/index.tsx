@@ -5,12 +5,18 @@ import useTablist from '@/components/tablist/useTablist'
 import Panel from '@/components/tablist/panel'
 import clsx from 'clsx'
 
-export default function TabList ({ defaultActiveTabId, tabs, orientation = 'horizontal', className, ...props }: TabListProps) {
+export default function TabList ({
+    defaultActiveTabId, 
+    tabs, 
+    orientation = 'horizontal', 
+    className, 
+    'data-variant': buttonVariant,
+    ...props }: TabListProps) {
   const {
     activeId,
     setActiveTab,
     tablistRef,
-    handleKeyDown
+    handleKeyDown,
   } = useTablist(defaultActiveTabId)
 
   if (!tabs?.length) return null
@@ -30,6 +36,8 @@ export default function TabList ({ defaultActiveTabId, tabs, orientation = 'hori
                         id={item.id}
                         isSelected={activeId === item.id}
                         onClick={() => setActiveTab(item.id)}
+                        data-style={activeId === item.id ? "outlined" : "filled"}
+                        data-variant={buttonVariant}
                     >
                         {item.tabLabel}
                     </Tab>
