@@ -259,8 +259,8 @@ export default function useButton() {
                     </PostNote>
 
                 </PostSection>
-                <PostSection>
-                    <Heading headingLevel={2}>Essential Features</Heading>
+                <PostSection id="essential-features">
+                    <Heading id="essential-features-heading" headingLevel={2}>Essential Features</Heading>
                     <Heading headingLevel={3}>Loading States</Heading>
                     <p>Loading states are critical for async operations. They provide feedback to users and prevent duplicate submissions.</p>
                     <p className="bold">Our implementation:</p>
@@ -293,8 +293,8 @@ export default function useButton() {
   Save Changes
 </Button>`} />
                 </PostSection>
-                <PostSection>
-                    <Heading headingLevel={2}>Accessibility Requirements</Heading>
+                <PostSection id="accessibility">
+                    <Heading id="accessibility-heading" headingLevel={2}>Accessibility Requirements</Heading>
 
                     <Heading headingLevel={3}>WCAG Success Criteria That Apply to Buttons</Heading>
                     <p>Buttons must meet several WCAG standards. Here are the key criteria our implementation addresses:</p>
@@ -375,8 +375,8 @@ export default function useButton() {
                     <Heading headingLevel={4}>Assistive Technology isnt everything</Heading>
                     <Heading headingLevel={4}>Further Reading</Heading>
                 </PostSection>
-                <PostSection id="CSS-styling">
-                    <Heading headingLevel={2} id="CSS-styling-heading">CSS Styling</Heading>
+                <PostSection id="css-styling">
+                    <Heading headingLevel={2} id="css-styling-heading">CSS Styling</Heading>
                     <Heading headingLevel={3} id="reset-base-styles">Reset and Base Styles</Heading>
                     <Heading headingLevel={3} id="">Custom Properties for Theming</Heading>
                     <Heading headingLevel={3} id="">Button States</Heading>
@@ -453,7 +453,7 @@ export default function useButton() {
                     </p>
                 </PostSection>
                 <PostSection id="resources">
-                    <Heading headingLevel={2}>Resources</Heading>
+                    <Heading headingLevel={2} id="resources-heading">Resources</Heading>
                     <Heading headingLevel={3}>Complete Code Reference</Heading>
                     <TabList
                         className="code__reference"
@@ -763,12 +763,14 @@ button.button {
                     { id: 'what-were-building', href: '#what-were-building', label: "What We're Building" },
                     { id: 'project-setup', href: '#project-setup', label: 'Project Setup' },
                     { id: 'building-foundation', href: '#building-foundation', label: 'Building the Foundation' },
-                    { id: 'essential-features', href: '#essential-features', label: 'Essential Features' },
                     { id: 'interaction-logic', href: '#interaction-logic', label: 'Interaction Logic' },
-                    { id: 'CSS-styling', href: '#css-styling', label: 'Styling' },
+                    { id: 'essential-features', href: '#essential-features', label: 'Essential Features' },
+                    { id: 'accessibility', href: '#accessibility', label: 'Accessibility Requirements' },
+                    { id: 'css-styling', href: '#css-styling', label: 'Styling' },
                     { id: 'testing', href: '#testing', label: 'Testing' },
                     { id: 'what-we-built', href: '#what-we-built', label: 'What We Built' },
-                    { id: 'whats-next', href: '#whats-next', label: "What's Next" }
+                    { id: 'whats-next', href: '#whats-next', label: "What's Next" },
+                    { id: 'resources', href: '#resources', label: "resources" }
                 ]}
                 // Fillers
                 relatedPosts={[
