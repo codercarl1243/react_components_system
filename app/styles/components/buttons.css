@@ -1,4 +1,3 @@
-/* Base button styles - Layout, sizing, and UX patterns */
 .button {
     /* Layout properties */
     --button-font-size: 1rem;
@@ -65,7 +64,7 @@
         outline: 1px dotted var(--button-outline-color, currentColor);
         transform: translateY(1px);
     }
-
+    /* The button can't be disabled using this base button but other packages might add disabled to the button on the DOM. We should maintain consistent styling */
     &:disabled,
     &[aria-disabled="true"] {
         --button-bg-color: var(--color-neutral-200);
@@ -74,11 +73,14 @@
         cursor: not-allowed;
 
         &:hover,
-        &:focus-visible,
         &:active {
             outline: none;
             box-shadow: none;
             transform: none;
+        }
+
+        &:focus-visible {
+           --button-outline-color: var(--color-neutral-600);
         }
     }
 
@@ -116,15 +118,12 @@ button.button {
     }
 }
 
-/* Color system - Semantic color tokens and their application */
-
 /* Filled style - solid background with contrasting text */
 .button[data-style="filled"] {
     --button-color: var(--button-primary-color);
     --button-bg-color: var(--button-secondary-color);
     --button-border-color: var(--button-accent-color);
     --button-outline-color: var(--button-accent-color);
-
 }
 
 /* Outline style - transparent background with colored border/text */
