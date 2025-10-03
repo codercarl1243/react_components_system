@@ -7,5 +7,6 @@ export type HeadingTag = `h${HeadingLevelsType}`;
 export type HeadingPropsType = {
     headingLevel?: HeadingLevelsType;
     headingSize?: HeadingLevelsType;
+    hasIcon?: boolean;
     children: ReactNode;
 } & ComponentProps<HeadingTag>;
