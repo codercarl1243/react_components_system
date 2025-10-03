@@ -75,12 +75,19 @@ export default function ButtonsBasePage() {
                         <li><Link className="bold" href="https://www.npmjs.com/package/clsx">CLSX</Link>to handle class names conditionally</li>
                     </List>
                     <Code lang="bash" codeString={`npm install @remixicon/react clsx`} />
-                    <PostNote className="italic">Later in this post we will use <Link className="bold" href="https://jestjs.io/docs/getting-started">Jest</Link> to run tests.</PostNote>
+                    <PostNote className="italic">
+                        <p>Later in this post we will use <Link className="bold" href="https://jestjs.io/docs/getting-started">Jest</Link> to run tests.</p>
+                    </PostNote>
 
                 </PostSection>
+
                 <PostSection id="building-foundation">
-                    <Heading headingLevel={2} id="building-foundation-heading">Building the Foundation</Heading>
-                    <Heading headingLevel={3} id="starting-simple">Starting Simple: The Component</Heading>
+                    <Heading headingLevel={2} id="building-foundation-heading">
+                        Building the Foundation
+                    </Heading>
+                    <Heading headingLevel={3} id="starting-simple">
+                        Starting Simple: The Component
+                    </Heading>
                     <p>Let's start with the component itself. Our Button component needs to handle several responsibilities:</p>
                     <List>
                         <li>Managing click events (both sync and async)</li>
@@ -90,14 +97,14 @@ export default function ButtonsBasePage() {
                         <li>Preventing interaction when disabled or loading</li>
                     </List>
 
-                    <p>Here's how we structure it:</p>
-                    <PostNote>We're using a custom hook called
-                        <Code codeString="useButton" inline copyEnabled={false} /> to handle click logic - we'll explore
-                        that in detail in the next section.)</PostNote>
+                    <PostNote><p>We're using a custom hook called <Code codeString="useButton" inline copyEnabled={false} /> to handle click logic - we'll explore
+                        this in detail in the next section.</p>
+                    </PostNote>
+                    <p className="bold">Here's how we structure it:</p>
                     <Code codeString={`'use client'
 
 import clsx from 'clsx'
-import { BaseButtonProps, MouseEventType } from './button.type'
+import { BaseButtonProps, MouseEventType } from './button.type' // explored more in the Typescript section
 import Spinner from '@/components/utilities/spinner' // custom spinner but this can be anything
 
 export default function Button({
@@ -126,7 +133,6 @@ return (
         {...props}
         className={clsx(className, 'button')}
         onClick={onClickHandler}
-        disabled={disabled}
         aria-disabled={isLoading || disabled}
         data-loading={isLoading}
         ref={ref}
@@ -140,7 +146,7 @@ return (
                     <Heading headingLevel={4}>Key Decisions</Heading>
                     <List>
                         <li><Code codeString={`clsx(className, 'button')`} inline copyEnabled={false} /> - Combines user-provided classes with our base class, giving consumers flexibility while maintaining defaults</li>
-                        <li><Code codeString={`isLoading || disabled`} inline copyEnabled={false} /> - Prevents click handlers from firing during loading or disabled states, even though we use <Code codeString={`aria-disabled`} inline copyEnabled={false} /> </li>
+                        <li><Code codeString={`isLoading || disabled`} inline copyEnabled={false} /> - Prevents click handlers from firing during loading or disabled states. We are using  <Code codeString={`aria-disabled`} inline copyEnabled={false} /> </li>
                         <li><Code codeString={`event.preventDefault()`} inline copyEnabled={false} /> - Stops any default behavior when the button shouldn't be interactive</li>
                         <li><Code codeString={`ref`} inline copyEnabled={false} /> - React 19 allows refs to be passed as regular props without <Code codeString={`forwardRef`} inline copyEnabled={false} /></li>
                         <li><Code codeString={`data-loading`} inline copyEnabled={false} /> - Provides a styling hook for loading states without relying on JavaScript</li>
@@ -176,7 +182,6 @@ export type BaseButtonProps = {
 
                 <PostSection id="interaction-logic">
                     <Heading headingLevel={2} id="interaction-logic-heading">Interaction Logic</Heading>
-
                     <p>Our button needs to handle both synchronous and asynchronous click handlers gracefully. We will extract this logic into a custom hook for several reasons:</p>
                     <List>
                         {/* <li>Reusability - Other components (like <Link>toggle buttons</Link>) will need the same logic</li> */}
@@ -185,13 +190,14 @@ export type BaseButtonProps = {
                         <li><span className="bold">Separation of concerns</span> - Component handles rendering, hook handles behavior</li>
                         <li><span className="bold">Error handling</span> - Centralized error logging for debugging</li>
                     </List>
-                    <p>The hook needs to:</p>
+                    <p className="bold">The hook needs to:</p>
                     <List ordered>
                         <li>Accept any click handler (sync or async)</li>
                         <li>Catch and log errors without breaking the UI</li>
                         <li>Handle promise rejections properly</li>
                         <li>Return the result for testing purposes</li>
                     </List>
+                    <p>Here's the complete implementation:</p>
                     <Code codeString={`import type { ButtonClickHandler, MouseEventType } from '@/components/button/button.type';
 
 export default function useButton() {
@@ -210,12 +216,16 @@ export default function useButton() {
         ) {
             void Promise.resolve(result).catch((err) => {
                     // This is where you would hook into a logging service
+                    customLoggingService(err)
             })
         }
 
         return result
         } catch (err) {
             // This is where you would hook into a logging service
+            customLoggingService(err)
+            // Re-throw synchronous errors so React error boundaries can catch them
+            // This prevents silent failures and allows graceful error UI
         throw err
         }
     }
@@ -223,17 +233,30 @@ export default function useButton() {
     return { handleClick }
 }`} />
 
-                    <Heading>Why this approach</Heading>
+                    <Heading headingLevel={3}>Why this approach</Heading>
                     <List>
-                        <li><span className="bold">Curried function</span> - <Code codeString="handleClick(onClick)(event)" inline copyEnabled={false} /> allows us to configure the handler once and reuse it</li>
-                        <li><span className="bold">Duck typing for Promises</span> - We check for a then method rather than using <Code codeString="instanceof Promise" inline copyEnabled={false} /> because the handler might return a Promise-like object</li>
-                        <li><span className="bold"><Code codeString="void" inline copyEnabled={false} /> operator</span> - tells TypeScript and ESLint: "Yes, I know this returns a Promise. I'm intentionally ignoring it".</li>
-                        <li><span className="bold">Logging</span> - Errors are logged as needed. this is one of the main reasons we are creating this hook rather than using the native event handler</li>
-                        <li><span className="bold">Re-throw synchronous errors</span> - Allows React error boundaries to catch them</li>
+                        <li>
+                            <span className="bold">Curried function</span> - <Code codeString="handleClick(onClick)(event)" inline copyEnabled={false} /> allows us to configure the handler once and reuse it.
+                        </li>
+                        <li>
+                            <span className="bold">Duck typing for Promises</span> - We check for a <Code codeString=".then" inline copyEnabled={false} /> method rather than using <Code codeString="instanceof Promise" inline copyEnabled={false} /> because the handler might return a Promise-like object.
+                        </li>
+                        <li>
+                            The <span className="bold"><Code codeString="void" inline copyEnabled={false} /> operator</span> - Explicitly discards the Promise return value, telling TypeScript/ESLint we're intentionally not awaiting it (fire-and-forget error logging).
+                        </li>
+                        <li>
+                            <span className="bold">Centralized logging</span> - Errors are logged consistently across all buttons. This is one of the main reasons we extract this logic into a hook rather than handling it in each component.
+                        </li>
+                        <li>
+                            <span className="bold">Re-throw synchronous errors</span> - By re-throwing with <Code inline codeString="throw err" copyEnabled={false} />, we allow React error boundaries to catch and handle errors. This prevents the UI from breaking silently.
+                            <span className="bold">Async errors</span> are logged but not re-thrown since they occur after the handler returns.
+                        </li>
                     </List>
                     <PostNote>
-                        typing the <Code codeString="Promise.resolve" inline copyEnabled={false} /> is a deliberate choice for fire-and-forget error logging that doesn't interfere with the handler's return value or the component that ends up handling it.
+                        <p><span className="bold">Why doesn&apos;t the hook await?</span> Using <Code codeString="void" inline copyEnabled={false} /> with <Code codeString="Promise.resolve" inline copyEnabled={false} /> is a deliberate choice for fire-and-forget error logging. We attach a <Code codeString=".catch()" inline copyEnabled={false} /> block to log any rejected Promises.</p>
+                        <p>We don't await the Promise because we want the handler to return the <span className="italic">resolving</span> promise to the component that will actually use it.</p>
                     </PostNote>
+
                 </PostSection>
 
                 <PostSection>
