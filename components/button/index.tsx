@@ -1,7 +1,7 @@
 'use client'
 
 import clsx from 'clsx'
-import { BaseButtonProps, MouseEventType } from './button.type'
+import { BaseButtonProps, MouseEventType } from '@/components/button/button.type'
 import useButton from '@/components/button/useButton'
 import Spinner from '@/components/utilities/spinner'
 
@@ -21,6 +21,7 @@ export default function Button({
 
     if (isLoading || disabled) {
       event.preventDefault();
+      event.stopPropagation();  // ← Prevent form submission
       return;
     }
     handleClick(onClick)(event)
