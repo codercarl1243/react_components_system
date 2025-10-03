@@ -21,12 +21,14 @@ const getSizeClass = (level: number): string => {
  *
  * @param headingLevel - Semantic heading level to render (1–6). Defaults to `3`.
  * @param headingSize - Visual size level used to pick the CSS size class (1–6). Defaults to `headingLevel`.
+ * @param hasIcon - a flag to add classname to the Heading element that adds spacing between the Icon and the Text
  * @returns A React element for the requested heading tag with composed classes and forwarded props.
  */
 
 export default function Heading({
   headingLevel = 3,
   headingSize = headingLevel,
+  hasIcon = false,
   children,
   className,
   ...props
@@ -35,7 +37,10 @@ export default function Heading({
   return createElement(
     `h${headingLevel}`,
     {
-      className: clsx('font-main heading', className, getSizeClass(headingSize)),
+      className: clsx('font-main heading', 
+        {"heading-w-icon": hasIcon},
+        className, 
+        getSizeClass(headingSize)),
       ...props
     },
     children
