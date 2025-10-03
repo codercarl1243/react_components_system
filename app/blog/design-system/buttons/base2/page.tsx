@@ -12,6 +12,7 @@ import { type Metadata } from "next";
 import { RiAccessibilityLine, RiErrorWarningLine, RiFlaskLine } from "@remixicon/react";
 import Icon from "@/components/icon";
 import PostNote from "@/components/post/post.note";
+import TabList from "@/components/tablist";
 
 export const metadata: Metadata = { title: 'Buttons · Design System' }
 
@@ -172,7 +173,7 @@ export type BaseButtonProps = {
     'data-variant'?: 'primary' | 'secondary' | 'accent';
     onClick?: ButtonClickHandler;
 } & Omit<ComponentPropsWithRef<'button'>, 'onClick'>;`} />
-                    <Heading>Types Breakdown</Heading>
+                    <Heading headingLevel={4}>Types Breakdown</Heading>
                     <List>
                         <li><Code codeString={`MouseEventType`} inline copyEnabled={false} /> - Alias for cleaner code and easier updates if we need to change event types</li>
                         <li><Code codeString={`ButtonClickHandler<T = void>`} inline copyEnabled={false} /> - Supports both void functions and functions that return values (including Promises). The generic allows type inference at the call site</li>
@@ -258,11 +259,73 @@ export default function useButton() {
                     </PostNote>
 
                 </PostSection>
-
+                <PostSection>
+                    <Heading headingLevel={2}>Essential Features</Heading>
+                    <Heading headingLevel={3}>Loading States</Heading>
+                    <p>Loading states are critical for async operations. They provide feedback to users and prevent duplicate submissions.</p>
+                    <p className="bold">Our implementation:</p>
+                    <Code codeString="{isLoading && <Spinner />}" copyEnabled={false} />
+                    <p>The Spinner component appears alongside the button text, maintaining the button's layout. We use <Code codeString="data-loading={isLoading}" copyEnabled={false} inline /> to enable CSS styling:</p>
+                    <Code lang="css" codeString={`&[data-loading="true"] {
+  position: relative;
+  cursor: wait;
+}`} copyEnabled={false} />
+                    <Heading headingLevel={3}>Preventing Duplicate Actions</Heading>
+                    <p>When a button triggers an async operation, users might click multiple times. We prevent this by:</p>
+                    <List ordered>
+                        <li>Checking <Code codeString="isLoading || disabled" copyEnabled={false} inline /> in our click handler</li>
+                        <li>Using <Code codeString="event.preventDefault()" copyEnabled={false} inline /> to stop the event</li>
+                        <li>Setting <Code lang="css" codeString="cursor: wait" copyEnabled={false} inline /> in CSS for visual feedback</li>
+                        <li>Using <Code codeString="aria-disabled" copyEnabled={false} inline /> to communicate the state to assistive technology</li>
+                    </List>
+                    <Heading headingLevel={3}>Integration with Forms</Heading>
+                    <p>
+                        Our button defaults to <Code codeString={`type="button"`} copyEnabled={false} inline /> instead of <Code codeString={`type="submit"`} copyEnabled={false} inline />.
+                    </p>
+                    <p className="bold">This default button type ensures that we:</p>
+                    <List>
+                        <li>Prevent accidental form submissions</li>
+                        <li>Force developers to explicitly opt-in to submit behavior</li>
+                        <li>Reduce bugs in complex forms with multiple buttons</li>
+                    </List>
+                    <p>If you need a submit button, simply override this type:</p>
+                    <Code copyEnabled={false} codeString={`<Button type="submit" onClick={handleSubmit}>
+  Save Changes
+</Button>`} />
+                </PostSection>
                 <PostSection>
                     <Heading headingLevel={2}>Accessibility Requirements</Heading>
 
-                    <Heading headingLevel={3}>WCAG</Heading>
+                    <Heading headingLevel={3}>WCAG Success Criteria That Apply to Buttons</Heading>
+                    <p>Buttons must meet several WCAG standards. Here are the key criteria our implementation addresses:</p>
+                    <PostNote>
+                        <p>This button is providing a base, more complex components that have additional accessibility considerations should be treated like their own Component and those concerns would be addressed within them.</p>
+                        <p>That being said, there is nothing within the Base Button Component that would prevent you from extending it to meet your needs</p>
+                    </PostNote>
+                    <Heading headingLevel={4}>Perceivable (Principle 1)</Heading>
+                    <List>
+                        <li><span className="bold">1.4.3 Contrast (Minimum)</span> - Text and borders must have 4.5:1 contrast ratio</li>
+                        <li><span className="bold">1.4.11 Non-text Contrast</span> - Interactive elements need 3:1 contrast against adjacent colors</li>
+                        <li><span className="bold">1.4.1 Use of Color</span> - Don't rely on color alone to convey state changes</li>
+                        <li><span className="bold">1.4.4 Resize Text</span> - Text must be readable when zoomed to 200%</li>
+                    </List>
+                    <Heading headingLevel={4}>Operable (Principle 2)</Heading>
+                    <List>
+                        <li><span className="bold">2.1.1 Keyboard</span> - All functionality must be available via keyboard</li>
+                        <li><span className="bold">2.4.7 Focus Visible</span> - Clear focus indicators for keyboard navigation</li>
+                        <li><span className="bold">2.5.5 Target Size</span> - Minimum 44×44px touch target (AAA standard)</li>
+                        <li><span className="bold">2.5.3 Label in Name</span> - Visible text should match accessible name</li>
+                    </List>
+                    <Heading headingLevel={4}>Understandable (Principle 3)</Heading>
+                    <List>
+                        <li><span className="bold">3.3.2 Labels or Instructions</span> - Clear, descriptive button labels</li>
+                        <li><span className="bold">3.2.2 On Input</span> - Button actions shouldn't cause unexpected context changes</li>
+                    </List>
+                    <Heading headingLevel={4}>Robust (Principle 4)</Heading>
+                    <List>
+                        <li><span className="bold">4.1.2 Name, Role, Value</span> - Proper semantic HTML and ARIA attributes</li>
+                        <li><span className="bold">4.1.3 Status Messages</span> - Loading states must be communicated</li>
+                    </List>
                     {/*  give references to common wcag success criteria that could apply to buttons 
                         1.1.1: Non-text Content
                         1.3.1: Info and Relationships
@@ -286,7 +349,7 @@ export default function useButton() {
                     */}
                     {/* explain why we dont use aria-loading - does this belong here or under ux/ui?? */}
 
-                    <Heading headingLevel={3}>How UX/UI adds</Heading>
+                    <Heading headingLevel={3}>How UX/UI Design Extends WCAG</Heading>
                     {/* Explain how WCAG doesnt cover all bases */}
                     {/* benefits of adding margin around the button */}
                     {/* contrast requirements dont consider disabled buttons but they should */}
@@ -302,28 +365,44 @@ export default function useButton() {
                     */}
                     {/* good reads on topic: 
                     https://adrianroselli.com/2021/01/multi-function-button.html - in depth article on creating a button. plain html,js,css example code is quite complicated imo
+                    https://kittygiraudel.com/2024/03/29/on-disabled-and-aria-disabled-attributes/ - explaining when to use aria-disabled over disabled
                     */}
+                    <Heading headingLevel={4}>Margin and Spacing</Heading>
+                    <Heading headingLevel={4}>Disabled State Contrast</Heading>
+                    <Heading headingLevel={4}>The aria-disabled decision</Heading>
+                    <Heading headingLevel={4}>Why we don&apos;t use aria-busy</Heading>
+                    <Heading headingLevel={4}>Consistent Button Sizing</Heading>
+                    <Heading headingLevel={4}>Assistive Technology isnt everything</Heading>
+                    <Heading headingLevel={4}>Further Reading</Heading>
                 </PostSection>
                 <PostSection id="CSS-styling">
                     <Heading headingLevel={2} id="CSS-styling-heading">CSS Styling</Heading>
                     <Heading headingLevel={3} id="reset-base-styles">Reset and Base Styles</Heading>
+                    <Heading headingLevel={3} id="">Custom Properties for Theming</Heading>
+                    <Heading headingLevel={3} id="">Button States</Heading>
+                    <Heading headingLevel={4} id="">Interaction stations</Heading>
+                    <Heading headingLevel={4} id="">Disabled</Heading>
+                    <Heading headingLevel={4} id="">Loading</Heading>
                     <Heading headingLevel={3} id="variants">Adding Variants</Heading>
-
-                    {/*
-                        Do I need this section? 
-                    <Heading headingLevel={3} id="user-preferences">User Preferences</Heading> 
-                    */}
+                    <Heading headingLevel={3} id="">Touch Device Optimization</Heading>
+                    <Heading headingLevel={3} id="">Respecting User Preferences</Heading>
                 </PostSection>
 
                 <PostSection id="testing">
                     <Heading headingLevel={2} id="testing-heading">Testing</Heading>
+                    <Heading headingLevel={3} id="">Set up</Heading>
+                    <Heading headingLevel={3} id="">The Component</Heading>
+                    <Heading headingLevel={3} id="">The Hook</Heading>
                 </PostSection>
 
                 <PostSection id="what-we-built">
                     <Heading headingLevel={2} id="what-we-built-heading">What We Built</Heading>
                     <p>Our base button component now provides:</p>
 
-                    <Heading headingLevel={3} id="what-we-built__core" className="heading-w-icon"><Icon icon={RiErrorWarningLine} color={"var(--color-primary-400)"} size={32} />Core Features</Heading>
+                    <Heading headingLevel={3} id="what-we-built__core" hasIcon >
+                        <Icon icon={RiErrorWarningLine} color={"var(--color-primary-400)"} size={32} />
+                        Core Features
+                    </Heading>
                     <List aria-labelledby="what-we-built__core">
                         <li>Type-safe component with TypeScript</li>
                         <li>Clean separation of logic and presentation</li>
@@ -336,7 +415,10 @@ export default function useButton() {
                         <li>Full test coverage</li>
                     </List>
 
-                    <Heading headingLevel={3} id="what-we-built__accessibility" className="heading-w-icon"><Icon icon={RiAccessibilityLine} color={"var(--color-primary-400)"} size={32} />Accessibility Checklist</Heading>
+                    <Heading headingLevel={3} id="what-we-built__accessibility" className="heading-w-icon">
+                        <Icon icon={RiAccessibilityLine} color={"var(--color-primary-400)"} size={32} />
+                        Accessibility Checklist
+                    </Heading>
                     <p>Our button implementation meets these accessibility standards:</p>
                     <List aria-labelledby="what-we-built__accessibility">
                         <li>AAA target size (44x44px minimum)</li>
@@ -369,13 +451,310 @@ export default function useButton() {
                         The patterns we&apos;ve established here will serve as the foundation for more complex
                         components like button groups, tab lists, and interactive panels.
                     </p>
+                </PostSection>
+                <PostSection id="resources">
+                    <Heading headingLevel={2}>Resources</Heading>
+                    <Heading headingLevel={3}>Complete Code Reference</Heading>
+                    <TabList
+                        className="code__reference"
+                        defaultActiveTabId="code_button"
+                        data-variant="accent"
+                        orientation="horizontal"
+                        tabs={[
+                            {
+                                id: 'code_button',
+                                tabLabel: 'button.tsx',
+                                panelContent: (
+                                    <Code codeString={`'use client'
+
+import clsx from 'clsx'
+import { BaseButtonProps, MouseEventType } from '@/components/button/button.type'
+import useButton from '@/components/button/useButton'
+import Spinner from '@/components/spinner'
+
+export default function Button({
+    className,
+    children,
+    onClick,
+    type = 'button',
+    disabled = false,
+    isLoading = false,
+    ref,
+    ...props
+}: BaseButtonProps) {
+    const { handleClick } = useButton()
+
+    function onClickHandler(event: MouseEventType) {
+
+    if (isLoading || disabled) {
+        event.preventDefault();
+        event.stopPropagation();  // ← Prevent form submission
+        return;
+    }
+    handleClick(onClick)(event)
+    }
+
+    return (
+    <button
+        {...props}
+        className={clsx(className, 'button')}
+        onClick={onClickHandler}
+        aria-disabled={isLoading || disabled}
+        data-loading={isLoading}
+        ref={ref}
+        type={type}
+        data-testid="base-button"
+    >
+        {children}
+        {isLoading && <Spinner />}
+    </button>
+    )
+}
+`} />
+                                )
+                            },
+                            {
+                                id: 'code_hook',
+                                tabLabel: 'useButton.tsx',
+                                panelContent: (
+                                    <Code codeString={`import type { ButtonClickHandler, MouseEventType } from '@/components/button/button.type';
+ 
+ export default function useButton() {
+   const handleClick = <T = void>(userHandler?: ButtonClickHandler<T>) =>
+     (event: MouseEventType): T | Promise<T> | undefined => {
+       if (!userHandler) return
+ 
+       try {
+         const result = userHandler(event)
+ 
+         // Log promise rejections without interfering
+         if (
+           result &&
+           typeof result === 'object' &&
+           typeof (result as { then?: unknown }).then === 'function'
+         ) {
+           void Promise.resolve(result).catch((err) => {
+             if (process.env.NODE_ENV !== 'production') {
+               // eslint-disable-next-line no-console
+               console.error('Button click error', err)
+             }
+           })
+         }
+ 
+         return result
+       } catch (err) {
+         if (process.env.NODE_ENV !== 'production') {
+           // eslint-disable-next-line no-console
+           console.error('Button click error', err)
+         }
+         throw err
+       }
+     }
+ 
+   return { handleClick }
+ }`} />
+                                )
+                            },
+                            {
+                                id: 'code_type',
+                                tabLabel: 'button.type.ts',
+                                panelContent: (
+                                    <Code lang="ts" codeString={`import type { ComponentPropsWithRef, MouseEvent } from 'react'
+
+export type MouseEventType = MouseEvent<HTMLButtonElement>;
+
+export type ButtonClickHandler<T = void> = (event: MouseEventType) => T | Promise<T>;
+
+export type BaseButtonProps = {
+    isLoading?: boolean;
+    'data-style'?: 'outlined' | 'filled';
+    'data-variant'?: 'primary' | 'secondary' | 'accent';
+    onClick?: ButtonClickHandler;
+} & Omit<ComponentPropsWithRef<'button'>, 'onClick'>;`} />
+                                )
+                            },
+                            {
+                                id: 'code_css',
+                                tabLabel: 'button.css',
+                                panelContent: (
+                                    <Code lang="css" codeString={`.button {
+    /* Layout properties */
+    --button-font-size: 1rem;
+    --button-margin: 8px;
+    --button-padding: 8px 16px;
+    --button-outline-offset: 2px;
+
+    /* WCAG Target Size Requirements */
+    /* AA: 24px x 24px minimum, AAA: 44px x 44px minimum */
+    min-width: 44px;
+    min-height: 44px;
+
+    /* Layout */
+    margin: var(--button-margin);
+    padding: var(--button-padding);
+    display: flex;
+    align-items: center;
+
+    /* Reset browser defaults */
+    -webkit-appearance: none;
+    appearance: none;
+    background: none;
+    border: var(--border-thin);
+    border-radius: var(--radius-md);
+    outline: 0;
+    box-shadow: none;
+
+    /* Apply color properties (defined in second declaration) */
+    background-color: var(--button-bg-color, transparent);
+    color: var(--button-color, currentColor);
+    border-color: var(--button-border-color, currentColor);
+    box-shadow: var(--button-shadow, none);
+    outline-color: var(--button-outline-color, currentColor);
+    outline-offset: var(--button-outline-offset);
+
+    /* Typography */
+    font: inherit;
+    font-size: var(--button-font-size);
+    line-height: 1.25;
+    text-align: center;
+    vertical-align: middle;
+
+    /* Smooth transitions */
+    transition:
+        background-color 0.2s ease,
+        color 0.2s ease,
+        border-color 0.2s ease,
+        outline 0.2s ease,
+        box-shadow 0.2s ease;
+
+    /* Interactive states - UX communication through outlines and transforms */
+    &:hover {
+        outline: 1px solid var(--button-outline-color, currentColor);
+        box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    &:focus-visible {
+        outline: 2px solid var(--button-outline-color, currentColor);
+        outline-offset: var(--button-outline-offset);
+        box-shadow: none;
+    }
+
+    &:active {
+        outline: 1px dotted var(--button-outline-color, currentColor);
+        transform: translateY(1px);
+    }
+    /* The button can't be disabled using this base button but other packages might add disabled to the button on the DOM. We should maintain consistent styling */
+    &:disabled,
+    &[aria-disabled="true"] {
+        --button-bg-color: var(--color-neutral-200);
+        --button-color: var(--color-neutral-800);
+        --button-border-color: var(--color-neutral-400);
+        cursor: not-allowed;
+
+        &:hover,
+        &:active {
+            outline: none;
+            box-shadow: none;
+            transform: none;
+        }
+
+        &:focus-visible {
+           --button-outline-color: var(--color-neutral-600);
+        }
+    }
+
+    &[data-loading="true"] {
+        position: relative;
+        cursor: wait;
+        display: flex;
+
+        &:hover:not(:focus-visible) {
+            outline: none;
+            box-shadow: none;
+            transform: none;
+        }
+    }
+}
+
+/* Only actual button elements get pointer cursor */
+button.button {
+    cursor: pointer;
+}
+
+/* Touch device optimization */
+@media screen and (any-pointer: coarse) {
+    .button {
+        --button-margin: 12px;
+        --button-padding: 12px 20px;
+    }
+}
+
+/* Respect user motion preferences */
+@media (prefers-reduced-motion: reduce) {
+    .button {
+        transition: none !important;
+        animation: none !important;
+    }
+}
+
+/* Filled style - solid background with contrasting text */
+.button[data-style="filled"] {
+    --button-color: var(--button-primary-color);
+    --button-bg-color: var(--button-secondary-color);
+    --button-border-color: var(--button-accent-color);
+    --button-outline-color: var(--button-accent-color);
+}
+
+/* Outline style - transparent background with colored border/text */
+.button[data-style="outlined"] {
+    --button-color: var(--button-secondary-color);
+    --button-bg-color: var(--button-primary-color);
+    --button-border-color: var(--button-accent-color);
+    --button-outline-color: var(--button-accent-color);
+}
+
+/* Color Variants */
+.button {
+    --button-primary-color: var(--color-neutral-100);
+    --button-secondary-color: var(--color-neutral-800);
+    --button-accent-color: var(--color-neutral-600);
+}
+
+.button[data-variant="primary"] {
+    --button-primary-color: var(--color-neutral-100);
+    --button-secondary-color: var(--color-primary-400);
+    --button-accent-color: var(--color-primary-600);
+}
+
+.button[data-variant="secondary"] {
+    --button-primary-color: var(--color-neutral-100);
+    --button-secondary-color: var(--color-secondary-400);
+    --button-accent-color: var(--color-secondary-600);
+
+}
+
+.button[data-variant="accent"] {
+    --button-primary-color: var(--color-neutral-100);
+    --button-secondary-color: var(--color-accent-400);
+    --button-accent-color: var(--color-accent-600);
+}`} />
+                                )
+                            }
+                        ]}
+                    />
+                    {/* decide if we want to embed a codepen or do we use tabpanel component to add each of the files under a tab 
+                    ### button.type.ts <!-- H3 -->
+                    ### useButton.ts <!-- H3 -->
+                    ### Button.tsx <!-- H3 -->
+                    ### button.css <!-- H3 -->
+                    */}
+                </PostSection>
+                <PostSection>
                     <PostNavigation
                         next={{
                             href: "/blog/design-system/buttons/sliders",
                             heading: "Slider Buttons"
                         }} />
-
-
                 </PostSection>
 
             </Post>
