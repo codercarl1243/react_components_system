@@ -1,0 +1,19 @@
+
+.tablist__header {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing);
+}
+.code__reference {
+    border-radius: 12px;
+    background-color: var(--color-code-dark);
+    padding-inline: 1em;
+    padding-block-end: 1em;
+
+    & pre {
+        height: 30rem;
+    }
+}
+.tablist__header-tab {
+    margin-inline:  0;
+}
