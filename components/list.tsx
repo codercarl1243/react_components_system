@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { ComponentProps,  } from "react";
+import { ComponentProps } from "react";
 
 type BaseListProps = {
   className?: string;
@@ -12,29 +12,29 @@ type OrderedListProps = ComponentProps<'ol'> & BaseListProps & { ordered: true; 
 
 type ListProps = UnorderedListProps | OrderedListProps;
 
-export default function List({ 
-  children, 
-  className, 
-  ordered = false, 
+export default function List({
+  children,
+  className,
+  ordered = false,
   variant = 'default',
   spacing = 'normal',
-  ...props 
+  ...props
 }: ListProps) {
-  
-//   const spacingClasses = {
-//     tight: 'space-y-1',
-//     normal: 'space-y-2',
-//     loose: 'space-y-4'
-//   };
 
-//   const variantClasses = {
-//     default: ordered ? 'list-decimal' : 'list-disc',
-//     disc: 'list-disc',
-//     circle: 'list-circle',
-//     square: 'list-square',
-//     decimal: 'list-decimal',
-//     none: 'list-none'
-//   };
+  //   const spacingClasses = {
+  //     tight: 'space-y-1',
+  //     normal: 'space-y-2',
+  //     loose: 'space-y-4'
+  //   };
+
+  //   const variantClasses = {
+  //     default: ordered ? 'list-decimal' : 'list-disc',
+  //     disc: 'list-disc',
+  //     circle: 'list-circle',
+  //     square: 'list-square',
+  //     decimal: 'list-decimal',
+  //     none: 'list-none'
+  //   };
 
   const listClasses = clsx(
     'list',
