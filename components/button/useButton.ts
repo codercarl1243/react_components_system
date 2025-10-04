@@ -9,20 +9,20 @@ export default function useButton() {
       try {
         const result = userHandler(event)
 
-        // Log promise rejections without interfering
+        /**
+         * Log promise rejections without interfering
+         * we re-throw so the caller and Error boundaries can catch
+         *  */ 
         if (result && typeof (result as any)?.then === 'function') {
-          void Promise.resolve(result).catch((err) => {
-            if (process.env.NODE_ENV !== 'production') {
+          return Promise.resolve(result).catch((err) => {
               log('Button click error', err, 'error')
-            }
+              throw err 
           })
         }
 
       } catch (err) {
-        if (process.env.NODE_ENV !== 'production') {
           log('Button click error', err, 'error')
-        }
-        throw err
+          throw err
       }
     }
 
