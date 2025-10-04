@@ -58,7 +58,7 @@ type TLogEntry = TDefaultLogEntry | TWarningLogEntry | TErrorLogEntry;
  *   console.log(l3.error); // Always available here
  * }
  */
-export function log<
+export default function log<
   L extends TLogLevel
 >(
   message: string,
