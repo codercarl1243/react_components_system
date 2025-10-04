@@ -1,8 +1,8 @@
 import type { ButtonClickHandler, MouseEventType } from '@/components/button/button.type';
 
 export default function useButton() {
-  const handleClick = <T = void>(userHandler?: ButtonClickHandler<T>) =>
-    (event: MouseEventType): T | Promise<T> | undefined => {
+  const handleClick = <T = unknown>(userHandler?: ButtonClickHandler<T>) =>
+    (event: MouseEventType) => {
       if (!userHandler) return
 
       try {
@@ -22,7 +22,6 @@ export default function useButton() {
           })
         }
 
-        return result
       } catch (err) {
         if (process.env.NODE_ENV !== 'production') {
           // eslint-disable-next-line no-console
