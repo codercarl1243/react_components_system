@@ -1,34 +1,28 @@
 import type { ButtonClickHandler, MouseEventType } from '@/components/button/button.type';
+import log from '@/utils/Logging';
 
 export default function useButton() {
-  const handleClick = <T = void>(userHandler?: ButtonClickHandler<T>) =>
+  const handleClick = <T = unknown>(userHandler?: ButtonClickHandler<T>) =>
     (event: MouseEventType) => {
       if (!userHandler) return
 
       try {
         const result = userHandler(event)
 
-        // Log promise rejections without interfering
-        if (
-          result &&
-          typeof result === 'object' &&
-          typeof (result as { then?: unknown }).then === 'function'
-        ) {
-          void Promise.resolve(result).catch((err) => {
-            if (process.env.NODE_ENV !== 'production') {
-              // eslint-disable-next-line no-console
-              console.error('Button click error', err)
-            }
+        /**
+         * Log promise rejections without interfering
+         * we re-throw so the caller and Error boundaries can catch
+         *  */ 
+        if (result && typeof (result as any)?.then === 'function') {
+          return Promise.resolve(result).catch((err) => {
+              log('Button click error', err, 'error')
+              throw err 
           })
         }
 
-        return result
       } catch (err) {
-        if (process.env.NODE_ENV !== 'production') {
-          // eslint-disable-next-line no-console
-          console.error('Button click error', err)
-        }
-        throw err
+          log('Button click error', err, 'error')
+          throw err
       }
     }
 

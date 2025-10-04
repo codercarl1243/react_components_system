@@ -3,3 +3,9 @@
     gap: calc(var(--spacing) * 2);
     align-items: center;
 }
+
+.heading {
+    overflow-wrap: break-word;
+    text-wrap: balance;
+    hyphens: auto;
+}

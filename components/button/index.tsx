@@ -1,9 +1,9 @@
 'use client'
 
 import clsx from 'clsx'
-import { BaseButtonProps, MouseEventType } from './button.type'
-import useButton from './useButton'
-import Ellipsis from '../ellipsis'
+import { BaseButtonProps, MouseEventType } from '@/components/button/button.type'
+import useButton from '@/components/button/useButton'
+import Spinner from '@/components/utilities/spinner'
 
 export default function Button({
   className,
@@ -21,9 +21,10 @@ export default function Button({
 
     if (isLoading || disabled) {
       event.preventDefault();
+      event.stopPropagation();  // ← Prevent form submission
       return;
     }
-    void handleClick(onClick)(event)
+    handleClick(onClick)(event)
   }
 
   return (
@@ -31,7 +32,6 @@ export default function Button({
       {...props}
       className={clsx(className, 'button')}
       onClick={onClickHandler}
-      disabled={disabled}
       aria-disabled={isLoading || disabled}
       data-loading={isLoading}
       ref={ref}
@@ -39,7 +39,7 @@ export default function Button({
       data-testid="base-button"
     >
       {children}
-      {/* {isLoading && <Ellipsis />} */}
+      {isLoading && <Spinner />}
     </button>
   )
 }

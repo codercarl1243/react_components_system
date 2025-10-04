@@ -23,7 +23,7 @@ class ShikiSingleton {
 
     this.initPromise = createHighlighter({
       themes: ['github-dark'],
-      langs: ['tsx', 'ts', 'css', 'md']
+      langs: ['tsx', 'ts', 'css', 'md', 'bash']
     }).then((h) => {
       this.highlighter = h
       if (process.env.NODE_ENV !== 'production') {

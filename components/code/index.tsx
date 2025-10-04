@@ -4,7 +4,7 @@ import { CopyButton } from '@/components/button/button.copy'
 
 interface Props {
     codeString: string
-    lang?: 'tsx' | 'ts' | 'css' | 'md';
+    lang?: 'tsx' | 'ts' | 'css' | 'md' | 'bash';
     inline?: boolean;
     layout?: 'full' | 'bleed' | 'content';
     title?: string;

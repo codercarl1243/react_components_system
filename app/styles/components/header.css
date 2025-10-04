@@ -14,7 +14,7 @@
 }
 
 .nav__primary a {
-    color: var(--color-neutral-100);
+    color: var(--color-primary-400);
     font-size: 1.125rem;
     transition: color 0.3s ease;
 
