@@ -102,6 +102,7 @@ export default function log<
     };
     // eslint-disable-next-line no-console
     console.error(`[ERROR]`, entry);
+    return;
   }
 
   if (level === 'warning') {
@@ -114,6 +115,7 @@ export default function log<
     };
     // eslint-disable-next-line no-console
     console.warn(`[WARN]`, entry);
+    return;
   }
 
   const entry: TDefaultLogEntry = {
