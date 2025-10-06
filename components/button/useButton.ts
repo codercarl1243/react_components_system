@@ -30,7 +30,7 @@ export default function useButton() {
 
         // Log all button clicks for analytics/debugging
         if (process.env.NODE_ENV !== 'production') {
-          log('Button clicked', undefined, 'default', { context: `${userHandler.name || 'un-named function'}`, trace: true })
+          log('Button clicked', undefined, 'default', { context: `${userHandler.name || 'anonymous function'}`, trace: true })
         }
         if (result && typeof (result as any)?.then === 'function') {
           /**
@@ -41,7 +41,7 @@ export default function useButton() {
            * If the user handler has its own try/catch, this won't fire.
            */
           void Promise.resolve(result).catch((err) => {
-            log('Unhandled async error', err, 'error', { context: `${userHandler.name || 'un-named function'}`, trace: true })
+            log('Unhandled async error', err, 'error', { context: `${userHandler.name || 'anonymous function'}`, trace: true })
           })
         }
 
@@ -54,7 +54,7 @@ export default function useButton() {
          * Log the error for debugging, then re-throw so the error still
          * propagates (breaks execution, shows in console, etc.)
          */
-        log('Button click error', err, 'error', { context: `${userHandler.name || 'un-named function'}`, trace: true })
+        log('Button click error', err, 'error', { context: `${userHandler.name || 'anonymous function'}`, trace: true })
         throw err
       }
     }
