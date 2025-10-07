@@ -53,7 +53,7 @@ export default function Button({
    *
    * - Prevents default form submission when loading or disabled.
    * - Stops propagation to avoid parent click triggers.
-   * - Delegates to `useButton`’s click handler otherwise.
+   * - Delegates to useButton's click handler otherwise.
    */
   function onClickHandler(event: MouseEventType) {
 
@@ -83,5 +83,4 @@ export default function Button({
       {children}
       {isLoading && <Spinner />}
     </button>
-  )
-}
+  )}
