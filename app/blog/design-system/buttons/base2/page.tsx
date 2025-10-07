@@ -105,53 +105,98 @@ export default function ButtonsBasePage() {
                     <Code codeString={`'use client'
 
 import clsx from 'clsx'
-import { BaseButtonProps, MouseEventType } from './button.type' // explored more in the Typescript section
-import Spinner from '@/components/utilities/spinner' // custom spinner but this can be anything
+import { BaseButtonProps, MouseEventType } from '@/components/button/button.type'
+import useButton from '@/components/button/useButton'
+import Spinner from '@/components/utilities/spinner'
 
+/**
+ * A base, accessible button component that supports loading states and 
+ * safely manages click behavior and logging through a custom hook.
+ *  
+ * This component uses aria-disabled instead of the native disabled attribute
+ * to maintain discoverability and tab order. The button remains focusable
+ * and discoverable to assistive technology while in this non-functional state.
+ *
+ * @component
+ * @param {BaseButtonProps} props - The props for the Button component.
+ * @param {string} [props.className] - Additional class names to append.
+ * @param {React.ReactNode} props.children - The button label or content.
+ * @param {function} [props.onClick] - Optional click handler.
+ * @param {'button' | 'submit' | 'reset'} [props.type='button'] - The button type.
+ * @param {boolean} [props.disabled=false] - Whether the button is disabled.
+ * @param {boolean} [props.isLoading=false] - Whether the button is in a loading state.
+ * @param {React.Ref<HTMLButtonElement>} [props.ref] - Optional ref to the button element.
+ * @returns {JSX.Element} The rendered Button component.
+ *
+ * @example
+ * // Loading state with spinner
+ * <Button isLoading onClick={handleSubmit}>Submit</Button>
+ * 
+ * // Disabled but discoverable
+ * <Button disabled onClick={handleSave}>Save</Button>
+ * 
+ * // With variant styling
+ * <Button data-variant="primary" data-style="filled">
+ *   Click Me
+ * </Button>
+ */
 export default function Button({
-className,
-children,
-onClick,
-type = 'button',
-disabled = false,
-isLoading = false,
-ref,
-...props
+    className,
+    children,
+    onClick,
+    type = 'button',
+    disabled = false,
+    isLoading = false,
+    ref,
+    ...props
 }: BaseButtonProps) {
+    const { handleClick } = useButton()
 
-const { handleClick } = useButton() // We'll explore this hook shortly
+    /**
+     * Handles click events.
+     *
+     * - Prevents default form submission when loading or disabled.
+     * - Stops propagation to avoid parent click triggers.
+     * - Delegates to useButton's click handler otherwise.
+     */
+    function onClickHandler(event: MouseEventType) {
 
-function onClickHandler(event: MouseEventType) {
-  if (isLoading || disabled) {
-    event.preventDefault();
-    return;
-  }
-  handleClick(onClick)(event)
-}
+    if (isLoading || disabled) {
+        /**  
+         * Using both is correct here since a disabled/loading button should do nothing and 
+         * not trigger parent handlers.
+         * */
+        event.preventDefault()      // Prevent form submission and/or default click actions
+        event.stopPropagation()     // Prevent bubbling to parent click handlers
+        return;
+    }
+    return handleClick(onClick)(event)
+    }
 
-return (
-    <button
-        {...props}
-        className={clsx(className, 'button')}
-        onClick={onClickHandler}
-        aria-disabled={isLoading || disabled}
-        data-loading={isLoading}
-        ref={ref}
-        type={type}
-    >
-        {children}
-        {isLoading && <Spinner />}
-    </button>
-)}`} />
+    return (
+        <button
+            {...props}
+            className={clsx(className, 'button')}
+            onClick={onClickHandler}
+            aria-disabled={isLoading || disabled}
+            data-loading={isLoading}
+            ref={ref}
+            type={type}
+            data-testid="base-button"
+        >
+            {children}
+            {isLoading && <Spinner />}
+        </button>
+    )}`} />
 
                     <Heading headingLevel={4}>Key Decisions</Heading>
                     <List>
                         <li><Code codeString={`clsx(className, 'button')`} inline copyEnabled={false} /> - Combines user-provided classes with our base class, giving consumers flexibility while maintaining defaults</li>
-                        <li><Code codeString={`isLoading || disabled`} inline copyEnabled={false} /> - Prevents click handlers from firing during loading or disabled states. We are using  <Code codeString={`aria-disabled`} inline copyEnabled={false} /> </li>
+                        <li><Code codeString={`isLoading || disabled`} inline copyEnabled={false} /> - Prevents click handlers from firing during loading or disabled states.</li>
                         <li><Code codeString={`event.preventDefault()`} inline copyEnabled={false} /> - Stops any default behavior when the button shouldn't be interactive</li>
                         <li><Code codeString={`ref`} inline copyEnabled={false} /> - React 19 allows refs to be passed as regular props without <Code codeString={`forwardRef`} inline copyEnabled={false} /></li>
                         <li><Code codeString={`data-loading`} inline copyEnabled={false} /> - Provides a styling hook for loading states without relying on JavaScript</li>
-                        <li>Both <Code codeString={`disabled`} inline copyEnabled={false} /> and <Code codeString={`aria-disabled`} inline copyEnabled={false} /> - We'll explain this choice in the accessibility section</li>
+                        <li><Code codeString={`aria-disabled`} inline copyEnabled={false} /> over <Code codeString={`disabled`} inline copyEnabled={false} /> - We'll explain this choice in the accessibility section</li>
                     </List>
                     <Heading headingLevel={3} id="typescript-support">Adding TypeScript Support</Heading>
                     <p>Type safety helps catch errors early and provides excellent autocomplete for consumers. Our type definitions need to:</p>
@@ -165,25 +210,27 @@ return (
 
 export type MouseEventType = MouseEvent<HTMLButtonElement>;
 
-export type ButtonClickHandler<T = void> = (event: MouseEventType) => T | Promise<T>;
+export type ButtonClickHandler<T = unknown> = (event: MouseEventType) => T | Promise<T>;
 
 export type BaseButtonProps = {
+    disabled?: boolean; 
     isLoading?: boolean;
-    'data-style'?: 'outlined' | 'filled';Omit<ComponentPropsWithRef<'button'>, 'onClick'>
+    'data-style'?: 'outlined' | 'filled';
     'data-variant'?: 'primary' | 'secondary' | 'accent';
     onClick?: ButtonClickHandler;
-} & Omit<ComponentPropsWithRef<'button'>, 'onClick'>;`} />
+} & Omit<ComponentPropsWithRef<'button'>, 'onClick' | 'disabled'>;`} />
                     <Heading headingLevel={4}>Types Breakdown</Heading>
                     <List>
                         <li><Code codeString={`MouseEventType`} inline copyEnabled={false} /> - Alias for cleaner code and easier updates if we need to change event types</li>
-                        <li><Code codeString={`ButtonClickHandler<T = void>`} inline copyEnabled={false} /> - Supports both void functions and functions that return values (including Promises). The generic allows type inference at the call site</li>
-                        <li><Code codeString={`Omit<ComponentPropsWithRef<'button'>, 'onClick'>`} inline copyEnabled={false} /> - Inherits all native button props (className, aria-*, data-*, etc.) while replacing onClick with our typed version</li>
+                        <li><Code codeString={`ButtonClickHandler<T = unknown>`} inline copyEnabled={false} /> - The unknown default allows maximum flexibility while maintaining type safety through inference at the call site</li>
+                        <li><Code codeString={`Omit<ComponentPropsWithRef<'button'>, 'onClick' | 'disabled'>`} inline copyEnabled={false} /> - Inherits all native button props (className, aria-*, data-*, etc.) while replacing onClick, and disabled with our typed versions</li>
                     </List>
                 </PostSection>
 
                 <PostSection id="interaction-logic">
                     <Heading headingLevel={2} id="interaction-logic-heading">Interaction Logic</Heading>
-                    <p>Our button needs to handle both synchronous and asynchronous click handlers gracefully. We will extract this logic into a custom hook for several reasons:</p>
+                    <p>Our button needs to handle both <span className="fun-underline">synchronous</span> and <span className="fun-underline">asynchronous</span> click handlers gracefully.</p>
+                    <p> We extract this logic into a custom hook for several reasons:</p>
                     <List>
                         {/* <li>Reusability - Other components (like <Link>toggle buttons</Link>) will need the same logic</li> */}
                         <li><span className="bold">Reusability</span> - Other components (like toggle buttons) will need the same logic</li>
@@ -200,34 +247,63 @@ export type BaseButtonProps = {
                     </List>
                     <p>Here's the complete implementation:</p>
                     <Code codeString={`import type { ButtonClickHandler, MouseEventType } from '@/components/button/button.type';
+import log from '@/utils/Logging';
 
 export default function useButton() {
-    const handleClick = <T = void>(userHandler?: ButtonClickHandler<T>) =>
-    (event: MouseEventType): T | Promise<T> | undefined => {
+    /**
+     * Creates a wrapped click handler that logs all button interactions and handles errors.
+     * 
+     * This wrapper provides centralized logging for:
+     * - All button click events (successful and failed) - Logged in: Development only
+     * - Synchronous errors (caught and re-thrown) - Logged in: All environments
+     * - Unhandled asynchronous errors (not re-thrown) - Logged in: All environments
+     * 
+     * Note: If the user handler catches its own errors, those errors will NOT be logged here.
+     * Only unhandled promise rejections are captured for async operations.
+     * 
+     * @template T - The return type of the user's click handler
+     * @param {ButtonClickHandler<T>} [userHandler] - The user's click handler function
+     * @returns {Function} A wrapped click handler that can be passed to button onClick
+     * 
+     * @example
+     * const { handleClick } = useButton()
+     * <button onClick={handleClick(myAsyncHandler)}>Click me</button>
+     */
+    const handleClick = <T = unknown>(userHandler?: ButtonClickHandler<T>) =>
+    (event: MouseEventType) => {
         if (!userHandler) return
 
         try {
-        const result = userHandler(event)
+            const result = userHandler(event)
 
-        // Log promise rejections without interfering
-        if (
-            result &&
-            typeof result === 'object' &&
-            typeof (result as { then?: unknown }).then === 'function'
-        ) {
-            void Promise.resolve(result).catch((err) => {
-                    // This is where you would hook into a logging service
-                    customLoggingService(err)
-            })
-        }
+            // Log all button clicks for analytics/debugging
+            if (process.env.NODE_ENV !== 'production') {
+                log('Button clicked', undefined, 'default', { context: \`\${userHandler.name || 'anonymous function'}\`, trace: true })
+            }
+            if (result && typeof (result as any)?.then === 'function') {
+                /**
+                 * Attach error logging to unhandled promise rejections.
+                 * Uses void to indicate we're intentionally not awaiting this promise.
+                 * 
+                 * Note: This only catches rejections that the user handler did NOT catch.
+                 * If the user handler has its own try/catch, this won't fire.
+                 */
+                void Promise.resolve(result).catch((err) => {
+                log('Unhandled async error', err, 'error', { context: \`\${userHandler.name || 'anonymous function'}\`, trace: true })
+                })
+            }
 
-        return result
+            // Return the result (could be a value, Promise, or undefined)
+            return result
+
         } catch (err) {
-            // This is where you would hook into a logging service
-            customLoggingService(err)
-            // Re-throw synchronous errors so React error boundaries can catch them
-            // This prevents silent failures and allows graceful error UI
-        throw err
+            /**
+             * Catch synchronous errors thrown during handler execution.
+             * Log the error for debugging, then re-throw so the error still
+             * propagates (breaks execution, shows in console, etc.)
+             */
+            log('Button click error', err, 'error', { context: \`\${userHandler.name || 'anonymous function'}\`, trace: true })
+            throw err
         }
     }
 
@@ -237,20 +313,21 @@ export default function useButton() {
                     <Heading headingLevel={3}>Why this approach</Heading>
                     <List>
                         <li>
-                            <span className="bold">Curried function</span> - <Code codeString="handleClick(onClick)(event)" inline copyEnabled={false} /> allows us to configure the handler once and reuse it.
+                            <p><span className="bold">Curried function</span> - <Code codeString="handleClick(onClick)(event)" inline copyEnabled={false} /> allows us to configure the handler once and reuse it.</p>
                         </li>
                         <li>
-                            <span className="bold">Duck typing for Promises</span> - We check for a <Code codeString=".then" inline copyEnabled={false} /> method rather than using <Code codeString="instanceof Promise" inline copyEnabled={false} /> because the handler might return a Promise-like object.
+                            <p><span className="bold">Duck typing for Promises</span> - We check for a <Code codeString=".then" inline copyEnabled={false} /> method rather than using <Code codeString="instanceof Promise" inline copyEnabled={false} /> because the handler might return a <span className="italic">Promise-like</span> object. </p>
+                            <p>This is a little bit more verbose and not as pretty but 2 extra lines ensures we don&apos;t miss the edges.</p>
                         </li>
                         <li>
-                            The <span className="bold"><Code codeString="void" inline copyEnabled={false} /> operator</span> - Explicitly discards the Promise return value, telling TypeScript/ESLint we're intentionally not awaiting it (fire-and-forget error logging).
+                            <p>The <span className="bold"><Code codeString="void" inline copyEnabled={false} /> operator</span> - Explicitly discards the Promise return value, telling TypeScript/ESLint we're intentionally not awaiting it (fire-and-forget error logging).</p>
                         </li>
                         <li>
-                            <span className="bold">Centralized logging</span> - Errors are logged consistently across all buttons. This is one of the main reasons we extract this logic into a hook rather than handling it in each component.
+                            <p><span className="bold">Centralized logging</span> - Errors are logged consistently across all buttons. This is one of the main reasons we extract this logic into a hook rather than handling it in each component.</p>
                         </li>
                         <li>
-                            <span className="bold">Re-throw synchronous errors</span> - By re-throwing with <Code inline codeString="throw err" copyEnabled={false} />, we allow React error boundaries to catch and handle errors. This prevents the UI from breaking silently.
-                            <span className="bold">Async errors</span> are logged but not re-thrown since they occur after the handler returns.
+                            <p><span className="bold">Re-throw synchronous errors</span> - By re-throwing with <Code inline codeString="throw err" copyEnabled={false} />, we allow React error boundaries to catch and handle errors. This prevents the UI from breaking silently.
+                                <span className="bold">Async errors</span> are logged but not re-thrown since this occurs <FunHighlight>after the promise rejects.</FunHighlight></p>
                         </li>
                     </List>
                     <PostNote>
@@ -350,6 +427,7 @@ export default function useButton() {
                     {/* explain why we dont use aria-loading - does this belong here or under ux/ui?? */}
 
                     <Heading headingLevel={3}>How UX/UI Design Extends WCAG</Heading>
+                    <p>WCAG provides minimum standards, but good UX goes further. Here's how our implementation adds:</p>
                     {/* Explain how WCAG doesnt cover all bases */}
                     {/* benefits of adding margin around the button */}
                     {/* contrast requirements dont consider disabled buttons but they should */}
@@ -368,8 +446,28 @@ export default function useButton() {
                     https://kittygiraudel.com/2024/03/29/on-disabled-and-aria-disabled-attributes/ - explaining when to use aria-disabled over disabled
                     */}
                     <Heading headingLevel={4}>Margin and Spacing</Heading>
+                    <p>WCAG addresses target size but does not specifically require spacing between targets. This button has margin added by default</p>
+                    <p><span className="bold">Why this matters:</span> Users with motor disabilities benefit from space between interactive elements. Accidental taps are less likely when targets aren't crowded. <span className="fun_underline">This is especially important on touch devices</span></p>
                     <Heading headingLevel={4}>Disabled State Contrast</Heading>
+                    <p>WCAG's contrast requirements have an exception for disabled elements. But disabled buttons should still be visible and identifiable, they shouldn't dissapear from view because of an action that the user has taken.</p>
                     <Heading headingLevel={4}>The aria-disabled decision</Heading>
+                    <p>This is one of the most important accessibility choices in our component. We use <Code codeString="aria-disabled" inline copyEnabled={false}/> instead of the native <Code codeString="disabled" inline copyEnabled={false}/> attribute.</p>
+                    <p className="bold">The problem with <Code codeString="disabled" inline copyEnabled={false}/>:</p>
+                    <List>
+                        <li>Removes the button from the accessibility tree</li>
+                        <li>Changes tab order dynamically</li>
+                        <li>The Button can't be focused or announced by all assistive technologies</li>
+                        <li>Users can find it hard to understand what is unavailable and why</li>
+                    </List>
+                    <p className="bold">Our solution - <Code codeString="aria-disabled" inline copyEnabled={false}/></p>
+                    <p>This approach:</p>
+                    <List>
+                        <li>Keeps the button in the tab order</li>
+                        <li>Allows screen readers to announce the button and it's state</li>
+                        <li>Prevents confusion the user may experience</li>
+                        <li>Works for both permanently disabled and temporily <span className="italic">loading</span> states</li>
+                    </List>
+                    <PostNote>Using aria-disabled in the same way as disabled works - We need to take a few extra steps and ensure that our click handler prevents interactions, along with targeting the aria-disabled state in our styling</PostNote>
                     <Heading headingLevel={4}>Why we don&apos;t use aria-busy</Heading>
                     <Heading headingLevel={4}>Consistent Button Sizing</Heading>
                     <Heading headingLevel={4}>Assistive Technology isnt everything</Heading>
@@ -518,41 +616,35 @@ export default function Button({
                                 tabLabel: 'useButton.tsx',
                                 panelContent: (
                                     <Code codeString={`import type { ButtonClickHandler, MouseEventType } from '@/components/button/button.type';
- 
- export default function useButton() {
-   const handleClick = <T = void>(userHandler?: ButtonClickHandler<T>) =>
-     (event: MouseEventType): T | Promise<T> | undefined => {
-       if (!userHandler) return
- 
-       try {
-         const result = userHandler(event)
- 
-         // Log promise rejections without interfering
-         if (
-           result &&
-           typeof result === 'object' &&
-           typeof (result as { then?: unknown }).then === 'function'
-         ) {
-           void Promise.resolve(result).catch((err) => {
-             if (process.env.NODE_ENV !== 'production') {
-               // eslint-disable-next-line no-console
-               console.error('Button click error', err)
-             }
-           })
-         }
- 
-         return result
-       } catch (err) {
-         if (process.env.NODE_ENV !== 'production') {
-           // eslint-disable-next-line no-console
-           console.error('Button click error', err)
-         }
-         throw err
-       }
-     }
- 
-   return { handleClick }
- }`} />
+import log from '@/utils/Logging';
+
+export default function useButton() {
+    const handleClick = <T = unknown>(userHandler?: ButtonClickHandler<T>) =>
+    (event: MouseEventType) => {
+        if (!userHandler) return
+
+        try {
+            const result = userHandler(event)
+
+            if (process.env.NODE_ENV !== 'production') {
+                log('Button clicked', undefined, 'default', { context: \`\${userHandler.name || 'anonymous function'}\`, trace: true })
+            }
+            if (result && typeof (result as any)?.then === 'function') {
+                void Promise.resolve(result).catch((err) => {
+                log('Unhandled async error', err, 'error', { context: \`\${userHandler.name || 'anonymous function'}\`, trace: true })
+                })
+            }
+
+            return result
+
+        } catch (err) {
+            log('Button click error', err, 'error', { context: \`\${userHandler.name || 'anonymous function'}\`, trace: true })
+            throw err
+        }
+    }
+
+    return { handleClick }
+}`} />
                                 )
                             },
                             {
@@ -563,14 +655,15 @@ export default function Button({
 
 export type MouseEventType = MouseEvent<HTMLButtonElement>;
 
-export type ButtonClickHandler<T = void> = (event: MouseEventType) => T | Promise<T>;
+export type ButtonClickHandler<T = unknown> = (event: MouseEventType) => T | Promise<T>;
 
 export type BaseButtonProps = {
+    disabled?: boolean; 
     isLoading?: boolean;
     'data-style'?: 'outlined' | 'filled';
     'data-variant'?: 'primary' | 'secondary' | 'accent';
     onClick?: ButtonClickHandler;
-} & Omit<ComponentPropsWithRef<'button'>, 'onClick'>;`} />
+} & Omit<ComponentPropsWithRef<'button'>, 'onClick' | 'disabled'>;`} />
                                 )
                             },
                             {
