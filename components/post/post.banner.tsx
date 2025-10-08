@@ -33,7 +33,7 @@ export default function PostBanner({ title, headingId, subtitle, image }: PostBa
 
       {image?.src
         ? (
-          <Image src={image.src} alt={image.alt ?? ''} variant='banner' className='post__banner__image' />
+          <Image src={image.src} alt={image.alt ?? ''} variant='banner' className='post__banner__image' priority={true} />
         )
         : null}
       <div className='post__banner__text'>
