@@ -22,8 +22,6 @@ type TErrorLogEntry = TBaseLogEntry & {
   stack?: string;  // optional stack trace
 };
 
-type TLogEntry = TDefaultLogEntry | TWarningLogEntry | TErrorLogEntry;
-
 
 /**
  * General logging utility for Next.js / TypeScript apps.

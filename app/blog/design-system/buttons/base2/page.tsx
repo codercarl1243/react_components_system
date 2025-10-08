@@ -73,7 +73,7 @@ export default function ButtonsBasePage() {
                     <p>I have installed a couple of additional packages:</p>
                     <List>
                         <li><Link className="bold" href="https://www.npmjs.com/package/@remixicon/react">RemixIcons</Link> to leverage their extensive and free library of icons</li>
-                        <li><Link className="bold" href="https://www.npmjs.com/package/clsx">CLSX</Link>to handle class names conditionally</li>
+                        <li><Link className="bold" href="https://www.npmjs.com/package/clsx">CLSX</Link> to handle class names conditionally</li>
                     </List>
                     <Code lang="bash" codeString={`npm install @remixicon/react clsx`} />
                     <PostNote className="italic">
@@ -475,22 +475,22 @@ export default function useButton() {
                 </PostSection>
                 <PostSection id="css-styling">
                     <Heading headingLevel={2} id="css-styling-heading">CSS Styling</Heading>
-                    <Heading headingLevel={3} id="reset-base-styles">Reset and Base Styles</Heading>
-                    <Heading headingLevel={3} id="">Custom Properties for Theming</Heading>
-                    <Heading headingLevel={3} id="">Button States</Heading>
-                    <Heading headingLevel={4} id="">Interaction stations</Heading>
-                    <Heading headingLevel={4} id="">Disabled</Heading>
-                    <Heading headingLevel={4} id="">Loading</Heading>
-                    <Heading headingLevel={3} id="variants">Adding Variants</Heading>
-                    <Heading headingLevel={3} id="">Touch Device Optimization</Heading>
-                    <Heading headingLevel={3} id="">Respecting User Preferences</Heading>
+                    <Heading headingLevel={3} id="css-reset-base-styles">Reset and Base Styles</Heading>
+                    <Heading headingLevel={3} id="css-custom-properties">Custom Properties for Theming</Heading>
+                    <Heading headingLevel={3} id="css-button-states">Button States</Heading>
+                    <Heading headingLevel={4} id="css-interactions">Interaction states</Heading>
+                    <Heading headingLevel={4} id="css-disabled">Disabled</Heading>
+                    <Heading headingLevel={4} id="css-loading">Loading</Heading>
+                    <Heading headingLevel={3} id="css-variants">Adding Variants</Heading>
+                    <Heading headingLevel={3} id="css-touch-devices">Touch Device Optimization</Heading>
+                    <Heading headingLevel={3} id="css-user-preferences">Respecting User Preferences</Heading>
                 </PostSection>
 
                 <PostSection id="testing">
                     <Heading headingLevel={2} id="testing-heading">Testing</Heading>
-                    <Heading headingLevel={3} id="">Set up</Heading>
-                    <Heading headingLevel={3} id="">The Component</Heading>
-                    <Heading headingLevel={3} id="">The Hook</Heading>
+                    <Heading headingLevel={3} id="testing-setup">Set up</Heading>
+                    <Heading headingLevel={3} id="testing-component">The Component</Heading>
+                    <Heading headingLevel={3} id="testing-hook">The Hook</Heading>
                 </PostSection>
 
                 <PostSection id="what-we-built">
@@ -584,31 +584,32 @@ export default function Button({
 
     function onClickHandler(event: MouseEventType) {
 
-    if (isLoading || disabled) {
-        event.preventDefault();
-        event.stopPropagation();  // ← Prevent form submission
-        return;
-    }
-    handleClick(onClick)(event)
+        if (isLoading || disabled) {
+            event.preventDefault()
+            event.stopPropagation()
+            return;
+        }
+
+        return handleClick(onClick)(event)
     }
 
     return (
-    <button
-        {...props}
-        className={clsx(className, 'button')}
-        onClick={onClickHandler}
-        aria-disabled={isLoading || disabled}
-        data-loading={isLoading}
-        ref={ref}
-        type={type}
-        data-testid="base-button"
-    >
-        {children}
-        {isLoading && <Spinner />}
-    </button>
+        <button
+            {...props}
+            className={clsx(className, 'button')}
+            onClick={onClickHandler}
+            aria-disabled={isLoading || disabled}
+            data-loading={isLoading}
+            ref={ref}
+            type={type}
+            data-testid="base-button"
+        >
+            {icon && <Icon icon={icon}/>}
+            {children}
+            {isLoading && <Spinner />}
+        </button>
     )
-}
-`} />
+}`} />
                                 )
                             },
                             {

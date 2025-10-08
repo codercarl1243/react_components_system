@@ -74,7 +74,7 @@ export default function Button({
   return (
     <button
       {...props}
-      className={clsx(className, 'button')}
+      className={clsx(className, {'button-w-icon': icon}, 'button')}
       onClick={onClickHandler}
       aria-disabled={isLoading || disabled}
       data-loading={isLoading}
