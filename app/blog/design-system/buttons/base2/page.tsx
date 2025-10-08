@@ -10,7 +10,6 @@ import PostSection from "@/components/post/post.section";
 import PostSideBar from "@/components/post/sidebar";
 import { type Metadata } from "next";
 import { RiAccessibilityLine, RiErrorWarningLine, RiFlaskLine } from "@remixicon/react";
-import Icon from "@/components/icon";
 import PostNote from "@/components/post/post.note";
 import TabList from "@/components/tablist";
 
@@ -497,8 +496,7 @@ export default function useButton() {
                     <Heading headingLevel={2} id="what-we-built-heading">What We Built</Heading>
                     <p>Our base button component now provides:</p>
 
-                    <Heading headingLevel={3} id="what-we-built__core" hasIcon >
-                        <Icon icon={RiErrorWarningLine} color={"var(--color-primary-400)"} size={32} />
+                    <Heading headingLevel={3} id="what-we-built__core" icon={RiErrorWarningLine} >
                         Core Features
                     </Heading>
                     <List aria-labelledby="what-we-built__core">
@@ -513,8 +511,7 @@ export default function useButton() {
                         <li>Full test coverage</li>
                     </List>
 
-                    <Heading headingLevel={3} id="what-we-built__accessibility" className="heading-w-icon">
-                        <Icon icon={RiAccessibilityLine} color={"var(--color-primary-400)"} size={32} />
+                    <Heading headingLevel={3} id="what-we-built__accessibility" icon={RiAccessibilityLine}>
                         Accessibility Checklist
                     </Heading>
                     <p>Our button implementation meets these accessibility standards:</p>
@@ -528,7 +525,7 @@ export default function useButton() {
                     </List>
 
 
-                    <Heading headingLevel={3} id="what-we-built__DX" className="heading-w-icon"><Icon icon={RiFlaskLine} color={"var(--color-primary-400)"} size={32} />Developer Experience</Heading>
+                    <Heading headingLevel={3} id="what-we-built__DX" icon={RiFlaskLine}>Developer Experience</Heading>
                     <List aria-labelledby="what-we-built__DX">
                         <li>Clean separation of logic and presentation</li>
                         <li>Consistent API across all variants</li>
