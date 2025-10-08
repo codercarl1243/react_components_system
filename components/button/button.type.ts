@@ -13,3 +13,9 @@ export type BaseButtonProps = {
     'data-variant'?: 'primary' | 'secondary' | 'accent';
     onClick?: ButtonClickHandler;
 } & Omit<ComponentPropsWithRef<'button'>, 'onClick' | 'disabled'>;
+
+type AccessibleLabel =
+  | { 'aria-label': string; 'aria-labelledby'?: never }
+  | { 'aria-labelledby': string; 'aria-label'?: never };
+
+export type IconButtonProps = AccessibleLabel & Omit<BaseButtonProps, 'children'>;
