@@ -30,7 +30,7 @@ const getIconSize = (level: number): number => {
  *
  * @param headingLevel - Semantic heading level to render (1–6). Defaults to `3`.
  * @param headingSize - Visual size level used to pick the CSS size class (1–6). Defaults to `headingLevel`.
- * @param hasIcon - a flag to add classname to the Heading element that adds spacing between the Icon and the Text
+ * @param icon - Optional icon to render before the heading text. When provided, adds spacing between the icon and text.
  * @returns A React element for the requested heading tag with composed classes and forwarded props.
  */
 
