@@ -861,7 +861,7 @@ button.button {
                     { id: 'testing', href: '#testing', label: 'Testing' },
                     { id: 'what-we-built', href: '#what-we-built', label: 'What We Built' },
                     { id: 'whats-next', href: '#whats-next', label: "What's Next" },
-                    { id: 'resources', href: '#resources', label: "resources" }
+                    { id: 'resources', href: '#resources', label: "Resources" }
                 ]}
                 // Fillers
                 relatedPosts={[
