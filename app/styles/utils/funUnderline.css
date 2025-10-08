@@ -44,7 +44,8 @@
 
     .fun-underline::after,
     .fun-underline.individual::after {
-        transition: none;
+        transition: none !important;
+        animation: none !important;
     }
 }
 
