@@ -1,6 +1,7 @@
 import clsx from 'clsx'
-import type { HeadingPropsType } from './heading.type'
+import type { HeadingPropsType } from '@/components/heading/heading.type'
 import { createElement } from 'react'
+import Icon from '@/components/icon'
 
 const getSizeClass = (level: number): string => {
   switch (level) {
@@ -13,7 +14,15 @@ const getSizeClass = (level: number): string => {
     default: return 'text-2xl'
   }
 }
-
+const getIconSize = (level: number): number => {
+  switch (level) {
+    case 1: return 64
+    case 2: return 48
+    case 3: return 32
+    case 4: return 24
+    default: return 16
+  }
+}
 /**
  * Render a semantic heading element with configurable visual size.
  *
@@ -28,21 +37,28 @@ const getSizeClass = (level: number): string => {
 export default function Heading({
   headingLevel = 3,
   headingSize = headingLevel,
-  hasIcon = false,
   children,
   className,
+  icon,
   ...props
 }: HeadingPropsType) {
+
+ const content = icon ? (
+    <>
+      <Icon icon={icon} size={getIconSize(headingSize)} />
+      <span className='heading__content'>{children}</span>
+    </>
+  ) : children;
 
   return createElement(
     `h${headingLevel}`,
     {
       className: clsx('font-main heading', 
-        {"heading-w-icon": hasIcon},
+        {"heading-w-icon": icon},
         className, 
         getSizeClass(headingSize)),
       ...props
     },
-    children
+    content
   )
 }

@@ -4,6 +4,18 @@
     align-items: center;
 }
 
+.heading-w-icon:nth-of-type(3n+1) {
+    color: var(--color-primary-400);
+}
+
+.heading-w-icon:nth-of-type(3n+2) {
+    color: var(--color-secondary-400);
+}
+
+.heading-w-icon:nth-of-type(3n+3) {
+    color: var(--color-accent-400);
+}
+
 .heading {
     overflow-wrap: break-word;
     text-wrap: balance;
