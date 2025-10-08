@@ -4,6 +4,7 @@ import clsx from 'clsx'
 import { BaseButtonProps, MouseEventType } from '@/components/button/button.type'
 import useButton from '@/components/button/useButton'
 import Spinner from '@/components/utilities/spinner'
+import Icon from '@/components/icon'
 
 /**
  * A base, accessible button component that supports loading states and 
@@ -44,6 +45,7 @@ export default function Button({
   disabled = false,
   isLoading = false,
   ref,
+  icon,
   ...props
 }: BaseButtonProps) {
   const { handleClick } = useButton()
@@ -80,7 +82,8 @@ export default function Button({
       type={type}
       data-testid="base-button"
     >
-      {children}
+      {icon && <Icon icon={icon}/>}
+      <span className='button__content'>{children}</span>
       {isLoading && <Spinner />}
     </button>
   )}

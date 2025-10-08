@@ -2,19 +2,36 @@
     /* Layout properties */
     --button-font-size: 1rem;
     --button-margin: 8px;
-    --button-padding: 8px 16px;
-    --button-outline-offset: 2px;
+    --button-padding-y: 8px;
+    --button-padding-x: 4px;
+    --button-icon-width: 24px;
 
     /* WCAG Target Size Requirements */
     /* AA: 24px x 24px minimum, AAA: 44px x 44px minimum */
     min-width: 44px;
     min-height: 44px;
 
-    /* Layout */
-    margin: var(--button-margin);
-    padding: var(--button-padding);
-    display: flex;
+    /* Layout - reserve space for icons*/
+    display: grid;
+    grid-template-columns: var(--button-icon-width) fit-content(100%) var(--button-icon-width);
+    gap: 4px;
     align-items: center;
+    white-space: nowrap; /* Prevent text wrapping */
+
+    & > * {
+        grid-column: 2;
+    }
+    & .icon {
+        grid-column: 1;
+        justify-self: center;
+    }
+    & .spinner {
+        grid-column: 3;
+        justify-self: center;
+    }
+
+    margin: var(--button-margin);
+    padding: var(--button-padding-y) var(--button-padding-x);
 
     /* Reset browser defaults */
     -webkit-appearance: none;
@@ -64,6 +81,7 @@
         outline: 1px dotted var(--button-outline-color, currentColor);
         transform: translateY(1px);
     }
+
     /* The button can't be disabled using this base button but other packages might add disabled to the button on the DOM. We should maintain consistent styling */
     &:disabled,
     &[aria-disabled="true"] {
@@ -80,14 +98,12 @@
         }
 
         &:focus-visible {
-           --button-outline-color: var(--color-neutral-600);
+            --button-outline-color: var(--color-neutral-600);
         }
     }
 
     &[data-loading="true"] {
-        position: relative;
         cursor: wait;
-        display: flex;
 
         &:hover:not(:focus-visible) {
             outline: none;
@@ -106,7 +122,8 @@ button.button {
 @media screen and (any-pointer: coarse) {
     .button {
         --button-margin: 12px;
-        --button-padding: 12px 20px;
+        --button-padding-y: 12px;
+        --button-padding-x: 20px;
     }
 }
 
