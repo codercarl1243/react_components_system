@@ -1,6 +1,6 @@
 import type { BundledLanguage } from 'shiki'
 import { getCustomGithubDark, getHighlighterSingleton } from '@/components/code/highlighter'
-import { CopyButton } from '@/components/button/button.copy'
+import { CopyButton } from '@/components/button/copyButton'
 type SupportedLangs = Extract<BundledLanguage, 'tsx' | 'ts' | 'css' | 'md' | 'bash'>;
 
 interface Props {
