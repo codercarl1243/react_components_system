@@ -4,17 +4,21 @@
     align-items: center;
 }
 
-.heading-w-icon:nth-of-type(3n+1) {
-    color: var(--color-primary-400);
-}
-
-.heading-w-icon:nth-of-type(3n+2) {
+h2.heading {
+    margin-block-start: calc(var(--spacing) * 3);
     color: var(--color-secondary-400);
 }
 
-.heading-w-icon:nth-of-type(3n+3) {
-    color: var(--color-accent-400);
+h3.heading {
+    margin-block-start: calc(var(--spacing) * 2);
+    color: var(--color-secondary-600);
+} 
+
+h4.heading {
+    margin-block-start: var(--spacing);
+    color: var(--color-secondary-600);
 }
+
 
 .heading {
     overflow-wrap: break-word;
