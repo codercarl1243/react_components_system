@@ -2,7 +2,7 @@ import NextLink from 'next/link'
 import Icon from '../icon'
 import { RiExternalLinkLine } from '@remixicon/react'
 import clsx from 'clsx'
-import { type ComponentProps } from 'react'
+import type { LinkProps } from '@/components/link/link.type'
 
 /**
  * Render a link that chooses between an external <a> (with security attributes and an external icon),
@@ -20,7 +20,7 @@ import { type ComponentProps } from 'react'
  *   - otherwise: render Next.js client-side link.
  * @returns A React element representing the appropriate link (or plain children).
  */
-export default function Link({ children, className, href, ...props }: ComponentProps<'a'>) {
+export default function Link({ icon, children, className, href, ...props }: LinkProps) {
   if (!href) return <>{children}</>
 
   const schemeMatch = href.match(/^([a-zA-Z][a-zA-Z+.-]*):/)
@@ -37,14 +37,18 @@ export default function Link({ children, className, href, ...props }: ComponentP
 
   if (isExternal && (!scheme || SAFE_EXTERNAL.has(scheme))) {
     return (
-      <a href={href} rel="noopener noreferrer" className={clsx(className, 'link external')} {...props}>
-        {children}{' '}
+      <a href={href} rel="noopener noreferrer" className={clsx(className, {'link-w-icon': icon}, 'link external')} {...props}>
+        {icon && <Icon icon={icon} />}
+        <span>{children}</span>
         <Icon color={'currentColor'} icon={RiExternalLinkLine} size={'sm'} className='icon' />
       </a>
     )
   }
   return (
-    <NextLink href={href} className={clsx(className, 'link internal')} {...props}>{children}</NextLink>
+    <NextLink href={href} className={clsx(className, {'link-w-icon': icon}, 'link internal')} {...props}>
+      {icon && <Icon icon={icon} />}
+      {children}
+    </NextLink>
   )
 }
 
