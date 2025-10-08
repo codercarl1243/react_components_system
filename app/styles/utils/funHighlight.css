@@ -14,7 +14,7 @@
         border-radius: var(--border-radius, 50px);
         opacity: 0.35;
         z-index: -1;
-        transform: translate(-50%, -50%) rotate(-2deg) scale(1);
+        transform: translate(-50%, -50%) rotate(-1deg) scale(1);
         background: var(--background, currentColor);
         transform-origin: center;
     }

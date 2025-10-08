@@ -1,8 +1,6 @@
 
 .tablist__header {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--spacing);
+    display: block;
 }
 .code__reference {
     border-radius: 12px;
