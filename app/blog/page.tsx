@@ -13,11 +13,11 @@ export default function BlogPage () {
                       headingLevel={2}
                       variant="featured" 
                       post={{
-                        title: 'Buttons - the base of every button', 
+                        title: '2 Buttons - the base of every button', 
                         image: {
                           src: 'globe.svg', 
                           alt: 'A collection of buttons showing different states and styles'}, 
-                        slug: 'design-system/buttons'}}
+                        slug: 'design-system/buttons/base2'}}
                       />
                     </li>
                                         <li>

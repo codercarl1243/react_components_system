@@ -15,6 +15,7 @@ export default function Icon({
   
   return (
     <IconComponent
+      className="icon"
       width={resolvedSize}
       height={resolvedSize}
       color={color}

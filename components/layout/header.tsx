@@ -4,8 +4,7 @@ import clsx from 'clsx'
 import { useEffect, useState, type ComponentProps } from 'react'
 import Link from '@/components/link'
 import { usePathname } from 'next/navigation'
-import { RiCloseLargeLine, RiMenuLine } from '@remixicon/react'
-import Icon from '@/components/icon'
+import { RiBookReadFill, RiCloseLargeLine, RiHomeHeartLine, RiMenuLine, RiUser3Fill } from '@remixicon/react'
 import Button from '@/components/button'
 /**
  * Site footer component that displays the current year, copyright notice and a link to codercarl.dev.
@@ -25,7 +24,7 @@ export default function Header({ className, ...props }: ComponentProps<'header'>
   };
 
   useEffect(() => {
-      handleMenuOpenState(false)
+    handleMenuOpenState(false)
   }, [pathname])
 
   return (
@@ -38,8 +37,9 @@ export default function Header({ className, ...props }: ComponentProps<'header'>
         onClick={() => handleMenuOpenState()}
         data-style='filled'
         data-variant='primary'
+        icon={RiMenuLine}
       >
-        <Icon icon={RiMenuLine} /><span>Menu</span>
+        Menu
       </Button>
       <nav
         className='nav__primary'
@@ -54,20 +54,16 @@ export default function Header({ className, ...props }: ComponentProps<'header'>
           onClick={() => handleMenuOpenState()}
           data-style='filled'
           data-variant='primary'
+          icon={RiCloseLargeLine}
         >
-          <Icon icon={RiCloseLargeLine} /><span>Menu</span>
+          Menu
         </Button>
-        <Link
-          href="/"
-          className={clsx({ 'active': pathname === '/' })}
-          aria-current={pathname === '/' ? 'page' : undefined}
-        >
-          Home
-        </Link>
+        {pathname !== '/' && <Link href="/" icon={RiHomeHeartLine}>Home</Link>}
         <Link
           href="/blog"
           className={clsx({ 'active': pathname.startsWith('/blog') })}
           aria-current={pathname === '/blog' ? 'page' : undefined}
+          icon={RiBookReadFill}
         >
           Blog
         </Link>
@@ -75,6 +71,7 @@ export default function Header({ className, ...props }: ComponentProps<'header'>
           href="/about"
           className={clsx({ 'active': pathname === '/about' })}
           aria-current={pathname === '/about' ? 'page' : undefined}
+          icon={RiUser3Fill}
         >
           About
         </Link>

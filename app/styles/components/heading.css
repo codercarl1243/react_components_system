@@ -3,3 +3,25 @@
     gap: calc(var(--spacing) * 2);
     align-items: center;
 }
+
+h2.heading {
+    margin-block-start: calc(var(--spacing) * 3);
+    color: var(--color-secondary-400);
+}
+
+h3.heading {
+    margin-block-start: calc(var(--spacing) * 2);
+    color: var(--color-secondary-600);
+} 
+
+h4.heading {
+    margin-block-start: var(--spacing);
+    color: var(--color-secondary-600);
+}
+
+
+.heading {
+    overflow-wrap: break-word;
+    text-wrap: balance;
+    hyphens: auto;
+}

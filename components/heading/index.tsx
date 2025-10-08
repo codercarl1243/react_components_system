@@ -1,6 +1,7 @@
 import clsx from 'clsx'
-import type { HeadingPropsType } from './heading.type'
+import type { HeadingPropsType } from '@/components/heading/heading.type'
 import { createElement } from 'react'
+import Icon from '@/components/icon'
 
 const getSizeClass = (level: number): string => {
   switch (level) {
@@ -13,7 +14,15 @@ const getSizeClass = (level: number): string => {
     default: return 'text-2xl'
   }
 }
-
+const getIconSize = (level: number): number => {
+  switch (level) {
+    case 1: return 64
+    case 2: return 48
+    case 3: return 32
+    case 4: return 24
+    default: return 16
+  }
+}
 /**
  * Render a semantic heading element with configurable visual size.
  *
@@ -21,6 +30,7 @@ const getSizeClass = (level: number): string => {
  *
  * @param headingLevel - Semantic heading level to render (1–6). Defaults to `3`.
  * @param headingSize - Visual size level used to pick the CSS size class (1–6). Defaults to `headingLevel`.
+ * @param icon - Optional icon to render before the heading text. When provided, adds spacing between the icon and text.
  * @returns A React element for the requested heading tag with composed classes and forwarded props.
  */
 
@@ -29,15 +39,26 @@ export default function Heading({
   headingSize = headingLevel,
   children,
   className,
+  icon,
   ...props
 }: HeadingPropsType) {
+
+ const content = icon ? (
+    <>
+      <Icon icon={icon} size={getIconSize(headingSize)} />
+      <span className='heading__content'>{children}</span>
+    </>
+  ) : children;
 
   return createElement(
     `h${headingLevel}`,
     {
-      className: clsx('font-main heading', className, getSizeClass(headingSize)),
+      className: clsx('font-main heading', 
+        {"heading-w-icon": icon},
+        className, 
+        getSizeClass(headingSize)),
       ...props
     },
-    children
+    content
   )
 }
