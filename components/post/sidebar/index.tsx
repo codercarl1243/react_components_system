@@ -54,9 +54,9 @@ export default function PostSideBar({
                 aria-expanded={sidebarIsOpen}
                 aria-label="Open table of contents"
                 data-style='filled'
+                icon={RiMenuFold3Line}
             >
-                <Icon icon={RiMenuFold3Line} color={"var(--color-neutral-100)"} />
-                <span>Contents</span>
+                 <span aria-hidden="true">Contents</span>
             </Button>
             <aside
                 ref={sidebarRef}
@@ -71,8 +71,8 @@ export default function PostSideBar({
                     aria-controls='sideBar'
                     aria-expanded={sidebarIsOpen}
                     data-style='filled'
+                    icon={RiMenuUnfold3Line}
                 >
-                    <Icon icon={RiMenuUnfold3Line} color={"var(--color-neutral-100)"} />
                     <span className="sr-only">Close table of contents</span>
                     <span aria-hidden="true">Contents</span>
                 </Button>
