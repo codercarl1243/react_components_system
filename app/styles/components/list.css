@@ -1,0 +1,3 @@
+.list li > *:not(:last-child) {
+    margin-block-end: calc(var(--spacing) * 2);
+}
