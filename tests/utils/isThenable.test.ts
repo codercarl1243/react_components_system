@@ -14,7 +14,7 @@ describe('isThenable', () => {
             expect(isThenable(promise)).toBe(true);
         });
 
-        it('returns true for async function results', async () => {
+        it('returns true for async function results', () => {
             const asyncFunc = async () => {
                 await Promise.resolve();
                 return 'value';
