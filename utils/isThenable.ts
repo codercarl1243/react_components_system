@@ -1,7 +1,7 @@
 /**
   * Checks if a value is thenable (Promise-like).
   * 
-  * A thenable is any object with a `then` method, which includes native Promises,
+  * A thenable is any object or a function with a `then` method, which includes native Promises,
   * async function results, and custom Promise-like objects.
   * 
   * @param value - The value to check
