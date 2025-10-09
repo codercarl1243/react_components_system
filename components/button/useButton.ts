@@ -39,7 +39,7 @@ export default function useButton() {
            * Uses void to indicate we're intentionally not awaiting this promise.
            * 
            * Note: This only catches rejections that the user handler did NOT catch.
-           * If the user handler has its own try/catch, this won't fire/ do anything.
+           * If the user handler has its own try/catch, this won't fire or do anything.
            */
           void Promise.resolve(result).catch((err) => {
             log('Unhandled async error', err, 'error', { context: `${userHandler.name || 'anonymous function'}`, trace: true })
