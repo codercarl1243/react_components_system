@@ -9,9 +9,10 @@ import PostNavigation from "@/components/post/navigation";
 import PostSection from "@/components/post/post.section";
 import PostSideBar from "@/components/post/sidebar";
 import { type Metadata } from "next";
-import { RiAccessibilityLine, RiErrorWarningLine, RiFlaskLine } from "@remixicon/react";
+import { RiAccessibilityLine, RiBrainLine, RiContrastLine, RiErrorWarningLine, RiFlaskLine, RiKeyboardLine, RiShieldCheckLine } from "@remixicon/react";
 import PostNote from "@/components/post/post.note";
 import TabList from "@/components/tablist";
+import Icon from "@/components/icon";
 
 export const metadata: Metadata = { title: 'Buttons · Design System' }
 
@@ -372,70 +373,88 @@ export default function useButton() {
                 <PostSection id="accessibility">
                     <Heading id="accessibility-heading" headingLevel={2}>Accessibility Requirements</Heading>
 
-                    <Heading headingLevel={3}>WCAG Success Criteria That Apply to Buttons</Heading>
+                    {/* <Heading headingLevel={3}>WCAG Success Criteria That Apply to Buttons</Heading>
                     <p>Buttons must meet several WCAG standards. Here are the key criteria our implementation addresses:</p>
+                     */}
+                    <Heading headingLevel={3}>WCAG Principles in Practice</Heading>
+                    <p>Our Button component addresses key accessibility requirements across all four WCAG principles:</p>
+                    <List>
+                        <li>
+                            <p>
+                                <span className="bold"><Icon icon={RiContrastLine} /> Perceivable:</span> Sufficient contrast (4.5:1) and readable text at 200% zoom.
+                            </p>
+                            <p className="italic text-sm neutral-600">WCAG: 1.4.3, 1.4.11, 1.4.1, 1.4.4</p>
+                        </li>
+                        <li>
+                            <p>
+                                <span className="bold"><Icon icon={RiKeyboardLine} /> Operable:</span> Fully keyboard accessible with clear focus states and appropriate target sizes.
+                            </p>
+                            <p className="italic text-sm neutral-600">WCAG: 2.1.1, 2.4.7, 2.5.5, 2.5.3</p>
+                        </li>
+                        <li>
+                            <p>
+                                <span className="bold"><Icon icon={RiBrainLine} /> Understandable:</span> Descriptive labels and predictable button behavior.
+                            </p>
+                            <p className="italic text-sm neutral-600">WCAG: 3.3.2, 3.2.2</p>
+                        </li>
+                        <li>
+                            <p>
+                                <span className="bold"><Icon icon={RiShieldCheckLine} /> Robust:</span> Proper semantic HTML and ARIA support for assistive technologies.
+                            </p>
+                            <p className="italic text-sm neutral-600">WCAG: 4.1.2, 4.1.3</p>
+                        </li>
+                    </List>
                     <PostNote>
-                        <p>This button is providing a base, more complex components that have additional accessibility considerations should be treated like their own Component and those concerns would be addressed within them.</p>
-                        <p>That being said, there is nothing within the Base Button Component that would prevent you from extending it to meet your needs</p>
+                        For a complete reference of these criteria, see the <Link href="https://www.w3.org/WAI/WCAG21/quickref/">WCAG 2.1 Quick Reference</Link>.
                     </PostNote>
-                    <Heading headingLevel={4}>Perceivable (Principle 1)</Heading>
+                    
+
+                    <Heading headingLevel={3}>Designing Beyond WCAG</Heading>
+                    <p>Accessibility isn't just about meeting standards—it&apos;s about creating predictable, inclusive experiences. Our base button adds thoughtful UX and ARIA design decisions:</p>
                     <List>
-                        <li><span className="bold">1.4.3 Contrast (Minimum)</span> - Text and borders must have 4.5:1 contrast ratio</li>
-                        <li><span className="bold">1.4.11 Non-text Contrast</span> - Interactive elements need 3:1 contrast against adjacent colors</li>
-                        <li><span className="bold">1.4.1 Use of Color</span> - Don't rely on color alone to convey state changes</li>
-                        <li><span className="bold">1.4.4 Resize Text</span> - Text must be readable when zoomed to 200%</li>
+                        <li>
+                            <p>
+                                <span className="bold">Margin and Spacing:</span> WCAG addresses target size but does not specifically require spacing between targets.
+                            </p>
+                            <p>
+                                Users with motor disabilities (permanent or situationally temporary) benefit from space between interactive elements.
+                            </p>
+                        </li>
+                        <li>
+                            <span className="bold">Disabled and loading states:</span> WCAG's contrast requirements have an exception for disabled elements. But disabled buttons should still contrast enough that the intended purposes is obvious.
+                        </li>
+                        <li>
+                            <span className="bold">The aria-disabled decision:</span> We use <Code codeString="aria-disabled" inline copyEnabled={false} /> instead of the native <Code codeString="disabled" inline copyEnabled={false} /> attribute.
+                            <p>This ensures that the button <span className="fun_underline">remains in the accessibility tree</span>, <span className="fun_underline">preserving discoverability</span> and <span className="fun_underline">tab order</span>.</p>
+                        </li>
+                        <li><p><span className="bold">Stable sizing:</span> We enforce minimum sizes with WCAG AAA compliance in mind:</p>
+                            <Code lang="css" codeString={`min-width: 44px;
+min-height: 44px;`} copyEnabled={false} />
+                            <p>But we also ensure button dimensions remain stable during state changes. This is achieved through CSS Grid and deliberately reserved columns.
+                            </p>
+                            {/* Image here that shows a button cut into 3 columns */}
+                            <p>
+                                The grid layout prevents visual shifts when icons or spinners appear. That consistency helps users with cognitive disabilities stay oriented and reduces accidental clicks on moving targets.
+                            </p>
+                        </li>
+
                     </List>
-                    <Heading headingLevel={4}>Operable (Principle 2)</Heading>
-                    <List>
-                        <li><span className="bold">2.1.1 Keyboard</span> - All functionality must be available via keyboard</li>
-                        <li><span className="bold">2.4.7 Focus Visible</span> - Clear focus indicators for keyboard navigation</li>
-                        <li><span className="bold">2.5.5 Target Size</span> - Minimum 44×44px touch target (AAA standard)</li>
-                        <li><span className="bold">2.5.3 Label in Name</span> - Visible text should match accessible name</li>
-                    </List>
-                    <Heading headingLevel={4}>Understandable (Principle 3)</Heading>
-                    <List>
-                        <li><span className="bold">3.3.2 Labels or Instructions</span> - Clear, descriptive button labels</li>
-                        <li><span className="bold">3.2.2 On Input</span> - Button actions shouldn't cause unexpected context changes</li>
-                    </List>
-                    <Heading headingLevel={4}>Robust (Principle 4)</Heading>
-                    <List>
-                        <li><span className="bold">4.1.2 Name, Role, Value</span> - Proper semantic HTML and ARIA attributes</li>
-                        <li><span className="bold">4.1.3 Status Messages</span> - Loading states must be communicated</li>
-                    </List>
-                    {/*  give references to common wcag success criteria that could apply to buttons 
-                        1.1.1: Non-text Content
-                        1.3.1: Info and Relationships
-                        1.4.1: Use of Color
-                        1.4.3: Contrast (Minimum)
-                        1.4.4: Resize text
-                        1.4.11: Non-text Contrast
-                        1.4.12: Text Spacing
-                        2.1.1: Keyboard
-                        2.2.2: Pause, Stop, Hide
-                        2.4.3: Focus Order
-                        2.4.6: Headings and Labels
-                        2.4.7: Focus Visible
-                        2.5.3: Label in Name
-                        2.5.5: Target Size (AAA)
-                        3.3.1: Error Identification
-                        3.3.2: Labels or Instructions
-                        4.1.1: Parsing
-                        4.1.2: Name, Role, Value
-                        4.1.3 Status Messages 
-                    */}
-                    {/* explain why we dont use aria-loading - does this belong here or under ux/ui?? */}
+                    <PostNote><span className="bold">Replacing <Code codeString="disabled" inline copyEnabled={false} /> with <Code codeString="aria-disabled" inline copyEnabled={false} />:</span> - We need to write a few extra lines of code which prevents Event Defaults and bubbling and we target the <Code codeString={`[aria-disabled="true"]`} inline copyEnabled={false} /> state in our styling instead of <Code codeString=":disabled" inline copyEnabled={false} /></PostNote>
+
+
+                    {/* 
 
                     <Heading headingLevel={3}>How UX/UI Design Extends WCAG</Heading>
-                    <p>WCAG provides minimum standards, but good UX goes further. Here's how our implementation adds:</p>
-
+                    <p>WCAG provides minimum standards, but good UX goes further. Here's how our implementation adds:</p> */}
+                    {/* 
                     <Heading headingLevel={4}>Margin and Spacing</Heading>
                     <p>WCAG addresses target size but does not specifically require spacing between targets. This button has margin added by default</p>
-                    <p><span className="bold">Why this matters:</span> Users with motor disabilities benefit from space between interactive elements. Accidental taps are less likely when targets aren't crowded. <span className="fun_underline">This is especially important on touch devices</span></p>
+                    <p><span className="bold">Why this matters:</span> Users with motor disabilities benefit from space between interactive elements. Accidental taps are less likely when targets aren't crowded. <span className="fun_underline">This is especially important on touch devices</span></p> */}
 
-                    <Heading headingLevel={4}>Disabled State Contrast</Heading>
-                    <p>WCAG's contrast requirements have an exception for disabled elements. But disabled buttons should still be visible and identifiable, they shouldn't dissapear from view because of an action that the user has taken.</p>
+                    {/* <Heading headingLevel={4}>Disabled State Contrast</Heading>
+                    <p>WCAG's contrast requirements have an exception for disabled elements. But disabled buttons should still be visible and identifiable, they shouldn't dissapear from view because of an action that the user has taken.</p> */}
 
-                    <Heading headingLevel={4}>The aria-disabled decision</Heading>
+                    {/* <Heading headingLevel={4}>The aria-disabled decision</Heading>
                     <p>This is one of the most important accessibility choices in our component. We use <Code codeString="aria-disabled" inline copyEnabled={false} /> instead of the native <Code codeString="disabled" inline copyEnabled={false} /> attribute.</p>
                     <p className="bold">The problem with <Code codeString="disabled" inline copyEnabled={false} />:</p>
                     <List>
@@ -443,15 +462,15 @@ export default function useButton() {
                         <li>Changes tab order dynamically</li>
                         <li>The Button can't be focused or announced by all assistive technologies</li>
                         <li>Users can find it hard to understand what is unavailable and why</li>
-                    </List>
-                    <p className="bold">Our solution - <Code codeString="aria-disabled" inline copyEnabled={false} /></p>
+                    </List> */}
+                    {/* <p className="bold">Our solution - <Code codeString="aria-disabled" inline copyEnabled={false} /></p>
                     <p>This approach:</p>
                     <List>
                         <li>Keeps the button in the tab order</li>
                         <li>Allows screen readers to announce the button and it's state</li>
                         <li>Prevents potential confusion about why a button suddenly disappeared for users of assistive technology or those with low contrast recognition</li>
                         <li>Works for both disabled and <span className="italic">loading</span> states</li>
-                    </List>
+                    </List> */}
                     <p><span className="bold">Real-world benefit:</span> When a user tabs through a form, they can discover all buttons (including disabled ones), understand what actions are available, and know what they need to complete to enable those actions.</p>
 
                     <PostNote><span className="bold">Replacing <Code codeString="disabled" inline copyEnabled={false} /> with <Code codeString="aria-disabled" inline copyEnabled={false} /> and ensuring it works for all users </span> - We need to take a few extra steps and ensure that our click handler prevents interactions, along with targeting the aria-disabled state in our styling</PostNote>
@@ -475,52 +494,7 @@ export default function useButton() {
                     </List>
                     <p>The <Code codeString="data-loading" inline copyEnabled={false} /> attribute handles visual styling, while <Code codeString="aria-disabled" inline copyEnabled={false} /> ensures that we communicate this in an accessible way.</p>
 
-                    <Heading headingLevel={4}>Consistent Button Sizing</Heading>
-                    <p>We enforce minimum sizes with AAA compliance in mind:</p>
-                    <Code lang="css" codeString={`min-width: 44px;
-min-height: 44px;`} copyEnabled={false} />
-                    <p>But we also keep button sizes consistent during state changes. This is achieved through CSS Grid with reserved columns:</p>
-                    <Code lang="css" codeString={`.button {
-  --button-icon-width: 24px;
-  
-  display: grid;
-  grid-template-columns: var(--button-icon-width) fit-content(100%) var(--button-icon-width);
-  gap: var(--spacing);
-  align-items: center;
-  
-  & > * {
-    grid-column: 2;  /* Content in center */
-  }
-  
-  & .icon {
-    grid-column: 1;  /* Icon on left */
-    justify-self: center;
-  }
-  
-  & .spinner {
-    grid-column: 3;  /* Spinner on right */
-    justify-self: center;
-  }
-}`} copyEnabled={false} />
-                    <p className="bold">How this prevents layout shift:</p>
 
-                    <List>
-                        <li><span className="bold">Left column</span> - Reserved for icons, remains empty if no icon present</li>
-                        <li><span className="bold">Center column </span>- Button text/content</li>
-                        <li><span className="bold">Right column</span> - Reserved for spinner, hidden when not loading</li>
-                    </List>
-                    <p>The grid reserves space even when elements are absent, so:</p>
-                    <List>
-                        <li>When a spinner appears, content doesn't shift right</li>
-                        <li>If an icon is added later, content stays centered</li>
-                        <li>Button dimensions remain stable throughout all state changes</li>
-                    </List>
-                    <p>
-                        Why this matters: When buttons resize or shift during state changes, it can have a larger impact on the flow of content on the page than intended. Users lose track of where things are. This grid-based approach maintains visual stability and predictable behavior.
-                    </p>
-                    <p>
-                        If you need a smaller button (icon-only toolbar buttons) or larger button (primary CTA), these should be separate components with their own styling rules, not variants of the base button.
-                    </p>
                     <Heading headingLevel={4}>Assistive Technology isnt everything</Heading>
                     <p>Screen readers are powerful, but they don't solve all problems:</p>
                     <List>
@@ -545,9 +519,9 @@ min-height: 44px;`} copyEnabled={false} />
                         <li><Link href="https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Roles/button_role">MDN: Button Accessibility</Link></li>
                         <li><Link href="https://www.w3.org/WAI/ARIA/apg/patterns/button/">W3C ARIA Authoring Practices: Button</Link></li>
                         <li><Link href="https://adrianroselli.com/2021/01/multi-function-button.html">Adrian Roselli: Multi-Function Button</Link>
-                        <div>
-                            in depth article on creating a button with multiple states. This uses plain HTML, JS, & CSS.
-                        </div>
+                            <div>
+                                in depth article on creating a button with multiple states. This uses plain HTML, JS, & CSS.
+                            </div>
                         </li>
                         <li><Link href=" https://kittygiraudel.com/2024/03/29/on-disabled-and-aria-disabled-attributes/">Kitty Giraudel: a comparison of aria-disabled and disabled</Link> and how the use of either is not explicitly wrong</li>
                     </List>
