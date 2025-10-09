@@ -427,50 +427,141 @@ export default function useButton() {
 
                     <Heading headingLevel={3}>How UX/UI Design Extends WCAG</Heading>
                     <p>WCAG provides minimum standards, but good UX goes further. Here's how our implementation adds:</p>
-                    {/* Explain how WCAG doesnt cover all bases */}
-                    {/* benefits of adding margin around the button */}
-                    {/* contrast requirements dont consider disabled buttons but they should */}
-                    {/* Assistive technology is great but they dont work in every situation */}
-                    {/* changing content/text content doesnt always end with the user knowing it has changed */}
-                    {/* Disabling a button results in it being removed from the accessibility tree and shifts tab-order 
-                            aria-disabled doesnt
-                            explain - benefits of using aria-disabled when loading
-                            how to do this while preventing user interactions like it is a disabled button
-                    */}
-                    {/* Keeping the button size consistent and how this prevents chaotic UIs, the rare case where a button needs to be larger or smaller should
-                        probably be treated as its own component and have own styling i.e. toolbar/icon, CTA
-                    */}
-                    {/* good reads on topic: 
-                    https://adrianroselli.com/2021/01/multi-function-button.html - in depth article on creating a button. plain html,js,css example code is quite complicated imo
-                    https://kittygiraudel.com/2024/03/29/on-disabled-and-aria-disabled-attributes/ - explaining when to use aria-disabled over disabled
-                    */}
+
                     <Heading headingLevel={4}>Margin and Spacing</Heading>
                     <p>WCAG addresses target size but does not specifically require spacing between targets. This button has margin added by default</p>
                     <p><span className="bold">Why this matters:</span> Users with motor disabilities benefit from space between interactive elements. Accidental taps are less likely when targets aren't crowded. <span className="fun_underline">This is especially important on touch devices</span></p>
+
                     <Heading headingLevel={4}>Disabled State Contrast</Heading>
                     <p>WCAG's contrast requirements have an exception for disabled elements. But disabled buttons should still be visible and identifiable, they shouldn't dissapear from view because of an action that the user has taken.</p>
+
                     <Heading headingLevel={4}>The aria-disabled decision</Heading>
-                    <p>This is one of the most important accessibility choices in our component. We use <Code codeString="aria-disabled" inline copyEnabled={false}/> instead of the native <Code codeString="disabled" inline copyEnabled={false}/> attribute.</p>
-                    <p className="bold">The problem with <Code codeString="disabled" inline copyEnabled={false}/>:</p>
+                    <p>This is one of the most important accessibility choices in our component. We use <Code codeString="aria-disabled" inline copyEnabled={false} /> instead of the native <Code codeString="disabled" inline copyEnabled={false} /> attribute.</p>
+                    <p className="bold">The problem with <Code codeString="disabled" inline copyEnabled={false} />:</p>
                     <List>
                         <li>Removes the button from the accessibility tree</li>
                         <li>Changes tab order dynamically</li>
                         <li>The Button can't be focused or announced by all assistive technologies</li>
                         <li>Users can find it hard to understand what is unavailable and why</li>
                     </List>
-                    <p className="bold">Our solution - <Code codeString="aria-disabled" inline copyEnabled={false}/></p>
+                    <p className="bold">Our solution - <Code codeString="aria-disabled" inline copyEnabled={false} /></p>
                     <p>This approach:</p>
                     <List>
                         <li>Keeps the button in the tab order</li>
                         <li>Allows screen readers to announce the button and it's state</li>
-                        <li>Prevents confusion the user may experience</li>
-                        <li>Works for both permanently disabled and temporily <span className="italic">loading</span> states</li>
+                        <li>Prevents potential confusion about why a button suddenly disappeared for users of assistive technology or those with low contrast recognition</li>
+                        <li>Works for both disabled and <span className="italic">loading</span> states</li>
                     </List>
-                    <PostNote>Using aria-disabled in the same way as disabled works - We need to take a few extra steps and ensure that our click handler prevents interactions, along with targeting the aria-disabled state in our styling</PostNote>
+                    <p><span className="bold">Real-world benefit:</span> When a user tabs through a form, they can discover all buttons (including disabled ones), understand what actions are available, and know what they need to complete to enable those actions.</p>
+
+                    <PostNote><span className="bold">Replacing <Code codeString="disabled" inline copyEnabled={false} /> with <Code codeString="aria-disabled" inline copyEnabled={false} /> and ensuring it works for all users </span> - We need to take a few extra steps and ensure that our click handler prevents interactions, along with targeting the aria-disabled state in our styling</PostNote>
+
+
                     <Heading headingLevel={4}>Why we don&apos;t use aria-busy</Heading>
+                    <p>You might expect aria-busy for loading states. It seems perfect! But:</p>
+                    <List>
+                        <li>Limited screen reader support (inconsistent across AT)</li>
+                        <li>Doesn't prevent keyboard interaction</li>
+                        <li>Not widely recognized by users</li>
+                        <li>aria-disabled has better support and clearer meaning</li>
+                    </List>
+
+                    <p>Instead, we use aria-disabled during loading, which:</p>
+                    <List>
+                        <li>Works consistently across assistive technologies</li>
+                        <li>Clearly communicates "you can't interact with this right now"</li>
+                        <li>Keeps the button in the accessibility tree</li>
+                        <li>Has established user expectations</li>
+                    </List>
+                    <p>The <Code codeString="data-loading" inline copyEnabled={false} /> attribute handles visual styling, while <Code codeString="aria-disabled" inline copyEnabled={false} /> ensures that we communicate this in an accessible way.</p>
+
                     <Heading headingLevel={4}>Consistent Button Sizing</Heading>
+                    <p>We enforce minimum sizes with AAA compliance in mind:</p>
+                    <Code lang="css" codeString={`min-width: 44px;
+min-height: 44px;`} copyEnabled={false} />
+                    <p>But we also keep button sizes consistent during state changes. This is achieved through CSS Grid with reserved columns:</p>
+                    <Code lang="css" codeString={`.button {
+  --button-icon-width: 24px;
+  
+  display: grid;
+  grid-template-columns: var(--button-icon-width) fit-content(100%) var(--button-icon-width);
+  gap: var(--spacing);
+  align-items: center;
+  
+  & > * {
+    grid-column: 2;  /* Content in center */
+  }
+  
+  & .icon {
+    grid-column: 1;  /* Icon on left */
+    justify-self: center;
+  }
+  
+  & .spinner {
+    grid-column: 3;  /* Spinner on right */
+    justify-self: center;
+  }
+}`} copyEnabled={false} />
+                    <p className="bold">How this prevents layout shift:</p>
+
+                    <List>
+                        <li><span className="bold">Left column</span> - Reserved for icons, remains empty if no icon present</li>
+                        <li><span className="bold">Center column </span>- Button text/content</li>
+                        <li><span className="bold">Right column</span> - Reserved for spinner, hidden when not loading</li>
+                    </List>
+                    <p>The grid reserves space even when elements are absent, so:</p>
+                    <List>
+                        <li>When a spinner appears, content doesn't shift right</li>
+                        <li>If an icon is added later, content stays centered</li>
+                        <li>Button dimensions remain stable throughout all state changes</li>
+                    </List>
+                    <p>
+                        Why this matters: When buttons resize or shift during state changes, it can have a larger impact on the flow of content on the page than intended. Users lose track of where things are. This grid-based approach maintains visual stability and predictable behavior.
+                    </p>
+                    <p>
+                        If you need a smaller button (icon-only toolbar buttons) or larger button (primary CTA), these should be separate components with their own styling rules, not variants of the base button.
+                    </p>
                     <Heading headingLevel={4}>Assistive Technology isnt everything</Heading>
+                    <p>Screen readers are powerful, but they don't solve all problems:</p>
+                    <List>
+                        <li>Not all users with disabilities use screen readers</li>
+                        <li>Visual feedback is critical for many users</li>
+                        <li>Cognitive disabilities benefit from predictable, stable UIs</li>
+                        <li>Motor disabilities benefit from well-spaced, consistently-sized targets</li>
+                    </List>
+
+                    <p>Our button combines:</p>
+                    <List>
+                        <li>Semantic HTML and ARIA for screen readers</li>
+                        <li>Visual state changes for sighted users</li>
+                        <li>Stable layouts for cognitive accessibility</li>
+                        <li>Large targets and spacing for motor accessibility</li>
+                    </List>
+
+
                     <Heading headingLevel={4}>Further Reading</Heading>
+                    <p>For a dive into accessible button patterns:</p>
+                    <List>
+                        <li><Link href="https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Roles/button_role">MDN: Button Accessibility</Link></li>
+                        <li><Link href="https://www.w3.org/WAI/ARIA/apg/patterns/button/">W3C ARIA Authoring Practices: Button</Link></li>
+                        <li><Link href="https://adrianroselli.com/2021/01/multi-function-button.html">Adrian Roselli: Multi-Function Button</Link>
+                        <div>
+                            in depth article on creating a button with multiple states. This uses plain HTML, JS, & CSS.
+                        </div>
+                        </li>
+                        <li><Link href=" https://kittygiraudel.com/2024/03/29/on-disabled-and-aria-disabled-attributes/">Kitty Giraudel: a comparison of aria-disabled and disabled</Link> and how the use of either is not explicitly wrong</li>
+                    </List>
+                    <p className="bold">Design Systems: Buttons</p>
+                    <List>
+                        <li><Link href="https://m3.material.io/components/buttons/overview">Material Design</Link></li>
+                        <li><Link href="https://developer.apple.com/design/human-interface-guidelines/buttons">Apple Human Interface Guidelines</Link></li>
+                        <li><Link href="https://atlassian.design/components/button/examples">Atlassian</Link></li>
+                        <li><Link href="https://storybook.designsystemet.no/?path=/docs/komponenter-button--docs">Designsystemet</Link></li>
+                        <li><Link href="https://design-system.agriculture.gov.au/components/button/accessibility">Department of Agriculture (Australia)</Link></li>
+                    </List>
+                    <PostNote>In these linked design systems You will see many different ways to try and include as many users as possible.
+                        No one solution is perfect, These systems are designed to ensure that any users on their websites have a consistent experience with their components.
+                    </PostNote>
                 </PostSection>
                 <PostSection id="css-styling">
                     <Heading headingLevel={2} id="css-styling-heading">CSS Styling</Heading>
