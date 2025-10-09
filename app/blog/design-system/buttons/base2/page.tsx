@@ -376,7 +376,7 @@ export default function useButton() {
                     {/* <Heading headingLevel={3}>WCAG Success Criteria That Apply to Buttons</Heading>
                     <p>Buttons must meet several WCAG standards. Here are the key criteria our implementation addresses:</p>
                      */}
-                    <Heading headingLevel={3}>WCAG Principles in Practice</Heading>
+                    <Heading headingLevel={3}>WCAG principles in practice</Heading>
                     <p>Our Button component addresses key accessibility requirements across all four WCAG principles:</p>
                     <List>
                         <li>
@@ -407,10 +407,11 @@ export default function useButton() {
                     <PostNote>
                         For a complete reference of these criteria, see the <Link href="https://www.w3.org/WAI/WCAG21/quickref/">WCAG 2.1 Quick Reference</Link>.
                     </PostNote>
-                    
 
-                    <Heading headingLevel={3}>Designing Beyond WCAG</Heading>
-                    <p>Accessibility isn't just about meeting standards—it&apos;s about creating predictable, inclusive experiences. Our base button adds thoughtful UX and ARIA design decisions:</p>
+
+                    <Heading headingLevel={3}>Designing beyond WCAG</Heading>
+                    <p>WCAG is a great starting point, but it&apos;s not the finish line.</p>
+                    <p>As developers, our role is to make accessibility practical by designing buttons that feel consistent, predictable, and inclusive for everyone:</p>
                     <List>
                         <li>
                             <p>
@@ -421,16 +422,18 @@ export default function useButton() {
                             </p>
                         </li>
                         <li>
-                            <span className="bold">Disabled and loading states:</span> WCAG's contrast requirements have an exception for disabled elements. But disabled buttons should still contrast enough that the intended purposes is obvious.
+                            <span className="bold">Disabled and loading states:</span> WCAG's contrast requirements have an exception for disabled elements. But disabled buttons should still contrast enough that the intended purpose remains clear.
                         </li>
                         <li>
-                            <span className="bold">The aria-disabled decision:</span> We use <Code codeString="aria-disabled" inline copyEnabled={false} /> instead of the native <Code codeString="disabled" inline copyEnabled={false} /> attribute.
-                            <p>This ensures that the button <span className="fun_underline">remains in the accessibility tree</span>, <span className="fun_underline">preserving discoverability</span> and <span className="fun_underline">tab order</span>.</p>
+                            <p>
+                                <span className="bold">The aria-disabled decision:</span> We use <Code codeString="aria-disabled" inline copyEnabled={false} /> instead of the native <Code codeString="disabled" inline copyEnabled={false} /> attribute.
+                            </p>
+                            <p>This ensures that the button <span className="fun_underline">remains in the accessibility tree</span>, <span className="fun_underline">preserves discoverability</span>, and <span className="fun_underline">maintains tab order</span>.</p>
                         </li>
                         <li><p><span className="bold">Stable sizing:</span> We enforce minimum sizes with WCAG AAA compliance in mind:</p>
                             <Code lang="css" codeString={`min-width: 44px;
 min-height: 44px;`} copyEnabled={false} />
-                            <p>But we also ensure button dimensions remain stable during state changes. This is achieved through CSS Grid and deliberately reserved columns.
+                            <p>We also ensure button dimensions remain stable during state changes, preventing layout shifts that can disorient users. This is achieved through CSS Grid and deliberately reserved columns.
                             </p>
                             {/* Image here that shows a button cut into 3 columns */}
                             <p>
@@ -439,7 +442,7 @@ min-height: 44px;`} copyEnabled={false} />
                         </li>
 
                     </List>
-                    <PostNote><span className="bold">Replacing <Code codeString="disabled" inline copyEnabled={false} /> with <Code codeString="aria-disabled" inline copyEnabled={false} />:</span> - We need to write a few extra lines of code which prevents Event Defaults and bubbling and we target the <Code codeString={`[aria-disabled="true"]`} inline copyEnabled={false} /> state in our styling instead of <Code codeString=":disabled" inline copyEnabled={false} /></PostNote>
+                    <PostNote><span className="bold">Replacing <Code codeString="disabled" inline copyEnabled={false} /> with <Code codeString="aria-disabled" inline copyEnabled={false} />:</span> - We need to write a few extra lines of JavaScript which prevents default interactions and hides the fact that the button isn't <span className="underline">actually</span> disabled. To fool the user we target the <Code codeString={`aria-disabled`} inline copyEnabled={false} /> state in our styling instead of <Code codeString=":disabled" inline copyEnabled={false} /></PostNote>
 
 
                     {/* 
