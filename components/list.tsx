@@ -37,7 +37,7 @@ export default function List({
   //   };
 
   const listClasses = clsx(
-    'list',
+    'list flow-4',
     // variantClasses[variant],
     // spacingClasses[spacing],
     // 'pl-6',
