@@ -26,7 +26,8 @@ const getIconSize = (level: number): number => {
 /**
  * Render a semantic heading element with configurable visual size.
  *
- * Creates an `h{n}` element (where `n` is `headingLevel`) and applies the component's base font class together with a size class derived from `headingSize`. `headingSize` lets you control the visual font size independently of the semantic heading level.
+ * Creates an `h{n}` element (where `n` is `headingLevel`) and applies the component's base font class together with a size class derived from `headingSize`. 
+ * `headingSize` lets you control the visual font size independently of the semantic heading level.
  *
  * @param headingLevel - Semantic heading level to render (1–6). Defaults to `3`.
  * @param headingSize - Visual size level used to pick the CSS size class (1–6). Defaults to `headingLevel`.

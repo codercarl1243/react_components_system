@@ -7,7 +7,6 @@ import Author from './author';
 import { PostSideBarProps } from './sidebar.type';
 import Button from '@/components/button';
 import { RiMenuFold3Line, RiMenuUnfold3Line } from '@remixicon/react';
-import Icon from '@/components/icon';
 import useSidebar from '@/components/post/sidebar/useSidebar';
 
 /**
@@ -76,11 +75,8 @@ export default function PostSideBar({
                     <span className="sr-only">Close table of contents</span>
                     <span aria-hidden="true">Contents</span>
                 </Button>
-                {/* Table of contents */}
                 {hasContents && <ToC items={contents} />}
-                {/* Related posts */}
                 {hasRelated && <RelatedPosts posts={relatedPosts} />}
-                {/* Author info */}
                 {author && <Author author={author} />}
                 {children}
             </aside>
