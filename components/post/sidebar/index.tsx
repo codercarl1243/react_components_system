@@ -75,11 +75,8 @@ export default function PostSideBar({
                     <span className="sr-only">Close table of contents</span>
                     <span aria-hidden="true">Contents</span>
                 </Button>
-                {/* Table of contents */}
                 {hasContents && <ToC items={contents} />}
-                {/* Related posts */}
                 {hasRelated && <RelatedPosts posts={relatedPosts} />}
-                {/* Author info */}
                 {author && <Author author={author} />}
                 {children}
             </aside>
