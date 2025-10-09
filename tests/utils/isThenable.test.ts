@@ -15,15 +15,17 @@ describe('isThenable', () => {
         });
 
         it('returns true for async function results', async () => {
-            const asyncFunc = async () => 'value';
+            const asyncFunc = async () => {
+                await Promise.resolve();
+                return 'value';
+            };
             const result = asyncFunc();
             expect(isThenable(result)).toBe(true);
-            await result;
         });
 
         it('returns true for objects with then method', () => {
             const thenable = {
-                then: (onFulfilled: any) => {
+                then: (onFulfilled: (value: string) => void) => {
                     onFulfilled('value');
                 },
             };
