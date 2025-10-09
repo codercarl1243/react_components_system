@@ -7,7 +7,6 @@ import Author from './author';
 import { PostSideBarProps } from './sidebar.type';
 import Button from '@/components/button';
 import { RiMenuFold3Line, RiMenuUnfold3Line } from '@remixicon/react';
-import Icon from '@/components/icon';
 import useSidebar from '@/components/post/sidebar/useSidebar';
 
 /**
