@@ -428,7 +428,7 @@ export default function useButton() {
                             <p>
                                 <span className="bold">The aria-disabled decision:</span> We use <Code codeString="aria-disabled" inline copyEnabled={false} /> instead of the native <Code codeString="disabled" inline copyEnabled={false} /> attribute.
                             </p>
-                            <p>This ensures that the button <span className="fun_underline">remains in the accessibility tree</span>, <span className="fun_underline">preserves discoverability</span>, and <span className="fun_underline">maintains tab order</span>.</p>
+                            <p>This ensures that the button <span className="fun-underline">remains in the accessibility tree</span>, <span className="fun-underline">preserves discoverability</span>, and <span className="fun-underline">maintains tab order</span>.</p>
                         </li>
                         <li><p><span className="bold">Stable sizing:</span> We enforce minimum sizes with WCAG AAA compliance in mind:</p>
                             <Code lang="css" codeString={`min-width: 44px;
@@ -452,7 +452,7 @@ min-height: 44px;`} copyEnabled={false} />
                     {/* 
                     <Heading headingLevel={4}>Margin and Spacing</Heading>
                     <p>WCAG addresses target size but does not specifically require spacing between targets. This button has margin added by default</p>
-                    <p><span className="bold">Why this matters:</span> Users with motor disabilities benefit from space between interactive elements. Accidental taps are less likely when targets aren't crowded. <span className="fun_underline">This is especially important on touch devices</span></p> */}
+                    <p><span className="bold">Why this matters:</span> Users with motor disabilities benefit from space between interactive elements. Accidental taps are less likely when targets aren't crowded. <span className="fun-underline">This is especially important on touch devices</span></p> */}
 
                     {/* <Heading headingLevel={4}>Disabled State Contrast</Heading>
                     <p>WCAG's contrast requirements have an exception for disabled elements. But disabled buttons should still be visible and identifiable, they shouldn't dissapear from view because of an action that the user has taken.</p> */}
