@@ -1,4 +1,5 @@
 import type { ButtonClickHandler, MouseEventType } from '@/components/button/button.type';
+import isThenable from '@/utils/isThenable';
 import log from '@/utils/Logging';
 
 export default function useButton() {
@@ -32,13 +33,13 @@ export default function useButton() {
         if (process.env.NODE_ENV !== 'production') {
           log('Button clicked', undefined, 'default', { context: `${userHandler.name || 'anonymous function'}`, trace: true })
         }
-        if (result && typeof (result as any)?.then === 'function') {
+        if (isThenable(result)) {
           /**
            * Attach error logging to unhandled promise rejections.
            * Uses void to indicate we're intentionally not awaiting this promise.
            * 
            * Note: This only catches rejections that the user handler did NOT catch.
-           * If the user handler has its own try/catch, this won't fire.
+           * If the user handler has its own try/catch, this won't fire/ do anything.
            */
           void Promise.resolve(result).catch((err) => {
             log('Unhandled async error', err, 'error', { context: `${userHandler.name || 'anonymous function'}`, trace: true })
