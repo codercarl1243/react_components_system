@@ -65,7 +65,6 @@ export default function Button({
        * not trigger parent handlers.
        * */
       event.preventDefault()      // Prevent form submission and/or default click actions
-      event.stopPropagation()     // Prevent bubbling to parent click handlers
       return;
     }
     return handleClick(onClick)(event)

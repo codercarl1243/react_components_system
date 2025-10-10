@@ -247,7 +247,7 @@ export type BaseButtonProps = {
                     </List>
                     <p>Here's the complete implementation:</p>
                     <Code codeString={`import type { ButtonClickHandler, MouseEventType } from '@/components/button/button.type';
-import log from '@/utils/Logging';
+import log from '@/lib/Logging';
 
 export default function useButton() {
     /**
@@ -682,7 +682,7 @@ export default function Button({
                                 tabLabel: 'useButton.tsx',
                                 panelContent: (
                                     <Code codeString={`import type { ButtonClickHandler, MouseEventType } from '@/components/button/button.type';
-import log from '@/utils/Logging';
+import log from '@/lib/Logging';
 
 export default function useButton() {
     const handleClick = <T = unknown>(userHandler?: ButtonClickHandler<T>) =>

@@ -1,4 +1,4 @@
-import type { KeyPressCallbackMap, KeyPressEventType } from "@/utils/keyboardHandlers.type"
+import type { KeyPressCallbackMap, KeyPressEventType } from "@/lib/keyboardHandlers.type"
 
 
 /**
