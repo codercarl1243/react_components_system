@@ -3,6 +3,7 @@ export interface BlogPost {
     id: string;
     relatedPostIds: string[];
     url: string;
+    lastModified: Date;
 }
 
 const ButtonPosts: BlogPost[] = [
@@ -10,19 +11,22 @@ const ButtonPosts: BlogPost[] = [
         name: 'Button',
         id: 'design__button__01',
         relatedPostIds: ['design__button__slider__01', 'design__button__toggle__01'],
-        url: '/blog/design-system/buttons'
+        url: '/blog/design-system/buttons',
+        lastModified: new Date('2025-10-10')
     },
     {
         name: 'Slider Buttons',
         id: 'design__button__slider__01',
         relatedPostIds: ['design__button__01', 'design__button__toggle__01'],
-        url: '/blog/design-system/buttons/sliders'
+        url: '/blog/design-system/buttons/sliders',
+        lastModified: new Date('2025-10-10')
     },
     {
         name: 'Toggle Buttons',
         id: 'design__button__toggle__01',
         relatedPostIds: ['design__button__01', 'design__button__slider__01'],
-        url: '/blog/design-system/buttons/toggle'
+        url: '/blog/design-system/buttons/toggle',
+        lastModified: new Date('2025-10-10')
     },
 ]
 

@@ -2,11 +2,11 @@ import { BLOG_POSTS } from '@/lib/blogPosts';
 import type { MetadataRoute } from 'next';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://yoursite.com';
+    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://codercarl.dev';
     
     const blogUrls: MetadataRoute.Sitemap = BLOG_POSTS.map(post => ({
         url: `${baseUrl}${post.url}`,
-        lastModified: new Date(),
+        lastModified: post.lastModified,
         changeFrequency: 'weekly' as const,
         priority: 0.8,
     }));

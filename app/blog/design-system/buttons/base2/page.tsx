@@ -13,10 +13,13 @@ import { RiAccessibilityLine, RiBrainLine, RiContrastLine, RiErrorWarningLine, R
 import PostNote from "@/components/post/post.note";
 import TabList from "@/components/tablist";
 import Icon from "@/components/icon";
+import { useRelatedPosts } from "@/hooks/useRelatedPosts";
 
 export const metadata: Metadata = { title: 'Buttons · Design System' }
 
 export default function ButtonsBasePage() {
+  const relatedPosts = useRelatedPosts('design__button__01');
+
     return (
         <>
             <Post>
@@ -932,12 +935,7 @@ button.button {
                     { id: 'resources', href: '#resources', label: "Resources" }
                 ]}
                 // Fillers
-                relatedPosts={[
-                    { href: "/blog/design-system/buttons/sliders", title: "Slider Buttons" },
-                    { href: "/blog/design-system/buttons/sliders", title: "Slider Buttons" },
-                    { href: "/blog/design-system/buttons/sliders", title: "Slider Buttons" },
-                    { href: "/blog/design-system/buttons/sliders", title: "Slider Buttons" }
-                ]}
+                relatedPosts={relatedPosts}
                 author={{ avatarUrl: '/window.svg', name: "carl davidson" }}
             />
 

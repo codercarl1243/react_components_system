@@ -17,10 +17,15 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: 'React Component designs',
-  description: 'A library of accessible and extensible react based components'
+  description: 'A library of accessible and extensible react based components',
+  alternates: {
+    types: {
+      'application/rss+xml': '/feed.xml',
+    },
+  },
 }
 
-export default function RootLayout ({
+export default function RootLayout({
   children
 }: Readonly<{
   children: ReactNode;
