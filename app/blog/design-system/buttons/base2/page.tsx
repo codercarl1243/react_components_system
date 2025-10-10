@@ -13,12 +13,15 @@ import { RiAccessibilityLine, RiBrainLine, RiContrastLine, RiErrorWarningLine, R
 import PostNote from "@/components/post/post.note";
 import TabList from "@/components/tablist";
 import Icon from "@/components/icon";
-import { useRelatedPosts } from "@/hooks/useRelatedPosts";
+import { getRelatedPosts } from "@/lib/blogPosts";
 
 export const metadata: Metadata = { title: 'Buttons · Design System' }
 
 export default function ButtonsBasePage() {
-  const relatedPosts = useRelatedPosts('design__button__01');
+    const relatedPosts = getRelatedPosts('design__button__01').map(post => ({
+        href: post.url,
+        title: post.name
+    }));
 
     return (
         <>
