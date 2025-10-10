@@ -74,7 +74,7 @@ export default function ButtonsBasePage() {
                     <p>This structure keeps related code together while maintaining clear boundaries between logic, types, and presentation.</p>
                     <Heading headingLevel={3} id="dependencies">Dependencies</Heading>
                     <p>I have installed a couple of additional packages:</p>
-                    <List>
+                    <List variant="none" spacing="tight">
                         <li><Link className="bold" href="https://www.npmjs.com/package/@remixicon/react">RemixIcons</Link> to leverage their extensive and free library of icons</li>
                         <li><Link className="bold" href="https://www.npmjs.com/package/clsx">CLSX</Link> to handle class names conditionally</li>
                     </List>
@@ -92,8 +92,8 @@ export default function ButtonsBasePage() {
                     <Heading headingLevel={3} id="starting-simple">
                         Starting Simple: The Component
                     </Heading>
-                    <p>Let's start with the component itself. Our Button component needs to handle several responsibilities:</p>
-                    <List>
+                    <p>Let's start with the component itself. Our <Code codeString="Button" inline copyEnabled={false} /> component needs to handle several responsibilities:</p>
+                    <List variant="circle" spacing="normal">
                         <li>Managing click events (both sync and async)</li>
                         <li>Communicating loading states</li>
                         <li>Maintaining accessibility attributes</li>
@@ -101,8 +101,10 @@ export default function ButtonsBasePage() {
                         <li>Preventing interaction when disabled or loading</li>
                     </List>
 
-                    <PostNote><p>We're using a custom hook called <Code codeString="useButton" inline copyEnabled={false} /> to handle click logic - we'll explore
-                        this in detail in the next section.</p>
+                    <PostNote>
+                        <p>
+                            We're using a custom hook called <Code codeString="useButton" inline copyEnabled={false} /> to handle click logic - we'll explore this in detail in the next section.
+                        </p>
                     </PostNote>
                     <p className="bold">Here's how we structure it:</p>
                     <Code codeString={`'use client'
@@ -111,105 +113,76 @@ import clsx from 'clsx'
 import { BaseButtonProps, MouseEventType } from '@/components/button/button.type'
 import useButton from '@/components/button/useButton'
 import Spinner from '@/components/utilities/spinner'
+import Icon from '@/components/icon'
 
-/**
- * A base, accessible button component that supports loading states and 
- * safely manages click behavior and logging through a custom hook.
- *  
- * This component uses aria-disabled instead of the native disabled attribute
- * to maintain discoverability and tab order. The button remains focusable
- * and discoverable to assistive technology while in this non-functional state.
- *
- * @component
- * @param {BaseButtonProps} props - The props for the Button component.
- * @param {string} [props.className] - Additional class names to append.
- * @param {React.ReactNode} props.children - The button label or content.
- * @param {function} [props.onClick] - Optional click handler.
- * @param {'button' | 'submit' | 'reset'} [props.type='button'] - The button type.
- * @param {boolean} [props.disabled=false] - Whether the button is disabled.
- * @param {boolean} [props.isLoading=false] - Whether the button is in a loading state.
- * @param {React.Ref<HTMLButtonElement>} [props.ref] - Optional ref to the button element.
- * @returns {JSX.Element} The rendered Button component.
- *
- * @example
- * // Loading state with spinner
- * <Button isLoading onClick={handleSubmit}>Submit</Button>
- * 
- * // Disabled but discoverable
- * <Button disabled onClick={handleSave}>Save</Button>
- * 
- * // With variant styling
- * <Button data-variant="primary" data-style="filled">
- *   Click Me
- * </Button>
- */
 export default function Button({
-    className,
-    children,
-    onClick,
-    type = 'button',
-    disabled = false,
-    isLoading = false,
-    ref,
-    ...props
+  onClick,
+  type = 'button',
+  disabled = false,
+  isLoading = false,
+  icon,
+  className,
+  children,
+  ref,
+  ...props
 }: BaseButtonProps) {
-    const { handleClick } = useButton()
+    const { handleClick } = useButton();
 
-    /**
-     * Handles click events.
-     *
-     * - Prevents default form submission when loading or disabled.
-     * - Stops propagation to avoid parent click triggers.
-     * - Delegates to useButton's click handler otherwise.
-     */
     function onClickHandler(event: MouseEventType) {
-
-    if (isLoading || disabled) {
-        /**  
-         * Using both is correct here since a disabled/loading button should do nothing and 
-         * not trigger parent handlers.
-         * */
-        event.preventDefault()      // Prevent form submission and/or default click actions
-        event.stopPropagation()     // Prevent bubbling to parent click handlers
-        return;
-    }
-    return handleClick(onClick)(event)
+        if (isLoading || disabled) {
+            event.preventDefault();
+            return;
+        }
+        return handleClick(onClick)(event);
     }
 
     return (
         <button
             {...props}
-            className={clsx(className, 'button')}
+            className={clsx(className, {'button-w-icon': icon}, 'button')}
             onClick={onClickHandler}
             aria-disabled={isLoading || disabled}
             data-loading={isLoading}
             ref={ref}
             type={type}
-            data-testid="base-button"
+            data-testid='base-button'
         >
-            {children}
+            {icon && <Icon icon={icon}/>}
+            <span className='button__content'>{children}</span>
             {isLoading && <Spinner />}
         </button>
-    )}`} />
+        )
+}`} />
 
                     <Heading headingLevel={4}>Key Decisions</Heading>
-                    <List>
+                    <List variant="circle" spacing="normal">
                         <li><Code codeString={`clsx(className, 'button')`} inline copyEnabled={false} /> - Combines user-provided classes with our base class, giving consumers flexibility while maintaining defaults</li>
                         <li><Code codeString={`isLoading || disabled`} inline copyEnabled={false} /> - Prevents click handlers from firing during loading or disabled states.</li>
-                        <li><Code codeString={`event.preventDefault()`} inline copyEnabled={false} /> - Stops any default behavior when the button shouldn't be interactive</li>
-                        <li><Code codeString={`ref`} inline copyEnabled={false} /> - React 19 allows refs to be passed as regular props without <Code codeString={`forwardRef`} inline copyEnabled={false} /></li>
-                        <li><Code codeString={`data-loading`} inline copyEnabled={false} /> - Provides a styling hook for loading states without relying on JavaScript</li>
+                        <li><Code codeString={`event.preventDefault()`} inline copyEnabled={false} /> - Stops default behavior when the button shouldn't be interactive</li>
+                        <li><p>
+                            <Code codeString={`ref`} inline copyEnabled={false} /> - React 19 allows refs to be passed as regular props without <Code codeString={`forwardRef`} inline copyEnabled={false} />
+                        </p>
+                            <p className="italic text-sm neutral-600">
+                                Further reading: <Link href="https://react.dev/blog/2024/12/05/react-19#ref-as-a-prop">React 19 release notes</Link>
+                            </p></li>
+                        <li><Code codeString={`data-loading`} inline copyEnabled={false} /> - Provides a styling hook for loading states</li>
                         <li><Code codeString={`aria-disabled`} inline copyEnabled={false} /> over <Code codeString={`disabled`} inline copyEnabled={false} /> - We'll explain this choice in the accessibility section</li>
                     </List>
-                    <Heading headingLevel={3} id="typescript-support">Adding TypeScript Support</Heading>
-                    <p>Type safety helps catch errors early and provides excellent autocomplete for consumers. Our type definitions need to:</p>
-                    <List>
+
+                    <Heading headingLevel={3} id="typescript-support">
+                        Adding TypeScript Support
+                    </Heading>
+                    <p>
+                        Type safety helps catch errors early and provides excellent autocomplete for consumers. Our type definitions need to:
+                    </p>
+                    <List variant="circle" spacing="normal">
                         <li>Support both synchronous and asynchronous click handlers</li>
                         <li>Extend native button props without conflicts</li>
                         <li>Allow custom data attributes for styling</li>
                         <li>Properly type mouse events</li>
                     </List>
                     <Code codeString={`import type { ComponentPropsWithRef, MouseEvent } from 'react'
+import { IconProps } from '@/components/icon/icon.type';
 
 export type MouseEventType = MouseEvent<HTMLButtonElement>;
 
@@ -218,15 +191,18 @@ export type ButtonClickHandler<T = unknown> = (event: MouseEventType) => T | Pro
 export type BaseButtonProps = {
     disabled?: boolean; 
     isLoading?: boolean;
+    icon?: IconProps['icon'];
     'data-style'?: 'outlined' | 'filled';
     'data-variant'?: 'primary' | 'secondary' | 'accent';
     onClick?: ButtonClickHandler;
 } & Omit<ComponentPropsWithRef<'button'>, 'onClick' | 'disabled'>;`} />
-                    <Heading headingLevel={4}>Types Breakdown</Heading>
-                    <List>
-                        <li><Code codeString={`MouseEventType`} inline copyEnabled={false} /> - Alias for cleaner code and easier updates if we need to change event types</li>
+                    <Heading headingLevel={4}>
+                        Types Breakdown
+                    </Heading>
+                    <List variant="circle" spacing="normal">
+                        <li><Code codeString={`MouseEventType`} inline copyEnabled={false} /> - Alias for cleaner code</li>
                         <li><Code codeString={`ButtonClickHandler<T = unknown>`} inline copyEnabled={false} /> - The unknown default allows maximum flexibility while maintaining type safety through inference at the call site</li>
-                        <li><Code codeString={`Omit<ComponentPropsWithRef<'button'>, 'onClick' | 'disabled'>`} inline copyEnabled={false} /> - Inherits all native button props (className, aria-*, data-*, etc.) while replacing onClick, and disabled with our typed versions</li>
+                        <li><Code codeString={`Omit<ComponentPropsWithRef<'button'>, 'onClick' | 'disabled'>`} inline copyEnabled={false} /> - Inherits all native button props (className, aria-*, data-*, etc.) while replacing <Code codeString="onClick" inline copyEnabled={false} />, and <Code codeString="disabled" inline copyEnabled={false} /> with our typed versions</li>
                     </List>
                 </PostSection>
 
