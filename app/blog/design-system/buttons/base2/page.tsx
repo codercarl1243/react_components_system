@@ -18,10 +18,7 @@ import { getRelatedPosts } from "@/lib/blogPosts";
 export const metadata: Metadata = { title: 'Buttons · Design System' }
 
 export default function ButtonsBasePage() {
-    const relatedPosts = getRelatedPosts('design__button__01').map(post => ({
-        href: post.url,
-        title: post.name
-    }));
+    const relatedPosts = getRelatedPosts('design__button__01');
 
     return (
         <>

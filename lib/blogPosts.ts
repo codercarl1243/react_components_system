@@ -6,6 +6,11 @@ export interface BlogPost {
     lastModified: Date;
 }
 
+export interface RelatedPost {
+    href: BlogPost['url'];
+    title: BlogPost['name'];
+}
+
 const ButtonPosts: BlogPost[] = [
     {
         name: 'Button',
@@ -44,11 +49,13 @@ export function getBlogPostById(id: string): BlogPost | undefined {
 /**
  * Get related posts for a given post ID
  */
-export function getRelatedPosts(postId: string): BlogPost[] {
-    const post = getBlogPostById(postId);
-    if (!post) return [];
+export function getRelatedPosts(postId: string): RelatedPost[] {
+  const post = getBlogPostById(postId);
+  if (!post) return [];
 
-    return post.relatedPostIds
-        .map(id => getBlogPostById(id))
-        .filter((post): post is BlogPost => post !== undefined);
+  return post.relatedPostIds.reduce<RelatedPost[]>((acc, id) => {
+    const related = getBlogPostById(id);
+    if (related) acc.push({ href: related.url, title: related.name });
+    return acc;
+  }, []);
 }
