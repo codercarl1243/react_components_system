@@ -50,37 +50,37 @@
 }
 
 .fun-underline:nth-of-type(9n+1) {
-    --rotation: -2deg;
+    --rotation: 0.5deg;
     --background: var(--color-emphasis-100);
     --delay: 0s;
 }
 
 .fun-underline:nth-of-type(9n+2) {
-    --rotation: 0.5deg;
+    --rotation: -1deg;
     --background: var(--color-emphasis-200);
     --delay: 0.05s;
 }
 
 .fun-underline:nth-of-type(9n+3) {
-    --rotation: -1deg;
+    --rotation: 1deg;
     --background: var(--color-emphasis-300);
     --delay: 0.1s;
 }
 
 .fun-underline:nth-of-type(9n+4) {
-    --rotation: 1.5deg;
+    --rotation: 0.5deg;
     --background: var(--color-emphasis-400);
     --delay: 0.15s;
 }
 
 .fun-underline:nth-of-type(9n+5) {
-    --rotation: -1.5deg;
+    --rotation: -1deg;
     --background: var(--color-emphasis-500);
     --delay: 0.2s;
 }
 
 .fun-underline:nth-of-type(9n+6) {
-    --rotation: 2deg;
+    --rotation: 1deg;
     --background: var(--color-emphasis-600);
     --delay: 0.25s;
 }

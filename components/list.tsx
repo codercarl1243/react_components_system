@@ -62,16 +62,18 @@ export default function List({
     className
   );
 
+  const ariaRole = variant === 'none' ? 'list' : undefined;
+
   if (ordered) {
     return (
-      <ol className={listClasses} {...(props as ComponentProps<'ol'>)}>
+      <ol className={listClasses} role={ariaRole} {...(props as ComponentProps<'ol'>)}>
         {children}
       </ol>
     );
   }
 
   return (
-    <ul className={listClasses} {...(props as ComponentProps<'ul'>)}>
+    <ul className={listClasses} role={ariaRole} {...(props as ComponentProps<'ul'>)}>
       {children}
     </ul>
   );
