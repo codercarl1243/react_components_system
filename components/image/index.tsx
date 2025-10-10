@@ -40,6 +40,7 @@ export default function Image({ variant, src, alt, ...props }: TImage) {
 
     const [isLoading, setIsLoading] = useState(true);
     const { className, sizes, width, style, height, priority, placeholder, blurDataURL, quality, onLoad, onError, ...rest } = props
+
     const {
         width: variantWidth,
         height: variantHeight,
@@ -57,7 +58,13 @@ export default function Image({ variant, src, alt, ...props }: TImage) {
         onError?.(event);
         setIsLoading(false)
     }
+    
+    const isPriority = priority ?? (variant === 'hero' || variant === "banner" || variant === "featured");
 
+    // For priority images, use eager loading without blur to maximize FCP
+    const imagePlaceholder = isPriority ? 'empty' : (placeholder ?? 'blur');
+    const imageBlurDataURL = imagePlaceholder === 'blur' ? (blurDataURL ?? variantBlurDataURL) : undefined
+    
     return (
         <span
             className={clsx(
@@ -76,12 +83,13 @@ export default function Image({ variant, src, alt, ...props }: TImage) {
                 width={width ?? variantWidth}
                 height={height ?? variantHeight}
                 style={{ aspectRatio, ...style }}
-                priority={priority ?? (variant === 'hero' || variant === "banner" || variant === "featured")}
-                placeholder={placeholder ?? 'blur'}
-                blurDataURL={blurDataURL ?? variantBlurDataURL}
+                priority={isPriority}
+                placeholder={imagePlaceholder}
+                blurDataURL={imageBlurDataURL}
                 quality={quality ?? variantQuality}
                 onLoad={handleOnLoad}
                 onError={handleOnError}
+                fetchPriority={isPriority ? "high" : "auto"}
                 {...rest}
             />
         </span>
