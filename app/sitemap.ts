@@ -88,6 +88,13 @@ const SITEMAP_PRIORITY = {
 } as const;
 
 /**
+ * Threshold for considering a post as "recent" vs "archive"
+ * Posts updated within this timeframe get higher priority and change frequency
+ * @constant 6 months in milliseconds
+ */
+const RECENT_CONTENT_THRESHOLD_MONTHS = 6;
+
+/**
  * Determines the appropriate priority for a blog post based on its last modified date
  * 
  * @param lastModified - The date the post was last updated
@@ -100,21 +107,48 @@ const SITEMAP_PRIORITY = {
  * // Returns 0.4 (ARCHIVE) if current date is past July 2024
  */
 function getPostPriority(lastModified: Date): number {
-    const sixMonthsAgo = new Date();
-    sixMonthsAgo.setMonth(sixMonthsAgo.getMonth() - 6);
+    const thresholdDate = new Date();
+    thresholdDate.setMonth(thresholdDate.getMonth() - RECENT_CONTENT_THRESHOLD_MONTHS);
 
-    return lastModified > sixMonthsAgo
+    return lastModified > thresholdDate
         ? SITEMAP_PRIORITY.BLOG_POST
         : SITEMAP_PRIORITY.ARCHIVE;
 }
 
+/**
+ * Determines the appropriate change frequency for a blog post based on its last modified date
+ * 
+ * Helps search engines understand how often to re-crawl the page
+ * 
+ * @param lastModified - The date the post was last updated
+ * @returns Change frequency hint:
+ *   - 'weekly' if updated within the last 6 months (actively maintained content)
+ *   - 'monthly' if updated 6+ months ago (archive content, updated occasionally)
+ * 
+ * @example
+ * const frequency = getPostChangeFrequency(new Date('2025-09-01'));
+ * // Returns 'weekly' if current date is within 6 months of September 2025
+ * 
+ * @example
+ * const frequency = getPostChangeFrequency(new Date('2024-01-01'));
+ * // Returns 'monthly' if current date is past July 2024
+ */
+function getPostChangeFrequency(
+    lastModified: Date
+): MetadataRoute.Sitemap[number]['changeFrequency'] {
+    const thresholdDate = new Date();
+    thresholdDate.setMonth(thresholdDate.getMonth() - RECENT_CONTENT_THRESHOLD_MONTHS);
+
+    return lastModified > thresholdDate ? 'weekly' : 'monthly';
+}
+
 export default function sitemap(): MetadataRoute.Sitemap {
-    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://codercarl.dev';
+    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://yoursite.com';
     
     const blogUrls: MetadataRoute.Sitemap = BLOG_POSTS.map(post => ({
         url: `${baseUrl}${post.url}`,
         lastModified: post.lastModified,
-        changeFrequency: 'weekly' as const,
+        changeFrequency: getPostChangeFrequency(post.lastModified),
         priority: getPostPriority(post.lastModified),
     }));
 
