@@ -2,6 +2,7 @@ import clsx from 'clsx'
 import type { HeadingPropsType } from '@/components/heading/heading.type'
 import { createElement } from 'react'
 import Icon from '@/components/icon'
+import Head from 'next/head'
 
 const getSizeClass = (level: number): string => {
   switch (level) {
@@ -23,16 +24,42 @@ const getIconSize = (level: number): number => {
     default: return 16
   }
 }
+
+const generateSlug = (text: string): string => {
+  return text
+    .toLowerCase()
+    .trim()
+    .replace(/[^\w\s-]/g, '')
+    .replace(/\s+/g, '-')
+    .replace(/-+/g, '-')
+}
+
+const extractTextFromChildren = (children: React.ReactNode): string => {
+  if (typeof children === 'string') return children
+  if (typeof children === 'number') return children.toString()
+  if (Array.isArray(children)) {
+    return children.map(extractTextFromChildren).join('')
+  }
+  if (children && typeof children === 'object' && 'props' in children) {
+    const element = children as { props: { children: React.ReactNode } }
+    return extractTextFromChildren(element.props.children)
+  }
+  return ''
+}
+
 /**
- * Render a semantic heading element with configurable visual size.
+ * Render a semantic heading element with configurable visual size, wrapped in a shareable anchor link.
  *
- * Creates an `h{n}` element (where `n` is `headingLevel`) and applies the component's base font class together with a size class derived from `headingSize`. 
- * `headingSize` lets you control the visual font size independently of the semantic heading level.
+ * Creates an `h{n}` element (where `n` is `headingLevel`) wrapped in an anchor tag that links to itself.
+ * This allows users to easily share direct links to specific heading sections. Applies the component's 
+ * base font class together with a size class derived from `headingSize`. `headingSize` lets you control 
+ * the visual font size independently of the semantic heading level.
  *
  * @param headingLevel - Semantic heading level to render (1–6). Defaults to `3`.
  * @param headingSize - Visual size level used to pick the CSS size class (1–6). Defaults to `headingLevel`.
  * @param icon - Optional icon to render before the heading text. When provided, adds spacing between the icon and text.
- * @returns A React element for the requested heading tag with composed classes and forwarded props.
+ * @param id - Optional custom ID for the anchor. If not provided, auto-generated from heading text.
+ * @returns A React element for the requested heading tag wrapped in an anchor, with composed classes and forwarded props.
  */
 
 export default function Heading({
@@ -41,8 +68,11 @@ export default function Heading({
   children,
   className,
   icon,
+  id,
   ...props
 }: HeadingPropsType) {
+
+ const headingId = id || generateSlug(extractTextFromChildren(children))
 
  const content = icon ? (
     <>
@@ -51,9 +81,10 @@ export default function Heading({
     </>
   ) : children;
 
-  return createElement(
+  const HeadingElement = () => createElement(
     `h${headingLevel}`,
     {
+      id: headingId,
       className: clsx('font-main heading', 
         {"heading-w-icon": icon},
         className, 
@@ -61,5 +92,14 @@ export default function Heading({
       ...props
     },
     content
+  )
+ const fullUrl = typeof window !== 'undefined' 
+    ? `${window.location.origin}${window.location.pathname}#${headingId}`
+    : `#${headingId}`
+
+  return (
+    <a href="">
+      <HeadingElement />
+    </a>
   )
 }
