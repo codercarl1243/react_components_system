@@ -378,7 +378,7 @@ export default function useButton() {
                      */}
                     <Heading headingLevel={3}>WCAG principles in practice</Heading>
                     <p>Our Button component addresses key accessibility requirements across all four WCAG principles:</p>
-                    <List>
+                    <List variant="none" spacing="loose">
                         <li>
                             <p>
                                 <span className="bold"><Icon icon={RiContrastLine} /> Perceivable:</span> Sufficient contrast (4.5:1) and readable text at 200% zoom.
@@ -412,7 +412,7 @@ export default function useButton() {
                     <Heading headingLevel={3}>Designing beyond WCAG</Heading>
                     <p>WCAG is a great starting point, but it&apos;s not the finish line.</p>
                     <p>As developers, our role is to make accessibility practical by designing buttons that feel consistent, predictable, and inclusive for everyone:</p>
-                    <List>
+                    <List variant="none" spacing="normal">
                         <li>
                             <p>
                                 <span className="bold">Margin and Spacing:</span> WCAG addresses target size but does not specifically require spacing between targets.
@@ -526,7 +526,7 @@ min-height: 44px;`} copyEnabled={false} />
                                 in depth article on creating a button with multiple states. This uses plain HTML, JS, & CSS.
                             </div>
                         </li>
-                        <li><Link href=" https://kittygiraudel.com/2024/03/29/on-disabled-and-aria-disabled-attributes/">Kitty Giraudel: a comparison of aria-disabled and disabled</Link> and how the use of either is not explicitly wrong</li>
+                        <li><Link href="https://kittygiraudel.com/2024/03/29/on-disabled-and-aria-disabled-attributes/">Kitty Giraudel: a comparison of aria-disabled and disabled</Link> and how the use of either is not explicitly wrong</li>
                     </List>
                     <p className="bold">Design Systems: Buttons</p>
                     <List>
