@@ -53,7 +53,7 @@ export function CopyButton({ text }: CopyButtonProps) {
         )
         : copied
           ? (
-            <Icon icon={RiCheckFill} color={'green'} />
+            <Icon icon={RiCheckFill} color={'var(--color-accent-400'} />
           )
           : (
             <Icon icon={RiFileCopyLine} />
