@@ -1,14 +1,22 @@
 import clsx from "clsx";
 import { ComponentProps } from "react";
 
+type UlMarkers = 'default' | 'disc' | 'circle' | 'square' | 'none';
+type OlMarkers = 'default' | 'decimal' | 'lower-alpha' | 'upper-alpha' | 'lower-roman' | 'upper-roman' | 'none';
+
 type BaseListProps = {
   className?: string;
-  variant?: 'default' | 'disc' | 'circle' | 'square' | 'decimal' | 'none';
   spacing?: 'tight' | 'normal' | 'loose';
 };
 
-type UnorderedListProps = ComponentProps<'ul'> & BaseListProps & { ordered?: false };
-type OrderedListProps = ComponentProps<'ol'> & BaseListProps & { ordered: true; start?: number };
+type UnorderedListProps = ComponentProps<'ul'> & BaseListProps & {
+  ordered?: false;
+  variant?: UlMarkers;
+};
+type OrderedListProps = ComponentProps<'ol'> & BaseListProps & {
+  ordered: true;
+  variant?: OlMarkers;
+};
 
 type ListProps = UnorderedListProps | OrderedListProps;
 
@@ -21,40 +29,49 @@ export default function List({
   ...props
 }: ListProps) {
 
-  //   const spacingClasses = {
-  //     tight: 'space-y-1',
-  //     normal: 'space-y-2',
-  //     loose: 'space-y-4'
-  //   };
+  const spacingClasses = {
+    tight: 'list--tight',
+    normal: 'list--normal',
+    loose: 'list--loose'
+  };
 
-  //   const variantClasses = {
-  //     default: ordered ? 'list-decimal' : 'list-disc',
-  //     disc: 'list-disc',
-  //     circle: 'list-circle',
-  //     square: 'list-square',
-  //     decimal: 'list-decimal',
-  //     none: 'list-none'
-  //   };
+  const ulVariantClasses: Record<UlMarkers, string> = {
+    default: 'list--disc',
+    disc: 'list--disc',
+    circle: 'list--circle',
+    square: 'list--square',
+    none: 'list--none'
+  };
+
+  const olVariantClasses: Record<OlMarkers, string> = {
+    default: 'list--decimal',
+    decimal: 'list--decimal',
+    'lower-alpha': 'list--lower-alpha',
+    'upper-alpha': 'list--upper-alpha',
+    'lower-roman': 'list--lower-roman',
+    'upper-roman': 'list--upper-roman',
+    none: 'list--none'
+  };
+
+  const variantClasses = ordered ? olVariantClasses[variant as OlMarkers] : ulVariantClasses[variant as UlMarkers];
 
   const listClasses = clsx(
-    'list flow-4',
-    // variantClasses[variant],
-    // spacingClasses[spacing],
-    // 'pl-6',
+    'list',
+    variantClasses,
+    spacingClasses[spacing],
     className
   );
 
   if (ordered) {
-    const { start, ...olProps } = props as OrderedListProps;
     return (
-      <ol className={listClasses} start={start} {...olProps}>
+      <ol className={listClasses} {...(props as ComponentProps<'ol'>)}>
         {children}
       </ol>
     );
   }
 
   return (
-    <ul className={listClasses} {...props}>
+    <ul className={listClasses} {...(props as ComponentProps<'ul'>)}>
       {children}
     </ul>
   );
