@@ -4,7 +4,9 @@ import { BLOG_POSTS } from '@/lib/blogPosts';
 
 export async function GET() {
     const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://codercarl.dev';
-    
+    const siteTitle = 'React Component designs';
+    const siteDescription = 'A library of accessible and extensible react based components';
+
     const blogItems = BLOG_POSTS.map(post => `
     <item>
         <title>${escapeXml(post.name)}</title>
@@ -18,9 +20,9 @@ export async function GET() {
     const feed = `<?xml version="1.0" encoding="UTF-8" ?>
 <rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>Your Blog Title</title>
+     <title>${escapeXml(siteTitle)}</title>
     <link>${baseUrl}/blog</link>
-    <description>Your blog description</description>
+    <description>${escapeXml(siteDescription)}</description>
     <language>en-us</language>
     <lastBuildDate>${new Date().toUTCString()}</lastBuildDate>
     ${blogItems}
