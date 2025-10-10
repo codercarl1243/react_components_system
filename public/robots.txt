@@ -1,0 +1,7 @@
+// public/robots.txt
+User-agent: *
+Allow: /
+Disallow: /admin
+
+Sitemap: https://codercarl.dev/sitemap.xml
+Feed: https://codercarl.dev/feed.xml
