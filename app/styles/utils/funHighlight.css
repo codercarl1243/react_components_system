@@ -9,7 +9,7 @@
         position: absolute;
         top: 50%;
         left: 50%;
-        width: 110%;
+        width: 103%;
         height: 120%;
         border-radius: var(--border-radius, 50px);
         opacity: 0.35;

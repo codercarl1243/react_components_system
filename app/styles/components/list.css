@@ -1,0 +1,64 @@
+.list {
+    margin: 0;
+    padding-inline-start: 1rem;
+    list-style-position: outside;
+    font-size: inherit;
+}
+
+/* Spacing variants */
+.list--tight {
+  --list-spacing: 0.15lh;
+}
+
+.list--normal {
+  --list-spacing: 0.25lh;
+}
+
+.list--loose {
+  --list-spacing: 0.4lh;
+}
+
+.list li > *:not(:last-child) {
+    margin-block-end: var(--list-spacing, 0.25em);
+}
+.list li:not(:last-child) {
+    margin-block-end: calc(var(--list-spacing, 0.25em) * 2);
+}
+
+/* Unordered list variants */
+.list--disc {
+  list-style-type: disc;
+}
+
+.list--circle {
+  list-style-type: circle;
+}
+
+.list--square {
+  list-style-type: square;
+}
+
+.list--none {
+  list-style-type: none;
+}
+
+/* Ordered list variants */
+.list--decimal {
+  list-style-type: decimal;
+}
+
+.list--lower-alpha {
+  list-style-type: lower-alpha;
+}
+
+.list--upper-alpha {
+  list-style-type: upper-alpha;
+}
+
+.list--lower-roman {
+  list-style-type: lower-roman;
+}
+
+.list--upper-roman {
+  list-style-type: upper-roman;
+}
