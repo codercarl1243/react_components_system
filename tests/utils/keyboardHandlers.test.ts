@@ -1,5 +1,5 @@
-import { getKeyAlias, handleKeyPress } from '@/utils/keyboardHandlers'
-import type { KeyPressCallbackMap, KeyPressEventType } from '@/utils/keyboardHandlers.type'
+import { getKeyAlias, handleKeyPress } from '@/lib/keyboardHandlers'
+import type { KeyPressCallbackMap, KeyPressEventType } from '@/lib/keyboardHandlers.type'
 
 describe('handleKeyPress', () => {
   // Helper to create a minimal KeyboardEvent-like object with tracking

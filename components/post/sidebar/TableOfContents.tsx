@@ -3,7 +3,7 @@ import Heading from "@/components/heading";
 import Link from '@/components/link';
 import clsx from "clsx";
 import { useMemo, type MouseEvent } from "react";
-import { useScrollSpy } from "@/utils/useScrollSpy";
+import { useScrollSpy } from "@/hooks/useScrollSpy";
 
 type ToCProps = {
     items: { id: string; href: string; label: string }[]

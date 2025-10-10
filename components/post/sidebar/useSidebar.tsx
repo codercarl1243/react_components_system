@@ -1,6 +1,6 @@
 'use client';
-import { handleKeyPress } from '@/utils/keyboardHandlers';
-import { useFocusTrap } from '@/utils/useFocusTrap';
+import { handleKeyPress } from '@/lib/keyboardHandlers';
+import { useFocusTrap } from '@/hooks/useFocusTrap';
 import { usePathname } from 'next/navigation';
 import { type RefObject, useEffect, useRef, useState } from 'react'
 

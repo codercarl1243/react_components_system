@@ -13,10 +13,16 @@ import { RiAccessibilityLine, RiBrainLine, RiContrastLine, RiErrorWarningLine, R
 import PostNote from "@/components/post/post.note";
 import TabList from "@/components/tablist";
 import Icon from "@/components/icon";
+import { getRelatedPosts } from "@/lib/blogPosts";
 
 export const metadata: Metadata = { title: 'Buttons · Design System' }
 
 export default function ButtonsBasePage() {
+    const relatedPosts = getRelatedPosts('design__button__01').map(post => ({
+        href: post.url,
+        title: post.name
+    }));
+
     return (
         <>
             <Post>
@@ -247,7 +253,7 @@ export type BaseButtonProps = {
                     </List>
                     <p>Here's the complete implementation:</p>
                     <Code codeString={`import type { ButtonClickHandler, MouseEventType } from '@/components/button/button.type';
-import log from '@/utils/Logging';
+import log from '@/lib/Logging';
 
 export default function useButton() {
     /**
@@ -682,7 +688,7 @@ export default function Button({
                                 tabLabel: 'useButton.tsx',
                                 panelContent: (
                                     <Code codeString={`import type { ButtonClickHandler, MouseEventType } from '@/components/button/button.type';
-import log from '@/utils/Logging';
+import log from '@/lib/Logging';
 
 export default function useButton() {
     const handleClick = <T = unknown>(userHandler?: ButtonClickHandler<T>) =>
@@ -932,12 +938,7 @@ button.button {
                     { id: 'resources', href: '#resources', label: "Resources" }
                 ]}
                 // Fillers
-                relatedPosts={[
-                    { href: "/blog/design-system/buttons/sliders", title: "Slider Buttons" },
-                    { href: "/blog/design-system/buttons/sliders", title: "Slider Buttons" },
-                    { href: "/blog/design-system/buttons/sliders", title: "Slider Buttons" },
-                    { href: "/blog/design-system/buttons/sliders", title: "Slider Buttons" }
-                ]}
+                relatedPosts={relatedPosts}
                 author={{ avatarUrl: '/window.svg', name: "carl davidson" }}
             />
 

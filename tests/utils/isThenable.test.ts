@@ -1,4 +1,4 @@
-import isThenable from '@/utils/isThenable';
+import isThenable from '@/lib/isThenable';
 
 describe('isThenable', () => {
     describe('should return true for thenable objects', () => {
