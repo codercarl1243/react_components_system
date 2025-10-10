@@ -22,7 +22,7 @@ export default function RelatedPosts({posts}: RelatedPostsProps) {
             aria-labelledby="related-posts-heading"
         >
             <Heading headingLevel={2} id="related-posts-heading">Related Posts</Heading>
-            <List role="list" className="post-sidebar__related__list">
+            <List className="post-sidebar__related__list" variant="none">
                 {posts.map((post, idx) => (
                     <li key={post.href + idx}>
                         <NavigationCard href={post.href} heading={post.title} />
