@@ -57,7 +57,7 @@ const extractTextFromChildren = (children: React.ReactNode): string => {
  * @param headingSize - Visual size level used to pick the CSS size class (1–6). Defaults to `headingLevel`.
  * @param icon - Optional icon to render before the heading text. When provided, adds spacing between the icon and text.
  * @param id - Optional custom ID for the anchor. If not provided, auto-generated from heading text.
- * @returns A React element for the requested heading tag wrapped in an anchor, with composed classes and forwarded props.
+ * @returns A React element for the requested heading tag with composed classes and forwarded props.
  */
 
 export default function Heading({
