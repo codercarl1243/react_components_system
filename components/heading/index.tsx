@@ -2,7 +2,6 @@ import clsx from 'clsx'
 import type { HeadingPropsType } from '@/components/heading/heading.type'
 import { createElement } from 'react'
 import Icon from '@/components/icon'
-import Head from 'next/head'
 
 const getSizeClass = (level: number): string => {
   switch (level) {
