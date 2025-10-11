@@ -14,7 +14,7 @@ import PostNote from "@/components/post/post.note";
 import TabList from "@/components/tablist";
 import Icon from "@/components/icon";
 import { getRelatedPosts } from "@/lib/blogPosts";
-import AnchorHeading from "@/components/post/post.anchorHeading";
+import AnchorHeading from "@/components/heading/anchorHeading";
 
 export const metadata: Metadata = { title: 'Buttons · Design System' }
 
