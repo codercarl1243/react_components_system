@@ -47,12 +47,11 @@ const extractTextFromChildren = (children: React.ReactNode): string => {
 }
 
 /**
- * Render a semantic heading element with configurable visual size, wrapped in a shareable anchor link.
+ * Render a semantic heading element with configurable visual size.
  *
- * Creates an `h{n}` element (where `n` is `headingLevel`) wrapped in an anchor tag that links to itself.
- * This allows users to easily share direct links to specific heading sections. Applies the component's 
- * base font class together with a size class derived from `headingSize`. `headingSize` lets you control 
- * the visual font size independently of the semantic heading level.
+ * Creates an `h{n}` element (where `n` is `headingLevel`).
+ * Applies the component's base font class together with a size class derived from `headingSize`.
+ * `headingSize` lets you control the visual font size independently of the semantic heading level.
  *
  * @param headingLevel - Semantic heading level to render (1–6). Defaults to `3`.
  * @param headingSize - Visual size level used to pick the CSS size class (1–6). Defaults to `headingLevel`.
@@ -78,9 +77,9 @@ export default function Heading({
       <Icon icon={icon} size={getIconSize(headingSize)} />
       <span className='heading__content'>{children}</span>
     </>
-  ) : children;
+  ) : <span className='heading__content'>{children}</span>;
 
-  const HeadingElement = () => createElement(
+  return createElement(
     `h${headingLevel}`,
     {
       id: headingId,
@@ -91,14 +90,5 @@ export default function Heading({
       ...props
     },
     content
-  )
- const fullUrl = typeof window !== 'undefined' 
-    ? `${window.location.origin}${window.location.pathname}#${headingId}`
-    : `#${headingId}`
-
-  return (
-    <a href={fullUrl} className='link'>
-      <HeadingElement />
-    </a>
   )
 }
