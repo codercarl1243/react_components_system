@@ -58,6 +58,7 @@
   width: 0.5rem;
   height: 0.5rem;
   border-radius: 0;
+  background-color: var(--color-secondary-400);
 }
 
 /* Ordered list variants */
