@@ -97,7 +97,7 @@ export default function Heading({
     : `#${headingId}`
 
   return (
-    <a href="">
+    <a href={fullUrl} className='link'>
       <HeadingElement />
     </a>
   )
