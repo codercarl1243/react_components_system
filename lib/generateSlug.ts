@@ -1,8 +1,11 @@
 export const generateSlug = (text: string): string => {
-  return text
+  const slug = text
     .toLowerCase()
-    .trim()
-    .replace(/[^\w\s-]/g, '')
     .replace(/\s+/g, '-')
-    .replace(/-+/g, '-')
+    .replace(/[^\w\-]+/g, '')
+    .replace(/\-\-+/g, '-')
+    .replace(/^-+/, '')
+    .replace(/-+$/, '');
+
+    return slug || 'slug'
 }
