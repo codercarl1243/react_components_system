@@ -2,7 +2,7 @@
 
 import { BLOG_POSTS } from '@/lib/blogPosts';
 
-export async function GET() {
+export function GET() {
     const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://codercarl.dev';
     const siteTitle = 'React Component designs';
     const siteDescription = 'A library of accessible and extensible react based components';

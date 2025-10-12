@@ -1,8 +1,21 @@
 .list {
-    margin: 0;
-    padding-inline-start: 1rem;
-    list-style-position: outside;
-    font-size: inherit;
+  margin: 0;
+  list-style-type: none;
+  font-size: inherit;
+  padding-inline-start: calc(var(--spacing) * 2);
+}
+
+.list:not(.list--none) li {
+  position: relative;
+  padding-inline-start: 1.5em;
+}
+
+.list li::before {
+  position: absolute;
+  left: 0;
+  top: 0.5em;
+  width: 0.6rem;
+  height: 0.6rem;
 }
 
 /* Spacing variants */
@@ -18,47 +31,68 @@
   --list-spacing: 0.4lh;
 }
 
-.list li > *:not(:last-child) {
-    margin-block-end: var(--list-spacing, 0.25em);
+.list li>*:not(:last-child) {
+  margin-block-end: var(--list-spacing, 0.25em);
 }
+
 .list li:not(:last-child) {
-    margin-block-end: calc(var(--list-spacing, 0.25em) * 2);
+  margin-block-end: calc(var(--list-spacing, 0.25em) * 2);
 }
 
 /* Unordered list variants */
-.list--disc {
-  list-style-type: disc;
+.list--disc li::before {
+  content: '';
+  background-color: var(--color-secondary-400);
+  border-radius: 50%;
 }
 
-.list--circle {
-  list-style-type: circle;
+.list--circle li::before {
+  content: '';
+  border: 1px solid var(--color-secondary-400);
+  background-color: var(--color-secondary-100);
+  border-radius: 50%;
 }
 
-.list--square {
-  list-style-type: square;
-}
-
-.list--none {
-  list-style-type: none;
+.list--square li::before {
+  content: '';
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 0;
+  background-color: var(--color-secondary-400);
 }
 
 /* Ordered list variants */
-.list--decimal {
-  list-style-type: decimal;
-}
-
-.list--lower-alpha {
-  list-style-type: lower-alpha;
-}
-
-.list--upper-alpha {
-  list-style-type: upper-alpha;
-}
-
-.list--lower-roman {
-  list-style-type: lower-roman;
-}
-
+.list--decimal,
+.list--lower-alpha,
+.list--upper-alpha,
+.list--lower-roman,
 .list--upper-roman {
-  list-style-type: upper-roman;
+  counter-reset: ol-counter;
+
+  & li::before {
+    counter-increment: ol-counter;
+    font-weight: 600;
+    color: var(--color-secondary-400);
+    top: 0;
+    width: 1.5em;
+  }
+}
+.list--decimal li::before {
+  content: counter(ol-counter, decimal) '.';
+}
+
+.list--lower-alpha li::before {
+  content: counter(ol-counter, lower-alpha) '.';
+}
+
+.list--upper-alpha li::before {
+  content: counter(ol-counter, upper-alpha) '.';
+}
+
+.list--lower-roman li::before {
+  content: counter(ol-counter, lower-roman) '.';
+}
+
+.list--upper-roman li::before {
+  content: counter(ol-counter, upper-roman) '.';
 }

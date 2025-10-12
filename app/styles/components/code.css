@@ -7,9 +7,6 @@
         position: absolute;
         top: 2px;
         right: 2px;
-        display: grid;
-        place-content: center;
-
     }
 
     .shiki-wrapper pre {

@@ -1,0 +1,6 @@
+.button--copy {
+    display: inline-block;
+    --button-margin: 6px;
+    --button-padding-x: 12px;
+    --button-padding-y: 12px;
+}

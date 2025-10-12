@@ -7,6 +7,27 @@
     transition: text-decoration-color 0.2s ease;
 }
 
+.link--heading {
+    position: relative;
+     text-decoration: none;
+     width: fit-content;
+     &:hover, &:focus-visible {
+        text-decoration: underline;
+        text-decoration-style: dotted;
+        &:after {
+            content: '#';
+            position: absolute;
+            right: -1.5ch;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: var(--font-size-xl);
+            font-weight: 600;
+            font-family: var(--font-accent);
+            color: var(--color-neutral-300);
+        }
+     }
+}
+
 .link-w-icon {
     display: grid;
     grid-template-columns: 24px fit-content(100%);

@@ -14,14 +14,12 @@ import PostNote from "@/components/post/post.note";
 import TabList from "@/components/tablist";
 import Icon from "@/components/icon";
 import { getRelatedPosts } from "@/lib/blogPosts";
+import AnchorHeading from "@/components/heading/anchorHeading";
 
 export const metadata: Metadata = { title: 'Buttons · Design System' }
 
 export default function ButtonsBasePage() {
-    const relatedPosts = getRelatedPosts('design__button__01').map(post => ({
-        href: post.url,
-        title: post.name
-    }));
+    const relatedPosts = getRelatedPosts('design__button__01');
 
     return (
         <>
@@ -55,9 +53,9 @@ export default function ButtonsBasePage() {
                     </List>
                 </PostSection>
                 <PostSection id="project-setup">
-                    <Heading headingLevel={2} id="project-setup-heading">Project Setup</Heading>
+                    <AnchorHeading headingLevel={2} id="project-setup-heading">Project Setup</AnchorHeading>
 
-                    <Heading headingLevel={3} id="file-structure">File Structure</Heading>
+                    <AnchorHeading headingLevel={3} id="file-structure">File Structure</AnchorHeading>
                     <p>We&apos;ll follow a consistent pattern for organizing our components:</p>
 
                     <Code lang="md" copyEnabled={false} codeString={`components/
@@ -75,9 +73,9 @@ export default function ButtonsBasePage() {
     └── components/
         └── button.css`} />
                     <p>This structure keeps related code together while maintaining clear boundaries between logic, types, and presentation.</p>
-                    <Heading headingLevel={3} id="dependencies">Dependencies</Heading>
+                    <AnchorHeading headingLevel={3} id="dependencies">Dependencies</AnchorHeading>
                     <p>I have installed a couple of additional packages:</p>
-                    <List>
+                    <List variant="none" spacing="tight">
                         <li><Link className="bold" href="https://www.npmjs.com/package/@remixicon/react">RemixIcons</Link> to leverage their extensive and free library of icons</li>
                         <li><Link className="bold" href="https://www.npmjs.com/package/clsx">CLSX</Link> to handle class names conditionally</li>
                     </List>
@@ -89,14 +87,14 @@ export default function ButtonsBasePage() {
                 </PostSection>
 
                 <PostSection id="building-foundation">
-                    <Heading headingLevel={2} id="building-foundation-heading">
+                    <AnchorHeading headingLevel={2} id="building-foundation-heading">
                         Building the Foundation
-                    </Heading>
-                    <Heading headingLevel={3} id="starting-simple">
+                    </AnchorHeading>
+                    <AnchorHeading headingLevel={3} id="starting-simple">
                         Starting Simple: The Component
-                    </Heading>
-                    <p>Let's start with the component itself. Our Button component needs to handle several responsibilities:</p>
-                    <List>
+                    </AnchorHeading>
+                    <p>Let's start with the component itself. Our <Code codeString="Button" inline copyEnabled={false} /> component needs to handle several responsibilities:</p>
+                    <List variant="circle" spacing="normal">
                         <li>Managing click events (both sync and async)</li>
                         <li>Communicating loading states</li>
                         <li>Maintaining accessibility attributes</li>
@@ -104,8 +102,10 @@ export default function ButtonsBasePage() {
                         <li>Preventing interaction when disabled or loading</li>
                     </List>
 
-                    <PostNote><p>We're using a custom hook called <Code codeString="useButton" inline copyEnabled={false} /> to handle click logic - we'll explore
-                        this in detail in the next section.</p>
+                    <PostNote>
+                        <p>
+                            We're using a custom hook called <Code codeString="useButton" inline copyEnabled={false} /> to handle click logic - we'll explore this in detail in the next section.
+                        </p>
                     </PostNote>
                     <p className="bold">Here's how we structure it:</p>
                     <Code codeString={`'use client'
@@ -114,105 +114,76 @@ import clsx from 'clsx'
 import { BaseButtonProps, MouseEventType } from '@/components/button/button.type'
 import useButton from '@/components/button/useButton'
 import Spinner from '@/components/utilities/spinner'
+import Icon from '@/components/icon'
 
-/**
- * A base, accessible button component that supports loading states and 
- * safely manages click behavior and logging through a custom hook.
- *  
- * This component uses aria-disabled instead of the native disabled attribute
- * to maintain discoverability and tab order. The button remains focusable
- * and discoverable to assistive technology while in this non-functional state.
- *
- * @component
- * @param {BaseButtonProps} props - The props for the Button component.
- * @param {string} [props.className] - Additional class names to append.
- * @param {React.ReactNode} props.children - The button label or content.
- * @param {function} [props.onClick] - Optional click handler.
- * @param {'button' | 'submit' | 'reset'} [props.type='button'] - The button type.
- * @param {boolean} [props.disabled=false] - Whether the button is disabled.
- * @param {boolean} [props.isLoading=false] - Whether the button is in a loading state.
- * @param {React.Ref<HTMLButtonElement>} [props.ref] - Optional ref to the button element.
- * @returns {JSX.Element} The rendered Button component.
- *
- * @example
- * // Loading state with spinner
- * <Button isLoading onClick={handleSubmit}>Submit</Button>
- * 
- * // Disabled but discoverable
- * <Button disabled onClick={handleSave}>Save</Button>
- * 
- * // With variant styling
- * <Button data-variant="primary" data-style="filled">
- *   Click Me
- * </Button>
- */
 export default function Button({
-    className,
-    children,
-    onClick,
-    type = 'button',
-    disabled = false,
-    isLoading = false,
-    ref,
-    ...props
+  onClick,
+  type = 'button',
+  disabled = false,
+  isLoading = false,
+  icon,
+  className,
+  children,
+  ref,
+  ...props
 }: BaseButtonProps) {
-    const { handleClick } = useButton()
+    const { handleClick } = useButton();
 
-    /**
-     * Handles click events.
-     *
-     * - Prevents default form submission when loading or disabled.
-     * - Stops propagation to avoid parent click triggers.
-     * - Delegates to useButton's click handler otherwise.
-     */
     function onClickHandler(event: MouseEventType) {
-
-    if (isLoading || disabled) {
-        /**  
-         * Using both is correct here since a disabled/loading button should do nothing and 
-         * not trigger parent handlers.
-         * */
-        event.preventDefault()      // Prevent form submission and/or default click actions
-        event.stopPropagation()     // Prevent bubbling to parent click handlers
-        return;
-    }
-    return handleClick(onClick)(event)
+        if (isLoading || disabled) {
+            event.preventDefault();
+            return;
+        }
+        return handleClick(onClick)(event);
     }
 
     return (
         <button
             {...props}
-            className={clsx(className, 'button')}
+            className={clsx(className, {'button-w-icon': icon}, 'button')}
             onClick={onClickHandler}
             aria-disabled={isLoading || disabled}
             data-loading={isLoading}
             ref={ref}
             type={type}
-            data-testid="base-button"
+            data-testid='base-button'
         >
-            {children}
+            {icon && <Icon icon={icon}/>}
+            <span className='button__content'>{children}</span>
             {isLoading && <Spinner />}
         </button>
-    )}`} />
+        )
+}`} />
 
-                    <Heading headingLevel={4}>Key Decisions</Heading>
-                    <List>
+                    <AnchorHeading headingLevel={4}>Key Decisions</AnchorHeading>
+                    <List variant="circle" spacing="normal">
                         <li><Code codeString={`clsx(className, 'button')`} inline copyEnabled={false} /> - Combines user-provided classes with our base class, giving consumers flexibility while maintaining defaults</li>
                         <li><Code codeString={`isLoading || disabled`} inline copyEnabled={false} /> - Prevents click handlers from firing during loading or disabled states.</li>
-                        <li><Code codeString={`event.preventDefault()`} inline copyEnabled={false} /> - Stops any default behavior when the button shouldn't be interactive</li>
-                        <li><Code codeString={`ref`} inline copyEnabled={false} /> - React 19 allows refs to be passed as regular props without <Code codeString={`forwardRef`} inline copyEnabled={false} /></li>
-                        <li><Code codeString={`data-loading`} inline copyEnabled={false} /> - Provides a styling hook for loading states without relying on JavaScript</li>
+                        <li><Code codeString={`event.preventDefault()`} inline copyEnabled={false} /> - Stops default behavior when the button shouldn't be interactive</li>
+                        <li><p>
+                            <Code codeString={`ref`} inline copyEnabled={false} /> - React 19 allows refs to be passed as regular props without <Code codeString={`forwardRef`} inline copyEnabled={false} />
+                        </p>
+                            <p className="italic text-sm neutral-600">
+                                Further reading: <Link href="https://react.dev/blog/2024/12/05/react-19#ref-as-a-prop">React 19 release notes</Link>
+                            </p></li>
+                        <li><Code codeString={`data-loading`} inline copyEnabled={false} /> - Provides a styling hook for loading states</li>
                         <li><Code codeString={`aria-disabled`} inline copyEnabled={false} /> over <Code codeString={`disabled`} inline copyEnabled={false} /> - We'll explain this choice in the accessibility section</li>
                     </List>
-                    <Heading headingLevel={3} id="typescript-support">Adding TypeScript Support</Heading>
-                    <p>Type safety helps catch errors early and provides excellent autocomplete for consumers. Our type definitions need to:</p>
-                    <List>
+
+                    <AnchorHeading headingLevel={3} id="typescript-support">
+                        Adding TypeScript Support
+                    </AnchorHeading>
+                    <p>
+                        Type safety helps catch errors early and provides excellent autocomplete for consumers. Our type definitions need to:
+                    </p>
+                    <List variant="circle" spacing="normal">
                         <li>Support both synchronous and asynchronous click handlers</li>
                         <li>Extend native button props without conflicts</li>
                         <li>Allow custom data attributes for styling</li>
                         <li>Properly type mouse events</li>
                     </List>
                     <Code codeString={`import type { ComponentPropsWithRef, MouseEvent } from 'react'
+import { IconProps } from '@/components/icon/icon.type';
 
 export type MouseEventType = MouseEvent<HTMLButtonElement>;
 
@@ -221,20 +192,23 @@ export type ButtonClickHandler<T = unknown> = (event: MouseEventType) => T | Pro
 export type BaseButtonProps = {
     disabled?: boolean; 
     isLoading?: boolean;
+    icon?: IconProps['icon'];
     'data-style'?: 'outlined' | 'filled';
     'data-variant'?: 'primary' | 'secondary' | 'accent';
     onClick?: ButtonClickHandler;
 } & Omit<ComponentPropsWithRef<'button'>, 'onClick' | 'disabled'>;`} />
-                    <Heading headingLevel={4}>Types Breakdown</Heading>
-                    <List>
-                        <li><Code codeString={`MouseEventType`} inline copyEnabled={false} /> - Alias for cleaner code and easier updates if we need to change event types</li>
+                    <AnchorHeading headingLevel={4}>
+                        Types Breakdown
+                    </AnchorHeading>
+                    <List variant="circle" spacing="normal">
+                        <li><Code codeString={`MouseEventType`} inline copyEnabled={false} /> - Alias for cleaner code</li>
                         <li><Code codeString={`ButtonClickHandler<T = unknown>`} inline copyEnabled={false} /> - The unknown default allows maximum flexibility while maintaining type safety through inference at the call site</li>
-                        <li><Code codeString={`Omit<ComponentPropsWithRef<'button'>, 'onClick' | 'disabled'>`} inline copyEnabled={false} /> - Inherits all native button props (className, aria-*, data-*, etc.) while replacing onClick, and disabled with our typed versions</li>
+                        <li><Code codeString={`Omit<ComponentPropsWithRef<'button'>, 'onClick' | 'disabled'>`} inline copyEnabled={false} /> - Inherits all native button props (className, aria-*, data-*, etc.) while replacing <Code codeString="onClick" inline copyEnabled={false} />, and <Code codeString="disabled" inline copyEnabled={false} /> with our typed versions</li>
                     </List>
                 </PostSection>
 
                 <PostSection id="interaction-logic">
-                    <Heading headingLevel={2} id="interaction-logic-heading">Interaction Logic</Heading>
+                    <AnchorHeading headingLevel={2} id="interaction-logic-heading">Interaction Logic</AnchorHeading>
                     <p>Our button needs to handle both <span className="fun-underline">synchronous</span> and <span className="fun-underline">asynchronous</span> click handlers gracefully.</p>
                     <p> We extract this logic into a custom hook for several reasons:</p>
                     <List>
@@ -316,7 +290,7 @@ export default function useButton() {
     return { handleClick }
 }`} />
 
-                    <Heading headingLevel={3}>Why this approach</Heading>
+                    <AnchorHeading headingLevel={3}>Why this approach</AnchorHeading>
                     <List>
                         <li>
                             <p><span className="bold">Curried function</span> - <Code codeString="handleClick(onClick)(event)" inline copyEnabled={false} /> allows us to configure the handler once and reuse it.</p>
@@ -343,8 +317,8 @@ export default function useButton() {
 
                 </PostSection>
                 <PostSection id="essential-features">
-                    <Heading id="essential-features-heading" headingLevel={2}>Essential Features</Heading>
-                    <Heading headingLevel={3}>Loading States</Heading>
+                    <AnchorHeading id="essential-features-heading" headingLevel={2}>Essential Features</AnchorHeading>
+                    <AnchorHeading headingLevel={3}>Loading States</AnchorHeading>
                     <p>Loading states are critical for async operations. They provide feedback to users and prevent duplicate submissions.</p>
                     <p className="bold">Our implementation:</p>
                     <Code codeString="{isLoading && <Spinner />}" copyEnabled={false} />
@@ -353,7 +327,7 @@ export default function useButton() {
   position: relative;
   cursor: wait;
 }`} copyEnabled={false} />
-                    <Heading headingLevel={3}>Preventing Duplicate Actions</Heading>
+                    <AnchorHeading headingLevel={3}>Preventing Duplicate Actions</AnchorHeading>
                     <p>When a button triggers an async operation, users might click multiple times. We prevent this by:</p>
                     <List ordered>
                         <li>Checking <Code codeString="isLoading || disabled" copyEnabled={false} inline /> in our click handler</li>
@@ -361,7 +335,7 @@ export default function useButton() {
                         <li>Setting <Code lang="css" codeString="cursor: wait" copyEnabled={false} inline /> in CSS for visual feedback</li>
                         <li>Using <Code codeString="aria-disabled" copyEnabled={false} inline /> to communicate the state to assistive technology</li>
                     </List>
-                    <Heading headingLevel={3}>Integration with Forms</Heading>
+                    <AnchorHeading headingLevel={3}>Integration with Forms</AnchorHeading>
                     <p>
                         Our button defaults to <Code codeString={`type="button"`} copyEnabled={false} inline /> instead of <Code codeString={`type="submit"`} copyEnabled={false} inline />.
                     </p>
@@ -377,12 +351,12 @@ export default function useButton() {
 </Button>`} />
                 </PostSection>
                 <PostSection id="accessibility">
-                    <Heading id="accessibility-heading" headingLevel={2}>Accessibility Requirements</Heading>
+                    <AnchorHeading id="accessibility-heading" headingLevel={2}>Accessibility Requirements</AnchorHeading>
 
-                    {/* <Heading headingLevel={3}>WCAG Success Criteria That Apply to Buttons</Heading>
+                    {/* <AnchorHeading headingLevel={3}>WCAG Success Criteria That Apply to Buttons</AnchorHeading>
                     <p>Buttons must meet several WCAG standards. Here are the key criteria our implementation addresses:</p>
                      */}
-                    <Heading headingLevel={3}>WCAG principles in practice</Heading>
+                    <AnchorHeading headingLevel={3}>WCAG principles in practice</AnchorHeading>
                     <p>Our Button component addresses key accessibility requirements across all four WCAG principles:</p>
                     <List variant="none" spacing="loose">
                         <li>
@@ -415,7 +389,7 @@ export default function useButton() {
                     </PostNote>
 
 
-                    <Heading headingLevel={3}>Designing beyond WCAG</Heading>
+                    <AnchorHeading headingLevel={3}>Designing beyond WCAG</AnchorHeading>
                     <p>WCAG is a great starting point, but it&apos;s not the finish line.</p>
                     <p>As developers, our role is to make accessibility practical by designing buttons that feel consistent, predictable, and inclusive for everyone:</p>
                     <List variant="none" spacing="normal">
@@ -453,17 +427,17 @@ min-height: 44px;`} copyEnabled={false} />
 
                     {/* 
 
-                    <Heading headingLevel={3}>How UX/UI Design Extends WCAG</Heading>
+                    <AnchorHeading headingLevel={3}>How UX/UI Design Extends WCAG</AnchorHeading>
                     <p>WCAG provides minimum standards, but good UX goes further. Here's how our implementation adds:</p> */}
                     {/* 
-                    <Heading headingLevel={4}>Margin and Spacing</Heading>
+                    <AnchorHeading headingLevel={4}>Margin and Spacing</AnchorHeading>
                     <p>WCAG addresses target size but does not specifically require spacing between targets. This button has margin added by default</p>
                     <p><span className="bold">Why this matters:</span> Users with motor disabilities benefit from space between interactive elements. Accidental taps are less likely when targets aren't crowded. <span className="fun-underline">This is especially important on touch devices</span></p> */}
 
-                    {/* <Heading headingLevel={4}>Disabled State Contrast</Heading>
+                    {/* <AnchorHeading headingLevel={4}>Disabled State Contrast</AnchorHeading>
                     <p>WCAG's contrast requirements have an exception for disabled elements. But disabled buttons should still be visible and identifiable, they shouldn't dissapear from view because of an action that the user has taken.</p> */}
 
-                    {/* <Heading headingLevel={4}>The aria-disabled decision</Heading>
+                    {/* <AnchorHeading headingLevel={4}>The aria-disabled decision</AnchorHeading>
                     <p>This is one of the most important accessibility choices in our component. We use <Code codeString="aria-disabled" inline copyEnabled={false} /> instead of the native <Code codeString="disabled" inline copyEnabled={false} /> attribute.</p>
                     <p className="bold">The problem with <Code codeString="disabled" inline copyEnabled={false} />:</p>
                     <List>
@@ -485,7 +459,7 @@ min-height: 44px;`} copyEnabled={false} />
                     <PostNote><span className="bold">Replacing <Code codeString="disabled" inline copyEnabled={false} /> with <Code codeString="aria-disabled" inline copyEnabled={false} /> and ensuring it works for all users </span> - We need to take a few extra steps and ensure that our click handler prevents interactions, along with targeting the aria-disabled state in our styling</PostNote>
 
 
-                    <Heading headingLevel={4}>Why we don&apos;t use aria-busy</Heading>
+                    <AnchorHeading headingLevel={4}>Why we don&apos;t use aria-busy</AnchorHeading>
                     <p>You might expect aria-busy for loading states. It seems perfect! But:</p>
                     <List>
                         <li>Limited screen reader support (inconsistent across AT)</li>
@@ -504,7 +478,7 @@ min-height: 44px;`} copyEnabled={false} />
                     <p>The <Code codeString="data-loading" inline copyEnabled={false} /> attribute handles visual styling, while <Code codeString="aria-disabled" inline copyEnabled={false} /> ensures that we communicate this in an accessible way.</p>
 
 
-                    <Heading headingLevel={4}>Assistive Technology isnt everything</Heading>
+                    <AnchorHeading headingLevel={4}>Assistive Technology isnt everything</AnchorHeading>
                     <p>Screen readers are powerful, but they don't solve all problems:</p>
                     <List>
                         <li>Not all users with disabilities use screen readers</li>
@@ -522,7 +496,7 @@ min-height: 44px;`} copyEnabled={false} />
                     </List>
 
 
-                    <Heading headingLevel={4}>Further Reading</Heading>
+                    <AnchorHeading headingLevel={4}>Further Reading</AnchorHeading>
                     <p>For a dive into accessible button patterns:</p>
                     <List>
                         <li><Link href="https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Roles/button_role">MDN: Button Accessibility</Link></li>
@@ -547,32 +521,32 @@ min-height: 44px;`} copyEnabled={false} />
                     </PostNote>
                 </PostSection>
                 <PostSection id="css-styling">
-                    <Heading headingLevel={2} id="css-styling-heading">CSS Styling</Heading>
-                    <Heading headingLevel={3} id="css-reset-base-styles">Reset and Base Styles</Heading>
-                    <Heading headingLevel={3} id="css-custom-properties">Custom Properties for Theming</Heading>
-                    <Heading headingLevel={3} id="css-button-states">Button States</Heading>
-                    <Heading headingLevel={4} id="css-interactions">Interaction states</Heading>
-                    <Heading headingLevel={4} id="css-disabled">Disabled</Heading>
-                    <Heading headingLevel={4} id="css-loading">Loading</Heading>
-                    <Heading headingLevel={3} id="css-variants">Adding Variants</Heading>
-                    <Heading headingLevel={3} id="css-touch-devices">Touch Device Optimization</Heading>
-                    <Heading headingLevel={3} id="css-user-preferences">Respecting User Preferences</Heading>
+                    <AnchorHeading headingLevel={2} id="css-styling-heading">CSS Styling</AnchorHeading>
+                    <AnchorHeading headingLevel={3} id="css-reset-base-styles">Reset and Base Styles</AnchorHeading>
+                    <AnchorHeading headingLevel={3} id="css-custom-properties">Custom Properties for Theming</AnchorHeading>
+                    <AnchorHeading headingLevel={3} id="css-button-states">Button States</AnchorHeading>
+                    <AnchorHeading headingLevel={4} id="css-interactions">Interaction states</AnchorHeading>
+                    <AnchorHeading headingLevel={4} id="css-disabled">Disabled</AnchorHeading>
+                    <AnchorHeading headingLevel={4} id="css-loading">Loading</AnchorHeading>
+                    <AnchorHeading headingLevel={3} id="css-variants">Adding Variants</AnchorHeading>
+                    <AnchorHeading headingLevel={3} id="css-touch-devices">Touch Device Optimization</AnchorHeading>
+                    <AnchorHeading headingLevel={3} id="css-user-preferences">Respecting User Preferences</AnchorHeading>
                 </PostSection>
 
                 <PostSection id="testing">
-                    <Heading headingLevel={2} id="testing-heading">Testing</Heading>
-                    <Heading headingLevel={3} id="testing-setup">Set up</Heading>
-                    <Heading headingLevel={3} id="testing-component">The Component</Heading>
-                    <Heading headingLevel={3} id="testing-hook">The Hook</Heading>
+                    <AnchorHeading headingLevel={2} id="testing-heading">Testing</AnchorHeading>
+                    <AnchorHeading headingLevel={3} id="testing-setup">Set up</AnchorHeading>
+                    <AnchorHeading headingLevel={3} id="testing-component">The Component</AnchorHeading>
+                    <AnchorHeading headingLevel={3} id="testing-hook">The Hook</AnchorHeading>
                 </PostSection>
 
                 <PostSection id="what-we-built">
-                    <Heading headingLevel={2} id="what-we-built-heading">What We Built</Heading>
+                    <AnchorHeading headingLevel={2} id="what-we-built-heading">What We Built</AnchorHeading>
                     <p>Our base button component now provides:</p>
 
-                    <Heading headingLevel={3} id="what-we-built__core" icon={RiErrorWarningLine} >
+                    <AnchorHeading headingLevel={3} id="what-we-built__core" icon={RiErrorWarningLine} >
                         Core Features
-                    </Heading>
+                    </AnchorHeading>
                     <List aria-labelledby="what-we-built__core">
                         <li>Type-safe component with TypeScript</li>
                         <li>Clean separation of logic and presentation</li>
@@ -585,9 +559,9 @@ min-height: 44px;`} copyEnabled={false} />
                         <li>Full test coverage</li>
                     </List>
 
-                    <Heading headingLevel={3} id="what-we-built__accessibility" icon={RiAccessibilityLine}>
+                    <AnchorHeading headingLevel={3} id="what-we-built__accessibility" icon={RiAccessibilityLine}>
                         Accessibility Checklist
-                    </Heading>
+                    </AnchorHeading>
                     <p>Our button implementation meets these accessibility standards:</p>
                     <List aria-labelledby="what-we-built__accessibility">
                         <li>AAA target size (44x44px minimum)</li>
@@ -599,7 +573,7 @@ min-height: 44px;`} copyEnabled={false} />
                     </List>
 
 
-                    <Heading headingLevel={3} id="what-we-built__DX" icon={RiFlaskLine}>Developer Experience</Heading>
+                    <AnchorHeading headingLevel={3} id="what-we-built__DX" icon={RiFlaskLine}>Developer Experience</AnchorHeading>
                     <List aria-labelledby="what-we-built__DX">
                         <li>Clean separation of logic and presentation</li>
                         <li>Consistent API across all variants</li>
@@ -611,7 +585,7 @@ min-height: 44px;`} copyEnabled={false} />
                 </PostSection>
 
                 <PostSection id="whats-next">
-                    <Heading headingLevel={2} id="whats-next-heading">What&apos;s Next</Heading>
+                    <AnchorHeading headingLevel={2} id="whats-next-heading">What&apos;s Next</AnchorHeading>
                     <p>
                         In the next post, we&apos;ll extend this foundation to create toggle buttons and explore
                         setting up Storybook to document our growing design system.
@@ -622,8 +596,8 @@ min-height: 44px;`} copyEnabled={false} />
                     </p>
                 </PostSection>
                 <PostSection id="resources">
-                    <Heading headingLevel={2} id="resources-heading">Resources</Heading>
-                    <Heading headingLevel={3}>Complete Code Reference</Heading>
+                    <AnchorHeading headingLevel={2} id="resources-heading">Resources</AnchorHeading>
+                    <AnchorHeading headingLevel={3}>Complete Code Reference</AnchorHeading>
                     <TabList
                         className="code__reference"
                         defaultActiveTabId="code_button"
