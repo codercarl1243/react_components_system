@@ -18,17 +18,31 @@
     align-items: center;
     white-space: nowrap;
 
-    & > * {
-        grid-column: 2;
-    }
-    & .icon {
+    /* button | spinner */
+    & .button__content {
         grid-column: 1;
-        justify-self: center;
     }
+
     & .spinner {
-        grid-column: 3;
+        grid-column: 2;
         justify-self: center;
     }
+    /* icon | text | spinner */
+    &.button-w-icon {
+        & .button__content {
+            grid-column: 2;
+        }
+
+        & .icon {
+            grid-column: 1;
+            justify-self: center;
+        }
+
+        & .spinner {
+            grid-column: 3;
+        }
+    }
+
 
     margin: var(--button-margin);
     padding: var(--button-padding-y) var(--button-padding-x);
@@ -58,12 +72,11 @@
     vertical-align: middle;
 
     /* Smooth transitions */
-    transition:
-        background-color 0.2s ease,
-        color 0.2s ease,
-        border-color 0.2s ease,
-        outline 0.2s ease,
-        box-shadow 0.2s ease;
+    transition: background-color 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease,
+    outline 0.2s ease,
+    box-shadow 0.2s ease;
 
     /* Interactive states - UX communication through outlines and transforms */
     &:hover {

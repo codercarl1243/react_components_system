@@ -64,6 +64,7 @@ export default function Button({
        * Using both is correct here since a disabled/loading button should do nothing and 
        * not trigger parent handlers.
        * */
+      event.stopPropagation()     // Prevent triggering parent click handlers
       event.preventDefault()      // Prevent form submission and/or default click actions
       return;
     }
