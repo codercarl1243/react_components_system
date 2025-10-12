@@ -1,3 +1,5 @@
+import { generateHash } from '@/lib/generateHash'
+
 export const generateSlug = (text: string): string => {
   const slug = text
     .toLowerCase()
@@ -7,5 +9,9 @@ export const generateSlug = (text: string): string => {
     .replace(/^-+/, '')
     .replace(/-+$/, '');
 
-    return slug || 'slug'
+  if (slug && slug.length) {
+    return slug
+  }
+
+  return `slug-${generateHash(text)}`
 }
