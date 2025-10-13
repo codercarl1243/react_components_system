@@ -68,7 +68,7 @@ export default function Button({
       event.preventDefault()      // Prevent form submission and/or default click actions
       return;
     }
-    return handleClick(onClick)(event)
+    void handleClick(onClick)(event)
   }
 
   return (
