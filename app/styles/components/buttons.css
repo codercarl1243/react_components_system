@@ -5,7 +5,7 @@
     --button-padding-y: calc(var(--spacing) * 2);
     --button-padding-x: var(--spacing);
     --button-icon-width: 24px;
-
+    --button-spinner-width: 24px;
     /* WCAG Target Size Requirements */
     /* AA: 24px x 24px minimum, AAA: 44px x 44px minimum */
     min-width: 44px;
@@ -13,22 +13,36 @@
 
     /* Layout - reserve space for icon and spinner to prevent layout shift*/
     display: grid;
-    grid-template-columns: var(--button-icon-width) fit-content(100%) var(--button-icon-width);
+    grid-template-columns: var(--button-icon-width) fit-content(100%) var(--button-spinner-width);
     gap: var(--spacing);
     align-items: center;
     white-space: nowrap;
 
-    & > * {
+    /* button | spinner */
+    & .button__content {
         grid-column: 2;
     }
-    & .icon {
-        grid-column: 1;
-        justify-self: center;
-    }
+
     & .spinner {
         grid-column: 3;
         justify-self: center;
     }
+    /* icon | text | spinner */
+    &.button-w-icon {
+        & .button__content {
+            grid-column: 2;
+        }
+
+        & .icon {
+            grid-column: 1;
+            justify-self: center;
+        }
+
+        & .spinner {
+            grid-column: 3;
+        }
+    }
+
 
     margin: var(--button-margin);
     padding: var(--button-padding-y) var(--button-padding-x);
@@ -58,12 +72,11 @@
     vertical-align: middle;
 
     /* Smooth transitions */
-    transition:
-        background-color 0.2s ease,
-        color 0.2s ease,
-        border-color 0.2s ease,
-        outline 0.2s ease,
-        box-shadow 0.2s ease;
+    transition: background-color 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease,
+    outline 0.2s ease,
+    box-shadow 0.2s ease;
 
     /* Interactive states - UX communication through outlines and transforms */
     &:hover {

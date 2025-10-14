@@ -58,16 +58,16 @@ export default function Button({
    * - Delegates to useButton's click handler otherwise.
    */
   function onClickHandler(event: MouseEventType) {
-
     if (isLoading || disabled) {
       /**  
        * Using both is correct here since a disabled/loading button should do nothing and 
        * not trigger parent handlers.
        * */
+      event.stopPropagation()     // Prevent triggering parent click handlers
       event.preventDefault()      // Prevent form submission and/or default click actions
       return;
     }
-    return handleClick(onClick)(event)
+    void handleClick(onClick)(event)
   }
 
   return (
