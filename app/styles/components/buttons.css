@@ -5,7 +5,7 @@
     --button-padding-y: calc(var(--spacing) * 2);
     --button-padding-x: var(--spacing);
     --button-icon-width: 24px;
-
+    --button-spinner-width: 24px;
     /* WCAG Target Size Requirements */
     /* AA: 24px x 24px minimum, AAA: 44px x 44px minimum */
     min-width: 44px;
@@ -13,18 +13,18 @@
 
     /* Layout - reserve space for icon and spinner to prevent layout shift*/
     display: grid;
-    grid-template-columns: var(--button-icon-width) fit-content(100%) var(--button-icon-width);
+    grid-template-columns: var(--button-icon-width) fit-content(100%) var(--button-spinner-width);
     gap: var(--spacing);
     align-items: center;
     white-space: nowrap;
 
     /* button | spinner */
     & .button__content {
-        grid-column: 1;
+        grid-column: 2;
     }
 
     & .spinner {
-        grid-column: 2;
+        grid-column: 3;
         justify-self: center;
     }
     /* icon | text | spinner */

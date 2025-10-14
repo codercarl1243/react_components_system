@@ -3,7 +3,7 @@ import { IconProps } from '@/components/icon/icon.type';
 
 export type MouseEventType = MouseEvent<HTMLButtonElement>;
 
-export type ButtonClickHandler<T = unknown> = (event: MouseEventType) => T | Promise<T>;
+export type ButtonClickHandler = (event: MouseEventType) => void | Promise<void>;
 
 export type BaseButtonProps = {
     disabled?: boolean; 

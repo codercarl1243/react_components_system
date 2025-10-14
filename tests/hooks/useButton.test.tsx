@@ -1,175 +1,179 @@
 import useButton from '@/components/button/useButton'
 import { renderHook } from '@testing-library/react'
 import { MouseEvent as ReactMouseEvent } from 'react'
+import log from '@/lib/Logging';
+
+jest.mock('../../lib/Logging.ts');
+
+const mockLog = log as jest.MockedFunction<typeof log>
 
 let handleClick: ReturnType<typeof useButton>['handleClick']
-let consoleErrorSpy: jest.SpyInstance
 
 describe('useButton', () => {
-  beforeAll(() => {
-    consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation(() => { })
-  })
 
   beforeEach(() => {
+    jest.clearAllMocks()
     const { result } = renderHook(() => useButton())
     handleClick = result.current.handleClick
-    consoleErrorSpy.mockClear()
   })
 
-  afterAll(() => consoleErrorSpy.mockRestore())
+  describe('handleClick', () => {
+    test('accepts a curried function with the Event as the prop', () => {
+      const mockUserHandler = jest.fn()
+      const mockEvent = {} as ReactMouseEvent<HTMLButtonElement>
+      handleClick(mockUserHandler)(mockEvent)
 
-  test('passes event object to handler', () => {
-    const mockHandler = jest.fn()
-    const clickHandler = handleClick(mockHandler)
-    const mockEvent = {} as ReactMouseEvent<HTMLButtonElement>
-
-    clickHandler(mockEvent)
-
-    expect(mockHandler).toHaveBeenCalledWith(mockEvent)
-  })
-
-  test('returns undefined when no handler is provided', () => {
-    const clickHandler = handleClick(undefined)
-    const result = clickHandler({} as ReactMouseEvent<HTMLButtonElement>)
-
-    expect(result).toBeUndefined()
-    expect(consoleErrorSpy).not.toHaveBeenCalled()
-  })
-
-  test('calls and returns result from sync handler', () => {
-    const mockHandler = jest.fn<string, [ReactMouseEvent<HTMLButtonElement>]>().mockReturnValue('sync result')
-    const clickHandler = handleClick(mockHandler)
-
-    const result = clickHandler({} as ReactMouseEvent<HTMLButtonElement>)
-
-    expect(mockHandler).toHaveBeenCalledTimes(1)
-    expect(result).toBe('sync result')
-  })
-
-  test('calls and returns promise from async handler', async () => {
-    const mockHandler = jest.fn<Promise<string>, [ReactMouseEvent<HTMLButtonElement>]>().mockResolvedValue('async result')
-    const clickHandler = handleClick(mockHandler)
-
-    const result = clickHandler({} as ReactMouseEvent<HTMLButtonElement>)
-
-    expect(mockHandler).toHaveBeenCalledTimes(1)
-    expect(result).toBeInstanceOf(Promise)
-    await expect(result).resolves.toBe('async result')
-  })
-
-  test('logs and rethrows sync handler errors', () => {
-    const error = new Error('Sync Error')
-    const mockHandler = jest.fn<string, [ReactMouseEvent<HTMLButtonElement>]>().mockImplementation(() => { throw error })
-
-    const clickHandler = handleClick(mockHandler)
-
-    expect(() => {
-      clickHandler({} as ReactMouseEvent<HTMLButtonElement>)
-    }).toThrow(error)
-
-    expect(consoleErrorSpy).toHaveBeenCalledWith('Button click error', error)
-  })
-
-  test('returns rejected promise and logs async handler errors', async () => {
-    const error = new Error('Async Error')
-    const mockHandler = jest.fn<Promise<string>, [ReactMouseEvent<HTMLButtonElement>]>().mockRejectedValue(error)
-    const clickHandler = handleClick(mockHandler)
-
-    const result = clickHandler({} as ReactMouseEvent<HTMLButtonElement>)
-
-    expect(result).toBeInstanceOf(Promise)
-    await expect(result).rejects.toThrow(error)
-
-    // Wait for the hook's internal promise.catch() to execute
-    await new Promise<void>(resolve => {
-      global.setTimeout(resolve, 0)
+      expect(mockUserHandler).toHaveBeenCalledWith(mockEvent)
     })
 
-    expect(consoleErrorSpy).toHaveBeenCalledWith('Button click error', error)
-  })
+    test('returns early when no handler is provided', () => {
+      const clickHandler = handleClick(undefined)
+      const result = clickHandler({} as ReactMouseEvent<HTMLButtonElement>)
 
-  test('does not interfere with parent promise handling', async () => {
-    const error = new Error('Parent should catch this')
-    const mockHandler = jest.fn<Promise<string>, [ReactMouseEvent<HTMLButtonElement>]>().mockRejectedValue(error)
-    const clickHandler = handleClick(mockHandler)
-
-    const result = clickHandler({} as ReactMouseEvent<HTMLButtonElement>)
-
-    let caughtError
-    try {
-      await result
-    } catch (err) {
-      caughtError = err
-    }
-
-    expect(caughtError).toBe(error)
-
-    await new Promise(resolve => global.setTimeout(resolve, 0))
-    expect(consoleErrorSpy).toHaveBeenCalledWith('Button click error', error)
-  })
-
-  test('handles non-promise return values without instanceof check', () => {
-    const mockHandler = jest.fn<string, [ReactMouseEvent<HTMLButtonElement>]>().mockReturnValue('not a promise')
-
-    const clickHandler = handleClick(mockHandler)
-
-    const result = clickHandler({} as ReactMouseEvent<HTMLButtonElement>)
-
-    expect(result).toBe('not a promise')
-    expect(consoleErrorSpy).not.toHaveBeenCalled()
-  })
-
-  test('handles null return value without promise check', () => {
-    const mockHandler = jest.fn<null, [ReactMouseEvent<HTMLButtonElement>]>().mockReturnValue(null)
-
-    const clickHandler = handleClick(mockHandler)
-
-    const result = clickHandler({} as ReactMouseEvent<HTMLButtonElement>)
-
-    expect(result).toBeNull()
-    expect(consoleErrorSpy).not.toHaveBeenCalled()
-  })
-
-  describe('in production environment', () => {
-    const originalEnv = process.env
-
-    beforeAll(() => {
-      process.env = { ...originalEnv, NODE_ENV: 'production' }
-      jest.resetModules()
+      expect(result).toBeUndefined()
+      expect(mockLog).not.toHaveBeenCalled()
     })
-    afterAll(() => {
-      process.env = originalEnv
-      jest.resetModules()
+
+    test('does not return a value for sync functions', () => {
+      const mockHandler = jest.fn()
+      const clickHandler = handleClick(mockHandler)
+
+      const result = clickHandler({} as ReactMouseEvent<HTMLButtonElement>)
+
+      expect(mockHandler).toHaveBeenCalledTimes(1)
+      expect(result).toBeUndefined()
     })
-    test('does not log sync errors', () => {
-      const error = new Error('Production Error')
-      const mockHandler = jest.fn<string, [ReactMouseEvent<HTMLButtonElement>]>().mockImplementation(() => { throw error })
+
+    test('does not return a value for async/promise functions', () => {
+      const mockHandler = jest.fn<Promise<void>, [ReactMouseEvent<HTMLButtonElement>]>()
+        .mockResolvedValue(undefined)
+      const clickHandler = handleClick(mockHandler)
+
+      const result = clickHandler({} as ReactMouseEvent<HTMLButtonElement>)
+
+      expect(mockHandler).toHaveBeenCalledTimes(1)
+      expect(result).toBeUndefined()
+    })
+
+    test('logs and rethrows sync handler errors', () => {
+      const error = new Error('Sync Error')
+      const mockHandler = jest.fn().mockImplementation(() => { throw error })
+
       const clickHandler = handleClick(mockHandler)
 
       expect(() => {
         clickHandler({} as ReactMouseEvent<HTMLButtonElement>)
       }).toThrow(error)
 
-      expect(consoleErrorSpy).not.toHaveBeenCalled()
+      expect(mockLog).toHaveBeenCalledWith('Button click error', error, 'error', expect.objectContaining({
+        context: expect.any(String),
+        trace: true
+      }))
     })
 
-    test('does not log async errors', async () => {
-      const error = new Error('Production Async Error')
-      const mockHandler = jest.fn<Promise<string>, [ReactMouseEvent<HTMLButtonElement>]>().mockRejectedValue(error)
-
+    test('attaches logging to unhandled async errors', async () => {
+      const error = new Error('Async Error')
+      const mockHandler = jest.fn<Promise<void>, [ReactMouseEvent<HTMLButtonElement>]>()
+        .mockRejectedValue(error)
       const clickHandler = handleClick(mockHandler)
 
       const result = clickHandler({} as ReactMouseEvent<HTMLButtonElement>)
 
-      expect(result).toBeInstanceOf(Promise)
+      expect(mockHandler).toHaveBeenCalledTimes(1)
+      expect(result).toBeUndefined()
 
-      const promiseResult = result as Promise<string>
-
-      await expect(promiseResult).rejects.toThrow(error)
       await new Promise<void>(resolve => {
         global.setTimeout(resolve, 0)
       })
-      expect(consoleErrorSpy).not.toHaveBeenCalled()
+
+      expect(mockLog).toHaveBeenCalledWith('Unhandled async error', error, 'error', expect.objectContaining({
+        context: expect.any(String),
+        trace: true
+      }))
+    })
+
+    test('does not log caught async errors', async () => {
+      const originalNodeEnv = process.env.NODE_ENV
+
+      Object.defineProperty(process.env, 'NODE_ENV', {
+        value: 'production',
+        writable: true,
+        configurable: true
+      })
+
+      const error = new Error('Caught Async Error')
+      const mockHandler = jest.fn<Promise<void>, [ReactMouseEvent<HTMLButtonElement>]>()
+        .mockImplementation(() => Promise.reject(error).catch(() => {
+          // Swallow the error
+        }))
+      const clickHandler = handleClick(mockHandler)
+
+      const result = clickHandler({} as ReactMouseEvent<HTMLButtonElement>)
+
+      expect(mockHandler).toHaveBeenCalledTimes(1)
+      expect(result).toBeUndefined()
+
+      await new Promise<void>(resolve => {
+        global.setTimeout(resolve, 0)
+      })
+
+      expect(mockLog).not.toHaveBeenCalled()
+
+      Object.defineProperty(process.env, 'NODE_ENV', {
+        value: originalNodeEnv,
+        writable: false,
+        configurable: true
+      })
+    })
+   test('logs all clicks in non-production environments', () => {
+      const originalNodeEnv = process.env.NODE_ENV
+
+      Object.defineProperty(process.env, 'NODE_ENV', {
+        value: 'development',
+        writable: true,
+        configurable: true
+      })
+
+      const mockHandler = jest.fn().mockName('testHandler')
+      const clickHandler = handleClick(mockHandler)
+
+      clickHandler({} as ReactMouseEvent<HTMLButtonElement>)
+
+      expect(mockHandler).toHaveBeenCalledTimes(1)
+      expect(mockLog).toHaveBeenCalledWith('Button clicked', undefined, 'default', expect.objectContaining({
+        context: expect.any(String),
+        trace: true
+      }))
+
+      Object.defineProperty(process.env, 'NODE_ENV', {
+        value: originalNodeEnv,
+        writable: false,
+        configurable: true
+      })
+    })
+
+    test('does not log clicks in production', () => {
+      const originalNodeEnv = process.env.NODE_ENV
+
+      Object.defineProperty(process.env, 'NODE_ENV', {
+        value: 'production',
+        writable: true,
+        configurable: true
+      })
+
+      const mockHandler = jest.fn()
+      const clickHandler = handleClick(mockHandler)
+
+      clickHandler({} as ReactMouseEvent<HTMLButtonElement>)
+
+      expect(mockHandler).toHaveBeenCalledTimes(1)
+      expect(mockLog).not.toHaveBeenCalled()
+
+      Object.defineProperty(process.env, 'NODE_ENV', {
+        value: originalNodeEnv,
+        writable: false,
+        configurable: true
+      })
     })
   })
 })

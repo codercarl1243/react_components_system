@@ -14,15 +14,14 @@ export default function useButton() {
  * Note: If the user handler catches its own errors, those errors will NOT be logged here.
  * Only unhandled promise rejections are captured for async operations.
  * 
- * @template T - The return type of the user's click handler
- * @param {ButtonClickHandler<T>} [userHandler] - The user's click handler function
+ * @param {ButtonClickHandler} [userHandler] - The user's click handler function
  * @returns {Function} A wrapped click handler that can be passed to button onClick
  * 
  * @example
  * const { handleClick } = useButton()
  * <button onClick={handleClick(myAsyncHandler)}>Click me</button>
  */
-  const handleClick = <T = unknown>(userHandler?: ButtonClickHandler<T>) =>
+  const handleClick =(userHandler?: ButtonClickHandler) =>
     (event: MouseEventType) => {
       if (!userHandler) return
 
@@ -45,10 +44,6 @@ export default function useButton() {
             log('Unhandled async error', err, 'error', { context: `${userHandler.name || 'anonymous function'}`, trace: true })
           })
         }
-
-        // Return the result (could be a value, Promise, or undefined)
-        return result
-
       } catch (err) {
         /**
          * Catch synchronous errors thrown during handler execution.

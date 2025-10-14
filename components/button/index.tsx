@@ -58,7 +58,6 @@ export default function Button({
    * - Delegates to useButton's click handler otherwise.
    */
   function onClickHandler(event: MouseEventType) {
-
     if (isLoading || disabled) {
       /**  
        * Using both is correct here since a disabled/loading button should do nothing and 
