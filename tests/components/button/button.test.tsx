@@ -1,4 +1,5 @@
 import Button from '@/components/button'
+import { Ri24HoursFill } from '@remixicon/react'
 import { fireEvent, render, screen } from '@testing-library/react'
 import React from 'react'
 
@@ -9,7 +10,7 @@ describe('Button', () => {
   })
 
   test('renders with icon when icon prop is provided', () => {
-    render(<Button icon="home">click me</Button>)
+    render(<Button icon={Ri24HoursFill}>click me</Button>)
     const button = screen.getByTestId('base-button')
     expect(button).toHaveClass('button-w-icon')
     expect(button).toHaveTextContent('click me')
