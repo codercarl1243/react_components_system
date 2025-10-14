@@ -2,6 +2,7 @@ import useButton from '@/components/button/useButton'
 import { renderHook } from '@testing-library/react'
 import { MouseEvent as ReactMouseEvent } from 'react'
 import log from '@/lib/Logging';
+import withNodeEnv from '@/tests/helpers/withNodeEnv';
 
 jest.mock('../../lib/Logging.ts');
 
@@ -93,86 +94,50 @@ describe('useButton', () => {
     })
 
     test('does not log caught async errors', async () => {
-      const originalNodeEnv = process.env.NODE_ENV
+      await withNodeEnv('production', async () => {
+        const error = new Error('Caught Async Error')
+        const mockHandler = jest.fn<Promise<void>, [ReactMouseEvent<HTMLButtonElement>]>()
+          .mockImplementation(() => Promise.reject(error).catch(() => {
+            // Swallow the error
+          }))
+        const clickHandler = handleClick(mockHandler)
 
-      Object.defineProperty(process.env, 'NODE_ENV', {
-        value: 'production',
-        writable: true,
-        configurable: true
-      })
+        const result = clickHandler({} as ReactMouseEvent<HTMLButtonElement>)
 
-      const error = new Error('Caught Async Error')
-      const mockHandler = jest.fn<Promise<void>, [ReactMouseEvent<HTMLButtonElement>]>()
-        .mockImplementation(() => Promise.reject(error).catch(() => {
-          // Swallow the error
-        }))
-      const clickHandler = handleClick(mockHandler)
+        expect(mockHandler).toHaveBeenCalledTimes(1)
+        expect(result).toBeUndefined()
 
-      const result = clickHandler({} as ReactMouseEvent<HTMLButtonElement>)
+        await new Promise<void>(resolve => {
+          global.setTimeout(resolve, 0)
+        })
 
-      expect(mockHandler).toHaveBeenCalledTimes(1)
-      expect(result).toBeUndefined()
-
-      await new Promise<void>(resolve => {
-        global.setTimeout(resolve, 0)
-      })
-
-      expect(mockLog).not.toHaveBeenCalled()
-
-      Object.defineProperty(process.env, 'NODE_ENV', {
-        value: originalNodeEnv,
-        writable: false,
-        configurable: true
+        expect(mockLog).not.toHaveBeenCalled()
       })
     })
-   test('logs all clicks in non-production environments', () => {
-      const originalNodeEnv = process.env.NODE_ENV
+    test('logs all clicks in non-production environments', () => {
+      withNodeEnv('development', () => {
+        const mockHandler = jest.fn().mockName('testHandler')
+        const clickHandler = handleClick(mockHandler)
 
-      Object.defineProperty(process.env, 'NODE_ENV', {
-        value: 'development',
-        writable: true,
-        configurable: true
-      })
+        clickHandler({} as ReactMouseEvent<HTMLButtonElement>)
 
-      const mockHandler = jest.fn().mockName('testHandler')
-      const clickHandler = handleClick(mockHandler)
-
-      clickHandler({} as ReactMouseEvent<HTMLButtonElement>)
-
-      expect(mockHandler).toHaveBeenCalledTimes(1)
-      expect(mockLog).toHaveBeenCalledWith('Button clicked', undefined, 'default', expect.objectContaining({
-        context: expect.any(String),
-        trace: true
-      }))
-
-      Object.defineProperty(process.env, 'NODE_ENV', {
-        value: originalNodeEnv,
-        writable: false,
-        configurable: true
+        expect(mockHandler).toHaveBeenCalledTimes(1)
+        expect(mockLog).toHaveBeenCalledWith('Button clicked', undefined, 'default', expect.objectContaining({
+          context: expect.any(String),
+          trace: true
+        }))
       })
     })
 
     test('does not log clicks in production', () => {
-      const originalNodeEnv = process.env.NODE_ENV
+      withNodeEnv('production', () => {
+        const mockHandler = jest.fn()
+        const clickHandler = handleClick(mockHandler)
 
-      Object.defineProperty(process.env, 'NODE_ENV', {
-        value: 'production',
-        writable: true,
-        configurable: true
-      })
+        clickHandler({} as ReactMouseEvent<HTMLButtonElement>)
 
-      const mockHandler = jest.fn()
-      const clickHandler = handleClick(mockHandler)
-
-      clickHandler({} as ReactMouseEvent<HTMLButtonElement>)
-
-      expect(mockHandler).toHaveBeenCalledTimes(1)
-      expect(mockLog).not.toHaveBeenCalled()
-
-      Object.defineProperty(process.env, 'NODE_ENV', {
-        value: originalNodeEnv,
-        writable: false,
-        configurable: true
+        expect(mockHandler).toHaveBeenCalledTimes(1)
+        expect(mockLog).not.toHaveBeenCalled()
       })
     })
   })
