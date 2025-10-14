@@ -130,14 +130,13 @@ describe('Button', () => {
     expect(screen.getByTestId('base-button')).toHaveClass('custom-class', 'button')
   })
 
-  test('is keyboard accessible', () => {
+  test('activates button with Enter key', () => {
     const handleClick = jest.fn()
     render(<Button onClick={handleClick}>click me</Button>)
     const button = screen.getByTestId('base-button')
     button.focus()
     expect(button).toHaveFocus()
     fireEvent.keyDown(button, { key: 'Enter', code: 'Enter' })
-    fireEvent.click(button)
     expect(handleClick).toHaveBeenCalled()
   })
 
