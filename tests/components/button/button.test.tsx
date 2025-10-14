@@ -20,7 +20,7 @@ describe('Button', () => {
     render(<Button isLoading>click me</Button>)
     const button = screen.getByTestId('base-button')
     expect(button).toHaveAttribute('data-loading', 'true')
-    expect(button.querySelector('[data-testid*="spinner"]')).toBeInTheDocument()
+    expect(button.querySelector('[data-testid="spinner"]')).toBeInTheDocument()
   })
 
   test('calls onClick handler when clicked', () => {
