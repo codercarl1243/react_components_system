@@ -62,7 +62,7 @@ export default function withNodeEnv(
 function restoreNodeEnv(original: string | undefined): void {
   Object.defineProperty(process.env, 'NODE_ENV', {
     value: original,
-    writable: false,
+    writable: true,
     configurable: true
   })
 }
