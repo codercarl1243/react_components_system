@@ -15,6 +15,7 @@ import TabList from "@/components/tablist";
 import Icon from "@/components/icon";
 import { getRelatedPosts } from "@/lib/blogPosts";
 import AnchorHeading from "@/components/heading/anchorHeading";
+import Image from "@/components/image";
 
 export const metadata: Metadata = { title: 'Buttons · Design System' }
 
@@ -30,7 +31,7 @@ export default function ButtonsBasePage() {
                         subtitle="Building a React Design System Foundation"
                         headingId="the-button-heading"
                         image={{
-                            src: '/mountainRangeBanner_1200x400.png'
+                            src: '/images/mountainRangeBanner_1200x400.png'
                         }}
                     />
                     <Heading headingLevel={2} id="foundation-heading">Laying the Foundation</Heading>
@@ -356,6 +357,7 @@ export default function useButton() {
                         <p>
                             This keeps the component API simple while ensuring errors don't disappear silently. The Promise continues executing, but we've attached logging to catch any rejections that weren't already handled.
                         </p>
+                        <Image style={{borderRadius: 'var(--radius-lg)'}} src={'/images/handleClick_flow.png'} alt="Diagram illustrating how the button hook handles both synchronous errors (caught and re-thrown immediately) and asynchronous errors (logged via attached .catch() handler when Promise rejects later)"/>
                     </PostNote>
 
                 </PostSection>
