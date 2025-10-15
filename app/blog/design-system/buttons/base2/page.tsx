@@ -303,40 +303,59 @@ export default function useButton() {
 
     return { handleClick }
 }`} />
-<PostNote>
-    The hook uses a utility function <Code codeString="isThenable" inline copyEnabled={false} /> to check if the result is a Promise-like object. This ensures we handle both native Promises and custom thenables correctly.
+                    <PostNote>
+                        The hook uses a utility function <Code codeString="isThenable" inline copyEnabled={false} /> to check if the result is a Promise-like object. This ensures we handle both native Promises and custom thenables correctly.
 
-    <Code codeString="function isThenable(value: unknown): value is PromiseLike<unknown> {
+                        <Code codeString="function isThenable(value: unknown): value is PromiseLike<unknown> {
   return (
     value !== null &&
     typeof value === 'object' &&
     typeof (value as PromiseLike<unknown>).then === 'function'
   )
 }"/>
-</PostNote>
+                    </PostNote>
                     <AnchorHeading headingLevel={3}>Why this approach</AnchorHeading>
-                    <List>
+                    <List variant="circle" spacing="loose">
                         <li>
-                            <p><span className="bold">Curried function</span> - <Code codeString="handleClick(onClick)(event)" inline copyEnabled={false} /> allows us to configure the handler once and reuse it.</p>
+                            <p>
+                                <span className="bold">Curried function</span> - <Code codeString="handleClick(onClick)(event)" inline copyEnabled={false} /> allows us to configure the handler once and reuse it.</p>
                         </li>
                         <li>
-                            <p><span className="bold">Duck typing for Promises</span> - We check for a <Code codeString=".then" inline copyEnabled={false} /> method rather than using <Code codeString="instanceof Promise" inline copyEnabled={false} /> because the handler might return a <span className="italic">Promise-like</span> object. </p>
-                            <p>This is a little bit more verbose and not as pretty but 2 extra lines ensures we don&apos;t miss the edges.</p>
+                            <p>
+                                <span className="bold">Duck typing for Promises</span> - We use a helper function that checks for a <Code codeString=".then" inline copyEnabled={false} /> method rather than using <Code codeString="instanceof Promise" inline copyEnabled={false} /> because the handler might return a <span className="italic">Promise-like</span> object.
+                            </p>
+                            <p>
+                                This is a little bit more verbose and not as pretty but 2 extra lines ensures we don&apos;t miss the edges.
+
+                            </p>
                         </li>
                         <li>
-                            <p>The <span className="bold"><Code codeString="void" inline copyEnabled={false} /> operator</span> - Explicitly discards the Promise return value, telling TypeScript/ESLint we're intentionally not awaiting it (fire-and-forget error logging).</p>
+                            <p>
+                                <span className="bold">The <Code codeString="void" inline copyEnabled={false} /> operator</span> - Signals we're intentionally not awaiting the Promise (prevents ESLint "floating promise" warnings).
+                            </p>
+                            <p>
+                                We use <Code codeString="Promise.resolve().catch()" inline copyEnabled={false} /> to log unhandled rejections. If the user's handler already has error handling, our logging never runs.
+                            </p>
                         </li>
                         <li>
-                            <p><span className="bold">Centralized logging</span> - Errors are logged consistently across all buttons. This is one of the main reasons we extract this logic into a hook rather than handling it in each component.</p>
+                            <p>
+                                <span className="bold">Centralized logging</span> - Errors are logged consistently across all buttons. This is one of the main reasons we extract this logic into a hook rather than handling it in each component.
+                            </p>
                         </li>
                         <li>
-                            <p><span className="bold">Re-throw synchronous errors</span> - By re-throwing with <Code inline codeString="throw err" copyEnabled={false} />, we allow React error boundaries to catch and handle errors. This prevents the UI from breaking silently.
-                                <span className="bold">Async errors</span> are logged but not re-thrown since this occurs <FunHighlight>after the promise rejects.</FunHighlight></p>
+                            <p>
+                                <span className="bold">Re-throw synchronous errors</span> - By re-throwing with <Code inline codeString="throw err" copyEnabled={false} />, we allow React error boundaries to catch and handle errors. This prevents the UI from breaking silently.
+                                <span className="bold">Async errors</span> are logged but not re-thrown since this occurs <FunHighlight>after the promise rejects.</FunHighlight>
+                            </p>
                         </li>
                     </List>
                     <PostNote>
-                        <p><span className="bold">Why doesn&apos;t the hook await?</span> Using <Code codeString="void" inline copyEnabled={false} /> with <Code codeString="Promise.resolve" inline copyEnabled={false} /> is a deliberate choice for fire-and-forget error logging. We attach a <Code codeString=".catch()" inline copyEnabled={false} /> block to log any rejected Promises.</p>
-                        <p>We don't await the Promise because we want the handler to return the <span className="italic">resolving</span> promise to the component that will actually use it.</p>
+                        <p>
+                            <span className="bold">Why doesn't the hook await?</span> We use a fire-and-forget pattern with <Code codeString="void Promise.resolve().catch()" inline copyEnabled={false} /> to log unhandled errors without forcing the button handler to be async.
+                        </p>
+                        <p>
+                            This keeps the component API simple while ensuring errors don't disappear silently. The Promise continues executing, but we've attached logging to catch any rejections that weren't already handled.
+                        </p>
                     </PostNote>
 
                 </PostSection>
@@ -639,7 +658,6 @@ min-height: 44px;`} copyEnabled={false} />
                         <li>No reliance on color alone for meaning</li>
                         <li>Proper focus management and keyboard navigation</li>
                         <li>Properly disabled state communicated</li>
-                        <li>Screen reader support with <Code inline codeString="aria-busy" /></li>
                         <li>Touch-friendly margins for motor accessibility</li>
                     </List>
 
@@ -976,6 +994,19 @@ button.button {
     --button-primary-color: var(--color-neutral-100);
     --button-secondary-color: var(--color-accent-400);
     --button-accent-color: var(--color-accent-600);
+}`} />
+                                )
+                            },
+                            {
+                                id: 'isThenable',
+                                tabLabel: 'isThenable.ts',
+                                panelContent: (
+                                    <Code lang="ts" codeString={`export default function isThenable(value: unknown): value is PromiseLike<unknown> {
+  return (
+    value !== null &&
+    typeof value === 'object' &&
+    typeof (value as PromiseLike<unknown>).then === 'function'
+  )
 }`} />
                                 )
                             }

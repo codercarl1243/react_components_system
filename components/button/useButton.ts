@@ -21,7 +21,7 @@ export default function useButton() {
  * const { handleClick } = useButton()
  * <button onClick={handleClick(myAsyncHandler)}>Click me</button>
  */
-  const handleClick =(userHandler?: ButtonClickHandler) =>
+  const handleClick = (userHandler?: ButtonClickHandler) =>
     (event: MouseEventType) => {
       if (!userHandler) return
 
