@@ -357,7 +357,7 @@ export default function useButton() {
                         <p>
                             This keeps the component API simple while ensuring errors don't disappear silently. The Promise continues executing, but we've attached logging to catch any rejections that weren't already handled.
                         </p>
-                        <Image style={{borderRadius: 'var(--radius-lg)'}} src={'/images/handleClick_flow.png'} alt="Diagram illustrating how the button hook handles both synchronous errors (caught and re-thrown immediately) and asynchronous errors (logged via attached .catch() handler when Promise rejects later)"/>
+                        <Image style={{borderRadius: 'var(--radius-md)'}} src={'/images/handleClick_flow.png'} alt="Diagram illustrating how the button hook handles both synchronous errors (caught and re-thrown immediately) and asynchronous errors (logged via attached .catch() handler when Promise rejects later)"/>
                     </PostNote>
 
                 </PostSection>
