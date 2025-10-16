@@ -15,6 +15,7 @@ import TabList from "@/components/tablist";
 import Icon from "@/components/icon";
 import { getRelatedPosts } from "@/lib/blogPosts";
 import AnchorHeading from "@/components/heading/anchorHeading";
+import Image from "@/components/image";
 
 export const metadata: Metadata = { title: 'Buttons · Design System' }
 
@@ -24,44 +25,45 @@ export default function ButtonsBasePage() {
     return (
         <>
             <Post>
-                <PostSection id="what-were-building">
+                <PostSection id="button-foundations">
                     <PostBanner
                         title="The Button"
                         subtitle="Building a React Design System Foundation"
                         headingId="the-button-heading"
                         image={{
-                            src: '/mountainRangeBanner_1200x400.png'
+                            src: '/images/mountainRangeBanner_1200x400.png'
                         }}
                     />
-                    <Heading headingLevel={2} id="what-were-building-heading">What We&apos;re Building</Heading>
+                    <Heading headingLevel={2} id="foundation-heading">Laying the Foundation</Heading>
                     <p>
-                        This is the first in a series where we&apos;re building a comprehensive <span className="bold">Button design system</span>.
+                        Buttons are the most reused component in any interface — and the easiest to get wrong.
+                        In this first post of the design system series, we&apos;re building a button that balances <FunHighlight>functionality</FunHighlight>, <FunHighlight>accessibility</FunHighlight>, and <FunHighlight>developer trust</FunHighlight>.
                     </p>
                     <p>
-                        We&apos;ll create a <FunHighlight>flexible</FunHighlight>, <FunHighlight>accessible</FunHighlight>, and <FunHighlight>composable</FunHighlight> button system in React
-                        {/* Add links to content
-                        that serves as the foundation for more complex components like <Link>toggles</Link>, <Link>switches</Link>, and button <Link>panels</Link>.
-                        */}
-                        that serves as the foundation for more complex components like toggles, switches, and panels.
+                        This isn&apos;t just another styled button. It&apos;s a <FunHighlight>system</FunHighlight> — one that scales gracefully, communicates state clearly, and behaves predictably under real-world conditions. Built in React, this component forms the foundation for more advanced elements like toggles, switches, and interactive panels.
                     </p>
-                    <p>By the end of this post, you&apos;ll have:</p>
+
+                    <p>By the end of this post, you&apos;ll understand how to design a button system that is:</p>
                     <List>
-                        <li>A type-safe, accessible base button component</li>
-                        <li>A reusable hook for handling button interactions</li>
-                        <li>CSS styling with built-in accessibility features</li>
-                        <li>Comprehensive test coverage</li>
+                        <li>Type-safe and accessible by default</li>
+                        <li>Backed by a reusable hook for interaction logic</li>
+                        <li>Styled with built-in accessibility and state awareness</li>
+                        <li>Fully tested to ensure reliability</li>
                     </List>
                 </PostSection>
                 <PostSection id="project-setup">
                     <AnchorHeading headingLevel={2} id="project-setup-heading">Project Setup</AnchorHeading>
 
                     <AnchorHeading headingLevel={3} id="file-structure">File Structure</AnchorHeading>
-                    <p>We&apos;ll follow a consistent pattern for organizing our components:</p>
+                    <p>
+                        A well-defined folder structure makes components easier to reason about and maintain.
+                        For our Button, we&apos;ll follow a consistent pattern that keeps logic, types, and styles clearly separated:
+                    </p>
 
                     <Code lang="md" copyEnabled={false} codeString={`components/
     └── button/
         ├── button.tsx              
-        ├── hook.ts
+        ├── useButton.ts
         └── button.type.ts
 
     tests/                          
@@ -72,16 +74,21 @@ export default function ButtonsBasePage() {
     styles/
     └── components/
         └── button.css`} />
-                    <p>This structure keeps related code together while maintaining clear boundaries between logic, types, and presentation.</p>
+                    <p>
+                        This structure encourages <FunHighlight>encapsulation</FunHighlight> — everything related to a component lives together —
+                        while maintaining a clean boundary between <span className="italic">presentation</span>, <span className="italic">logic</span>, and <span className="italic">types</span>.
+                        It also makes testing and refactoring predictable as your design system grows.
+                    </p>
+
                     <AnchorHeading headingLevel={3} id="dependencies">Dependencies</AnchorHeading>
-                    <p>I have installed a couple of additional packages:</p>
+                    <p> We&apos;ll use a couple of small, focused packages to support the component:</p>
                     <List variant="none" spacing="tight">
-                        <li><Link className="bold" href="https://www.npmjs.com/package/@remixicon/react">RemixIcons</Link> to leverage their extensive and free library of icons</li>
-                        <li><Link className="bold" href="https://www.npmjs.com/package/clsx">CLSX</Link> to handle class names conditionally</li>
+                        <li><Link className="bold" href="https://www.npmjs.com/package/@remixicon/react">RemixIcons</Link> for an extensive and free icon library</li>
+                        <li><Link className="bold" href="https://www.npmjs.com/package/clsx">CLSX</Link> for clean, conditional class name handling</li>
                     </List>
                     <Code lang="bash" codeString={`npm install @remixicon/react clsx`} />
                     <PostNote className="italic">
-                        <p>Later in this post we will use <Link className="bold" href="https://jestjs.io/docs/getting-started">Jest</Link> to run tests.</p>
+                        <p>We&apos;ll also use<Link className="bold" href="https://jestjs.io/docs/getting-started">Jest</Link> later in this post to run tests and verify behavior.</p>
                     </PostNote>
 
                 </PostSection>
@@ -93,21 +100,28 @@ export default function ButtonsBasePage() {
                     <AnchorHeading headingLevel={3} id="starting-simple">
                         Starting Simple: The Component
                     </AnchorHeading>
-                    <p>Let's start with the component itself. Our <Code codeString="Button" inline copyEnabled={false} /> component needs to handle several responsibilities:</p>
+                    <p>Every design system needs a reliable base component to build from. </p>
+
+                    <p>
+                        The goal here isn&apos;t to design every possible button — it&apos;s to define a solid foundation that
+                        future variants can build on without rewriting the essentials.
+                    </p>
+
                     <List variant="circle" spacing="normal">
-                        <li>Managing click events (both sync and async)</li>
-                        <li>Communicating loading states</li>
-                        <li>Maintaining accessibility attributes</li>
-                        <li>Forwarding refs properly; and</li>
-                        <li>Preventing interaction when disabled or loading</li>
+                        <li>Manages synchronous and asynchronous click events</li>
+                        <li>Communicates loading and disabled states</li>
+                        <li>Preserves accessibility and focus behavior</li>
+                        <li>Forwards refs safely</li>
+                        <li>Prevents unintended interaction during inactive states</li>
                     </List>
 
                     <PostNote>
                         <p>
-                            We're using a custom hook called <Code codeString="useButton" inline copyEnabled={false} /> to handle click logic - we'll explore this in detail in the next section.
+                            Button behavior is handled through a dedicated <Code codeString="useButton" inline copyEnabled={false} /> hook.
+                            This keeps our component lean and allows logic to be reused across other interactive elements like toggles or switches.
                         </p>
                     </PostNote>
-                    <p className="bold">Here's how we structure it:</p>
+                    <p className="bold">Here&apos;s our base implementation:</p>
                     <Code codeString={`'use client'
 
 import clsx from 'clsx'
@@ -127,67 +141,84 @@ export default function Button({
   ref,
   ...props
 }: BaseButtonProps) {
-    const { handleClick } = useButton();
+  const { handleClick } = useButton()
 
-    function onClickHandler(event: MouseEventType) {
-        if (isLoading || disabled) {
-            event.preventDefault();
-            return;
-        }
-        return handleClick(onClick)(event);
+  function onClickHandler(event: MouseEventType) {
+    if (isLoading || disabled) {
+      event.stopPropagation()
+      event.preventDefault()
+      return
     }
+    void handleClick(onClick)(event)
+  }
 
-    return (
-        <button
-            {...props}
-            className={clsx(className, {'button-w-icon': icon}, 'button')}
-            onClick={onClickHandler}
-            aria-disabled={isLoading || disabled}
-            data-loading={isLoading}
-            ref={ref}
-            type={type}
-            data-testid='base-button'
-        >
-            {icon && <Icon icon={icon}/>}
-            <span className='button__content'>{children}</span>
-            {isLoading && <Spinner />}
-        </button>
-        )
+  return (
+    <button
+      {...props}
+      className={clsx(className, { 'button-w-icon': icon }, 'button')}
+      onClick={onClickHandler}
+      aria-disabled={isLoading || disabled}
+      data-loading={isLoading}
+      ref={ref}
+      type={type}
+      data-testid="base-button"
+    >
+      {icon && <Icon icon={icon} />}
+      <span className="button__content">{children}</span>
+      {isLoading && <Spinner />}
+    </button>
+  )
 }`} />
 
                     <AnchorHeading headingLevel={4}>Key Decisions</AnchorHeading>
+                    {/* GENERATE IMAGE FOR HERE */}
                     <List variant="circle" spacing="normal">
-                        <li><Code codeString={`clsx(className, 'button')`} inline copyEnabled={false} /> - Combines user-provided classes with our base class, giving consumers flexibility while maintaining defaults</li>
-                        <li><Code codeString={`isLoading || disabled`} inline copyEnabled={false} /> - Prevents click handlers from firing during loading or disabled states.</li>
-                        <li><Code codeString={`event.preventDefault()`} inline copyEnabled={false} /> - Stops default behavior when the button shouldn't be interactive</li>
-                        <li><p>
-                            <Code codeString={`ref`} inline copyEnabled={false} /> - React 19 allows refs to be passed as regular props without <Code codeString={`forwardRef`} inline copyEnabled={false} />
-                        </p>
+                        <li>
+                            <Code codeString={`clsx(className, 'button')`} inline copyEnabled={false} /> - Combines user-provided
+                            classes with our base class for flexible, predictable styling.
+                        </li>
+                        <li>
+                            <Code codeString={`isLoading || disabled`} inline copyEnabled={false} /> - Prevents clicks and ensures
+                            consistent state management.
+                        </li>
+                        <li>
+                            <Code codeString="event.preventDefault()" inline copyEnabled={false} /> and <Code codeString="event.stopPropagation()" inline copyEnabled={false} /> — Block interaction entirely when the button is inactive, maintaining UX consistency.
+                        </li>
+                        <li>
+                            <p>
+                                <Code codeString={`ref`} inline copyEnabled={false} /> - React 19 allows refs to be passed as regular props without <Code codeString={`forwardRef`} inline copyEnabled={false} />
+                            </p>
                             <p className="italic text-sm neutral-600">
-                                Further reading: <Link href="https://react.dev/blog/2024/12/05/react-19#ref-as-a-prop">React 19 release notes</Link>
-                            </p></li>
-                        <li><Code codeString={`data-loading`} inline copyEnabled={false} /> - Provides a styling hook for loading states</li>
-                        <li><Code codeString={`aria-disabled`} inline copyEnabled={false} /> over <Code codeString={`disabled`} inline copyEnabled={false} /> - We'll explain this choice in the accessibility section</li>
+                                See: <Link href="https://react.dev/blog/2024/12/05/react-19#ref-as-a-prop">React 19 release notes</Link>
+                            </p>
+                        </li>
+                        <li>
+                            <Code codeString={`data-loading`} inline copyEnabled={false} /> - Provides a hook for styling and animation control.
+                        </li>
+                        <li>
+                            <Code codeString={`aria-disabled`} inline copyEnabled={false} /> - Keeps the button in the accessibility
+                            tree and maintains keyboard discoverability. We'll explain this more indepth in the accessibility section.
+                        </li>
                     </List>
 
                     <AnchorHeading headingLevel={3} id="typescript-support">
                         Adding TypeScript Support
                     </AnchorHeading>
                     <p>
-                        Type safety helps catch errors early and provides excellent autocomplete for consumers. Our type definitions need to:
+                        TypeScript helps ensure our component remains predictable and extensible. The type definitions below create a contract between the UI and its behavior — protecting both consumers and contributors.
                     </p>
                     <List variant="circle" spacing="normal">
                         <li>Support both synchronous and asynchronous click handlers</li>
-                        <li>Extend native button props without conflicts</li>
+                        <li>Extends native button props safely</li>
                         <li>Allow custom data attributes for styling</li>
-                        <li>Properly type mouse events</li>
+                        <li>Properly types mouse events</li>
                     </List>
                     <Code codeString={`import type { ComponentPropsWithRef, MouseEvent } from 'react'
 import { IconProps } from '@/components/icon/icon.type';
 
 export type MouseEventType = MouseEvent<HTMLButtonElement>;
 
-export type ButtonClickHandler<T = unknown> = (event: MouseEventType) => T | Promise<T>;
+export type ButtonClickHandler = (event: MouseEventType) => void | Promise<void>;
 
 export type BaseButtonProps = {
     disabled?: boolean; 
@@ -201,13 +232,20 @@ export type BaseButtonProps = {
                         Types Breakdown
                     </AnchorHeading>
                     <List variant="circle" spacing="normal">
-                        <li><Code codeString={`MouseEventType`} inline copyEnabled={false} /> - Alias for cleaner code</li>
-                        <li><Code codeString={`ButtonClickHandler<T = unknown>`} inline copyEnabled={false} /> - The unknown default allows maximum flexibility while maintaining type safety through inference at the call site</li>
-                        <li><Code codeString={`Omit<ComponentPropsWithRef<'button'>, 'onClick' | 'disabled'>`} inline copyEnabled={false} /> - Inherits all native button props (className, aria-*, data-*, etc.) while replacing <Code codeString="onClick" inline copyEnabled={false} />, and <Code codeString="disabled" inline copyEnabled={false} /> with our typed versions</li>
+                        <li>
+                            <Code codeString={`MouseEventType`} inline copyEnabled={false} /> -  Alias for cleaner references throughout the component.
+                        </li>
+                        <li>
+                            <Code codeString={`ButtonClickHandler`} inline copyEnabled={false} /> - This type further communicates that we are not returning anything which is consistent with React patterns.
+                        </li>
+                        <li>
+                            <Code codeString={`Omit<ComponentPropsWithRef<'button'>, 'onClick' | 'disabled'>`} inline copyEnabled={false} /> - Inherits all native button props (e.g. <Code inline copyEnabled={false} codeString="className" /> and <Code inline copyEnabled={false} codeString="aria-*" />) while replacing <Code codeString="onClick" inline copyEnabled={false} />, and <Code codeString="disabled" inline copyEnabled={false} /> with our typed versions.
+                        </li>
                     </List>
                 </PostSection>
 
                 <PostSection id="interaction-logic">
+                    {/* GENERATE IMAGE FOR HERE */}
                     <AnchorHeading headingLevel={2} id="interaction-logic-heading">Interaction Logic</AnchorHeading>
                     <p>Our button needs to handle both <span className="fun-underline">synchronous</span> and <span className="fun-underline">asynchronous</span> click handlers gracefully.</p>
                     <p> We extract this logic into a custom hook for several reasons:</p>
@@ -230,93 +268,101 @@ export type BaseButtonProps = {
 import log from '@/lib/Logging';
 
 export default function useButton() {
-    /**
-     * Creates a wrapped click handler that logs all button interactions and handles errors.
-     * 
-     * This wrapper provides centralized logging for:
-     * - All button click events (successful and failed) - Logged in: Development only
-     * - Synchronous errors (caught and re-thrown) - Logged in: All environments
-     * - Unhandled asynchronous errors (not re-thrown) - Logged in: All environments
-     * 
-     * Note: If the user handler catches its own errors, those errors will NOT be logged here.
-     * Only unhandled promise rejections are captured for async operations.
-     * 
-     * @template T - The return type of the user's click handler
-     * @param {ButtonClickHandler<T>} [userHandler] - The user's click handler function
-     * @returns {Function} A wrapped click handler that can be passed to button onClick
-     * 
-     * @example
-     * const { handleClick } = useButton()
-     * <button onClick={handleClick(myAsyncHandler)}>Click me</button>
-     */
-    const handleClick = <T = unknown>(userHandler?: ButtonClickHandler<T>) =>
-    (event: MouseEventType) => {
-        if (!userHandler) return
+    const handleClick = (userHandler?: ButtonClickHandler) =>
+        (event: MouseEventType) => {
+            if (!userHandler) return
 
-        try {
+            try {
             const result = userHandler(event)
 
             // Log all button clicks for analytics/debugging
             if (process.env.NODE_ENV !== 'production') {
-                log('Button clicked', undefined, 'default', { context: \`\${userHandler.name || 'anonymous function'}\`, trace: true })
+               // Add your custom logging solution here
             }
-            if (result && typeof (result as any)?.then === 'function') {
+            if (isThenable(result)) {
                 /**
                  * Attach error logging to unhandled promise rejections.
                  * Uses void to indicate we're intentionally not awaiting this promise.
                  * 
                  * Note: This only catches rejections that the user handler did NOT catch.
-                 * If the user handler has its own try/catch, this won't fire.
+                 * If the user handler has its own try/catch, this won't fire or do anything.
                  */
                 void Promise.resolve(result).catch((err) => {
-                log('Unhandled async error', err, 'error', { context: \`\${userHandler.name || 'anonymous function'}\`, trace: true })
+                    // Add your custom logging solution here
                 })
             }
-
-            // Return the result (could be a value, Promise, or undefined)
-            return result
-
-        } catch (err) {
+            } catch (err) {
             /**
              * Catch synchronous errors thrown during handler execution.
              * Log the error for debugging, then re-throw so the error still
              * propagates (breaks execution, shows in console, etc.)
              */
-            log('Button click error', err, 'error', { context: \`\${userHandler.name || 'anonymous function'}\`, trace: true })
+            // Add your custom logging solution here
             throw err
+            }
         }
-    }
 
     return { handleClick }
 }`} />
+                    <PostNote>
+                        The hook uses a utility function <Code codeString="isThenable" inline copyEnabled={false} /> to check if the result is a Promise-like object. This ensures we handle both native Promises and custom thenables correctly.
 
+                        <Code codeString="function isThenable(value: unknown): value is PromiseLike<unknown> {
+  return (
+    value !== null &&
+    typeof value === 'object' &&
+    typeof (value as PromiseLike<unknown>).then === 'function'
+  )
+}"/>
+                    </PostNote>
                     <AnchorHeading headingLevel={3}>Why this approach</AnchorHeading>
-                    <List>
+                    <List variant="circle" spacing="loose">
                         <li>
-                            <p><span className="bold">Curried function</span> - <Code codeString="handleClick(onClick)(event)" inline copyEnabled={false} /> allows us to configure the handler once and reuse it.</p>
+                            <p>
+                                <span className="bold">Curried function</span> - <Code codeString="handleClick(onClick)(event)" inline copyEnabled={false} /> allows us to configure the handler once and reuse it.</p>
                         </li>
                         <li>
-                            <p><span className="bold">Duck typing for Promises</span> - We check for a <Code codeString=".then" inline copyEnabled={false} /> method rather than using <Code codeString="instanceof Promise" inline copyEnabled={false} /> because the handler might return a <span className="italic">Promise-like</span> object. </p>
-                            <p>This is a little bit more verbose and not as pretty but 2 extra lines ensures we don&apos;t miss the edges.</p>
+                            <p>
+                                <span className="bold">Duck typing for Promises</span> - We use a helper function that checks for a <Code codeString=".then" inline copyEnabled={false} /> method rather than using <Code codeString="instanceof Promise" inline copyEnabled={false} /> because the handler might return a <span className="italic">Promise-like</span> object.
+                            </p>
+                            <p>
+                                This is a little bit more verbose and not as pretty but 2 extra lines ensures we don&apos;t miss the edges.
+
+                            </p>
                         </li>
                         <li>
-                            <p>The <span className="bold"><Code codeString="void" inline copyEnabled={false} /> operator</span> - Explicitly discards the Promise return value, telling TypeScript/ESLint we're intentionally not awaiting it (fire-and-forget error logging).</p>
+                            <p>
+                                <span className="bold">The <Code codeString="void" inline copyEnabled={false} /> operator</span> - Signals we're intentionally not awaiting the Promise (prevents ESLint "floating promise" warnings).
+                            </p>
+                            <p>
+                                We use <Code codeString="Promise.resolve().catch()" inline copyEnabled={false} /> to log unhandled rejections. If the user's handler already has error handling, our logging never runs.
+                            </p>
                         </li>
                         <li>
-                            <p><span className="bold">Centralized logging</span> - Errors are logged consistently across all buttons. This is one of the main reasons we extract this logic into a hook rather than handling it in each component.</p>
+                            <p>
+                                <span className="bold">Centralized logging</span> - Errors are logged consistently across all buttons. This is one of the main reasons we extract this logic into a hook rather than handling it in each component.
+                            </p>
                         </li>
                         <li>
-                            <p><span className="bold">Re-throw synchronous errors</span> - By re-throwing with <Code inline codeString="throw err" copyEnabled={false} />, we allow React error boundaries to catch and handle errors. This prevents the UI from breaking silently.
-                                <span className="bold">Async errors</span> are logged but not re-thrown since this occurs <FunHighlight>after the promise rejects.</FunHighlight></p>
+                            <p>
+                                <span className="bold">Re-throw synchronous errors</span> - By re-throwing with <Code inline codeString="throw err" copyEnabled={false} />, we allow React error boundaries to catch and handle errors. This prevents the UI from breaking silently.
+                                <span className="bold">Async errors</span> are logged but not re-thrown since this occurs <FunHighlight>after the promise rejects.</FunHighlight>
+                            </p>
                         </li>
                     </List>
                     <PostNote>
-                        <p><span className="bold">Why doesn&apos;t the hook await?</span> Using <Code codeString="void" inline copyEnabled={false} /> with <Code codeString="Promise.resolve" inline copyEnabled={false} /> is a deliberate choice for fire-and-forget error logging. We attach a <Code codeString=".catch()" inline copyEnabled={false} /> block to log any rejected Promises.</p>
-                        <p>We don't await the Promise because we want the handler to return the <span className="italic">resolving</span> promise to the component that will actually use it.</p>
+                        <p>
+                            <span className="bold">Why doesn't the hook await?</span> We use a fire-and-forget pattern with <Code codeString="void Promise.resolve().catch()" inline copyEnabled={false} /> to log unhandled errors without forcing the button handler to be async.
+                        </p>
+                        <p>
+                            This keeps the component API simple while ensuring errors don't disappear silently. The Promise continues executing, but we've attached logging to catch any rejections that weren't already handled.
+                        </p>
+                        <Image style={{borderRadius: 'var(--radius-md)'}} src={'/images/handleClick_flow.png'} alt="Diagram illustrating how the button hook handles both synchronous errors (caught and re-thrown immediately) and asynchronous errors (logged via attached .catch() handler when Promise rejects later)"/>
                     </PostNote>
 
                 </PostSection>
                 <PostSection id="essential-features">
+                    {/* GENERATE IMAGE FOR HERE */}
                     <AnchorHeading id="essential-features-heading" headingLevel={2}>Essential Features</AnchorHeading>
                     <AnchorHeading headingLevel={3}>Loading States</AnchorHeading>
                     <p>Loading states are critical for async operations. They provide feedback to users and prevent duplicate submissions.</p>
@@ -328,6 +374,7 @@ export default function useButton() {
   cursor: wait;
 }`} copyEnabled={false} />
                     <AnchorHeading headingLevel={3}>Preventing Duplicate Actions</AnchorHeading>
+                    {/* GENERATE IMAGE FOR HERE */}
                     <p>When a button triggers an async operation, users might click multiple times. We prevent this by:</p>
                     <List ordered>
                         <li>Checking <Code codeString="isLoading || disabled" copyEnabled={false} inline /> in our click handler</li>
@@ -350,13 +397,14 @@ export default function useButton() {
   Save Changes
 </Button>`} />
                 </PostSection>
+
+
+
+
                 <PostSection id="accessibility">
                     <AnchorHeading id="accessibility-heading" headingLevel={2}>Accessibility Requirements</AnchorHeading>
-
-                    {/* <AnchorHeading headingLevel={3}>WCAG Success Criteria That Apply to Buttons</AnchorHeading>
-                    <p>Buttons must meet several WCAG standards. Here are the key criteria our implementation addresses:</p>
-                     */}
                     <AnchorHeading headingLevel={3}>WCAG principles in practice</AnchorHeading>
+                    {/* GENERATE IMAGE FOR HERE */}
                     <p>Our Button component addresses key accessibility requirements across all four WCAG principles:</p>
                     <List variant="none" spacing="loose">
                         <li>
@@ -391,6 +439,7 @@ export default function useButton() {
 
                     <AnchorHeading headingLevel={3}>Designing beyond WCAG</AnchorHeading>
                     <p>WCAG is a great starting point, but it&apos;s not the finish line.</p>
+                    {/* GENERATE IMAGE FOR HERE */}
                     <p>As developers, our role is to make accessibility practical by designing buttons that feel consistent, predictable, and inclusive for everyone:</p>
                     <List variant="none" spacing="normal">
                         <li>
@@ -422,61 +471,16 @@ min-height: 44px;`} copyEnabled={false} />
                         </li>
 
                     </List>
-                    <PostNote><span className="bold">Replacing <Code codeString="disabled" inline copyEnabled={false} /> with <Code codeString="aria-disabled" inline copyEnabled={false} />:</span> - We need to write a few extra lines of JavaScript which prevents default interactions and hides the fact that the button isn't <span className="underline">actually</span> disabled. To fool the user we target the <Code codeString={`aria-disabled`} inline copyEnabled={false} /> state in our styling instead of <Code codeString=":disabled" inline copyEnabled={false} /></PostNote>
-
-
-                    {/* 
-
-                    <AnchorHeading headingLevel={3}>How UX/UI Design Extends WCAG</AnchorHeading>
-                    <p>WCAG provides minimum standards, but good UX goes further. Here's how our implementation adds:</p> */}
-                    {/* 
-                    <AnchorHeading headingLevel={4}>Margin and Spacing</AnchorHeading>
-                    <p>WCAG addresses target size but does not specifically require spacing between targets. This button has margin added by default</p>
-                    <p><span className="bold">Why this matters:</span> Users with motor disabilities benefit from space between interactive elements. Accidental taps are less likely when targets aren't crowded. <span className="fun-underline">This is especially important on touch devices</span></p> */}
-
-                    {/* <AnchorHeading headingLevel={4}>Disabled State Contrast</AnchorHeading>
-                    <p>WCAG's contrast requirements have an exception for disabled elements. But disabled buttons should still be visible and identifiable, they shouldn't dissapear from view because of an action that the user has taken.</p> */}
-
-                    {/* <AnchorHeading headingLevel={4}>The aria-disabled decision</AnchorHeading>
-                    <p>This is one of the most important accessibility choices in our component. We use <Code codeString="aria-disabled" inline copyEnabled={false} /> instead of the native <Code codeString="disabled" inline copyEnabled={false} /> attribute.</p>
-                    <p className="bold">The problem with <Code codeString="disabled" inline copyEnabled={false} />:</p>
-                    <List>
-                        <li>Removes the button from the accessibility tree</li>
-                        <li>Changes tab order dynamically</li>
-                        <li>The Button can't be focused or announced by all assistive technologies</li>
-                        <li>Users can find it hard to understand what is unavailable and why</li>
-                    </List> */}
-                    {/* <p className="bold">Our solution - <Code codeString="aria-disabled" inline copyEnabled={false} /></p>
-                    <p>This approach:</p>
-                    <List>
-                        <li>Keeps the button in the tab order</li>
-                        <li>Allows screen readers to announce the button and it's state</li>
-                        <li>Prevents potential confusion about why a button suddenly disappeared for users of assistive technology or those with low contrast recognition</li>
-                        <li>Works for both disabled and <span className="italic">loading</span> states</li>
-                    </List> */}
-                    <p><span className="bold">Real-world benefit:</span> When a user tabs through a form, they can discover all buttons (including disabled ones), understand what actions are available, and know what they need to complete to enable those actions.</p>
-
-                    <PostNote><span className="bold">Replacing <Code codeString="disabled" inline copyEnabled={false} /> with <Code codeString="aria-disabled" inline copyEnabled={false} /> and ensuring it works for all users </span> - We need to take a few extra steps and ensure that our click handler prevents interactions, along with targeting the aria-disabled state in our styling</PostNote>
-
-
-                    <AnchorHeading headingLevel={4}>Why we don&apos;t use aria-busy</AnchorHeading>
-                    <p>You might expect aria-busy for loading states. It seems perfect! But:</p>
-                    <List>
-                        <li>Limited screen reader support (inconsistent across AT)</li>
-                        <li>Doesn't prevent keyboard interaction</li>
-                        <li>Not widely recognized by users</li>
-                        <li>aria-disabled has better support and clearer meaning</li>
-                    </List>
-
-                    <p>Instead, we use aria-disabled during loading, which:</p>
-                    <List>
-                        <li>Works consistently across assistive technologies</li>
-                        <li>Clearly communicates "you can't interact with this right now"</li>
-                        <li>Keeps the button in the accessibility tree</li>
-                        <li>Has established user expectations</li>
-                    </List>
-                    <p>The <Code codeString="data-loading" inline copyEnabled={false} /> attribute handles visual styling, while <Code codeString="aria-disabled" inline copyEnabled={false} /> ensures that we communicate this in an accessible way.</p>
-
+                    <PostNote>
+                        <p><span className="bold">Why <Code inline codeString="aria-disabled" copyEnabled={false} /> instead of <Code inline codeString="disabled" copyEnabled={false} />?</span></p>
+                        <List>
+                            <li><Code inline codeString="disabled" copyEnabled={false} /> removes the element from the accessibility tree and tab order.</li>
+                            <li><Code inline codeString="aria-disabled" copyEnabled={false} /> keeps the button focusable, ensuring it remains discoverable.</li>
+                        </List>
+                        <p>
+                            We pair this with click prevention in JavaScript — stopping propagation and default behavior to simulate a “true” disabled button while staying accessible.
+                        </p>
+                    </PostNote>
 
                     <AnchorHeading headingLevel={4}>Assistive Technology isnt everything</AnchorHeading>
                     <p>Screen readers are powerful, but they don't solve all problems:</p>
@@ -516,32 +520,120 @@ min-height: 44px;`} copyEnabled={false} />
                         <li><Link href="https://storybook.designsystemet.no/?path=/docs/komponenter-button--docs">Designsystemet</Link></li>
                         <li><Link href="https://design-system.agriculture.gov.au/components/button/accessibility">Department of Agriculture (Australia)</Link></li>
                     </List>
-                    <PostNote>In these linked design systems You will see many different ways to try and include as many users as possible.
-                        No one solution is perfect, These systems are designed to ensure that any users on their websites have a consistent experience with their components.
+                    <PostNote>
+                        <p>
+                            In these linked design systems You will see many different ways to try and include as many users as possible.
+                        </p>
+                        <p>
+                            No one solution is perfect, These systems are designed to ensure that any users on their websites have a consistent experience with their components.
+                        </p>
                     </PostNote>
                 </PostSection>
+
+
                 <PostSection id="css-styling">
                     <AnchorHeading headingLevel={2} id="css-styling-heading">CSS Styling</AnchorHeading>
+                    <p>
+                        Our CSS isn&apos;t just decorative — it enforces <FunHighlight>layout stability</FunHighlight>, <FunHighlight>WCAG compliance</FunHighlight>, and <FunHighlight>customizability</FunHighlight>.
+                        We&apos;ll look at three layers: resets, custom properties, and variants.
+                    </p>
                     <AnchorHeading headingLevel={3} id="css-reset-base-styles">Reset and Base Styles</AnchorHeading>
+                    <p>
+                        We start by resetting browser defaults for consistent cross-browser rendering, then re-apply
+                        only what we need: borders, outline, and box model. This gives us a neutral baseline for theming.
+                    </p>
+                    <Code lang="css" codeString={`.button {
+  -webkit-appearance: none;
+  appearance: none;
+  background: none;
+  border: var(--border-thin);
+  border-radius: var(--radius-md);
+  outline: 0;
+}`} copyEnabled={false} />
                     <AnchorHeading headingLevel={3} id="css-custom-properties">Custom Properties for Theming</AnchorHeading>
+                    <p>
+                        The button uses CSS custom properties instead of hardcoded values, allowing design tokens
+                        and color variants to cascade naturally through your design system.
+                    </p>
+
+                    <Code lang="css" codeString={`.button[data-variant="primary"] {
+  --button-secondary-color: var(--color-primary-400);
+  --button-accent-color: var(--color-primary-600);
+}`} copyEnabled={false} />
                     <AnchorHeading headingLevel={3} id="css-button-states">Button States</AnchorHeading>
                     <AnchorHeading headingLevel={4} id="css-interactions">Interaction states</AnchorHeading>
-                    <AnchorHeading headingLevel={4} id="css-disabled">Disabled</AnchorHeading>
-                    <AnchorHeading headingLevel={4} id="css-loading">Loading</AnchorHeading>
-                    <AnchorHeading headingLevel={3} id="css-variants">Adding Variants</AnchorHeading>
+                    <p>
+                        <Code inline copyEnabled={false} codeString=":hover" />, <Code inline copyEnabled={false} codeString=":focus" />, and <Code inline copyEnabled={false} codeString=":active" /> states communicate affordance. We use outline and subtle transforms <span className="fun-underline">instead of color alone</span> — ensuring <span className="bold">contrast</span> and <span className="bold">motion</span> respect user preferences.
+                    </p>
+                    <AnchorHeading headingLevel={4} id="css-disabled">Disabled & Loading States</AnchorHeading>
+                    <p>
+                        Disabled buttons use <Code inline copyEnabled={false} codeString="aria-disabled" /> and custom visual styles that
+                        remain discoverable. The <Code inline copyEnabled={false} codeString="cursor: not-allowed" /> communicates the state
+                        without removing interactivity from assistive technology.
+                    </p>
                     <AnchorHeading headingLevel={3} id="css-touch-devices">Touch Device Optimization</AnchorHeading>
+                    <p>
+                        Larger touch targets (44x44px) and increased padding are applied on devices with coarse pointers.
+                        This directly supports WCAG AAA and improves usability on mobile.
+                    </p>
                     <AnchorHeading headingLevel={3} id="css-user-preferences">Respecting User Preferences</AnchorHeading>
+                    <p>
+                        We disable transitions and animations when <Code inline codeString="prefers-reduced-motion" /> is detected.
+                        <span className="fun-underline">Accessibility is baked in — not added later</span>.
+                    </p>
                 </PostSection>
+
 
                 <PostSection id="testing">
                     <AnchorHeading headingLevel={2} id="testing-heading">Testing</AnchorHeading>
+                    <p>
+                        A design system component is only as good as its guarantees. Our test suite verifies behavior across sync and async handlers, accessibility attributes, and real DOM interaction.
+                    </p>
                     <AnchorHeading headingLevel={3} id="testing-setup">Set up</AnchorHeading>
                     <AnchorHeading headingLevel={3} id="testing-component">The Component</AnchorHeading>
+                    <p>
+                        The Button tests confirm rendering, event handling, and accessible state management:
+                    </p>
+                    <Code lang="ts" codeString={`test('prevents click handler when disabled', () => {
+  const handleClick = jest.fn()
+  render(<Button disabled onClick={handleClick}>Click</Button>)
+  fireEvent.click(screen.getByTestId('base-button'))
+  expect(handleClick).not.toHaveBeenCalled()
+})`} />
+
+                    <List>
+                        <li>Confirms <Code inline codeString="aria-disabled" /> and <Code inline codeString="data-loading" /> work as expected</li>
+                        <li>Ensures buttons never trigger parent handlers when inactive</li>
+                        <li>Prevents accidental form submissions with <Code inline codeString="type='button'" /></li>
+                    </List>
+
                     <AnchorHeading headingLevel={3} id="testing-hook">The Hook</AnchorHeading>
+                    <p>
+                        The <Code inline codeString="useButton" /> tests go deeper — they validate that both synchronous and asynchronous click handlers log and rethrow errors correctly.
+                    </p>
+
+                    <Code lang="ts" codeString={`test('attaches logging to unhandled async errors', async () => {
+  const error = new Error('Async Error')
+  const mockHandler = jest.fn().mockRejectedValue(error)
+  const clickHandler = handleClick(mockHandler)
+  clickHandler({} as ReactMouseEvent<HTMLButtonElement>)
+  await new Promise(r => setTimeout(r, 0))
+  expect(mockLog).toHaveBeenCalledWith('Unhandled async error', error, 'error', expect.anything())
+})`} />
+                    <p>
+                        This pattern ensures <FunHighlight>no button interaction fails silently</FunHighlight>,
+                        which makes debugging production and development environments far safer.
+                    </p>
                 </PostSection>
 
                 <PostSection id="what-we-built">
                     <AnchorHeading headingLevel={2} id="what-we-built-heading">What We Built</AnchorHeading>
+                    {/* GENERATE IMAGE FOR HERE */}
+
+                    <p>
+                        By combining type safety, clear accessibility semantics, and a robust test suite, this button is more than a component — it&apos;s a contract.
+                        Every developer who uses it can trust that it behaves predictably, communicates clearly, and fails gracefully.
+                    </p>
                     <p>Our base button component now provides:</p>
 
                     <AnchorHeading headingLevel={3} id="what-we-built__core" icon={RiErrorWarningLine} >
@@ -568,7 +660,6 @@ min-height: 44px;`} copyEnabled={false} />
                         <li>No reliance on color alone for meaning</li>
                         <li>Proper focus management and keyboard navigation</li>
                         <li>Properly disabled state communicated</li>
-                        <li>Screen reader support with <Code inline codeString="aria-busy" /></li>
                         <li>Touch-friendly margins for motor accessibility</li>
                     </List>
 
@@ -613,7 +704,8 @@ min-height: 44px;`} copyEnabled={false} />
 import clsx from 'clsx'
 import { BaseButtonProps, MouseEventType } from '@/components/button/button.type'
 import useButton from '@/components/button/useButton'
-import Spinner from '@/components/spinner'
+import Spinner from '@/components/utilities/spinner'
+import Icon from '@/components/icon'
 
 export default function Button({
     className,
@@ -623,38 +715,37 @@ export default function Button({
     disabled = false,
     isLoading = false,
     ref,
+    icon,
     ...props
 }: BaseButtonProps) {
     const { handleClick } = useButton()
 
     function onClickHandler(event: MouseEventType) {
-
-        if (isLoading || disabled) {
-            event.preventDefault()
-            event.stopPropagation()
-            return;
-        }
-
-        return handleClick(onClick)(event)
+    if (isLoading || disabled) {
+        event.stopPropagation()
+        event.preventDefault()
+        return;
+    }
+    void handleClick(onClick)(event)
     }
 
     return (
-        <button
-            {...props}
-            className={clsx(className, 'button')}
-            onClick={onClickHandler}
-            aria-disabled={isLoading || disabled}
-            data-loading={isLoading}
-            ref={ref}
-            type={type}
-            data-testid="base-button"
-        >
-            {icon && <Icon icon={icon}/>}
-            {children}
-            {isLoading && <Spinner />}
-        </button>
-    )
-}`} />
+    <button
+        {...props}
+        className={clsx(className, {'button-w-icon': icon}, 'button')}
+        onClick={onClickHandler}
+        aria-disabled={isLoading || disabled}
+        data-loading={isLoading}
+        ref={ref}
+        type={type}
+        data-testid="base-button"
+    >
+        {icon && <Icon icon={icon}/>}
+        <span className='button__content'>{children}</span>
+        {isLoading && <Spinner />}
+    </button>
+    )}
+`} />
                                 )
                             },
                             {
@@ -665,28 +756,25 @@ export default function Button({
 import log from '@/lib/Logging';
 
 export default function useButton() {
-    const handleClick = <T = unknown>(userHandler?: ButtonClickHandler<T>) =>
+  const handleClick = (userHandler?: ButtonClickHandler) =>
     (event: MouseEventType) => {
-        if (!userHandler) return
+      if (!userHandler) return
 
-        try {
-            const result = userHandler(event)
+      try {
+        const result = userHandler(event)
 
-            if (process.env.NODE_ENV !== 'production') {
-                log('Button clicked', undefined, 'default', { context: \`\${userHandler.name || 'anonymous function'}\`, trace: true })
-            }
-            if (result && typeof (result as any)?.then === 'function') {
-                void Promise.resolve(result).catch((err) => {
-                log('Unhandled async error', err, 'error', { context: \`\${userHandler.name || 'anonymous function'}\`, trace: true })
-                })
-            }
-
-            return result
-
-        } catch (err) {
-            log('Button click error', err, 'error', { context: \`\${userHandler.name || 'anonymous function'}\`, trace: true })
-            throw err
+        if (process.env.NODE_ENV !== 'production') {
+          // Custom Logging solution here
         }
+        if (isThenable(result)) {
+          void Promise.resolve(result).catch((err) => {
+           // Custom Logging solution here
+          })
+        }
+      } catch (err) {
+       // Custom Logging solution here
+        throw err
+      }
     }
 
     return { handleClick }
@@ -698,14 +786,16 @@ export default function useButton() {
                                 tabLabel: 'button.type.ts',
                                 panelContent: (
                                     <Code lang="ts" codeString={`import type { ComponentPropsWithRef, MouseEvent } from 'react'
+import { IconProps } from '@/components/icon/icon.type';
 
 export type MouseEventType = MouseEvent<HTMLButtonElement>;
 
-export type ButtonClickHandler<T = unknown> = (event: MouseEventType) => T | Promise<T>;
+export type ButtonClickHandler = (event: MouseEventType) => void | Promise<void>;
 
 export type BaseButtonProps = {
     disabled?: boolean; 
     isLoading?: boolean;
+    icon?: IconProps['icon'];
     'data-style'?: 'outlined' | 'filled';
     'data-variant'?: 'primary' | 'secondary' | 'accent';
     onClick?: ButtonClickHandler;
@@ -719,20 +809,51 @@ export type BaseButtonProps = {
                                     <Code lang="css" codeString={`.button {
     /* Layout properties */
     --button-font-size: 1rem;
-    --button-margin: 8px;
-    --button-padding: 8px 16px;
-    --button-outline-offset: 2px;
-
+    --button-margin: calc(var(--spacing) * 2);
+    --button-padding-y: calc(var(--spacing) * 2);
+    --button-padding-x: var(--spacing);
+    --button-icon-width: 24px;
+    --button-spinner-width: 24px;
     /* WCAG Target Size Requirements */
     /* AA: 24px x 24px minimum, AAA: 44px x 44px minimum */
     min-width: 44px;
     min-height: 44px;
 
-    /* Layout */
-    margin: var(--button-margin);
-    padding: var(--button-padding);
-    display: flex;
+    /* Layout - reserve space for icon and spinner to prevent layout shift*/
+    display: grid;
+    grid-template-columns: var(--button-icon-width) fit-content(100%) var(--button-spinner-width);
+    gap: var(--spacing);
     align-items: center;
+    white-space: nowrap;
+
+    /* button | spinner */
+    & .button__content {
+        grid-column: 2;
+    }
+
+    & .spinner {
+        grid-column: 3;
+        justify-self: center;
+    }
+    /* icon | text | spinner */
+    &.button-w-icon {
+        & .button__content {
+            grid-column: 2;
+        }
+
+        & .icon {
+            grid-column: 1;
+            justify-self: center;
+        }
+
+        & .spinner {
+            grid-column: 3;
+        }
+    }
+
+
+    margin: var(--button-margin);
+    padding: var(--button-padding-y) var(--button-padding-x);
 
     /* Reset browser defaults */
     -webkit-appearance: none;
@@ -759,12 +880,11 @@ export type BaseButtonProps = {
     vertical-align: middle;
 
     /* Smooth transitions */
-    transition:
-        background-color 0.2s ease,
-        color 0.2s ease,
-        border-color 0.2s ease,
-        outline 0.2s ease,
-        box-shadow 0.2s ease;
+    transition: background-color 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease,
+    outline 0.2s ease,
+    box-shadow 0.2s ease;
 
     /* Interactive states - UX communication through outlines and transforms */
     &:hover {
@@ -782,6 +902,7 @@ export type BaseButtonProps = {
         outline: 1px dotted var(--button-outline-color, currentColor);
         transform: translateY(1px);
     }
+
     /* The button can't be disabled using this base button but other packages might add disabled to the button on the DOM. We should maintain consistent styling */
     &:disabled,
     &[aria-disabled="true"] {
@@ -798,14 +919,12 @@ export type BaseButtonProps = {
         }
 
         &:focus-visible {
-           --button-outline-color: var(--color-neutral-600);
+            --button-outline-color: var(--color-neutral-600);
         }
     }
 
     &[data-loading="true"] {
-        position: relative;
         cursor: wait;
-        display: flex;
 
         &:hover:not(:focus-visible) {
             outline: none;
@@ -824,7 +943,8 @@ button.button {
 @media screen and (any-pointer: coarse) {
     .button {
         --button-margin: 12px;
-        --button-padding: 12px 20px;
+        --button-padding-y: 12px;
+        --button-padding-x: 20px;
     }
 }
 
@@ -878,6 +998,19 @@ button.button {
     --button-accent-color: var(--color-accent-600);
 }`} />
                                 )
+                            },
+                            {
+                                id: 'isThenable',
+                                tabLabel: 'isThenable.ts',
+                                panelContent: (
+                                    <Code lang="ts" codeString={`export default function isThenable(value: unknown): value is PromiseLike<unknown> {
+  return (
+    value !== null &&
+    typeof value === 'object' &&
+    typeof (value as PromiseLike<unknown>).then === 'function'
+  )
+}`} />
+                                )
                             }
                         ]}
                     />
@@ -896,10 +1029,10 @@ button.button {
                         }} />
                 </PostSection>
 
-            </Post>
+            </Post >
             <PostSideBar
                 contents={[
-                    { id: 'what-were-building', href: '#what-were-building', label: "What We're Building" },
+                    { id: 'button-foundations', href: '#button-foundations', label: "Laying the Foundation" },
                     { id: 'project-setup', href: '#project-setup', label: 'Project Setup' },
                     { id: 'building-foundation', href: '#building-foundation', label: 'Building the Foundation' },
                     { id: 'interaction-logic', href: '#interaction-logic', label: 'Interaction Logic' },
