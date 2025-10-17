@@ -10,5 +10,4 @@
 .figure-caption {
     color: var(--color-neutral-500);
     padding-inline: clamp(0.25em, 1vw, 0.5em);
-    /* font-family: var(--font-accent); */
 }
