@@ -1,6 +1,5 @@
 'use client';
 import Button from "@/components/button";
-import Icon from "@/components/icon";
 import { RiBubbleChartLine, RiWindyLine } from "@remixicon/react";
 import { useEffect, useRef, useState } from "react";
 
@@ -217,7 +216,7 @@ export function BaseButtonExample() {
     }, []);
 
     const loadingText = "Taking a breath";
-    const text = "Blow a Bubble";
+    const text = " Blow a Bubble ";
     return (
         <div className="button-example--base">
             <p id="bubble-description">
@@ -232,11 +231,11 @@ export function BaseButtonExample() {
                 data-style="outlined"
                 data-variant="accent"
                 aria-describedby="bubble-description"
-
+                icon={isLoading ? RiBubbleChartLine : RiWindyLine}
             >
-                {isLoading ? <Icon icon={RiBubbleChartLine} /> : <Icon icon={RiWindyLine} />}
-                <span>{isLoading ? loadingText : text}</span>
+                {isLoading ? loadingText : text}
             </Button>
+
             {bubbles.map((bubble) => <div key={bubble.id}>{generateBubble(bubble)}</div>)}
             {sparkles.map((sparkle) => <div key={sparkle.id}>{generateSplatter(sparkle)}</div>)}
         </div>
