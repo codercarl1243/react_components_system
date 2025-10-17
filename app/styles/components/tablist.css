@@ -1,7 +1,26 @@
-
 .tablist__header {
     display: block;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
+
+    &::-webkit-scrollbar {
+        height: 6px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 3px;
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+        background: rgba(255, 255, 255, 0.3);
+    }
 }
+
 .code__reference {
     border-radius: 12px;
     background-color: var(--color-code-dark);
@@ -11,7 +30,29 @@
     & pre {
         height: 30rem;
     }
+
+    & .tablist__header {
+        display: flex;
+        overflow-x: auto;
+        gap: 0.5rem;
+        padding-block: 0.5rem;
+        scroll-behavior: smooth;
+        scrollbar-color: var(--color-accent-400) transparent;
+    }
+
+    & .tablist__header-tab {
+        flex-shrink: 0;
+        --button-spinner-width: 0px;
+        --button-icon-width: 0px;
+        --button-padding-x: 0.75rem;
+        --button-padding-y: 0.25rem;
+        --button-font-size: 0.875rem;
+        --button-outline-offset: 2px;
+        --button-margin: 0;
+        --button-shadow: none;
+    }
 }
+
 .tablist__header-tab {
-    margin-inline:  0;
+    margin-inline: 0;
 }

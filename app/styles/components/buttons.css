@@ -18,7 +18,7 @@
     align-items: center;
     white-space: nowrap;
 
-    /* button | spinner */
+    /* text | spinner */
     & .button__content {
         grid-column: 2;
     }
@@ -28,21 +28,10 @@
         justify-self: center;
     }
     /* icon | text | spinner */
-    &.button-w-icon {
-        & .button__content {
-            grid-column: 2;
-        }
-
-        & .icon {
+    &.button-w-icon  .icon {
             grid-column: 1;
             justify-self: center;
-        }
-
-        & .spinner {
-            grid-column: 3;
-        }
     }
-
 
     margin: var(--button-margin);
     padding: var(--button-padding-y) var(--button-padding-x);
@@ -56,7 +45,7 @@
     outline: 0;
     box-shadow: none;
 
-    /* Apply color properties (defined in second declaration) */
+    /* Apply color properties (All Colors and variants defined below) */
     background-color: var(--button-bg-color, transparent);
     color: var(--button-color, currentColor);
     border-color: var(--button-border-color, currentColor);
