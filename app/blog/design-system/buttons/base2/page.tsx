@@ -127,7 +127,7 @@ export default function ButtonsBasePage() {
 import clsx from 'clsx'
 import { BaseButtonProps, MouseEventType } from '@/components/button/button.type'
 import useButton from '@/components/button/useButton'
-import Spinner from '@/components/utilities/spinner'
+import Spinner from '@/components/spinner'
 import Icon from '@/components/icon'
 
 export default function Button({
@@ -515,20 +515,22 @@ min-height: 44px;`} copyEnabled={false} />
                             <li><Code inline codeString="aria-disabled" copyEnabled={false} /> keeps the button focusable, ensuring it remains discoverable.</li>
                         </List>
                         <p>
-                            We pair this with click prevention in JavaScript — stopping propagation and default behavior to simulate a “true” disabled button while staying accessible.
+                            We pair this with click prevention in JavaScript — stopping propagation and default behavior to simulate a <span className="italic">“true”</span> disabled button while staying accessible.
                         </p>
                     </PostNote>
 
                     <AnchorHeading headingLevel={4}>Assistive Technology isn&apos;t everything</AnchorHeading>
-                    <p>Screen readers are powerful, but they don't solve all problems:</p>
+                    <p>Screen readers and other assistive tech is definitely powerful and does level the field to some degree, but they don't solve all problems:</p>
+                    {/* add icons to these dot points */}
                     <List>
                         <li>Not all users with disabilities use screen readers</li>
                         <li>Visual feedback is critical for many users</li>
-                        <li>Cognitive disabilities benefit from predictable, stable UIs</li>
-                        <li>Motor disabilities benefit from well-spaced, consistently-sized targets</li>
+                        <li>Users with cognitive disabilities benefit from predictable, stable UIs</li>
+                        <li>Users with Motor disabilities benefit from well-spaced, consistently-sized targets</li>
                     </List>
 
-                    <p>Our button combines:</p>
+                    <p>Our button addresses these concerns as much as possible, we ensure:</p>
+                    {/* UPDATE for tick marks */}
                     <List>
                         <li>Semantic HTML and ARIA for screen readers</li>
                         <li>Visual state changes for sighted users</li>
@@ -562,7 +564,7 @@ min-height: 44px;`} copyEnabled={false} />
                             In these linked design systems You will see many different ways to try and include as many users as possible.
                         </p>
                         <p>
-                            No one solution is perfect, These systems are designed to ensure that any users on their websites have a consistent experience with their components.
+                            No one solution is perfect, but these systems are designed to ensure that any users on their websites have a consistent experience across their respective applications.
                         </p>
                     </PostNote>
                 </PostSection>
