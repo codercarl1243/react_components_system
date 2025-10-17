@@ -42,7 +42,7 @@ export default function Figure({
     ...imageProps
 }: FigureProps) {
 
-    if (!caption) {
+    if (!caption || (typeof caption === 'string' && caption.trim() === '')) {
         return <Image {...imageProps} />
     }
 
