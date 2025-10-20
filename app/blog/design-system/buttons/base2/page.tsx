@@ -371,6 +371,11 @@ export default function useButton() {
                     <AnchorHeading id="essential-features-heading" headingLevel={2}>
                         Essential Features
                     </AnchorHeading>
+                    <p>
+                        Beyond aesthetics, these essential features ensure the button behaves predictably
+                        under real-world conditions—handling async operations gracefully, preventing
+                        duplicate submissions, and integrating seamlessly with forms.
+                    </p>
                     <AnchorHeading headingLevel={3}>
                         Loading States
                     </AnchorHeading>
