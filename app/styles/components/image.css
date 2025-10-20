@@ -93,7 +93,7 @@
 .text-with-image .image {
     grid-column: var(--grid-column--image);
     grid-row: var(--grid-row--image);
-    margin-inline: 0.75em
+    margin-inline: var(--spacing-md);
 }
 
 .text-with-image .text-with-image__text {
