@@ -15,7 +15,6 @@ import TabList from "@/components/tablist";
 import Icon from "@/components/icon";
 import { getRelatedPosts } from "@/lib/blogPosts";
 import AnchorHeading from "@/components/heading/anchorHeading";
-import Image from "@/components/image";
 import Figure from "@/components/image/figure";
 import TextWithImage from "@/components/textWithImage";
 
