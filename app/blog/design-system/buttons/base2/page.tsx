@@ -17,6 +17,7 @@ import { getRelatedPosts } from "@/lib/blogPosts";
 import AnchorHeading from "@/components/heading/anchorHeading";
 import Image from "@/components/image";
 import Figure from "@/components/image/figure";
+import TextWithImage from "@/components/textWithImage";
 
 export const metadata: Metadata = { title: 'Buttons · Design System' }
 
@@ -499,9 +500,9 @@ export default function useButton() {
                             </p>
                             <Code lang="css" codeString={`min-width: 44px;
 min-height: 44px;`} copyEnabled={false} />
-                            <p><Image className="float-image" style={{ aspectRatio: "auto", height: "95px", width: "250px" }} src={'/images/button_ss.png'} height={95} width={250} alt="Button component showing the position of an icon and spinner" /> We also ensure button dimensions remain stable during state changes, preventing layout shifts that can disorient users. This is achieved through CSS Grid and deliberately reserved columns.
-                            </p>
-
+                            <TextWithImage imageSrc={'/images/button_ss.png'} imageAlt="Button component showing the position of an icon and spinner">
+                                <p>We also ensure button dimensions remain stable during state changes, preventing layout shifts that can disorient users. This is achieved through CSS Grid and deliberately reserved columns.</p>
+                            </TextWithImage>
                             <p>
                                 The grid layout prevents visual shifts when icons or spinners appear. That consistency helps users with cognitive disabilities stay oriented and reduces accidental clicks on moving targets.
                             </p>

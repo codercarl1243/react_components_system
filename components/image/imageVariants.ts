@@ -65,4 +65,12 @@ export const imageVariants = {
         blurDataURL: "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTA4MCIgaGVpZ2h0PSIxMDgwIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9IiNmM2Y0ZjYiLz48L3N2Zz4=",
         quality: 85
     },
+    textWithImage: {
+        width: 500,
+        height: 200,
+        sizes: "(max-width: 600px) 100vw, (max-width: 900px) 50vw, 400px",
+        aspectRatio: 'auto',
+        blurDataURL: "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZjNmNGY2Ii8+PC9zdmc+",
+        quality: 85
+    },
 } as const satisfies TImageVariants;
