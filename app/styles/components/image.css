@@ -76,8 +76,6 @@
     grid-template-columns: var(--grid-template-cols);
     grid-template-rows: var(--grid-template-rows);
     gap: var(--spacing-sm);
-    align-items: start;
-    margin-block-end: var(--spacing-lg);
     place-items: center;
 }
 
