@@ -10,7 +10,7 @@ type Source = {
   type?: string;
 };
 
-
+// Narrow src to string (Picture uses native img, not NextImage's StaticImageData)
 type FigureProps = Omit<TImage, 'src'> & {
   caption?: ReactNode;
   figureProps?: ComponentProps<'figure'>;
@@ -40,7 +40,7 @@ export default function Figure({
   sources,
   ...imageProps
 }: FigureProps) {
-  
+
   const hasCaption =
     caption != null &&
     caption !== false &&
