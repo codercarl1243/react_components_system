@@ -3,7 +3,7 @@
 import clsx from 'clsx'
 import { BaseButtonProps, MouseEventType } from '@/components/button/button.type'
 import useButton from '@/components/button/useButton'
-import Spinner from '@/components/utilities/spinner'
+import Spinner from '@/components/spinner'
 import Icon from '@/components/icon'
 
 /**

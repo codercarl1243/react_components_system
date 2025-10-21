@@ -10,13 +10,14 @@ export type ImageVariant =
   | 'default'
   | 'hero'
   | 'banner'
-  | 'general';
+  | 'general'
+  | 'textWithImage';
 
 export interface ImageVariantConfig {
     width: number;
     height: number;
     sizes: string;
-    aspectRatio: number;
+    aspectRatio: number | 'auto';
     blurDataURL: string;
     quality: number;
 }

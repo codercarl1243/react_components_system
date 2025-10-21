@@ -15,7 +15,8 @@ import TabList from "@/components/tablist";
 import Icon from "@/components/icon";
 import { getRelatedPosts } from "@/lib/blogPosts";
 import AnchorHeading from "@/components/heading/anchorHeading";
-import Image from "@/components/image";
+import Figure from "@/components/image/figure";
+import TextWithImage from "@/components/textWithImage";
 
 export const metadata: Metadata = { title: 'Buttons · Design System' }
 
@@ -36,7 +37,7 @@ export default function ButtonsBasePage() {
                     />
                     <Heading headingLevel={2} id="foundation-heading">Laying the Foundation</Heading>
                     <p>
-                        Buttons are the most reused component in any interface — and the easiest to get wrong.
+                        Buttons are the most re-used components in any interface — and the easiest to get wrong.
                         In this first post of the design system series, we&apos;re building a button that balances <FunHighlight>functionality</FunHighlight>, <FunHighlight>accessibility</FunHighlight>, and <FunHighlight>developer trust</FunHighlight>.
                     </p>
                     <p>
@@ -103,8 +104,7 @@ export default function ButtonsBasePage() {
                     <p>Every design system needs a reliable base component to build from. </p>
 
                     <p>
-                        The goal here isn&apos;t to design every possible button — it&apos;s to define a solid foundation that
-                        future variants can build on without rewriting the essentials.
+                        The goal here isn&apos;t to design every possible button — it&apos;s to define a solid foundation that future variants can build on without rewriting the essentials.
                     </p>
 
                     <List variant="circle" spacing="normal">
@@ -127,7 +127,7 @@ export default function ButtonsBasePage() {
 import clsx from 'clsx'
 import { BaseButtonProps, MouseEventType } from '@/components/button/button.type'
 import useButton from '@/components/button/useButton'
-import Spinner from '@/components/utilities/spinner'
+import Spinner from '@/components/spinner'
 import Icon from '@/components/icon'
 
 export default function Button({
@@ -169,9 +169,7 @@ export default function Button({
     </button>
   )
 }`} />
-
                     <AnchorHeading headingLevel={4}>Key Decisions</AnchorHeading>
-                    {/* GENERATE IMAGE FOR HERE */}
                     <List variant="circle" spacing="normal">
                         <li>
                             <Code codeString={`clsx(className, 'button')`} inline copyEnabled={false} /> - Combines user-provided
@@ -357,45 +355,86 @@ export default function useButton() {
                         <p>
                             This keeps the component API simple while ensuring errors don't disappear silently. The Promise continues executing, but we've attached logging to catch any rejections that weren't already handled.
                         </p>
-                        <Image style={{borderRadius: 'var(--radius-md)'}} src={'/images/handleClick_flow.png'} alt="Diagram illustrating how the button hook handles both synchronous errors (caught and re-thrown immediately) and asynchronous errors (logged via attached .catch() handler when Promise rejects later)"/>
+                        <Figure
+                            alt={"Button error handling flow diagram"}
+                            src={'/images/handleClick_flow.png'}
+                            caption={
+                                <>
+                                    The onClick handler ensures that we log both synchronous errors <span className="bold italic">(caught and re-thrown immediately)</span> and asynchronous errors <span className="bold italic">(logged via attached <Code codeString=".catch()" copyEnabled={false} inline /> handler when Promise rejects later)</span>.
+                                </>}
+                        />
                     </PostNote>
 
                 </PostSection>
                 <PostSection id="essential-features">
-                    {/* GENERATE IMAGE FOR HERE */}
-                    <AnchorHeading id="essential-features-heading" headingLevel={2}>Essential Features</AnchorHeading>
-                    <AnchorHeading headingLevel={3}>Loading States</AnchorHeading>
-                    <p>Loading states are critical for async operations. They provide feedback to users and prevent duplicate submissions.</p>
-                    <p className="bold">Our implementation:</p>
+                    {/* IMAGE IDEA: Illustration of a button with spinner + disabled state side-by-side */}
+                    <AnchorHeading id="essential-features-heading" headingLevel={2}>
+                        Essential Features
+                    </AnchorHeading>
+                    <p>
+                        Beyond aesthetics, these essential features ensure the button behaves predictably
+                        under real-world conditions—handling async operations gracefully, preventing
+                        duplicate submissions, and integrating seamlessly with forms.
+                    </p>
+                    <AnchorHeading headingLevel={3}>
+                        Loading States
+                    </AnchorHeading>
+                    <p>Buttons often trigger asynchronous actions — saving data, submitting forms, or making API calls. A good design system must <FunHighlight>communicate progress clearly</FunHighlight> to the user while preventing accidental re-triggers.</p>
+                    <p className="bold">Our implementation is simple and composable:</p>
                     <Code codeString="{isLoading && <Spinner />}" copyEnabled={false} />
-                    <p>The Spinner component appears alongside the button text, maintaining the button's layout. We use <Code codeString="data-loading={isLoading}" copyEnabled={false} inline /> to enable CSS styling:</p>
-                    <Code lang="css" codeString={`&[data-loading="true"] {
+                    <p> The <Code codeString="Spinner" inline copyEnabled={false} /> appears alongside the button label without shifting layout, maintaining predictable spacing. We also expose a <Code codeString="data-loading" inline copyEnabled={false} /> attribute so CSS can respond directly to loading state:</p>
+                    <Code
+                        lang="css"
+                        copyEnabled={false}
+                        codeString={`&[data-loading="true"] {
   position: relative;
   cursor: wait;
-}`} copyEnabled={false} />
+}`} />
+                    <PostNote>
+                        <p>
+                            Using <Code codeString="cursor: wait" inline copyEnabled={false} /> gives users instant feedback while
+                            asynchronous work completes. This small visual cue prevents unnecessary frustration.
+                        </p>
+                    </PostNote>
                     <AnchorHeading headingLevel={3}>Preventing Duplicate Actions</AnchorHeading>
-                    {/* GENERATE IMAGE FOR HERE */}
-                    <p>When a button triggers an async operation, users might click multiple times. We prevent this by:</p>
+                    {/* IMAGE IDEA: Diagram showing click blocked by disabled/loading branch */}
+                    <p>Async operations can take time, and users often click again if nothing happens immediately. Our button prevents duplicate submissions with a combination of logic and semantics:</p>
                     <List ordered>
-                        <li>Checking <Code codeString="isLoading || disabled" copyEnabled={false} inline /> in our click handler</li>
-                        <li>Using <Code codeString="event.preventDefault()" copyEnabled={false} inline /> to stop the event</li>
-                        <li>Setting <Code lang="css" codeString="cursor: wait" copyEnabled={false} inline /> in CSS for visual feedback</li>
-                        <li>Using <Code codeString="aria-disabled" copyEnabled={false} inline /> to communicate the state to assistive technology</li>
+                        <li>
+                            Checking <Code codeString="isLoading || disabled" copyEnabled={false} inline /> before executing the handler
+                        </li>
+                        <li>
+                            Stopping events in their tracks with <Code codeString="event.preventDefault()" copyEnabled={false} inline /> and <Code codeString="event.stopPropagation()" copyEnabled={false} inline />. <span className="italic">A disabled button should not trigger any action.</span>
+                        </li>
+                        <li>
+                            Applying <Code lang="css" codeString="cursor: wait" copyEnabled={false} inline /> for visual feedback
+                        </li>
+                        <li>
+                            Using <Code codeString="aria-disabled" copyEnabled={false} inline /> to communicate the state to assistive technology
+                        </li>
                     </List>
+
+
                     <AnchorHeading headingLevel={3}>Integration with Forms</AnchorHeading>
                     <p>
-                        Our button defaults to <Code codeString={`type="button"`} copyEnabled={false} inline /> instead of <Code codeString={`type="submit"`} copyEnabled={false} inline />.
+                        By default, our button sets <Code codeString={`type="button"`} copyEnabled={false} inline />. This follows best practices and avoids accidental form submissions when multiple buttons exist.
                     </p>
-                    <p className="bold">This default button type ensures that we:</p>
+                    <p className="bold">This default type ensures that we:</p>
                     <List>
-                        <li>Prevent accidental form submissions</li>
+                        <li>Prevent unintentional form submissions</li>
                         <li>Force developers to explicitly opt-in to submit behavior</li>
-                        <li>Reduce bugs in complex forms with multiple buttons</li>
+                        <li>Reduce side effects in complex form layouts</li>
                     </List>
-                    <p>If you need a submit button, simply override this type:</p>
-                    <Code copyEnabled={false} codeString={`<Button type="submit" onClick={handleSubmit}>
+                    <p>
+                        When you need to submit a form, simply opt in explicitly:
+                    </p>
+
+                    <Code
+                        copyEnabled={false}
+                        codeString={`<Button type="submit" onClick={handleSubmit}>
   Save Changes
-</Button>`} />
+</Button>`}
+                    />
                 </PostSection>
 
 
@@ -459,12 +498,15 @@ export default function useButton() {
                             </p>
                             <p>This ensures that the button <span className="fun-underline">remains in the accessibility tree</span>, <span className="fun-underline">preserves discoverability</span>, and <span className="fun-underline">maintains tab order</span>.</p>
                         </li>
-                        <li><p><span className="bold">Stable sizing:</span> We enforce minimum sizes with WCAG AAA compliance in mind:</p>
+                        <li className="flow-4">
+                            <p>
+                                <span className="bold">Stable sizing:</span> We enforce minimum sizes with WCAG AAA compliance in mind:
+                            </p>
                             <Code lang="css" codeString={`min-width: 44px;
 min-height: 44px;`} copyEnabled={false} />
-                            <p>We also ensure button dimensions remain stable during state changes, preventing layout shifts that can disorient users. This is achieved through CSS Grid and deliberately reserved columns.
-                            </p>
-                            {/* Image here that shows a button cut into 3 columns */}
+                            <TextWithImage imageSrc={'/images/button_ss.png'} imageAlt="Button component showing the position of an icon and spinner">
+                                <p>We also ensure button dimensions remain stable during state changes, preventing layout shifts that can disorient users. This is achieved through CSS Grid and deliberately reserved columns.</p>
+                            </TextWithImage>
                             <p>
                                 The grid layout prevents visual shifts when icons or spinners appear. That consistency helps users with cognitive disabilities stay oriented and reduces accidental clicks on moving targets.
                             </p>
@@ -478,20 +520,22 @@ min-height: 44px;`} copyEnabled={false} />
                             <li><Code inline codeString="aria-disabled" copyEnabled={false} /> keeps the button focusable, ensuring it remains discoverable.</li>
                         </List>
                         <p>
-                            We pair this with click prevention in JavaScript — stopping propagation and default behavior to simulate a “true” disabled button while staying accessible.
+                            We pair this with click prevention in JavaScript — stopping propagation and default behavior to simulate a <span className="italic">“true”</span> disabled button while staying accessible.
                         </p>
                     </PostNote>
 
-                    <AnchorHeading headingLevel={4}>Assistive Technology isnt everything</AnchorHeading>
-                    <p>Screen readers are powerful, but they don't solve all problems:</p>
+                    <AnchorHeading headingLevel={4}>Assistive Technology isn&apos;t everything</AnchorHeading>
+                    <p>Screen readers and other assistive tech is definitely powerful and does level the field to some degree, but they don't solve all problems:</p>
+                    {/* add icons to these dot points */}
                     <List>
                         <li>Not all users with disabilities use screen readers</li>
                         <li>Visual feedback is critical for many users</li>
-                        <li>Cognitive disabilities benefit from predictable, stable UIs</li>
-                        <li>Motor disabilities benefit from well-spaced, consistently-sized targets</li>
+                        <li>Users with cognitive disabilities benefit from predictable, stable UIs</li>
+                        <li>Users with Motor disabilities benefit from well-spaced, consistently-sized targets</li>
                     </List>
 
-                    <p>Our button combines:</p>
+                    <p>Our button addresses these concerns as much as possible, we ensure:</p>
+                    {/* UPDATE for tick marks */}
                     <List>
                         <li>Semantic HTML and ARIA for screen readers</li>
                         <li>Visual state changes for sighted users</li>
@@ -525,7 +569,7 @@ min-height: 44px;`} copyEnabled={false} />
                             In these linked design systems You will see many different ways to try and include as many users as possible.
                         </p>
                         <p>
-                            No one solution is perfect, These systems are designed to ensure that any users on their websites have a consistent experience with their components.
+                            No one solution is perfect, but these systems are designed to ensure that any users on their websites have a consistent experience across their respective applications.
                         </p>
                     </PostNote>
                 </PostSection>
@@ -702,9 +746,9 @@ min-height: 44px;`} copyEnabled={false} />
                                     <Code codeString={`'use client'
 
 import clsx from 'clsx'
-import { BaseButtonProps, MouseEventType } from '@/components/button/button.type'
+import type { BaseButtonProps, MouseEventType } from '@/components/button/button.type'
 import useButton from '@/components/button/useButton'
-import Spinner from '@/components/utilities/spinner'
+import Spinner from '@/components/spinner'
 import Icon from '@/components/icon'
 
 export default function Button({
@@ -721,29 +765,29 @@ export default function Button({
     const { handleClick } = useButton()
 
     function onClickHandler(event: MouseEventType) {
-    if (isLoading || disabled) {
-        event.stopPropagation()
-        event.preventDefault()
-        return;
-    }
-    void handleClick(onClick)(event)
+        if (isLoading || disabled) {
+            event.stopPropagation()
+            event.preventDefault()
+            return;
+        }
+        void handleClick(onClick)(event)
     }
 
     return (
-    <button
-        {...props}
-        className={clsx(className, {'button-w-icon': icon}, 'button')}
-        onClick={onClickHandler}
-        aria-disabled={isLoading || disabled}
-        data-loading={isLoading}
-        ref={ref}
-        type={type}
-        data-testid="base-button"
-    >
-        {icon && <Icon icon={icon}/>}
-        <span className='button__content'>{children}</span>
-        {isLoading && <Spinner />}
-    </button>
+        <button
+            {...props}
+            className={clsx(className, {'button-w-icon': icon}, 'button')}
+            onClick={onClickHandler}
+            aria-disabled={isLoading || disabled}
+            data-loading={isLoading}
+            ref={ref}
+            type={type}
+            data-testid="base-button"
+        >
+            {icon && <Icon icon={icon}/>}
+            <span className='button__content'>{children}</span>
+            {isLoading && <Spinner />}
+        </button>
     )}
 `} />
                                 )
@@ -753,6 +797,7 @@ export default function Button({
                                 tabLabel: 'useButton.tsx',
                                 panelContent: (
                                     <Code codeString={`import type { ButtonClickHandler, MouseEventType } from '@/components/button/button.type';
+import isThenable from '@/lib/isThenable';
 import log from '@/lib/Logging';
 
 export default function useButton() {
@@ -826,7 +871,7 @@ export type BaseButtonProps = {
     align-items: center;
     white-space: nowrap;
 
-    /* button | spinner */
+    /* text | spinner */
     & .button__content {
         grid-column: 2;
     }
@@ -836,21 +881,10 @@ export type BaseButtonProps = {
         justify-self: center;
     }
     /* icon | text | spinner */
-    &.button-w-icon {
-        & .button__content {
-            grid-column: 2;
-        }
-
-        & .icon {
+    &.button-w-icon  .icon {
             grid-column: 1;
             justify-self: center;
-        }
-
-        & .spinner {
-            grid-column: 3;
-        }
     }
-
 
     margin: var(--button-margin);
     padding: var(--button-padding-y) var(--button-padding-x);
@@ -864,7 +898,7 @@ export type BaseButtonProps = {
     outline: 0;
     box-shadow: none;
 
-    /* Apply color properties (defined in second declaration) */
+    /* Apply color properties (All Colors and variants defined below) */
     background-color: var(--button-bg-color, transparent);
     color: var(--button-color, currentColor);
     border-color: var(--button-border-color, currentColor);
@@ -1010,6 +1044,312 @@ button.button {
     typeof (value as PromiseLike<unknown>).then === 'function'
   )
 }`} />
+                                )
+                            },
+                            {
+                                id: 'button_test',
+                                tabLabel: 'Button.test.tsx',
+                                panelContent: (
+                                    <Code codeString={`import Button from '@/components/button'
+import { Ri24HoursFill } from '@remixicon/react'
+import { fireEvent, render, screen } from '@testing-library/react'
+import React from 'react'
+
+describe('Button', () => {
+  test('renders with children', () => {
+    render(<Button>click me</Button>)
+    expect(screen.getByTestId('base-button')).toHaveTextContent('click me')
+  })
+
+  test('renders with icon when icon prop is provided', () => {
+    render(<Button icon={Ri24HoursFill}>click me</Button>)
+    const button = screen.getByTestId('base-button')
+    expect(button).toHaveClass('button-w-icon')
+    expect(button).toHaveTextContent('click me')
+  })
+
+  test('renders spinner when isLoading prop is true', () => {
+    render(<Button isLoading>click me</Button>)
+    const button = screen.getByTestId('base-button')
+    expect(button).toHaveAttribute('data-loading', 'true')
+    expect(button.querySelector('[data-testid="spinner"]')).toBeInTheDocument()
+  })
+
+  test('calls onClick handler when clicked', () => {
+    const handleClick = jest.fn()
+    render(<Button onClick={handleClick}>click me</Button>)
+    fireEvent.click(screen.getByTestId('base-button'))
+    expect(handleClick).toHaveBeenCalledTimes(1)
+  })
+
+  test('prevents click handler when disabled', () => {
+    const handleClick = jest.fn()
+    render(<Button disabled onClick={handleClick}>click me</Button>)
+    fireEvent.click(screen.getByTestId('base-button'))
+    expect(handleClick).not.toHaveBeenCalled()
+  })
+
+  test('prevents click handler when isLoading is true', () => {
+    const handleClick = jest.fn()
+    render(<Button isLoading onClick={handleClick}>click me</Button>)
+    fireEvent.click(screen.getByTestId('base-button'))
+    expect(handleClick).not.toHaveBeenCalled()
+  })
+
+  test('stops propagation when disabled', () => {
+    const handleParentClick = jest.fn()
+    render(
+      <div onClick={handleParentClick}>
+        <Button disabled onClick={jest.fn()}>click me</Button>
+      </div>
+    )
+    fireEvent.click(screen.getByTestId('base-button'))
+    expect(handleParentClick).not.toHaveBeenCalled()
+  })
+
+  test('stops propagation when loading', () => {
+    const handleParentClick = jest.fn()
+    render(
+      <div onClick={handleParentClick}>
+        <Button isLoading onClick={jest.fn()}>click me</Button>
+      </div>
+    )
+    fireEvent.click(screen.getByTestId('base-button'))
+    expect(handleParentClick).not.toHaveBeenCalled()
+  })
+
+  test('sets type to button by default to prevent form submission', () => {
+    render(<Button>click me</Button>)
+    expect(screen.getByTestId('base-button')).toHaveAttribute('type', 'button')
+  })
+
+  test('allows type to be overridden to submit', () => {
+    const handleSubmit = jest.fn((e) => e.preventDefault())
+    render(
+      <form onSubmit={handleSubmit}>
+        <Button type="submit">submit</Button>
+      </form>
+    )
+    fireEvent.click(screen.getByTestId('base-button'))
+    expect(handleSubmit).toHaveBeenCalledTimes(1)
+  })
+
+  test('prevents form submission when disabled', () => {
+    const handleSubmit = jest.fn()
+    render(
+      <form onSubmit={handleSubmit}>
+        <Button type="submit" disabled>submit</Button>
+      </form>
+    )
+    fireEvent.click(screen.getByTestId('base-button'))
+    expect(handleSubmit).not.toHaveBeenCalled()
+  })
+
+  test('forwards ref to the HTML button element', () => {
+    const ref = React.createRef<HTMLButtonElement>()
+    render(<Button ref={ref} id="ref_test">click me</Button>)
+    expect(ref.current).toBeInstanceOf(HTMLButtonElement)
+    expect(ref.current).toHaveAttribute('id', 'ref_test')
+  })
+
+  test('sets aria-disabled when disabled', () => {
+    render(<Button disabled>click me</Button>)
+    expect(screen.getByTestId('base-button')).toHaveAttribute('aria-disabled', 'true')
+  })
+
+  test('sets aria-disabled when loading', () => {
+    render(<Button isLoading>click me</Button>)
+    expect(screen.getByTestId('base-button')).toHaveAttribute('aria-disabled', 'true')
+  })
+
+  test('sets data-loading attribute when loading', () => {
+    render(<Button isLoading>click me</Button>)
+    expect(screen.getByTestId('base-button')).toHaveAttribute('data-loading', 'true')
+  })
+
+  test('applies data-style prop', () => {
+    render(<Button data-style="filled">click me</Button>)
+    expect(screen.getByTestId('base-button')).toHaveAttribute('data-style', 'filled')
+  })
+
+  test('applies data-variant prop', () => {
+    render(<Button data-variant="primary">click me</Button>)
+    expect(screen.getByTestId('base-button')).toHaveAttribute('data-variant', 'primary')
+  })
+
+  test('applies custom className', () => {
+    render(<Button className="custom-class">click me</Button>)
+    expect(screen.getByTestId('base-button')).toHaveClass('custom-class', 'button')
+  })
+
+  test('activates button with Enter key', () => {
+    const handleClick = jest.fn()
+    render(<Button onClick={handleClick}>click me</Button>)
+    const button = screen.getByTestId('base-button')
+    button.focus()
+    expect(button).toHaveFocus()
+    fireEvent.keyDown(button, { key: 'Enter', code: 'Enter' })
+    expect(handleClick).toHaveBeenCalled()
+  })
+
+  test('handles async click handlers', async () => {
+    const handleClick = jest.fn().mockResolvedValue(undefined)
+    render(<Button onClick={handleClick}>click me</Button>)
+    fireEvent.click(screen.getByTestId('base-button'))
+    expect(handleClick).toHaveBeenCalledTimes(1)
+    await expect(handleClick.mock.results[0].value).resolves.toBeUndefined()
+  })
+})`} />
+                                )
+                            },
+                            {
+                                id: 'useButton_test',
+                                tabLabel: 'useButton.test.tsx',
+                                panelContent: (
+                                    <Code codeString={`import useButton from '@/components/button/useButton'
+import { renderHook } from '@testing-library/react'
+import { MouseEvent as ReactMouseEvent } from 'react'
+import log from '@/lib/Logging';
+import withNodeEnv from '@/tests/helpers/withNodeEnv';
+
+jest.mock('../../lib/Logging.ts');
+
+const mockLog = log as jest.MockedFunction<typeof log>
+
+let handleClick: ReturnType<typeof useButton>['handleClick']
+
+describe('useButton', () => {
+
+    beforeEach(() => {
+    jest.clearAllMocks()
+    const { result } = renderHook(() => useButton())
+    handleClick = result.current.handleClick
+    })
+
+    describe('handleClick', () => {
+    test('accepts a curried function with the Event as the prop', () => {
+        const mockUserHandler = jest.fn()
+        const mockEvent = {} as ReactMouseEvent<HTMLButtonElement>
+        handleClick(mockUserHandler)(mockEvent)
+
+        expect(mockUserHandler).toHaveBeenCalledWith(mockEvent)
+    })
+
+    test('returns early when no handler is provided', () => {
+        const clickHandler = handleClick(undefined)
+        const result = clickHandler({} as ReactMouseEvent<HTMLButtonElement>)
+
+        expect(result).toBeUndefined()
+        expect(mockLog).not.toHaveBeenCalled()
+    })
+
+    test('does not return a value for sync functions', () => {
+        const mockHandler = jest.fn()
+        const clickHandler = handleClick(mockHandler)
+
+        const result = clickHandler({} as ReactMouseEvent<HTMLButtonElement>)
+
+        expect(mockHandler).toHaveBeenCalledTimes(1)
+        expect(result).toBeUndefined()
+    })
+
+    test('does not return a value for async/promise functions', () => {
+        const mockHandler = jest.fn<Promise<void>, [ReactMouseEvent<HTMLButtonElement>]>()
+        .mockResolvedValue(undefined)
+        const clickHandler = handleClick(mockHandler)
+
+        const result = clickHandler({} as ReactMouseEvent<HTMLButtonElement>)
+
+        expect(mockHandler).toHaveBeenCalledTimes(1)
+        expect(result).toBeUndefined()
+    })
+
+    test('logs and rethrows sync handler errors', () => {
+        const error = new Error('Sync Error')
+        const mockHandler = jest.fn().mockImplementation(() => { throw error })
+
+        const clickHandler = handleClick(mockHandler)
+
+        expect(() => {
+        clickHandler({} as ReactMouseEvent<HTMLButtonElement>)
+        }).toThrow(error)
+
+        expect(mockLog).toHaveBeenCalledWith('Button click error', error, 'error', expect.objectContaining({
+        context: expect.any(String),
+        trace: true
+        }))
+    })
+
+    test('attaches logging to unhandled async errors', async () => {
+        const error = new Error('Async Error')
+        const mockHandler = jest.fn<Promise<void>, [ReactMouseEvent<HTMLButtonElement>]>()
+        .mockRejectedValue(error)
+        const clickHandler = handleClick(mockHandler)
+
+        const result = clickHandler({} as ReactMouseEvent<HTMLButtonElement>)
+
+        expect(mockHandler).toHaveBeenCalledTimes(1)
+        expect(result).toBeUndefined()
+
+        await new Promise<void>(resolve => {
+        global.setTimeout(resolve, 0)
+        })
+
+        expect(mockLog).toHaveBeenCalledWith('Unhandled async error', error, 'error', expect.objectContaining({
+        context: expect.any(String),
+        trace: true
+        }))
+    })
+
+    test('does not log caught async errors', async () => {
+        await withNodeEnv('production', async () => {
+        const error = new Error('Caught Async Error')
+        const mockHandler = jest.fn<Promise<void>, [ReactMouseEvent<HTMLButtonElement>]>()
+            .mockImplementation(() => Promise.reject(error).catch(() => {
+            // Swallow the error
+            }))
+        const clickHandler = handleClick(mockHandler)
+
+        const result = clickHandler({} as ReactMouseEvent<HTMLButtonElement>)
+
+        expect(mockHandler).toHaveBeenCalledTimes(1)
+        expect(result).toBeUndefined()
+
+        await new Promise<void>(resolve => {
+            global.setTimeout(resolve, 0)
+        })
+
+        expect(mockLog).not.toHaveBeenCalled()
+        })
+    })
+    test('logs all clicks in non-production environments', () => {
+        withNodeEnv('development', () => {
+        const mockHandler = jest.fn().mockName('testHandler')
+        const clickHandler = handleClick(mockHandler)
+
+        clickHandler({} as ReactMouseEvent<HTMLButtonElement>)
+
+        expect(mockHandler).toHaveBeenCalledTimes(1)
+        expect(mockLog).toHaveBeenCalledWith('Button clicked', undefined, 'default', expect.objectContaining({
+            context: expect.any(String),
+            trace: true
+        }))
+        })
+    })
+
+    test('does not log clicks in production', () => {
+        withNodeEnv('production', () => {
+        const mockHandler = jest.fn()
+        const clickHandler = handleClick(mockHandler)
+
+        clickHandler({} as ReactMouseEvent<HTMLButtonElement>)
+
+        expect(mockHandler).toHaveBeenCalledTimes(1)
+        expect(mockLog).not.toHaveBeenCalled()
+        })
+    })
+    })
+})`} />
                                 )
                             }
                         ]}
