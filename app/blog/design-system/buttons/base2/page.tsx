@@ -457,15 +457,10 @@ export default function useButton() {
                     <p>Our Button component addresses key accessibility requirements across all four WCAG principles:</p>
                     <List variant="none" spacing="loose">
                         <li>
-                            {/* <p> */}
-                                <Icon icon={RiContrastLine} /> 
-                                    <TextWithImage alt="" src="">
-<span className="bold">Perceivable:</span> Sufficient contrast (4.5:1) and readable text at 200% zoom.
-<p className="italic text-sm neutral-600">WCAG: 1.4.3, 1.4.11, 1.4.1, 1.4.4</p>
-                                    </TextWithImage>
-                                    {/* <Icon icon={RiContrastLine} /> </span>  */}
-                            {/* </p> */}
-                            
+                            <p>
+                                <span className="bold"><Icon icon={RiContrastLine} /> Perceivable:</span> Sufficient contrast (4.5:1) and readable text at 200% zoom.
+                                <p className="italic text-sm neutral-600">WCAG: 1.4.3, 1.4.11, 1.4.1, 1.4.4</p>
+                            </p>
                         </li>
                         <li>
                             <p>
