@@ -16,7 +16,7 @@ import Icon from "@/components/icon";
 import { getRelatedPosts } from "@/lib/blogPosts";
 import AnchorHeading from "@/components/heading/anchorHeading";
 import Figure from "@/components/image/figure";
-import TextWithImage from "@/components/textWithImage";
+import TextWithImage from "@/components/image/textWithImage";
 
 export const metadata: Metadata = { title: 'Buttons · Design System' }
 
@@ -358,6 +358,9 @@ export default function useButton() {
                         <Figure
                             alt={"Button error handling flow diagram"}
                             src={'/images/handleClick_flow.png'}
+                            sources={[
+                                { media: '(max-width: 560px)', srcSet: '/images/handleClick_Flow_vertical.png' },
+                            ]}
                             caption={
                                 <>
                                     The onClick handler ensures that we log both synchronous errors <span className="bold italic">(caught and re-thrown immediately)</span> and asynchronous errors <span className="bold italic">(logged via attached <Code codeString=".catch()" copyEnabled={false} inline /> handler when Promise rejects later)</span>.
@@ -367,10 +370,17 @@ export default function useButton() {
 
                 </PostSection>
                 <PostSection id="essential-features">
-                    {/* IMAGE IDEA: Illustration of a button with spinner + disabled state side-by-side */}
                     <AnchorHeading id="essential-features-heading" headingLevel={2}>
                         Essential Features
                     </AnchorHeading>
+                    <Figure
+                        style={{ objectFit: "contain" }}
+                        height={200}
+                        variant="default"
+                        caption="Visual feedback for three button states: ready, processing, and unavailable"
+                        alt="Three buttons displayed side by side showing default state with pointer cursor, loading state with spinner and wait cursor, and disabled state with greyed colors and not-allowed cursor"
+                        src={"/images/button_states.png"}
+                    />
                     <p>
                         Beyond aesthetics, these essential features ensure the button behaves predictably
                         under real-world conditions—handling async operations gracefully, preventing
@@ -447,10 +457,15 @@ export default function useButton() {
                     <p>Our Button component addresses key accessibility requirements across all four WCAG principles:</p>
                     <List variant="none" spacing="loose">
                         <li>
-                            <p>
-                                <span className="bold"><Icon icon={RiContrastLine} /> Perceivable:</span> Sufficient contrast (4.5:1) and readable text at 200% zoom.
-                            </p>
-                            <p className="italic text-sm neutral-600">WCAG: 1.4.3, 1.4.11, 1.4.1, 1.4.4</p>
+                            {/* <p> */}
+                                <Icon icon={RiContrastLine} /> 
+                                    <TextWithImage alt="" src="">
+<span className="bold">Perceivable:</span> Sufficient contrast (4.5:1) and readable text at 200% zoom.
+<p className="italic text-sm neutral-600">WCAG: 1.4.3, 1.4.11, 1.4.1, 1.4.4</p>
+                                    </TextWithImage>
+                                    {/* <Icon icon={RiContrastLine} /> </span>  */}
+                            {/* </p> */}
+                            
                         </li>
                         <li>
                             <p>
@@ -504,7 +519,12 @@ export default function useButton() {
                             </p>
                             <Code lang="css" codeString={`min-width: 44px;
 min-height: 44px;`} copyEnabled={false} />
-                            <TextWithImage imageSrc={'/images/button_ss.png'} imageAlt="Button component showing the position of an icon and spinner">
+                            <TextWithImage
+                                src={'/images/button_ss.png'}
+                                alt="Button component showing the position of an icon and spinner"
+                                width={300}
+                                height={125}
+                            >
                                 <p>We also ensure button dimensions remain stable during state changes, preventing layout shifts that can disorient users. This is achieved through CSS Grid and deliberately reserved columns.</p>
                             </TextWithImage>
                             <p>
