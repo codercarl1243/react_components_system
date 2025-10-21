@@ -27,10 +27,11 @@
         grid-column: 3;
         justify-self: center;
     }
+
     /* icon | text | spinner */
-    &.button-w-icon  .icon {
-            grid-column: 1;
-            justify-self: center;
+    &.button-w-icon .icon {
+        grid-column: 1;
+        justify-self: center;
     }
 
     margin: var(--button-margin);
@@ -85,8 +86,9 @@
     }
 
     /* The button can't be disabled using this base button but other packages might add disabled to the button on the DOM. We should maintain consistent styling */
-    &:disabled,
-    &[aria-disabled="true"] {
+    &:is(:disabled, [aria-disabled="true"]),
+    &[data-variant]:is(:disabled, [aria-disabled="true"]),
+    &[data-style]:is(:disabled, [aria-disabled="true"]) {
         --button-bg-color: var(--color-neutral-200);
         --button-color: var(--color-neutral-800);
         --button-border-color: var(--color-neutral-400);
