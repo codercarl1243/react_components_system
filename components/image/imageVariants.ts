@@ -37,7 +37,7 @@ export const imageVariants = {
         width: 1200,
         height: 800,
         sizes: "(max-width: 768px) 100vw, (max-width: 1024px) 90vw, (max-width: 1200px) 80vw, 1200px",
-        aspectRatio: 1.5,
+        aspectRatio: "auto",
         blurDataURL: "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTIwMCIgaGVpZ2h0PSI4MDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0iI2YzZjRmNiIvPjwvc3ZnPg==",
         quality: 85
     },

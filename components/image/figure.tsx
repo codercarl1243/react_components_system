@@ -1,60 +1,66 @@
 import Image from '@/components/image';
+import Picture from '@/components/image/picture';
 import { type TImage } from '@/components/image/image.type';
 import { clsx } from 'clsx';
-import { type ReactNode } from 'react';
+import { ComponentProps, type ReactNode } from 'react';
 
-export interface FigureProps extends TImage {
-    /** Caption text or custom caption content */
-    caption?: ReactNode;
-    /** Additional className for the figure wrapper */
-    figureClassName?: string;
-    /** Additional className for the figcaption element */
-    captionClassName?: string;
-}
+type Source = {
+  media: string;
+  srcSet: string;
+  type?: string;
+};
 
+
+type FigureProps = Omit<TImage, 'src' > & {
+  caption?: ReactNode;
+  figureProps?: ComponentProps<'figure'>;
+  captionProps?: ComponentProps<'figcaption'>;
+  src: string;
+  sources?: Source[];
+};
 /**
- * Semantic Figure component that wraps the Image component with optional caption.
- * Uses HTML5 <figure> and <figcaption> elements for proper semantic markup.
- * 
- * @param caption - Caption text or custom React node to display with the image
- * @param figureClassName - Additional classes for the figure wrapper
- * @param captionClassName - Additional classes for the figcaption element
- * @param variant - Image variant passed to the Image component
- * @param src - Image source URL
- * @param alt - Alternative text for the image (required)
- * @param props - All other Image component props
- * 
+ * Semantic <Figure> component that wraps either an <Image> or a responsive <Picture>,
+ * with optional caption and full support for figure/caption element props.
+ *
  * @example
- * ```tsx
- * // Basic usage
- * <Figure 
- *   variant="card"
- *   src="/photo.jpg"
- *   alt="A beautiful landscape"
- *   caption="Sunset over the mountains"
+ * <Figure
+ *   caption="Flowchart of the useButton hook"
+ *   figureProps={{ className: 'figure--wide' }}
+ *   captionProps={{ className: 'text-muted' }}
+ *   src="/images/flowchart-horizontal.png"
+ *   sources={[
+ *     { media: '(max-width: 800px)', srcSet: '/images/flowchart-vertical.png' },
+ *   ]}
  * />
- * ```
  */
 export default function Figure({
-    caption,
-    figureClassName,
-    captionClassName,
-    ...imageProps
+  caption,
+  figureProps,
+  captionProps,
+  sources,
+  ...imageProps
 }: FigureProps) {
+  const hasCaption = caption && !(typeof caption === 'string' && caption.trim() === '');
 
-    if (!caption || (typeof caption === 'string' && caption.trim() === '')) {
-        return <Image {...imageProps} />
-    }
+  const ImageElement = sources?.length ? (
+    <Picture
+      sources={sources}
+      src={imageProps.src}
+      alt={imageProps.alt}
+      className={clsx('image', imageProps.className)}
+    />
+  ) : (
+    <Image {...imageProps} />
+  );
 
-    const captionElement =
-        <figcaption className={clsx('figure-caption text-sm', captionClassName)}>
-            {caption}
-        </figcaption>;
+  if (!hasCaption) return ImageElement;
 
-    return (
-        <figure className={clsx('figure', figureClassName)}>
-            <Image {...imageProps} />
-            {captionElement}
-        </figure>
-    );
+  return (
+    <figure {...figureProps} className={clsx('figure', figureProps?.className)}>
+      {ImageElement}
+      <figcaption {...captionProps} className={clsx('figure-caption text-sm', captionProps?.className)}>
+        {caption}
+      </figcaption>
+    </figure>
+  );
 }

@@ -7,11 +7,10 @@
 @import './header.css';
 @import './footer.css';
 @import './link.css';
-@import './image.css';
-@import './figure.css';
 @import './spinner.css';
 @import './examples/index.css';
 @import './heading.css';
 @import './tablist.css';
 @import './icon.css';
 @import './list.css';
+@import './image/index.css';
