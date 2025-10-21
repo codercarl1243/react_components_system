@@ -5,7 +5,7 @@ import type { ComponentProps, ReactNode } from 'react';
 type TextWithImageProps = {
     imagePosition?: 'left' | 'right';
     children: ReactNode;
-} & ComponentProps<typeof Image>;
+} & Omit<ComponentProps<typeof Image>, 'variant'>;
 
 export default function TextWithImage({
     imagePosition = 'right',
