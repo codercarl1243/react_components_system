@@ -11,7 +11,7 @@ type Source = {
 };
 
 
-type FigureProps = Omit<TImage, 'src' > & {
+type FigureProps = Omit<TImage, 'src'> & {
   caption?: ReactNode;
   figureProps?: ComponentProps<'figure'>;
   captionProps?: ComponentProps<'figcaption'>;
@@ -40,7 +40,12 @@ export default function Figure({
   sources,
   ...imageProps
 }: FigureProps) {
-  const hasCaption = caption && !(typeof caption === 'string' && caption.trim() === '');
+  
+  const hasCaption =
+    caption != null &&
+    caption !== false &&
+    !(typeof caption === 'string' && caption.trim() === '') &&
+    !(Array.isArray(caption) && caption.length === 0);
 
   const ImageElement = sources?.length ? (
     <Picture
