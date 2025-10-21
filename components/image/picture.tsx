@@ -2,8 +2,8 @@ import log from '@/lib/Logging';
 import clsx from 'clsx';
 
 type Source = {
-  media: string;
   srcSet: string;
+  media?: string;
   type?: string;
 };
 
