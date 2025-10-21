@@ -30,7 +30,7 @@ export default function Picture({
 }: PictureProps) {
 
   if (!sources || sources.length === 0) {
-    log("Picture component requires at least one source.", null, 'error');
+    log("Picture component requires at least one source.");
   }
 
   return (
