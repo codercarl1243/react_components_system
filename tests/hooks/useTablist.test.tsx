@@ -17,7 +17,7 @@ if (doMock && mockFn) {
     }
   })
 
-  doMock('../../../lib/keyboardHandlers', () => ({
+  doMock('@/lib/keyboardHandlers', () => ({
     handleKeyPress: (e: KeyPressEventType, map: KeyPressCallbackMap) =>
       handleKeyPressMock(e, map)
   }))

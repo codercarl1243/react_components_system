@@ -10,7 +10,7 @@ interface MockTabProps {
 }
 
 // Mock children components and hook for isolation and deterministic behavior
-jest.mock('../../../components/tablist/tab', () => {
+jest.mock('@/components/tablist/tab', () => {
   return {
     __esModule: true,
     default: ({ id, isSelected, onClick, children }: MockTabProps) => (
@@ -31,7 +31,7 @@ interface MockPanelProps {
     children: React.ReactNode;
 }
 
-jest.mock('../../../components/tablist/panel', () => {
+jest.mock('@/components/tablist/panel', () => {
   return {
     __esModule: true,
     default: ({ id, hidden, children }: MockPanelProps) => (
@@ -51,7 +51,7 @@ const mockSetActive = jest.fn()
 const mockHandleKeyDown = jest.fn()
 const makeRef = () => ({ current: null } as React.MutableRefObject<HTMLDivElement | null>)
 
-jest.mock('../../../components/tablist/useTablist', () => {
+jest.mock('@/components/tablist/useTablist', () => {
   return {
     __esModule: true,
     default: (defaultActiveId: string) => {
@@ -146,7 +146,7 @@ describe('TabList', () => {
     const sharedRef: React.MutableRefObject<HTMLDivElement | null> = { current: null }
     // TODO: look into replacing this with jest.isolateModules(() => {}). tests returning value of null if this is used currently.
     jest.resetModules()
-    jest.doMock('../../../components/tablist/useTablist', () => ({
+    jest.doMock('@/components/tablist/useTablist', () => ({
       __esModule: true,
       default: (defaultActiveId: string) => ({
         activeId: defaultActiveId,
@@ -155,11 +155,11 @@ describe('TabList', () => {
         handleKeyDown: mockHandleKeyDown
       })
     }))
-    const TabListReloaded = require('../../../components/tablist/index').default
+    const TabListReloaded = require('@/components/tablist/index').default
     render(<TabListReloaded tabs={sampleTabs} defaultActiveTabId="t1" />)
     expect(sharedRef.current).toHaveAttribute('role', 'tablist')
     expect(sharedRef.current).toHaveClass('tablist__header')
-    jest.dontMock('../../../components/tablist/useTablist')
+    jest.dontMock('@/components/tablist/useTablist')
     jest.resetModules()
   })
 
