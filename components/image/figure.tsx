@@ -5,7 +5,7 @@ import { clsx } from 'clsx';
 import { ComponentProps, type ReactNode } from 'react';
 
 type Source = {
-  media: string;
+  media?: string;
   srcSet: string;
   type?: string;
 };
