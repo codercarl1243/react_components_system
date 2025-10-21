@@ -1,3 +1,4 @@
+import log from '@/lib/Logging';
 import clsx from 'clsx';
 
 type Source = {
@@ -27,6 +28,11 @@ export default function Picture({
   className,
   ...rest
 }: PictureProps) {
+
+  if (!sources || sources.length === 0) {
+    log("Picture component requires at least one source.", null, 'error');
+  }
+
   return (
     <picture className={clsx('picture', className)} {...rest}>
       {sources.map(({ media, srcSet, type }, index) => (
