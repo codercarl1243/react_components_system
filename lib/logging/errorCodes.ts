@@ -124,7 +124,7 @@ const ERROR_MESSAGES: Record<AppErrorCode, string> = {
  * ```
  */
 export function getErrorMessage(code: AppErrorCode): string {
-  return ERROR_MESSAGES[code];
+  return ERROR_MESSAGES[code] ?? ERROR_MESSAGES[AppErrorCode.UNKNOWN_ERROR];
 }
 
 /**
