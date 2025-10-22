@@ -29,6 +29,7 @@
  */
 
 import { logError, logWarning } from '@/lib/logging/log';
+import type { TErrorLogOptions } from '@/lib/logging/log.type';
 import { createErrorResult, createSuccessfulResult, IErrorResult, IResult } from '@/lib/results';
 
 /**
@@ -60,7 +61,7 @@ import { createErrorResult, createSuccessfulResult, IErrorResult, IResult } from
 export function logAndReturnError<ErrorCode>(
     code: ErrorCode,
     message: string,
-    options?: { context?: string; data?: unknown }
+    options?: TErrorLogOptions
 ): IErrorResult<ErrorCode> {
     logError(message, undefined, options);
     return createErrorResult(code, message);
@@ -106,9 +107,9 @@ export async function tryCatchAsync<Result, ErrorCode>(
     fn: () => Promise<Result>,
     errorCode: ErrorCode,
     options?: {
-        context?: string;
+        context?: TErrorLogOptions['context'];
         errorMessage?: string;
-        trace?: boolean;
+        trace?: TErrorLogOptions['trace'];
     }
 ): Promise<IResult<Result, ErrorCode>> {
     try {
@@ -163,9 +164,9 @@ export function tryCatch<Result, ErrorCode>(
     fn: () => Result,
     errorCode: ErrorCode,
     options?: {
-        context?: string;
+        context?: TErrorLogOptions['context'];
         errorMessage?: string;
-        trace?: boolean;
+        trace?: TErrorLogOptions['trace'];
     }
 ): IResult<Result, ErrorCode> {
     try {
@@ -230,7 +231,7 @@ export function validate<T, ErrorCode>(
     predicate: (value: T) => boolean,
     errorCode: ErrorCode,
     errorMessage: string,
-    options?: { context?: string }
+    options?: { context?: TErrorLogOptions['context'] }
 ): IResult<T, ErrorCode> {
     if (!predicate(value)) {
         logWarning(errorMessage, options);

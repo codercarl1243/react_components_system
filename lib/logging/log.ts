@@ -27,43 +27,9 @@
  * ```
  */
 
-type TLogLevel = 'default' | 'warning' | 'error';
+import type { TErrorLogOptions, TLogOptions, TLogLevel, TErrorLogEntry, TWarningLogEntry, TDefaultLogEntry } from "@/lib/logging/log.type";
 
-type TLogOptions = {
-  context?: string;
-  data?: Record<string, unknown>;
-};
 
-type TErrorLogOptions = TLogOptions & {
-  trace?: boolean;
-};
-
-type TBaseLogEntry = {
-  level: TLogLevel;
-  message: string;
-  context?: string;
-  data?: Record<string, unknown>;
-  timestamp: string;
-};
-
-type TDefaultLogEntry = TBaseLogEntry & {
-  level: 'default';
-};
-
-type TWarningLogEntry = TBaseLogEntry & {
-  level: 'warning';
-};
-
-type TErrorLogEntry = TBaseLogEntry & {
-  level: 'error';
-  error: string;   // required for error logs
-  stack?: string;  // optional stack trace
-};
-
-/**
- * Union type of all possible log entry types.
- */
-export type TLogEntry = TDefaultLogEntry | TWarningLogEntry | TErrorLogEntry;
 
 /**
  * Logs an error message. Error parameter is required.

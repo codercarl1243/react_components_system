@@ -5,9 +5,11 @@ import {
   isError,
   isSuccess,
   pipe,
-  type IResult,
-  type IErrorResult,
-  type ISuccessfulResult,
+} from '@/lib/results';
+import type {
+  IResult,
+  IErrorResult,
+  ISuccessfulResult
 } from '@/lib/results';
 
 describe('results', () => {
