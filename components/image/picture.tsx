@@ -1,4 +1,4 @@
-import log from '@/lib/logging/log';
+import log, { logWarning } from '@/lib/logging/log';
 import clsx from 'clsx';
 
 type Source = {
@@ -30,7 +30,7 @@ export default function Picture({
 }: PictureProps) {
 
   if (!sources || sources.length === 0) {
-    log("Picture component requires at least one source.");
+    logWarning("Picture component requires at least one source.", {context: "PictureComponent"});
   }
 
   return (
