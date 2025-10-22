@@ -22,6 +22,8 @@
  */
 
 import { AppErrorCode, getErrorMessage } from "@/lib/logging/errorCodes";
+import { logAppError } from "@/lib/logging/logAppError";
+import { isNonEmptyString } from "@/lib/utils/string";
 
 /**
  * Represents the outcome of an operation that can either succeed or fail.
@@ -62,7 +64,7 @@ export type IError<ErrorCode> = {
  * 
  * @template ErrorCode - The type of error codes
  * @param code - The error code (typically from a predefined set)
- * @param message - Optional human-readable error message. Defaults to "An error occurred"
+ * @param message - Optional human-readable error message. Defaults to "DEFAULT_ERROR_MESSAGE"
  * @returns A typed error result
  * 
  * @example
@@ -71,21 +73,35 @@ export type IError<ErrorCode> = {
  * return createErrorResult<AuthError>('UNAUTHORIZED', 'Please log in');
  * ```
  */
-export function createErrorResult<ErrorCode>(
-    errorCode: ErrorCode,
+
+export function createErrorResult<ErrorCode extends string>(
+    errorCode: Exclude<ErrorCode, "" | null | undefined>,
     message?: string
 ): IErrorResult<ErrorCode> {
+    if (!errorCode) {
+        return {
+            error: {
+                code: AppErrorCode.INTERNAL_ERROR as unknown as ErrorCode,
+                message: "Error code cannot be empty or falsy",
+            },
+        };
+    }
+
     const defaultMessage =
         Object.values(AppErrorCode).includes(errorCode as AppErrorCode)
             ? getErrorMessage(errorCode as AppErrorCode)
-            : 'DEFAULT_ERROR_MESSAGE';
+            : "DEFAULT_ERROR_MESSAGE";
+
+    const finalMessage = isNonEmptyString(message) ? message : defaultMessage
+
     return {
         error: {
             code: errorCode,
-            message: message ?? defaultMessage
+            message: finalMessage
         },
     };
 }
+
 
 /**
  * Creates a successful result containing a value.
@@ -200,58 +216,140 @@ export function isSuccess<Result, ErrorCode>(
  * );
  * ```
  */
+
+
+type TPipeResult<ErrorCode> =
+    | IResult<unknown, ErrorCode>
+    | IErrorResult<AppErrorCode>;
+
 /* eslint-disable no-redeclare */
-export async function pipe<T, U, ErrorCode>(
+export async function pipeAsync<T, U, ErrorCode>(
     initialValue: T,
     fn1: (value: T) => Promise<IResult<U, ErrorCode>>
-): Promise<IResult<U, ErrorCode>>;
+): Promise<TPipeResult<ErrorCode>>;
 
-export async function pipe<T, U, V, ErrorCode>(
+export async function pipeAsync<T, U, V, ErrorCode>(
     initialValue: T,
     fn1: (value: T) => Promise<IResult<U, ErrorCode>>,
     fn2: (value: U) => Promise<IResult<V, ErrorCode>>
-): Promise<IResult<V, ErrorCode>>;
+): Promise<TPipeResult<ErrorCode>>;
 
-export async function pipe<T, U, V, W, ErrorCode>(
+export async function pipeAsync<T, U, V, W, ErrorCode>(
     initialValue: T,
     fn1: (value: T) => Promise<IResult<U, ErrorCode>>,
     fn2: (value: U) => Promise<IResult<V, ErrorCode>>,
     fn3: (value: V) => Promise<IResult<W, ErrorCode>>
-): Promise<IResult<W, ErrorCode>>;
+): Promise<TPipeResult<ErrorCode>>;
 
-export async function pipe<T, U, V, W, X, ErrorCode>(
+export async function pipeAsync<T, U, V, W, X, ErrorCode>(
     initialValue: T,
     fn1: (value: T) => Promise<IResult<U, ErrorCode>>,
     fn2: (value: U) => Promise<IResult<V, ErrorCode>>,
     fn3: (value: V) => Promise<IResult<W, ErrorCode>>,
     fn4: (value: W) => Promise<IResult<X, ErrorCode>>
-): Promise<IResult<X, ErrorCode>>;
+): Promise<TPipeResult<ErrorCode>>;
 
-export async function pipe<T, U, V, W, X, Y, ErrorCode>(
+export async function pipeAsync<T, U, V, W, X, Y, ErrorCode>(
     initialValue: T,
     fn1: (value: T) => Promise<IResult<U, ErrorCode>>,
     fn2: (value: U) => Promise<IResult<V, ErrorCode>>,
     fn3: (value: V) => Promise<IResult<W, ErrorCode>>,
     fn4: (value: W) => Promise<IResult<X, ErrorCode>>,
     fn5: (value: X) => Promise<IResult<Y, ErrorCode>>
-): Promise<IResult<Y, ErrorCode>>;
+): Promise<TPipeResult<ErrorCode>>;
 
-export async function pipe<T, ErrorCode>(
+
+export async function pipeAsync<T, ErrorCode>(
     initialValue: T,
     ...fns: Array<(value: unknown) => Promise<IResult<unknown, ErrorCode>>>
-): Promise<IResult<unknown, ErrorCode>>;
-
-export async function pipe<T, ErrorCode>(
-    initialValue: T,
-    ...fns: Array<(value: unknown) => Promise<IResult<unknown, ErrorCode>>>
-): Promise<IResult<unknown, ErrorCode>> {
-    let current: IResult<unknown, ErrorCode> = createSuccessfulResult(initialValue);
+): Promise<TPipeResult<ErrorCode>> {
+    let current: TPipeResult<ErrorCode> = createSuccessfulResult(initialValue);
 
     for (const fn of fns) {
         if (current.error) {
+            logAppError(current.error.code as AppErrorCode, current.error.message);
             return current;
         }
         current = await fn(current.result);
+
+        if (!current || (typeof current !== "object") || (!("error" in current) && !("result" in current))) {
+            current = createErrorResult(AppErrorCode.INTERNAL_ERROR, "Invalid function return value");
+        }
+    }
+
+    return current;
+}
+/* eslint-enable no-redeclare */
+
+
+/* eslint-disable no-redeclare */
+export function pipe<T, U, ErrorCode>(
+    initialValue: T,
+    fn1: (value: T) => IResult<U, ErrorCode>
+): TPipeResult<ErrorCode>;
+
+export function pipe<T, U, V, ErrorCode>(
+    initialValue: T,
+    fn1: (value: T) => IResult<U, ErrorCode>,
+    fn2: (value: U) => IResult<V, ErrorCode>
+): TPipeResult<ErrorCode>;
+
+export function pipe<T, U, V, W, ErrorCode>(
+    initialValue: T,
+    fn1: (value: T) => IResult<U, ErrorCode>,
+    fn2: (value: U) => IResult<V, ErrorCode>,
+    fn3: (value: V) => IResult<W, ErrorCode>
+): TPipeResult<ErrorCode>;
+
+export function pipe<T, U, V, W, X, ErrorCode>(
+    initialValue: T,
+    fn1: (value: T) => IResult<U, ErrorCode>,
+    fn2: (value: U) => IResult<V, ErrorCode>,
+    fn3: (value: V) => IResult<W, ErrorCode>,
+    fn4: (value: W) => IResult<X, ErrorCode>
+): TPipeResult<ErrorCode>;
+
+export function pipe<T, U, V, W, X, Y, ErrorCode>(
+    initialValue: T,
+    fn1: (value: T) => IResult<U, ErrorCode>,
+    fn2: (value: U) => IResult<V, ErrorCode>,
+    fn3: (value: V) => IResult<W, ErrorCode>,
+    fn4: (value: W) => IResult<X, ErrorCode>,
+    fn5: (value: X) => IResult<Y, ErrorCode>
+): TPipeResult<ErrorCode>;
+
+export function pipe<T, U, V, W, X, Y, Z, ErrorCode>(
+    initialValue: T,
+    fn1: (value: T) => IResult<U, ErrorCode>,
+    fn2: (value: U) => IResult<V, ErrorCode>,
+    fn3: (value: V) => IResult<W, ErrorCode>,
+    fn4: (value: W) => IResult<X, ErrorCode>,
+    fn5: (value: X) => IResult<Y, ErrorCode>,
+    fn6: (value: Y) => IResult<Z, ErrorCode>
+): TPipeResult<ErrorCode>;
+
+export function pipe<T, ErrorCode>(
+    initialValue: T,
+    ...fns: Array<(value: unknown) => IResult<unknown, ErrorCode>>
+): TPipeResult<ErrorCode>;
+
+export function pipe<T, ErrorCode>(
+    initialValue: T,
+    ...fns: Array<(value: unknown) => IResult<unknown, ErrorCode>>
+): TPipeResult<ErrorCode> {
+    let current: TPipeResult<ErrorCode> = createSuccessfulResult(initialValue);
+
+    for (const fn of fns) {
+        if (current.error) {
+            logAppError(current.error.code as AppErrorCode, current.error.message);
+            return current;
+        }
+
+        current = fn(current.result);
+
+        if (!current || typeof current !== "object" || (!("error" in current) && !("result" in current))) {
+            current = createErrorResult(AppErrorCode.INTERNAL_ERROR, "Invalid function return value");
+        }
     }
 
     return current;

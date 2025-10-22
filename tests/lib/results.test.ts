@@ -5,8 +5,18 @@ import {
   isError,
   isSuccess,
   pipe,
+  pipeAsync,
   type IResult
 } from '@/lib/results';
+import { logAppError } from '@/lib/logging/logAppError';
+
+
+// Mock the logger to verify logging behavior
+jest.mock('@/lib/logging/logAppError', () => ({
+  logAppError: jest.fn(),
+}));
+
+const mockLogAppError = logAppError as jest.MockedFunction<typeof logAppError>;
 
 describe('results', () => {
   describe('createErrorResult', () => {
@@ -21,21 +31,22 @@ describe('results', () => {
       expect(Object.keys(errorResult)).not.toContain('result');
     });
 
-    it('should use default message when not provided', () => {
+    it('should use default message when msg prop is falsey', () => {
       const result = createErrorResult('GENERIC_CODE');
 
       expect(result.error.code).toBe('GENERIC_CODE');
-      expect(result.error.message).toBe('An unknown error occurred');
+      expect(result.error.message).toBe('DEFAULT_ERROR_MESSAGE');
+
+      const result2 = createErrorResult('ERROR', '');
+      expect(result2.error.code).toBe('ERROR');
+      expect(result2.error.message).toBe('DEFAULT_ERROR_MESSAGE');
     });
 
-    it('should handle empty string as error code', () => {
+    it('should return app Error when error code is falsey', () => {
+      // @ts-expect-error Testing runtime fallback for invalid code
       const result = createErrorResult('', 'Empty error code');
-      expect(result.error.code).toBe('UNKNOWN_ERROR');
-    });
-
-    it('should handle empty string as message', () => {
-      const result = createErrorResult('ERROR', '');
-      expect(result.error.message).toBe('An unknown error occurred');
+      expect(result.error.code).toBe('INTERNAL_ERROR');
+      expect(result.error.message).toBe('Error code cannot be empty or falsy');
     });
   });
 
@@ -91,21 +102,19 @@ describe('results', () => {
     });
   });
 
-  describe('pipe', () => {
+  describe('pipeAsync (Async version)', () => {
     type TestError = 'ERROR_1' | 'ERROR_2' | 'ERROR_3';
 
-    it('should chain successful operations', async () => {
-      const step1 = jest
-        .fn()
-        .mockResolvedValue(createSuccessfulResult('step1-result'));
-      const step2 = jest
-        .fn()
-        .mockResolvedValue(createSuccessfulResult('step2-result'));
-      const step3 = jest
-        .fn()
-        .mockResolvedValue(createSuccessfulResult('step3-result'));
+    beforeEach(() => {
+      jest.clearAllMocks();
+    });
 
-      const result = await pipe('initial', step1, step2, step3);
+    it('should chain successful operations', async () => {
+      const step1 = jest.fn().mockResolvedValue(createSuccessfulResult('step1-result'));
+      const step2 = jest.fn().mockResolvedValue(createSuccessfulResult('step2-result'));
+      const step3 = jest.fn().mockResolvedValue(createSuccessfulResult('step3-result'));
+
+      const result = await pipeAsync('initial', step1, step2, step3);
 
       expect(step1).toHaveBeenCalledWith('initial');
       expect(step2).toHaveBeenCalledWith('step1-result');
@@ -115,49 +124,190 @@ describe('results', () => {
     });
 
     it('should stop at first error', async () => {
-      const step1 = jest
-        .fn()
-        .mockResolvedValue(createSuccessfulResult('step1-result'));
-      const step2 = jest
-        .fn()
-        .mockResolvedValue(createErrorResult<TestError>('ERROR_2', 'Failed at step 2'));
-      const step3 = jest.fn(); // Should not be called
+      const step1 = jest.fn().mockResolvedValue(createSuccessfulResult('step1-result'));
+      const step2 = jest.fn().mockResolvedValue(
+        createErrorResult<TestError>('ERROR_2', 'Failed at step 2')
+      );
+      const step3 = jest.fn(); // should not be called
 
-      const result = await pipe<string, TestError>('initial', step1, step2, step3);
+      const result = await pipeAsync('initial', step1, step2, step3);
 
       expect(step1).toHaveBeenCalledWith('initial');
       expect(step2).toHaveBeenCalledWith('step1-result');
       expect(step3).not.toHaveBeenCalled();
+
       expect(isError(result)).toBe(true);
       expect(result.error?.code).toBe('ERROR_2');
     });
 
     it('should handle initial error', async () => {
-      const step1 = jest
-        .fn()
-        .mockResolvedValue(createErrorResult<TestError>('ERROR_1', 'Failed immediately'));
+      const step1 = jest.fn().mockResolvedValue(
+        createErrorResult<TestError>('ERROR_1', 'Failed immediately')
+      );
       const step2 = jest.fn();
       const step3 = jest.fn();
 
-      const result = await pipe<string, TestError>('initial', step1, step2, step3);
+      const result = await pipeAsync('initial', step1, step2, step3);
 
       expect(step1).toHaveBeenCalledWith('initial');
       expect(step2).not.toHaveBeenCalled();
       expect(step3).not.toHaveBeenCalled();
+
       expect(isError(result)).toBe(true);
       expect(result.error?.code).toBe('ERROR_1');
     });
 
-    it('should handle async errors', async () => {
-      const failingStep = async (): Promise<IResult<string, string>> => {
-        await Promise.resolve(); // Now it actually uses async
+    it('should handle async thrown errors', async () => {
+      const failingStep = async () => {
+        await Promise.resolve(); // make it async
         throw new Error('Unexpected error');
       };
 
-      // pipe doesn't catch thrown errors - they should propagate
-      await expect(pipe('initial', failingStep)).rejects.toThrow(
-        'Unexpected error'
-      );
+      // pipeAsync doesn't catch thrown errors — they should propagate
+      await expect(pipeAsync('initial', failingStep)).rejects.toThrow('Unexpected error');
+    });
+
+    it('should handle malformed return values gracefully', async () => {
+      const step1 = jest.fn().mockResolvedValue(createSuccessfulResult('ok'));
+      const step2 = jest.fn().mockResolvedValue('not-a-result' as any);
+
+      const result = await pipeAsync('start', step1, step2);
+      expect(isError(result)).toBe(true);
+      if (isError(result)) {
+        expect(result.error.code).toBe("INTERNAL_ERROR");
+        expect(result.error.message).toBe('Invalid function return value');
+      }
+    });
+
+    it('should log an app error when a step fails', async () => {
+      const step1 = jest.fn().mockResolvedValue(createErrorResult('NOT_FOUND', 'Item not found'));
+      const step2 = jest.fn(); // should not run
+
+      const result = await pipeAsync('initial', step1, step2);
+
+      expect(mockLogAppError).toHaveBeenCalledWith('NOT_FOUND', 'Item not found');
+      expect(isError(result)).toBe(true);
+      if (isError(result)) {
+        expect(result.error.code).toBe('NOT_FOUND');
+        expect(step2).not.toHaveBeenCalled();
+      }
+    });
+
+    it('should stop when encountering an invalid step result', async () => {
+      const step1 = jest.fn().mockResolvedValue(createSuccessfulResult('ok'));
+      const step2 = jest.fn().mockResolvedValue({} as any);
+      const step3 = jest.fn(); // should not run
+
+      const result = await pipeAsync('initial', step1, step2, step3);
+
+      expect(isError(result)).toBe(true);
+      if (isError(result)) {
+        expect(result.error.code).toBe("INTERNAL_ERROR");
+        expect(result.error.message).toBe('Invalid function return value');
+      }
+      expect(step3).not.toHaveBeenCalled();
     });
   });
+  describe('pipe (sync version)', () => {
+  type TestError = 'ERROR_1' | 'ERROR_2' | 'ERROR_3';
+
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
+
+  it('should chain successful operations synchronously', () => {
+    const step1 = jest.fn().mockReturnValue(createSuccessfulResult('step1-result'));
+    const step2 = jest.fn().mockReturnValue(createSuccessfulResult('step2-result'));
+    const step3 = jest.fn().mockReturnValue(createSuccessfulResult('step3-result'));
+
+    const result = pipe('initial', step1, step2, step3);
+
+    expect(step1).toHaveBeenCalledWith('initial');
+    expect(step2).toHaveBeenCalledWith('step1-result');
+    expect(step3).toHaveBeenCalledWith('step2-result');
+
+    expect(isSuccess(result)).toBe(true);
+    expect(result.result).toBe('step3-result');
+  });
+
+  it('should stop at first error', () => {
+    const step1 = jest.fn().mockReturnValue(createSuccessfulResult('ok'));
+    const step2 = jest.fn().mockReturnValue(createErrorResult<TestError>('ERROR_2', 'sync fail'));
+    const step3 = jest.fn(); // should not be called
+
+    const result = pipe('start', step1, step2, step3);
+
+    expect(step1).toHaveBeenCalledWith('start');
+    expect(step2).toHaveBeenCalledWith('ok');
+    expect(step3).not.toHaveBeenCalled();
+
+    expect(isError(result)).toBe(true);
+    if (isError(result)) {
+      expect(result.error.code).toBe('ERROR_2');
+      expect(result.error.message).toBe('sync fail');
+    }
+  });
+
+  it('should handle initial error immediately', () => {
+    const step1 = jest.fn().mockReturnValue(createErrorResult<TestError>('ERROR_1', 'Immediate fail'));
+    const step2 = jest.fn();
+    const step3 = jest.fn();
+
+    const result = pipe('start', step1, step2, step3);
+
+    expect(step1).toHaveBeenCalledWith('start');
+    expect(step2).not.toHaveBeenCalled();
+    expect(step3).not.toHaveBeenCalled();
+
+    expect(isError(result)).toBe(true);
+    if (isError(result)) {
+      expect(result.error.code).toBe('ERROR_1');
+      expect(result.error.message).toBe('Immediate fail');
+    }
+  });
+
+  it('should handle malformed return values gracefully', () => {
+    const step1 = jest.fn().mockReturnValue(createSuccessfulResult('ok'));
+    const step2 = jest.fn().mockReturnValue('not-a-result' as any);
+
+    const result = pipe('start', step1, step2);
+
+    expect(isError(result)).toBe(true);
+    if (isError(result)) {
+      expect(result.error.code).toBe('INTERNAL_ERROR');
+      expect(result.error.message).toBe('Invalid function return value');
+    }
+  });
+
+  it('should log an app error when a step fails', () => {
+    const step1 = jest.fn().mockReturnValue(
+      createErrorResult('NOT_FOUND', 'Item not found')
+    );
+    const step2 = jest.fn(); // should not run
+
+    const result = pipe('initial', step1, step2);
+
+    expect(mockLogAppError).toHaveBeenCalledWith('NOT_FOUND', 'Item not found');
+    expect(isError(result)).toBe(true);
+    if (isError(result)) {
+      expect(result.error.code).toBe('NOT_FOUND');
+      expect(step2).not.toHaveBeenCalled();
+    }
+  });
+
+  it('should stop when encountering invalid return shape', () => {
+    const step1 = jest.fn().mockReturnValue(createSuccessfulResult('ok'));
+    const step2 = jest.fn().mockReturnValue({} as any);
+    const step3 = jest.fn(); // should not run
+
+    const result = pipe('initial', step1, step2, step3);
+
+    expect(isError(result)).toBe(true);
+    if (isError(result)) {
+      expect(result.error.code).toBe('INTERNAL_ERROR');
+      expect(result.error.message).toBe('Invalid function return value');
+    }
+    expect(step3).not.toHaveBeenCalled();
+  });
+});
 });
