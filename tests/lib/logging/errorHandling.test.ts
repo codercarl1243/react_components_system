@@ -161,7 +161,7 @@ describe('errorHandling', () => {
       const invalidJson = '{invalid}';
 
       const result = tryCatch(
-        () => JSON.parse(invalidJson),
+        () => JSON.parse(invalidJson) as unknown,
         'INVALID_JSON',
         { context: 'JsonParser', errorMessage: 'Invalid JSON string' }
       );
@@ -323,9 +323,10 @@ describe('errorHandling', () => {
       }
 
       // Then fetch with validated ID
+      type TUser = { id: string; name: string };
       const fetchUser = jest.fn().mockResolvedValue({ id: '123', name: 'John' });
-      const fetchResult = await tryCatchAsync<{ id: string; name: string }, AppError>(
-        () => fetchUser(validationResult.result),
+      const fetchResult = await tryCatchAsync<TUser, AppError>(
+        () => fetchUser(validationResult.result) as Promise<TUser>,
         'NOT_FOUND',
         { context: 'UserService' }
       );

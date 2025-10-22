@@ -5,8 +5,8 @@ import {
   isError,
   isSuccess,
   pipe,
+  type IResult
 } from '@/lib/results';
-import type { IResult } from '@/lib/results';
 
 describe('results', () => {
   describe('createErrorResult', () => {
@@ -150,6 +150,7 @@ describe('results', () => {
 
     it('should handle async errors', async () => {
       const failingStep = async (): Promise<IResult<string, string>> => {
+        await Promise.resolve(); // Now it actually uses async
         throw new Error('Unexpected error');
       };
 

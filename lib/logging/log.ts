@@ -27,84 +27,75 @@
  * ```
  */
 
-import type { TErrorLogOptions, TLogOptions, TLogLevel, TErrorLogEntry, TWarningLogEntry, TDefaultLogEntry } from "@/lib/logging/log.type";
+import type {
+  TErrorLogOptions,
+  TLogOptions,
+  TLogLevel,
+  TErrorLogEntry,
+  TWarningLogEntry,
+  TDefaultLogEntry,
+} from "@/lib/logging/log.type";
 
+/* eslint-disable no-redeclare */
 
-
-/**
- * Logs an error message. Error parameter is required.
- */
-export default function log(
+// Overload signatures
+export function log(
   message: string,
-  level: 'error',
+  level: "error",
   error: unknown,
   options?: TErrorLogOptions
 ): void;
-
-/**
- * Logs a warning message.
- */
-export default function log(
+export function log(
   message: string,
-  level: 'warning',
+  level: "warning",
   options?: TLogOptions
 ): void;
-
-/**
- * Logs a default/info message.
- */
-export default function log(
+export function log(
   message: string,
-  level?: 'default',
+  level?: "default",
   options?: TLogOptions
 ): void;
-
-/**
- * Implementation of the log function.
- */
-export default function log(
+export function log(
   message: string,
   levelOrOptions?: TLogLevel,
-  errorOrOptions?: unknown | TLogOptions,
+  errorOrOptions?: unknown,
   finalOptions?: TErrorLogOptions
 ): void {
-  // Parse arguments based on overload
-  const level: TLogLevel = levelOrOptions || 'default';
+  const level: TLogLevel = levelOrOptions || "default";
   let error: unknown;
   let options: TErrorLogOptions = {};
 
-  if (level === 'error') {
-    // log(message, 'error', error, options?)
+  if (level === "error") {
     error = errorOrOptions;
     options = finalOptions || {};
   } else {
-    // log(message, 'warning'|'default', options?)
     options = (errorOrOptions as TLogOptions) || {};
   }
 
   const { context, data, trace } = options;
   const timestamp = new Date().toISOString();
 
-  // Handle error-level logs
-  if (level === 'error') {
-    let errorMsg = '';
+  if (level === "error") {
+    let errorMsg = "";
     let stack: string | undefined;
 
-    if (error instanceof Error) {
-      errorMsg = error.message;
-      stack = trace ? error.stack : undefined;
-    } else if (typeof error === 'string') {
-      errorMsg = error;
-    } else if (error !== undefined) {
-      try {
-        errorMsg = JSON.stringify(error);
-      } catch {
-        errorMsg = String(error);
-      }
-    }
+if (error instanceof Error) {
+  errorMsg = error.message;
+  stack = trace ? error.stack : undefined;
+} else if (typeof error === "string") {
+  errorMsg = error;
+} else if (typeof error === "object" && error !== null) {
+  try {
+    errorMsg = JSON.stringify(error);
+  } catch {
+    errorMsg = "[Unserializable Object]";
+  }
+} else if (error !== undefined) {
+  errorMsg = String(error);
+}
 
     const entry: TErrorLogEntry = {
-      level: 'error',
+      level: "error",
       message,
       error: errorMsg,
       stack,
@@ -112,39 +103,38 @@ export default function log(
       data,
       timestamp,
     };
-
+    
     // eslint-disable-next-line no-console
     console.error(`[ERROR]`, entry);
     return;
   }
 
-  // Handle warning-level logs
-  if (level === 'warning') {
+  if (level === "warning") {
     const entry: TWarningLogEntry = {
-      level: 'warning',
+      level: "warning",
       message,
       context,
       data,
       timestamp,
     };
-
     // eslint-disable-next-line no-console
     console.warn(`[WARN]`, entry);
     return;
   }
 
-  // Handle default/info-level logs
   const entry: TDefaultLogEntry = {
-    level: 'default',
+    level: "default",
     message,
     context,
     data,
     timestamp,
   };
-
   // eslint-disable-next-line no-console
   console.log(`[LOG]`, entry);
 }
+
+export default log;
+/* eslint-enable no-redeclare */
 
 /**
  * Convenience function for logging informational messages.

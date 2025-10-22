@@ -1,4 +1,11 @@
 import log, { logInfo, logWarning, logError } from '@/lib/logging/log';
+import { TDefaultLogEntry, TErrorLogEntry, TWarningLogEntry } from '@/lib/logging/log.type';
+
+
+function getLogEntry<T>(mockFn: jest.SpyInstance, callIndex = 0): T {
+  const calls = mockFn.mock.calls as unknown[][];
+  return calls[callIndex]?.[1] as T;
+}
 
 describe('Logging', () => {
   // Store original console methods
@@ -87,31 +94,20 @@ describe('Logging', () => {
 
     it('should include a valid ISO timestamp in the log entry', () => {
       logInfo('Test message');
-
-      expect(mockConsoleLog).toHaveBeenCalledTimes(1);
-      const logEntry = mockConsoleLog.mock.calls[0][1];
-      expect(logEntry).toHaveProperty('timestamp');
-      expect(new Date(logEntry.timestamp).toString()).not.toBe('Invalid Date');
-      const infoTimeStamp = mockConsoleLog.mock.calls[0][1].timestamp;
-      expect(new Date(infoTimeStamp).toISOString()).toBe(infoTimeStamp);
+      const logEntry = getLogEntry<TDefaultLogEntry>(mockConsoleLog);
+      expect(logEntry.timestamp).toBeDefined();
+      expect(new Date(logEntry.timestamp).toISOString()).toBe(logEntry.timestamp);
 
       logWarning('a warning test message');
-      expect(mockConsoleWarn).toHaveBeenCalledTimes(1);
-      const warnEntry = mockConsoleWarn.mock.calls[0][1];
-      expect(warnEntry).toHaveProperty('timestamp');
-      expect(new Date(warnEntry.timestamp).toString()).not.toBe('Invalid Date');
-      const warningTimeStamp = mockConsoleLog.mock.calls[0][1].timestamp;
-      expect(new Date(warningTimeStamp).toISOString()).toBe(warningTimeStamp);
+      const warnEntry = getLogEntry<TWarningLogEntry>(mockConsoleWarn);
+      expect(warnEntry.timestamp).toBeDefined();
+      expect(new Date(warnEntry.timestamp).toISOString()).toBe(warnEntry.timestamp);
 
       logError('Error message', new Error('Test error'));
-      expect(mockConsoleError).toHaveBeenCalledTimes(1);
-      const errorEntry = mockConsoleError.mock.calls[0][1];
-      expect(errorEntry).toHaveProperty('timestamp');
-      expect(new Date(errorEntry.timestamp).toString()).not.toBe('Invalid Date');
-      const errorTimeStamp = mockConsoleLog.mock.calls[0][1].timestamp;
-      expect(new Date(errorTimeStamp).toISOString()).toBe(errorTimeStamp);
+      const errorEntry = getLogEntry<TErrorLogEntry>(mockConsoleError);
+      expect(errorEntry.timestamp).toBeDefined();
+      expect(new Date(errorEntry.timestamp).toISOString()).toBe(errorEntry.timestamp);
     });
-
     it('should log with context', () => {
       logInfo('Info message with context', { context: 'InfoContext' });
       expect(mockConsoleLog).toHaveBeenCalledWith('[LOG]', expect.objectContaining({ context: 'InfoContext' }));
@@ -129,22 +125,19 @@ describe('Logging', () => {
       const error = new Error('Connection failed');
       logError('Database error', error, { trace: true });
 
-      expect(mockConsoleError).toHaveBeenCalledWith(
-        '[ERROR]',
-        expect.objectContaining({
-          error: 'Connection failed',
-          stack: expect.stringContaining('Error: Connection failed'),
-        })
-      );
+      const errorEntry = getLogEntry<TErrorLogEntry>(mockConsoleError);
+      expect(errorEntry.error).toBe('Connection failed');
+      expect(errorEntry.stack).toBeDefined();
+      expect(errorEntry.stack).toContain('Error: Connection failed');
     });
 
     it('should handle Error instance without stack trace when trace is false', () => {
       const error = new Error('Connection failed');
       logError('Database error', error, { trace: false });
 
-      const call = mockConsoleError.mock.calls[0][1];
-      expect(call.error).toBe('Connection failed');
-      expect(call.stack).toBeUndefined();
+      const errorEntry = getLogEntry<TErrorLogEntry>(mockConsoleError);
+      expect(errorEntry.error).toBe('Connection failed');
+      expect(errorEntry.stack).toBeUndefined();
     });
 
     it('should handle string error', () => {
@@ -171,13 +164,14 @@ describe('Logging', () => {
     });
 
     it('should handle non-serializable error with circular reference', () => {
-      const circular: any = { name: 'test' };
+      const circular: Record<string, unknown> = { name: 'test' };
       circular.self = circular;
 
       logError('Circular error', circular);
 
-      const call = mockConsoleError.mock.calls[0][1];
-      expect(call.error).toBe('[object Object]');
+      const errorEntry = getLogEntry<TErrorLogEntry>(mockConsoleError);
+
+      expect(errorEntry.error).toBe("[Unserializable Object]");
     });
 
     it('should handle undefined error', () => {
