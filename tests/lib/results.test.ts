@@ -6,11 +6,7 @@ import {
   isSuccess,
   pipe,
 } from '@/lib/results';
-import type {
-  IResult,
-  IErrorResult,
-  ISuccessfulResult
-} from '@/lib/results';
+import type { IResult } from '@/lib/results';
 
 describe('results', () => {
   describe('createErrorResult', () => {
