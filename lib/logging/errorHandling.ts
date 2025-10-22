@@ -28,7 +28,7 @@
  * ```
  */
 
-import log from '@/lib/logging/log';
+import { logError, logWarning } from '@/lib/logging/log';
 import { createErrorResult, createSuccessfulResult, IErrorResult, IResult } from '@/lib/results';
 
 /**
@@ -62,7 +62,7 @@ export function logAndReturnError<ErrorCode>(
     message: string,
     options?: { context?: string; data?: unknown }
 ): IErrorResult<ErrorCode> {
-    log(message, undefined, 'error', options);
+    logError(message, undefined, options);
     return createErrorResult(code, message);
 }
 
@@ -116,7 +116,7 @@ export async function tryCatchAsync<Result, ErrorCode>(
         return createSuccessfulResult(result);
     } catch (error) {
         const message = options?.errorMessage ?? 'Operation failed';
-        log(message, error, 'error', {
+        logError(message, error, {
             context: options?.context,
             trace: options?.trace,
         });
@@ -173,7 +173,7 @@ export function tryCatch<Result, ErrorCode>(
         return createSuccessfulResult(result);
     } catch (error) {
         const message = options?.errorMessage ?? 'Operation failed';
-        log(message, error, 'error', {
+        logError(message, error, {
             context: options?.context,
             trace: options?.trace,
         });
@@ -233,7 +233,7 @@ export function validate<T, ErrorCode>(
     options?: { context?: string }
 ): IResult<T, ErrorCode> {
     if (!predicate(value)) {
-        log(errorMessage, undefined, 'warning', options);
+        logWarning(errorMessage, options);
         return createErrorResult(errorCode, errorMessage);
     }
     return createSuccessfulResult(value);
