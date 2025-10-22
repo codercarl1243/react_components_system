@@ -1,4 +1,4 @@
-import log from '@/lib/Logging';
+import log from '@/lib/logging/log';
 import clsx from 'clsx';
 
 type Source = {

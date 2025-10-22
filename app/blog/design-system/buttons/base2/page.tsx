@@ -263,7 +263,7 @@ export type BaseButtonProps = {
                     </List>
                     <p>Here's the complete implementation:</p>
                     <Code codeString={`import type { ButtonClickHandler, MouseEventType } from '@/components/button/button.type';
-import log from '@/lib/Logging';
+import log from '@/lib/logging/Log';
 
 export default function useButton() {
     const handleClick = (userHandler?: ButtonClickHandler) =>
@@ -813,7 +813,7 @@ export default function Button({
                                 panelContent: (
                                     <Code codeString={`import type { ButtonClickHandler, MouseEventType } from '@/components/button/button.type';
 import isThenable from '@/lib/isThenable';
-import log from '@/lib/Logging';
+import log from '@/lib/logging/Log';
 
 export default function useButton() {
   const handleClick = (userHandler?: ButtonClickHandler) =>
@@ -1224,7 +1224,7 @@ describe('Button', () => {
                                     <Code codeString={`import useButton from '@/components/button/useButton'
 import { renderHook } from '@testing-library/react'
 import { MouseEvent as ReactMouseEvent } from 'react'
-import log from '@/lib/Logging';
+import log from '@/lib/logging/Log';
 import withNodeEnv from '@/tests/helpers/withNodeEnv';
 
 jest.mock('../../lib/Logging.ts');
