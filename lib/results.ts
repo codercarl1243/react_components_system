@@ -72,12 +72,12 @@ export type IError<ErrorCode> = {
  * ```
  */
 export function createErrorResult<ErrorCode>(
-    errorCode: ErrorCode, 
+    errorCode: ErrorCode,
     message?: string
 ): IErrorResult<ErrorCode> {
     return {
         error: {
-            code : errorCode,
+            code: errorCode,
             message: message ?? getErrorMessage(AppErrorCode.UNKNOWN_ERROR),
         },
     };
@@ -194,12 +194,49 @@ export function isSuccess<Result, ErrorCode>(
  *   validateSettings,                  // Settings → Result<Settings>
  *   updateSettings                     // validated Settings → Result<Settings>
  * );
- * 
- * if (isError(result)) {
- *   // Handle first error in the chain
- * }
  * ```
  */
+/* eslint-disable no-redeclare */
+export async function pipe<T, U, ErrorCode>(
+    initialValue: T,
+    fn1: (value: T) => Promise<IResult<U, ErrorCode>>
+): Promise<IResult<U, ErrorCode>>;
+
+export async function pipe<T, U, V, ErrorCode>(
+    initialValue: T,
+    fn1: (value: T) => Promise<IResult<U, ErrorCode>>,
+    fn2: (value: U) => Promise<IResult<V, ErrorCode>>
+): Promise<IResult<V, ErrorCode>>;
+
+export async function pipe<T, U, V, W, ErrorCode>(
+    initialValue: T,
+    fn1: (value: T) => Promise<IResult<U, ErrorCode>>,
+    fn2: (value: U) => Promise<IResult<V, ErrorCode>>,
+    fn3: (value: V) => Promise<IResult<W, ErrorCode>>
+): Promise<IResult<W, ErrorCode>>;
+
+export async function pipe<T, U, V, W, X, ErrorCode>(
+    initialValue: T,
+    fn1: (value: T) => Promise<IResult<U, ErrorCode>>,
+    fn2: (value: U) => Promise<IResult<V, ErrorCode>>,
+    fn3: (value: V) => Promise<IResult<W, ErrorCode>>,
+    fn4: (value: W) => Promise<IResult<X, ErrorCode>>
+): Promise<IResult<X, ErrorCode>>;
+
+export async function pipe<T, U, V, W, X, Y, ErrorCode>(
+    initialValue: T,
+    fn1: (value: T) => Promise<IResult<U, ErrorCode>>,
+    fn2: (value: U) => Promise<IResult<V, ErrorCode>>,
+    fn3: (value: V) => Promise<IResult<W, ErrorCode>>,
+    fn4: (value: W) => Promise<IResult<X, ErrorCode>>,
+    fn5: (value: X) => Promise<IResult<Y, ErrorCode>>
+): Promise<IResult<Y, ErrorCode>>;
+
+export async function pipe<T, ErrorCode>(
+    initialValue: T,
+    ...fns: Array<(value: any) => Promise<IResult<any, ErrorCode>>>
+): Promise<IResult<any, ErrorCode>>;
+
 export async function pipe<T, ErrorCode>(
     initialValue: T,
     ...fns: Array<(value: any) => Promise<IResult<any, ErrorCode>>>
@@ -215,3 +252,4 @@ export async function pipe<T, ErrorCode>(
 
     return current;
 }
+/* eslint-enable no-redeclare */
