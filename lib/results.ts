@@ -77,8 +77,8 @@ export function createErrorResult<ErrorCode>(
 ): IErrorResult<ErrorCode> {
     return {
         error: {
-            code : errorCode || AppErrorCode.UNKNOWN_ERROR as unknown as ErrorCode,
-            message: message || getErrorMessage(AppErrorCode.UNKNOWN_ERROR),
+            code : errorCode,
+            message: message ?? getErrorMessage(AppErrorCode.UNKNOWN_ERROR),
         },
     };
 }
