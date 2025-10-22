@@ -238,14 +238,14 @@ export async function pipe<T, U, V, W, X, Y, ErrorCode>(
 
 export async function pipe<T, ErrorCode>(
     initialValue: T,
-    ...fns: Array<(value: any) => Promise<IResult<any, ErrorCode>>>
-): Promise<IResult<any, ErrorCode>>;
+    ...fns: Array<(value: unknown) => Promise<IResult<unknown, ErrorCode>>>
+): Promise<IResult<unknown, ErrorCode>>;
 
 export async function pipe<T, ErrorCode>(
     initialValue: T,
-    ...fns: Array<(value: any) => Promise<IResult<any, ErrorCode>>>
-): Promise<IResult<any, ErrorCode>> {
-    let current: IResult<any, ErrorCode> = createSuccessfulResult(initialValue);
+    ...fns: Array<(value: unknown) => Promise<IResult<unknown, ErrorCode>>>
+): Promise<IResult<unknown, ErrorCode>> {
+    let current: IResult<unknown, ErrorCode> = createSuccessfulResult(initialValue);
 
     for (const fn of fns) {
         if (current.error) {
