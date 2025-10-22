@@ -10,16 +10,16 @@
  * log("User logged in successfully");
  * 
  * // Warning with context
- * log("Missing optional field in request", undefined, "warning", { 
+ * log("Missing optional field in request", "warning", { 
  *   context: "SignupForm",
  *   data: { field: "phoneNumber" }
  * });
  * 
- * // Error with stack trace
+ * // Error with stack trace (error parameter is required)
  * try {
  *   await db.connect();
  * } catch (err) {
- *   log("Database connection failed", err, "error", { 
+ *   log("Database connection failed", "error", err, { 
  *     context: "DBService",
  *     trace: true
  *   });
@@ -29,11 +29,20 @@
 
 type TLogLevel = 'default' | 'warning' | 'error';
 
+type TLogOptions = {
+  context?: string;
+  data?: Record<string, unknown>;
+};
+
+type TErrorLogOptions = TLogOptions & {
+  trace?: boolean;
+};
+
 type TBaseLogEntry = {
   level: TLogLevel;
   message: string;
   context?: string;
-  data?: unknown;
+  data?: Record<string, unknown>;
   timestamp: string;
 };
 
@@ -57,59 +66,56 @@ type TErrorLogEntry = TBaseLogEntry & {
 export type TLogEntry = TDefaultLogEntry | TWarningLogEntry | TErrorLogEntry;
 
 /**
- * Logs a message with structured output to the console.
- * 
- * Provides three severity levels:
- * - `default`: General information and application flow
- * - `warning`: Non-critical issues that should be reviewed
- * - `error`: Critical failures that require attention
- * 
- * @template L - The log level type (inferred from the level parameter)
- * 
- * @param message - Human-readable description of the event or issue
- * @param error - Error object, string, or any value to log. Required when level is 'error'
- * @param level - The severity level. Defaults to 'default'
- * @param options - Additional logging options
- * @param options.context - Where the log occurred (e.g., "AuthService", "UserRepository")
- * @param options.data - Additional structured data for debugging
- * @param options.trace - Include stack trace (only for Error objects)
- * 
- * @example
- * ```ts
- * // Info logging
- * log("User profile updated", undefined, "default", {
- *   context: "ProfileService",
- *   data: { userId: "123" }
- * });
- * 
- * // Warning logging
- * log("Rate limit approaching", undefined, "warning", {
- *   context: "ApiMiddleware",
- *   data: { requests: 95, limit: 100 }
- * });
- * 
- * // Error logging with automatic error parsing
- * try {
- *   await riskyOperation();
- * } catch (err) {
- *   log("Operation failed", err, "error", {
- *     context: "PaymentService",
- *     trace: true,
- *     data: { orderId: "ord_123" }
- *   });
- * }
- * ```
+ * Logs an error message. Error parameter is required.
  */
-export default function log<L extends TLogLevel = 'default'>(
+export default function log(
   message: string,
-  error?: L extends 'error' ? unknown : never,
-  level?: L,
-  options: {
-    context?: string;
-    data?: unknown;
-    trace?: boolean;
-  } = {}
+  level: 'error',
+  error: unknown,
+  options?: TErrorLogOptions
+): void;
+
+/**
+ * Logs a warning message.
+ */
+export default function log(
+  message: string,
+  level: 'warning',
+  options?: TLogOptions
+): void;
+
+/**
+ * Logs a default/info message.
+ */
+export default function log(
+  message: string,
+  level?: 'default',
+  options?: TLogOptions
+): void;
+
+/**
+ * Implementation of the log function.
+ */
+export default function log(
+  message: string,
+  levelOrOptions?: TLogLevel,
+  errorOrOptions?: unknown | TLogOptions,
+  finalOptions?: TErrorLogOptions
 ): void {
+  // Parse arguments based on overload
+  const level: TLogLevel = levelOrOptions || 'default';
+  let error: unknown;
+  let options: TErrorLogOptions = {};
+
+  if (level === 'error') {
+    // log(message, 'error', error, options?)
+    error = errorOrOptions;
+    options = finalOptions || {};
+  } else {
+    // log(message, 'warning'|'default', options?)
+    options = (errorOrOptions as TLogOptions) || {};
+  }
+
   const { context, data, trace } = options;
   const timestamp = new Date().toISOString();
 
@@ -191,9 +197,9 @@ export default function log<L extends TLogLevel = 'default'>(
  */
 export function logInfo(
   message: string,
-  options?: { context?: string; data?: unknown }
+  options?: TLogOptions
 ): void {
-  log(message, undefined, 'default', options);
+  log(message, 'default', options);
 }
 
 /**
@@ -213,9 +219,9 @@ export function logInfo(
  */
 export function logWarning(
   message: string,
-  options?: { context?: string; data?: unknown }
+  options?: TLogOptions
 ): void {
-  log(message, undefined, 'warning', options);
+  log(message, 'warning', options);
 }
 
 /**
@@ -242,7 +248,7 @@ export function logWarning(
 export function logError(
   message: string,
   error: unknown,
-  options?: { context?: string; data?: unknown; trace?: boolean }
+  options?: TErrorLogOptions
 ): void {
-  log(message, error, 'error', options);
+  log(message, 'error', error, options);
 }
