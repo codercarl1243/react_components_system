@@ -175,6 +175,9 @@ export function isSuccess<Result, ErrorCode>(
  * Executes operations sequentially, passing the result of each to the next.
  * Stops and returns the first error encountered.
  * 
+ * Note: Thrown errors (exceptions) are NOT caught and will propagate as
+ * promise rejections. Operations should return error Results instead of throwing.
+ * 
  * @template T - The type of the initial value
  * @template ErrorCode - The type of error codes (must be consistent across all operations)
  * @param initialValue - The starting value to pipe through the operations
