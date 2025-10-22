@@ -1,4 +1,4 @@
-import log, { logWarning } from '@/lib/logging/log';
+import { logWarning } from '@/lib/logging/log';
 import clsx from 'clsx';
 
 type Source = {
