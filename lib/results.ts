@@ -75,10 +75,14 @@ export function createErrorResult<ErrorCode>(
     errorCode: ErrorCode,
     message?: string
 ): IErrorResult<ErrorCode> {
+    const defaultMessage =
+        Object.values(AppErrorCode).includes(errorCode as AppErrorCode)
+            ? getErrorMessage(errorCode as AppErrorCode)
+            : 'DEFAULT_ERROR_MESSAGE';
     return {
         error: {
             code: errorCode,
-            message: message ?? getErrorMessage(AppErrorCode.UNKNOWN_ERROR),
+            message: message ?? defaultMessage
         },
     };
 }
