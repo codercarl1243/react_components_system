@@ -25,7 +25,7 @@ export function isDefined<T>(value: T | undefined): value is T {
 }
 
 /**
- * Type guard to check if a value is undefined (not undefined).
+ * Type guard to check if a value is undefined (not defined).
  */
 export function isUndefined<T>(value: T | undefined): value is undefined {
   return value === undefined;
