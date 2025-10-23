@@ -1,7 +1,7 @@
 import Heading from '@/components/heading'
 import type { HeadingPropsType } from '@/components/heading/heading.type'
 import Link from '@/components/link'
-import { generateSlug } from '@/lib/generateSlug'
+import { generateSlug } from '@/lib/utils/generateSlug'
 import { extractTextFromChildren } from '@/components/heading/utils'
 
 export default function AnchorHeading({ id, ...props }: HeadingPropsType & { id?: string }) {

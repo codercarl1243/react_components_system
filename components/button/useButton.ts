@@ -1,5 +1,5 @@
 import type { ButtonClickHandler, MouseEventType } from '@/components/button/button.type';
-import isThenable from '@/lib/isThenable';
+import {isThenable} from '@/lib/utils/guards';
 import { logError, logInfo } from '@/lib/logging/log';
 
 export default function useButton() {
