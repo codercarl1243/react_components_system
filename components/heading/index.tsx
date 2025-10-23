@@ -3,7 +3,7 @@ import type { HeadingPropsType } from '@/components/heading/heading.type'
 import { createElement } from 'react'
 import Icon from '@/components/icon'
 import {extractTextFromChildren, getIconSize, getSizeClass} from '@/components/heading/utils'
-import { generateSlug } from '@/lib/generateSlug'
+import { generateSlug } from '@/lib/utils/generateSlug'
 /**
  * Render a semantic heading element with configurable visual size.
  *

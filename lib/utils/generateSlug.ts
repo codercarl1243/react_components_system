@@ -1,4 +1,4 @@
-import { generateHash } from '@/lib/generateHash'
+import { generateHash } from '@/lib/utils/generateHash'
 
 export const generateSlug = (text: string): string => {
   const slug = text

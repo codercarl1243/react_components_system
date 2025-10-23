@@ -2,7 +2,7 @@ import React, { useEffect, useImperativeHandle, forwardRef } from 'react'
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import useTablist from '@/components/tablist/useTablist'
-import type { KeyPressCallbackMap, KeyPressEventType } from '@/lib/keyboardHandlers.type'
+import type { KeyPressCallbackMap, KeyPressEventType } from '@/lib/utils/keyboardHandlers.type'
 
 const mockFn = globalThis.jest?.fn
 const doMock = globalThis.jest?.mock
@@ -17,7 +17,7 @@ if (doMock && mockFn) {
     }
   })
 
-  doMock('../../../lib/keyboardHandlers', () => ({
+  doMock('@/lib/keyboardHandlers', () => ({
     handleKeyPress: (e: KeyPressEventType, map: KeyPressCallbackMap) =>
       handleKeyPressMock(e, map)
   }))

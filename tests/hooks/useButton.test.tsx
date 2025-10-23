@@ -1,10 +1,10 @@
 import useButton from '@/components/button/useButton'
 import { renderHook } from '@testing-library/react'
 import { MouseEvent as ReactMouseEvent } from 'react'
-import log from '@/lib/Logging';
+import log from '@/lib/logging/log';
 import withNodeEnv from '@/tests/helpers/withNodeEnv';
 
-jest.mock('../../lib/Logging.ts');
+jest.mock('@/lib/logging/log.ts');
 
 const mockLog = log as jest.MockedFunction<typeof log>
 

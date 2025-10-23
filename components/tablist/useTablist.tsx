@@ -1,6 +1,6 @@
 'use client'
-import { handleKeyPress } from '@/lib/keyboardHandlers'
-import type { KeyPressCallbackMap } from '@/lib/keyboardHandlers.type'
+import { handleKeyPress } from '@/lib/utils/keyboardHandlers'
+import type { KeyPressCallbackMap } from '@/lib/utils/keyboardHandlers.type'
 import { useRef, useState, useEffect, useCallback, type KeyboardEvent } from 'react'
 
 export default function useTablist(defaultTabId?: string) {

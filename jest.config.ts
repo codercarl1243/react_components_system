@@ -15,7 +15,7 @@ const config: Config = {
   testEnvironment: 'jsdom',
   silent: true, // Prevent jest from logging to the console
   moduleNameMapper: {
-    '^@/(.*)$': '<rootdir>/$1'
+    '^@/(.*)$': '<rootDir>/$1'
   },
   // Add more setup options before each test is run
   setupFilesAfterEnv: ['<rootDir>/jest.setup.ts']

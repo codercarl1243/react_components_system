@@ -1,6 +1,6 @@
 import type { ButtonClickHandler, MouseEventType } from '@/components/button/button.type';
-import isThenable from '@/lib/isThenable';
-import log from '@/lib/Logging';
+import {isThenable} from '@/lib/utils/guards';
+import { logError, logInfo } from '@/lib/logging/log';
 
 export default function useButton() {
   /**
@@ -30,7 +30,7 @@ export default function useButton() {
 
         // Log all button clicks for analytics/debugging
         if (process.env.NODE_ENV !== 'production') {
-          log('Button clicked', undefined, 'default', { context: `${userHandler.name || 'anonymous function'}`, trace: true })
+          logInfo('Button clicked', { context: `${userHandler.name || 'anonymous function'}` })
         }
         if (isThenable(result)) {
           /**
@@ -41,7 +41,7 @@ export default function useButton() {
            * If the user handler has its own try/catch, this won't fire or do anything.
            */
           void Promise.resolve(result).catch((err) => {
-            log('Unhandled async error', err, 'error', { context: `${userHandler.name || 'anonymous function'}`, trace: true })
+            logError('Unhandled async error', err, { context: `${userHandler.name || 'anonymous function'}`, trace: true })
           })
         }
       } catch (err) {
@@ -50,7 +50,7 @@ export default function useButton() {
          * Log the error for debugging, then re-throw so the error still
          * propagates (breaks execution, shows in console, etc.)
          */
-        log('Button click error', err, 'error', { context: `${userHandler.name || 'anonymous function'}`, trace: true })
+        logError('Button click error', err, { context: `${userHandler.name || 'anonymous function'}`, trace: true })
         throw err
       }
     }
