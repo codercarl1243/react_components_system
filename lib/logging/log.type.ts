@@ -1,3 +1,5 @@
+import type { AppErrorCode } from "@/lib/logging/errorCodes";
+
 export type TLogLevel = 'default' | 'warning' | 'error';
 
 export type TLogOptions = {
@@ -31,5 +33,6 @@ export type TErrorLogEntry = TBaseLogEntry & {
   stack?: string;  // optional stack trace
 };
 
-
 export type TLogEntry = TDefaultLogEntry | TWarningLogEntry | TErrorLogEntry;
+
+export type TErrorCode = Exclude<AppErrorCode | string, "" | null | undefined>;
