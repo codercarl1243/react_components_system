@@ -7,7 +7,7 @@ import PostSection from "@/components/post/post.section";
 import Link from "@/components/link";
 
 
-export default function section2() {
+export default function Section2() {
 
     return (
         <PostSection id="project-setup">
