@@ -488,7 +488,7 @@ import { MouseEvent as ReactMouseEvent } from 'react'
 import log from '@/lib/logging/log';
 import withNodeEnv from '@/tests/helpers/withNodeEnv';
 
-jest.mock('../../lib/Logging.ts');
+jest.mock('@/lib/Logging.ts');
 
 const mockLog = log as jest.MockedFunction<typeof log>
 
