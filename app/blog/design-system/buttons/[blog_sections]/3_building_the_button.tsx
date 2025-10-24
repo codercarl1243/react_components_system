@@ -109,7 +109,7 @@ export default function Section3() {
                 </li>
                 <li>
                     <Code codeString={`aria-disabled`} inline copyEnabled={false} /> - Keeps the button in the accessibility
-                    tree and maintains keyboard discoverability. We'll explain this more indepth in the accessibility section.
+                    tree and maintains keyboard discoverability. We'll explain this more in depth in the accessibility section.
                 </li>
             </List>
 
