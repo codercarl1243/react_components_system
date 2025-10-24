@@ -27,9 +27,9 @@ type FigureProps = Omit<TImage, 'src'> & {
  *   caption="Flowchart of the useButton hook"
  *   figureProps={{ className: 'figure--wide' }}
  *   captionProps={{ className: 'text-muted' }}
- *   src="/images/flowchart-horizontal.png"
+ *   src="/images/flowchart-horizontal.webp"
  *   sources={[
- *     { media: '(max-width: 800px)', srcSet: '/images/flowchart-vertical.png' },
+ *     { media: '(max-width: 800px)', srcSet: '/images/flowchart-vertical.webp' },
  *   ]}
  * />
  */
