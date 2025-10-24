@@ -29,7 +29,7 @@ export default function Section6() {
                     <p>
                         <span className="bold"><Icon icon={RiKeyboardLine} /> Operable:</span> Fully keyboard accessible with clear focus states and appropriate target sizes.
                     </p>
-                    <p className="italic text-sm neutral-600">WCAG: 2.1.1, 2.4.7, 2.5.5, 2.5.3</p>
+                    <p className="italic text-sm neutral-600">WCAG: 2.1.1, 2.4.7, 2.5.5</p>
                 </li>
                 <li>
                     <p>
