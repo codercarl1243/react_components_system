@@ -16,7 +16,7 @@ import {
   NavigationFooter,
   Resources,
   Sidebar,
-} from './[blog_sections]';
+} from './(blog_sections)';
 export const metadata: Metadata = { title: 'Buttons · Design System' }
 
 export default function ButtonsBasePage() {
