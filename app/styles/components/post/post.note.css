@@ -9,7 +9,7 @@
     padding-block: 1.25em 1em;
     padding-inline: clamp(0.5em, 0.5em + 0.5vw, 1em);
     box-shadow: inset 2px 2px 4px rgba(153, 105, 105, 0.1),
-    inset -2px -2px 4px rgba(255, 255, 255, 0.8);
+        inset -2px -2px 4px rgba(255, 255, 255, 0.8);
     border: var(--border-thin);
     border-color: var(--note-border-color);
     border-left: 4px solid var(--color-primary-400);
@@ -17,12 +17,13 @@
 }
 
 .post-note__icon {
+    pointer-events: none;
     background-color: var(--note-background-color);
     color: var(--color-primary-400);
     border-radius: var(--radius-circle);
 
     border: var(--border-thin);
-    border-color: var(--color-primary-400);
+    border-color: currentColor;
     position: absolute;
     top: -0.5em;
     left: -0.5em;
