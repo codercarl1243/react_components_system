@@ -7,26 +7,27 @@ declare global {
   // eslint-disable-next-line no-var
   var __customTheme: ThemeRegistration | undefined
 }
-// ✅ Cached in globalThis to persist across reloads (especially in dev)
 const globalForShiki = globalThis
 
-/** 
- * Create or reuse the Shiki highlighter singleton.
- */
+
 export async function getHighlighterSingleton(): Promise<Highlighter> {
   if (!globalForShiki.__highlighterPromise) {
     console.debug('🟦 Creating new Shiki highlighter')
-    globalForShiki.__highlighterPromise = createHighlighter({
+      const highlighterPromise = createHighlighter({
       themes: ['github-dark'],
       langs: ['tsx', 'ts', 'css', 'md', 'bash']
+    }).catch(err => {
+      // reset cache so a later retry can succeed
+      delete globalForShiki.__highlighterPromise
+      throw err
     })
+    globalForShiki.__highlighterPromise = highlighterPromise
   }
   return globalForShiki.__highlighterPromise
 }
 
 /**
  * Builds a custom GitHub Dark theme variant with modified colors.
- * This runs once and caches the result.
  */
 export async function getCustomGithubDark(): Promise<ThemeRegistration> {
   if (globalForShiki.__customTheme) return globalForShiki.__customTheme
