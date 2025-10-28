@@ -42,7 +42,7 @@ export default async function Code({
   )
 
   if (!inline) {
-    const titleId = title ? `code-${createHash('sha1').update(codeString).digest('hex').slice(0,8)}` : undefined;
+    const titleId = title ? `code-${createHash('sha1').update(codeString).digest('hex').slice(0, 8)}` : undefined;
 
     return <div
       className={`shiki-wrapper width-${layout}`}
