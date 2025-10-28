@@ -2,6 +2,8 @@ import type { BundledLanguage } from 'shiki'
 import { getCustomGithubDark, getHighlighterSingleton } from '@/components/code/highlighter'
 import { CopyButton } from '@/components/button/copyButton'
 import { generateSlug } from '@/lib/utils/generateSlug';
+import { createHash } from 'crypto';
+
 type SupportedLangs = Extract<BundledLanguage, 'tsx' | 'ts' | 'css' | 'md' | 'bash'>;
 
 interface Props {
@@ -40,7 +42,7 @@ export default async function Code({
   )
 
   if (!inline) {
-    const titleId = title ? generateSlug(title) : undefined;
+    const titleId = title ? `code-${createHash('sha1').update(codeString).digest('hex').slice(0,8)}` : undefined;
 
     return <div
       className={`shiki-wrapper width-${layout}`}
