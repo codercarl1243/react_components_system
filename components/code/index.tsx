@@ -1,7 +1,6 @@
 import type { BundledLanguage } from 'shiki'
 import { getCustomGithubDark, getHighlighterSingleton } from '@/components/code/highlighter'
 import { CopyButton } from '@/components/button/copyButton'
-import { generateSlug } from '@/lib/utils/generateSlug';
 import { createHash } from 'crypto';
 
 type SupportedLangs = Extract<BundledLanguage, 'tsx' | 'ts' | 'css' | 'md' | 'bash'>;
