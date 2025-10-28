@@ -11,48 +11,28 @@ export default function Section9() {
             {/* GENERATE IMAGE FOR HERE */}
 
             <p>
-                By combining type safety, clear accessibility semantics, and a robust test suite, this button is more than a component — it&apos;s a contract.
-                Every developer who uses it can trust that it behaves predictably, communicates clearly, and fails gracefully.
+                By combining <span className="bold">type safety</span>, clear <span className="bold"> accessibility semantics</span>, and <span className="bold"> thorough testing</span>, this is more than a component — it&apos;s a <span className="bold">contract</span>.  Developers can trust it to behave predictably, communicate clearly and fail gracefully.
             </p>
-            <p>Our base button component now provides:</p>
 
-            <AnchorHeading headingLevel={3} id="summary__core" icon={RiErrorWarningLine} >
-                Core Features
+            <AnchorHeading headingLevel={3} id="summary__features" icon={RiErrorWarningLine}>
+                What We Built
             </AnchorHeading>
-            <List aria-labelledby="summary__core">
-                <li>Type-safe component with TypeScript</li>
-                <li>Clean separation of logic and presentation</li>
-                <li>Reusable custom hook for interactions</li>
-                <li>CSS custom properties for easy theming</li>
-                <li>Multiple style variants (filled, outline)</li>
-                <li>Color variants (primary, secondary, accent)</li>
-                <li>Comprehensive error handling</li>
-                <li>Async operation support</li>
-                <li>Full test coverage</li>
+            <List aria-labelledby="summary__features">
+                <li>Type-safe component with async operation support</li>
+                <li>Reusable hook with centralized error logging</li>
+                <li>CSS custom properties for flexible theming and variants</li>
+                <li>AAA accessibility standards (44x44px targets, keyboard navigation, aria-disabled)</li>
+                <li>Comprehensive test coverage for reliability</li>
             </List>
 
-            <AnchorHeading headingLevel={3} id="summary__accessibility" icon={RiAccessibilityLine}>
-                Accessibility Checklist
+            <AnchorHeading headingLevel={3} id="summary__impact" icon={RiFlaskLine}>
+                Why It Matters
             </AnchorHeading>
-            <p>Our button implementation meets these accessibility standards:</p>
-            <List aria-labelledby="summary__accessibility">
-                <li>AAA target size (44x44px minimum)</li>
-                <li>No reliance on color alone for meaning</li>
-                <li>Proper focus management and keyboard navigation</li>
-                <li>Properly disabled state communicated</li>
-                <li>Touch-friendly margins for motor accessibility</li>
+            <List aria-labelledby="summary__impact">
+                <li><span className="bold">For users:</span> Predictable, accessible interactions across all devices</li>
+                <li><span className="bold">For developers:</span> Consistent API, clear error messages, no surprises</li>
+                <li><span className="bold">For the system:</span> Foundation for toggles, switches, and complex components</li>
             </List>
-
-
-            <AnchorHeading headingLevel={3} id="summary__DX" icon={RiFlaskLine}>Developer Experience</AnchorHeading>
-            <List aria-labelledby="summary__DX">
-                <li>Clean separation of logic and presentation</li>
-                <li>Consistent API across all variants</li>
-                <li>Comprehensive error handling</li>
-                <li>Type safety with TypeScript</li>
-                <li>Full test coverage</li>
-            </List>
-
         </PostSection>
     )
 }
