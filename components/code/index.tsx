@@ -64,6 +64,7 @@ export default async function Code({
 
   const innerHtml = out.replace(/^.*?<code[^>]*>|<\/code>.*$/gs, '')
 
+  {/* biome-ignore lint/security/noDangerouslySetInnerHtml: Shiki output is trusted in this context */}
   return <code
     className={'shiki-inline shiki'}
     {...(title && { 'aria-label': title })}
