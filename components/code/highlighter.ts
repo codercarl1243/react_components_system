@@ -1,10 +1,14 @@
 import { createHighlighter, type Highlighter, type ThemeRegistration } from 'shiki'
 
-// ✅ Cached in globalThis to persist across reloads (especially in dev)
-const globalForShiki = globalThis as unknown as {
-  __highlighterPromise?: Promise<Highlighter>
-  __customTheme?: ThemeRegistration
+
+declare global {
+  // eslint-disable-next-line no-var
+  var __highlighterPromise: Promise<Highlighter> | undefined
+  // eslint-disable-next-line no-var
+  var __customTheme: ThemeRegistration | undefined
 }
+// ✅ Cached in globalThis to persist across reloads (especially in dev)
+const globalForShiki = globalThis
 
 /** 
  * Create or reuse the Shiki highlighter singleton.
