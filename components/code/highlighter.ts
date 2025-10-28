@@ -1,3 +1,4 @@
+import { logError } from '@/lib/logging/log'
 import { createHighlighter, type Highlighter, type ThemeRegistration } from 'shiki'
 
 
@@ -19,6 +20,7 @@ export async function getHighlighterSingleton(): Promise<Highlighter> {
     }).catch(err => {
       // reset cache so a later retry can succeed
       delete globalForShiki.__highlighterPromise
+      logError('Failed to create shiki Highlighter', err, {context: "getHighlighterSingleton"})
       throw err
     })
     globalForShiki.__highlighterPromise = highlighterPromise
