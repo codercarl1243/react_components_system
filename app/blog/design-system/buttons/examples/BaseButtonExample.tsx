@@ -42,7 +42,7 @@ export function BaseButtonExample({ children }: { children?: ReactNode }) {
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const bubbleIdCounter = useRef(0);
     const splatterCounter = useRef(0)
-    
+
     const removeBubble = (bubbleId: string) => {
         setBubbles(prev => prev.filter(b => b.id !== bubbleId));
         const timeouts = timeoutsRef.current.get(bubbleId);
@@ -148,6 +148,7 @@ export function BaseButtonExample({ children }: { children?: ReactNode }) {
     const generateBubble = ({ id, left, top, size, cssColorVar, floatAnimation, animationLength, isPopping }: TBubble) => {
         return (
             <div
+                key={id}
                 data-bubble-id={id}
                 className={`bubble`}
                 style={{
@@ -196,6 +197,7 @@ export function BaseButtonExample({ children }: { children?: ReactNode }) {
 
         return (
             <div
+                key={id}
                 className="splatter"
                 style={styleObject}
                 onAnimationEnd={() => removeSplatter(id)}
@@ -241,8 +243,8 @@ export function BaseButtonExample({ children }: { children?: ReactNode }) {
 
             </Button>
 
-            {bubbles.map((bubble) => <div key={bubble.id}>{generateBubble(bubble)}</div>)}
-            {splatters.map((splatter) => <div key={splatter.id}>{generateSplatter(splatter)}</div>)}
+            {bubbles.map(generateBubble)}
+            {splatters.map(generateSplatter)}
             {children}
         </div>
     )
