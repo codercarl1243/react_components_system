@@ -25,9 +25,10 @@ type TSplatter = {
     color: string;
 };
 
+type Timeout = ReturnType<typeof setTimeout>;
 type BubbleId = string;
 type BubbleTimeouts = {
-    popTimeout: NodeJS.Timeout;
+    popTimeout: Timeout;
 }
 type TimeoutRef = Map<BubbleId, BubbleTimeouts>;
 
@@ -36,7 +37,7 @@ export function BaseButtonExample({ children }: { children?: ReactNode }) {
     const [bubbles, setBubbles] = useState<TBubble[]>([]);
     const [splatters, setSplatters] = useState<TSplatter[]>([]);
     const timeoutsRef = useRef<TimeoutRef>(new Map());
-    const pendingTimeoutsRef = useRef<Set<NodeJS.Timeout>>(new Set())
+    const pendingTimeoutsRef = useRef<Set<Timeout>>(new Set())
     const cooldownRef = useRef<boolean>(false);
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const bubbleIdCounter = useRef(0);
