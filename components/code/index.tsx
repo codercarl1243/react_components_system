@@ -55,6 +55,8 @@ export default async function Code({
         )}
         {copyEnabled && <CopyButton text={codeString} />}
       </div>
+      {/* Shiki-generated HTML from author-controlled codeString */}
+      {/* biome-ignore lint/security/noDangerouslySetInnerHtml: Shiki output is trusted in this context */}
       <div {...(title && { role: 'region', 'aria-labelledby': titleId, tabIndex: 0 })}
         dangerouslySetInnerHTML={{ __html: out }} />
     </div>
