@@ -47,7 +47,7 @@ export default function Section2() {
                 </List>
                 <Code lang="bash" codeString={`npm install @remixicon/react clsx`} />
                 <PostNote className="italic">
-                    <p>We&apos;ll also use<Link className="bold" href="https://jestjs.io/docs/getting-started">Jest</Link> later in this post to run tests and verify behavior.</p>
+                    <p>We&apos;ll also use <Link className="bold" href="https://jestjs.io/docs/getting-started">Jest</Link> later in this post to run tests and verify behavior.</p>
                 </PostNote>
 
         </PostSection>
