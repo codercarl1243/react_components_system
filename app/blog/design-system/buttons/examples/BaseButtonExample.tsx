@@ -1,7 +1,7 @@
 'use client';
 import Button from "@/components/button";
 import { RiBubbleChartLine, RiWindyLine } from "@remixicon/react";
-import { type ReactNode, useEffect, useRef, useState } from "react";
+import { type CSSProperties, type ReactNode, useEffect, useRef, useState } from "react";
 
 type TBubble = {
     id: string;
@@ -26,30 +26,33 @@ type TSplatter = {
 };
 
 type Timeout = ReturnType<typeof setTimeout>;
-type BubbleId = string;
-type BubbleTimeouts = {
-    popTimeout: Timeout;
-}
-type TimeoutRef = Map<BubbleId, BubbleTimeouts>;
 
+const POP_ANIMATION_DURATION = 400;
+const SPLATTER_ANIMATION_DURATION = 800;
+const COOLDOWN_DURATION = 300;
+const MIN_BUBBLE_LIFETIME = 3000;
+const MAX_BUBBLE_LIFETIME = 7000;
 
 export function BaseButtonExample({ children }: { children?: ReactNode }) {
     const [bubbles, setBubbles] = useState<TBubble[]>([]);
     const [splatters, setSplatters] = useState<TSplatter[]>([]);
-    const timeoutsRef = useRef<TimeoutRef>(new Map());
-    const pendingTimeoutsRef = useRef<Set<Timeout>>(new Set())
+    const timeoutsRef = useRef<Set<Timeout>>(new Set());
     const cooldownRef = useRef<boolean>(false);
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const bubbleIdCounter = useRef(0);
     const splatterCounter = useRef(0)
 
+    const createTimeout = (callback: () => void, delay: number) => {
+        const timeout = setTimeout(() => {
+            callback();
+            timeoutsRef.current.delete(timeout);
+        }, delay);
+        timeoutsRef.current.add(timeout);
+        return timeout;
+    };
+
     const removeBubble = (bubbleId: string) => {
         setBubbles(prev => prev.filter(b => b.id !== bubbleId));
-        const timeouts = timeoutsRef.current.get(bubbleId);
-        if (timeouts) {
-            clearTimeout(timeouts.popTimeout);
-            timeoutsRef.current.delete(bubbleId);
-        }
     };
 
     const addBubble = () => {
@@ -58,38 +61,31 @@ export function BaseButtonExample({ children }: { children?: ReactNode }) {
         cooldownRef.current = true;
         setIsLoading(true);
 
-        const cooldownT = setTimeout(() => {
+        createTimeout(() => {
             cooldownRef.current = false;
             setIsLoading(false);
-            pendingTimeoutsRef.current.delete(cooldownT);
-        }, 300);
+        }, COOLDOWN_DURATION)
 
-        pendingTimeoutsRef.current.add(cooldownT);
-        const LIFE_TIME = 3000 + Math.random() * 4000; // 3-7s
-        const POP_DURATION = 400;
-        const BUBBLE_ID = `bubble-${bubbleIdCounter.current++}`;
-        const BUBBLE_COLOR = `--color-emphasis-${(Math.floor(Math.random() * 9) + 1) * 100}`
-        const BUBBLE_SIZE = 20 + Math.random() * 40;
+        const lifetime = MIN_BUBBLE_LIFETIME + Math.random() * (MAX_BUBBLE_LIFETIME - MIN_BUBBLE_LIFETIME);
+        const bubbleId = `bubble-${bubbleIdCounter.current++}`;
+        const bubbleColor = `--color-emphasis-${(Math.floor(Math.random() * 9) + 1) * 100}`
+        const bubbleSize = 20 + Math.random() * 40;
 
         const bubble: TBubble = {
-            id: BUBBLE_ID,
+            id: bubbleId,
             left: `${10 + Math.random() * 80}vw`,
             top: `${10 + Math.random() * 80}vh`,
-            size: `${BUBBLE_SIZE}px`,
-            cssColorVar: BUBBLE_COLOR,
+            size: `${bubbleSize}px`,
+            cssColorVar: bubbleColor,
             floatAnimation: `float${Math.floor(Math.random() * 3) + 1}`,
-            animationLength: LIFE_TIME,
+            animationLength: lifetime,
             isPopping: false
         };
 
         setBubbles((prev) => [...prev, bubble]);
-
-        const popTimeout = setTimeout(() => {
-            popBubble(BUBBLE_ID);
-        }, LIFE_TIME - POP_DURATION);
-
-        // Store timeouts for cleanup
-        timeoutsRef.current.set(bubble.id, { popTimeout });
+        createTimeout(() => {
+            popBubble(bubbleId);
+        }, lifetime - POP_ANIMATION_DURATION)
     };
 
     const popBubble = (bubbleId: string) => {
@@ -97,16 +93,17 @@ export function BaseButtonExample({ children }: { children?: ReactNode }) {
             const bubble = prev.find(b => b.id === bubbleId);
             if (!bubble) return prev;
 
-            const updated = prev.map((b) => (b.id === bubbleId ? { ...b, isPopping: true } : b));
             const domElement = document.querySelector(`[data-bubble-id="${bubbleId}"]`) as HTMLElement;
             if (domElement) {
                 createSplatter(domElement, bubble.cssColorVar, parseInt(bubble.size), bubble.id);
-                removeBubble(bubbleId)
             }
 
-            return updated;
-        }
-        );
+            return prev.map((b) => (b.id === bubbleId ? { ...b, isPopping: true } : b));
+        });
+        createTimeout(() => {
+            removeBubble(bubbleId);
+        }, POP_ANIMATION_DURATION)
+
     }
 
     const createSplatter = (bubbleElement: HTMLElement, bubbleColor: string, bubbleSize: number, bubbleId: string) => {
@@ -135,14 +132,11 @@ export function BaseButtonExample({ children }: { children?: ReactNode }) {
 
         setSplatters(prev => [...prev, ...newSplatters]);
 
-        // Remove splatters after animation
-        const splatterCleanup = setTimeout(() => {
+        createTimeout(() => {
             setSplatters(prev =>
                 prev.filter(splatter => !splatter.id.startsWith(`splatter-${bubbleId}`))
             );
-            pendingTimeoutsRef.current.delete(splatterCleanup);
-        }, 800);
-        pendingTimeoutsRef.current.add(splatterCleanup);
+        }, SPLATTER_ANIMATION_DURATION);
     };
 
     const generateBubble = ({ id, left, top, size, cssColorVar, floatAnimation, animationLength, isPopping }: TBubble) => {
@@ -150,7 +144,7 @@ export function BaseButtonExample({ children }: { children?: ReactNode }) {
             <div
                 key={id}
                 data-bubble-id={id}
-                className={`bubble`}
+                className="bubble"
                 style={{
                     left,
                     top,
@@ -168,7 +162,7 @@ export function BaseButtonExample({ children }: { children?: ReactNode }) {
                         outlineColor: `var(${cssColorVar})`,
                         borderColor: `var(${cssColorVar})`,
                         animation: isPopping
-                            ? `rotate ${animationLength}ms cubic-bezier(0.25, 0.1, 0.25, 1) forwards, pop 400ms cubic-bezier(0.25, -1, 0, 1) forwards`
+                            ? `rotate ${animationLength}ms cubic-bezier(0.25, 0.1, 0.25, 1) forwards, pop ${POP_ANIMATION_DURATION}ms cubic-bezier(0.25, -1, 0, 1) forwards`
                             : `rotate ${animationLength}ms cubic-bezier(0.25, 0.1, 0.25, 1) forwards`
                     }}
                 />
@@ -176,11 +170,7 @@ export function BaseButtonExample({ children }: { children?: ReactNode }) {
         );
     };
 
-    const removeSplatter = (splatterId: string) => {
-        setSplatters(prev => prev.filter(s => s.id !== splatterId))
-    }
-
-    type CSSWithVars = React.CSSProperties & Record<'--end-x' | '--end-y', string>;
+    type CSSWithVars = CSSProperties & Record<'--end-x' | '--end-y', string>;
     const generateSplatter = ({
         x, y, size, delay, endX, endY, color, id
     }: TSplatter) => {
@@ -200,20 +190,15 @@ export function BaseButtonExample({ children }: { children?: ReactNode }) {
                 key={id}
                 className="splatter"
                 style={styleObject}
-                onAnimationEnd={() => removeSplatter(id)}
+                onAnimationEnd={() => setSplatters(prev => prev.filter(s => s.id !== id))}
             />
         )
     }
 
-    // Cleanup on unmount
     useEffect(() => {
         return () => {
-            timeoutsRef.current.forEach((timeout) => {
-                clearTimeout(timeout.popTimeout);
-            });
+            timeoutsRef.current.forEach(clearTimeout);
             timeoutsRef.current.clear();
-            pendingTimeoutsRef.current.forEach(clearTimeout);
-            pendingTimeoutsRef.current.clear()
         };
     }, []);
 
@@ -239,10 +224,7 @@ export function BaseButtonExample({ children }: { children?: ReactNode }) {
                 icon={isLoading ? RiBubbleChartLine : RiWindyLine}
             >
                 {text}
-
-
             </Button>
-
             {bubbles.map(generateBubble)}
             {splatters.map(generateSplatter)}
             {children}
