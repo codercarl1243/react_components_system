@@ -1,9 +1,9 @@
 import FunHighlight from "@/components/decorations/FunHighlight";
 import Heading from "@/components/heading";
-import Link from "@/components/link";
+// import Link from "@/components/link";
 import List from "@/components/list";
 import PostBanner from "@/components/post/post.banner";
-import PostNote from "@/components/post/post.note";
+// import PostNote from "@/components/post/post.note";
 import PostSection from "@/components/post/post.section";
 
 
