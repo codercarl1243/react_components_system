@@ -73,7 +73,7 @@ export default function Button({
                         tabLabel: 'useButton.tsx',
                         panelContent: (
                             <Code codeString={`import type { ButtonClickHandler, MouseEventType } from '@/components/button/button.type';
-import isThenable from '@/lib/isThenable';
+import { isThenable } from '@/lib/utils/guards';
 import log from '@/lib/logging/log';
 
 export default function useButton() {
@@ -85,16 +85,16 @@ export default function useButton() {
         const result = userHandler(event)
 
         if (process.env.NODE_ENV !== 'production') {
-          // Custom Logging solution here
+          log()
         }
         if (isThenable(result)) {
           void Promise.resolve(result).catch((err) => {
-           // Custom Logging solution here
+              log()
           })
         }
       } catch (err) {
-       // Custom Logging solution here
-        throw err
+          log()
+          throw err
       }
     }
 
