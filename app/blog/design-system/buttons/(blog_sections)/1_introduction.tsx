@@ -24,17 +24,16 @@ export default function Section1() {
                 In this first post of the design system series, we&apos;re building a button that balances <FunHighlight>functionality</FunHighlight>, <FunHighlight>accessibility</FunHighlight>, and <FunHighlight>developer trust</FunHighlight>.
             </p>
             <p>
-                This isn't just another styled button. It's a <FunHighlight>design system foundation</FunHighlight>
-                that scales gracefully and behaves predictably under real-world conditions.
+                This isn't just another styled button. It's a <FunHighlight>design system foundation</FunHighlight> that scales gracefully and behaves predictably under real-world conditions.
             </p>
-            <PostNote>
+            {/* <PostNote>
                 <p className="bold">In this series:</p>
                 <List variant="none" spacing="tight">
                     <li><Link href="/blog/design-system/buttons/toggles">Toggles</Link></li>
                     <li><Link href="/blog/design-system/buttons/switches">Switches</Link></li>
-                     <li><Link href="/blog/design-system/buttons/groups">Button Groups & Toolbars</Link></li>
+                    <li><Link href="/blog/design-system/buttons/groups">Button Groups & Toolbars</Link></li>
                 </List>
-            </PostNote>
+            </PostNote> */}
 
             <p>By the end of this post, you&apos;ll understand how to design a button system that is:</p>
             <List ordered>

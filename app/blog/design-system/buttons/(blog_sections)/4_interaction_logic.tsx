@@ -39,9 +39,7 @@ export default function Section4() {
             <p>
                 Before we dive into the implementation, let&apos;s clarify what responsibilities this hook needs to handle:
             </p>
-
             <p className="bold">The hook:</p>
-
             <List variant="circle">
                 <li>Logs clicks in development</li>
                 <li>Logs synchronous errors (then re-throws them)</li>
@@ -49,7 +47,9 @@ export default function Section4() {
                 <li>Doesn't interfere with return values or error handling</li>
             </List>
 
-            <Code codeString={`import type { ButtonClickHandler, MouseEventType } from '@/components/button/button.type';
+            <Code 
+            title="useButton.tsx"
+            codeString={`import type { ButtonClickHandler, MouseEventType } from '@/components/button/button.type';
 import log from '@/lib/logging/log';
 import isThenable from '@/lib/utils/guards';
 
