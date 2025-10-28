@@ -1,11 +1,9 @@
-import { logError } from '@/lib/logging/log'
+import { logError, logInfo } from '@/lib/logging/log'
 import { createHighlighter, type Highlighter, type ThemeRegistration } from 'shiki'
 
 
 declare global {
-  // eslint-disable-next-line no-var
   var __highlighterPromise: Promise<Highlighter> | undefined
-  // eslint-disable-next-line no-var
   var __customTheme: ThemeRegistration | undefined
 }
 const globalForShiki = globalThis
@@ -13,14 +11,16 @@ const globalForShiki = globalThis
 
 export async function getHighlighterSingleton(): Promise<Highlighter> {
   if (!globalForShiki.__highlighterPromise) {
-    console.debug('🟦 Creating new Shiki highlighter')
-      const highlighterPromise = createHighlighter({
+    if (process.env.NODE_ENV !== 'production') {
+      logInfo('🟦 Creating new Shiki highlighter', { context: `getHighlighterSingleton` })
+    }
+    const highlighterPromise = createHighlighter({
       themes: ['github-dark'],
       langs: ['tsx', 'ts', 'css', 'md', 'bash']
     }).catch(err => {
       // reset cache so a later retry can succeed
       delete globalForShiki.__highlighterPromise
-      logError('Failed to create shiki Highlighter', err, {context: "getHighlighterSingleton"})
+      logError('Failed to create shiki Highlighter', err, { context: "getHighlighterSingleton" })
       throw err
     })
     globalForShiki.__highlighterPromise = highlighterPromise
