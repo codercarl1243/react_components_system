@@ -5,17 +5,17 @@
 }
 
 h2.heading {
-    margin-block-start: calc(var(--spacing) * 3);
+    margin-block: var(--spacing-md);
     color: var(--color-secondary-400);
 }
 
 h3.heading {
-    margin-block-start: calc(var(--spacing) * 2);
+    margin-block: var(--spacing-sm);
     color: var(--color-secondary-600);
 } 
 
 h4.heading {
-    margin-block-start: var(--spacing);
+    margin-block: var(--spacing);
     color: var(--color-secondary-600);
 }
 
