@@ -6,13 +6,12 @@ import List from "@/components/list";
 import PostNote from "@/components/post/post.note";
 import PostSection from "@/components/post/post.section";
 
-
 export default function Section5() {
 
     return (
-        <PostSection id="essential-features">
-            <AnchorHeading id="essential-features-heading" headingLevel={2}>
-                Essential Features
+        <PostSection id="loading-and-states">
+            <AnchorHeading id="loading-and-states" headingLevel={2}>
+                Loading & States
             </AnchorHeading>
             <Figure
                 style={{ objectFit: "contain" }}
@@ -23,9 +22,7 @@ export default function Section5() {
                 src={"/images/button_states.webp"}
             />
             <p>
-                Beyond aesthetics, these essential features ensure the button behaves predictably
-                under real-world conditions—handling async operations gracefully, preventing
-                duplicate submissions, and integrating seamlessly with forms.
+                Beyond aesthetics, these essential features ensure the button behaves predictably under real-world conditions—handling async operations gracefully, preventing duplicate submissions, and integrating seamlessly with forms.
             </p>
             <AnchorHeading headingLevel={3}>
                 Loading States

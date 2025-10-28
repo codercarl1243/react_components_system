@@ -6,8 +6,8 @@ import { RiErrorWarningLine, RiAccessibilityLine, RiFlaskLine } from "@remixicon
 export default function Section9() {
 
     return (
-        <PostSection id="what-we-built">
-            <AnchorHeading headingLevel={2} id="what-we-built-heading">What We Built</AnchorHeading>
+        <PostSection id="summary">
+            <AnchorHeading headingLevel={2} id="summary-heading">Summary</AnchorHeading>
             {/* GENERATE IMAGE FOR HERE */}
 
             <p>
@@ -16,10 +16,10 @@ export default function Section9() {
             </p>
             <p>Our base button component now provides:</p>
 
-            <AnchorHeading headingLevel={3} id="what-we-built__core" icon={RiErrorWarningLine} >
+            <AnchorHeading headingLevel={3} id="summary__core" icon={RiErrorWarningLine} >
                 Core Features
             </AnchorHeading>
-            <List aria-labelledby="what-we-built__core">
+            <List aria-labelledby="summary__core">
                 <li>Type-safe component with TypeScript</li>
                 <li>Clean separation of logic and presentation</li>
                 <li>Reusable custom hook for interactions</li>
@@ -31,11 +31,11 @@ export default function Section9() {
                 <li>Full test coverage</li>
             </List>
 
-            <AnchorHeading headingLevel={3} id="what-we-built__accessibility" icon={RiAccessibilityLine}>
+            <AnchorHeading headingLevel={3} id="summary__accessibility" icon={RiAccessibilityLine}>
                 Accessibility Checklist
             </AnchorHeading>
             <p>Our button implementation meets these accessibility standards:</p>
-            <List aria-labelledby="what-we-built__accessibility">
+            <List aria-labelledby="summary__accessibility">
                 <li>AAA target size (44x44px minimum)</li>
                 <li>No reliance on color alone for meaning</li>
                 <li>Proper focus management and keyboard navigation</li>
@@ -44,8 +44,8 @@ export default function Section9() {
             </List>
 
 
-            <AnchorHeading headingLevel={3} id="what-we-built__DX" icon={RiFlaskLine}>Developer Experience</AnchorHeading>
-            <List aria-labelledby="what-we-built__DX">
+            <AnchorHeading headingLevel={3} id="summary__DX" icon={RiFlaskLine}>Developer Experience</AnchorHeading>
+            <List aria-labelledby="summary__DX">
                 <li>Clean separation of logic and presentation</li>
                 <li>Consistent API across all variants</li>
                 <li>Comprehensive error handling</li>

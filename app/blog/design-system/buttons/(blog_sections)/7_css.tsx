@@ -6,8 +6,8 @@ import PostSection from "@/components/post/post.section";
 export default function Section7() {
 
     return (
-        <PostSection id="css-styling">
-            <AnchorHeading headingLevel={2} id="css-styling-heading">CSS Styling</AnchorHeading>
+        <PostSection id="css-and-theming">
+            <AnchorHeading headingLevel={2} id="css-and-theming-heading">CSS & Theming</AnchorHeading>
             <p>
                 Our CSS isn&apos;t just decorative — it enforces <FunHighlight>layout stability</FunHighlight>, <FunHighlight>WCAG compliance</FunHighlight>, and <FunHighlight>customizability</FunHighlight>.
                 We&apos;ll look at three layers: resets, custom properties, and variants.

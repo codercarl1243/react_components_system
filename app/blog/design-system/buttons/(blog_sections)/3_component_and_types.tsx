@@ -8,9 +8,9 @@ import Link from "@/components/link";
 export default function Section3() {
 
     return (
-        <PostSection id="building-button">
-            <AnchorHeading headingLevel={2} id="building-button-heading">
-                Building the Button
+        <PostSection id="component-and-types">
+            <AnchorHeading headingLevel={2} id="component-and-types-heading">
+                Component & Types
             </AnchorHeading>
             <AnchorHeading headingLevel={3} id="starting-simple">
                 Starting Simple: The Component
