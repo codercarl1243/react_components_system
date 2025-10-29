@@ -131,12 +131,13 @@ export function BaseButtonExample({ children }: { children?: ReactNode }) {
         }
 
         setSplatters(prev => [...prev, ...newSplatters]);
+        const maxDelayMs = Math.max(0, ...newSplatters.map(s => parseFloat(s.delay)));
 
         createTimeout(() => {
             setSplatters(prev =>
                 prev.filter(splatter => !splatter.id.startsWith(`splatter-${bubbleId}`))
             );
-        }, SPLATTER_ANIMATION_DURATION);
+        }, SPLATTER_ANIMATION_DURATION + maxDelayMs);
     };
 
     const generateBubble = ({ id, left, top, size, cssColorVar, floatAnimation, animationLength, isPopping }: TBubble) => {
@@ -190,7 +191,7 @@ export function BaseButtonExample({ children }: { children?: ReactNode }) {
                 key={id}
                 className="splatter"
                 style={styleObject}
-                onAnimationEnd={() => setSplatters(prev => prev.filter(s => s.id !== id))}
+                // onAnimationEnd={() => setSplatters(prev => prev.filter(s => s.id !== id))}
             />
         )
     }
