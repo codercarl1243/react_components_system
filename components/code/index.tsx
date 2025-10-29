@@ -1,18 +1,20 @@
 import type { BundledLanguage } from 'shiki'
 import { getCustomGithubDark, getHighlighterSingleton } from '@/components/code/highlighter'
 import { CopyButton } from '@/components/button/copyButton'
+import { createHash } from 'crypto';
+
 type SupportedLangs = Extract<BundledLanguage, 'tsx' | 'ts' | 'css' | 'md' | 'bash'>;
 
 interface Props {
-    codeString: string
-    lang?: SupportedLangs;
-    inline?: boolean;
-    layout?: 'full' | 'bleed' | 'content';
-    title?: string;
-    copyEnabled?: boolean;
+  codeString: string
+  lang?: SupportedLangs;
+  inline?: boolean;
+  layout?: 'full' | 'bleed' | 'content';
+  title?: string;
+  copyEnabled?: boolean;
 }
 
-export default async function Code ({
+export default async function Code({
   codeString,
   lang = 'tsx',
   inline = false,
@@ -39,19 +41,32 @@ export default async function Code ({
   )
 
   if (!inline) {
+    const titleId = title ? `code-${createHash('sha1').update(title).digest('hex').slice(0, 8)}` : undefined;
+
     return <div
-            className={`shiki-wrapper width-${layout}`}>
-            {copyEnabled && <CopyButton text={codeString} />}
-            <div {...(title && { 'aria-label': title, role: 'region' })}
-                dangerouslySetInnerHTML={{ __html: out }} />
-        </div>
+      className={`shiki-wrapper width-${layout}`}
+    >
+      <div className='code-header'>
+        {title && (
+          <div id={titleId} className="code-title">
+            {title}
+          </div>
+        )}
+        {copyEnabled && <CopyButton text={codeString} />}
+      </div>
+      {/* Shiki-generated HTML from author-controlled codeString */}
+      {/* biome-ignore lint/security/noDangerouslySetInnerHtml: Shiki output is trusted in this context */}
+      <div {...(title && { role: 'region', 'aria-labelledby': titleId, tabIndex: 0 })}
+        dangerouslySetInnerHTML={{ __html: out }} />
+    </div>
   }
 
   const innerHtml = out.replace(/^.*?<code[^>]*>|<\/code>.*$/gs, '')
 
+  // biome-ignore lint/security/noDangerouslySetInnerHtml: Shiki output is trusted in this context
   return <code
-        className={'shiki-inline shiki'}
-        {...(title && { 'aria-label': title})}
-        dangerouslySetInnerHTML={{ __html: innerHtml }}
-    />
+    className={'shiki-inline shiki'}
+    {...(title && { 'aria-label': title })}
+    dangerouslySetInnerHTML={{ __html: innerHtml }}
+  />
 }

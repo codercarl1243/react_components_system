@@ -7,17 +7,17 @@ export default function ButtonsSideBar({ relatedPosts }: TSideBarProps) {
     return (
         <PostSideBar
             contents={[
-                { id: 'button-foundations', href: '#button-foundations', label: "Laying the Foundation" },
+                { id: 'introduction', href: '#introduction', label: "Introduction" },
                 { id: 'project-setup', href: '#project-setup', label: 'Project Setup' },
-                { id: 'building-button', href: '#building-button', label: 'Building the Button' },
+                { id: 'component-and-types', href: '#component-and-types', label: 'Component & Types' },
                 { id: 'interaction-logic', href: '#interaction-logic', label: 'Interaction Logic' },
-                { id: 'essential-features', href: '#essential-features', label: 'Essential Features' },
-                { id: 'accessibility', href: '#accessibility', label: 'Accessibility Requirements' },
-                { id: 'css-styling', href: '#css-styling', label: 'Styling' },
+                { id: 'loading-and-states', href: '#loading-and-states', label: 'Loading & States' },
+                { id: 'accessibility', href: '#accessibility', label: 'Accessibility (WCAG)' },
+                { id: 'css-and-theming', href: '#css-and-theming', label: 'CSS & Theming' },
                 { id: 'testing', href: '#testing', label: 'Testing' },
-                { id: 'what-we-built', href: '#what-we-built', label: 'What We Built' },
+                { id: 'summary', href: '#summary', label: 'Summary' },
                 { id: 'whats-next', href: '#whats-next', label: "What's Next" },
-                { id: 'resources', href: '#resources', label: "Resources" }
+                { id: 'resources', href: '#resources', label: "Code & Resources" }
             ]}
             // Fillers
             relatedPosts={relatedPosts}

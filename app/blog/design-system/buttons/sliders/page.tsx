@@ -28,7 +28,7 @@ export default function SlidersPage () {
                           { id: 'starting-code', href: '#starting-code', label: 'Starting Code' },
                           { id: 'onclick-handler', href: '#onclick-handler', label: 'The onClick Handler with Custom Hook' },
                           { id: 'type-safety', href: '#type-safety', label: 'Adding Type-Safety' },
-                          { id: 'css-styling', href: '#css-styling', label: 'CSS Styling' },
+                        { id: 'css-and-theming', href: '#css-and-theming', label: 'CSS & Theming' },
                           { id: 'final-touches', href: '#final-touches', label: 'Final Touches' },
                           { id: 'summary', href: '#summary', label: 'Summary' }
                         ]}

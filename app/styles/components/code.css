@@ -1,13 +1,45 @@
     .shiki-wrapper {
         position: relative;
         font-size: 1rem;
+        background: var(--color-neutral-900);
+        border-radius: var(--radius-md);
     }
 
     .shiki-wrapper .button--copy {
         position: absolute;
-        top: 2px;
-        right: 2px;
+        --button-margin: 0;
+        --button-padding-x: 0;
+        --button-padding-y: 0;
+        top: 0.5lh;
+        right: var(--spacing);
     }
+
+    .shiki-wrapper:has(.code-title) {
+        padding: var(--spacing);
+
+        .code-header {
+            padding-inline-start: var(--spacing);
+            padding-block: var(--spacing);
+            display: flex;
+            gap: var(--spacing-md);
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .button--copy {
+            position: relative;
+            top: 0;
+            right: 0;
+        }
+
+        .code-title {
+            color: var(--color-neutral-300);
+            font-style: italic;
+            font-weight: 500;
+            margin: 0;
+        }
+    }
+
 
     .shiki-wrapper pre {
         max-height: 30rem;
@@ -17,10 +49,8 @@
         border: var(--border-thick);
         border-radius: var(--radius-md);
         overflow: auto;
-        white-space: pre-wrap;
-        word-break: break-word;
-        overflow-wrap: break-word;
 
+        white-space: pre;
         scrollbar-width: auto;
         scrollbar-color: var(--color-neutral-200) transparent;
 
@@ -37,8 +67,9 @@
 
     @media (max-width: 768px) {
         .shiki-wrapper pre {
-            max-height: 24rem;
+            max-height: 22rem;
             padding-inline-end: 0;
+            font-size: var(--font-size-sm);
         }
     }
 

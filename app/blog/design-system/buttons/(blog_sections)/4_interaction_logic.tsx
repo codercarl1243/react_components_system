@@ -5,118 +5,131 @@ import Figure from "@/components/image/figure";
 import List from "@/components/list";
 import PostNote from "@/components/post/post.note";
 import PostSection from "@/components/post/post.section";
+import { BaseButtonExample } from "../examples/BaseButtonExample";
 
 
 export default function Section4() {
 
     return (
         <PostSection id="interaction-logic">
-            {/* GENERATE IMAGE FOR HERE */}
             <AnchorHeading headingLevel={2} id="interaction-logic-heading">Interaction Logic</AnchorHeading>
-            <p>Our button needs to handle both <span className="fun-underline">synchronous</span> and <span className="fun-underline">asynchronous</span> click handlers gracefully.</p>
-            <p> We extract this logic into a custom hook for several reasons:</p>
-            <List>
-                {/* <li>Reusability - Other components (like <Link>toggle buttons</Link>) will need the same logic</li> */}
-                <li><span className="bold">Reusability</span> - Other components (like toggle buttons) will need the same logic</li>
-                <li><span className="bold">Testability</span> - Isolated logic is easier to test</li>
-                <li><span className="bold">Separation of concerns</span> - Component handles rendering, hook handles behavior</li>
-                <li><span className="bold">Error handling</span> - Centralized error logging for debugging</li>
+            <p>
+                Every button interaction should feel complete: <span className="italic">"I acted. Something responded."</span>
+            </p>
+            <p>
+                Good buttons don't just execute code—they <FunHighlight>communicate</FunHighlight>. Users should always know their action was received.
+            </p>
+            <p>Try it out below:</p>
+
+            <BaseButtonExample />
+            <PostNote>
+                <p>
+                    This whimsical demo shows what's possible when buttons provide rich feedback. The bubbles are decorative, but the <span className="italic">principles</span> are production-ready:
+                </p>
+                <List ordered spacing="tight">
+                    <li>The button prevents duplicate clicks during loading (isLoading state)</li>
+                    <li>Visual feedback stays within the button's boundaries — <span className="italic">no unexpected layout shifts</span></li>
+                    <li>Visual feedback is paired with accessible announcements using a live region</li>
+                </List>
+            </PostNote>
+
+            <p>
+                Behind the scenes is a simple logging layer. Every click flows through a custom hook that tracks interactions and logs errors—without changing how errors propagate or promises resolve.
+            </p>
+            <p>
+                Before we dive into the implementation, let&apos;s clarify what responsibilities this hook needs to handle:
+            </p>
+            <p className="bold">The hook:</p>
+            <List variant="circle">
+                <li>Logs clicks in development</li>
+                <li>Logs synchronous errors (then re-throws them)</li>
+                <li>Attaches logging to unhandled Promise rejections</li>
+                <li>Doesn't interfere with return values or error handling</li>
             </List>
-            <p className="bold">The hook needs to:</p>
-            <List ordered>
-                <li>Accept any click handler (sync or async)</li>
-                <li>Catch and log errors without breaking the UI</li>
-                <li>Handle promise rejections properly</li>
-                <li>Return the result for testing purposes</li>
-            </List>
-            <p>Here's the complete implementation:</p>
-            <Code codeString={`import type { ButtonClickHandler, MouseEventType } from '@/components/button/button.type';
+
+            <Code 
+            title="useButton.tsx"
+            codeString={`import type { ButtonClickHandler, MouseEventType } from '@/components/button/button.type';
 import log from '@/lib/logging/log';
 import isThenable from '@/lib/utils/guards';
 
 export default function useButton() {
     const handleClick = (userHandler?: ButtonClickHandler) =>
-        (event: MouseEventType) => {
-            if (!userHandler) return
 
-            try {
+    // The actual click handler
+    (event: MouseEventType) => {
+        if (!userHandler) return
+
+        try {
             const result = userHandler(event)
 
-            // Log all button clicks for analytics/debugging
             if (process.env.NODE_ENV !== 'production') {
-               // Add your custom logging solution here
+                log();
             }
+/**
+ * Note: This only catches rejections that the user handler did NOT catch.
+ * If the user handler has its own try/catch, this won't do anything.
+ * See the isThenable function in the Resources section.
+*/
             if (isThenable(result)) {
-                /**
-                 * Attach error logging to unhandled promise rejections.
-                 * Uses void to indicate we're intentionally not awaiting this promise.
-                 * 
-                 * Note: This only catches rejections that the user handler did NOT catch.
-                 * If the user handler has its own try/catch, this won't fire or do anything.
-                 */
                 void Promise.resolve(result).catch((err) => {
-                    // Add your custom logging solution here
-                })
+                    log();
+                });
             }
-            } catch (err) {
-            /**
-             * Catch synchronous errors thrown during handler execution.
-             * Log the error for debugging, then re-throw so the error still
-             * propagates (breaks execution, shows in console, etc.)
-             */
-            // Add your custom logging solution here
+        } catch (err) {
+            log();
             throw err
-            }
         }
+    }
 
     return { handleClick }
 }`} />
-            <PostNote>
-                The hook uses a utility function <Code codeString="isThenable" inline copyEnabled={false} /> to check if the result is a Promise-like object. This ensures we handle both native Promises and custom thenables correctly.
 
-                <Code codeString="function isThenable(value: unknown): value is PromiseLike<unknown> {
-  return (
-    value !== null &&
-    typeof value === 'object' &&
-    typeof (value as PromiseLike<unknown>).then === 'function'
-  )
-}"/>
-            </PostNote>
-            <AnchorHeading headingLevel={3}>Why this approach</AnchorHeading>
+            <AnchorHeading headingLevel={3}>Why These Choices Matter</AnchorHeading>
+            <p>
+                Each of these choices may seem small, but together they create a robust, fault-tolerant interaction layer that behaves consistently across environments.
+            </p>
             <List variant="circle" spacing="loose">
                 <li>
                     <p>
-                        <span className="bold">Curried function</span> - <Code codeString="handleClick(onClick)(event)" inline copyEnabled={false} /> allows us to configure the handler once and reuse it.</p>
-                </li>
-                <li>
-                    <p>
-                        <span className="bold">Duck typing for Promises</span> - We use a helper function that checks for a <Code codeString=".then" inline copyEnabled={false} /> method rather than using <Code codeString="instanceof Promise" inline copyEnabled={false} /> because the handler might return a <span className="italic">Promise-like</span> object.
-                    </p>
-                    <p>
-                        This is a little bit more verbose and not as pretty but 2 extra lines ensures we don&apos;t miss the edges.
-
+                        <span className="bold">Curried function</span> - <Code codeString="handleClick(onClick)(event)" inline copyEnabled={false} /> allows us to configure the handler once and reuse it.
                     </p>
                 </li>
                 <li>
                     <p>
-                        <span className="bold">The <Code codeString="void" inline copyEnabled={false} /> operator</span> - Signals we're intentionally not awaiting the Promise (prevents ESLint "floating promise" warnings).
-                    </p>
-                    <p>
-                        We use <Code codeString="Promise.resolve().catch()" inline copyEnabled={false} /> to log unhandled rejections. If the user's handler already has error handling, our logging never runs.
+                        <span className="bold">Duck typing for Promises</span> - We check for a <Code codeString=".then" inline copyEnabled={false} /> method rather than using <Code codeString="instanceof Promise" inline copyEnabled={false} /> because the handler might return a <span className="italic">Promise-like</span> object.
                     </p>
                 </li>
                 <li>
                     <p>
-                        <span className="bold">Centralized logging</span> - Errors are logged consistently across all buttons. This is one of the main reasons we extract this logic into a hook rather than handling it in each component.
+                        <span className="bold">The <Code codeString="void" inline copyEnabled={false} /> operator</span> - Signals that we intentionally don&apos;t await the Promise (prevents ESLint "floating promise" warnings).
+                    </p>
+                    <p className="italic">
+                        We use <Code codeString="Promise.resolve().catch()" inline copyEnabled={false} /> to log unhandled rejections. If the user&apos;s handler already has error handling, our logging never runs.
                     </p>
                 </li>
                 <li>
                     <p>
-                        <span className="bold">Re-throw synchronous errors</span> - By re-throwing with <Code inline codeString="throw err" copyEnabled={false} />, we allow React error boundaries to catch and handle errors. This prevents the UI from breaking silently.
-                        <span className="bold">Async errors</span> are logged but not re-thrown since this occurs <FunHighlight>after the promise rejects.</FunHighlight>
+                        <span className="bold">Centralized logging</span> - Errors are logged consistently across all buttons. In development, we can easily toggle logging via an environment variable to inspect interactions.
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        <span className="bold">Re-throw synchronous errors</span> - Logging happens, then errors propagate to React error boundaries as normal. The hook doesn't suppress or handle errors — it just observes them.
                     </p>
                 </li>
             </List>
+            <Figure
+                alt={"Button error handling flow diagram"}
+                src={'/images/handleClick_flow.webp'}
+                sources={[
+                    { media: '(max-width: 560px)', srcSet: '/images/handleClick_Flow_vertical.webp' },
+                ]}
+                caption={
+                    <>
+                        The onClick handler ensures that we log both synchronous errors <span className="bold italic">(caught and re-thrown immediately)</span> and asynchronous errors <span className="bold italic">(logged via attached <Code codeString=".catch()" copyEnabled={false} inline /> handler when Promise rejects later)</span>.
+                    </>}
+            />
             <PostNote>
                 <p>
                     <span className="bold">Why doesn't the hook await?</span> We use a fire-and-forget pattern with <Code codeString="void Promise.resolve().catch()" inline copyEnabled={false} /> to log unhandled errors without forcing the button handler to be async.
@@ -124,19 +137,7 @@ export default function useButton() {
                 <p>
                     This keeps the component API simple while ensuring errors don't disappear silently. The Promise continues executing, but we've attached logging to catch any rejections that weren't already handled.
                 </p>
-                <Figure
-                    alt={"Button error handling flow diagram"}
-                    src={'/images/handleClick_flow.webp'}
-                    sources={[
-                        { media: '(max-width: 560px)', srcSet: '/images/handleClick_Flow_vertical.webp' },
-                    ]}
-                    caption={
-                        <>
-                            The onClick handler ensures that we log both synchronous errors <span className="bold italic">(caught and re-thrown immediately)</span> and asynchronous errors <span className="bold italic">(logged via attached <Code codeString=".catch()" copyEnabled={false} inline /> handler when Promise rejects later)</span>.
-                        </>}
-                />
             </PostNote>
-
         </PostSection>
     )
 }

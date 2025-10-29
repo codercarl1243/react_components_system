@@ -1,115 +1,84 @@
+import { logError, logInfo } from '@/lib/logging/log'
 import { createHighlighter, type Highlighter, type ThemeRegistration } from 'shiki'
 
-class ShikiSingleton {
-  private static instance: ShikiSingleton | null = null
-  private highlighter: Highlighter | null = null
-  private customTheme: ThemeRegistration | null = null
-  private initPromise: Promise<Highlighter> | null = null
 
-  private constructor () {
-    // Private constructor prevents direct instantiation
-  }
+declare global {
+  var __highlighterPromise: Promise<Highlighter> | undefined
+  var __customTheme: ThemeRegistration | undefined
+}
+const globalForShiki = globalThis
 
-  static getInstance (): ShikiSingleton {
-    if (!ShikiSingleton.instance) {
-      ShikiSingleton.instance = new ShikiSingleton()
+
+export async function getHighlighterSingleton(): Promise<Highlighter> {
+  if (!globalForShiki.__highlighterPromise) {
+    if (process.env.NODE_ENV !== 'production') {
+      logInfo('🟦 Creating new Shiki highlighter', { context: `getHighlighterSingleton` })
     }
-    return ShikiSingleton.instance
-  }
-
-  async getHighlighter (): Promise<Highlighter> {
-    if (this.highlighter) return this.highlighter
-    if (this.initPromise) return this.initPromise
-
-    this.initPromise = createHighlighter({
+    const highlighterPromise = createHighlighter({
       themes: ['github-dark'],
       langs: ['tsx', 'ts', 'css', 'md', 'bash']
-    }).then((h) => {
-      this.highlighter = h
-      if (process.env.NODE_ENV !== 'production') {
-        // eslint-disable-next-line no-console
-        console.debug('Shiki highlighter created successfully')
-      }
-      return h
+    }).catch(err => {
+      // reset cache so a later retry can succeed
+      delete globalForShiki.__highlighterPromise
+      logError('Failed to create shiki Highlighter', err, { context: "getHighlighterSingleton" })
+      throw err
     })
-
-    return this.initPromise
+    globalForShiki.__highlighterPromise = highlighterPromise
   }
+  return globalForShiki.__highlighterPromise
+}
 
-  async getCustomTheme (): Promise<ThemeRegistration> {
-    if (this.customTheme) {
-      return this.customTheme
-    }
+/**
+ * Builds a custom GitHub Dark theme variant with modified colors.
+ */
+export async function getCustomGithubDark(): Promise<ThemeRegistration> {
+  if (globalForShiki.__customTheme) return globalForShiki.__customTheme
 
-    const highlighter = await this.getHighlighter()
-    const baseTheme = highlighter.getTheme('github-dark')
+  const highlighter = await getHighlighterSingleton()
+  const baseTheme = highlighter.getTheme('github-dark')
 
-    this.customTheme = {
-      ...baseTheme,
-      name: 'custom-github-dark',
-      settings: [
-        {
-          settings: {
-            foreground: baseTheme.settings?.[0]?.settings?.foreground || '#e1e4e8',
-            background: '#1c1e24'
-          }
+  const customTheme: ThemeRegistration = {
+    ...baseTheme,
+    name: 'custom-github-dark',
+    settings: [
+      {
+        settings: {
+          foreground: baseTheme.settings?.[0]?.settings?.foreground || '#e1e4e8',
+          background: '#1c1e24',
         },
-        ...(baseTheme.settings || []).slice(1).filter((token) => {
-          if (!token.scope) return true
-
-          const scopes = Array.isArray(token.scope) ? token.scope : [token.scope]
-          return !scopes.some((scope: string) =>
-            scope === 'comment' ||
-                        scope === 'punctuation.definition.comment' ||
-                        scope === 'string.comment' ||
-                        scope.includes('comment')
-          )
-        }),
-        {
-          scope: [
-            'comment',
-            'punctuation.definition.comment',
-            'string.comment'
-          ],
-          settings: {
-            foreground: '#9198a1',
-            fontStyle: 'italic'
-          }
-        }
-      ],
-      colors: {
-        ...baseTheme.colors,
-        'editor.background': '#1c1e24',
-        comment: '#9198a1'
       },
-      colorReplacements: {
-        '#24292e': '#1c1e24'
-      }
-    }
-
-    return this.customTheme
+      ...(baseTheme.settings || []).slice(1).filter((token) => {
+        if (!token.scope) return true
+        const scopes = Array.isArray(token.scope) ? token.scope : [token.scope]
+        return !scopes.some((s: string) =>
+          s === 'comment' ||
+          s === 'punctuation.definition.comment' ||
+          s === 'string.comment' ||
+          s.includes('comment')
+        )
+      }),
+      {
+        scope: [
+          'comment',
+          'punctuation.definition.comment',
+          'string.comment',
+        ],
+        settings: {
+          foreground: '#9198a1',
+          fontStyle: 'italic',
+        },
+      },
+    ],
+    colors: {
+      ...baseTheme.colors,
+      'editor.background': '#1c1e24',
+      comment: '#9198a1',
+    },
+    colorReplacements: {
+      '#24292e': '#1c1e24',
+    },
   }
 
-  dispose (): void {
-    if (this.highlighter) {
-      this.highlighter.dispose?.()
-      this.highlighter = null
-    }
-    this.customTheme = null
-    this.initPromise = null
-    ShikiSingleton.instance = null
-  }
-}
-
-// Export convenience functions
-export async function getHighlighterSingleton (): Promise<Highlighter> {
-  return ShikiSingleton.getInstance().getHighlighter()
-}
-
-export async function getCustomGithubDark (): Promise<ThemeRegistration> {
-  return ShikiSingleton.getInstance().getCustomTheme()
-}
-
-export function disposeHighlighter (): void {
-  ShikiSingleton.getInstance().dispose()
+  globalForShiki.__customTheme = customTheme
+  return customTheme
 }

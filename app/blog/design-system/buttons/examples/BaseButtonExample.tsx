@@ -1,7 +1,7 @@
 'use client';
 import Button from "@/components/button";
 import { RiBubbleChartLine, RiWindyLine } from "@remixicon/react";
-import { useEffect, useRef, useState } from "react";
+import { type CSSProperties, type ReactNode, useEffect, useRef, useState } from "react";
 
 type TBubble = {
     id: string;
@@ -14,7 +14,7 @@ type TBubble = {
     isPopping: boolean;
 };
 
-type TSparkle = {
+type TSplatter = {
     id: string;
     x: number;
     y: number;
@@ -25,32 +25,34 @@ type TSparkle = {
     color: string;
 };
 
-type BubbleId = string;
-type BubbleTimeouts = {
-    removeFromDOMTimeout: NodeJS.Timeout;
-    popTimeout: NodeJS.Timeout;
-}
-type TimeoutRef = Map<BubbleId, BubbleTimeouts>;
+type Timeout = ReturnType<typeof setTimeout>;
 
+const POP_ANIMATION_DURATION = 400;
+const SPLATTER_ANIMATION_DURATION = 800;
+const COOLDOWN_DURATION = 300;
+const MIN_BUBBLE_LIFETIME = 3000;
+const MAX_BUBBLE_LIFETIME = 7000;
 
-export function BaseButtonExample() {
+export function BaseButtonExample({ children }: { children?: ReactNode }) {
     const [bubbles, setBubbles] = useState<TBubble[]>([]);
-    const [sparkles, setSparkles] = useState<TSparkle[]>([]);
-
-    const timeoutsRef = useRef<TimeoutRef>(new Map());
-    const pendingTimeoutsRef = useRef<Set<NodeJS.Timeout>>(new Set())
+    const [splatters, setSplatters] = useState<TSplatter[]>([]);
+    const timeoutsRef = useRef<Set<Timeout>>(new Set());
     const cooldownRef = useRef<boolean>(false);
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const bubbleIdCounter = useRef(0);
+    const splatterCounter = useRef(0)
+
+    const createTimeout = (callback: () => void, delay: number) => {
+        const timeout = setTimeout(() => {
+            callback();
+            timeoutsRef.current.delete(timeout);
+        }, delay);
+        timeoutsRef.current.add(timeout);
+        return timeout;
+    };
 
     const removeBubble = (bubbleId: string) => {
         setBubbles(prev => prev.filter(b => b.id !== bubbleId));
-        const timeouts = timeoutsRef.current.get(bubbleId);
-        if (timeouts) {
-            clearTimeout(timeouts.removeFromDOMTimeout);
-            clearTimeout(timeouts.popTimeout);
-            timeoutsRef.current.delete(bubbleId);
-        }
     };
 
     const addBubble = () => {
@@ -59,74 +61,65 @@ export function BaseButtonExample() {
         cooldownRef.current = true;
         setIsLoading(true);
 
-        const cooldownT = setTimeout(() => {
+        createTimeout(() => {
             cooldownRef.current = false;
             setIsLoading(false);
-            pendingTimeoutsRef.current.delete(cooldownT);
-        }, 300);
+        }, COOLDOWN_DURATION)
 
-        pendingTimeoutsRef.current.add(cooldownT);
-
-        const LIFE_TIME = 3000 + Math.random() * 4000; // 3-7s
-        const POP_DURATION = 400;
-        const BUBBLE_ID = `bubble-${bubbleIdCounter.current++}`;
-        const BUBBLE_COLOR = `--color-emphasis-${(Math.floor(Math.random() * 9) + 1) * 100}`
-        const BUBBLE_SIZE = 20 + Math.random() * 40;
+        const lifetime = MIN_BUBBLE_LIFETIME + Math.random() * (MAX_BUBBLE_LIFETIME - MIN_BUBBLE_LIFETIME);
+        const bubbleId = `bubble-${bubbleIdCounter.current++}`;
+        const bubbleColor = `--color-emphasis-${(Math.floor(Math.random() * 9) + 1) * 100}`
+        const bubbleSize = 20 + Math.random() * 40;
 
         const bubble: TBubble = {
-            id: BUBBLE_ID,
+            id: bubbleId,
             left: `${10 + Math.random() * 80}vw`,
             top: `${10 + Math.random() * 80}vh`,
-            size: `${BUBBLE_SIZE}px`,
-            cssColorVar: BUBBLE_COLOR,
+            size: `${bubbleSize}px`,
+            cssColorVar: bubbleColor,
             floatAnimation: `float${Math.floor(Math.random() * 3) + 1}`,
-            animationLength: LIFE_TIME,
+            animationLength: lifetime,
             isPopping: false
         };
 
         setBubbles((prev) => [...prev, bubble]);
-
-        // Set bubble to popping state and create sparkles
-        const popTimeout = setTimeout(() => {
-            setBubbles(prev => prev.map(b =>
-                b.id === BUBBLE_ID ? { ...b, isPopping: true } : b
-            ));
-
-            // Create sparkles
-            const bubbleElement = document.querySelector(`[data-bubble-id="${BUBBLE_ID}"]`) as HTMLElement;
-            if (bubbleElement) {
-                createSplatter(bubbleElement, BUBBLE_COLOR, BUBBLE_SIZE);
-            }
-        }, LIFE_TIME - POP_DURATION);
-
-        const removeFromDOMTimeout = setTimeout(() => removeBubble(BUBBLE_ID), LIFE_TIME);
-
-        // Store timeouts for cleanup
-        timeoutsRef.current.set(bubble.id, { removeFromDOMTimeout, popTimeout });
+        createTimeout(() => {
+            popBubble(bubbleId);
+        }, lifetime - POP_ANIMATION_DURATION)
     };
-    const popBubble = (bubbleId: string) => {
-        const bubbleElement = document.querySelector(`[data-bubble-id="${bubbleId}"]`) as HTMLElement;
-        // Find bubble in state
-        const bubble = bubbles.find(b => b.id === bubbleId);
-        if (!bubble || !bubbleElement) return;
 
-        removeBubble(bubbleId)
-        createSplatter(bubbleElement, bubble.cssColorVar, parseInt(bubble.size));
+    const popBubble = (bubbleId: string) => {
+        setBubbles((prev) => {
+            const bubble = prev.find(b => b.id === bubbleId);
+            if (!bubble) return prev;
+
+            const domElement = document.querySelector(`[data-bubble-id="${bubbleId}"]`) as HTMLElement;
+            if (domElement) {
+                createSplatter(domElement, bubble.cssColorVar, parseInt(bubble.size), bubble.id);
+            }
+
+            return prev.map((b) => (b.id === bubbleId ? { ...b, isPopping: true } : b));
+        });
+        createTimeout(() => {
+            removeBubble(bubbleId);
+        }, POP_ANIMATION_DURATION)
+
     }
-    const createSplatter = (bubbleElement: HTMLElement, bubbleColor: string, bubbleSize: number) => {
+
+    const createSplatter = (bubbleElement: HTMLElement, bubbleColor: string, bubbleSize: number, bubbleId: string) => {
         const rect = bubbleElement.getBoundingClientRect();
         const centerX = rect.left + rect.width / 2;
         const centerY = rect.top + rect.height / 2;
 
-        const sparkleCount = 6 + Math.floor(Math.random() * 3);
-        const newSparkles: TSparkle[] = [];
+        const splatterCount = 6 + Math.floor(Math.random() * 3);
+        const newSplatters: TSplatter[] = [];
 
-        for (let i = 0; i < sparkleCount; i++) {
-            const angle = (Math.PI * 2 * i) / sparkleCount + Math.random() * 0.5;
+        for (let i = 0; i < splatterCount; i++) {
+            const angle = (Math.PI * 2 * i) / splatterCount + Math.random() * 0.5;
             const distance = bubbleSize + Math.random() * 30;
 
-            newSparkles.push({
-                id: `sparkle-${Date.now()}-${i}`,
+            newSplatters.push({
+                id: `splatter-${bubbleId}-${splatterCounter.current++}`,
                 x: centerX,
                 y: centerY,
                 size: `${1 + Math.random() * 4}px`,
@@ -137,23 +130,22 @@ export function BaseButtonExample() {
             });
         }
 
-        setSparkles(prev => [...prev, ...newSparkles]);
+        setSplatters(prev => [...prev, ...newSplatters]);
+        const maxDelayMs = Math.max(0, ...newSplatters.map(s => parseFloat(s.delay)));
 
-        // Remove sparkles after animation
-        const sparkleCleanupT = setTimeout(() => {
-            setSparkles(prev => prev.filter(sparkle =>
-                !newSparkles.some(newSparkle => newSparkle.id === sparkle.id)
-            ));
-            pendingTimeoutsRef.current.delete(sparkleCleanupT);
-        }, 800);
-        pendingTimeoutsRef.current.add(sparkleCleanupT);
+        createTimeout(() => {
+            setSplatters(prev =>
+                prev.filter(splatter => !splatter.id.startsWith(`splatter-${bubbleId}`))
+            );
+        }, SPLATTER_ANIMATION_DURATION + maxDelayMs);
     };
 
     const generateBubble = ({ id, left, top, size, cssColorVar, floatAnimation, animationLength, isPopping }: TBubble) => {
         return (
             <div
+                key={id}
                 data-bubble-id={id}
-                className={`bubble`}
+                className="bubble"
                 style={{
                     left,
                     top,
@@ -163,6 +155,7 @@ export function BaseButtonExample() {
                 <Button
                     className="bubble-inner"
                     onClick={() => popBubble(id)}
+                    id={id}
                     style={{
                         width: size,
                         height: size,
@@ -170,7 +163,7 @@ export function BaseButtonExample() {
                         outlineColor: `var(${cssColorVar})`,
                         borderColor: `var(${cssColorVar})`,
                         animation: isPopping
-                            ? `rotate ${animationLength}ms cubic-bezier(0.25, 0.1, 0.25, 1) forwards, pop 400ms cubic-bezier(0.25, -1, 0, 1) forwards`
+                            ? `rotate ${animationLength}ms cubic-bezier(0.25, 0.1, 0.25, 1) forwards, pop ${POP_ANIMATION_DURATION}ms cubic-bezier(0.25, -1, 0, 1) forwards`
                             : `rotate ${animationLength}ms cubic-bezier(0.25, 0.1, 0.25, 1) forwards`
                     }}
                 />
@@ -178,10 +171,10 @@ export function BaseButtonExample() {
         );
     };
 
-    type CSSWithVars = React.CSSProperties & Record<'--end-x' | '--end-y', string>;
+    type CSSWithVars = CSSProperties & Record<'--end-x' | '--end-y', string>;
     const generateSplatter = ({
-        x, y, size, delay, endX, endY, color
-    }: TSparkle) => {
+        x, y, size, delay, endX, endY, color, id
+    }: TSplatter) => {
         const styleObject: CSSWithVars = {
             left: `${x}px`,
             top: `${y}px`,
@@ -192,39 +185,37 @@ export function BaseButtonExample() {
             ['--end-x']: `${endX - x}px`,
             ['--end-y']: `${endY - y}px`,
         }
+
         return (
             <div
+                key={id}
                 className="splatter"
                 style={styleObject}
+                // onAnimationEnd={() => setSplatters(prev => prev.filter(s => s.id !== id))}
             />
         )
     }
 
-
-
-    // Cleanup on unmount
     useEffect(() => {
         return () => {
-            timeoutsRef.current.forEach((timeout) => {
-                clearTimeout(timeout.removeFromDOMTimeout);
-                clearTimeout(timeout.popTimeout);
-            });
+            timeoutsRef.current.forEach(clearTimeout);
             timeoutsRef.current.clear();
-            pendingTimeoutsRef.current.forEach(clearTimeout);
-            pendingTimeoutsRef.current.clear()
         };
     }, []);
 
     const loadingText = "Taking a breath";
-    const text = " Blow a Bubble ";
+    const text = "Blow a Bubble";
+
     return (
         <div className="button-example--base">
-            <p id="bubble-description">
-                Creates a decorative bubble that floats upward and disappears with sparkles
+            <div id="bubble-description" className="flow-4">
+                <p>Creates a decorative bubble that floats upward and disappears with a 'Pop!'.</p>
+                <p>Click on a Bubble to <span className="italic">pop</span> it.</p>
+                <p>Current Number of Bubbles: <span style={{ color: 'var(--color-accent-400)' }}>{bubbles.length}</span></p>
                 <span className="sr-only" role="status">
                     {isLoading ? loadingText : text}
                 </span>
-            </p>
+            </div>
             <Button
                 onClick={addBubble}
                 isLoading={isLoading}
@@ -233,11 +224,11 @@ export function BaseButtonExample() {
                 aria-describedby="bubble-description"
                 icon={isLoading ? RiBubbleChartLine : RiWindyLine}
             >
-                {isLoading ? loadingText : text}
+                {text}
             </Button>
-
-            {bubbles.map((bubble) => <div key={bubble.id}>{generateBubble(bubble)}</div>)}
-            {sparkles.map((sparkle) => <div key={sparkle.id}>{generateSplatter(sparkle)}</div>)}
+            {bubbles.map(generateBubble)}
+            {splatters.map(generateSplatter)}
+            {children}
         </div>
     )
 }
