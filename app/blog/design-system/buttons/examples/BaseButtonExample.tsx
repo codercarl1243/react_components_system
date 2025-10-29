@@ -191,7 +191,6 @@ export function BaseButtonExample({ children }: { children?: ReactNode }) {
                 key={id}
                 className="splatter"
                 style={styleObject}
-                // onAnimationEnd={() => setSplatters(prev => prev.filter(s => s.id !== id))}
             />
         )
     }
