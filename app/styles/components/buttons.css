@@ -1,8 +1,8 @@
 .button {
     /* Layout properties */
     --button-font-size: 1rem;
-    --button-margin: calc(var(--spacing) * 2);
-    --button-padding-y: calc(var(--spacing) * 2);
+    --button-margin: var(--spacing-sm);
+    --button-padding-y: var(--spacing-sm);
     --button-padding-x: var(--spacing);
     --button-icon-width: 24px;
     --button-spinner-width: 24px;
@@ -18,7 +18,7 @@
     align-items: center;
     white-space: nowrap;
 
-    /* text | spinner */
+    /* icon | text | spinner */
     & .button__content {
         grid-column: 2;
     }
@@ -28,7 +28,6 @@
         justify-self: center;
     }
 
-    /* icon | text | spinner */
     &.button-w-icon .icon {
         grid-column: 1;
         justify-self: center;
