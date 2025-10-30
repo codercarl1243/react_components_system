@@ -9,6 +9,7 @@ import PostNote from "@/components/post/post.note";
 import PostSection from "@/components/post/post.section";
 import { RiContrastLine, RiKeyboardLine, RiBrainLine, RiShieldCheckLine } from "@remixicon/react";
 import Link from "@/components/link";
+import InlineCode from "@/components/code/inlineCode";
 
 export default function Section6() {
 
@@ -83,7 +84,7 @@ export default function Section6() {
                     </li>
                     <li>
                         <p>
-                            <span className="bold">The aria-disabled decision:</span> We use <Code codeString="aria-disabled" inline copyEnabled={false} /> instead of the native <Code codeString="disabled" inline copyEnabled={false} /> attribute.
+                            <span className="bold">The aria-disabled decision:</span> We use <InlineCode codeString="aria-disabled" /> instead of the native <InlineCode codeString="disabled" /> attribute.
                         </p>
                         <p>This ensures that the button remains in the accessibility tree, preserves discoverability, and maintains tab order.</p>
                     </li>
@@ -108,10 +109,10 @@ min-height: 44px;`} copyEnabled={false} />
 
                 </List>
                 <PostNote>
-                    <p><span className="bold">Why <Code inline codeString="aria-disabled" copyEnabled={false} /> instead of <Code inline codeString="disabled" copyEnabled={false} />?</span></p>
+                    <p><span className="bold">Why <InlineCode codeString="aria-disabled" /> instead of <InlineCode codeString="disabled" />?</span></p>
                     <List variant="none">
-                        <li><Code inline codeString="disabled" copyEnabled={false} /> removes the element from the accessibility tree and tab order.</li>
-                        <li><Code inline codeString="aria-disabled" copyEnabled={false} /> keeps the button focusable, ensuring it remains discoverable.</li>
+                        <li><InlineCode codeString="disabled" /> removes the element from the accessibility tree and tab order.</li>
+                        <li><InlineCode codeString="aria-disabled" /> keeps the button focusable, ensuring it remains discoverable.</li>
                     </List>
                     <p>
                         We pair this with click prevention in JavaScript — stopping propagation and default behavior to simulate a <span className="italic">“true”</span> disabled button while staying accessible.

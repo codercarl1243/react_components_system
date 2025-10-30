@@ -6,6 +6,7 @@ import List from "@/components/list";
 import PostNote from "@/components/post/post.note";
 import PostSection from "@/components/post/post.section";
 import { BaseButtonExample } from "../examples/BaseButtonExample";
+import InlineCode from "@/components/code/inlineCode";
 
 
 export default function Section4() {
@@ -47,9 +48,9 @@ export default function Section4() {
                 <li>Doesn't interfere with return values or error handling</li>
             </List>
 
-            <Code 
-            title="useButton.tsx"
-            codeString={`import type { ButtonClickHandler, MouseEventType } from '@/components/button/button.type';
+            <Code
+                title="useButton.tsx"
+                codeString={`import type { ButtonClickHandler, MouseEventType } from '@/components/button/button.type';
 import log from '@/lib/logging/log';
 import isThenable from '@/lib/utils/guards';
 
@@ -92,20 +93,20 @@ export default function useButton() {
             <List variant="circle" spacing="loose">
                 <li>
                     <p>
-                        <span className="bold">Curried function</span> - <Code codeString="handleClick(onClick)(event)" inline copyEnabled={false} /> allows us to configure the handler once and reuse it.
+                        <span className="bold">Curried function</span> - <InlineCode codeString="handleClick(onClick)(event)" /> allows us to configure the handler once and reuse it.
                     </p>
                 </li>
                 <li>
                     <p>
-                        <span className="bold">Duck typing for Promises</span> - We check for a <Code codeString=".then" inline copyEnabled={false} /> method rather than using <Code codeString="instanceof Promise" inline copyEnabled={false} /> because the handler might return a <span className="italic">Promise-like</span> object.
+                        <span className="bold">Duck typing for Promises</span> - We check for a <InlineCode codeString=".then" /> method rather than using <InlineCode codeString="instanceof Promise" /> because the handler might return a <span className="italic">Promise-like</span> object.
                     </p>
                 </li>
                 <li>
                     <p>
-                        <span className="bold">The <Code codeString="void" inline copyEnabled={false} /> operator</span> - Signals that we intentionally don&apos;t await the Promise (prevents ESLint "floating promise" warnings).
+                        <span className="bold">The <InlineCode codeString="void" /> operator</span> - Signals that we intentionally don&apos;t await the Promise (prevents ESLint "floating promise" warnings).
                     </p>
                     <p className="italic">
-                        We use <Code codeString="Promise.resolve().catch()" inline copyEnabled={false} /> to log unhandled rejections. If the user&apos;s handler already has error handling, our logging never runs.
+                        We use <InlineCode codeString="Promise.resolve().catch()" /> to log unhandled rejections. If the user&apos;s handler already has error handling, our logging never runs.
                     </p>
                 </li>
                 <li>
@@ -127,12 +128,12 @@ export default function useButton() {
                 ]}
                 caption={
                     <>
-                        The onClick handler ensures that we log both synchronous errors <span className="bold italic">(caught and re-thrown immediately)</span> and asynchronous errors <span className="bold italic">(logged via attached <Code codeString=".catch()" copyEnabled={false} inline /> handler when Promise rejects later)</span>.
+                        The onClick handler ensures that we log both synchronous errors <span className="bold italic">(caught and re-thrown immediately)</span> and asynchronous errors <span className="bold italic">(logged via attached <InlineCode codeString=".catch()" /> handler when Promise rejects later)</span>.
                     </>}
             />
             <PostNote>
                 <p>
-                    <span className="bold">Why doesn't the hook await?</span> We use a fire-and-forget pattern with <Code codeString="void Promise.resolve().catch()" inline copyEnabled={false} /> to log unhandled errors without forcing the button handler to be async.
+                    <span className="bold">Why doesn't the hook await?</span> We use a fire-and-forget pattern with <InlineCode codeString="void Promise.resolve().catch()" /> to log unhandled errors without forcing the button handler to be async.
                 </p>
                 <p>
                     This keeps the component API simple while ensuring errors don't disappear silently. The Promise continues executing, but we've attached logging to catch any rejections that weren't already handled.

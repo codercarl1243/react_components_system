@@ -1,4 +1,5 @@
 import Code from "@/components/code";
+import InlineCode from "@/components/code/inlineCode";
 import FunHighlight from "@/components/decorations/FunHighlight";
 import AnchorHeading from "@/components/heading/anchorHeading";
 import Link from "@/components/link";
@@ -196,12 +197,12 @@ export default function Section7() {
             <AnchorHeading headingLevel={3} id="css-button-states">Button States</AnchorHeading>
             <AnchorHeading headingLevel={4} id="css-interactions">Interaction states</AnchorHeading>
             <p>
-                <Code inline copyEnabled={false} codeString=":hover" />, <Code inline copyEnabled={false} codeString=":focus" />, and <Code inline copyEnabled={false} codeString=":active" /> states communicate affordance. We use outline and subtle transforms <span className="fun-underline">instead of color alone</span> — ensuring <span className="bold">contrast</span> and <span className="bold">motion</span> respect user preferences.
+                <InlineCode lang="css" codeString=":hover" />, <InlineCode lang="css" codeString=":focus" />, and <InlineCode lang="css" codeString=":active" /> states communicate affordance. We use outline and subtle transforms <span className="fun-underline">instead of color alone</span> — ensuring <span className="bold">contrast</span> and <span className="bold">motion</span> respect user preferences.
             </p>
             <AnchorHeading headingLevel={4} id="css-disabled">Disabled & Loading States</AnchorHeading>
             <p>
-                Disabled buttons use <Code inline copyEnabled={false} codeString="aria-disabled" /> and custom visual styles that
-                remain discoverable. The <Code inline copyEnabled={false} codeString="cursor: not-allowed" /> communicates the state
+                Disabled buttons use <InlineCode codeString="aria-disabled" /> and custom visual styles that
+                remain discoverable. The <InlineCode lang="css" codeString="cursor: not-allowed" /> communicates the state
                 without removing interactivity from assistive technology.
             </p>
             <AnchorHeading headingLevel={3} id="css-touch-devices">Touch Device Optimization</AnchorHeading>
@@ -211,7 +212,7 @@ export default function Section7() {
             </p>
             <AnchorHeading headingLevel={3} id="css-user-preferences">Respecting User Preferences</AnchorHeading>
             <p>
-                We disable transitions and animations when <Code inline codeString="prefers-reduced-motion" /> is detected.
+                We disable transitions and animations when <InlineCode lang="css" codeString="prefers-reduced-motion" /> is detected.
                 <span className="fun-underline">Accessibility is baked in — not added later</span>.
             </p>
         </PostSection>
