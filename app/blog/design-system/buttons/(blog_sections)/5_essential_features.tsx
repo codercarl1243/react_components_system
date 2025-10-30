@@ -30,8 +30,8 @@ export default function Section5() {
             </AnchorHeading>
             <p>Buttons often trigger asynchronous actions — saving data, submitting forms, or making API calls. A good design system must <FunHighlight>communicate progress clearly</FunHighlight> to the user while preventing accidental re-triggers.</p>
             <p className="bold">Our implementation is simple and composable:</p>
-            <InlineCode codeString="{isLoading && <Spinner />}"/>
-            <p> The <InlineCode codeString="Spinner" /> appears alongside the button label without shifting layout, maintaining predictable spacing. We also expose a <InlineCode codeString="data-loading" /> attribute so CSS can respond directly to loading state:</p>
+            
+            <p><InlineCode codeString="{isLoading && <Spinner />}"/> - The <InlineCode codeString="Spinner" /> appears alongside the button label without shifting layout, maintaining predictable spacing. We also expose a <InlineCode codeString="data-loading" /> attribute so CSS can respond directly to loading state:</p>
             <Code
                 lang="css"
                 copyEnabled={false}
