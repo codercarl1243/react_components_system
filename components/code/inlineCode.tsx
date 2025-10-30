@@ -8,7 +8,7 @@ export default async function InlineCode({
 
     const highlighter = await getHighlighterSingleton()
     const loadedLanguages = new Set(highlighter.getLoadedLanguages?.() ?? [])
-    const safeLanguage = (loadedLanguages.has(lang) ? lang : 'plaintext') as SupportedLangs
+    const safeLanguage = (loadedLanguages.has(lang) ? lang : 'text') as SupportedLangs
     const inlineTheme = await getInlineCodeTheme();
 
     const out = highlighter.codeToHtml(

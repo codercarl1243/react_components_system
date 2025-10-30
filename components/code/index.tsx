@@ -22,7 +22,7 @@ export default async function Code({
   
   const highlighter = await getHighlighterSingleton()
   const loadedLanguages = new Set(highlighter.getLoadedLanguages?.() ?? [])
-  const safeLanguage = (loadedLanguages.has(lang) ? lang : 'plaintext') as SupportedLangs
+  const safeLanguage = (loadedLanguages.has(lang) ? lang : 'text') as SupportedLangs
   const customTheme = await getCustomTheme()
 
   const out = highlighter.codeToHtml(
@@ -49,5 +49,3 @@ export default async function Code({
     </div>
   )
 }
-
-
