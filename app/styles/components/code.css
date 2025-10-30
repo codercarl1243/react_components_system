@@ -63,6 +63,19 @@
             background-color: var(--color-neutral-100);
             border-radius: var(--radius-sm);
         }
+
+        code {
+            line-height: 1.5;
+        }
+
+        .line {
+            display: inline-flex;
+            width: 100%;
+        }
+
+        .line:hover {
+            background-color: var(--color-neutral-900);
+        }
     }
 
     @media (max-width: 768px) {
@@ -74,14 +87,13 @@
     }
 
     .shiki-inline {
-        /* theme colors */
-        background-color: var(--color-code-dark);
-        color: var(--color-code-light);
-        /* theme colors */
+        background-color: var(--color-inline-bg);
         border: var(--border-thin);
         padding: 0.125em 0.2em;
         border-radius: var(--radius-md);
         white-space: pre-wrap;
         word-break: break-word;
         overflow-wrap: break-word;
+        box-decoration-break: clone;
+        -webkit-box-decoration-break: clone;
     }
