@@ -2,14 +2,55 @@ import type { KeyPressCallbackMap, KeyPressEventType } from "@/lib/utils/keyboar
 
 
 /**
- * Invoke a registered callback for a keyboard event if a matching key is found in the map.
+ * Invokes a registered callback for a keyboard event if a matching key or key combination
+ * is found in the provided map.
  *
- * Canonicalises the event key (single characters are lower-cased; named keys kept verbatim),
- * looks up the callback in `keyMap` using the canonical key or a known alias, then prevents the
- * event's default action and calls the callback with the original event.
+ * The function canonicalises the event key:
+ * - Single-character keys are converted to lowercase (e.g. "A" → "a")
+ * - Named keys (e.g. "Enter", "Escape") are kept verbatim
+ * - Modifier combinations are normalised (e.g. "Control+Enter", "Meta+K")
  *
- * @param event - The keyboard event to handle; function returns immediately if falsy or if `event.key` is missing.
- * @param keyMap - Mapping of key names to callbacks. If empty or no matching key/alias exists, nothing happens.
+ * It then looks up the callback in `keyMap` using either:
+ * 1. The full combination (e.g. "Control+Enter"), or
+ * 2. A known alias of the key (e.g. "Esc" → "Escape")
+ *
+ * If a matching callback is found, the event’s default action is prevented and the callback
+ * is invoked with the original event.
+ *
+ * @param event - The keyboard event to handle.
+ *   The function returns immediately if falsy or if `event.key` is missing.
+ * @param keyMap - A mapping of key names or combinations to callback functions.
+ *   Keys may use canonical names ("Enter", "Escape") or combinations joined by `+`
+ *   ("Control+Enter", "Meta+K"). If empty or no matching key/alias exists, nothing happens.
+ *
+ * @example
+ * // Basic single-key handler
+ * handleKeyPress(event, {
+ *   Enter: () => console.log('Enter pressed'),
+ *   Escape: () => console.log('Escape pressed'),
+ * });
+ *
+ * @example
+ * // Lowercase single-character keys are matched automatically
+ * handleKeyPress(event, {
+ *   a: () => console.log('Pressed the A key'),
+ * });
+ *
+ * @example
+ * // Combination (modifier + key)
+ * handleKeyPress(event, {
+ *   'Control+Enter': () => console.log('Ctrl+Enter combo triggered'),
+ *   'Meta+K': () => openCommandPalette(),
+ * });
+ *
+ * @example
+ * // Using inside a component keyboard handler
+ * function onKeyDown(event: React.KeyboardEvent<HTMLButtonElement>) {
+ *   handleKeyPress(event, {
+ *     Enter: () => (event.currentTarget.dataset.pressed = 'true'),
+ *     'Control+Enter': () => console.log('Ctrl+Enter shortcut!'),
+ *   });
+ * }
  */
 export function handleKeyPress(
   event: KeyPressEventType,
@@ -34,34 +75,41 @@ export function handleKeyPress(
 }
 
 export function getKeyAlias(key: string): string | undefined {
-  switch (key) {
+  if (!key) return undefined;
+
+  // Normalize to lowercase for consistent matching
+  switch (key.toLowerCase()) {
     // Standard alternate spellings
     case ' ':
-    case 'Spacebar':
-      return 'Space'
-    case 'Esc':
-      return 'Escape'
-    case 'Del':
-      return 'Delete'
-    case 'Enter':
-    case 'Return':
-      return 'Enter'
-    case 'Control':
-    case 'Ctrl':
-      return 'Control'
+    case 'spacebar':
+      return 'Space';
+    case 'esc':
+      return 'Escape';
+    case 'del':
+    case 'delete':
+      return 'Delete';
+    case 'enter':
+    case 'return':
+      return 'Enter';
+    case 'control':
+    case 'ctrl':
+      return 'Control';
+
     // Arrow key short forms
-    case 'Left':
-      return 'ArrowLeft'
-    case 'Right':
-      return 'ArrowRight'
-    case 'Up':
-      return 'ArrowUp'
-    case 'Down':
-      return 'ArrowDown'
+    case 'left':
+      return 'ArrowLeft';
+    case 'right':
+      return 'ArrowRight';
+    case 'up':
+      return 'ArrowUp';
+    case 'down':
+      return 'ArrowDown';
+
     default:
-      return undefined
+      return undefined;
   }
 }
+
 
 export function normalizeShortcut(key: string, event: KeyPressEventType): string {
   const parts = [
