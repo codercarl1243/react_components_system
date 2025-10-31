@@ -16,15 +16,16 @@ export function handleKeyPress(
   keyMap: KeyPressCallbackMap
 ) {
 
-  if (!event) return
-  if (!keyMap || Object.keys(keyMap).length === 0) return
-  // Canonicalise: single chars -> lower-case, keep named keys verbatim.
-  let key = event.key
-  if (!key) return
-  key = key && key.length === 1 ? key.toLowerCase() : key
-  const alias = getKeyAlias(key);
+  if (!event) return;
+  if (!keyMap || Object.keys(keyMap).length === 0) return;
 
-  const callback = keyMap[key] ?? (alias ? keyMap[alias] : undefined)
+  // Normalize and canonicalize key
+  let key = event.key;
+  if (key.length === 1) key = key.toLowerCase();
+
+  const combo = normalizeShortcut(key, event);
+  const alias = getKeyAlias(key);
+  const callback = keyMap[combo] ?? (alias ? keyMap[alias] : keyMap[key]);
 
   if (!callback) return
 
@@ -34,6 +35,7 @@ export function handleKeyPress(
 
 export function getKeyAlias(key: string): string | undefined {
   switch (key) {
+    // Standard alternate spellings
     case ' ':
     case 'Spacebar':
       return 'Space'
@@ -41,6 +43,13 @@ export function getKeyAlias(key: string): string | undefined {
       return 'Escape'
     case 'Del':
       return 'Delete'
+    case 'Enter':
+    case 'Return':
+      return 'Enter'
+    case 'Control':
+    case 'Ctrl':
+      return 'Control'
+    // Arrow key short forms
     case 'Left':
       return 'ArrowLeft'
     case 'Right':
@@ -49,13 +58,18 @@ export function getKeyAlias(key: string): string | undefined {
       return 'ArrowUp'
     case 'Down':
       return 'ArrowDown'
-    case 'Enter':
-    case 'Return':
-      return 'Enter'
-    case 'Control':
-    case 'Ctrl':
-      return 'Control'
     default:
       return undefined
   }
+}
+
+export function normalizeShortcut(key: string, event: KeyPressEventType): string {
+  const parts = [
+    event.ctrlKey && 'Control',
+    event.metaKey && 'Meta',
+    event.shiftKey && 'Shift',
+    event.altKey && 'Alt',
+    getKeyAlias(key)
+  ].filter(Boolean);
+  return parts.join('+');
 }
