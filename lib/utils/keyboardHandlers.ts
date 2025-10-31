@@ -5,119 +5,129 @@ import type { KeyPressCallbackMap, KeyPressEventType } from "@/lib/utils/keyboar
  * Invokes a registered callback for a keyboard event if a matching key or key combination
  * is found in the provided map.
  *
- * The function canonicalises the event key:
+ * The function canonicalizes the event key:
  * - Single-character keys are converted to lowercase (e.g. "A" → "a")
  * - Named keys (e.g. "Enter", "Escape") are kept verbatim
- * - Modifier combinations are normalised (e.g. "Control+Enter", "Meta+K")
+ * - Modifier combinations are normalized (e.g. "Control+Enter", "Meta+k")
  *
- * It then looks up the callback in `keyMap` using either:
- * 1. The full combination (e.g. "Control+Enter"), or
- * 2. A known alias of the key (e.g. "Esc" → "Escape")
- *
- * If a matching callback is found, the event’s default action is prevented and the callback
+ * It then looks up the callback in `keyMap` using the normalized key combination.
+ * If a matching callback is found, the event's default action is prevented and the callback
  * is invoked with the original event.
  *
  * @param event - The keyboard event to handle.
- *   The function returns immediately if falsy or if `event.key` is missing.
  * @param keyMap - A mapping of key names or combinations to callback functions.
- *   Keys may use canonical names ("Enter", "Escape") or combinations joined by `+`
- *   ("Control+Enter", "Meta+K"). If empty or no matching key/alias exists, nothing happens.
  *
  * @example
- * // Basic single-key handler
  * handleKeyPress(event, {
  *   Enter: () => console.log('Enter pressed'),
- *   Escape: () => console.log('Escape pressed'),
+ *   'Control+Enter': () => console.log('Ctrl+Enter combo'),
+ *   'Meta+k': () => openCommandPalette(),
  * });
- *
- * @example
- * // Lowercase single-character keys are matched automatically
- * handleKeyPress(event, {
- *   a: () => console.log('Pressed the A key'),
- * });
- *
- * @example
- * // Combination (modifier + key)
- * handleKeyPress(event, {
- *   'Control+Enter': () => console.log('Ctrl+Enter combo triggered'),
- *   'Meta+K': () => openCommandPalette(),
- * });
- *
- * @example
- * // Using inside a component keyboard handler
- * function onKeyDown(event: React.KeyboardEvent<HTMLButtonElement>) {
- *   handleKeyPress(event, {
- *     Enter: () => (event.currentTarget.dataset.pressed = 'true'),
- *     'Control+Enter': () => console.log('Ctrl+Enter shortcut!'),
- *   });
- * }
  */
 export function handleKeyPress(
   event: KeyPressEventType,
   keyMap: KeyPressCallbackMap
 ) {
-
-  if (!event) return;
+  if (!event?.key) return;
   if (!keyMap || Object.keys(keyMap).length === 0) return;
 
-  // Normalize and canonicalize key
-  let key = event.key;
-  if (key.length === 1) key = key.toLowerCase();
-
-  const combo = normalizeShortcut(key, event);
-  const alias = getKeyAlias(key);
-  const callback = keyMap[combo] ?? (alias ? keyMap[alias] : keyMap[key]);
-
-  if (!callback) return
-
-  event.preventDefault()
-  callback(event)
+  // Normalize the pressed key
+  const normalizedKey = normalizeKey(event.key, event);
+  
+  // Normalize the keymap for case-insensitive matching
+  const normalizedKeyMap = normalizeKeyMap(keyMap);
+  
+  // Look up the callback
+  const callback = normalizedKeyMap[normalizedKey];
+  
+  if (!callback) return;
+  
+  event.preventDefault();
+  callback(event);
 }
 
-export function getKeyAlias(key: string): string | undefined {
-  if (!key) return undefined;
+/**
+ * Returns the canonical alias for a given key string.
+ * Handles common alternate spellings and short forms.
+ */
+export function getKeyAlias(key: string): string {
+  if (!key) return '';
 
-  // Normalize to lowercase for consistent matching
-  switch (key.toLowerCase()) {
+  const lowerKey = key.toLowerCase();
+
+  switch (lowerKey) {
     // Standard alternate spellings
     case ' ':
     case 'spacebar':
-      return 'Space';
+      return 'space';
     case 'esc':
-      return 'Escape';
+      return 'escape';
     case 'del':
-    case 'delete':
-      return 'Delete';
-    case 'enter':
+      return 'delete';
     case 'return':
-      return 'Enter';
-    case 'control':
+      return 'enter';
     case 'ctrl':
-      return 'Control';
+      return 'control';
 
     // Arrow key short forms
     case 'left':
-      return 'ArrowLeft';
+      return 'arrowleft';
     case 'right':
-      return 'ArrowRight';
+      return 'arrowright';
     case 'up':
-      return 'ArrowUp';
+      return 'arrowup';
     case 'down':
-      return 'ArrowDown';
+      return 'arrowdown';
 
     default:
-      return undefined;
+      return lowerKey;
   }
 }
+/**
+ * Normalizes all keys in the keymap to lowercase for case-insensitive matching.
+ */
+function normalizeKeyMap(keyMap: KeyPressCallbackMap): KeyPressCallbackMap {
+  return Object.fromEntries(
+    Object.entries(keyMap).map(([k, v]) => [k.toLowerCase(), v])
+  );
+}
 
+/**
+ * Normalizes a key press into a canonical string representation.
+ * Combines active modifiers with the key name, excluding modifier keys themselves.
+ * 
+ * @example
+ * normalizeKey('Enter', event) // 'enter' (no modifiers)
+ * normalizeKey('k', event) // 'control+k' (with Ctrl pressed)
+ * normalizeKey('Control', event) // 'control' (modifier key alone)
+ */
+export function normalizeKey(key: string, event: KeyPressEventType): string {
+  if (!key || typeof key !== 'string') return '';
 
-export function normalizeShortcut(key: string, event: KeyPressEventType): string {
-  const parts = [
-    event.ctrlKey && 'Control',
-    event.metaKey && 'Meta',
-    event.shiftKey && 'Shift',
-    event.altKey && 'Alt',
-    getKeyAlias(key)
-  ].filter(Boolean);
-  return parts.join('+');
+  // Get the canonical key name
+  const canonicalKey = getKeyAlias(key);
+  
+  // Modifier keys that should be excluded from the final key combination
+  const modifierKeys = ['control', 'meta', 'shift', 'alt'];
+  
+  // If only a modifier key is pressed (without another key), return just that modifier
+  if (modifierKeys.includes(canonicalKey)) {
+    return canonicalKey;
+  }
+  
+  // Build the modifier prefix
+  const modifiers: string[] = [];
+  
+  if (event.ctrlKey) modifiers.push('control');
+  if (event.metaKey) modifiers.push('meta');
+  if (event.shiftKey) modifiers.push('shift');
+  if (event.altKey) modifiers.push('alt');
+  
+  // If there are modifiers, combine them with the key
+  if (modifiers.length > 0) {
+    return [...modifiers, canonicalKey].join('+');
+  }
+  
+  // No modifiers, just return the canonical key
+  return canonicalKey;
 }
