@@ -1,6 +1,4 @@
-@import './buttons.css';
-@import './iconButton.css';
-@import './copyButton.css';
+@import './buttons/index.css';
 @import './post/index.css';
 @import './skiplink.css';
 @import './code.css';
