@@ -5,21 +5,22 @@ import TabList from "@/components/tablist";
 
 export default function ButtonsResources() {
 
-    return (
-        <PostSection id="resources">
-            <AnchorHeading headingLevel={2} id="resources-heading">Code & Resources</AnchorHeading>
-            <AnchorHeading headingLevel={3}>Complete Code Reference</AnchorHeading>
-            <TabList
-                className="code__reference"
-                defaultActiveTabId="code_button"
-                data-variant="accent"
-                orientation="horizontal"
-                tabs={[
-                    {
-                        id: 'code_button',
-                        tabLabel: 'button.tsx',
-                        panelContent: (
-                            <Code codeString={`'use client'
+  return (
+    <PostSection id="resources">
+      <AnchorHeading headingLevel={2} id="resources-heading">Code & Resources</AnchorHeading>
+      <AnchorHeading headingLevel={3}>Complete Code Reference</AnchorHeading>
+      <TabList
+        tabListName="code_reference"
+        className="code__reference"
+        defaultActiveTabId="code_button"
+        data-variant="accent"
+        orientation="horizontal"
+        tabs={[
+          {
+            id: 'code_button',
+            tabLabel: 'button.tsx',
+            panelContent: (
+              <Code codeString={`'use client'
 
 import clsx from 'clsx'
 import type { BaseButtonProps, MouseEventType } from '@/components/button/button.type'
@@ -66,13 +67,13 @@ export default function Button({
         </button>
     )}
 `} />
-                        )
-                    },
-                    {
-                        id: 'code_hook',
-                        tabLabel: 'useButton.tsx',
-                        panelContent: (
-                            <Code codeString={`import type { ButtonClickHandler, MouseEventType } from '@/components/button/button.type';
+            )
+          },
+          {
+            id: 'code_hook',
+            tabLabel: 'useButton.tsx',
+            panelContent: (
+              <Code codeString={`import type { ButtonClickHandler, MouseEventType } from '@/components/button/button.type';
 import { isThenable } from '@/lib/utils/guards';
 import log from '@/lib/logging/log';
 
@@ -100,13 +101,13 @@ export default function useButton() {
 
     return { handleClick }
 }`} />
-                        )
-                    },
-                    {
-                        id: 'code_type',
-                        tabLabel: 'button.type.ts',
-                        panelContent: (
-                            <Code lang="ts" codeString={`import type { ComponentPropsWithRef, MouseEvent } from 'react'
+            )
+          },
+          {
+            id: 'code_type',
+            tabLabel: 'button.type.ts',
+            panelContent: (
+              <Code lang="ts" codeString={`import type { ComponentPropsWithRef, MouseEvent } from 'react'
 import { IconProps } from '@/components/icon/icon.type';
 
 export type MouseEventType = MouseEvent<HTMLButtonElement>;
@@ -121,13 +122,13 @@ export type BaseButtonProps = {
     'data-variant'?: 'primary' | 'secondary' | 'accent';
     onClick?: ButtonClickHandler;
 } & Omit<ComponentPropsWithRef<'button'>, 'onClick' | 'disabled'>;`} />
-                        )
-                    },
-                    {
-                        id: 'code_css',
-                        tabLabel: 'button.css',
-                        panelContent: (
-                            <Code lang="css" codeString={`.button {
+            )
+          },
+          {
+            id: 'code_css',
+            tabLabel: 'button.css',
+            panelContent: (
+              <Code lang="css" codeString={`.button {
     /* Layout properties */
     --button-font-size: 1rem;
     --button-margin: calc(var(--spacing) * 2);
@@ -307,26 +308,26 @@ button.button {
     --button-secondary-color: var(--color-accent-400);
     --button-accent-color: var(--color-accent-600);
 }`} />
-                        )
-                    },
-                    {
-                        id: 'isThenable',
-                        tabLabel: 'guards.ts (excerpt)',
-                        panelContent: (
-                            <Code lang="ts" codeString={`export function isThenable(value: unknown): value is PromiseLike<unknown> {
+            )
+          },
+          {
+            id: 'isThenable',
+            tabLabel: 'guards.ts (excerpt)',
+            panelContent: (
+              <Code lang="ts" codeString={`export function isThenable(value: unknown): value is PromiseLike<unknown> {
   return (
     value !== null &&
     typeof value === 'object' &&
     typeof (value as PromiseLike<unknown>).then === 'function'
   )
 }`} />
-                        )
-                    },
-                    {
-                        id: 'button_test',
-                        tabLabel: 'Button.test.tsx',
-                        panelContent: (
-                            <Code codeString={`import Button from '@/components/button'
+            )
+          },
+          {
+            id: 'button_test',
+            tabLabel: 'Button.test.tsx',
+            panelContent: (
+              <Code codeString={`import Button from '@/components/button'
 import { Ri24HoursFill } from '@remixicon/react'
 import { fireEvent, render, screen } from '@testing-library/react'
 import React from 'react'
@@ -476,13 +477,13 @@ describe('Button', () => {
     await expect(handleClick.mock.results[0].value).resolves.toBeUndefined()
   })
 })`} />
-                        )
-                    },
-                    {
-                        id: 'useButton_test',
-                        tabLabel: 'useButton.test.tsx',
-                        panelContent: (
-                            <Code codeString={`import useButton from '@/components/button/useButton'
+            )
+          },
+          {
+            id: 'useButton_test',
+            tabLabel: 'useButton.test.tsx',
+            panelContent: (
+              <Code codeString={`import useButton from '@/components/button/useButton'
 import { renderHook } from '@testing-library/react'
 import { MouseEvent as ReactMouseEvent } from 'react'
 import log from '@/lib/logging/log';
@@ -626,10 +627,10 @@ describe('useButton', () => {
     })
     })
 })`} />
-                        )
-                    }
-                ]}
-            />
-        </PostSection>
-    )
+            )
+          }
+        ]}
+      />
+    </PostSection>
+  )
 }
