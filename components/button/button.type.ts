@@ -5,12 +5,16 @@ export type MouseEventType = MouseEvent<HTMLButtonElement>;
 
 export type ButtonClickHandler = (event: MouseEventType) => void | Promise<void>;
 
+export type TVariant = 'primary' | 'secondary' | 'accent' | 'danger';
+
+export type TButtonStyle = 'outlined' | 'filled' | 'ghost';
+
 export type BaseButtonProps = {
     disabled?: boolean; 
     isLoading?: boolean;
     icon?: IconProps['icon'];
-    'data-style'?: 'outlined' | 'filled';
-    'data-variant'?: 'primary' | 'secondary' | 'accent';
+    'data-style'?: TButtonStyle;
+    'data-variant'?: TVariant;
     onClick?: ButtonClickHandler;
 } & Omit<ComponentPropsWithRef<'button'>, 'onClick' | 'disabled'>;
 
