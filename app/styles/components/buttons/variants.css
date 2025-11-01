@@ -18,6 +18,7 @@
     --button-outline-color: var(--button-accent-color);
 }
 
+/* This shouldnt be used as a primary button, this is for cancel etc. */
 .button[data-style="ghost"] {
     --button-bg-color: transparent;
     --button-color: var(--button-secondary-color);
