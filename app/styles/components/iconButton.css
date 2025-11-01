@@ -1,7 +1,0 @@
-  .button--icon-only {
-
-      & .button__content {
-        display: none;
-      }
-  }
-  

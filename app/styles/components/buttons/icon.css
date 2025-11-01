@@ -1,0 +1,24 @@
+.button {
+  &.button--icon-only {
+    --button-padding-y: 0;
+    --button-padding-x: 0;
+
+    grid-template-columns: 1fr;
+    place-content: center;
+
+    .button__content {
+      display: none;
+    }
+
+    & .icon,
+    & .spinner {
+      grid-column: 1;
+    }
+  }
+
+  &.button--icon-only[data-loading="true"] {
+    .icon {
+      display: none;
+    }
+  }
+}
