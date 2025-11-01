@@ -7,6 +7,7 @@ import clsx from 'clsx'
 
 export default function TabList ({
     defaultActiveTabId, 
+    tabListName,
     tabs, 
     orientation = 'horizontal', 
     className, 
@@ -30,9 +31,12 @@ export default function TabList ({
                 ref={tablistRef}
                 onKeyDown={handleKeyDown}
             >
-                {tabs.map(item => (
+                {tabs.map(item => {
+                    const tabId = `${tabListName}-tab-${item.id}`;
+
+                    return (
                     <Tab
-                        key={item.id}
+                        key={tabId}
                         id={item.id}
                         isSelected={activeId === item.id}
                         onClick={() => setActiveTab(item.id)}
@@ -41,12 +45,13 @@ export default function TabList ({
                     >
                         {item.tabLabel}
                     </Tab>
-                ))}
+                )
+                })}
             </div>
             <div className="tablist__content">
                 {tabs.map(item => (
                     <Panel
-                        key={`panel-${item.id}`}
+                        key={`${tabListName}-panel-${item.id}`}
                         id={item.id}
                         hidden={activeId !== item.id}
                     >

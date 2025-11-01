@@ -21,6 +21,7 @@ export type TabItem = Readonly<{
 }>
 
 export type TabListProps = Readonly<{
+  tabListName: string;
   tabs: TabItem[];
   orientation?: 'vertical' | 'horizontal';
   defaultActiveTabId?: string;
