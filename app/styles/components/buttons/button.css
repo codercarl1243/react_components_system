@@ -79,7 +79,8 @@
         box-shadow: none;
     }
 
-    &:active {
+    &:active,
+    &[data-pressed="true"] {
         outline: 1px dotted var(--button-outline-color, currentColor);
         transform: translateY(1px);
     }
@@ -136,46 +137,4 @@ button.button {
         transition: none !important;
         animation: none !important;
     }
-}
-
-/* Filled style - solid background with contrasting text */
-.button[data-style="filled"] {
-    --button-color: var(--button-primary-color);
-    --button-bg-color: var(--button-secondary-color);
-    --button-border-color: var(--button-accent-color);
-    --button-outline-color: var(--button-accent-color);
-}
-
-/* Outline style - transparent background with colored border/text */
-.button[data-style="outlined"] {
-    --button-color: var(--button-secondary-color);
-    --button-bg-color: var(--button-primary-color);
-    --button-border-color: var(--button-accent-color);
-    --button-outline-color: var(--button-accent-color);
-}
-
-/* Color Variants */
-.button {
-    --button-primary-color: var(--color-neutral-100);
-    --button-secondary-color: var(--color-neutral-800);
-    --button-accent-color: var(--color-neutral-600);
-}
-
-.button[data-variant="primary"] {
-    --button-primary-color: var(--color-neutral-100);
-    --button-secondary-color: var(--color-primary-400);
-    --button-accent-color: var(--color-primary-600);
-}
-
-.button[data-variant="secondary"] {
-    --button-primary-color: var(--color-neutral-100);
-    --button-secondary-color: var(--color-secondary-400);
-    --button-accent-color: var(--color-secondary-600);
-
-}
-
-.button[data-variant="accent"] {
-    --button-primary-color: var(--color-neutral-100);
-    --button-secondary-color: var(--color-accent-400);
-    --button-accent-color: var(--color-accent-600);
 }
