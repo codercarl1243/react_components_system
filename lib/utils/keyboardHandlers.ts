@@ -1,6 +1,5 @@
 import type { KeyPressCallbackMap, KeyPressEventType } from "@/lib/utils/keyboardHandlers.type"
 
-
 /**
  * Invokes a registered callback for a keyboard event if a matching key or key combination
  * is found in the provided map.
@@ -83,6 +82,7 @@ export function getKeyAlias(key: string): string {
       return lowerKey;
   }
 }
+
 /**
  * Normalizes all keys in the keymap to a canonical form:
  * - Applies key aliases (e.g., 'Ctrl' → 'control', 'Esc' → 'escape')
@@ -115,6 +115,7 @@ function normalizeKeyMap(keyMap: KeyPressCallbackMap): KeyPressCallbackMap {
           continue;
         }
 
+        // Last non-modifier token becomes the base key
         baseKey = canonical;
       }
 
@@ -131,16 +132,29 @@ function normalizeKeyMap(keyMap: KeyPressCallbackMap): KeyPressCallbackMap {
  * Normalizes a key press into a canonical string representation.
  * Combines active modifiers with the key name, excluding modifier keys themselves.
  * 
+ * For shifted symbols (e.g., Shift+/ produces '?'), this function derives the
+ * unshifted key from event.code to ensure consistency with keyMap entries.
+ * 
  * @example
  * normalizeKey('Enter', event) // 'enter' (no modifiers)
  * normalizeKey('k', event) // 'control+k' (with Ctrl pressed)
  * normalizeKey('Control', event) // 'control' (modifier key alone)
+ * normalizeKey('?', event) // 'shift+/' (Shift+/ pressed, uses code)
  */
 export function normalizeKey(key: string, event: KeyPressEventType): string {
   if (!key || typeof key !== 'string') return '';
 
-  // Get the canonical key name
-  const canonicalKey = getKeyAlias(key);
+  // When Shift is pressed, event.key gives the shifted character (e.g., '?' for Shift+/)
+  // but we want the unshifted key (e.g., '/') to match keyMap entries like 'Shift+/'
+  let canonicalKey: string;
+  
+  if (event.shiftKey && event.code && isShiftedSymbol(key, event.code)) {
+    // Use the unshifted key derived from code (e.g., 'Slash' -> '/')
+    canonicalKey = getKeyFromCode(event.code);
+  } else {
+    // Normal case: use key with alias resolution
+    canonicalKey = getKeyAlias(key);
+  }
   
   // Modifier keys that should be excluded from the final key combination
   const modifierKeys = ['control', 'meta', 'shift', 'alt'];
@@ -165,4 +179,62 @@ export function normalizeKey(key: string, event: KeyPressEventType): string {
   
   // No modifiers, just return the canonical key
   return canonicalKey;
+}
+
+/**
+ * Checks if a key represents a shifted symbol by comparing key length and code.
+ * Shifted symbols are single characters that differ from their code representation.
+ * 
+ * @internal Exported for testing purposes
+ */
+export function isShiftedSymbol(key: string, code: string): boolean {
+  // Single character that's likely a shifted symbol
+  if (key.length !== 1) return false;
+  
+  // Check if code starts with 'Digit' or common punctuation codes
+  if (code.startsWith('Digit')) return true;
+  
+  // Common punctuation keys that produce different characters when shifted
+  const punctuationCodes = [
+    'Slash', 'Backslash', 'BracketLeft', 'BracketRight',
+    'Semicolon', 'Quote', 'Comma', 'Period', 'Minus', 'Equal',
+    'Backquote'
+  ];
+  
+  return punctuationCodes.includes(code);
+}
+
+/**
+ * Converts a KeyboardEvent.code to its unshifted key character.
+ * E.g., 'Slash' -> '/', 'Digit1' -> '1', 'KeyA' -> 'a'
+ * 
+ * @internal Exported for testing purposes
+ */
+export function getKeyFromCode(code: string): string {
+  // Handle digit keys (Digit0-Digit9)
+  if (code.startsWith('Digit')) {
+    return code.replace('Digit', '');
+  }
+  
+  // Handle letter keys (KeyA-KeyZ)
+  if (code.startsWith('Key')) {
+    return code.replace('Key', '').toLowerCase();
+  }
+  
+  // Map common punctuation codes to their unshifted characters
+  const codeToKey: Record<string, string> = {
+    'Slash': '/',
+    'Backslash': '\\',
+    'BracketLeft': '[',
+    'BracketRight': ']',
+    'Semicolon': ';',
+    'Quote': "'",
+    'Comma': ',',
+    'Period': '.',
+    'Minus': '-',
+    'Equal': '=',
+    'Backquote': '`',
+  };
+  
+  return codeToKey[code]?.toLowerCase() || code.toLowerCase();
 }

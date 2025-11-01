@@ -1,4 +1,4 @@
-import { getKeyAlias, handleKeyPress, normalizeKey } from '@/lib/utils/keyboardHandlers'
+import { getKeyAlias, handleKeyPress, normalizeKey, isShiftedSymbol, getKeyFromCode } from '@/lib/utils/keyboardHandlers'
 import type { KeyPressCallbackMap, KeyPressEventType } from '@/lib/utils/keyboardHandlers.type'
 
 describe('handleKeyPress', () => {
@@ -10,10 +10,12 @@ describe('handleKeyPress', () => {
       metaKey?: boolean
       shiftKey?: boolean
       altKey?: boolean
-    }
+    },
+    code?: string
   ): KeyPressEventType {
     return {
       key,
+      code: code || '',
       ctrlKey: modifiers?.ctrlKey ?? false,
       metaKey: modifiers?.metaKey ?? false,
       shiftKey: modifiers?.shiftKey ?? false,
@@ -560,6 +562,125 @@ describe('handleKeyPress', () => {
     })
   })
 
+  describe('shifted symbol shortcuts', () => {
+    it('handles Shift+/ (question mark)', () => {
+      const mockCallback = jest.fn()
+      const keyMap: KeyPressCallbackMap = {
+        'Shift+/': mockCallback  // Registered as Shift+/
+      }
+      // When user presses Shift+/, event.key is '?' but event.code is 'Slash'
+      const event = makeEvent('?', { shiftKey: true }, 'Slash')
+
+      handleKeyPress(event, keyMap)
+
+      expect(mockCallback).toHaveBeenCalled()
+    })
+
+    it('handles Shift+1 (exclamation mark)', () => {
+      const mockCallback = jest.fn()
+      const keyMap: KeyPressCallbackMap = {
+        'Shift+1': mockCallback
+      }
+      // event.key is '!' but event.code is 'Digit1'
+      const event = makeEvent('!', { shiftKey: true }, 'Digit1')
+
+      handleKeyPress(event, keyMap)
+
+      expect(mockCallback).toHaveBeenCalled()
+    })
+
+    it('handles Control+Shift+1', () => {
+      const mockCallback = jest.fn()
+      const keyMap: KeyPressCallbackMap = {
+        'Control+Shift+1': mockCallback
+      }
+      // event.key is '!' with both modifiers
+      const event = makeEvent('!', { ctrlKey: true, shiftKey: true }, 'Digit1')
+
+      handleKeyPress(event, keyMap)
+
+      expect(mockCallback).toHaveBeenCalled()
+    })
+
+    it('handles Shift+[ (curly brace)', () => {
+      const mockCallback = jest.fn()
+      const keyMap: KeyPressCallbackMap = {
+        'Shift+[': mockCallback
+      }
+      // event.key is '{' but event.code is 'BracketLeft'
+      const event = makeEvent('{', { shiftKey: true }, 'BracketLeft')
+
+      handleKeyPress(event, keyMap)
+
+      expect(mockCallback).toHaveBeenCalled()
+    })
+
+    it('handles Shift+; (colon)', () => {
+      const mockCallback = jest.fn()
+      const keyMap: KeyPressCallbackMap = {
+        'Shift+;': mockCallback
+      }
+      // event.key is ':' but event.code is 'Semicolon'
+      const event = makeEvent(':', { shiftKey: true }, 'Semicolon')
+
+      handleKeyPress(event, keyMap)
+
+      expect(mockCallback).toHaveBeenCalled()
+    })
+
+    it('handles Shift+\' (double quote)', () => {
+      const mockCallback = jest.fn()
+      const keyMap: KeyPressCallbackMap = {
+        "Shift+'": mockCallback
+      }
+      // event.key is '"' but event.code is 'Quote'
+      const event = makeEvent('"', { shiftKey: true }, 'Quote')
+
+      handleKeyPress(event, keyMap)
+
+      expect(mockCallback).toHaveBeenCalled()
+    })
+
+    it('handles Meta+Shift+/ for help shortcuts', () => {
+      const mockCallback = jest.fn()
+      const keyMap: KeyPressCallbackMap = {
+        'Meta+Shift+/': mockCallback
+      }
+      // Common pattern for help menus (Cmd+Shift+/ or Cmd+?)
+      const event = makeEvent('?', { metaKey: true, shiftKey: true }, 'Slash')
+
+      handleKeyPress(event, keyMap)
+
+      expect(mockCallback).toHaveBeenCalled()
+    })
+
+    it('does not match shifted symbol without Shift in keyMap', () => {
+      const mockCallback = jest.fn()
+      const keyMap: KeyPressCallbackMap = {
+        '/': mockCallback  // No Shift
+      }
+      // User presses Shift+/ (which produces '?')
+      const event = makeEvent('?', { shiftKey: true }, 'Slash')
+
+      handleKeyPress(event, keyMap)
+
+      expect(mockCallback).not.toHaveBeenCalled()
+    })
+
+    it('does not match unshifted key when Shift+key is in keyMap', () => {
+      const mockCallback = jest.fn()
+      const keyMap: KeyPressCallbackMap = {
+        'Shift+1': mockCallback
+      }
+      // User presses just '1' without Shift
+      const event = makeEvent('1', {}, 'Digit1')
+
+      handleKeyPress(event, keyMap)
+
+      expect(mockCallback).not.toHaveBeenCalled()
+    })
+  })
+
   describe('normalizeKey', () => {
     it('normalizes simple keys to lowercase', () => {
       const event = makeEvent('A')
@@ -594,6 +715,108 @@ describe('handleKeyPress', () => {
     it('returns empty string for empty key', () => {
       const event = makeEvent('')
       expect(normalizeKey('', event)).toBe('')
+    })
+
+    it('derives unshifted key from code for shifted symbols', () => {
+      // Shift+/ produces '?' but should normalize to 'shift+/'
+      const event = makeEvent('?', { shiftKey: true }, 'Slash')
+      expect(normalizeKey('?', event)).toBe('shift+/')
+    })
+
+    it('derives unshifted key from code for shifted digits', () => {
+      // Shift+1 produces '!' but should normalize to 'shift+1'
+      const event = makeEvent('!', { shiftKey: true }, 'Digit1')
+      expect(normalizeKey('!', event)).toBe('shift+1')
+    })
+
+    it('handles shifted brackets correctly', () => {
+      // Shift+[ produces '{' but should normalize to 'shift+['
+      const event = makeEvent('{', { shiftKey: true }, 'BracketLeft')
+      expect(normalizeKey('{', event)).toBe('shift+[')
+    })
+
+    it('uses key (not code) when shift is not pressed', () => {
+      // Regular slash without shift
+      const event = makeEvent('/', {}, 'Slash')
+      expect(normalizeKey('/', event)).toBe('/')
+    })
+
+    it('uses key (not code) for non-symbol keys even with shift', () => {
+      // Letters with shift should use the key (uppercase letter)
+      const event = makeEvent('A', { shiftKey: true }, 'KeyA')
+      expect(normalizeKey('A', event)).toBe('shift+a')
+    })
+  })
+
+  describe('isShiftedSymbol', () => {
+    it('returns true for shifted digits', () => {
+      expect(isShiftedSymbol('!', 'Digit1')).toBe(true)
+      expect(isShiftedSymbol('@', 'Digit2')).toBe(true)
+      expect(isShiftedSymbol('#', 'Digit3')).toBe(true)
+    })
+
+    it('returns true for shifted punctuation', () => {
+      expect(isShiftedSymbol('?', 'Slash')).toBe(true)
+      expect(isShiftedSymbol(':', 'Semicolon')).toBe(true)
+      expect(isShiftedSymbol('"', 'Quote')).toBe(true)
+      expect(isShiftedSymbol('{', 'BracketLeft')).toBe(true)
+    })
+
+    it('returns true for single-character keys with shiftable codes (even if unshifted)', () => {
+      // These are single characters with codes that can produce different chars when shifted
+      // The function needs to return true so we can check event.shiftKey and use code appropriately
+      expect(isShiftedSymbol('/', 'Slash')).toBe(true)
+      expect(isShiftedSymbol(';', 'Semicolon')).toBe(true)
+      expect(isShiftedSymbol('1', 'Digit1')).toBe(true)
+    })
+
+    it('returns false for multi-character keys', () => {
+      expect(isShiftedSymbol('Enter', 'Enter')).toBe(false)
+      expect(isShiftedSymbol('Escape', 'Escape')).toBe(false)
+    })
+
+    it('returns false for regular letter keys', () => {
+      expect(isShiftedSymbol('A', 'KeyA')).toBe(false)
+      expect(isShiftedSymbol('z', 'KeyZ')).toBe(false)
+    })
+
+    it('returns false for non-shiftable single-char codes', () => {
+      // Single char but code is not in the special punctuation/digit list
+      expect(isShiftedSymbol('a', 'Tab')).toBe(false)
+      expect(isShiftedSymbol(' ', 'Space')).toBe(false)
+    })
+  })
+
+  describe('getKeyFromCode', () => {
+    it('converts Digit codes to numbers', () => {
+      expect(getKeyFromCode('Digit1')).toBe('1')
+      expect(getKeyFromCode('Digit5')).toBe('5')
+      expect(getKeyFromCode('Digit0')).toBe('0')
+    })
+
+    it('converts Key codes to lowercase letters', () => {
+      expect(getKeyFromCode('KeyA')).toBe('a')
+      expect(getKeyFromCode('KeyZ')).toBe('z')
+      expect(getKeyFromCode('KeyM')).toBe('m')
+    })
+
+    it('converts punctuation codes to symbols', () => {
+      expect(getKeyFromCode('Slash')).toBe('/')
+      expect(getKeyFromCode('Backslash')).toBe('\\')
+      expect(getKeyFromCode('BracketLeft')).toBe('[')
+      expect(getKeyFromCode('BracketRight')).toBe(']')
+      expect(getKeyFromCode('Semicolon')).toBe(';')
+      expect(getKeyFromCode('Quote')).toBe("'")
+      expect(getKeyFromCode('Comma')).toBe(',')
+      expect(getKeyFromCode('Period')).toBe('.')
+      expect(getKeyFromCode('Minus')).toBe('-')
+      expect(getKeyFromCode('Equal')).toBe('=')
+      expect(getKeyFromCode('Backquote')).toBe('`')
+    })
+
+    it('returns lowercase code for unknown codes', () => {
+      expect(getKeyFromCode('UnknownCode')).toBe('unknowncode')
+      expect(getKeyFromCode('F1')).toBe('f1')
     })
   })
 })
