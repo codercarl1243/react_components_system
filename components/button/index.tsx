@@ -5,7 +5,6 @@ import { BaseButtonProps, MouseEventType } from '@/components/button/button.type
 import useButton from '@/components/button/useButton'
 import Spinner from '@/components/spinner'
 import Icon from '@/components/icon'
-import { handleKeyPress } from '@/lib/utils/keyboardHandlers'
 
 /**
  * A base, accessible button component that supports loading states and 
@@ -71,33 +70,19 @@ export default function Button({
     void handleClick(onClick)(event)
   }
 
-  function onKeyDown(event: React.KeyboardEvent<HTMLButtonElement>) {
-    handleKeyPress(event, {
-      Enter: () => (event.currentTarget.dataset.pressed = 'true'),
-    })
-  }
-
-  function onKeyUp(event: React.KeyboardEvent<HTMLButtonElement>) {
-    handleKeyPress(event, {
-      Enter: () => delete event.currentTarget.dataset.pressed,
-    })
-  }
   return (
     <button
       {...props}
-      className={clsx(className, { 'button-w-icon': icon }, 'button')}
+      className={clsx(className, {'button-w-icon': icon}, 'button')}
       onClick={onClickHandler}
       aria-disabled={isLoading || disabled}
       data-loading={isLoading}
       ref={ref}
       type={type}
-      onKeyDown={onKeyDown}
-      onKeyUp={onKeyUp}
       data-testid="base-button"
     >
-      {icon && <Icon icon={icon} />}
+      {icon && <Icon icon={icon}/>}
       <span className='button__content'>{children}</span>
       {isLoading && <Spinner />}
     </button>
-  )
-}
+  )}
