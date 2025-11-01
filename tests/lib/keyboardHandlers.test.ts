@@ -486,6 +486,80 @@ describe('handleKeyPress', () => {
     })
   })
 
+  describe('normalizeKeyMap with aliases and modifier order', () => {
+    it('normalizes Ctrl alias to control', () => {
+      const mockCallback = jest.fn()
+      const keyMap: KeyPressCallbackMap = {
+        'Ctrl+s': mockCallback  // Using alias
+      }
+      const event = makeEvent('s', { ctrlKey: true })
+
+      handleKeyPress(event, keyMap)
+
+      expect(mockCallback).toHaveBeenCalled()
+    })
+
+    it('handles modifiers in any order', () => {
+      const mockCallback = jest.fn()
+      const keyMap: KeyPressCallbackMap = {
+        'Shift+Control+k': mockCallback  // Wrong order
+      }
+      const event = makeEvent('k', { ctrlKey: true, shiftKey: true })
+
+      handleKeyPress(event, keyMap)
+
+      expect(mockCallback).toHaveBeenCalled()
+    })
+
+    it('normalizes Esc alias in combinations', () => {
+      const mockCallback = jest.fn()
+      const keyMap: KeyPressCallbackMap = {
+        'Control+Esc': mockCallback  // Using Esc alias
+      }
+      const event = makeEvent('Escape', { ctrlKey: true })
+
+      handleKeyPress(event, keyMap)
+
+      expect(mockCallback).toHaveBeenCalled()
+    })
+
+    it('handles Spacebar alias with modifiers', () => {
+      const mockCallback = jest.fn()
+      const keyMap: KeyPressCallbackMap = {
+        'Shift+Spacebar': mockCallback
+      }
+      const event = makeEvent(' ', { shiftKey: true })
+
+      handleKeyPress(event, keyMap)
+
+      expect(mockCallback).toHaveBeenCalled()
+    })
+
+    it('handles empty string key in keyMap', () => {
+      const mockCallback = jest.fn()
+      const validCallback = jest.fn()
+      const keyMap: KeyPressCallbackMap = {
+        '': mockCallback,  // Empty key
+        'a': validCallback
+      }
+      
+      // Should not throw, and valid key should still work
+      expect(() => handleKeyPress(makeEvent('a'), keyMap)).not.toThrow()
+      expect(validCallback).toHaveBeenCalled()
+      expect(mockCallback).not.toHaveBeenCalled()
+    })
+
+    it('preserves empty key entries without modification', () => {
+      const mockCallback = jest.fn()
+      const keyMap: KeyPressCallbackMap = {
+        '': mockCallback
+      }
+      
+      // The empty key should remain in the normalized map even if it can't be triggered
+      expect(() => handleKeyPress(makeEvent(''), keyMap)).not.toThrow()
+    })
+  })
+
   describe('normalizeKey', () => {
     it('normalizes simple keys to lowercase', () => {
       const event = makeEvent('A')

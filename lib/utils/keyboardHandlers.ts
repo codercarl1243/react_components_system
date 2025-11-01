@@ -84,11 +84,46 @@ export function getKeyAlias(key: string): string {
   }
 }
 /**
- * Normalizes all keys in the keymap to lowercase for case-insensitive matching.
+ * Normalizes all keys in the keymap to a canonical form:
+ * - Applies key aliases (e.g., 'Ctrl' → 'control', 'Esc' → 'escape')
+ * - Enforces consistent modifier order (control, meta, shift, alt)
+ * - Lowercases everything for case-insensitive matching
+ * 
+ * This ensures keyMap entries like 'Shift+Control+K' or 'Ctrl+Enter'
+ * are normalized to match the format produced by normalizeKey().
  */
 function normalizeKeyMap(keyMap: KeyPressCallbackMap): KeyPressCallbackMap {
+  const modifierOrder: ReadonlyArray<string> = ['control', 'meta', 'shift', 'alt'];
+
   return Object.fromEntries(
-    Object.entries(keyMap).map(([k, v]) => [k.toLowerCase(), v])
+    Object.entries(keyMap).map(([rawKey, callback]) => {
+      if (!rawKey) return [rawKey, callback];
+
+      const tokens = rawKey
+        .split('+')
+        .map((token) => token.trim())
+        .filter(Boolean);
+
+      const modifierSet = new Set<string>();
+      let baseKey = '';
+
+      for (const token of tokens) {
+        const canonical = getKeyAlias(token);
+
+        if (modifierOrder.includes(canonical)) {
+          modifierSet.add(canonical);
+          continue;
+        }
+
+        baseKey = canonical;
+      }
+
+      // Build key in consistent order: modifiers (sorted) + base key
+      const orderedModifiers = modifierOrder.filter((name) => modifierSet.has(name));
+      const parts = baseKey ? [...orderedModifiers, baseKey] : orderedModifiers;
+
+      return [parts.join('+'), callback];
+    })
   );
 }
 
