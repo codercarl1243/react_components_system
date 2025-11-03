@@ -15,7 +15,7 @@ export default function Section1() {
                 subtitle="Building a React Design System Foundation"
                 headingId="the-button-heading"
                 image={{
-                    src: '/images/mountainRangeBanner_1200x400.webp'
+                    src: '/images/Buttons.webp'
                 }}
             />
             <Heading headingLevel={2} id="introduction-heading">Introduction</Heading>

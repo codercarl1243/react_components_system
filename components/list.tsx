@@ -24,8 +24,8 @@ export default function List({
   children,
   className,
   ordered = false,
-  variant = 'default',
-  spacing = 'normal',
+  variant = 'circle',
+  spacing = 'tight',
   ...props
 }: ListProps) {
 
