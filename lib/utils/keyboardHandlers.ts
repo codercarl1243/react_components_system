@@ -30,6 +30,9 @@ export function handleKeyPress(
   if (!event?.key) return;
   if (!keyMap || Object.keys(keyMap).length === 0) return;
 
+  // Ignore events during IME composition (e.g., typing Japanese/Chinese/Korean)
+  if (event.key === 'Process' || (event as any).isComposing) return;
+
   // Normalize the pressed key
   const normalizedKey = normalizeKey(event.key, event);
   
@@ -99,24 +102,44 @@ function normalizeKeyMap(keyMap: KeyPressCallbackMap): KeyPressCallbackMap {
     Object.entries(keyMap).map(([rawKey, callback]) => {
       if (!rawKey) return [rawKey, callback];
 
-      const tokens = rawKey
-        .split('+')
-        .map((token) => token.trim())
-        .filter(Boolean);
-
+      // Split on '+' but be careful with keys that are literally '+'
+      const tokens = rawKey.split('+').map((token) => token.trim());
+      
+      // Handle the edge case where the key is '+' itself
+      // After split, we get ['', ''] for '+' or ['Control', '', ''] for 'Control+'
+      // We need to detect this and handle it specially
+      
       const modifierSet = new Set<string>();
       let baseKey = '';
+      
+      // Check if this is a single '+' key (splits into ['', ''])
+      if (tokens.length === 2 && tokens[0] === '' && tokens[1] === '') {
+        baseKey = '+';
+      } else {
+        // Normal processing
+        for (let i = 0; i < tokens.length; i++) {
+          const token = tokens[i];
+          
+          // Skip empty tokens unless it's the last one and previous was non-empty
+          // This handles 'Control+' -> ['Control', ''] where '+' is the base key
+          if (token === '') {
+            // Check if this empty token represents a '+' key
+            if (i === tokens.length - 1 && i > 0) {
+              baseKey = '+';
+            }
+            continue;
+          }
+          
+          const canonical = getKeyAlias(token);
 
-      for (const token of tokens) {
-        const canonical = getKeyAlias(token);
+          if (modifierOrder.includes(canonical)) {
+            modifierSet.add(canonical);
+            continue;
+          }
 
-        if (modifierOrder.includes(canonical)) {
-          modifierSet.add(canonical);
-          continue;
+          // Last non-modifier token becomes the base key
+          baseKey = canonical;
         }
-
-        // Last non-modifier token becomes the base key
-        baseKey = canonical;
       }
 
       // Build key in consistent order: modifiers (sorted) + base key
@@ -146,9 +169,13 @@ export function normalizeKey(key: string, event: KeyPressEventType): string {
 
   // When Shift is pressed, event.key gives the shifted character (e.g., '?' for Shift+/)
   // but we want the unshifted key (e.g., '/') to match keyMap entries like 'Shift+/'
+  // Also handle numpad keys which should be normalized regardless of Shift
   let canonicalKey: string;
   
-  if (event.shiftKey && event.code && isShiftedSymbol(key, event.code)) {
+  if (event.code && event.code.startsWith('Numpad')) {
+    // Always normalize numpad keys to their main keyboard equivalents
+    canonicalKey = getKeyFromCode(event.code);
+  } else if (event.shiftKey && event.code && isShiftedSymbol(key, event.code)) {
     // Use the unshifted key derived from code (e.g., 'Slash' -> '/')
     canonicalKey = getKeyFromCode(event.code);
   } else {
@@ -208,9 +235,35 @@ export function isShiftedSymbol(key: string, code: string): boolean {
  * Converts a KeyboardEvent.code to its unshifted key character.
  * E.g., 'Slash' -> '/', 'Digit1' -> '1', 'KeyA' -> 'a'
  * 
+ * Numpad keys are normalized to their main keyboard equivalents
+ * (e.g., 'NumpadEnter' -> 'enter', 'Numpad1' -> '1').
+ * 
  * @internal Exported for testing purposes
  */
 export function getKeyFromCode(code: string): string {
+  // Handle numpad keys - normalize to main keyboard equivalents
+  if (code.startsWith('Numpad')) {
+    const numpadToKey: Record<string, string> = {
+      'NumpadEnter': 'enter',
+      'NumpadAdd': '+',
+      'NumpadSubtract': '-',
+      'NumpadMultiply': '*',
+      'NumpadDivide': '/',
+      'NumpadDecimal': '.',
+      'Numpad0': '0',
+      'Numpad1': '1',
+      'Numpad2': '2',
+      'Numpad3': '3',
+      'Numpad4': '4',
+      'Numpad5': '5',
+      'Numpad6': '6',
+      'Numpad7': '7',
+      'Numpad8': '8',
+      'Numpad9': '9',
+    };
+    return numpadToKey[code] || code.toLowerCase();
+  }
+  
   // Handle digit keys (Digit0-Digit9)
   if (code.startsWith('Digit')) {
     return code.replace('Digit', '');
