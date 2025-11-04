@@ -35,15 +35,15 @@ export function handleKeyPress(
 
   // Normalize the pressed key
   const normalizedKey = normalizeKey(event.key, event);
-  
+
   // Normalize the keymap for case-insensitive matching
   const normalizedKeyMap = normalizeKeyMap(keyMap);
-  
+
   // Look up the callback
   const callback = normalizedKeyMap[normalizedKey];
-  
+
   if (!callback) return;
-  
+
   event.preventDefault();
   callback(event);
 }
@@ -97,59 +97,110 @@ export function getKeyAlias(key: string): string {
  */
 function normalizeKeyMap(keyMap: KeyPressCallbackMap): KeyPressCallbackMap {
   const modifierOrder: ReadonlyArray<string> = ['control', 'meta', 'shift', 'alt'];
+  const normalizedEntries: Array<[string, KeyPressCallbackMap[string]]> = [];
 
-  return Object.fromEntries(
-    Object.entries(keyMap).map(([rawKey, callback]) => {
-      if (!rawKey) return [rawKey, callback];
+  for (const [rawKey, callback] of Object.entries(keyMap)) {
+    if (!rawKey) {
+      normalizedEntries.push([rawKey, callback]);
+      continue;
+    }
 
-      // Split on '+' but be careful with keys that are literally '+'
-      const tokens = rawKey.split('+').map((token) => token.trim());
-      
-      // Handle the edge case where the key is '+' itself
-      // After split, we get ['', ''] for '+' or ['Control', '', ''] for 'Control+'
-      // We need to detect this and handle it specially
-      
-      const modifierSet = new Set<string>();
-      let baseKey = '';
-      
-      // Check if this is a single '+' key (splits into ['', ''])
-      if (tokens.length === 2 && tokens[0] === '' && tokens[1] === '') {
-        baseKey = '+';
-      } else {
-        // Normal processing
-        for (let i = 0; i < tokens.length; i++) {
-          const token = tokens[i];
-          
-          // Skip empty tokens unless it's the last one and previous was non-empty
-          // This handles 'Control+' -> ['Control', ''] where '+' is the base key
-          if (token === '') {
-            // Check if this empty token represents a '+' key
-            if (i === tokens.length - 1 && i > 0) {
-              baseKey = '+';
-            }
-            continue;
+    const tokens = rawKey.split('+').map((token) => token.trim());
+
+    const modifierSet = new Set<string>();
+    let baseKey = '';
+
+    if (tokens.length === 2 && tokens[0] === '' && tokens[1] === '') {
+      baseKey = '+';
+    } else {
+      for (let i = 0; i < tokens.length; i++) {
+        const token = tokens[i];
+
+        if (token === '') {
+          if (i === tokens.length - 1 && i > 0) {
+            baseKey = '+';
           }
-          
-          const canonical = getKeyAlias(token);
-
-          if (modifierOrder.includes(canonical)) {
-            modifierSet.add(canonical);
-            continue;
-          }
-
-          // Last non-modifier token becomes the base key
-          baseKey = canonical;
+          continue;
         }
+
+        const canonical = getKeyAlias(token);
+
+        if (modifierOrder.includes(canonical)) {
+          modifierSet.add(canonical);
+          continue;
+        }
+
+        baseKey = canonical;
+
       }
+    }
 
-      // Build key in consistent order: modifiers (sorted) + base key
-      const orderedModifiers = modifierOrder.filter((name) => modifierSet.has(name));
-      const parts = baseKey ? [...orderedModifiers, baseKey] : orderedModifiers;
+    const orderedModifiers = modifierOrder.filter((name) => modifierSet.has(name));
+    const parts = baseKey ? [...orderedModifiers, baseKey] : orderedModifiers;
+    normalizedEntries.push([parts.join('+'), callback]);
 
-      return [parts.join('+'), callback];
-    })
-  );
+    if (baseKey === '+') {
+      const modifiersWithShift = new Set(modifierSet);
+      modifiersWithShift.add('shift');
+      const orderedWithShift = modifierOrder.filter((name) => modifiersWithShift.has(name));
+      const aliasParts = [...orderedWithShift, '='];
+      normalizedEntries.push([aliasParts.join('+'), callback]);
+    }
+  }
+  return Object.fromEntries(normalizedEntries);
 }
+// return Object.fromEntries(
+//   Object.entries(keyMap).map(([rawKey, callback]) => {
+//     if (!rawKey) return [rawKey, callback];
+
+//     // Split on '+' but be careful with keys that are literally '+'
+//     const tokens = rawKey.split('+').map((token) => token.trim());
+
+//     // Handle the edge case where the key is '+' itself
+//     // After split, we get ['', ''] for '+' or ['Control', '', ''] for 'Control+'
+//     // We need to detect this and handle it specially
+
+//     const modifierSet = new Set<string>();
+//     let baseKey = '';
+
+//     // Check if this is a single '+' key (splits into ['', ''])
+//     if (tokens.length === 2 && tokens[0] === '' && tokens[1] === '') {
+//       baseKey = '+';
+//     } else {
+//       // Normal processing
+//       for (let i = 0; i < tokens.length; i++) {
+//         const token = tokens[i];
+
+//         // Skip empty tokens unless it's the last one and previous was non-empty
+//         // This handles 'Control+' -> ['Control', ''] where '+' is the base key
+//         if (token === '') {
+//           // Check if this empty token represents a '+' key
+//           if (i === tokens.length - 1 && i > 0) {
+//             baseKey = '+';
+//           }
+//           continue;
+//         }
+
+//         const canonical = getKeyAlias(token);
+
+//         if (modifierOrder.includes(canonical)) {
+//           modifierSet.add(canonical);
+//           continue;
+//         }
+
+//         // Last non-modifier token becomes the base key
+//         baseKey = canonical;
+//       }
+//     }
+
+//     // Build key in consistent order: modifiers (sorted) + base key
+//     const orderedModifiers = modifierOrder.filter((name) => modifierSet.has(name));
+//     const parts = baseKey ? [...orderedModifiers, baseKey] : orderedModifiers;
+
+//     return [parts.join('+'), callback];
+//   })
+// );
+// }
 
 /**
  * Normalizes a key press into a canonical string representation.
@@ -171,7 +222,7 @@ export function normalizeKey(key: string, event: KeyPressEventType): string {
   // but we want the unshifted key (e.g., '/') to match keyMap entries like 'Shift+/'
   // Also handle numpad keys which should be normalized regardless of Shift
   let canonicalKey: string;
-  
+
   if (event.code && event.code.startsWith('Numpad')) {
     // Always normalize numpad keys to their main keyboard equivalents
     canonicalKey = getKeyFromCode(event.code);
@@ -182,28 +233,28 @@ export function normalizeKey(key: string, event: KeyPressEventType): string {
     // Normal case: use key with alias resolution
     canonicalKey = getKeyAlias(key);
   }
-  
+
   // Modifier keys that should be excluded from the final key combination
   const modifierKeys = ['control', 'meta', 'shift', 'alt'];
-  
+
   // If only a modifier key is pressed (without another key), return just that modifier
   if (modifierKeys.includes(canonicalKey)) {
     return canonicalKey;
   }
-  
+
   // Build the modifier prefix
   const modifiers: string[] = [];
-  
+
   if (event.ctrlKey) modifiers.push('control');
   if (event.metaKey) modifiers.push('meta');
   if (event.shiftKey) modifiers.push('shift');
   if (event.altKey) modifiers.push('alt');
-  
+
   // If there are modifiers, combine them with the key
   if (modifiers.length > 0) {
     return [...modifiers, canonicalKey].join('+');
   }
-  
+
   // No modifiers, just return the canonical key
   return canonicalKey;
 }
@@ -217,17 +268,17 @@ export function normalizeKey(key: string, event: KeyPressEventType): string {
 export function isShiftedSymbol(key: string, code: string): boolean {
   // Single character that's likely a shifted symbol
   if (key.length !== 1) return false;
-  
+
   // Check if code starts with 'Digit' or common punctuation codes
   if (code.startsWith('Digit')) return true;
-  
+
   // Common punctuation keys that produce different characters when shifted
   const punctuationCodes = [
     'Slash', 'Backslash', 'BracketLeft', 'BracketRight',
     'Semicolon', 'Quote', 'Comma', 'Period', 'Minus', 'Equal',
     'Backquote'
   ];
-  
+
   return punctuationCodes.includes(code);
 }
 
@@ -263,17 +314,17 @@ export function getKeyFromCode(code: string): string {
     };
     return numpadToKey[code] || code.toLowerCase();
   }
-  
+
   // Handle digit keys (Digit0-Digit9)
   if (code.startsWith('Digit')) {
     return code.replace('Digit', '');
   }
-  
+
   // Handle letter keys (KeyA-KeyZ)
   if (code.startsWith('Key')) {
     return code.replace('Key', '').toLowerCase();
   }
-  
+
   // Map common punctuation codes to their unshifted characters
   const codeToKey: Record<string, string> = {
     'Slash': '/',
@@ -288,6 +339,6 @@ export function getKeyFromCode(code: string): string {
     'Equal': '=',
     'Backquote': '`',
   };
-  
+
   return codeToKey[code]?.toLowerCase() || code.toLowerCase();
 }
