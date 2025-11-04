@@ -54,9 +54,14 @@ export async function handleContact(_: any, formData: FormData): Promise<Contact
             context: "contact form",
             data: { name, email, message }
         });
+        const accessKey = process.env.WEB3FORMS_ACCESS_KEY;
+
+        if (!accessKey) {
+            throw new Error("WEB3FORMS_ACCESS_KEY is not set in environment variables.");
+        }
 
         formData.append("subject", "New contact form submission");
-        formData.append("access_key", process.env.WEB3FORMS_ACCESS_KEY || "");
+        formData.append("access_key", accessKey);
 
         const response = await fetch("https://api.web3forms.com/submit", {
             method: "POST",
