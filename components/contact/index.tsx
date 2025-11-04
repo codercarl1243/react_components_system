@@ -1,35 +1,57 @@
-import { useActionState } from 'react'
+'use client'
+import { useActionState, useEffect, useRef } from 'react'
 import Button from '@/components/button'
 import { handleContact } from '@/app/actions/contact';
+import List from '@/components/list';
 
+
+const initialState = {
+    status: "idle" as const,
+    fieldErrors: {},
+    formErrors: [],
+};
 
 export default function ContactForm() {
-  const [state, formAction, pending] = useActionState(handleContact, {
-    status: "idle",
-    errors: [],
-  });
+    const [state, formAction, pending] = useActionState(handleContact, initialState);
+    const formRef = useRef<HTMLFormElement>(null);
+
+  useEffect(() => {
+    if (state.status === "success") {
+      formRef.current?.reset();
+    }
+  }, [state.status]);
+
 
     return (
-        <form className="contact-form" action={formAction} noValidate>
+        <form ref={formRef} className="contact-form" action={formAction} noValidate>
             <fieldset className="contact-form__fieldset">
                 <legend className="contact-form__legend">Contact us</legend>
 
                 <div
-                    role="region"
+                    role="status"
                     aria-live="polite"
-                    aria-label="Form errors"
-                    className="contact-form__errors"
+                    aria-atomic="true"
+
+                    className="contact-form__status"
                 >
-                    {state.errors.length > 0 && (
-                        <ul>
-                            {state.errors.map((error, index) => (
-                                <li key={`error-${index}`}>{error}</li>
+                    {state.status === "success" && (
+                        <p className="contact-form__success">{state.message}</p>
+                    )}
+
+                    {state.formErrors.length > 0 && (
+                        <List
+                            className="contact-form__errors"
+                            aria-label="Form errors"
+                        >
+                            {state.formErrors.map((error, index) => (
+                                <li key={`form-error-${index}`}>{error}</li>
                             ))}
-                        </ul>
+                        </List>
                     )}
                 </div>
 
-                <div>
+                {/* Name */}
+                <div className="contact-form__field">
                     <label className="contact-form__label" htmlFor="contact-name">
                         Name
                     </label>
@@ -39,12 +61,19 @@ export default function ContactForm() {
                         type="text"
                         className="contact-form__input"
                         autoComplete="name"
-                        aria-invalid={state.errors.some(e => e.toLowerCase().includes("name"))}
                         required
+                        aria-invalid={!!state.fieldErrors.name}
+                        aria-describedby={state.fieldErrors.name ? "contact-name-error" : undefined}
                     />
+                    {state.fieldErrors.name && (
+                        <p id="contact-name-error" className="contact-form__error">
+                            {state.fieldErrors.name}
+                        </p>
+                    )}
                 </div>
 
-                <div>
+                {/* Email */}
+                <div className="contact-form__field">
                     <label className="contact-form__label" htmlFor="contact-email">
                         Email
                     </label>
@@ -54,24 +83,39 @@ export default function ContactForm() {
                         type="email"
                         className="contact-form__input"
                         autoComplete="email"
-                        aria-invalid={state.errors.some(e => e.toLowerCase().includes("email"))}
                         required
+                        aria-invalid={!!state.fieldErrors.email}
+                        aria-describedby={state.fieldErrors.email ? "contact-email-error" : undefined}
                     />
+                    {state.fieldErrors.email && (
+                        <p id="contact-email-error" className="contact-form__error">
+                            {state.fieldErrors.email}
+                        </p>
+                    )}
                 </div>
 
-                <label className="contact-form__label" htmlFor="contact-message">
-                    Message
+                {/* Message */}
+                <div className="contact-form__field">
+                    <label className="contact-form__label" htmlFor="contact-message">
+                        Message
+                    </label>
                     <textarea
                         id="contact-message"
                         name="message"
                         className="contact-form__textarea"
                         rows={4}
-                        aria-invalid={state.errors?.some(e => e.toLowerCase().includes("message"))}
                         required
+                        aria-invalid={!!state.fieldErrors.message}
+                        aria-describedby={state.fieldErrors.message ? "contact-message-error" : undefined}
                     />
-                </label>
+                    {state.fieldErrors.message && (
+                        <p id="contact-message-error" className="contact-form__error">
+                            {state.fieldErrors.message}
+                        </p>
+                    )}
+                </div>
 
-                <Button type="submit" data-variant="primary" isLoading={pending}>
+                <Button type="submit" data-variant="primary" data-style={"filled"} isLoading={pending}>
                     Send message
                 </Button>
             </fieldset>
