@@ -5,13 +5,23 @@ import { logInfo } from "@/lib/logging/log";
 import { logAppError } from "@/lib/logging/logAppError";
 import { z } from "zod";
 
+type ContactFields = "name" | "email" | "message";
+
+export type ContactActionState = {
+    status: "idle" | "success" | "error";
+    message?: string;
+    fieldErrors: Partial<Record<ContactFields, string>>;
+    formErrors: string[];
+};
+
 const ContactSchema = z.object({
     name: z.string().trim().min(1, "Name is required."),
     email: z.email("Please enter a valid email.").trim(),
     message: z.string().trim().min(1, "Message is required."),
 });
 
-export async function handleContact(_: any, formData: FormData){
+export async function handleContact(_: any, formData: FormData): Promise<ContactActionState> {
+
     const result = ContactSchema.safeParse({
         name: formData.get("name"),
         email: formData.get("email"),
@@ -19,12 +29,21 @@ export async function handleContact(_: any, formData: FormData){
     });
 
     if (!result.success) {
+        const fieldErrors = result.error.issues.reduce<Partial<Record<ContactFields, string>>>(
+            (acc, issue) => {
+                const field = issue.path[0];
+                if (field === "name" || field === "email" || field === "message") {
+                    acc[field] = issue.message;
+                }
+                return acc;
+            },
+            {}
+        );
+
         return {
             status: "error",
-            errors: result.error.issues.map(i => ({
-                field: i.path[0],
-                message: i.message
-            }))
+            fieldErrors,
+            formErrors: [],
         };
     }
 
@@ -36,6 +55,7 @@ export async function handleContact(_: any, formData: FormData){
             data: { name, email, message }
         });
 
+        formData.append("subject", "New contact form submission");
         formData.append("access_key", process.env.WEB3FORMS_ACCESS_KEY || "");
 
         const response = await fetch("https://api.web3forms.com/submit", {
@@ -45,16 +65,19 @@ export async function handleContact(_: any, formData: FormData){
 
         const data = await response.json();
 
-        if (response.ok && data.success) {
+        if (response.ok && data?.success) {
             return {
                 status: "success",
                 message: "Your message has been sent successfully!",
-                errors: []
+                fieldErrors: {},
+                formErrors: [],
             };
         }
+
         return {
             status: "error",
-            errors: [data.message ?? "Something went wrong. Please try again later."],
+            fieldErrors: {},
+            formErrors: [data?.message ?? "Something went wrong. Please try again later."],
         };
 
     } catch (err) {
@@ -62,10 +85,11 @@ export async function handleContact(_: any, formData: FormData){
 
         return {
             status: "error",
-            errors: [
+            fieldErrors: {},
+            formErrors: [
                 err instanceof Error
                     ? err.message
-                    : "An unexpected error occurred. Please try again later.",
+                    : "Network error. Please try again later.",
             ],
         };
     }
