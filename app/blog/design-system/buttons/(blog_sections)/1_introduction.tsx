@@ -12,7 +12,6 @@ export default function Section1() {
         <PostSection id="introduction">
             <PostBanner
                 title="The Button"
-                subtitle="Building a React Design System Foundation"
                 headingId="the-button-heading"
                 image={{
                     src: '/images/Buttons.webp'
