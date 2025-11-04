@@ -15,13 +15,35 @@ const geistMono = Geist_Mono({
   subsets: ['latin']
 })
 
+const title = 'React Component designs';
+const description = 'A library of accessible and extensible react based components';
+
 export const metadata: Metadata = {
-  title: 'React Component designs',
-  description: 'A library of accessible and extensible react based components',
+  title,
+  description,
   alternates: {
     types: {
       'application/rss+xml': '/feed.xml',
     },
+  },
+  openGraph: {
+    title,
+    description,
+    images: [
+      {
+        url: '/og-image.png',
+        width: 1200,
+        height: 630,
+        alt: 'React Component designs preview',
+      },
+    ],
+    type: 'website',
+  },
+  twitter: {
+    title,
+    description,
+    card: 'summary_large_image',
+    images: ['/og-image.png'],
   },
 }
 
