@@ -36,7 +36,7 @@ export async function handleContact(_: any, formData: FormData){
             data: { name, email, message }
         });
 
-        formData.append("access_key", "ffd7c506-c409-4ffc-bbfb-4f5ddbfceaf9");
+        formData.append("access_key", process.env.WEB3FORMS_ACCESS_KEY || "");
 
         const response = await fetch("https://api.web3forms.com/submit", {
             method: "POST",
