@@ -33,7 +33,7 @@ describe('handleKeyPress', () => {
       const event = {
         preventDefault: jest.fn(),
       } as unknown as KeyPressEventType
-      
+
       handleKeyPress(event, keyMap)
 
       expect(mockCallback).not.toHaveBeenCalled()
@@ -141,7 +141,7 @@ describe('handleKeyPress', () => {
       // Uppercase key in map, lowercase input  
       handleKeyPress(makeEvent('b'), keyMap)
       expect(mockCallbackUpper).toHaveBeenCalled()
-      
+
       // Uppercase key in map, Uppercase input  
       handleKeyPress(makeEvent('B'), keyMap)
       expect(mockCallbackUpper).toHaveBeenCalled()
@@ -475,7 +475,7 @@ describe('handleKeyPress', () => {
     it.each(aliasTestCases)('returns "%s" for input "%s"', (input, expected) => {
       expect(getKeyAlias(input)).toBe(expected)
     })
-    
+
     const noAliasTestCases = [
       'Tab', 'a', 'ArrowLeft', 'Escape', 'Space', 'F1', 'Home', 'End'
     ]
@@ -544,7 +544,7 @@ describe('handleKeyPress', () => {
         '': mockCallback,  // Empty key
         'a': validCallback
       }
-      
+
       // Should not throw, and valid key should still work
       expect(() => handleKeyPress(makeEvent('a'), keyMap)).not.toThrow()
       expect(validCallback).toHaveBeenCalled()
@@ -556,7 +556,7 @@ describe('handleKeyPress', () => {
       const keyMap: KeyPressCallbackMap = {
         '': mockCallback
       }
-      
+
       // The empty key should remain in the normalized map even if it can't be triggered
       expect(() => handleKeyPress(makeEvent(''), keyMap)).not.toThrow()
     })
@@ -574,6 +574,32 @@ describe('handleKeyPress', () => {
       handleKeyPress(event, keyMap)
 
       expect(mockCallback).toHaveBeenCalled()
+    })
+    it('handles Shift+= (plus) when registered as +', () => {
+      const mockCallback = jest.fn()
+      const keyMap: KeyPressCallbackMap = {
+        '+': mockCallback
+      }
+
+      const event = makeEvent('+', { shiftKey: true }, 'Equal')
+
+      handleKeyPress(event, keyMap)
+
+      expect(event.preventDefault).toHaveBeenCalled()
+      expect(mockCallback).toHaveBeenCalledWith(event)
+    })
+
+    it('handles Control+Shift+= (plus) when registered as Control++', () => {
+      const mockCallback = jest.fn()
+      const keyMap: KeyPressCallbackMap = {
+        'Control++': mockCallback
+      }
+
+      const event = makeEvent('+', { ctrlKey: true, shiftKey: true }, 'Equal')
+
+      handleKeyPress(event, keyMap)
+
+      expect(mockCallback).toHaveBeenCalledWith(event)
     })
 
     it('handles Shift+1 (exclamation mark)', () => {
@@ -681,6 +707,73 @@ describe('handleKeyPress', () => {
     })
   })
 
+  describe('numpad key handling', () => {
+    it('treats numpad Enter same as regular Enter', () => {
+      const mockCallback = jest.fn()
+      const keyMap: KeyPressCallbackMap = {
+        'Enter': mockCallback
+      }
+
+      // Regular Enter
+      handleKeyPress(makeEvent('Enter', {}, 'Enter'), keyMap)
+      expect(mockCallback).toHaveBeenCalledTimes(1)
+
+      // Numpad Enter should also trigger it
+      mockCallback.mockClear()
+      handleKeyPress(makeEvent('Enter', {}, 'NumpadEnter'), keyMap)
+      expect(mockCallback).toHaveBeenCalledTimes(1)
+    })
+
+    it('treats numpad digits same as regular digits', () => {
+      const mockCallback = jest.fn()
+      const keyMap: KeyPressCallbackMap = {
+        '5': mockCallback
+      }
+
+      // Regular 5
+      handleKeyPress(makeEvent('5', {}, 'Digit5'), keyMap)
+      expect(mockCallback).toHaveBeenCalledTimes(1)
+
+      // Numpad 5 should also trigger it
+      mockCallback.mockClear()
+      handleKeyPress(makeEvent('5', {}, 'Numpad5'), keyMap)
+      expect(mockCallback).toHaveBeenCalledTimes(1)
+    })
+
+    it('handles Control+NumpadEnter same as Control+Enter', () => {
+      const mockCallback = jest.fn()
+      const keyMap: KeyPressCallbackMap = {
+        'Control+Enter': mockCallback
+      }
+
+      // Control + Regular Enter
+      handleKeyPress(makeEvent('Enter', { ctrlKey: true }, 'Enter'), keyMap)
+      expect(mockCallback).toHaveBeenCalledTimes(1)
+
+      // Control + Numpad Enter should also trigger it
+      mockCallback.mockClear()
+      handleKeyPress(makeEvent('Enter', { ctrlKey: true }, 'NumpadEnter'), keyMap)
+      expect(mockCallback).toHaveBeenCalledTimes(1)
+    })
+
+    it('handles numpad operators', () => {
+      const addCallback = jest.fn()
+      const divideCallback = jest.fn()
+      const keyMap: KeyPressCallbackMap = {
+        '+': addCallback,
+        '/': divideCallback
+      }
+
+      // Numpad +
+      handleKeyPress(makeEvent('+', {}, 'NumpadAdd'), keyMap)
+      expect(addCallback).toHaveBeenCalled()
+
+      // Numpad /
+      handleKeyPress(makeEvent('/', {}, 'NumpadDivide'), keyMap)
+      expect(divideCallback).toHaveBeenCalled()
+    })
+  })
+
   describe('normalizeKey', () => {
     it('normalizes simple keys to lowercase', () => {
       const event = makeEvent('A')
@@ -745,6 +838,125 @@ describe('handleKeyPress', () => {
       // Letters with shift should use the key (uppercase letter)
       const event = makeEvent('A', { shiftKey: true }, 'KeyA')
       expect(normalizeKey('A', event)).toBe('shift+a')
+    })
+
+    it('normalizes numpad Enter to regular enter', () => {
+      const event = makeEvent('Enter', {}, 'NumpadEnter')
+      expect(normalizeKey('Enter', event)).toBe('enter')
+    })
+
+    it('normalizes numpad Enter with modifiers', () => {
+      const event = makeEvent('Enter', { ctrlKey: true }, 'NumpadEnter')
+      expect(normalizeKey('Enter', event)).toBe('control+enter')
+    })
+
+    it('normalizes numpad digits', () => {
+      const event = makeEvent('5', {}, 'Numpad5')
+      expect(normalizeKey('5', event)).toBe('5')
+    })
+  })
+
+  describe('special and function keys', () => {
+    it('handles function keys F1-F12', () => {
+      const mockCallback = jest.fn()
+      const keyMap: KeyPressCallbackMap = {
+        'F1': mockCallback
+      }
+
+      handleKeyPress(makeEvent('F1', {}, 'F1'), keyMap)
+      expect(mockCallback).toHaveBeenCalled()
+    })
+
+    it('handles navigation keys', () => {
+      const homeCallback = jest.fn()
+      const endCallback = jest.fn()
+      const pageUpCallback = jest.fn()
+      const keyMap: KeyPressCallbackMap = {
+        'Home': homeCallback,
+        'End': endCallback,
+        'PageUp': pageUpCallback
+      }
+
+      handleKeyPress(makeEvent('Home', {}, 'Home'), keyMap)
+      expect(homeCallback).toHaveBeenCalled()
+
+      handleKeyPress(makeEvent('End', {}, 'End'), keyMap)
+      expect(endCallback).toHaveBeenCalled()
+
+      handleKeyPress(makeEvent('PageUp', {}, 'PageUp'), keyMap)
+      expect(pageUpCallback).toHaveBeenCalled()
+    })
+
+    it('handles Tab key', () => {
+      const mockCallback = jest.fn()
+      const keyMap: KeyPressCallbackMap = {
+        'Tab': mockCallback
+      }
+
+      handleKeyPress(makeEvent('Tab', {}, 'Tab'), keyMap)
+      expect(mockCallback).toHaveBeenCalled()
+    })
+
+    it('handles Backspace key', () => {
+      const mockCallback = jest.fn()
+      const keyMap: KeyPressCallbackMap = {
+        'Backspace': mockCallback
+      }
+
+      handleKeyPress(makeEvent('Backspace', {}, 'Backspace'), keyMap)
+      expect(mockCallback).toHaveBeenCalled()
+    })
+  })
+
+  describe('IME and composition events', () => {
+    it('ignores events with key="Process" during IME composition', () => {
+      const mockCallback = jest.fn()
+      const keyMap: KeyPressCallbackMap = {
+        'a': mockCallback
+      }
+
+      const event = makeEvent('Process', {}, 'KeyA')
+      handleKeyPress(event, keyMap)
+
+      expect(mockCallback).not.toHaveBeenCalled()
+      expect(event.preventDefault).not.toHaveBeenCalled()
+    })
+
+    it('ignores events with isComposing flag', () => {
+      const mockCallback = jest.fn()
+      const keyMap: KeyPressCallbackMap = {
+        'a': mockCallback
+      }
+
+      const event = {
+        key: 'a',
+        code: 'KeyA',
+        isComposing: true,
+        ctrlKey: false,
+        metaKey: false,
+        shiftKey: false,
+        altKey: false,
+        preventDefault: jest.fn(),
+      } as unknown as KeyPressEventType
+
+      handleKeyPress(event, keyMap)
+
+      expect(mockCallback).not.toHaveBeenCalled()
+      expect(event.preventDefault).not.toHaveBeenCalled()
+    })
+
+    it('handles dead key events gracefully', () => {
+      const mockCallback = jest.fn()
+      const keyMap: KeyPressCallbackMap = {
+        'a': mockCallback
+      }
+
+      // Dead keys produce 'Dead' as the key value
+      const event = makeEvent('Dead', {}, 'Backquote')
+      handleKeyPress(event, keyMap)
+
+      expect(mockCallback).not.toHaveBeenCalled()
+      expect(event.preventDefault).not.toHaveBeenCalled()
     })
   })
 
@@ -814,9 +1026,74 @@ describe('handleKeyPress', () => {
       expect(getKeyFromCode('Backquote')).toBe('`')
     })
 
+    it('normalizes numpad keys to their main keyboard equivalents', () => {
+      expect(getKeyFromCode('NumpadEnter')).toBe('enter')
+      expect(getKeyFromCode('Numpad0')).toBe('0')
+      expect(getKeyFromCode('Numpad5')).toBe('5')
+      expect(getKeyFromCode('Numpad9')).toBe('9')
+      expect(getKeyFromCode('NumpadAdd')).toBe('+')
+      expect(getKeyFromCode('NumpadSubtract')).toBe('-')
+      expect(getKeyFromCode('NumpadMultiply')).toBe('*')
+      expect(getKeyFromCode('NumpadDivide')).toBe('/')
+      expect(getKeyFromCode('NumpadDecimal')).toBe('.')
+    })
+
+    it('handles unknown numpad codes gracefully', () => {
+      // Some theoretical or future numpad key not in our map
+      expect(getKeyFromCode('NumpadUnknown')).toBe('numpadunknown')
+      expect(getKeyFromCode('NumpadFuture')).toBe('numpadfuture')
+    })
+
     it('returns lowercase code for unknown codes', () => {
       expect(getKeyFromCode('UnknownCode')).toBe('unknowncode')
       expect(getKeyFromCode('F1')).toBe('f1')
+    })
+  })
+
+  describe('normalizeKeyMap internal behavior', () => {
+    it('normalizes plus sign key correctly', () => {
+      const mockCallback = jest.fn()
+      const keyMap: KeyPressCallbackMap = {
+        '+': mockCallback
+      }
+
+      const event = makeEvent('+', {}, 'Equal')
+      handleKeyPress(event, keyMap)
+      expect(mockCallback).toHaveBeenCalled()
+    })
+
+    it('normalizes Control++ correctly', () => {
+      const mockCallback = jest.fn()
+      const keyMap: KeyPressCallbackMap = {
+        'Control++': mockCallback
+      }
+
+      const event = makeEvent('+', { ctrlKey: true }, 'Equal')
+      handleKeyPress(event, keyMap)
+      expect(mockCallback).toHaveBeenCalled()
+    })
+
+    it('normalizes NumpadAdd correctly', () => {
+      const mockCallback = jest.fn()
+      const keyMap: KeyPressCallbackMap = {
+        '+': mockCallback
+      }
+
+      const event = makeEvent('+', {}, 'NumpadAdd')
+      handleKeyPress(event, keyMap)
+      expect(mockCallback).toHaveBeenCalled()
+    })
+
+    it('handles edge case: key ending with + after multiple modifiers', () => {
+      const mockCallback = jest.fn()
+      // This specifically targets the branch where we check for trailing empty token
+      const keyMap: KeyPressCallbackMap = {
+        'Control+Alt++': mockCallback  // Multiple modifiers + plus key
+      }
+
+      const event = makeEvent('+', { ctrlKey: true, altKey: true }, 'Equal')
+      handleKeyPress(event, keyMap)
+      expect(mockCallback).toHaveBeenCalled()
     })
   })
 })
