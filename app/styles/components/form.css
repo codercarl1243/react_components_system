@@ -1,3 +1,85 @@
-.form {
-    
+/* TODO: add disabled styling, maybe target these two:  
+.input-group[data-disabled="true"],
+.input-group:has(.input-group__input:disabled)
+*/
+.input-group {
+    --field-accent-color: currentColor;
+
+    position: relative;
+    display: grid;
+    gap: var(--spacing);
+    margin-block-end: var(--spacing-lg);
+
+    &::before {
+        content: "";
+        position: absolute;
+        inset-block: 0.25em;
+        inset-inline-start: -0.5rem;
+        width: 0;
+        background-color: var(--color-danger-400);
+        border-radius: var(--radius-sm) 0 0 var(--radius-sm);
+        transition: width 0.2s ease;
+    }
+
+    &[data-invalid="true"]::before {
+        width: 0.25rem;
+    }
+
+    &:focus-within {
+        --field-accent-color: var(--color-primary-400);
+    }
+
+    .input-group__label {
+        color: var(--field-accent-color);
+        flex-basis: 10ch;
+        transition: color 0.2s ease;
+    }
+
+    .input-group__helper {
+        color: var(--color-neutral-500);
+        margin-block: var(--spacing);
+    }
+
+    .input-group__required,
+    .input-group__error {
+        color: var(--color-danger-400);
+        font-size: var(--font-size-xs);
+    }
+
+    .input-group__input {
+        flex: 1;
+        padding: var(--spacing-sm) var(--spacing-md);
+        border: 1px solid var(--field-accent-color);
+        border-radius: var(--radius-sm);
+        transition: border-color 0.2s ease, outline-color 0.2s ease;
+
+        &:focus-visible {
+            outline: 2px solid var(--field-accent-color);
+            outline-offset: 2px;
+        }
+
+        &[aria-invalid="true"] {
+            border-color: var(--color-danger-400);
+            outline-color: var(--color-danger-400);
+        }
+    }
+
+    textarea.input-group__input {
+        padding: var(--spacing-sm);
+        min-block-size: clamp(6rem, 10vh, 12rem);
+        resize: vertical;
+    }
+}
+
+@media screen and (max-width: 35rem) {
+    .input-group {
+        flex-direction: column;
+        margin-block-end: var(--spacing-sm);
+
+        .input-group__label {
+            flex-basis: auto;
+        }
+    }
+
+
 }

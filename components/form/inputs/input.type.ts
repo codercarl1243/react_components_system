@@ -9,8 +9,9 @@ export type TElementMap = {
 
 export type TBaseInputProps<T extends textElementType> = {
   id: string;
-  label?: ReactNode;
+  label: ReactNode;
   error?: ReactNode;
+  helper?: ReactNode;
   as?: T;
 };
 

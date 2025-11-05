@@ -1,5 +1,6 @@
 .contact-form__fieldset {
     border-radius: var(--radius-md);
+    max-width: var(--bp-md);
 }
 
 .contact-form__status {
@@ -22,52 +23,4 @@
 .contact-form__status--error {
     --border-color: var(--color-danger-400);
     --bg-color: var(--color-danger-200);
-}
-
-.contact-form__error {
-    color: var(--color-danger-400);
-}
-
-.contact-form__field {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--spacing);
-    margin-block-end: var(--spacing-lg);
-}
-
-@media screen and (max-width: 35rem) {
-    .contact-form__field {
-        margin-block-end: var(--spacing-sm);
-    }
-}
-
-.contact-form__field:focus-within {
-    .contact-form__label {
-        color: var(--color-primary-400);
-    }
-
-    .contact-form__input,
-    .contact-form__textarea {
-        --input-border-color: var(--color-primary-400);
-    }
-}
-
-.contact-form__input:focus-visible,
-.contact-form__textarea:focus-visible {
-    --input-border-color: var(--color-primary-400);
-    outline-color: var(--color-primary-400);
-}
-
-.contact-form__label {
-    flex-basis: 10ch;
-}
-
-.contact-form__input,
-.contact-form__textarea {
-    flex: 1;
-    border: 1px solid var(--input-border-color, var(--color-neutral-300));
-}
-
-.contact-form__textarea {
-    padding: var(--spacing-sm);
 }
