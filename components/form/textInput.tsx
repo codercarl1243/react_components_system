@@ -17,7 +17,7 @@ type TBaseInputProps<T extends InputElementType> = {
 
 export type TProps<T extends InputElementType> = TBaseInputProps<T> & TElementMap[T];
 
-export default function Input<T extends keyof TElementMap = "input">({ as, className, required, label, error, id, ...props }: TProps<T>) {
+export default function TextInput<T extends keyof TElementMap = "input">({ as, className, required, label, error, id, ...props }: TProps<T>) {
 
     const inputType = (as ?? "input") as keyof JSX.IntrinsicElements;
     const commonProps = {
