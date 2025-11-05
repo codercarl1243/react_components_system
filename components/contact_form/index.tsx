@@ -9,24 +9,24 @@ import { RiMailLine } from '@remixicon/react';
 import { Text, TextArea } from '@/components/form/inputs';
 
 // 🧪 TEMP: Fake error state for testing layout
-const fakeErrorState = {
-    status: "unknown_error",
-    message: "",
-    fieldErrors: {
-        name: "Name is required.",
-        email: "Please enter a valid email address.",
-        message: "Message must be at least 10 characters long.",
-    },
-    formErrors: [
-    ],
-};
+// const fakeErrorState = {
+//     status: "unknown_error",
+//     message: "",
+//     fieldErrors: {
+//         name: "Name is required.",
+//         email: "Please enter a valid email address.",
+//         message: "Message must be at least 10 characters long.",
+//     },
+//     formErrors: [
+//     ],
+// };
 
-const fakeSuccessState = {
-    status: "success",
-    message: "✅ Your message has been sent successfully!",
-    fieldErrors: {},
-    formErrors: [],
-};
+// const fakeSuccessState = {
+//     status: "success",
+//     message: "✅ Your message has been sent successfully!",
+//     fieldErrors: {},
+//     formErrors: [],
+// };
 
 const initialState = {
     status: "idle" as const,
@@ -35,7 +35,7 @@ const initialState = {
 };
 
 export default function ContactForm() {
-    const [state, formAction, pending] = useActionState(handleContact, fakeErrorState);
+    const [state, formAction, pending] = useActionState(handleContact, initialState);
     const formRef = useRef<HTMLFormElement>(null);
 
     useEffect(() => {
@@ -54,7 +54,6 @@ export default function ContactForm() {
                     role="status"
                     aria-live="polite"
                     aria-atomic="true"
-
                     className={clsx("contact-form__status",
                         { "contact-form__status--error": (state.formErrors.length > 0 || state.status === "unknown_error") },
                         { "contact-form__status--success": state.status === "success" }
