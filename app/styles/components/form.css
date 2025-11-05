@@ -40,6 +40,11 @@
         margin-block: var(--spacing);
     }
 
+    .input-group__required {
+        vertical-align: text-top;
+        margin-inline-start: 0.25ch;
+    }
+
     .input-group__required,
     .input-group__error {
         color: var(--color-danger-400);
