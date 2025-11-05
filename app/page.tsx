@@ -1,5 +1,5 @@
 'use client';
-import ContactForm from '@/components/contact';
+import ContactForm from '@/components/contact_form';
 
 export default function Home() {
   return (
