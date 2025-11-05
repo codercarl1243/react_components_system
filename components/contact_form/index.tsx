@@ -6,7 +6,7 @@ import List from '@/components/list';
 import clsx from 'clsx';
 import Link from '@/components/link';
 import { RiMailLine } from '@remixicon/react';
-import Input from '@/components/form/input';
+import { Text, TextArea } from '@/components/form/inputs';
 
 // 🧪 TEMP: Fake error state for testing layout
 const fakeErrorState = {
@@ -87,7 +87,7 @@ export default function ContactForm() {
                     )}
                 </div>
 
-                <Input
+                <Text
                     id="contact-name"
                     label="Name"
                     name="name"
@@ -96,7 +96,7 @@ export default function ContactForm() {
                     required
                     error={state.fieldErrors.name}
                 />
-                <Input
+                <Text
                     id="contact-email"
                     label="Email"
                     name="email"
@@ -105,8 +105,7 @@ export default function ContactForm() {
                     required
                     error={state.fieldErrors.email}
                 />
-                <Input
-                    as="textarea"
+                <TextArea
                     id="contact-message"
                     label="Message"
                     name="message"

@@ -1,23 +1,9 @@
 import clsx from "clsx";
-import { createElement, type InputHTMLAttributes, type JSX, type ReactNode, type TextareaHTMLAttributes } from "react";
+import { createElement, type JSX } from "react";
+import type { TElementMap, TextInputProps } from "@/components/form/inputs/input.type";
 
-type InputElementType = "input" | "textarea";
 
-type TElementMap = {
-  input: InputHTMLAttributes<HTMLInputElement>;
-  textarea: TextareaHTMLAttributes<HTMLTextAreaElement>;
-};
-
-type TBaseInputProps<T extends InputElementType> = {
-  id: string;
-  label?: ReactNode;
-  error?: ReactNode;
-  as?: T;
-};
-
-export type TProps<T extends InputElementType> = TBaseInputProps<T> & TElementMap[T];
-
-export default function TextInput<T extends keyof TElementMap = "input">({ as, className, required, label, error, id, ...props }: TProps<T>) {
+export default function TextInput<T extends keyof TElementMap = "input">({ as, className, required, label, error, id, ...props }: TextInputProps<T>) {
 
     const inputType = (as ?? "input") as keyof JSX.IntrinsicElements;
     const commonProps = {
