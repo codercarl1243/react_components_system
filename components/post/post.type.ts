@@ -10,6 +10,7 @@ export type PostImageObjType = {
 
 export type PostId = Branded<string, 'PostId'>;
 export const asPostId = (value: string) => asBrand<string, 'PostId'>(value);
+export const asPostIds = (ids: string[]): PostId[] => ids.map(asPostId);
 
 export type PostType = {
     id: PostId;
