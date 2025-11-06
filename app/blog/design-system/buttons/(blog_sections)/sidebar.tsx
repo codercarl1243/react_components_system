@@ -1,8 +1,8 @@
 import PostSideBar from "@/components/post/sidebar";
-import { type RelatedPost } from "@/lib/blogPosts";
+import { PostSideBarProps } from "@/components/post/sidebar/sidebar.type";
+import { CODER_CARL } from "@/lib/authors";
 
-type TSideBarProps = { relatedPosts: RelatedPost[] }
-export default function ButtonsSideBar({ relatedPosts }: TSideBarProps) {
+export default function ButtonsSideBar({ relatedPosts }: PostSideBarProps) {
 
     return (
         <PostSideBar
@@ -21,7 +21,7 @@ export default function ButtonsSideBar({ relatedPosts }: TSideBarProps) {
             ]}
             // Fillers
             relatedPosts={relatedPosts}
-            author={{ avatarUrl: '/window.svg', name: "carl davidson" }}
+            author={CODER_CARL}
         />
     )
 }
