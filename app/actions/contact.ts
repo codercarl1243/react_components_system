@@ -91,8 +91,7 @@ export async function handleContact(_: any, formData: FormData): Promise<Contact
         return {
             status: "unknown_error",
             fieldErrors: {},
-            formErrors: ["Your message could not be sent. Please try again later.",
-                "If the problem persists, contact us directly via email at codercarl1243@gmail.com"],
+            formErrors: [],
         };
     }
 }
