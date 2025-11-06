@@ -1,7 +1,7 @@
 import type { ComponentProps } from 'react'
 import type { HeadingLevelsType } from '@/components/heading/heading.type';
 import type { TImage } from '@/components/image/image.type';
-import type { Branded } from '@/types/utility/brand';
+import { asBrand, type Branded } from '@/types/utility/brand';
 
 export type PostImageObjType = {
     src: TImage['src'];
@@ -9,6 +9,7 @@ export type PostImageObjType = {
 };
 
 export type PostId = Branded<string, 'PostId'>;
+export const asPostId = (value: string) => asBrand<string, 'PostId'>(value);
 
 export type PostType = {
     id: PostId;
