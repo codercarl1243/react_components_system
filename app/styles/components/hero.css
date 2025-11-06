@@ -1,0 +1,28 @@
+.hero {
+  padding-block-start: var(--space-xl);
+  text-align: center;
+}
+
+.hero__image-wrapper {
+  border-radius: var(--radius-circle);
+  display: inline-block;
+  box-shadow: var(--shadow-md, 0 4px 12px rgba(0, 0, 0, 0.15));
+  img {
+    object-fit: contain;
+    width:  min(350px, 80vw);
+  }
+}
+
+.hero__content {
+  margin-inline: auto;
+  gap: var(--space-md, 1.5rem);
+  align-items: center;
+}
+
+.hero__content--heading {
+  text-wrap: balance;
+}
+
+.hero__content--subtitle {
+  color: var(--color-neutral-600);
+}
