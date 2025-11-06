@@ -1,26 +1,35 @@
 .contact-form__fieldset {
     border-radius: var(--radius-md);
     max-width: var(--bp-md);
+    background-color: var(--color-neutral-100);
+    color: var(--color-neutral-900);
 }
 
 .contact-form__status {
-    border: 1px solid var(--border-color, transparent);
+    --border-color: transparent;
+
+    border: var(--border-thin);
     border-radius: var(--radius-md);
-    background-color: var(--bg-color, var(--color-neutral-100));
+    background-color: var(--bg-color, transparent);
+
+    transition:
+        background-color 0.25s ease,
+        border-color 0.25s ease,
+        color 0.25s ease;
 }
 
-.contact-form__status--success,
-.contact-form__status--error {
+.contact-form__status:not([data-status="idle"]) {
     margin-block: var(--spacing-md);
+    margin-inline: var(--spacing);
     padding: var(--spacing-md);
-}
 
-.contact-form__status--success {
-    --border-color: var(--color-secondary-400);
-    --bg-color: var(--color-secondary-200);
-}
+    &[data-status="success"] {
+        --border-color: var(--color-secondary-400);
+        --bg-color: var(--color-secondary-200);
+    }
 
-.contact-form__status--error {
-    --border-color: var(--color-danger-400);
-    --bg-color: var(--color-danger-200);
+    &[data-status="error"] {
+        --border-color: var(--color-danger-400);
+        --bg-color: var(--color-danger-200);
+    }
 }
