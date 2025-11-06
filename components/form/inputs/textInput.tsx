@@ -20,6 +20,7 @@ export default function TextInput<T extends keyof TElementMap = "input">({ as, h
         "aria-invalid": !!error,
         "aria-describedby": ariaDescribedByIds,
         className: clsx("input-group__input", className),
+        'aria-required': required,
         required,
         ...props,
     } satisfies Record<string, unknown>;
