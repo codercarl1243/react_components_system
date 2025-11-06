@@ -1,5 +1,5 @@
 import Image from '@/components/image'
-import Heading from './heading'
+import Heading from '@/components/heading'
 
 export default function Hero() {
   return (
