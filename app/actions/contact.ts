@@ -8,7 +8,7 @@ import { z } from "zod";
 type ContactFields = "name" | "email" | "message";
 
 export type ContactActionState = {
-    status: "idle" | "success" | "error";
+    status: "idle" | "success" | "error" | "unknown_error";
     message?: string;
     fieldErrors: Partial<Record<ContactFields, string>>;
     formErrors: string[];
@@ -89,13 +89,9 @@ export async function handleContact(_: any, formData: FormData): Promise<Contact
         logAppError(AppErrorCode.EXTERNAL_SERVICE_ERROR, "web3forms error", { context: "contact form", data: { error: err }, trace: true })
 
         return {
-            status: "error",
+            status: "unknown_error",
             fieldErrors: {},
-            formErrors: [
-                err instanceof Error
-                    ? err.message
-                    : "Network error. Please try again later.",
-            ],
+            formErrors: [],
         };
     }
 }

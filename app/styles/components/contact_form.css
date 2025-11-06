@@ -1,0 +1,26 @@
+.contact-form__fieldset {
+    border-radius: var(--radius-md);
+    max-width: var(--bp-md);
+}
+
+.contact-form__status {
+    border: 1px solid var(--border-color, transparent);
+    border-radius: var(--radius-md);
+    background-color: var(--bg-color, var(--color-neutral-100));
+}
+
+.contact-form__status--success,
+.contact-form__status--error {
+    margin-block: var(--spacing-md);
+    padding: var(--spacing-md);
+}
+
+.contact-form__status--success {
+    --border-color: var(--color-secondary-400);
+    --bg-color: var(--color-secondary-200);
+}
+
+.contact-form__status--error {
+    --border-color: var(--color-danger-400);
+    --bg-color: var(--color-danger-200);
+}
