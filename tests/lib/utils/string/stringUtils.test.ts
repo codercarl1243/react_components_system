@@ -166,10 +166,12 @@ describe('stringUtils', () => {
         // @ts-expect-error simulate undefined Intl
         global.Intl = undefined;
 
-        const result = stringUtils.truncate('Hello World', 5);
-        expect(result).toBe('Hello');
-
-        global.Intl = originalIntl;
+        try {
+            const result = stringUtils.truncate('Hello World', 5);
+            expect(result).toBe('Hello');
+        } finally {
+            global.Intl = originalIntl;
+        }        
     });
 
     describe('integration', () => {
