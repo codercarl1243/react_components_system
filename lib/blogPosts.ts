@@ -1,4 +1,4 @@
-import { asPostId, type PostId, type PostSummary, type PostType } from "@/components/post/post.type";
+import { asPostId, asPostIds, type PostId, type PostSummary, type PostType } from "@/components/post/post.type";
 
 const ButtonPosts: PostType[] = [
     {
@@ -6,7 +6,7 @@ const ButtonPosts: PostType[] = [
         title: 'Button',
         subtitle: 'Foundations of an Accessible Button System',
         excerpt: 'Build a robust, accessible button foundation for your design system.',
-        relatedPostIds: [asPostId('design__button__slider__01'), asPostId('design__button__toggle__01')],
+        relatedPostIds: asPostIds(['design__button__slider__01', 'design__button__toggle__01']),
         href: '/blog/design-system/buttons',
         lastModified: new Date('2025-10-10'),
         published: true,
@@ -20,7 +20,7 @@ const ButtonPosts: PostType[] = [
         id: asPostId('design__button__slider__01'),
         title: 'Slider Buttons',
         excerpt: 'Explore slider-based button interactions for dynamic UI controls.',
-        relatedPostIds: [asPostId('design__button__01'), asPostId('design__button__toggle__01')],
+        relatedPostIds: asPostIds(['design__button__01', 'design__button__toggle__01']),
         href: '/blog/design-system/buttons/sliders',
         lastModified: new Date('2025-10-10'),
         published: true,
@@ -33,7 +33,7 @@ const ButtonPosts: PostType[] = [
         id: asPostId('design__button__toggle__01'),
         title: 'Toggle Buttons',
         excerpt: 'Design accessible toggle buttons with proper ARIA and keyboard support.',
-        relatedPostIds: [asPostId('design__button__01'), asPostId('design__button__slider__01')],
+        relatedPostIds: asPostIds(['design__button__01', 'design__button__slider__01']),
         href: '/blog/design-system/buttons/toggle',
         lastModified: new Date('2025-10-10'),
         published: true,
