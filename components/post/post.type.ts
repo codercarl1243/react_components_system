@@ -29,8 +29,8 @@ export type PostType = {
     relatedPostIds: PostId[];
     lastModified: Date;
     createdAt: Date;
-    published: Boolean;
-    featured?: Boolean;
+    published: boolean;
+    featured?: boolean;
     authorId: AuthorId;
     subject?: string;           // high-level category: e.g. "Design System", "Accessibility"
     keywords?: string[];        // tags: e.g. ["buttons", "variants", "tokens"]
