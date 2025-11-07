@@ -1,6 +1,6 @@
 import { asPostId, asPostIds, type PostId, type PostSummary, type PostType } from "@/components/post/post.type";
 import { CODER_CARL_ID, getAuthorById, type AuthorId } from "./authors";
-import { escapeString } from "./utils/string/sanitizeString";
+import { sanitizeString } from "@/lib/utils/string";
 
 const ButtonPosts: PostType[] = [
     {
@@ -113,26 +113,28 @@ export function getFeaturedPosts(limit = 3): PostSummary[] {
  * Get posts by subject (case-insensitive + partial match)
  */
 export function getPostsBySubject(query: string): PostSummary[] {
-  if (!query.trim()) return [];
+    if (!query.trim()) return [];
 
-  const regex = new RegExp(escapeString(query), 'i');
+    const sanitizedQuery = sanitizeString(query);
+    const regex = new RegExp(sanitizedQuery, 'i');
 
-  return BLOG_POSTS
-    .filter(p => p.subject && regex.test(p.subject))
-    .map(toPostSummary);
+    return BLOG_POSTS
+        .filter(p => p.subject && regex.test(p.subject))
+        .map(toPostSummary);
 }
 
 /**
  * Get posts by keyword (case-insensitive + partial match)
  */
 export function getPostsByKeyword(query: string): PostSummary[] {
-  if (!query.trim()) return [];
+    if (!query.trim()) return [];
 
-  const regex = new RegExp(escapeString(query), 'i');
+    const sanitizedQuery = sanitizeString(query);
+    const regex = new RegExp(sanitizedQuery, 'i');
 
-  return BLOG_POSTS
-    .filter(p => p.keywords?.some(keyword => regex.test(keyword)))
-    .map(toPostSummary);
+    return BLOG_POSTS
+        .filter(p => p.keywords?.some(keyword => regex.test(keyword)))
+        .map(toPostSummary);
 }
 
 
