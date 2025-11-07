@@ -11,13 +11,16 @@ const ButtonPosts: PostType[] = [
         relatedPostIds: asPostIds(['design__button__slider__01', 'design__button__toggle__01']),
         href: '/blog/design-system/buttons',
         lastModified: new Date('2025-10-10'),
+        createdAt: new Date('2025-09-30'),
         published: true,
         featured: true,
         image: {
             src: '/images/blog/button-base-banner.jpg',
             alt: 'Accessible button components with variants and states'
         },
-        authorId: CODER_CARL_ID
+        authorId: CODER_CARL_ID,
+        subject: 'design system',
+        keywords: ['buttons', 'accessibility', 'foundations']
     },
     {
         id: asPostId('design__button__slider__01'),
@@ -26,6 +29,7 @@ const ButtonPosts: PostType[] = [
         relatedPostIds: asPostIds(['design__button__01', 'design__button__toggle__01']),
         href: '/blog/design-system/buttons/sliders',
         lastModified: new Date('2025-10-10'),
+        createdAt: new Date('2025-09-30'),
         published: true,
         image: {
             src: '/images/blog/button-slider-banner.jpg',
@@ -40,6 +44,7 @@ const ButtonPosts: PostType[] = [
         relatedPostIds: asPostIds(['design__button__01', 'design__button__slider__01']),
         href: '/blog/design-system/buttons/toggle',
         lastModified: new Date('2025-10-10'),
+        createdAt: new Date('2025-09-30'),
         published: true,
         image: {
             src: '/images/blog/button-toggle-banner.jpg',

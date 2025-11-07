@@ -4,6 +4,7 @@ import { Geist, Geist_Mono } from 'next/font/google'
 import './styles/globals.css'
 import Footer from '@/components/layout/footer'
 import Header from '@/components/layout/header'
+import { baseMetadata } from '@/lib/utils/generateMeta/default'
 
 const geistSans = Geist({
   variable: '--font-main',
@@ -15,37 +16,7 @@ const geistMono = Geist_Mono({
   subsets: ['latin']
 })
 
-const title = 'React Component designs';
-const description = 'A library of accessible and extensible react based components';
-
-export const metadata: Metadata = {
-  title,
-  description,
-  alternates: {
-    types: {
-      'application/rss+xml': '/feed.xml',
-    },
-  },
-  openGraph: {
-    title,
-    description,
-    images: [
-      {
-        url: '/og-image.png',
-        width: 1200,
-        height: 630,
-        alt: 'React Component designs preview',
-      },
-    ],
-    type: 'website',
-  },
-  twitter: {
-    title,
-    description,
-    card: 'summary_large_image',
-    images: ['/og-image.png'],
-  },
-}
+export const metadata: Metadata = baseMetadata;
 
 export default function RootLayout({
   children

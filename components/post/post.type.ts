@@ -4,14 +4,20 @@ import type { TImage } from '@/components/image/image.type';
 import { asBrand, type Branded } from '@/types/utility/brand';
 import { type AuthorId } from '@/lib/authors';
 
+export type PostId = Branded<string, 'PostId'>;
+export const asPostId = (value: string) => asBrand<string, 'PostId'>(value);
+export const asPostIds = (ids: string[]): PostId[] => ids.map(asPostId);
+
 export type PostImageObjType = {
     src: TImage['src'];
     alt: TImage['alt'];
 };
 
-export type PostId = Branded<string, 'PostId'>;
-export const asPostId = (value: string) => asBrand<string, 'PostId'>(value);
-export const asPostIds = (ids: string[]): PostId[] => ids.map(asPostId);
+export type PostMeta = {
+  title?: string;
+  description?: string;
+  ogImage?: string;
+};
 
 export type PostType = {
     id: PostId;
@@ -22,11 +28,13 @@ export type PostType = {
     href: string;
     relatedPostIds: PostId[];
     lastModified: Date;
+    createdAt: Date;
     published: Boolean;
     featured?: Boolean;
     authorId: AuthorId;
     subject?: string;           // high-level category: e.g. "Design System", "Accessibility"
     keywords?: string[];        // tags: e.g. ["buttons", "variants", "tokens"]
+    meta?: PostMeta;
 };
 
 export type PostSummary = {
