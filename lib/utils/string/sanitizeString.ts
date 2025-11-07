@@ -1,4 +1,4 @@
-import { stringUtils } from "@/lib/utils/string/stringUtils";
+import { stringUtils } from "@/lib/utils/string";
 
 /**
  * Sanitizes an input string by removing unwanted characters such as punctuation,
