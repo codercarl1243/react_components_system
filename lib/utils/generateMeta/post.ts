@@ -38,7 +38,7 @@ export function generateMetadataForPost(postId: PostId): Metadata {
       card: "summary_large_image",
       title,
       description,
-      images: ogImage ? [ogImage] : undefined,
+      images: ogImage ? [{ url: ogImage, alt: post.image.alt }] : undefined,
     },
     alternates: {
       canonical: `${siteDefaults.url}${post.href}`,
