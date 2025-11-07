@@ -15,7 +15,7 @@ export const sanitizeString = (
     } = {}
 ) => {
 
-    if (typeof query !== 'string') return '';
+    if (!query || typeof query !== 'string') return '';
 
     const {
         maxLength = 200,
@@ -25,7 +25,6 @@ export const sanitizeString = (
         toLowerCase = false,
     } = options;
 
-    if (!query || typeof query !== 'string') return '';
 
     let sanitized = query;
 
