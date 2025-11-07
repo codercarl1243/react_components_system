@@ -6,7 +6,10 @@ import type { PostId, PostType } from "@/components/post/post.type";
 export function generateMetadataForPost(postId: PostId): Metadata {
   const post = getBlogPostById(postId);
   if (!post)
-    return { title: "Post Not Found · Coder Carl", description: "Post not found" };
+    return {
+      title: `Post Not Found · ${siteDefaults.siteName}`,
+      description: "Post not found"
+    };
 
   const meta: NonNullable<PostType["meta"]> = post.meta ?? {};
   const title = meta.title ?? post.title;
