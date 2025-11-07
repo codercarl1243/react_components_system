@@ -12,7 +12,12 @@ export function generateMetadataForPost(postId: PostId): Metadata {
   const title = meta.title ?? post.title;
   const description = meta.description ?? post.excerpt;
   const rawImage = meta.ogImage ?? post.image.src;
-  const ogImage = rawImage ? String(rawImage) : undefined;
+  const ogImage =
+    typeof rawImage === "string"
+      ? rawImage
+      : rawImage && typeof rawImage === "object" && "src" in rawImage
+        ? rawImage.src
+        : undefined;
 
   return {
     title,
