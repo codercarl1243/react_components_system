@@ -3,24 +3,29 @@ import Post from "@/components/post";
 import { type Metadata } from "next";
 import { getRelatedPosts } from "@/lib/blogPosts";
 import {
-  Foundation,
-  Setup,
-  BuildingTheButton,
-  InteractionLogic,
-  EssentialFeatures,
-  Accessibility,
-  Css,
-  Testing,
-  Outro,
-  WhatsNext,
-  NavigationFooter,
-  Resources,
-  Sidebar,
+    Foundation,
+    Setup,
+    BuildingTheButton,
+    InteractionLogic,
+    EssentialFeatures,
+    Accessibility,
+    Css,
+    Testing,
+    Outro,
+    WhatsNext,
+    NavigationFooter,
+    Resources,
+    Sidebar,
 } from './(blog_sections)';
-export const metadata: Metadata = { title: 'Buttons · Design System' }
+import { asPostId } from "@/components/post/post.type";
+import { generateMetadataForPost } from "@/lib/utils/generateMeta/post";
 
-export default function ButtonsBasePage() {
-    const relatedPosts = getRelatedPosts('design__button__01');
+const postId = asPostId('design__button__01');
+
+export const metadata: Metadata = generateMetadataForPost(postId);
+
+export default function Page() {
+    const relatedPosts = getRelatedPosts(postId);
 
     return (
         <>

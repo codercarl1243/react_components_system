@@ -1,5 +1,6 @@
-import { type ComponentProps } from "react";
-
+import type { ComponentProps } from "react";
+import type { PostSummary } from "@/components/post/post.type";
+import type { Author } from "@/lib/authors";
 
 export type TableOfContentsItem = {
     id: string;
@@ -7,13 +8,8 @@ export type TableOfContentsItem = {
     label: string;
 };
 
-export type Author = { name: string; avatarUrl?: string; bio?: string };
-
-export type RelatedPost = { href: string; title: string };
-export type RelatedPosts = RelatedPost[];
-
 export type PostSideBarProps = {
     contents?: TableOfContentsItem[]
-    relatedPosts?: RelatedPosts;
+    relatedPosts?: PostSummary[];
     author?: Author;
 } & ComponentProps<'aside'>;
