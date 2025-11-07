@@ -1,4 +1,6 @@
 import { asPostId, asPostIds, type PostId, type PostSummary, type PostType } from "@/components/post/post.type";
+import { CODER_CARL_ID, getAuthorById, type AuthorId } from "./authors";
+import { escapeString } from "./utils/string/sanitizeString";
 
 const ButtonPosts: PostType[] = [
     {
@@ -14,7 +16,8 @@ const ButtonPosts: PostType[] = [
         image: {
             src: '/images/blog/button-base-banner.jpg',
             alt: 'Accessible button components with variants and states'
-        }
+        },
+        authorId: CODER_CARL_ID
     },
     {
         id: asPostId('design__button__slider__01'),
@@ -27,7 +30,8 @@ const ButtonPosts: PostType[] = [
         image: {
             src: '/images/blog/button-slider-banner.jpg',
             alt: 'Slider-style button interactions with dynamic visuals'
-        }
+        },
+        authorId: CODER_CARL_ID
     },
     {
         id: asPostId('design__button__toggle__01'),
@@ -40,7 +44,8 @@ const ButtonPosts: PostType[] = [
         image: {
             src: '/images/blog/button-toggle-banner.jpg',
             alt: 'Toggle button states and accessibility icons'
-        }
+        },
+        authorId: CODER_CARL_ID
     }
 ];
 
@@ -51,14 +56,15 @@ export const BLOG_POSTS: PostType[] = [
 /**
  * lightweight summary for cards and lists
  */
-function toPostSummary({ id, href, title, image, excerpt, lastModified }: PostType): PostSummary {
+function toPostSummary({ id, href, title, image, excerpt, lastModified, authorId }: PostType): PostSummary {
     return {
         id,
         href,
         title,
         image,
         excerpt,
-        lastModified
+        lastModified,
+        authorId
     };
 }
 
@@ -100,5 +106,45 @@ export function getFeaturedPosts(limit = 3): PostSummary[] {
     return BLOG_POSTS.filter(post => post.featured)
         .sort((a, b) => b.lastModified.getTime() - a.lastModified.getTime())
         .slice(0, limit)
+        .map(toPostSummary);
+}
+
+/**
+ * Get posts by subject (case-insensitive + partial match)
+ */
+export function getPostsBySubject(query: string): PostSummary[] {
+  if (!query.trim()) return [];
+
+  const regex = new RegExp(escapeString(query), 'i');
+
+  return BLOG_POSTS
+    .filter(p => p.subject && regex.test(p.subject))
+    .map(toPostSummary);
+}
+
+/**
+ * Get posts by keyword (case-insensitive + partial match)
+ */
+export function getPostsByKeyword(query: string): PostSummary[] {
+  if (!query.trim()) return [];
+
+  const regex = new RegExp(escapeString(query), 'i');
+
+  return BLOG_POSTS
+    .filter(p => p.keywords?.some(keyword => regex.test(keyword)))
+    .map(toPostSummary);
+}
+
+
+/**
+ * Get a posts by its Author
+ */
+export function getPostsUsingAuthor(authorId: AuthorId): PostSummary[] {
+    const author = getAuthorById(authorId);
+    if (!author) return [];
+
+    return author.postIds
+        .map(id => getBlogPostById(id))
+        .filter((p): p is PostType => !!p)
         .map(toPostSummary);
 }
