@@ -1,6 +1,6 @@
 // app/sitemap.ts
 
-import { BLOG_POSTS } from '@/lib/blogPosts';
+import { BLOG_POSTS } from '@/lib/blog/blogPosts';
 import type { MetadataRoute } from 'next';
 
 /**

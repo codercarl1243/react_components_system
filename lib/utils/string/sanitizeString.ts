@@ -1,9 +1,9 @@
 import { stringUtils } from "@/lib/utils/string";
 
 /**
- * Options for configuring the sanitizeSearchInput function.
+ * Options for configuring the sanitizeString function.
  */
-export interface SanitizeSearchOptions {
+export interface SanitizeStringOptions {
     /** Maximum length to truncate the input to. Default: 200 */
     maxLength?: number;
     /** Whether to remove punctuation. Default: true */
@@ -16,9 +16,8 @@ export interface SanitizeSearchOptions {
     toLowerCase?: boolean;
 }
 
-
 /**
- * Sanitizes and normalizes user search input to make it safe for use in regex patterns.
+ * Sanitizes and normalizes strings to make it safe for use in regex patterns.
  * Applies transformations in the following order:
  * 1. Normalize whitespace (if enabled)
  * 2. Truncate to maxLength
@@ -28,33 +27,33 @@ export interface SanitizeSearchOptions {
  * 6. Normalize whitespace again (if enabled)
  * 7. Escape regex special characters
  * 
- * @param query - The user's search query to sanitize
+ * @param query - The string to sanitize
  * @param options - Configuration options for sanitization behavior
  * @returns A sanitized string safe for use in RegExp, or empty string if input is invalid
  * 
  * @example
  * ```ts
  * // Default behavior
- * sanitizeSearchInput('Hello 🎉 World!!!'); 
+ * sanitizeString('Hello 🎉 World!!!'); 
  * // Returns: 'Hello World' (emoji and punctuation removed, regex-escaped)
  * 
  * // Keep punctuation
- * sanitizeSearchInput('C++ programming', { removePunctuation: false });
+ * sanitizeString('C++ programming', { removePunctuation: false });
  * // Returns: 'C\\+\\+ programming' (punctuation escaped for regex)
  * 
  * // Custom max length
- * sanitizeSearchInput('very long query...', { maxLength: 10 });
+ * sanitizeString('very long query...', { maxLength: 10 });
  * // Returns: 'very long' (truncated and sanitized)
  * 
  * // Case-insensitive search (lowercase + regex 'i' flag)
- * const sanitized = sanitizeSearchInput('JavaScript', { toLowerCase: true });
+ * const sanitized = sanitizeString('JavaScript', { toLowerCase: true });
  * const regex = new RegExp(sanitized, 'i');
  * // regex will match 'javascript', 'JavaScript', 'JAVASCRIPT', etc.
  * ```
  */
 export const sanitizeString = (
     query: unknown,
-    options: SanitizeSearchOptions = {}
+    options: SanitizeStringOptions = {}
 ): string => {
 
     if (!query || typeof query !== 'string') return '';
