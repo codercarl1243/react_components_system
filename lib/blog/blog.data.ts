@@ -53,8 +53,7 @@ export function getPostsBySubject(query: string): PostSummary[] {
     const sanitized = sanitizeString(query);
     if (!sanitized) return [];
 
-    const normalizedQuery = stringUtils.normalizeWhiteSpace(sanitized);
-    const regex = new RegExp(normalizedQuery, 'gi');
+    const regex = new RegExp(sanitized, 'gi');
 
     return BLOG_POSTS
         .filter(
