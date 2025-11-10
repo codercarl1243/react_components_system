@@ -1,19 +1,20 @@
 // app/feed.xml/route.ts
 
-import { BLOG_POSTS } from '@/lib/blog/blogPosts';
+import { getBlogPosts } from "@/lib/blog/blog.data";
+
 
 export function GET() {
     const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://codercarl.dev';
     const siteTitle = 'React Component designs';
     const siteDescription = 'A library of accessible and extensible react based components';
 
-    const blogItems = BLOG_POSTS.map(post => `
+    const blogItems = getBlogPosts().map(post => `
     <item>
-        <title>${escapeXml(post.name)}</title>
-        <link>${baseUrl}${post.url}</link>
-        <guid>${baseUrl}${post.url}</guid>
+        <title>${escapeXml(post.title)}</title>
+        <link>${baseUrl}${post.href}</link>
+        <guid>${baseUrl}${post.href}</guid>
         <pubDate>${new Date(post.lastModified).toUTCString()}</pubDate>
-        <description>${escapeXml(post.name)} - Learn about ${post.name} in our design system blog.</description>
+        <description>${escapeXml(post.title)} - Learn about ${post.title} in our design system blog.</description>
     </item>
     `).join('');
 
