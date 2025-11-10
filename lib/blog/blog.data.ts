@@ -4,6 +4,7 @@ import { AuthorId } from "@/lib/blog/authors/authors.types";
 import type { PostId, PostType, PostSummary, BlogCategory } from "@/lib/blog/blog.types";
 import { computePostScore, toPostSummary } from "@/lib/blog/blog.utils";
 import { BLOG_POSTS } from "@/lib/blog/blogPosts";
+import { BLOG_CATEGORIES } from "@/lib/blog/blog.categories";
 
 /**
  * Get a blog post by its ID
@@ -97,8 +98,24 @@ export function getPostsUsingAuthor(authorId: AuthorId): PostSummary[] {
         .map(toPostSummary);
 }
 
+/**
+ * Returns a deduplicated, alphabetically sorted list of all blog categories
+ * currently used across published posts.
+ * 
+ * @note This is a dynamic lookup — it inspects all entries in {@link BLOG_POSTS}
+ */
+export function getBlogCategories(): BlogCategory[] {
+    const allCategories = BLOG_POSTS.flatMap(p => p.categories ?? []);
+    const unique = Array.from(new Set(allCategories));
+    return unique.sort();
+}
 
-export function getPostsByCategory(category: BlogCategory) {
+/**
+ * Retrieves all posts that belong to the specified blog category.
+ * 
+ * @note must exist in {@link BLOG_CATEGORIES}.
+ */
+export function getPostsByCategory(category: BlogCategory): PostSummary[] {
     return BLOG_POSTS
         .filter(post => post.categories.includes(category))
         .map(toPostSummary);
