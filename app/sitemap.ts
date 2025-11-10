@@ -1,6 +1,6 @@
-// app/sitemap.ts
-
-import { BLOG_POSTS } from '@/lib/blog/blogPosts';
+import { getBlogPosts } from '@/lib/blog/blog.data';
+import { sortByCreatedAtDate } from '@/lib/blog/blog.sort';
+import { PostType } from '@/lib/blog/blog.types';
 import type { MetadataRoute } from 'next';
 
 /**
@@ -141,28 +141,34 @@ function getPostChangeFrequency(
 
     return lastModified > thresholdDate ? 'weekly' : 'monthly';
 }
+const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://codercarl.dev';
 
-export default function sitemap(): MetadataRoute.Sitemap {
-    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://yoursite.com';
-    
-    const blogUrls: MetadataRoute.Sitemap = BLOG_POSTS.map(post => ({
-        url: `${baseUrl}${post.url}`,
+function makeSiteMapObject(post: PostType) {
+    return {
+        url: `${BASE_URL}${post.href}`,
         lastModified: post.lastModified,
         changeFrequency: getPostChangeFrequency(post.lastModified),
         priority: getPostPriority(post.lastModified),
-    }));
+    }
+}
+
+export default function sitemap(): MetadataRoute.Sitemap {
+    const posts = getBlogPosts()
+    const sortedPosts = sortByCreatedAtDate(posts);
+
+    const blogUrls: MetadataRoute.Sitemap = sortedPosts.map(makeSiteMapObject);
 
     return [
         {
-            url: baseUrl,
+            url: BASE_URL,
             lastModified: new Date(),
-            changeFrequency: 'daily' as const,
+            changeFrequency: 'daily',
             priority: SITEMAP_PRIORITY.HOMEPAGE,
         },
         {
-            url: `${baseUrl}/blog`,
+            url: `${BASE_URL}/blog`,
             lastModified: new Date(),
-            changeFrequency: 'daily' as const,
+            changeFrequency: 'daily',
             priority: SITEMAP_PRIORITY.PRIMARY_SECTION,
         },
         ...blogUrls,
