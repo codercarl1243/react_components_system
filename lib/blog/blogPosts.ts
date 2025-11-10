@@ -2,8 +2,10 @@ import { CODER_CARL_ID } from "@/lib/blog/authors/authors";
 import { BLOG_CATEGORIES } from "@/lib/blog/blog.categories";
 import { PostType } from "@/lib/blog/blog.types";
 import { asPostId, asPostIds } from "@/lib/blog/blog.utils";
+import { BLOG_SUBJECTS } from "./blog.subjects";
+import { BLOG_KEYWORDS } from "./blog.keywords";
 
-const ButtonPosts: PostType[] = [
+const ButtonPosts: readonly Readonly<PostType>[] = [
     {
         id: asPostId('design__button__01'),
         title: 'Button',
@@ -20,8 +22,8 @@ const ButtonPosts: PostType[] = [
             alt: 'Accessible button components with variants and states'
         },
         authorId: CODER_CARL_ID,
-        subject: 'Design System',
-        keywords: ['buttons', 'accessibility', 'foundations'],
+        subject: `${BLOG_SUBJECTS.DESIGN_SYSTEM}`,
+        keywords: [BLOG_KEYWORDS.BUTTONS, BLOG_KEYWORDS.FOUNDATIONS, BLOG_KEYWORDS.ACCESSIBILITY, BLOG_KEYWORDS.DESIGN_SYSTEM],
         categories: [BLOG_CATEGORIES.DESIGN_SYSTEM, BLOG_CATEGORIES.ACCESSIBILITY],
     },
     {
@@ -38,8 +40,8 @@ const ButtonPosts: PostType[] = [
             alt: 'Slider-style button interactions with dynamic visuals'
         },
         authorId: CODER_CARL_ID,
-        subject: BLOG_CATEGORIES.DESIGN_SYSTEM,
-        keywords: ['buttons', 'foundations'],
+        subject: `${BLOG_SUBJECTS.DESIGN_SYSTEM}`,
+        keywords: [BLOG_KEYWORDS.BUTTONS, BLOG_KEYWORDS.FOUNDATIONS, BLOG_KEYWORDS.DESIGN_SYSTEM],
         categories: []
     },
     {
@@ -56,8 +58,8 @@ const ButtonPosts: PostType[] = [
             alt: 'Toggle button states and accessibility icons'
         },
         authorId: CODER_CARL_ID,
-        subject: BLOG_CATEGORIES.DESIGN_SYSTEM,
-        keywords: ['buttons', 'foundations'],
+        subject: `${BLOG_SUBJECTS.DESIGN_SYSTEM}`,
+        keywords: [BLOG_KEYWORDS.BUTTONS, BLOG_KEYWORDS.FOUNDATIONS, BLOG_KEYWORDS.DESIGN_SYSTEM],
         categories: []
     }
 ];

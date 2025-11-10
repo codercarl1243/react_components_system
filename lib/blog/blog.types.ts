@@ -2,6 +2,8 @@ import type { TImage } from "@/components/image/image.type";
 import { BLOG_CATEGORIES } from "@/lib/blog/blog.categories";
 import type { Branded } from "@/types/utility/brand";
 import type { AuthorId } from "@/lib/blog/authors/authors.types";
+import { BLOG_SUBJECTS } from "@/lib/blog/blog.subjects";
+import { BLOG_KEYWORDS } from "@/lib/blog/blog.keywords";
 
 // ---------- POST BRAND ----------
 export type PostId = Branded<string, 'PostId'>;
@@ -24,6 +26,8 @@ export type PostImageObjType = {
 // ---------- DOMAIN MODEL ----------
 
 export type BlogCategory = (typeof BLOG_CATEGORIES)[keyof typeof BLOG_CATEGORIES];
+export type BlogSubject = (typeof BLOG_SUBJECTS)[keyof typeof BLOG_SUBJECTS];
+export type BlogGlobalKeyword  = (typeof BLOG_KEYWORDS)[keyof typeof BLOG_KEYWORDS];
 
 export type PostType = {
     id: PostId;
@@ -38,8 +42,8 @@ export type PostType = {
     published: boolean;
     featured?: boolean;
     authorId: AuthorId;
-    subject?: string;
-    keywords?: string[];
+    subject: BlogSubject;
+    keywords?: ( string | BlogGlobalKeyword )[];
     categories: BlogCategory[];
     meta?: PostMeta;
 };
