@@ -1,6 +1,6 @@
 // app/feed.xml/route.ts
 
-import { BLOG_POSTS } from '@/lib/blogPosts';
+import { BLOG_POSTS } from '@/lib/blog/blogPosts';
 
 export function GET() {
     const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://codercarl.dev';

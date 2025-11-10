@@ -1,7 +1,7 @@
-import { getBlogPostById } from "@/lib/blogPosts";
+import { getBlogPostById } from "@/lib/blog/blog.data";
+import type { PostId, PostType } from "@/lib/blog/blog.types";
+import { Metadata } from "next";
 import { siteDefaults } from "@/lib/utils/generateMeta/default";
-import type { Metadata } from "next";
-import type { PostId, PostType } from "@/components/post/post.type";
 
 export function generateMetadataForPost(postId: PostId): Metadata {
   const post = getBlogPostById(postId);

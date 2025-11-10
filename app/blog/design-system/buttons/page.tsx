@@ -1,7 +1,6 @@
 
 import Post from "@/components/post";
 import { type Metadata } from "next";
-import { getRelatedPosts } from "@/lib/blogPosts";
 import {
     Foundation,
     Setup,
@@ -17,8 +16,9 @@ import {
     Resources,
     Sidebar,
 } from './(blog_sections)';
-import { asPostId } from "@/components/post/post.type";
 import { generateMetadataForPost } from "@/lib/utils/generateMeta/post";
+import { getRelatedPosts } from "@/lib/blog/blog.data";
+import { asPostId } from "@/lib/blog/blog.utils";
 
 const postId = asPostId('design__button__01');
 
