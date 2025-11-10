@@ -1,6 +1,7 @@
 import { getPostsUsingAuthor } from "@/lib/blog/blog.data";
 import { AUTHORS } from "@/lib/blog/authors/authors";
-import { AuthorId, Author } from "@/lib/blog/authors/authors.types";
+import type { AuthorId, Author } from "@/lib/blog/authors/authors.types";
+import type { PostSummary } from "@/lib/blog/blog.types";
 
 /**
  * Get an Author by its ID
@@ -12,7 +13,7 @@ export function getAuthorById(authorId: AuthorId): Author | undefined {
 /**
  * Get an Author with Posts
  */
-export function getAuthorWithPosts(authorId: AuthorId) {
+export function getAuthorWithPosts(authorId: AuthorId): (Author & { posts: PostSummary[] }) | undefined {
   const author = getAuthorById(authorId);
   if (!author) return undefined;
 
