@@ -79,20 +79,20 @@ export function log(
     let errorMsg = "";
     let stack: string | undefined;
 
-if (error instanceof Error) {
-  errorMsg = error.message;
-  stack = trace ? error.stack : undefined;
-} else if (typeof error === "string") {
-  errorMsg = error;
-} else if (typeof error === "object" && error !== null) {
-  try {
-    errorMsg = JSON.stringify(error);
-  } catch {
-    errorMsg = "[Unserializable Object]";
-  }
-} else if (error !== undefined) {
-  errorMsg = String(error);
-}
+    if (error instanceof Error) {
+      errorMsg = error.message;
+      stack = trace ? error.stack : undefined;
+    } else if (typeof error === "string") {
+      errorMsg = error;
+    } else if (typeof error === "object" && error !== null) {
+      try {
+        errorMsg = safeToString(error);
+      } catch {
+        errorMsg = "[Unserializable Object]";
+      }
+    } else if (error !== undefined) {
+      errorMsg = safeToString(error);
+    }
 
     const entry: TErrorLogEntry = {
       level: "error",
@@ -103,7 +103,7 @@ if (error instanceof Error) {
       data,
       timestamp,
     };
-    
+
     // eslint-disable-next-line no-console
     console.error(`[ERROR]`, entry);
     return;
@@ -206,5 +206,14 @@ export function logError(
   error: unknown,
   options?: TErrorLogOptions
 ): void {
-  log(message, 'error', error, options);
+  log(message, 'error', safeToString(error), options);
+}
+
+function safeToString(value: unknown): string {
+  if (typeof value === 'string') return value;
+  try {
+    return JSON.stringify(value, null, 2);
+  } catch {
+    return String(value);
+  }
 }

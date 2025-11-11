@@ -18,6 +18,8 @@ export default function usePostCard(href: string) {
     const router = useRouter()
     const mouseDownTimeRef = useRef<number | null>(null)
 
+    if (!href) return { handleClick: () => { }, handleMouseDown: () => { }, handleMouseUp: () => { }, handleMouseLeave: () => { } };
+
     const navigate = () => router.push(href)
 
     const handleClick = (e: ReactMouseEvent<HTMLElement>) => {

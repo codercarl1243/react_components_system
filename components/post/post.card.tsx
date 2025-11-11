@@ -6,8 +6,8 @@ import Link from '@/components/link'
 import Heading from '@/components/heading'
 import usePostCard from './usePostCard'
 
-
-/** * Render a clickable post card with an image and title.
+/** 
+ * Render a clickable post card with an image and title.
  * The entire card is clickable and navigates to the post URL.
  * Handles long-presses to allow text selection without navigation.
  * 
@@ -20,9 +20,8 @@ import usePostCard from './usePostCard'
 export default function PostCard({ variant = 'card', post, headingLevel = 3 }: PostCardPropsType) {
     const { image, title } = post
 
-    const postCardSlug = `/blog/${post.slug}`
 
-    const { handleClick, handleMouseDown, handleMouseUp, handleMouseLeave } = usePostCard(postCardSlug)
+    const { handleClick, handleMouseDown, handleMouseUp, handleMouseLeave } = usePostCard(post.href)
 
     return (
         <article
@@ -33,17 +32,20 @@ export default function PostCard({ variant = 'card', post, headingLevel = 3 }: P
             onMouseUp={handleMouseUp}
             onMouseLeave={handleMouseLeave}
         >
-            <Heading className="post-card__title"
+            <Heading
+                className="post-card__title"
                 data-styled="filled"
                 data-variant="accent"
                 headingLevel={headingLevel}
                 headingSize={4}>
-                <Link href={`/blog/${post.slug}`}>{title}</Link>
+                <Link href={post.href}>{title}</Link>
             </Heading>
-
+            {post.excerpt && (
+                <p className="post-card__excerpt">{post.excerpt}</p>
+            )}
             <Image
                 src={image.src}
-                alt={image.alt ?? ''}
+                alt={image.alt}
                 className='post-card__image'
                 variant={variant}
             />

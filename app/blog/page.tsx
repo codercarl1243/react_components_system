@@ -1,130 +1,25 @@
 import Heading from '@/components/heading'
+import List from '@/components/list';
 import PostCard from '@/components/post/post.card'
+import { getBlogPostsSummaries } from '@/lib/blog/blog.data'
 
 export default function BlogPage() {
+  const blogPosts = getBlogPostsSummaries();
+
   return (
     <>
       <Heading headingLevel={1}>Blogs</Heading>
-      <div className="blog--page__banner">
-        {/* TODO: Populate with recent posts (cards) **/}
-        <ul className='post-card__list'>
-          <li>
-            <PostCard
-              headingLevel={2}
-              variant="featured"
-              post={{
-                title: 'Buttons - the base of every button',
-                image: {
-                  src: 'globe.svg',
-                  alt: 'A collection of buttons showing different states and styles'
-                },
-                slug: 'design-system/buttons'
-              }}
-            />
-          </li>
-          <li>
+        <List variant='none' className='post-card__list'>
+        {blogPosts.map((post) => (
+          <li key={post.id}>
             <PostCard
               headingLevel={2}
               variant="card"
-              post={{
-                title: 'Buttons - the base of every button',
-                image: {
-                  src: 'globe.svg',
-                  alt: 'A collection of buttons showing different states and styles'
-                },
-                slug: 'design-system/buttons'
-              }}
+              post={post}
             />
           </li>
-          <li>
-            <PostCard
-              headingLevel={2}
-              variant="card"
-              post={{
-                title: 'Buttons - the base of every button',
-                image: {
-                  src: 'globe.svg',
-                  alt: 'A collection of buttons showing different states and styles'
-                },
-                slug: 'design-system/buttons'
-              }}
-            />
-          </li>
-          <li>
-            <PostCard
-              headingLevel={2}
-              variant="card"
-              post={{
-                title: 'Buttons - the base of every button',
-                image: {
-                  src: 'globe.svg',
-                  alt: 'A collection of buttons showing different states and styles'
-                },
-                slug: 'design-system/buttons'
-              }}
-            />
-          </li>
-          <li>
-            <PostCard
-              headingLevel={2}
-              variant="card"
-              post={{
-                title: 'Buttons - the base of every button',
-                image: {
-                  src: 'globe.svg',
-                  alt: 'A collection of buttons showing different states and styles'
-                },
-                slug: 'design-system/buttons'
-              }}
-            />
-          </li>
-          <li>
-            <PostCard
-              headingLevel={2}
-              variant="card"
-              post={{
-                title: 'Buttons - the base of every button',
-                image: {
-                  src: 'globe.svg',
-                  alt: 'A collection of buttons showing different states and styles'
-                },
-                slug: 'design-system/buttons'
-              }}
-            />
-          </li>
-          <li>
-            <PostCard
-              headingLevel={2}
-              variant="card"
-              post={{
-                title: 'Buttons - the base of every button',
-                image: {
-                  src: 'globe.svg',
-                  alt: 'A collection of buttons showing different states and styles'
-                },
-                slug: 'design-system/buttons'
-              }}
-            />
-          </li>
-          <li>
-            <PostCard
-              headingLevel={2}
-              variant="card"
-              post={{
-                title: 'Buttons - the base of every button',
-                image: {
-                  src: 'globe.svg',
-                  alt: 'A collection of buttons showing different states and styles'
-                },
-                slug: 'design-system/buttons'
-              }}
-            />
-          </li>
-
-        </ul>
-      </div>
-      {/* <p>Welcome to my blog page</p>
-        */}
+        ))} 
+      </List>
     </>
   )
 }

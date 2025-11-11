@@ -3,7 +3,6 @@ import { useActionState, useEffect, useRef } from 'react'
 import Button from '@/components/button'
 import { handleContact } from '@/app/actions/contact';
 import List from '@/components/list';
-import clsx from 'clsx';
 import Link from '@/components/link';
 import { RiMailLine } from '@remixicon/react';
 import { Text, TextArea } from '@/components/form/inputs';

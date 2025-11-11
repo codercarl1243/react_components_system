@@ -31,7 +31,7 @@ export function handleKeyPress(
   if (!keyMap || Object.keys(keyMap).length === 0) return;
 
   // Ignore events during IME composition (e.g., typing Japanese/Chinese/Korean)
-  if (event.key === 'Process' || (event as any).isComposing) return;
+  if (event.key === 'Process' || (event as KeyboardEvent).isComposing) return;
 
   // Normalize the pressed key
   const normalizedKey = normalizeKey(event.key, event);

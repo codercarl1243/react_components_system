@@ -1,10 +1,12 @@
 import { asBrand } from "@/types/utility/brand";
-import type { PostType, PostSummary, PostId } from "@/lib/blog/blog.types";
+import type { PostType, PostSummary, PostId, BlogSubject } from "@/lib/blog/blog.types";
 
 /**
  * lightweight summary for cards and lists
  */
-export function toPostSummary({ id, href, title, image, excerpt, lastModified, categories, authorId }: PostType): PostSummary {
+export function toPostSummary({ id, subject, pathFragment, title, image, excerpt, lastModified, categories, authorId }: PostType): PostSummary {
+    const href = buildBlogHref(subject, pathFragment);
+
     return {
         id,
         href,
@@ -15,6 +17,10 @@ export function toPostSummary({ id, href, title, image, excerpt, lastModified, c
         authorId,
         categories
     };
+}
+
+export function buildBlogHref(subject: BlogSubject, pathFragment: PostType['pathFragment']) {
+    return `/blog/${subject}/${pathFragment}`;
 }
 
 export const asPostId = (value: string): PostId => asBrand<string, 'PostId'>(value);
@@ -61,7 +67,8 @@ const SCORE_WEIGHTS = {
  * @see {@link SCORE_WEIGHTS} for the weight multipliers used
  */
 export function computePostScore(post: PostType, regex: RegExp): number {
-    const flags = Array.from(new Set((regex.flags + 'gi').split(''))).join('');
+    const flags = Array.from(new Set(`${regex.flags}gi`.split(''))).join('');
+
     const normalizedRegex = new RegExp(regex.source, flags);
 
     let score = 0;

@@ -8,6 +8,6 @@
     --radius-full: 9999px;  /* Pill shape / fully rounded */
 
     /* Border width + style tokens */
-    --border-thin: 1px solid var(--border-color, var(--color-neutral-400));
-    --border-thick: 2px solid var(--border-color, var(--color-neutral-400));
+    --border-thin: 1px solid;
+    --border-thick: 2px solid;
 }

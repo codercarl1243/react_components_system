@@ -27,7 +27,7 @@ export type PostImageObjType = {
 
 export type BlogCategory = (typeof BLOG_CATEGORIES)[keyof typeof BLOG_CATEGORIES];
 export type BlogSubject = (typeof BLOG_SUBJECTS)[keyof typeof BLOG_SUBJECTS];
-export type BlogGlobalKeyword  = (typeof BLOG_KEYWORDS)[keyof typeof BLOG_KEYWORDS];
+export type BlogGlobalKeyword = (typeof BLOG_KEYWORDS)[keyof typeof BLOG_KEYWORDS];
 
 export type PostType = {
     id: PostId;
@@ -35,7 +35,10 @@ export type PostType = {
     subtitle?: string;
     image: PostImageObjType;
     excerpt: string;
-    href: string;
+    /** The path fragment - Used with {@link buildBlogHref} to generate `href`. */
+    pathFragment: string;
+    /** The canonical URL - This is generated automatically and should not be hardcoded. */
+    href?: string;
     relatedPostIds: PostId[];
     lastModified: Date;
     createdAt: Date;
@@ -43,15 +46,18 @@ export type PostType = {
     featured?: boolean;
     authorId: AuthorId;
     subject: BlogSubject;
-    keywords?: ( string | BlogGlobalKeyword )[];
+    /** A mix of global, reusable taxonomy terms and post-specific ones. refer to {@link BlogGlobalKeyword} for suggestions */
+    keywords?: (string)[];
+    /** Categories are top-level grouping labels for filtering and navigation. */
     categories: BlogCategory[];
+    /** Optional SEO metadata overrides. */
     meta?: PostMeta;
 };
 
 // ---------- SUMMARY ----------
 export type PostSummary = {
     id: PostId;
-    href: PostType['href'];
+    href: NonNullable<PostType['href']>;
     title: PostType['title'];
     image: PostType['image'];
     excerpt?: PostType['excerpt'];

@@ -1,4 +1,4 @@
-import isThenable from "@/lib/isThenable"
+import { isThenable } from "@/lib/utils/guards"
 
 /**
  * Temporarily sets NODE_ENV for a test function, restoring the original value afterward.

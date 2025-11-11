@@ -1,6 +1,10 @@
 import type { ComponentProps } from "react";
-import type { PostSummary } from "@/components/post/post.type";
-import type { Author } from "@/lib/authors";
+import type { Author } from "@/lib/blog/authors/authors.types";
+import { PostSummary } from "@/lib/blog/blog.types";
+
+export type SidebarAuthorProps = {
+    author: Author
+}
 
 export type TableOfContentsItem = {
     id: string;

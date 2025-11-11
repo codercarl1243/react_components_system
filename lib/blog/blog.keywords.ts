@@ -15,5 +15,6 @@ export const BLOG_KEYWORDS = {
     TESTING: 'testing',
     UI: 'ui',
     UX: 'ux',
-    DESIGN_SYSTEM: 'design-system'
+    DESIGN_SYSTEM: 'design-system',
+    THEMING: 'theming',
 } as const;
