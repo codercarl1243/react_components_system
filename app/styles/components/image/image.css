@@ -30,19 +30,22 @@
     width: 100%;
     height: 100%;
     opacity: 0;
-    background: linear-gradient(90deg,
-            transparent,
-            rgba(255, 255, 255, 0.4),
-            transparent);
-    animation: shimmer 1.5s linear paused infinite;
+    background: linear-gradient(45deg,
+            transparent 25%,
+            rgba(255, 255, 255, 0.4) 50%,
+            transparent 75%);
+    animation: shimmer 2.5s linear paused infinite;
     z-index: 1;
     pointer-events: none;
     transition: opacity 0.3s ease-in-out;
 }
 
 .image-wrapper.image-loading {
-    animation-play-state: running;
     background-color: var(--color-neutral-200);
+
+    &::before {
+        animation-play-state: running;
+    }
 }
 
 .image-wrapper.image-loading::before {
@@ -58,6 +61,7 @@
         left: 100%;
     }
 }
+
 .image--rectangleLogo img,
 .image--logo img {
     object-fit: contain;
@@ -84,11 +88,11 @@
     }
 
     .image--banner {
-       --image-border-radius: var(--radius-sm);
+        --image-border-radius: var(--radius-sm);
     }
 
     .image--card {
-       --image-border-radius: var(--radius-sm);
+        --image-border-radius: var(--radius-sm);
     }
 }
 
