@@ -46,8 +46,8 @@ export type PostType = {
     featured?: boolean;
     authorId: AuthorId;
     subject: BlogSubject;
-    /** A mix of global, reusable taxonomy terms and post-specific ones. */
-    keywords?: (string | BlogGlobalKeyword)[];
+    /** A mix of global, reusable taxonomy terms and post-specific ones. refer to {@link BlogGlobalKeyword} for suggestions */
+    keywords?: (string)[];
     /** Categories are top-level grouping labels for filtering and navigation. */
     categories: BlogCategory[];
     /** Optional SEO metadata overrides. */
