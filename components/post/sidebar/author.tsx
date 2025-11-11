@@ -1,10 +1,6 @@
 import Heading from "@/components/heading";
-import Image from 'next/image'
-import type { Author } from '@/components/post/sidebar/sidebar.type';
-
-type SidebarAuthorProps = {
-    author: Author
-}
+import Image from '@/components/image'
+import { SidebarAuthorProps } from "@/components/post/sidebar/sidebar.type";
 
 export default function SidebarAuthor({ author }: SidebarAuthorProps) {
 
@@ -15,11 +11,9 @@ export default function SidebarAuthor({ author }: SidebarAuthorProps) {
                 {author.avatarUrl && (
                     <Image
                         src={author.avatarUrl}
-                        alt=""
+                        alt={`avatar of ${author.name}`}
                         className="author__avatar"
-                        loading="lazy"
-                        width={100}
-                        height={100}
+                        variant="logo"
                     />
                 )}
 

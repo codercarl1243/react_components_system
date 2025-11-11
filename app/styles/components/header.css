@@ -67,7 +67,7 @@
         background-color: var(--color-neutral-100);
         z-index: 999;
         overflow-y: auto;
-        box-shadow: -4px 0 12px rgba(0, 0, 0, 0.15);
+        box-shadow: var(--shadow-sm);
         transition: left 250ms ease-in-out;
 
         display: flex;

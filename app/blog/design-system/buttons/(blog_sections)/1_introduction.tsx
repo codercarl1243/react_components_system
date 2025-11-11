@@ -14,7 +14,8 @@ export default function Section1() {
                 title="The Button"
                 headingId="the-button-heading"
                 image={{
-                    src: '/images/Buttons.webp'
+                    src: '/images/Buttons.webp',
+                    alt: ""
                 }}
             />
             <Heading headingLevel={2} id="introduction-heading">Introduction</Heading>

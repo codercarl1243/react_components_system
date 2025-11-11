@@ -2,7 +2,15 @@ import type { ComponentProps } from 'react'
 import type { HeadingLevelsType } from '@/components/heading/heading.type';
 import type { PostSummary, PostType } from '@/lib/blog/blog.types';
 
-export type PostBannerPropsType = Pick<PostType, 'title' | 'image' | 'subtitle'> & { headingId?: string };
+export type PostBannerContent  = Pick<PostType, 'title' | 'subtitle' | 'image'>;
+
+export type PostBannerProps = {
+  post?: PostBannerContent;
+  title?: string;
+  subtitle?: string;
+  headingId: string;
+  image?: PostType['image'];
+}
 
 export type PostCardPropsType = {
     variant?: 'featured' | 'card';

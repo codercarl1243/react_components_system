@@ -1,7 +1,8 @@
 import Heading from "@/components/heading";
 import List from "@/components/list";
 import NavigationCard from "@/components/post/navigation/navigation.card";
-import { type RelatedPosts as RelatedPostsType } from "@/components/post/sidebar/sidebar.type";
+import type { PostSummary } from "@/lib/blog/blog.types";
+
 
 /**
  * Render a list of related posts with links.
@@ -10,9 +11,7 @@ import { type RelatedPosts as RelatedPostsType } from "@/components/post/sidebar
  * @returns The related posts section or `null` when there are no posts.
  */
 
-type RelatedPostsProps = {posts: RelatedPostsType}
-
-export default function RelatedPosts({posts}: RelatedPostsProps) {
+export default function RelatedPosts({posts}: { posts: PostSummary[] }) {
 
     if (!posts?.length) return null;
 

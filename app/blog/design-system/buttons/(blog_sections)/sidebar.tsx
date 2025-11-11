@@ -1,6 +1,6 @@
 import PostSideBar from "@/components/post/sidebar";
 import { PostSideBarProps } from "@/components/post/sidebar/sidebar.type";
-import { CODER_CARL } from "@/lib/authors";
+import { CODER_CARL } from "@/lib/blog/authors/authors";
 
 export default function ButtonsSideBar({ relatedPosts }: PostSideBarProps) {
 

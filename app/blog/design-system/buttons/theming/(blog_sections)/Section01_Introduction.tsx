@@ -20,10 +20,16 @@ export default function Section01_Introduction() {
             />
             <AnchorHeading headingLevel={2} id="introduction-heading">Introduction</AnchorHeading>
             <p>
-                You've built a solid button component—it's accessible, handles loading states, and prevents duplicate submissions. But there's one problem: <FunHighlight>it only comes in one color</FunHighlight>.
+                You've built a solid button component — it's:
             </p>
+            <List>
+                <li>accessible</li>
+                <li>handles loading states; and</li>
+                <li>prevents duplicate submissions.</li>
+            </List>
+            <p>But there's one problem: <FunHighlight>it only comes in one color</FunHighlight>.</p>
             <p>
-                In this guide, we'll transform your button into a <FunHighlight>themeable component</FunHighlight> that supports multiple variants (Primary, Secondary, Accent, Danger) and styles (Filled, Outlined, Ghost) while maintaining all the accessibility and functionality we've built.
+                In this post, we'll transform the button into a <FunHighlight>themeable component</FunHighlight> that supports multiple variants (Primary, Secondary, Accent, Danger) and styles (Filled, Outlined, Ghost) while maintaining all the accessibility and functionality we've built.
             </p>
             <List>
                 <li>CSS custom properties for dynamic theming</li>

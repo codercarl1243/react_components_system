@@ -13,13 +13,13 @@ export default function SlidersPage () {
 <>
 <Post>
     <PostSection>
-        <PostBanner
+        {/* <PostBanner
                                 title={'Slider Buttons'}
                                 image={{
                                   src: '',
                                   alt: undefined
                                 }}
-                            />
+                            /> */}
     </PostSection>
 </Post>
                     <PostSideBar

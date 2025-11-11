@@ -9,6 +9,18 @@ import { BLOG_KEYWORDS } from "./blog.keywords";
 import { BLOG_SUBJECTS } from "./blog.subjects";
 import { sortByModifiedDate } from '@/lib/blog/blog.sort';
 
+export const BLOG_BASE_PATH = '/blog';
+/**
+ * Builds a canonical blog post URL.
+ *
+ * @example
+ * buildBlogHref('design-system', 'buttons/theming')
+ * // → "/blog/design-system/buttons/theming"
+ */
+export function buildBlogHref(subject: BlogSubject, pathFragment: string): string {
+    return `${BLOG_BASE_PATH}/${subject}/${pathFragment}`.replace(/\/+/g, '/');
+}
+
 /**
  * Returns a copy of all blog posts.
  * 
@@ -22,8 +34,16 @@ import { sortByModifiedDate } from '@/lib/blog/blog.sort';
  * ```
  */
 export function getBlogPosts(includeUnpublished = false): PostType[] {
-  const posts = Array.from(BLOG_POSTS);
-  return includeUnpublished ? posts : posts.filter(post => post.published);
+    const posts = BLOG_POSTS.map(post => ({
+        ...post,
+        href: buildBlogHref(post.subject, post.pathFragment),
+    }));
+
+    return includeUnpublished ? posts : posts.filter(post => post.published);
+}
+
+export function getBlogPostsSummaries(includeUnpublished = false): PostSummary[] {
+    return getBlogPosts(includeUnpublished).map(toPostSummary);
 }
 
 /**
