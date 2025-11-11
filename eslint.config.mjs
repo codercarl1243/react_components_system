@@ -3,6 +3,7 @@ import tsParser from '@typescript-eslint/parser';
 import tsPlugin from '@typescript-eslint/eslint-plugin';
 import nextPlugin from '@next/eslint-plugin-next';
 import prettierConfig from 'eslint-config-prettier';
+import { read } from 'fs';
 
 export default [
   // Base JavaScript configuration
@@ -45,6 +46,7 @@ export default [
         __dirname: 'readonly',
         __filename: 'readonly',
         global: 'readonly',
+        fetch: 'readonly',
         // Next.js globals
         React: 'readonly',
         NodeJS: 'readonly',

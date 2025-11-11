@@ -14,13 +14,21 @@ export type ContactActionState = {
     formErrors: string[];
 };
 
+interface ContactResponse {
+  success: boolean;
+  message?: string;
+  errors?: { field?: string; message: string }[];
+}
+
 const ContactSchema = z.object({
     name: z.string().trim().min(1, "Name is required."),
     email: z.email("Please enter a valid email.").trim(),
     message: z.string().trim().min(1, "Message is required."),
 });
 
-export async function handleContact(_: any, formData: FormData): Promise<ContactActionState> {
+export async function handleContact(prevState: ContactActionState, formData: FormData): Promise<ContactActionState> {
+    let formErrors: ContactActionState['formErrors'] = [];
+    let fieldErrors: ContactActionState['fieldErrors'] = {};
 
     const result = ContactSchema.safeParse({
         name: formData.get("name"),
@@ -29,7 +37,7 @@ export async function handleContact(_: any, formData: FormData): Promise<Contact
     });
 
     if (!result.success) {
-        const fieldErrors = result.error.issues.reduce<Partial<Record<ContactFields, string>>>(
+        fieldErrors = result.error.issues.reduce<Partial<Record<ContactFields, string>>>(
             (acc, issue) => {
                 const field = issue.path[0];
                 if (field === "name" || field === "email" || field === "message") {
@@ -43,7 +51,7 @@ export async function handleContact(_: any, formData: FormData): Promise<Contact
         return {
             status: "error",
             fieldErrors,
-            formErrors: [],
+            formErrors,
         };
     }
 
@@ -68,21 +76,23 @@ export async function handleContact(_: any, formData: FormData): Promise<Contact
             body: formData
         });
 
-        const data = await response.json();
+        const data = (await response.json()) as ContactResponse;
 
         if (response.ok && data?.success) {
             return {
                 status: "success",
                 message: "Your message has been sent successfully!",
-                fieldErrors: {},
-                formErrors: [],
+                fieldErrors,
+                formErrors
             };
         }
 
+        formErrors = [data?.message ?? "Something went wrong. Please try again later."];
+        
         return {
             status: "error",
-            fieldErrors: {},
-            formErrors: [data?.message ?? "Something went wrong. Please try again later."],
+            fieldErrors,
+            formErrors
         };
 
     } catch (err) {
@@ -90,8 +100,8 @@ export async function handleContact(_: any, formData: FormData): Promise<Contact
 
         return {
             status: "unknown_error",
-            fieldErrors: {},
-            formErrors: [],
+            fieldErrors,
+            formErrors,
         };
     }
 }
