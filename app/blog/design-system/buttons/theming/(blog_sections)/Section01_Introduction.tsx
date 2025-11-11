@@ -14,7 +14,7 @@ export default function Section01_Introduction() {
                 headingId="button-theming-heading"
                 subtitle="Building a flexible color system for scalable, accessible design"
                 image={{
-                   src: '/images/mountainRangeBanner_1200x400.webp',
+                   src: '/images/blogs/buttons-theming/main-image.webp',
                     alt: "Grid of buttons in different colors and styles representing design system variants"
                 }}
             />
