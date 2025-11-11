@@ -12,6 +12,13 @@ export const baseMetadata: Metadata = {
   metadataBase: new URL(siteDefaults.url),
   title: siteDefaults.title,
   description: siteDefaults.description,
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/favicon.svg", type: "image/svg+xml" },
+    ],
+    apple: [{ url: "/apple-touch-icon.png" }],
+  },
   alternates: {
     canonical: "/",
     types: { "application/rss+xml": "/feed.xml" },
