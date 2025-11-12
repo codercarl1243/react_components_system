@@ -2,6 +2,8 @@ import { logError } from "@/lib/logging/log";
 import type { TErrorCode, TErrorLogOptions, TLogOptions } from "@/lib/logging/log.type";
 import { type TResult, createSuccessfulResult, createErrorResult } from "@/lib/results";
 
+// TODO: add optional function that runs inside of the catch block
+
 /**
  * Wraps an async function that might throw, converting exceptions to typed Results.
  * Automatically logs any errors that occur.
