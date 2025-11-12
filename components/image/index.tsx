@@ -3,6 +3,8 @@ import { type TImage } from "@/components/image/image.type";
 import NextImage from 'next/image';
 import { clsx } from 'clsx';
 import { imageVariants } from "@/components/image/imageVariants";
+import { on } from "events";
+import { ReactEventHandler, SyntheticEvent, useState } from "react";
 
 /**
  * Simplified, performant Image component with graceful fallback.
@@ -35,8 +37,9 @@ import { imageVariants } from "@/components/image/imageVariants";
  * ```
  */
 export default function Image({ variant, src, alt, ...props }: TImage) {
+    const [loaded, setLoaded] = useState(false);
 
-    const { className, sizes, width, style, height, priority, placeholder, blurDataURL, quality, ...rest } = props
+    const { className, sizes, width, style, height, priority, placeholder, blurDataURL, quality, onLoad, ...rest } = props
 
     const {
         width: variantWidth,
@@ -46,6 +49,11 @@ export default function Image({ variant, src, alt, ...props }: TImage) {
         blurDataURL: variantBlurDataURL,
         quality: variantQuality
     } = imageVariants[variant ?? "default"];
+
+    const handleLoad = (event: SyntheticEvent<HTMLImageElement, Event>) => {
+        onLoad?.(event);
+        setLoaded(true);
+    }
 
     const isPriority = priority ?? (variant === 'hero' || variant === "banner" || variant === "featured");
 
@@ -58,6 +66,7 @@ export default function Image({ variant, src, alt, ...props }: TImage) {
             className={clsx(
                 'image-wrapper image',
                 variant && `image--${variant}`,
+                loaded && 'image--loaded',
                 className
             )}
         >
@@ -67,10 +76,14 @@ export default function Image({ variant, src, alt, ...props }: TImage) {
                 sizes={sizes ?? variantSizes}
                 width={width ?? variantWidth}
                 height={height ?? variantHeight}
-                style={{ aspectRatio, 
-                    width: width ?? variantWidth, 
-                    height: height ?? variantHeight, 
-                    ...style }}
+                style={{
+                    aspectRatio,
+                    width: width ?? variantWidth,
+                    height: height ?? variantHeight,
+                    ...style
+                }}
+                onLoad={handleLoad}
+                onError={() => setLoaded(true)}
                 priority={isPriority}
                 placeholder={imagePlaceholder}
                 blurDataURL={imageBlurDataURL}
