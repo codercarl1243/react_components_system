@@ -1,14 +1,12 @@
-'use client';
-
+'use client'
 import { type TImage } from "@/components/image/image.type";
 import NextImage from 'next/image';
 import { clsx } from 'clsx';
 import { imageVariants } from "@/components/image/imageVariants";
-import { type SyntheticEvent, useRef, useState } from "react";
 
 /**
- * Enhanced Image component that wraps Next.js Image with predefined variants
- * and automatic optimizations for different image types.
+ * Simplified, performant Image component with graceful fallback.
+ * Uses a neutral background color until the image loads, and fades in smoothly.
  * 
  * @param variant - Image variant that determines dimensions, aspect ratio, quality, and blur placeholder.
  *                  Defaults to 'default' if not specified.
@@ -38,9 +36,7 @@ import { type SyntheticEvent, useRef, useState } from "react";
  */
 export default function Image({ variant, src, alt, ...props }: TImage) {
 
-    const [isLoading, setIsLoading] = useState(true);
-    const wrapperRef = useRef<HTMLSpanElement>(null);
-    const { className, sizes, width, style, height, priority, placeholder, blurDataURL, quality, onLoad, onError, ...rest } = props
+    const { className, sizes, width, style, height, priority, placeholder, blurDataURL, quality, ...rest } = props
 
     const {
         width: variantWidth,
@@ -50,38 +46,6 @@ export default function Image({ variant, src, alt, ...props }: TImage) {
         blurDataURL: variantBlurDataURL,
         quality: variantQuality
     } = imageVariants[variant ?? "default"];
-
-
-    /**
-     * When the image fully loads, we delay the loading-state removal
-     * until the shimmer animation finishes (CSS animation-duration).
-     */
-    function handleOnLoad(event: SyntheticEvent<HTMLImageElement, Event>) {
-        onLoad?.(event);
-
-        const el = wrapperRef.current;
-        const duration = getAnimationDurationMs(el);
-        const buffer = 100;
-
-        // Wait until shimmer animation finishes
-        window.setTimeout(() => setIsLoading(false), duration + buffer);
-
-
-        function getAnimationDurationMs(element: HTMLElement | null): number {
-            if (!element) return 2500;
-
-            const styles = getComputedStyle(element, "::before");
-            const durationString = styles.animationDuration || "2.5s";
-
-            const numeric = parseFloat(durationString);
-            return durationString.includes("ms") ? numeric : numeric * 1000;
-        }
-    }
-    
-    function handleOnError(event: SyntheticEvent<HTMLImageElement, Event>) {
-        onError?.(event);
-        setIsLoading(false)
-    }
 
     const isPriority = priority ?? (variant === 'hero' || variant === "banner" || variant === "featured");
 
@@ -94,10 +58,8 @@ export default function Image({ variant, src, alt, ...props }: TImage) {
             className={clsx(
                 'image-wrapper image',
                 variant && `image--${variant}`,
-                isLoading && 'image-loading',
                 className
             )}
-            ref={wrapperRef}
         >
             <NextImage
                 src={src}
@@ -105,13 +67,14 @@ export default function Image({ variant, src, alt, ...props }: TImage) {
                 sizes={sizes ?? variantSizes}
                 width={width ?? variantWidth}
                 height={height ?? variantHeight}
-                style={{ aspectRatio, ...style }}
+                style={{ aspectRatio, 
+                    width: width ?? variantWidth, 
+                    height: height ?? variantHeight, 
+                    ...style }}
                 priority={isPriority}
                 placeholder={imagePlaceholder}
                 blurDataURL={imageBlurDataURL}
                 quality={quality ?? variantQuality}
-                onLoad={handleOnLoad}
-                onError={handleOnError}
                 fetchPriority={isPriority ? "high" : "auto"}
                 {...rest}
             />

@@ -1,0 +1,4 @@
+.post-sidebar__author.author__avatar {
+    overflow: hidden;
+    border-radius: 0 0 var(--radius-full) var(--radius-full);
+}
