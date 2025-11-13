@@ -1,33 +1,33 @@
- body:has(.overlay--visible) {
-     overflow: hidden;
- }
+body:has(.overlay--visible) {
+    overflow: hidden;
+}
 
- .overlay {
-     position: relative;
-     isolation: isolate;
-     z-index: 1;
- }
+.overlay-backdrop {
+    position: fixed;
+    inset: 0;
+    opacity: 0;
+    background: var(--color-neutral-900);
+    transition: opacity 250ms ease-in-out;
+    z-index: 1;
+    pointer-events: none;
+}
 
- .overlay::before {
-     content: '';
-     position: fixed;
-     inset: 0;
-     opacity: 0;
-     background: var(--color-neutral-900);
-     transition: opacity 250ms ease-in-out;
-     z-index: -1;
-     pointer-events: none;
- }
+body:has(.overlay--visible) .overlay-backdrop {
+    opacity: 0.5;
+    pointer-events: auto;
+}
 
- .overlay.overlay--visible::before {
-     opacity: 1;
- }
-:where(.overlay-control) {
+.overlay {
     position: relative;
+    isolation: isolate;
+    z-index: 2;
+}
+.overlay-control {
+    /* make sure to give position to the control to ensure the stacking context works */
     z-index: 3;
- }
- @media (prefers-reduced-motion: reduce) {
-    .overlay::before {
+}
+@media (prefers-reduced-motion: reduce) {
+    .overlay-backdrop {
         transition: none !important;
     }
 }
