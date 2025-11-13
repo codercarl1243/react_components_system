@@ -66,13 +66,13 @@ export default function Image({ variant, src, alt, ...props }: TImage) {
             className={clsx(
                 'image-wrapper image',
                 variant && `image--${variant}`,
-                loaded && 'image--loaded',
                 className
             )}
         >
             <NextImage
                 src={src}
                 alt={alt}
+                data-loaded={loaded}
                 sizes={sizes ?? variantSizes}
                 width={width ?? variantWidth}
                 height={height ?? variantHeight}
