@@ -6,6 +6,7 @@ import Link from '@/components/link'
 import { usePathname } from 'next/navigation'
 import { RiBookReadFill, RiCloseLargeLine, RiHomeHeartLine, RiMenuLine, RiUser3Fill } from '@remixicon/react'
 import Button from '@/components/button'
+import { useClickOutside } from '@/hooks/useClickOutside'
 /**
  * Site footer component that displays the current year, copyright notice and a link to codercarl.dev.
  *
@@ -18,6 +19,7 @@ export default function Header({ className, ...props }: ComponentProps<'header'>
   const pathname = usePathname()
   const [menuIsOpen, setMenuIsOpen] = useState<boolean>(false);
 
+  const wrapperRef = useClickOutside(null, () => setMenuIsOpen(false), menuIsOpen);
 
   const handleMenuOpenState = (state?: boolean) => {
     setMenuIsOpen(prev => state !== undefined ? state : !prev);
@@ -28,7 +30,11 @@ export default function Header({ className, ...props }: ComponentProps<'header'>
   }, [pathname])
 
   return (
-    <header className={clsx('header-wrapper overlay', { 'overlay--visible': menuIsOpen }, className)} {...props}>
+    <header
+      className={clsx('header-wrapper fixed overlay', { 'overlay--visible': menuIsOpen }, className)}
+      {...props}
+      ref={wrapperRef}
+    >
       <SkipLink />
       <Button
         className='header__menu-button overlay-control fixed'

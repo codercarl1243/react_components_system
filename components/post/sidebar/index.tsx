@@ -6,8 +6,9 @@ import RelatedPosts from './RelatedPosts';
 import Author from './author';
 import { PostSideBarProps } from './sidebar.type';
 import Button from '@/components/button';
-import { RiMenuFold3Line, RiMenuUnfold3Line } from '@remixicon/react';
+import { RiCloseLargeLine, RiMenuFold3Line, RiMenuUnfold3Line } from '@remixicon/react';
 import useSidebar from '@/components/post/sidebar/useSidebar';
+import { useClickOutside } from '@/hooks/useClickOutside';
 
 /**
  * Render a post sidebar containing an optional table of contents, related posts and an author box.
@@ -36,7 +37,7 @@ export default function PostSideBar({
 }: PostSideBarProps) {
 
     const { handleSideBarOpenState, sidebarIsOpen, sidebarRef, openButtonRef } = useSidebar()
-
+    const wrapperRef = useClickOutside<HTMLDivElement>(null, () => handleSideBarOpenState(false), sidebarIsOpen);
     const hasContents = contents.length > 0;
     const hasRelated = relatedPosts.length > 0;
     const hasExtras = author || Children.count(children) > 0;
@@ -44,7 +45,10 @@ export default function PostSideBar({
     if (!hasContents && !hasRelated && !hasExtras) return null;
 
     return (
-        <>
+        <div
+            className={clsx('side-bar-wrapper overlay', { 'overlay--visible': sidebarIsOpen })}
+            ref={wrapperRef}
+        >
             <Button
                 ref={openButtonRef}
                 onClick={() => handleSideBarOpenState()}
@@ -53,24 +57,22 @@ export default function PostSideBar({
                 aria-expanded={sidebarIsOpen}
                 aria-label={sidebarIsOpen ? "Close table of contents" : "Open table of contents"}
                 data-style='filled'
-                icon={sidebarIsOpen ? RiMenuUnfold3Line : RiMenuFold3Line}
+                icon={sidebarIsOpen ? RiCloseLargeLine : RiMenuFold3Line}
             >
                 <span aria-hidden="true">Contents</span>
             </Button>
-            <div className={clsx('side-bar-wrapper overlay', { 'overlay--visible': sidebarIsOpen })}>
-                <aside
-                    ref={sidebarRef}
-                    data-isopen={sidebarIsOpen}
-                    id="sideBar"
-                    className={clsx('post-sidebar flow-8', className)}
-                    {...props}
-                >
-                    {hasContents && <ToC items={contents} />}
-                    {hasRelated && <RelatedPosts posts={relatedPosts} />}
-                    {author && <Author author={author} />}
-                    {children}
-                </aside>
-            </div>
-        </>
+            <aside
+                ref={sidebarRef}
+                data-isopen={sidebarIsOpen}
+                id="sideBar"
+                className={clsx('post-sidebar flow-8', className)}
+                {...props}
+            >
+                {hasContents && <ToC items={contents} />}
+                {hasRelated && <RelatedPosts posts={relatedPosts} />}
+                {author && <Author author={author} />}
+                {children}
+            </aside>
+        </div>
     )
 }
