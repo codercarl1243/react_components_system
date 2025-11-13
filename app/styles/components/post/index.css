@@ -1,8 +1,7 @@
 @import './post.css';
 @import './post.note.css';
-@import './post.sidebar.css';
+@import './sidebar/index.css';
 @import './post.section.css';
 @import './post.banner.css';
 @import './post.card.css';
 @import './post.navigation.css';
-@import './post.author.css';
