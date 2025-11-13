@@ -1,7 +1,7 @@
 'use client';
 import { generateHashFromChildren } from "@/lib/utils/generateHash";
 import clsx from "clsx";
-import { ComponentProps, ReactNode, useMemo } from "react";
+import { ComponentProps, CSSProperties, ReactNode, useMemo } from "react";
 import { useInView } from "react-intersection-observer";
 
 type FunHighlightProps = {

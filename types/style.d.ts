@@ -1,8 +1,7 @@
-export {}; // treat as module, prevents global pollution
-
-declare global {
+declare module 'react' {
   interface CSSProperties {
-    /** Allow any CSS custom property, e.g. --color-primary, --radius-lg */
-    [key: string]: string | number;
+    [key: `--${string}`]: string | number | undefined;
   }
 }
+
+export {};
