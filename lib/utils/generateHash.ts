@@ -13,21 +13,18 @@ export const generateHash = (text: string): string => {
 };
 
 export const generateHashFromChildren = (children: ReactNode): string => {
-  let text: string;
+  const extractText = (node: ReactNode): string => {
+    if (typeof node === "string" || typeof node === "number") {
+      return String(node);
+    }
+    if (Array.isArray(node)) {
+      return node.map(extractText).join("");
+    }
+    if (node && typeof node === "object" && "props" in node) {
+      return extractText((node as any).props?.children);
+    }
+    return "";
+  };
   
-  if (typeof children === "string") {
-    text = children;
-  } else if (typeof children === "number") {
-    text = String(children);
-  } else if (Array.isArray(children)) {
-    text = children.map(child => 
-      typeof child === "string" || typeof child === "number" 
-        ? String(child) 
-        : JSON.stringify(child)
-    ).join("");
-  } else {
-    text = JSON.stringify(children ?? "");
-  }
-  
-  return hashString(text);
+  return hashString(extractText(children));
 };
