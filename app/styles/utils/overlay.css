@@ -1,0 +1,30 @@
+ body:has(.overlay--visible) {
+     overflow: hidden;
+ }
+
+ .overlay {
+     position: relative;
+     isolation: isolate;
+     z-index: 0;
+ }
+
+ .overlay::before {
+     content: '';
+     position: fixed;
+     inset: 0;
+     opacity: 0;
+     background: var(--color-neutral-900);
+     transition: opacity 250ms ease-in-out;
+     z-index: -1;
+     pointer-events: none;
+ }
+
+ .overlay.overlay--visible::before {
+     opacity: 1;
+ }
+
+ @media (prefers-reduced-motion: reduce) {
+    .overlay {
+        transition: none !important;
+    }
+}
