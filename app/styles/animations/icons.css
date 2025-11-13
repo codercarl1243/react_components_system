@@ -3,10 +3,6 @@
         opacity: 0; /* Start hidden */
         transform: scale(0.25);
     }
-    50% {
-        opacity: 0; /* Stay hidden at midpoint */
-        transform: scale(0.25);
-    }
     60% {
         opacity: 0; /* Give it extra time hidden */
         transform: scale(0.5);
