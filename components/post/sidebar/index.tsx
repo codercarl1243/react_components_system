@@ -44,18 +44,18 @@ export default function PostSideBar({
     if (!hasContents && !hasRelated && !hasExtras) return null;
 
     return (
-        <div className='side-bar-wrapper'>
+        <div className={clsx('side-bar-wrapper overlay', { 'overlay--visible': sidebarIsOpen })}>
             <Button
                 ref={openButtonRef}
                 onClick={() => handleSideBarOpenState()}
-                className='sidebar-toggle-button--open'
+                className='sidebar-toggle-button'
                 aria-controls='sideBar'
                 aria-expanded={sidebarIsOpen}
-                aria-label="Open table of contents"
+                aria-label={sidebarIsOpen ? "Close table of contents" : "Open table of contents"}
                 data-style='filled'
-                icon={RiMenuFold3Line}
+                icon={sidebarIsOpen ? RiMenuUnfold3Line : RiMenuFold3Line}
             >
-                 <span aria-hidden="true">Contents</span>
+                <span aria-hidden="true">Contents</span>
             </Button>
             <aside
                 ref={sidebarRef}
@@ -64,17 +64,6 @@ export default function PostSideBar({
                 className={clsx('post-sidebar flow-8', className)}
                 {...props}
             >
-                <Button
-                    onClick={() => handleSideBarOpenState()}
-                    className='sidebar-toggle-button--close'
-                    aria-controls='sideBar'
-                    aria-expanded={sidebarIsOpen}
-                    data-style='filled'
-                    icon={RiMenuUnfold3Line}
-                >
-                    <span className="sr-only">Close table of contents</span>
-                    <span aria-hidden="true">Contents</span>
-                </Button>
                 {hasContents && <ToC items={contents} />}
                 {hasRelated && <RelatedPosts posts={relatedPosts} />}
                 {author && <Author author={author} />}

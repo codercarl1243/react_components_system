@@ -1,14 +1,13 @@
-'use client';
-
+'use client'
 import { type TImage } from "@/components/image/image.type";
 import NextImage from 'next/image';
 import { clsx } from 'clsx';
 import { imageVariants } from "@/components/image/imageVariants";
-import { type SyntheticEvent, useState } from "react";
+import { SyntheticEvent, useState } from "react";
 
 /**
- * Enhanced Image component that wraps Next.js Image with predefined variants
- * and automatic optimizations for different image types.
+ * Simplified, performant Image component with graceful fallback.
+ * Uses a neutral background color until the image loads, and fades in smoothly.
  * 
  * @param variant - Image variant that determines dimensions, aspect ratio, quality, and blur placeholder.
  *                  Defaults to 'default' if not specified.
@@ -37,9 +36,9 @@ import { type SyntheticEvent, useState } from "react";
  * ```
  */
 export default function Image({ variant, src, alt, ...props }: TImage) {
+    const [loaded, setLoaded] = useState(false);
 
-    const [isLoading, setIsLoading] = useState(true);
-    const { className, sizes, width, style, height, priority, placeholder, blurDataURL, quality, onLoad, onError, ...rest } = props
+    const { className, sizes, width, style, height, priority, placeholder, blurDataURL, quality, onLoad, ...rest } = props
 
     const {
         width: variantWidth,
@@ -50,43 +49,44 @@ export default function Image({ variant, src, alt, ...props }: TImage) {
         quality: variantQuality
     } = imageVariants[variant ?? "default"];
 
-    function handleOnLoad(event: SyntheticEvent<HTMLImageElement, Event>) {
+    const handleLoad = (event: SyntheticEvent<HTMLImageElement, Event>) => {
         onLoad?.(event);
-        setIsLoading(false)
+        setLoaded(true);
     }
-    function handleOnError(event: SyntheticEvent<HTMLImageElement, Event>) {
-        onError?.(event);
-        setIsLoading(false)
-    }
-    
+
     const isPriority = priority ?? (variant === 'hero' || variant === "banner" || variant === "featured");
 
     // For priority images, use eager loading without blur to maximize FCP
     const imagePlaceholder = isPriority ? 'empty' : (placeholder ?? 'blur');
     const imageBlurDataURL = imagePlaceholder === 'blur' ? (blurDataURL ?? variantBlurDataURL) : undefined
-    
+
     return (
         <span
             className={clsx(
                 'image-wrapper image',
                 variant && `image--${variant}`,
-                isLoading && 'image-loading',
                 className
             )}
         >
             <NextImage
                 src={src}
                 alt={alt}
+                data-loaded={loaded}
                 sizes={sizes ?? variantSizes}
                 width={width ?? variantWidth}
                 height={height ?? variantHeight}
-                style={{ aspectRatio, ...style }}
+                style={{
+                    aspectRatio,
+                    width: width ?? variantWidth,
+                    height: height ?? variantHeight,
+                    ...style
+                }}
+                onLoad={handleLoad}
+                onError={() => setLoaded(true)}
                 priority={isPriority}
                 placeholder={imagePlaceholder}
                 blurDataURL={imageBlurDataURL}
                 quality={quality ?? variantQuality}
-                onLoad={handleOnLoad}
-                onError={handleOnError}
                 fetchPriority={isPriority ? "high" : "auto"}
                 {...rest}
             />

@@ -1,0 +1,26 @@
+.post-sidebar__author {
+    margin-top: auto;
+    height: fit-content;
+}
+.author {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--spacing-md);
+}
+
+.author .author__name {
+    text-transform: capitalize;
+    margin: 0;
+}
+.author .author__avatar {
+    overflow: hidden;
+    border-radius: var(--radius-circle);
+    background-color: var(--color-neutral-100);
+    box-shadow: var(--shadow-sm);
+}
+
+.author__avatar img {
+    border-radius: var(--radius-circle);
+    padding: var(--spacing);
+}
