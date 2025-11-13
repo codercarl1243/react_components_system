@@ -36,7 +36,7 @@ export default function PostSideBar({
     ...props
 }: PostSideBarProps) {
 
-    const { handleSideBarOpenState, sidebarIsOpen, sidebarRef, openButtonRef } = useSidebar()
+    const { handleSideBarOpenState, sidebarIsOpen, hasInteracted, sidebarRef, openButtonRef } = useSidebar()
     const wrapperRef = useClickOutside<HTMLDivElement>(null, () => handleSideBarOpenState(false), sidebarIsOpen);
     const hasContents = contents.length > 0;
     const hasRelated = relatedPosts.length > 0;
@@ -52,7 +52,7 @@ export default function PostSideBar({
             <Button
                 ref={openButtonRef}
                 onClick={() => handleSideBarOpenState()}
-                className='overlay-control sidebar-toggle-button fixed'
+                className={clsx('overlay-control sidebar-toggle-button fixed', { 'can-animate': hasInteracted })}
                 aria-controls='sideBar'
                 aria-expanded={sidebarIsOpen}
                 aria-label={sidebarIsOpen ? "Close table of contents" : "Open table of contents"}

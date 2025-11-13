@@ -9,15 +9,18 @@ type SidebarType = {
     handleSideBarOpenState: (state?: boolean) => void;
     openButtonRef: RefObject<HTMLButtonElement | null>;
     sidebarRef: RefObject<HTMLElement | null>;
+    hasInteracted: boolean;
 }
 
 export default function useSidebar(): SidebarType {
     const sidebarRef = useRef<HTMLElement | null>(null);
     const openButtonRef = useRef<HTMLButtonElement>(null);
     const [sidebarIsOpen, setSidebarIsOpen] = useState(false);
+    const [hasInteracted, setHasInteracted] = useState(false)
     const pathname = usePathname()
 
     const handleSideBarOpenState = (state?: boolean) => {
+        if (!hasInteracted) setHasInteracted(true) // Only set once
         setSidebarIsOpen(prev => state !== undefined ? state : !prev);
     };
 
@@ -68,6 +71,6 @@ export default function useSidebar(): SidebarType {
     }, [sidebarIsOpen]);
 
     return {
-        handleSideBarOpenState, sidebarIsOpen, sidebarRef, openButtonRef
+        handleSideBarOpenState, hasInteracted, sidebarIsOpen, sidebarRef, openButtonRef
     }
 }

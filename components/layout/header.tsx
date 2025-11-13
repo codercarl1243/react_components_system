@@ -7,6 +7,7 @@ import { usePathname } from 'next/navigation'
 import { RiBookReadFill, RiCloseLargeLine, RiHomeHeartLine, RiMenuLine, RiUser3Fill } from '@remixicon/react'
 import Button from '@/components/button'
 import { useClickOutside } from '@/hooks/useClickOutside'
+import { useFocusTrap } from '@/hooks/useFocusTrap'
 /**
  * Site footer component that displays the current year, copyright notice and a link to codercarl.dev.
  *
@@ -20,13 +21,16 @@ export default function Header({ className, ...props }: ComponentProps<'header'>
   const [menuIsOpen, setMenuIsOpen] = useState<boolean>(false);
 
   const wrapperRef = useClickOutside(null, () => setMenuIsOpen(false), menuIsOpen);
+  const [hasInteracted, setHasInteracted] = useState(false)
 
   const handleMenuOpenState = (state?: boolean) => {
+    if (!hasInteracted) setHasInteracted(true) // Only set once
+
     setMenuIsOpen(prev => state !== undefined ? state : !prev);
   };
-
+  useFocusTrap({ containerRef: wrapperRef, isActive: menuIsOpen });
   useEffect(() => {
-    handleMenuOpenState(false)
+    setMenuIsOpen(false)
   }, [pathname])
 
   return (
@@ -37,7 +41,10 @@ export default function Header({ className, ...props }: ComponentProps<'header'>
     >
       <SkipLink />
       <Button
-        className='header__menu-button overlay-control fixed'
+        className={clsx(
+          'header__menu-button overlay-control',
+          { 'can-animate': hasInteracted }
+        )}
         aria-controls='primary-nav'
         aria-expanded={menuIsOpen}
         onClick={() => handleMenuOpenState()}
