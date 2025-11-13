@@ -28,16 +28,17 @@ export default function Header({ className, ...props }: ComponentProps<'header'>
   }, [pathname])
 
   return (
-    <header className={clsx('header', className)} {...props}>
+    <header className={clsx('header-wrapper overlay', { 'overlay--visible': menuIsOpen }, className)} {...props}>
       <SkipLink />
       <Button
-        className='header__menu-button--open'
+        className='header__menu-button overlay-control fixed'
         aria-controls='primary-nav'
         aria-expanded={menuIsOpen}
         onClick={() => handleMenuOpenState()}
+        aria-label={menuIsOpen ? "Close menu" : "Open menu"}
         data-style='filled'
         data-variant='primary'
-        icon={RiMenuLine}
+        icon={menuIsOpen ? RiCloseLargeLine : RiMenuLine}
       >
         Menu
       </Button>
@@ -47,17 +48,6 @@ export default function Header({ className, ...props }: ComponentProps<'header'>
         aria-label="Primary"
         id="primary-nav"
       >
-        <Button
-          className='header__menu-button--close'
-          aria-controls='primary-nav'
-          aria-expanded={menuIsOpen}
-          onClick={() => handleMenuOpenState()}
-          data-style='filled'
-          data-variant='primary'
-          icon={RiCloseLargeLine}
-        >
-          Menu
-        </Button>
         {pathname !== '/' && <Link href="/" icon={RiHomeHeartLine}>Home</Link>}
         <Link
           href="/blog"
