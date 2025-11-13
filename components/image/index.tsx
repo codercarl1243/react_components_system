@@ -3,8 +3,7 @@ import { type TImage } from "@/components/image/image.type";
 import NextImage from 'next/image';
 import { clsx } from 'clsx';
 import { imageVariants } from "@/components/image/imageVariants";
-import { on } from "events";
-import { ReactEventHandler, SyntheticEvent, useState } from "react";
+import { SyntheticEvent, useState } from "react";
 
 /**
  * Simplified, performant Image component with graceful fallback.
