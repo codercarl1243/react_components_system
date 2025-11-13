@@ -51,11 +51,10 @@ export default function PostSideBar({
                 className='sidebar-toggle-button'
                 aria-controls='sideBar'
                 aria-expanded={sidebarIsOpen}
-                aria-label="Open table of contents"
+                aria-label={sidebarIsOpen ? "Close table of contents" : "Open table of contents"}
                 data-style='filled'
                 icon={sidebarIsOpen ? RiMenuUnfold3Line : RiMenuFold3Line}
             >
-                {sidebarIsOpen && <span className="sr-only">Close table of contents</span>}
                 <span aria-hidden="true">Contents</span>
             </Button>
             <aside
