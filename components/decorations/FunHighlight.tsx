@@ -9,6 +9,10 @@ type FunHighlightProps = {
     className?: string;
 } & ComponentProps<'span'>;
 
+const COLOR_COUNT = 9;
+const MIN_DELAY_MS = 100;
+const MAX_DELAY_RANGE_MS = 1200
+
 export default function FunHighlight({ children,
     className = '',
     ...props
@@ -22,8 +26,8 @@ export default function FunHighlight({ children,
     const style = useMemo<CSSProperties>(() => {
         const stringHash = generateHashFromChildren(children);
         const hashInt = parseInt(stringHash, 16);
-        const colorIndex = (hashInt % 9) + 1;
-        const delay = 100 + (hashInt >> 8) % 1200;
+        const colorIndex = (hashInt % COLOR_COUNT) + 1;
+        const delay = MIN_DELAY_MS + (hashInt >> 8) % MAX_DELAY_RANGE_MS;
 
         return {
             '--background': `var(--color-emphasis-${colorIndex}00)`,
