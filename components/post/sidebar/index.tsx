@@ -36,8 +36,8 @@ export default function PostSideBar({
     ...props
 }: PostSideBarProps) {
 
-    const { handleSideBarOpenState, sidebarIsOpen, hasInteracted, sidebarRef, openButtonRef } = useSidebar()
-    const wrapperRef = useClickOutside<HTMLDivElement>(null, () => handleSideBarOpenState(false), sidebarIsOpen);
+    const { handleSideBarOpenState, sidebarIsOpen, sidebarRef, buttonRef, wrapperRef } = useSidebar()
+    
     const hasContents = contents.length > 0;
     const hasRelated = relatedPosts.length > 0;
     const hasExtras = author || Children.count(children) > 0;
@@ -50,20 +50,21 @@ export default function PostSideBar({
             ref={wrapperRef}
         >
             <Button
-                ref={openButtonRef}
+                ref={buttonRef}
                 onClick={() => handleSideBarOpenState()}
-                className={clsx('overlay-control sidebar-toggle-button fixed', { 'can-animate': hasInteracted })}
+                className={clsx('overlay-control sidebar-toggle-button fixed')}
                 aria-controls='sideBar'
-                aria-expanded={sidebarIsOpen}
+                aria-expanded={Boolean(sidebarIsOpen)}
                 aria-label={sidebarIsOpen ? "Close table of contents" : "Open table of contents"}
                 data-style='filled'
+                data-open={sidebarIsOpen}
                 icon={sidebarIsOpen ? RiCloseLargeLine : RiMenuFold3Line}
             >
                 <span aria-hidden="true">Contents</span>
             </Button>
             <aside
                 ref={sidebarRef}
-                data-isopen={sidebarIsOpen}
+                data-isopen={Boolean(sidebarIsOpen)}
                 id="sideBar"
                 className={clsx('post-sidebar flow-8', className)}
                 {...props}

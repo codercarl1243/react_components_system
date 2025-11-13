@@ -58,7 +58,7 @@
         left: 0;
         transition: border-radius 250ms ease-in-out;
 
-        &[aria-expanded="true"].can-animate {
+        &[data-open="true"] {
             width: var(--post-sidebar-width);
             margin-inline: 0;
             animation: expandButton 1200ms cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
@@ -68,7 +68,7 @@
             }
         }
 
-        &[aria-expanded="false"].can-animate {
+        &[data-open="false"] {
             animation: shrinkButton 650ms cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
 
             .icon {

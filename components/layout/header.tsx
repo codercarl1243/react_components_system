@@ -1,13 +1,14 @@
 'use client'
 import SkipLink from '@/components/skiplink'
 import clsx from 'clsx'
-import { useEffect, useState, type ComponentProps } from 'react'
+import { useEffect, useRef, useState, type ComponentProps } from 'react'
 import Link from '@/components/link'
 import { usePathname } from 'next/navigation'
 import { RiBookReadFill, RiCloseLargeLine, RiHomeHeartLine, RiMenuLine, RiUser3Fill } from '@remixicon/react'
 import Button from '@/components/button'
 import { useClickOutside } from '@/hooks/useClickOutside'
 import { useFocusTrap } from '@/hooks/useFocusTrap'
+import { boolean } from 'zod'
 /**
  * Site footer component that displays the current year, copyright notice and a link to codercarl.dev.
  *
@@ -18,46 +19,42 @@ import { useFocusTrap } from '@/hooks/useFocusTrap'
  */
 export default function Header({ className, ...props }: ComponentProps<'header'>) {
   const pathname = usePathname()
-  const [menuIsOpen, setMenuIsOpen] = useState<boolean>(false);
-
-  const wrapperRef = useClickOutside(null, () => setMenuIsOpen(false), menuIsOpen);
-  const [hasInteracted, setHasInteracted] = useState(false)
+  const [menuOpenState, setMenuOpenState] = useState<boolean | undefined>(undefined);
+  const wrapperRef = useClickOutside(null, () => setMenuOpenState(false), Boolean(menuOpenState));
 
   const handleMenuOpenState = (state?: boolean) => {
-    if (!hasInteracted) setHasInteracted(true) // Only set once
-
-    setMenuIsOpen(prev => state !== undefined ? state : !prev);
+    setMenuOpenState(prev => state ?? !prev);
   };
-  useFocusTrap({ containerRef: wrapperRef, isActive: menuIsOpen });
+
+  useFocusTrap({ containerRef: wrapperRef, isActive: Boolean(menuOpenState) });
+
   useEffect(() => {
-    setMenuIsOpen(false)
+    if (menuOpenState) setMenuOpenState(false);
   }, [pathname])
 
   return (
     <header
-      className={clsx('header-wrapper fixed overlay', { 'overlay--visible': menuIsOpen }, className)}
+      className={clsx('header-wrapper fixed overlay', { 'overlay--visible': Boolean(menuOpenState) }, className)}
       {...props}
       ref={wrapperRef}
     >
       <SkipLink />
       <Button
-        className={clsx(
-          'header__menu-button overlay-control',
-          { 'can-animate': hasInteracted }
-        )}
+        className='header__menu-button overlay-control'
         aria-controls='primary-nav'
-        aria-expanded={menuIsOpen}
+        aria-expanded={Boolean(menuOpenState)}
         onClick={() => handleMenuOpenState()}
-        aria-label={menuIsOpen ? "Close menu" : "Open menu"}
+        aria-label={menuOpenState ? "Close menu" : "Open menu"}
         data-style='filled'
         data-variant='primary'
-        icon={menuIsOpen ? RiCloseLargeLine : RiMenuLine}
+        data-open={menuOpenState}
+        icon={menuOpenState ? RiCloseLargeLine : RiMenuLine}
       >
         Menu
       </Button>
       <nav
         className='nav__primary'
-        data-isopen={menuIsOpen}
+        data-isopen={Boolean(menuOpenState)}
         aria-label="Primary"
         id="primary-nav"
       >

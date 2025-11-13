@@ -3,31 +3,31 @@ import { handleKeyPress } from '@/lib/utils/keyboardHandlers';
 import { useFocusTrap } from '@/hooks/useFocusTrap';
 import { usePathname } from 'next/navigation';
 import { type RefObject, useEffect, useRef, useState } from 'react'
+import { useClickOutside } from '@/hooks/useClickOutside';
 
 type SidebarType = {
-    sidebarIsOpen: boolean;
+    sidebarIsOpen: boolean | undefined;
     handleSideBarOpenState: (state?: boolean) => void;
-    openButtonRef: RefObject<HTMLButtonElement | null>;
+    buttonRef: RefObject<HTMLButtonElement | null>;
     sidebarRef: RefObject<HTMLElement | null>;
-    hasInteracted: boolean;
+    wrapperRef: RefObject<HTMLDivElement | null>;
 }
 
 export default function useSidebar(): SidebarType {
     const sidebarRef = useRef<HTMLElement | null>(null);
-    const openButtonRef = useRef<HTMLButtonElement>(null);
-    const [sidebarIsOpen, setSidebarIsOpen] = useState(false);
-    const [hasInteracted, setHasInteracted] = useState(false)
+    const buttonRef = useRef<HTMLButtonElement>(null);
+    const [sidebarIsOpen, setSidebarIsOpen] = useState<SidebarType['sidebarIsOpen']>(undefined);
+    const wrapperRef = useClickOutside<HTMLDivElement>(null, () => handleSideBarOpenState(false), Boolean(sidebarIsOpen));
     const pathname = usePathname()
 
     const handleSideBarOpenState = (state?: boolean) => {
-        if (!hasInteracted) setHasInteracted(true) // Only set once
-        setSidebarIsOpen(prev => state !== undefined ? state : !prev);
+        setSidebarIsOpen(prev => state ?? !prev);
     };
 
-    useFocusTrap({ containerRef: sidebarRef, isActive: sidebarIsOpen });
+    useFocusTrap({ containerRef: sidebarRef, isActive: Boolean(sidebarIsOpen) });
 
     useEffect(() => {
-            setSidebarIsOpen(false)
+            if (sidebarIsOpen) setSidebarIsOpen(false)
     }, [pathname])
     
     useEffect(() => {
@@ -61,7 +61,7 @@ export default function useSidebar(): SidebarType {
             }, 100);
         } else {
             focusTimeout = setTimeout(() => {
-                openButtonRef.current?.focus();
+                buttonRef.current?.focus();
             }, 100);
         }
 
@@ -71,6 +71,6 @@ export default function useSidebar(): SidebarType {
     }, [sidebarIsOpen]);
 
     return {
-        handleSideBarOpenState, hasInteracted, sidebarIsOpen, sidebarRef, openButtonRef
+        handleSideBarOpenState, sidebarIsOpen, sidebarRef, buttonRef, wrapperRef
     }
 }
