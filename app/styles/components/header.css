@@ -1,105 +1,105 @@
-.header {
-    height: 5rem;
-    /* background-color: var(--color-primary-200); */
-    color: var(--color-neutral-100);
-    display: flex;
-    align-items: center;
-    padding: 0 1rem;
-    min-width: var(--bp-xs);
-}
-
 .nav__primary {
     display: flex;
-    gap: 1.5rem;
-    margin-left: auto;
 }
 
 .nav__primary a {
     color: var(--color-primary-400);
-    font-size: 1.125rem;
-    transition: color 0.3s ease;
-
-    &:not(:hover, :focus-visible) {
-        text-decoration: none;
-    }
 }
 
-.nav__primary a.active {
-    font-weight: 600;
-    text-decoration: underline;
+.header-wrapper {
+    display: flex;
+
 }
 
-.header__menu-button--open,
-.header__menu-button--close {
-    display: none;
-}
-
-@media screen and (max-width: 56rem) {
-    .header {
-        position: relative;
-        isolation: isolate;
-        z-index: 2;
-    }
-
-    .header__menu-button--close,
-    .header__menu-button--open {
-        display: flex;
+/*  DESKTOP */
+@media screen and (min-width: 56rem) {
+    .header-wrapper {
         align-items: center;
-        gap: calc(var(--spacing) * 2);
-    }
-
-    .header__menu-button--open {
-        position: fixed;
-        top: 0;
-        left: 0;
-    }
-    .header__menu-button--close {
-        margin-inline-end: auto;
+        height: 5rem;
+        min-width: var(--bp-xs);
+        padding: var(--spacing-sm) var(--spacing-md);
     }
 
     .nav__primary {
-        --nav-width: min(90vw, 300px);
-        position: fixed;
-        width: var(--nav-width);
+        display: flex;
+        gap: 1.5rem;
+        margin-left: auto;
+    }
+
+    /*  make sure overlay is not present at larger viewports - if someone rotates device */
+    .header-wrapper:before {
+        display: none;
+    }
+
+    .header__menu-button {
+        display: none;
+    }
+
+}
+
+/* MOBILE */
+@media screen and (max-width: 56rem) {
+    .header-wrapper {
+        --nav-width: min(80%, 300px);
+        min-height: var(--bp-xs);
         height: 100dvh;
+
+        display: block;
+        min-width: initial;
+    }
+
+    .header__menu-button {
+        --expandButtonMaxWidth: var(--nav-width);
+        display: flex;
+        align-items: center;
+        gap: var(--spacing-sm);
+        position: fixed;
         top: 0;
         left: 0;
-        background-color: var(--color-neutral-100);
-        z-index: 999;
-        overflow-y: auto;
-        box-shadow: var(--shadow-sm);
-        transition: left 250ms ease-in-out;
+        transition: border-radius 250ms ease-in-out;
 
-        display: flex;
+        &[aria-expanded="true"] {
+            width: var(--post-sidebar-width);
+            margin-inline: 0;
+            animation: expandButton 1200ms cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+
+            .icon {
+                animation: iconFadeSwap 1200ms cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+            }
+        }
+
+        &[aria-expanded="false"] {
+            animation: shrinkButton 650ms cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+
+            .icon {
+                animation: iconFadeSwap 600ms cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+            }
+        }
+    }
+
+
+    .nav__primary {
+        position: fixed;
         flex-direction: column;
-        align-items: center;
-    }
+        gap: var(--spacing-lg);
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: var(--nav-width);
 
-    .nav__primary a {
-        color: var(--color-primary-400);
-    }
+        overflow-y: auto;
+        padding-inline: 1rem;
+        padding-block-start: calc(var(--spacing) * 24);
 
-    .nav__primary a:first-of-type {
-        padding-block-start: 2rem;
+        background-color: var(--color-neutral-100);
+        transition: transform 450ms ease-in-out;
     }
 
     .nav__primary[data-isopen="false"] {
-        left: calc(-2 * var(--nav-width));
+        transform: translateX(calc(var(--nav-width) * -2))
     }
 
-    .header::before {
-        content: '';
-        position: fixed;
-        top: 0;
-        left: 0;
-        opacity: 0;
-        height: 100vh;
-        background: var(--color-neutral-800);
-        z-index: -1;
-    }
-
-    .header:has(.nav__primary[data-isopen="true"])::before {
-        width: 100vw;
-        opacity: 0.8;
-    }
+    /* .nav__primary a:first-of-type {
+        padding-block-start: 2rem;
+    } */
 }

@@ -1,0 +1,11 @@
+
+
+@media screen and (max-width: 56rem) {
+        /* Adjust related posts layout for mobile */
+    .post-sidebar[data-isopen="true"] .post-sidebar__related__list {
+        grid-auto-flow: row;
+        grid-auto-columns: unset;
+        overflow-x: visible;
+        mask: none;
+    }
+}
