@@ -1,0 +1,71 @@
+@keyframes expandButton {
+    0% {
+        width: auto;
+        transform: scale(1);
+        box-shadow: -2px -2px 4px 7px hsl(from var(--color-neutral-100) h s l / 0.5);
+         border-radius: var(--radius-md);
+    }
+    5% {
+        outline: 2px solid var(--color-neutral-100);
+        outline-offset: 6px;
+        box-shadow: -2px -2px 8px 12px hsl(from var(--color-neutral-100) h s l / 0.6);
+    }
+    50% {
+        transform: scale(1.1);
+        outline: 2px solid var(--color-neutral-100);
+        outline-offset: 3px;
+        box-shadow: -2px -2px 12px 16px hsl(from var(--color-neutral-100) h s l / 0.4);
+    }
+    75% {
+        box-shadow: -2px -2px 6px 10px hsl(from var(--color-neutral-100) h s l / 0.2);
+    }
+    99% {
+        outline: 1px solid var(--color-neutral-100);
+        outline-offset: 0px;
+        border-radius: var(--radius-md);
+    }
+    100% {
+        width: var(--expandButtonMaxWidth);
+        transform: scale(1);
+        box-shadow: 0px 0px 0px 0px hsl(from var(--color-neutral-100) h s l / 0);
+        outline: none;
+        border-radius: 0;
+    }
+}
+
+@keyframes shrinkButton {
+    0% {
+        width: var(--expandButtonMaxWidth);
+        transform: scale(1);
+        box-shadow: 0px 0px 0px 0px hsl(from var(--color-neutral-100) h s l / 0);
+        outline: none;
+        border-radius: 0;
+    }
+    5% {
+        outline: 2px solid var(--color-neutral-100);
+        outline-offset: 6px;
+        box-shadow: -2px -2px 8px 12px hsl(from var(--color-neutral-100) h s l / 0.6);
+    }
+    50% {
+        transform: scale(1.1);
+        outline: 2px solid var(--color-neutral-100);
+        outline-offset: 3px;
+        box-shadow: -2px -2px 12px 16px hsl(from var(--color-neutral-100) h s l / 0.4);
+    }
+    75% {
+        box-shadow: -2px -2px 6px 10px hsl(from var(--color-neutral-100) h s l / 0.2);
+    }
+    99% {
+        outline: 1px solid var(--color-neutral-100);
+        outline-offset: 0px;
+        box-shadow: -2px -2px 4px 7px hsl(from var(--color-neutral-100) h s l / 0.5);
+        border-radius: var(--radius-md);
+    }
+    100% {
+        width: auto;
+        transform: scale(1);
+        box-shadow: 0;
+        border-radius: var(--radius-md);
+        outline: none;
+    }
+}
