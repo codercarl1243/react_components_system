@@ -60,7 +60,7 @@ export default function PostSideBar({
             </Hamburger.Toggle>
             <Hamburger.Menu
                 
-                className={clsx('post-sidebar hamburger-menu flow-8', className)}
+                className={clsx('post-sidebar flow-8', className)}
                 {...props}
             >
                 {hasContents && <ToC items={contents} />}
