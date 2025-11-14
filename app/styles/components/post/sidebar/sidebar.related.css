@@ -1,10 +1,10 @@
 
 
-@media screen and (max-width: 56rem) {
+@media screen and (max-width: 35rem) {
         /* Adjust related posts layout for mobile */
     .post-sidebar[data-isopen="true"] .post-sidebar__related__list {
         grid-auto-flow: row;
-        grid-auto-columns: unset;
+        grid-auto-columns: initial;
         overflow-x: visible;
         mask: none;
     }
