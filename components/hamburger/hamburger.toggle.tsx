@@ -7,8 +7,8 @@ import { RiCloseLargeLine, RiMenuLine } from "@remixicon/react";
 
 export default function HamburgerToggle({
     className,
-    openAriaLabel,
-    closeAriaLabel,
+    ariaLabelWhenOpen,
+    ariaLabelWhenClosed,
     closeIcon,
     openIcon,
     children,
@@ -18,7 +18,7 @@ export default function HamburgerToggle({
     const { menuIsOpen, menuId, toggleMenuOpenState, buttonRef, position } = useHamburgerContext();
 
     const IconToRender = menuIsOpen ? (closeIcon ?? RiCloseLargeLine) : (openIcon ?? RiMenuLine);
-    const ariaLabelValue = menuIsOpen ? (closeAriaLabel ?? "Close menu") : (openAriaLabel ?? "Open menu")
+    const ariaLabelValue = menuIsOpen ? (ariaLabelWhenOpen ?? "Close menu") : (ariaLabelWhenClosed ?? "Open menu")
 
     return (
         <Button

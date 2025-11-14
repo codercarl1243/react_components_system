@@ -26,8 +26,8 @@ export type HamburgerButtonProps = Omit<
 > & {
     closeIcon?: IconProps['icon'];
     openIcon?: IconProps['icon'];
-    openAriaLabel?: string;
-    closeAriaLabel?: string
+    ariaLabelWhenOpen?: string;
+    ariaLabelWhenClosed?: string
 };
 
 export type HamburgerMenuProps<T extends ElementType = "aside"> = PolymorphicProps<T>;
