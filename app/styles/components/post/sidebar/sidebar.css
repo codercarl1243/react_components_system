@@ -1,4 +1,4 @@
-.side-bar-wrapper {
+.side-bar--wrapper {
     min-height: var(--bp-xs);
     height: 100dvh;
 }
@@ -11,10 +11,9 @@
 }
 
 /*  DESKTOP */
-@media screen and (min-width: 56rem) {
-
+@media screen and (min-width: 35rem) {
     /*  make sure overlay is not present at larger viewports - if someone rotates device */
-    .side-bar-wrapper:before {
+    .side-bar--wrapper:before {
         display: none;
     }
 
@@ -42,14 +41,10 @@
 }
 
 /* MOBILE */
-@media screen and (max-width: 56rem) {
-    .side-bar-wrapper {
-        --post-sidebar-width: min(80%, 300px);
-    }
-
+@media screen and (max-width: 35rem) {
     .post-sidebar {
         position: fixed;
-        width: var(--post-sidebar-width);
+        width: var(--expanded-burger-menu-width);
         top: 0;
         right: 0;
         background: var(--color-neutral-100);
@@ -60,11 +55,11 @@
     }
 
     .post-sidebar[data-isopen="false"] {
-        transform: translateX(calc(var(--post-sidebar-width) * 2))
+        transform: translateX(calc(var(--expanded-burger-menu-width) * 2))
     }
 
     .sidebar-toggle-button {
-        --expandButtonMaxWidth: var(--post-sidebar-width);
+        --expandButtonMaxWidth: var(--expanded-burger-menu-width);
         display: flex;
         align-items: center;
         gap: var(--spacing-sm);
@@ -73,7 +68,7 @@
         transition: border-radius 250ms ease-in-out;
 
         &[data-open="true"] {
-            width: var(--post-sidebar-width);
+            width: var(--expanded-burger-menu-width);
             margin-inline: 0;
             animation: expandButton 1000ms cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
             .icon {

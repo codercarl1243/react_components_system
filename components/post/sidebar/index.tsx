@@ -6,9 +6,9 @@ import RelatedPosts from './RelatedPosts';
 import Author from './author';
 import { PostSideBarProps } from './sidebar.type';
 import Button from '@/components/button';
-import { RiCloseLargeLine, RiMenuFold3Line, RiMenuUnfold3Line } from '@remixicon/react';
-import useSidebar from '@/components/post/sidebar/useSidebar';
-import { useClickOutside } from '@/hooks/useClickOutside';
+import { RiCloseLargeLine, RiMenuFold3Line } from '@remixicon/react';
+import HamburgerMenu from '@/components/hamburger/hamburger.menu';
+import { Hamburger } from '@/components/hamburger';
 
 /**
  * Render a post sidebar containing an optional table of contents, related posts and an author box.
@@ -35,9 +35,6 @@ export default function PostSideBar({
     children,
     ...props
 }: PostSideBarProps) {
-
-    const { handleSideBarOpenState, sidebarIsOpen, sidebarRef, buttonRef, wrapperRef } = useSidebar()
-    
     const hasContents = contents.length > 0;
     const hasRelated = relatedPosts.length > 0;
     const hasExtras = author || Children.count(children) > 0;
@@ -45,35 +42,32 @@ export default function PostSideBar({
     if (!hasContents && !hasRelated && !hasExtras) return null;
 
     return (
-        <div
-            className={clsx('side-bar-wrapper overlay', { 'overlay--visible': sidebarIsOpen })}
-            ref={wrapperRef}
+        <Hamburger.Wrapper 
+            as="div"
+            position="right"
+            className='side-bar--wrapper'
+            breakpoint="mobile"
+            menuId='sideBar'
         >
-            <Button
-                ref={buttonRef}
-                onClick={() => handleSideBarOpenState()}
-                className={clsx('overlay-control sidebar-toggle-button fixed')}
-                aria-controls='sideBar'
-                aria-expanded={Boolean(sidebarIsOpen)}
-                aria-label={sidebarIsOpen ? "Close table of contents" : "Open table of contents"}
+            <Hamburger.Toggle
+                className="sidebar-toggle-button"
                 data-style='filled'
-                data-open={sidebarIsOpen}
-                icon={sidebarIsOpen ? RiCloseLargeLine : RiMenuFold3Line}
+                openAriaLabel="Open table of contents"
+                closeAriaLabel="Close table of contents"
+                openIcon={RiMenuFold3Line}
             >
                 <span aria-hidden="true">Contents</span>
-            </Button>
-            <aside
-                ref={sidebarRef}
-                data-isopen={Boolean(sidebarIsOpen)}
-                id="sideBar"
-                className={clsx('post-sidebar flow-8', className)}
+            </Hamburger.Toggle>
+            <Hamburger.Menu
+                
+                className={clsx('post-sidebar hamburger-menu flow-8', className)}
                 {...props}
             >
                 {hasContents && <ToC items={contents} />}
                 {hasRelated && <RelatedPosts posts={relatedPosts} />}
                 {author && <Author author={author} />}
                 {children}
-            </aside>
-        </div>
+            </Hamburger.Menu>
+        </Hamburger.Wrapper>
     )
 }

@@ -1,0 +1,92 @@
+.hamburger-menu--toggle {
+    display: none;
+}
+
+@media screen and (max-width: 35rem) {
+    .hamburger-menu-wrapper {
+        min-height: var(--bp-xs);
+        height: 100dvh;
+        position: fixed;
+        min-width: initial;
+    }
+
+    .hamburger-menu--toggle {
+        display: flex;
+        align-items: center;
+        gap: var(--spacing-sm);
+        position: fixed;
+        transition: border-radius 250ms ease-in-out;
+        top: 0;
+
+        &[data-position="right"] {
+            right: 0;
+            left: initial;
+        }
+
+        &[data-position="left"] {
+            left: 0;
+            right: initial;
+        }
+
+        &[data-open="true"] {
+            width: var(--expanded-burger-menu-width);
+            margin-inline: 0;
+            animation: expandButton 1000ms cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+
+            .icon {
+                animation: iconFadeSwap 1000ms cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+            }
+        }
+
+        &[data-open="false"] {
+            animation: shrinkButton 550ms cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+
+            .icon {
+                animation: iconFadeSwap 500ms cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+            }
+        }
+    }
+
+
+    .hamburger-menu {
+        position: fixed;
+        height: 100%;
+        width: var(--expanded-burger-menu-width);
+        overflow-y: auto;
+        transition: transform var(--overlay-transition-duration) ease-in-out;
+
+        top: 0;
+
+        &[data-position="right"] {
+            right: 0;
+            left: initial;
+            &[data-isopen="false"] {
+                transform: translateX(100%)
+            }
+        }
+
+        &[data-position="left"] {
+            left: 0;
+            right: initial;
+            &[data-isopen="false"] {
+                transform: translateX(-100%)
+            }
+        }
+    }
+
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .hamburger-menu--toggle {
+        animation: none !important;
+        transition: none !important;
+
+        .icon {
+            animation: none !important;
+        }
+    }
+
+    .hamburger-menu {
+        transition: none !important;
+    }
+}

@@ -1,14 +1,12 @@
 'use client'
 import SkipLink from '@/components/skiplink'
 import clsx from 'clsx'
-import { useEffect, useRef, useState, type ComponentProps } from 'react'
+import { type ComponentProps } from 'react'
 import Link from '@/components/link'
 import { usePathname } from 'next/navigation'
 import { RiBookReadFill, RiCloseLargeLine, RiHomeHeartLine, RiMenuLine, RiUser3Fill } from '@remixicon/react'
-import Button from '@/components/button'
-import { useClickOutside } from '@/hooks/useClickOutside'
-import { useFocusTrap } from '@/hooks/useFocusTrap'
-import { boolean } from 'zod'
+
+import { Hamburger } from '../hamburger'
 /**
  * Site footer component that displays the current year, copyright notice and a link to codercarl.dev.
  *
@@ -19,44 +17,29 @@ import { boolean } from 'zod'
  */
 export default function Header({ className, ...props }: ComponentProps<'header'>) {
   const pathname = usePathname()
-  const [menuOpenState, setMenuOpenState] = useState<boolean | undefined>(undefined);
-  const wrapperRef = useClickOutside(null, () => setMenuOpenState(false), Boolean(menuOpenState));
-
-  const handleMenuOpenState = (state?: boolean) => {
-    setMenuOpenState(prev => state ?? !prev);
-  };
-
-  useFocusTrap({ containerRef: wrapperRef, isActive: Boolean(menuOpenState) });
-
-  useEffect(() => {
-    if (menuOpenState) setMenuOpenState(false);
-  }, [pathname])
 
   return (
-    <header
-      className={clsx('header-wrapper fixed overlay', { 'overlay--visible': Boolean(menuOpenState) }, className)}
+    <Hamburger.Wrapper
+      as="header"
+      position="left"
+      className="header--wrapper"
+      breakpoint="mobile"
+      menuId="Primary-Nav"
       {...props}
-      ref={wrapperRef}
     >
       <SkipLink />
-      <Button
-        className='header__menu-button overlay-control'
-        aria-controls='primary-nav'
-        aria-expanded={Boolean(menuOpenState)}
-        onClick={() => handleMenuOpenState()}
-        aria-label={menuOpenState ? "Close menu" : "Open menu"}
+      <Hamburger.Toggle
+        className='hamburger-menu--toggle'
         data-style='filled'
         data-variant='primary'
-        data-open={menuOpenState}
-        icon={menuOpenState ? RiCloseLargeLine : RiMenuLine}
+        openIcon={RiMenuLine}
       >
         Menu
-      </Button>
-      <nav
+      </Hamburger.Toggle>
+      <Hamburger.Menu
+        as="nav"
         className='nav__primary'
-        data-isopen={Boolean(menuOpenState)}
         aria-label="Primary"
-        id="primary-nav"
       >
         {pathname !== '/' && <Link href="/" icon={RiHomeHeartLine}>Home</Link>}
         <Link
@@ -75,7 +58,7 @@ export default function Header({ className, ...props }: ComponentProps<'header'>
         >
           About
         </Link>
-      </nav>
-    </header>
+      </Hamburger.Menu>
+    </Hamburger.Wrapper>
   )
 }

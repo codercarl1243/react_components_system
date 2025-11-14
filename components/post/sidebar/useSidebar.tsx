@@ -9,22 +9,24 @@ type SidebarType = {
     sidebarIsOpen: boolean | undefined;
     handleSideBarOpenState: (state?: boolean) => void;
     buttonRef: RefObject<HTMLButtonElement | null>;
-    sidebarRef: RefObject<HTMLElement | null>;
+    menuRef: RefObject<HTMLElement | null>;
     wrapperRef: RefObject<HTMLDivElement | null>;
 }
 
 export default function useSidebar(): SidebarType {
-    const sidebarRef = useRef<HTMLElement | null>(null);
-    const buttonRef = useRef<HTMLButtonElement>(null);
     const [sidebarIsOpen, setSidebarIsOpen] = useState<SidebarType['sidebarIsOpen']>(undefined);
+    
+    const menuRef = useRef<HTMLElement | null>(null);
+    const buttonRef = useRef<HTMLButtonElement>(null);
     const wrapperRef = useClickOutside<HTMLDivElement>(null, () => handleSideBarOpenState(false), Boolean(sidebarIsOpen));
+    
     const pathname = usePathname()
 
     const handleSideBarOpenState = (state?: boolean) => {
         setSidebarIsOpen(prev => state ?? !prev);
     };
 
-    useFocusTrap({ containerRef: sidebarRef, isActive: Boolean(sidebarIsOpen) });
+    useFocusTrap({ containerRef: menuRef, isActive: Boolean(sidebarIsOpen) });
 
     useEffect(() => {
             if (sidebarIsOpen) setSidebarIsOpen(false)
@@ -35,7 +37,10 @@ export default function useSidebar(): SidebarType {
             if (!sidebarIsOpen) return;
 
             handleKeyPress(event, {
-                'Escape': () => handleSideBarOpenState(false)
+                'Escape': () => {
+                    handleSideBarOpenState(false)
+                    setTimeout(() => buttonRef.current?.focus(), 0)
+                }
             })
         }
 
@@ -48,29 +53,7 @@ export default function useSidebar(): SidebarType {
         };
     }, [sidebarIsOpen]);
 
-    useEffect(() => {
-        let focusTimeout: NodeJS.Timeout;
-
-        if (sidebarIsOpen) {
-            focusTimeout = setTimeout(() => {
-                const firstFocusable = sidebarRef.current?.querySelector(
-                    'button:not(.sidebar-toggle-button--close), [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
-                ) as HTMLElement;
-
-                firstFocusable?.focus();
-            }, 100);
-        } else {
-            focusTimeout = setTimeout(() => {
-                buttonRef.current?.focus();
-            }, 100);
-        }
-
-        return () => {
-            clearTimeout(focusTimeout);
-        };
-    }, [sidebarIsOpen]);
-
     return {
-        handleSideBarOpenState, sidebarIsOpen, sidebarRef, buttonRef, wrapperRef
+        handleSideBarOpenState, sidebarIsOpen, menuRef, buttonRef, wrapperRef
     }
 }
