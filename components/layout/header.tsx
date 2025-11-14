@@ -4,17 +4,9 @@ import clsx from 'clsx'
 import { type ComponentProps } from 'react'
 import Link from '@/components/link'
 import { usePathname } from 'next/navigation'
-import { RiBookReadFill, RiCloseLargeLine, RiHomeHeartLine, RiMenuLine, RiUser3Fill } from '@remixicon/react'
+import { RiBookReadFill, RiHomeHeartLine, RiMenuLine, RiUser3Fill } from '@remixicon/react'
+import { Hamburger } from '@/components/hamburger'
 
-import { Hamburger } from '../hamburger'
-/**
- * Site footer component that displays the current year, copyright notice and a link to codercarl.dev.
- *
- * The component computes the current year at render time and forwards any other standard footer element props to the root <footer>.
- *
- * @param className - Optional additional CSS class(es) applied to the footer element.
- * @returns The rendered footer JSX element.
- */
 export default function Header({ className, ...props }: ComponentProps<'header'>) {
   const pathname = usePathname()
 
