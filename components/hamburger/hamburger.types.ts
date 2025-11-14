@@ -14,7 +14,7 @@ export type HamburgerState = {
     menuId: string | undefined;
     buttonRef: RefObject<HTMLButtonElement | null>;
     menuRef: RefObject<HTMLElement | null>;
-    wrapperRef: RefObject<HTMLDivElement | null>;
+    wrapperRef: RefObject<any | null>;
     isActive: boolean;
     position?: Position;
     breakpoint?: Breakpoint;

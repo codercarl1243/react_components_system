@@ -25,7 +25,7 @@ export default function useHamburger(
 
   const menuRef = useRef<HTMLElement | null>(null);
   const buttonRef = useRef<HTMLButtonElement | null>(null);
-  const wrapperRef = useClickOutside<HTMLElement>(
+  const wrapperRef = useClickOutside(
     null,
     () => isActive ? toggleMenuOpenState(false) : null,
     menuIsOpen === true && isActive

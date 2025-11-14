@@ -19,7 +19,7 @@ export default function HamburgerWrapper<T extends React.ElementType = "div">({
     return (
         <HamburgerContext.Provider value={state}>
             <Component
-                ref={state.wrapperRef}
+                ref={state.wrapperRef as React.Ref<any>}
                 className={clsx(
                     "hamburger-menu-wrapper overlay",
                     { "overlay--visible": state.menuIsOpen && state.isActive },
