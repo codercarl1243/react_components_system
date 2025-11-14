@@ -64,7 +64,7 @@
     100% {
         width: auto;
         transform: scale(1);
-        box-shadow: 0;
+        box-shadow: none;
         border-radius: var(--radius-md);
         outline: none;
     }
