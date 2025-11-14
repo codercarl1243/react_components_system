@@ -28,7 +28,7 @@ export default function useHamburger(
   const wrapperRef = useClickOutside<HTMLDivElement>(
     null,
     () => isActive ? toggleMenuOpenState(false) : null,
-    menuIsOpen && isActive
+    menuIsOpen === true && isActive
   );
 
   function toggleMenuOpenState(state?: boolean) {
@@ -43,7 +43,7 @@ export default function useHamburger(
   // close when switching to desktop
   useEffect(() => {
     if (!isActive && menuIsOpen) {
-      toggleMenuOpenState(false);
+      toggleMenuOpenState(undefined);
     }
   }, [isActive]);
 

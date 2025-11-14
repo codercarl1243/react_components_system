@@ -21,7 +21,7 @@ export default function HamburgerWrapper<T extends React.ElementType = "div">({
             <Component
                 ref={state.wrapperRef}
                 className={clsx(
-                    "hamburger-menu-wrapper",
+                    "hamburger-menu-wrapper overlay",
                     { "overlay--visible": state.menuIsOpen && state.isActive },
                     className
                 )}

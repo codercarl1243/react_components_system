@@ -19,7 +19,7 @@ export default function HamburgerMenu<T extends React.ElementType = "aside">({
                 className
             )}
             id={menuId}
-            data-isopen={menuIsOpen}
+            data-isopen={menuIsOpen === true}
             data-position={position}
             {...dialogProps}
             {...props}
