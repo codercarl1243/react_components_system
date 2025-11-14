@@ -4,13 +4,14 @@ import { useEffect, useRef, type RefObject } from 'react'
  * Hook that triggers a callback when a click occurs outside the referenced element.
  *
  * @param externalRef - Optional ref from parent component. If not provided, creates internal ref.
- * @param callback - Function called when click outside is detected.
+ * @param callback - Function called when click outside is detected. Memoise with useCallback to avoid unnecessary re-runs.
  * @param enabled - Optional boolean to enable/disable the listener. Defaults to true.
  * @returns RefObject to attach to the element you want to detect clicks outside of.
  *
  * @example
- * // Basic usage with internal ref
- * const ref = useClickOutside(() => setIsOpen(false));
+ * // Basic usage with internal ref and memoized callback
+ * const handleClose = useCallback(() => setIsOpen(false), []);
+ * const ref = useClickOutside(handleClose);
  * return <div ref={ref}>Content</div>;
  *
  * @example
