@@ -50,8 +50,8 @@ export default function PostSideBar({
             <Hamburger.Toggle
                 className="sidebar-toggle-button"
                 data-style='filled'
-                openAriaLabel="Open table of contents"
-                closeAriaLabel="Close table of contents"
+                ariaLabelWhenClosed="Open table of contents"
+                ariaLabelWhenOpen="Close table of contents"
                 openIcon={RiMenuFold3Line}
             >
                 <span aria-hidden="true">Contents</span>
