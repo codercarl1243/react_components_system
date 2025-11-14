@@ -46,7 +46,7 @@ export default function PostSideBar({
             as="div"
             position="right"
             className='side-bar--wrapper'
-            breakpoint="mobile"
+            breakpoint="tablet"
             menuId='sideBar'
         >
             <Hamburger.Toggle
