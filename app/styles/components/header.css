@@ -26,16 +26,6 @@
         gap: 1.5rem;
         margin-left: auto;
     }
-
-    /*  make sure overlay is not present at larger viewports - if someone rotates device */
-    .header--wrapper:before {
-        display: none;
-    }
-
-    .header__menu-button {
-        display: none;
-    }
-
 }
 
 /* MOBILE */
