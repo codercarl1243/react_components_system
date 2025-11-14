@@ -14,7 +14,7 @@ export default function HamburgerWrapper<T extends React.ElementType = "div">({
 }: HamburgerWrapperProps<T>) {
 
     const Component = as || "div";
-    const state = useHamburger(undefined, position, breakpoint);
+    const state = useHamburger(menuId, position, breakpoint);
 
     return (
         <HamburgerContext.Provider value={state}>
