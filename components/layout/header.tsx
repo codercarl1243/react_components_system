@@ -14,7 +14,7 @@ export default function Header({ className, ...props }: ComponentProps<'header'>
     <Hamburger.Wrapper
       as="header"
       position="left"
-      className="header--wrapper"
+      className={clsx("header--wrapper", className)}
       breakpoint="mobile"
       menuId="Primary-Nav"
       {...props}

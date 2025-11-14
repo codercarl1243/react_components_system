@@ -5,9 +5,7 @@ import ToC from './TableOfContents';
 import RelatedPosts from './RelatedPosts';
 import Author from './author';
 import { PostSideBarProps } from './sidebar.type';
-import Button from '@/components/button';
-import { RiCloseLargeLine, RiMenuFold3Line } from '@remixicon/react';
-import HamburgerMenu from '@/components/hamburger/hamburger.menu';
+import { RiMenuFold3Line } from '@remixicon/react';
 import { Hamburger } from '@/components/hamburger';
 
 /**
