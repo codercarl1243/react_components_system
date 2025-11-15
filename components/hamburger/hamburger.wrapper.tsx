@@ -25,6 +25,7 @@ export default function HamburgerWrapper<T extends React.ElementType = "div">({
                     { "overlay--visible": state.menuIsOpen && state.isActive },
                     className
                 )}
+                data-breakpoint={breakpoint}
                 {...props}
             >
                 {children}
