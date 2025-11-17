@@ -8,9 +8,10 @@ type Position = typeof positions[number];
 const breakpoints = ["mobile", "tablet", "desktop"] as const;
 type Breakpoint = typeof breakpoints[number];
 
+type MenuState = "inactive" | "open" | "closed";
 export type HamburgerState = {
-    menuIsOpen: boolean | undefined;
-    toggleMenuOpenState: (state?: boolean) => void;
+    menuState: MenuState;
+    toggleMenuOpenState: (state?: MenuState) => void;
     menuId: string | undefined;
     buttonRef: RefObject<HTMLButtonElement | null>;
     menuRef: RefObject<HTMLElement | null>;
