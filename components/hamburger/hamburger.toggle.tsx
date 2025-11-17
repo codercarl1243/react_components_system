@@ -16,7 +16,7 @@ export default function HamburgerToggle({
     ...props
 }: HamburgerButtonProps) {
     // TODO: allow custom ref to be passed to context to use as buttonRef
-    const { menuState, menuId, toggleMenuOpenState, isActive, buttonRef, position } = useHamburgerContext();
+    const { menuState, menuId, toggleMenuOpenState, buttonRef, position } = useHamburgerContext();
 
     const IconToRender = menuState === "open" ? (closeIcon ?? RiCloseLargeLine) : (openIcon ?? RiMenuLine);
     const ariaLabelValue = menuState === "open" ? (ariaLabelWhenOpen ?? "Close menu") : (ariaLabelWhenClosed ?? "Open menu")
