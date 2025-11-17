@@ -32,7 +32,7 @@ export default function useHamburger(
     () => {
       if (isActive) {
         toggleMenuOpenState();
-        () => buttonRef.current?.focus();
+        buttonRef.current?.focus();
       }
     },
     menuState === "open" && isActive
