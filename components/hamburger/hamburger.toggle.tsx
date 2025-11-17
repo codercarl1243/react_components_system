@@ -1,3 +1,4 @@
+'use client';
 import Button from "@/components/button";
 import clsx from "clsx";
 import { HamburgerButtonProps } from "@/components/hamburger/hamburger.types";
@@ -15,18 +16,18 @@ export default function HamburgerToggle({
     ...props
 }: HamburgerButtonProps) {
     // TODO: allow custom ref to be passed to context to use as buttonRef
-    const { menuIsOpen, menuId, toggleMenuOpenState, buttonRef, position } = useHamburgerContext();
+    const { menuState, menuId, toggleMenuOpenState, isActive, buttonRef, position } = useHamburgerContext();
 
-    const IconToRender = menuIsOpen ? (closeIcon ?? RiCloseLargeLine) : (openIcon ?? RiMenuLine);
-    const ariaLabelValue = menuIsOpen ? (ariaLabelWhenOpen ?? "Close menu") : (ariaLabelWhenClosed ?? "Open menu")
+    const IconToRender = menuState === "open" ? (closeIcon ?? RiCloseLargeLine) : (openIcon ?? RiMenuLine);
+    const ariaLabelValue = menuState === "open" ? (ariaLabelWhenOpen ?? "Close menu") : (ariaLabelWhenClosed ?? "Open menu")
 
     return (
         <Button
             aria-label={ariaLabelValue}
             {...props}
             aria-controls={menuId}
-            aria-expanded={menuIsOpen === true}
-            data-open={menuIsOpen}
+            aria-expanded={menuState === "open"}
+            data-state={menuState}
             data-position={position}
             onClick={() => toggleMenuOpenState()}
             ref={buttonRef}

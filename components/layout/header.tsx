@@ -21,7 +21,6 @@ export default function Header({ className, ...props }: ComponentProps<'header'>
     >
       <SkipLink />
       <Hamburger.Toggle
-        className='hamburger-menu--toggle'
         data-style='filled'
         data-variant='primary'
         openIcon={RiMenuLine}

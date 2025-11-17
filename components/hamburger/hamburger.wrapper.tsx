@@ -1,3 +1,4 @@
+'use client';
 import clsx from "clsx";
 import useHamburger from "@/components/hamburger/useHamburger";
 import { HamburgerContext } from "@/components/hamburger/context";
@@ -21,11 +22,11 @@ export default function HamburgerWrapper<T extends React.ElementType = "div">({
             <Component
                 ref={state.wrapperRef as React.Ref<any>}
                 className={clsx(
-                    "hamburger-menu-wrapper overlay",
-                    { "overlay--visible": state.menuIsOpen && state.isActive },
+                    "hamburger-menu--wrapper overlay-container",
                     className
                 )}
-                data-breakpoint={breakpoint}
+                data-overlay={ (state.menuState === "open" && state.isActive) ? "visible" : "hidden"}
+                data-mode={state.isActive ? "hamburger" : "static"}
                 {...props}
             >
                 {children}

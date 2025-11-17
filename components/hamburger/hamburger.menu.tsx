@@ -1,3 +1,4 @@
+'use client';
 import clsx from "clsx";
 import { HamburgerMenuProps } from "@/components/hamburger/hamburger.types";
 import { useHamburgerContext } from "@/components/hamburger/context";
@@ -8,8 +9,8 @@ export default function HamburgerMenu<T extends React.ElementType = "aside">({
     ...props
 }: HamburgerMenuProps<T>) {
     const Component = as || "aside";
-    const { menuIsOpen, isActive, menuRef, menuId, position } = useHamburgerContext();
-    const dialogProps = (isActive && menuIsOpen) ? {role: "dialog","aria-modal": true} : {}
+    const { menuState, isActive, menuRef, menuId, position } = useHamburgerContext();
+    const dialogProps = (isActive && menuState === "open") ? {role: "dialog","aria-modal": true} : {}
 
     return (
         <Component
@@ -19,8 +20,9 @@ export default function HamburgerMenu<T extends React.ElementType = "aside">({
                 className
             )}
             id={menuId}
-            data-isopen={menuIsOpen === true}
+            data-state={menuState}
             data-position={position}
+            data-mode={isActive ? "hamburger" : "static"}
             {...dialogProps}
             {...props}
         />
