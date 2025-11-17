@@ -28,8 +28,12 @@ function getBreakpointState() {
 
 export function useMediaQuery() {
     const [state, setState] = useState(() => getBreakpointState());
+    const [mounted, setMounted] = useState(false);
 
     useEffect(() => {
+        setMounted(true);
+        setState(getBreakpointState());
+
         if (typeof window === "undefined") return;
 
         function compute() {
@@ -41,5 +45,5 @@ export function useMediaQuery() {
         return () => window.removeEventListener("resize", compute);
     }, []);
 
-    return state;
+    return { ...state, mounted };
 }
