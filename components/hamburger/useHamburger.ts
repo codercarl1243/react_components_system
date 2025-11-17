@@ -59,7 +59,7 @@ export default function useHamburger(
     if (!isActive && menuState !== "inactive") {
       closeMenu();
     }
-  }, [isActive]);
+  }, [isActive, menuState]);
 
   // close when pathname changes
   useEffect(() => {
