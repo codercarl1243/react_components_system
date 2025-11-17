@@ -16,8 +16,10 @@ body:has([data-overlay="visible"]) .overlay-backdrop {
     opacity: 1;
     pointer-events: auto;
 }
-
-.overlay-container[data-overlay="visible"] {
+body:has([data-overlay="visible"]) .overlay-container[data-overlay="hidden"] {
+    z-index: 0;
+}
+.overlay-container {
     position: relative;
     isolation: isolate;
     z-index: 3;
