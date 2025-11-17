@@ -45,7 +45,6 @@ export default function PostSideBar({
             position="right"
             className='side-bar--wrapper'
             breakpoint="tablet"
-            menuId='sideBar'
         >
             <Hamburger.Toggle
                 className="sidebar-toggle-button"
