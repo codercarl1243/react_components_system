@@ -29,7 +29,7 @@ export default function HamburgerToggle({
             aria-expanded={menuState === "open"}
             data-state={menuState}
             data-position={position}
-            onClick={() => toggleMenuOpenState()}
+            onClick={toggleMenuOpenState}
             ref={buttonRef}
             icon={IconToRender}
             className={clsx(
