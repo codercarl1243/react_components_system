@@ -1,13 +1,9 @@
-import type { ElementType, PolymorphicProps, Ref, RefObject } from "react";
+import type { ElementType, PolymorphicProps, RefObject } from "react";
 import type { BaseButtonProps } from "@/components/button/button.type";
 import type { IconProps } from "@/components/icon/icon.type";
 
-const positions = ["left", "right"] as const;
-type Position = typeof positions[number];
-
-const breakpoints = ["mobile", "tablet", "desktop"] as const;
-type Breakpoint = typeof breakpoints[number];
-
+type Position = "left" | "right";
+type Breakpoint = "mobile" | "tablet" | "desktop";
 type MenuState = "inactive" | "open" | "closed";
 
 export type HamburgerState = {
