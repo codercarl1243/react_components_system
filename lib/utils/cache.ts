@@ -34,7 +34,7 @@ export class LRUCache<K, V> {
     }
 
     /**
-     * Retrieves a value from the cache and marks it as recently used.
+     * Retrieves a value from the cache.
      * 
      * @param key - The key to retrieve
      * @returns The cached value, or undefined if the key doesn't exist
@@ -42,29 +42,26 @@ export class LRUCache<K, V> {
     get(key: K): V | undefined {
         const value = this._get(key);
         if (value === undefined) return undefined;
-        
+
         this._markAsRecentlyUsed(key, value);
         return value;
     }
 
     /**
-     * Adds or updates a value in the cache. If the cache is full, evicts the
-     * least recently used item. The added/updated item is marked as most recently used.
+     * Adds or updates a value in the cache.
      * 
      * @param key - The key to set
      * @param value - The value to store
      */
     set(key: K, value: V): void {
-        if (this.has(key)) {
-            this._delete(key);
-        } else if (this.size >= this.maxSize) {
+        if (!this.delete(key) && this.size >= this.capacity) {
             this._evictLRU();
         }
         this._set(key, value);
     }
 
     /**
-     * Checks if a key exists in the cache without affecting LRU order.
+     * Checks if a key exists in the cache.
      * 
      * @param key - The key to check
      * @returns True if the key exists, false otherwise
@@ -91,21 +88,23 @@ export class LRUCache<K, V> {
     }
 
     /**
-     * Gets the current number of items in the cache.
+     * The current number of items in the cache.
+     * @readonly
      */
     get size(): number {
         return this.cache.size;
     }
 
     /**
-     * Gets the maximum capacity of the cache.
+     * The maximum capacity of the cache.
+     * @readonly
      */
     get capacity(): number {
         return this.maxSize;
     }
 
     /**
-     * Returns all keys in LRU order (least recently used first).
+     * all keys in LRU order (least recently used first).
      * 
      * @returns Array of keys ordered from least to most recently used
      */
@@ -114,7 +113,7 @@ export class LRUCache<K, V> {
     }
 
     /**
-     * Returns all values in LRU order (least recently used first).
+     * all values in LRU order (least recently used first).
      * 
      * @returns Array of values ordered from least to most recently used
      */
@@ -123,7 +122,7 @@ export class LRUCache<K, V> {
     }
 
     /**
-     * Returns all entries in LRU order (least recently used first).
+     * all entries in LRU order (least recently used first).
      * 
      * @returns Array of [key, value] tuples ordered from least to most recently used
      */
