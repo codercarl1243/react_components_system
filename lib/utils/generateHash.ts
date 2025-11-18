@@ -29,7 +29,7 @@ export const generateHashFromChildren = (children: ReactNode): string => {
       return node.map(extractText).join("");
     }
     if (isReactElementWithChildren(node)) {
-      return extractText(node.props?.children);
+      return extractText(node.props.children);
     }
     return "";
   };
