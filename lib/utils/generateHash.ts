@@ -34,5 +34,5 @@ export const generateHashFromChildren = (children: ReactNode): string => {
     return "";
   };
 
-  return hashString(extractText(children));
+  return generateHash(extractText(children));
 };
