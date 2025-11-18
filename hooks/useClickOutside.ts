@@ -26,7 +26,7 @@ import { useEffect, useRef, type RefObject } from 'react'
  * return <div ref={ref}>Content</div>;
  */
 export function useClickOutside<T extends HTMLElement = HTMLElement>(
-  externalRef?: RefObject<T> | null,
+  externalRef?: RefObject<T | null> | null,
   callback?: () => void,
   enabled: boolean = true
 ): RefObject<T | null>{

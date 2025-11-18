@@ -31,7 +31,7 @@ declare module 'react' {
     Props = {}
   > = Props &
     AsProp<T> &
-    Omit<React.ComponentPropsWithoutRef<T>, PropsToOmit<T, Props>>;
+    Omit<React.ComponentPropsWithRef<T>, PropsToOmit<T, Props>>;
 
   /**
    * Polymorphic component type:

@@ -4,13 +4,14 @@ import { usePathname } from 'next/navigation';
 import { useEffect, useId, useRef, useState } from 'react'
 import { useClickOutside } from '@/hooks/useClickOutside';
 import { useMediaQuery } from '@/hooks/useMediaQuery';
-import type { HamburgerState } from '@/components/hamburger/hamburger.types';
+import type { HamburgerState, useHamburgerProps } from '@/components/hamburger/hamburger.types';
 
-export default function useHamburger(
-  id?: HamburgerState["menuId"],
-  position: HamburgerState["position"] = "left",
-  breakpoint: HamburgerState["breakpoint"] = "mobile"
-): HamburgerState {
+export default function useHamburger({
+  id,
+  position = "left",
+  breakpoint = "mobile",
+  wrapperRef
+  }: useHamburgerProps) {
   const [menuState, setMenuState] = useState<HamburgerState['menuState']>("inactive");
   const { isMobile, isTablet, mounted } = useMediaQuery();
 
@@ -27,8 +28,8 @@ export default function useHamburger(
 
   const menuRef = useRef<HTMLElement | null>(null);
   const buttonRef = useRef<HTMLButtonElement | null>(null);
-  const wrapperRef = useClickOutside(
-    null,
+  useClickOutside(
+    wrapperRef,
     () => {
       if (isActive) {
         toggleMenuOpenState();
@@ -90,7 +91,6 @@ export default function useHamburger(
     menuId,
     menuRef,
     buttonRef,
-    wrapperRef,
     position
   };
 }
