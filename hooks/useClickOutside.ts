@@ -34,8 +34,7 @@ export function useClickOutside<T extends HTMLElement = HTMLElement>(
   const ref = externalRef || internalRef
 
   useEffect(() => {
-    // Don't attach listener if disabled or no callback
-    if (!enabled || !callback) return
+    if (!enabled) return
 
     const handleClickOutside = (event: MouseEvent | TouchEvent) => {
       if (ref.current && !ref.current.contains(event.target as Node)) {
