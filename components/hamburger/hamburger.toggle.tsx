@@ -35,7 +35,7 @@ export default function HamburgerToggle({
                 'hamburger-menu--toggle overlay-control',
                 className)}
         >
-          {children}  
+            {children}
         </Button>
     )
 }
