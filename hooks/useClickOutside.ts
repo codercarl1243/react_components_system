@@ -26,7 +26,7 @@ import { useEffect, useRef, type RefObject } from 'react'
  * return <div ref={ref}>Content</div>;
  */
 export function useClickOutside<T extends HTMLElement = HTMLElement>(
-  callback: () => void,
+  callback: (event?: MouseEvent | TouchEvent) => void,
   externalRef?: RefObject<T | null> | null,
   enabled: boolean = true
 ): RefObject<T | null>{
@@ -39,7 +39,7 @@ export function useClickOutside<T extends HTMLElement = HTMLElement>(
 
     const handleClickOutside = (event: MouseEvent | TouchEvent) => {
       if (ref.current && !ref.current.contains(event.target as Node)) {
-        callback()
+        callback(event)
       }
     }
 
