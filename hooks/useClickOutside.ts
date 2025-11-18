@@ -11,7 +11,7 @@ import { useEffect, useRef, type RefObject } from 'react'
  * @example
  * // Basic usage with internal ref and memoized callback
  * const handleClose = useCallback(() => setIsOpen(false), []);
- * const ref = useClickOutside(handleClose);
+ * const ref = useClickOutside(null, handleClose);
  * return <div ref={ref}>Content</div>;
  *
  * @example
@@ -22,7 +22,7 @@ import { useEffect, useRef, type RefObject } from 'react'
  *
  * @example
  * // Usage with conditional enable
- * const ref = useClickOutside(() => setIsOpen(false), isOpen);
+ * const ref = useClickOutside(null,() => setIsOpen(false), isOpen);
  * return <div ref={ref}>Content</div>;
  */
 export function useClickOutside<T extends HTMLElement = HTMLElement>(
