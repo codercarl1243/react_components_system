@@ -43,15 +43,17 @@
         --color-inline-bg: rgb(244, 244, 229);
 
         /* alpha values */
-        --color-neutral-a1: color-mix(in srgb, var(--color-neutral-100) 10%, transparent);
-        --color-neutral-a2: color-mix(in srgb, var(--color-neutral-100) 20%, transparent);
-        --color-neutral-a3: color-mix(in srgb, var(--color-neutral-100) 30%, transparent);
-        --color-neutral-a4: color-mix(in srgb, var(--color-neutral-100) 40%, transparent);
-        --color-neutral-a5: color-mix(in srgb, var(--color-neutral-100) 50%, transparent);
-        --color-neutral-a6: color-mix(in srgb, var(--color-neutral-100) 60%, transparent);
-        --color-neutral-a7: color-mix(in srgb, var(--color-neutral-100) 70%, transparent);
-        --color-neutral-a8: color-mix(in srgb, var(--color-neutral-100) 80%, transparent);
-        --color-neutral-a9: color-mix(in srgb, var(--color-neutral-100) 90%, transparent);
+        --color-neutral-a2-dark: color-mix(in srgb, var(--color-neutral-900) 20%, transparent);
+        --color-neutral-a4-dark: color-mix(in srgb, var(--color-neutral-900) 40%, transparent);
+        --color-neutral-a6-dark: color-mix(in srgb, var(--color-neutral-900) 60%, transparent);
+        --color-neutral-a7-dark: color-mix(in srgb, var(--color-neutral-900) 70%, transparent);
+        --color-neutral-a9-dark: color-mix(in srgb, var(--color-neutral-900) 90%, transparent);
+
+        --color-neutral-a2-light: color-mix(in srgb, var(--color-neutral-100) 20%, transparent);
+        --color-neutral-a4-light: color-mix(in srgb, var(--color-neutral-100) 40%, transparent);
+        --color-neutral-a6-light: color-mix(in srgb, var(--color-neutral-100) 60%, transparent);
+        --color-neutral-a7-light: color-mix(in srgb, var(--color-neutral-100) 70%, transparent);
+        --color-neutral-a9-light: color-mix(in srgb, var(--color-neutral-100) 90%, transparent);
 
         /* Emphasis colors */
         --color-emphasis-100: hsl(16, 84%, 60%);
