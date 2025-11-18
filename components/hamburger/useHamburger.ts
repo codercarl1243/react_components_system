@@ -43,11 +43,8 @@ export default function useHamburger({
     setMenuState("inactive")
   }
 
-  function toggleMenuOpenState(state?: HamburgerState['menuState']) {
-    setMenuState(prev => {
-      if (state !== undefined) return state;
-      return prev === "open" ? "closed" : "open";
-    });
+  function toggleMenuOpenState() {
+    setMenuState(prev => prev === "open" ? "closed" : "open");
   }
 
   useFocusTrap({

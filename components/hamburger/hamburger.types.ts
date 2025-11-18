@@ -12,7 +12,7 @@ type MenuState = "inactive" | "open" | "closed";
 
 export type HamburgerState = {
     menuState: MenuState;
-    toggleMenuOpenState: (state?: MenuState) => void;
+    toggleMenuOpenState: () => void;
     menuId: string | undefined;
     buttonRef: RefObject<HTMLButtonElement | null>;
     menuRef: RefObject<HTMLElement | null>;
