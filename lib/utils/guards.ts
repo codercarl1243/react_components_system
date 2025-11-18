@@ -147,15 +147,15 @@ export function isReactElement(node: unknown): node is ReactElement {
  * hasChildren(empty); // false
  * ```
  */
-export function isReactElementWithChildren(node: unknown): node is ReactElement & { props: { children: ReactNode } } {
+export function isReactElementWithChildren(
+  node: unknown
+): node is ReactElement & { props: { children?: ReactNode } } {
   return (
     node !== null &&
     typeof node === "object" &&
     "props" in node &&
     node.props !== null &&
     typeof node.props === "object" &&
-    "children" in node.props &&
-    node.props.children !== null &&
-    node.props.children !== undefined
+    "children" in node.props
   );
 }
