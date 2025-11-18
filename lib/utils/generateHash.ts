@@ -5,7 +5,7 @@ const hashString = (text: string): string => {
   const hash = Array.from(text)
     .reduce((acc, char) => ((acc << 5) - acc + char.charCodeAt(0)) | 0, 0);
 
-  return (hash >>> 0).toString(16).padStart(8, '0').slice(0, 8);
+  return (hash >>> 0).toString(16).padStart(8, '0');
 };
 
 const hashCache = new Map<string, string>();
