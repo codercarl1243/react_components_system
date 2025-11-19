@@ -12,4 +12,4 @@ export default function extractTextFromNode(node: ReactNode): string {
       return extractTextFromNode(node.props.children);
     }
     return "";
-  };
+  }
