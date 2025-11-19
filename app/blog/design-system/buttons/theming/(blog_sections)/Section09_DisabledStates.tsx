@@ -7,7 +7,7 @@ import PostSection from "@/components/post/post.section";
 export default function Section09_DisabledStates() {
     return (
         <PostSection id="disabled-states">
-            <AnchorHeading headingLevel={2} id="disabled-states-heading">Handling Disabled States</AnchorHeading>
+            <AnchorHeading as={"h2"} id="disabled-states-heading">Handling Disabled States</AnchorHeading>
             <Code codeString={`.button:is(:disabled, [aria-disabled="true"]) {
     --button-bg-color: var(--color-neutral-200);
     --button-text-color: var(--color-neutral-800);

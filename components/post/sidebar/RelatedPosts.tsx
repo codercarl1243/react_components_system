@@ -20,7 +20,7 @@ export default function RelatedPosts({posts}: { posts: PostSummary[] }) {
             className="post-sidebar__related"
             aria-labelledby="related-posts-heading"
         >
-            <Heading headingLevel={2} id="related-posts-heading">Related Posts</Heading>
+            <Heading as={"h2"} id="related-posts-heading">Related Posts</Heading>
             <List className="post-sidebar__related__list" variant="none">
                 {posts.map((post, idx) => (
                     <li key={post.href + idx}>

@@ -7,8 +7,8 @@ export default function ButtonsResources() {
 
   return (
     <PostSection id="resources">
-      <AnchorHeading headingLevel={2} id="resources-heading">Code & Resources</AnchorHeading>
-      <AnchorHeading headingLevel={3}>Complete Code Reference</AnchorHeading>
+      <AnchorHeading as={"h2"} id="resources-heading">Code & Resources</AnchorHeading>
+      <AnchorHeading as={"h3"}>Complete Code Reference</AnchorHeading>
       <TabList
         tabListName="code_reference"
         className="code__reference"

@@ -11,7 +11,7 @@ export default function Section7() {
 
     return (
         <PostSection id="css-and-theming">
-            <AnchorHeading headingLevel={2} id="css-and-theming-heading">CSS & Theming</AnchorHeading>
+            <AnchorHeading as={"h2"} id="css-and-theming-heading">CSS & Theming</AnchorHeading>
             <p>
                 Our CSS isn&apos;t just decorative — it enforces <FunHighlight>layout stability</FunHighlight>, <FunHighlight>WCAG compliance</FunHighlight>, and <FunHighlight>customizability</FunHighlight>. If you&apos;d like to see the full CSS without the explanation, it is available within the <Link href="#resources-heading">resources section</Link>
             </p>
@@ -33,7 +33,7 @@ export default function Section7() {
 
 
 
-            <AnchorHeading headingLevel={3} id="css-reset-base-styles">Reset and Base Styles</AnchorHeading>
+            <AnchorHeading as={"h3"} id="css-reset-base-styles">Reset and Base Styles</AnchorHeading>
             <p>The reset we use here is more <span className="italic">button-specific</span> than those above. It re-applies only the essentials — borders, outline, and box model — giving us a neutral baseline for theming.
             </p>
             <Code
@@ -101,7 +101,7 @@ export default function Section7() {
                 Once the structure and accessibility requirements are set, we can make our buttons expressive through theming.
             </p>
             <p>CSS custom properties give us a flexible foundation for adapting to any color system or theme.</p>
-            <AnchorHeading headingLevel={3} id="css-custom-properties">Custom Properties for Theming</AnchorHeading>
+            <AnchorHeading as={"h3"} id="css-custom-properties">Custom Properties for Theming</AnchorHeading>
             <p>
                 The button uses CSS custom properties for a lot of values that aren&apos;t actually defined yet. This gives us a <span className="italic">hook</span> into the code that we can use with design tokens and color variants to cascade naturally through the design system.
             </p>
@@ -194,23 +194,23 @@ export default function Section7() {
                 With our tokens and variants defined, we&apos;ve built a flexible foundation that can scale across themes, brands, and accessibility requirements.
             </p>
 
-            <AnchorHeading headingLevel={3} id="css-button-states">Button States</AnchorHeading>
-            <AnchorHeading headingLevel={4} id="css-interactions">Interaction states</AnchorHeading>
+            <AnchorHeading as={"h3"} id="css-button-states">Button States</AnchorHeading>
+            <AnchorHeading as={"h4"} id="css-interactions">Interaction states</AnchorHeading>
             <p>
                 <InlineCode lang="css" codeString=":hover" />, <InlineCode lang="css" codeString=":focus" />, and <InlineCode lang="css" codeString=":active" /> states communicate affordance. We use outline and subtle transforms <span className="fun-underline">instead of color alone</span> — ensuring <span className="bold">contrast</span> and <span className="bold">motion</span> respect user preferences.
             </p>
-            <AnchorHeading headingLevel={4} id="css-disabled">Disabled & Loading States</AnchorHeading>
+            <AnchorHeading as={"h4"} id="css-disabled">Disabled & Loading States</AnchorHeading>
             <p>
                 Disabled buttons use <InlineCode codeString="aria-disabled" /> and custom visual styles that
                 remain discoverable. The <InlineCode lang="css" codeString="cursor: not-allowed" /> communicates the state
                 without removing interactivity from assistive technology.
             </p>
-            <AnchorHeading headingLevel={3} id="css-touch-devices">Touch Device Optimization</AnchorHeading>
+            <AnchorHeading as={"h3"} id="css-touch-devices">Touch Device Optimization</AnchorHeading>
             <p>
                 Larger touch targets (44x44px) and increased padding are applied on devices with coarse pointers.
                 This directly supports WCAG AAA and improves usability on mobile.
             </p>
-            <AnchorHeading headingLevel={3} id="css-user-preferences">Respecting User Preferences</AnchorHeading>
+            <AnchorHeading as={"h3"} id="css-user-preferences">Respecting User Preferences</AnchorHeading>
             <p>
                 We disable transitions and animations when <InlineCode lang="css" codeString="prefers-reduced-motion" /> is detected.
                 <span className="fun-underline">Accessibility is baked in — not added later</span>.

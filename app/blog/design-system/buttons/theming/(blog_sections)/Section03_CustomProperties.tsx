@@ -8,9 +8,9 @@ import PostSection from "@/components/post/post.section";
 export default function Section03_CustomProperties() {
     return (
         <PostSection id="css-custom-properties">
-            <AnchorHeading headingLevel={2} id="css-custom-properties-heading">The CSS Custom Property Pattern</AnchorHeading>
+            <AnchorHeading as={"h2"} id="css-custom-properties-heading">The CSS Custom Property Pattern</AnchorHeading>
             <p>Instead of hard-coding colors, we'll use <FunHighlight>CSS custom properties</FunHighlight> (CSS variables) to create a flexible theming system.</p>
-            <AnchorHeading headingLevel={3}>Step 1: Define Semantic Variables</AnchorHeading>
+            <AnchorHeading as={"h3"}>Step 1: Define Semantic Variables</AnchorHeading>
             <Code codeString={`.button {
     --button-bg-color: var(--color-primary-400);
     --button-text-color: var(--color-neutral-100);

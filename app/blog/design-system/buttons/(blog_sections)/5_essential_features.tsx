@@ -11,7 +11,7 @@ export default function Section5() {
 
     return (
         <PostSection id="loading-and-states">
-            <AnchorHeading id="loading-and-states" headingLevel={2}>
+            <AnchorHeading id="loading-and-states" as={"h2"}>
                 Loading & States
             </AnchorHeading>
             <Figure
@@ -25,7 +25,7 @@ export default function Section5() {
             <p>
                 Beyond aesthetics, these essential features ensure the button behaves predictably under real-world conditions—handling async operations gracefully, preventing duplicate submissions, and integrating seamlessly with forms.
             </p>
-            <AnchorHeading headingLevel={3}>
+            <AnchorHeading as={"h3"}>
                 Loading States
             </AnchorHeading>
             <p>Buttons often trigger asynchronous actions — saving data, submitting forms, or making API calls. A good design system must <FunHighlight>communicate progress clearly</FunHighlight> to the user while preventing accidental re-triggers.</p>
@@ -45,7 +45,7 @@ export default function Section5() {
                     asynchronous work completes. This small visual cue prevents unnecessary frustration.
                 </p>
             </PostNote>
-            <AnchorHeading headingLevel={3}>Preventing Duplicate Actions</AnchorHeading>
+            <AnchorHeading as={"h3"}>Preventing Duplicate Actions</AnchorHeading>
             {/* IMAGE IDEA: Diagram showing click blocked by disabled/loading branch */}
             <p>Async operations can take time, and users often click again if nothing happens immediately. Our button prevents duplicate submissions with a combination of logic and semantics:</p>
             <List ordered>
@@ -64,7 +64,7 @@ export default function Section5() {
             </List>
 
 
-            <AnchorHeading headingLevel={3}>Integration with Forms</AnchorHeading>
+            <AnchorHeading as={"h3"}>Integration with Forms</AnchorHeading>
             <p>
                 By default, our button sets <InlineCode codeString={`type="button"`} />. This follows best practices and avoids accidental form submissions when multiple buttons exist.
             </p>

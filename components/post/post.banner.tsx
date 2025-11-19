@@ -44,7 +44,7 @@ export default function PostBanner({ post, title, headingId, subtitle, image }: 
         />
       )}
       <div className="post__banner__text">
-        <Heading headingLevel={1} id={headingId} className="post__banner__text-heading">
+        <Heading as={"h1"} id={headingId} className="post__banner__text-heading">
           {displayTitle}
         </Heading>
         {displaySubtitle && (

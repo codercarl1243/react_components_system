@@ -6,7 +6,7 @@ import PostSection from "@/components/post/post.section";
 export default function Section14_Summary() {
     return (
         <PostSection id="summary">
-            <AnchorHeading headingLevel={2} id="summary-heading">Summary</AnchorHeading>
+            <AnchorHeading as={"h2"} id="summary-heading">Summary</AnchorHeading>
             <List>
                 <li>Flexible theming with CSS custom properties</li>
                 <li>Three styles and four color variants</li>

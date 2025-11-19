@@ -6,7 +6,7 @@ export default function SidebarAuthor({ author }: SidebarAuthorProps) {
 
     return (
  <section className="post-sidebar__author" aria-labelledby="post-sidebar-author-heading">
-            <Heading headingLevel={2} id="post-sidebar-author-heading" className="sr-only">
+            <Heading as={"h2"} id="post-sidebar-author-heading" className="sr-only">
                 About the Author
             </Heading>
             <div className="author">

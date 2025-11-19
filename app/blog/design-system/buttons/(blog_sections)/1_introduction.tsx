@@ -12,13 +12,14 @@ export default function Section1() {
         <PostSection id="introduction">
             <PostBanner
                 title="The Button"
+                subtitle="The most complex of the basic components"
                 headingId="the-button-heading"
                 image={{
                     src: '/images/blogs/button-base/main-image.webp',
                     alt: ""
                 }}
             />
-            <Heading headingLevel={2} id="introduction-heading">Introduction</Heading>
+            <Heading as={"h2"} id="introduction-heading">Introduction</Heading>
             <p>
                 Buttons are the most re-used components in any interface — and the easiest to get wrong.
                 In this first post of the design system series, we&apos;re building a button that balances <FunHighlight>functionality</FunHighlight>, <FunHighlight>accessibility</FunHighlight>, and <FunHighlight>developer trust</FunHighlight>.

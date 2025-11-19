@@ -8,7 +8,7 @@ import PostSection from "@/components/post/post.section";
 export default function Section04_ColorTokens() {
     return (
         <PostSection id="color-tokens">
-            <AnchorHeading headingLevel={2} id="color-tokens-heading">Building a Color Token System</AnchorHeading>
+            <AnchorHeading as={"h2"} id="color-tokens-heading">Building a Color Token System</AnchorHeading>
             <p>Before creating variants, let's establish our color tokens — the foundation of your design system.</p>
             <Code codeString={`:root {
     --color-primary-100: hsl(203, 31%, 95%);

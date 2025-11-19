@@ -15,9 +15,9 @@ export default function Section6() {
 
     return (
         <PostSection id="accessibility">
-            <AnchorHeading id="accessibility-heading" headingLevel={2}>Accessibility Requirements</AnchorHeading>
+            <AnchorHeading id="accessibility-heading" as={"h2"}>Accessibility Requirements</AnchorHeading>
             <div className="flow-4">
-                <AnchorHeading headingLevel={3}>WCAG principles in practice</AnchorHeading>
+                <AnchorHeading as={"h3"}>WCAG principles in practice</AnchorHeading>
                 <Picture
                     sources={[{ media: '(max-width: 560px)', srcSet: '/images/pour_circles_grid_600x600.webp' }]}
                     src="/images/pour_circles.webp"
@@ -57,7 +57,7 @@ export default function Section6() {
 
 
             <div className="flow-4">
-                <AnchorHeading headingLevel={3}>Designing beyond WCAG</AnchorHeading>
+                <AnchorHeading as={"h3"}>Designing beyond WCAG</AnchorHeading>
                 <p>
                     WCAG&apos;s four principles give us the foundation, but meeting the minimum isn&apos;t the goal. As developers, our job is to design buttons that feel <span className="fun-underline">consistent</span>, <span className="fun-underline">predictable</span>, and <span className="fun-underline">inclusive</span> in real-world situations.
                 </p>
@@ -122,7 +122,7 @@ min-height: 44px;`} copyEnabled={false} />
 
 
             <div className="flow-4">
-                <AnchorHeading headingLevel={4}>Assistive Technology isn&apos;t everything</AnchorHeading>
+                <AnchorHeading as={"h4"}>Assistive Technology isn&apos;t everything</AnchorHeading>
                 <p>Screen readers and other assistive tech is definitely powerful and does level the field to some degree, but they don't solve all problems:</p>
                 {/* add icons to these dot points */}
                 <List variant="circle" spacing="tight">
@@ -143,7 +143,7 @@ min-height: 44px;`} copyEnabled={false} />
 
 
             <div className="flow-4">
-                <AnchorHeading headingLevel={4}>Further Reading</AnchorHeading>
+                <AnchorHeading as={"h4"}>Further Reading</AnchorHeading>
                 <p>For a dive into accessible button patterns:</p>
                 <List variant="none" spacing="tight">
                     <li><Link href="https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Roles/button_role">MDN: Button Accessibility</Link></li>

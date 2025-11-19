@@ -6,7 +6,7 @@ import PostSection from "@/components/post/post.section";
 export default function Section07_TypeSupport() {
     return (
         <PostSection id="type-support">
-            <AnchorHeading headingLevel={2} id="type-support-heading">TypeScript Support</AnchorHeading>
+            <AnchorHeading as={"h2"} id="type-support-heading">TypeScript Support</AnchorHeading>
             <Code codeString={`export type TVariant = 'primary' | 'secondary' | 'accent' | 'danger';
 export type TButtonStyle = 'outlined' | 'filled' | 'ghost';`}
             />

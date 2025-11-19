@@ -42,7 +42,7 @@ export default function TableOfContents({ items }: ToCProps) {
 
     return (
         <nav className="post-sidebar__contents flow-4" aria-labelledby="toc-heading">
-            <Heading headingLevel={2} id="toc-heading">Table of contents</Heading>
+            <Heading as={"h2"} id="toc-heading">Table of contents</Heading>
             <ol className='toc-list'>
                 {items.map(item => {
                     const isActive = activeId === item.id;

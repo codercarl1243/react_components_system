@@ -1,13 +1,12 @@
-import type { ComponentProps, ReactNode } from 'react'
+import type { PolymorphicProps } from 'react'
 import type { IconProps } from '@/components/icon/icon.type';
 
-export type HeadingLevelsType = 1 | 2 | 3 | 4 | 5 | 6;
 
-export type HeadingTag = `h${HeadingLevelsType}`;
+export type ValidHeadingTag = "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
 
-export type HeadingPropsType = {
-    headingLevel?: HeadingLevelsType;
-    headingSize?: HeadingLevelsType;
+export type BaseHeadingProps = {
+    headingSize?: 1 | 2 | 3 | 4 | 5 | 6;
     icon?: IconProps['icon'];
-    children: ReactNode;
-} & ComponentProps<HeadingTag>;
+};
+
+export type HeadingPropsType<T extends ValidHeadingTag = "h3"> =  PolymorphicProps<T, BaseHeadingProps>;

@@ -6,7 +6,7 @@ import PostSection from "@/components/post/post.section";
 export default function Section06_ColorVariants() {
     return (
         <PostSection id="color-variants">
-            <AnchorHeading headingLevel={2} id="color-variants-heading">Creating Color Variants</AnchorHeading>
+            <AnchorHeading as={"h2"} id="color-variants-heading">Creating Color Variants</AnchorHeading>
             <p>Now, we'll define Primary, Secondary, Accent, and Danger variants using semantic mappings.</p>
             <Code codeString={`.button[data-variant="primary"] {
     --button-primary-color: var(--color-neutral-100);

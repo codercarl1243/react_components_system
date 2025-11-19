@@ -1,6 +1,7 @@
 import { generateSlug } from "@/lib/utils/generateSlug"
 import extractTextFromNode from "@/lib/utils/react/extractTextFromNode"
 import type { ReactNode } from "react"
+import type { ValidHeadingTag } from "./heading.type"
 
 export const getSizeClass = (level: number): string => {
   switch (level) {
@@ -23,4 +24,6 @@ export const getIconSize = (level: number): number => {
   }
 }
 
-export const generateHeadingId = (node: ReactNode) => generateSlug(extractTextFromNode(node))
+export const generateHeadingId = (node: ReactNode) => generateSlug(extractTextFromNode(node));
+
+export const generateHeadingSize = (headingTag: ValidHeadingTag) => Number(headingTag[1]);

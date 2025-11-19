@@ -10,10 +10,10 @@ export default function Section3() {
 
     return (
         <PostSection id="component-and-types">
-            <AnchorHeading headingLevel={2} id="component-and-types-heading">
+            <AnchorHeading as={"h2"} id="component-and-types-heading">
                 Component & Types
             </AnchorHeading>
-            <AnchorHeading headingLevel={3} id="starting-simple">
+            <AnchorHeading as={"h3"} id="starting-simple">
                 Starting Simple: The Component
             </AnchorHeading>
             <p>Every design system needs a reliable base component to build from. </p>
@@ -84,7 +84,7 @@ export default function Button({
         </button>
     )
 }`} />
-            <AnchorHeading headingLevel={4}>Key Decisions</AnchorHeading>
+            <AnchorHeading as={"h4"}>Key Decisions</AnchorHeading>
             <List variant="circle" spacing="normal">
                 <li>
                     <InlineCode codeString={`clsx(className, 'button')`} /> - Combines user-provided
@@ -114,7 +114,7 @@ export default function Button({
                 </li>
             </List>
 
-            <AnchorHeading headingLevel={3} id="typescript-support">
+            <AnchorHeading as={"h3"} id="typescript-support">
                 Adding TypeScript Support
             </AnchorHeading>
             <p>
@@ -143,7 +143,7 @@ export type BaseButtonProps = {
     'data-variant'?: 'primary' | 'secondary' | 'accent';
     onClick?: ButtonClickHandler;
 } & Omit<ComponentPropsWithRef<'button'>, 'onClick' | 'disabled'>;`} />
-            <AnchorHeading headingLevel={4}>
+            <AnchorHeading as={"h4"}>
                 Types Breakdown
             </AnchorHeading>
             <List variant="circle" spacing="normal">

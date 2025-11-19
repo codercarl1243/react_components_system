@@ -18,7 +18,7 @@ export default function Section01_Introduction() {
                     alt: "Grid of buttons in different colors and styles representing design system variants"
                 }}
             />
-            <AnchorHeading headingLevel={2} id="introduction-heading">Introduction</AnchorHeading>
+            <AnchorHeading as={"h2"} id="introduction-heading">Introduction</AnchorHeading>
             <p>
                 You've built a solid button component — it's:
             </p>
