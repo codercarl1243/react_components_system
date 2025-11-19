@@ -1,9 +1,11 @@
 import { InlineCodeProps, SupportedLangs } from "./code.type";
 import { getHighlighterSingleton, getInlineCodeTheme } from "./highlighter";
 
+// TODO: add the option to enforce no wrap
 export default async function InlineCode({
     codeString,
     lang = 'tsx',
+    noWrap = true
 }: InlineCodeProps) {
 
     const highlighter = await getHighlighterSingleton()
@@ -24,7 +26,7 @@ export default async function InlineCode({
     // biome-ignore lint/security/noDangerouslySetInnerHtml: Shiki output is trusted in this context
     return (
         <code
-            className={'shiki-inline shiki'}
+            className={'shiki-inline shiki' + (noWrap && " text-nowrap")}
             dangerouslySetInnerHTML={{ __html: innerHtml }}
         />
     )

@@ -97,3 +97,8 @@
         box-decoration-break: clone;
         -webkit-box-decoration-break: clone;
     }
+
+    
+.shiki-inline.text-nowrap span {
+    white-space: nowrap;
+}

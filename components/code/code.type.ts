@@ -13,4 +13,5 @@ export type CodeProps = {
 export type InlineCodeProps = {
   codeString: string;
   lang?: CodeProps['lang'];
+  noWrap?: boolean;
 }
