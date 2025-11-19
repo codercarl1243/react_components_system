@@ -29,7 +29,7 @@ export default function Heading<T extends ValidHeadingTag = "h3">({
   ...props
 }: HeadingPropsType<T>) {
 
-  const Component = (as ?? DEFAULT_HEADING_TAG) as ValidHeadingTag;
+  const Component = as ?? DEFAULT_HEADING_TAG
 
   const headingId = id || generateHeadingId(children)
   const resolvedHeadingSize = headingSize ?? generateHeadingSize(Component);
