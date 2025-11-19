@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
-import { isNullish, isReactElementWithChildren } from "@/lib/utils/guards";
 import { LRUCache } from "./cache";
+import extractTextFromNode from "@/lib/utils/react/extractTextFromNode";
 
 
 const HASH_CACHE = new LRUCache<string, string>(250);
@@ -26,21 +26,7 @@ export const generateHash = (text: string): string => {
 };
 
 export const generateHashFromChildren = (children: ReactNode): string => {
-
-  const extractText = (node: ReactNode): string => {
-    if (typeof node === "string" || typeof node === "number") {
-      return String(node);
-    }
-    if (Array.isArray(node)) {
-      return node.map(extractText).join("");
-    }
-    if (isReactElementWithChildren(node)) {
-      return extractText(node.props.children);
-    }
-    return "";
-  };
-
-  const extractedText = extractText(children);
+  const extractedText = extractTextFromNode(children);
 
   return generateHash(extractedText);
 };

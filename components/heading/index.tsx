@@ -2,8 +2,8 @@ import clsx from 'clsx'
 import type { HeadingPropsType } from '@/components/heading/heading.type'
 import { createElement } from 'react'
 import Icon from '@/components/icon'
-import {extractTextFromChildren, getIconSize, getSizeClass} from '@/components/heading/utils'
-import { generateSlug } from '@/lib/utils/generateSlug'
+import { generateHeadingId, getIconSize, getSizeClass} from '@/components/heading/utils'
+
 /**
  * Render a semantic heading element with configurable visual size.
  *
@@ -28,7 +28,7 @@ export default function Heading({
   ...props
 }: HeadingPropsType) {
 
- const headingId = id || generateSlug(extractTextFromChildren(children))
+ const headingId = id || generateHeadingId(children)
 
  const content = icon ? (
     <>

@@ -1,4 +1,6 @@
-import type { ReactNode } from 'react'
+import { generateSlug } from "@/lib/utils/generateSlug"
+import extractTextFromNode from "@/lib/utils/react/extractTextFromNode"
+import type { ReactNode } from "react"
 
 export const getSizeClass = (level: number): string => {
   switch (level) {
@@ -21,15 +23,4 @@ export const getIconSize = (level: number): number => {
   }
 }
 
-export const extractTextFromChildren = (children: ReactNode): string => {
-  if (typeof children === 'string') return children
-  if (typeof children === 'number') return children.toString()
-  if (Array.isArray(children)) {
-    return children.map(extractTextFromChildren).join('')
-  }
-  if (children && typeof children === 'object' && 'props' in children) {
-    const element = children as { props: { children: ReactNode } }
-    return extractTextFromChildren(element.props.children)
-  }
-  return ''
-}
+export const generateHeadingId = (node: ReactNode) => generateSlug(extractTextFromNode(node))
