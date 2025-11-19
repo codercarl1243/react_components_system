@@ -8,7 +8,7 @@ import PostSection from "@/components/post/post.section";
 export default function Section02_Problem() {
     return (
         <PostSection id="problem">
-            <AnchorHeading headingLevel={2} id="problem-heading">The Problem with Hard-Coded Colors</AnchorHeading>
+            <AnchorHeading as={"h2"} id="problem-heading">The Problem with Hard-Coded Colors</AnchorHeading>
             <p>Right now, your button probably looks something like this:</p>
             {/* Add a Button as an example */}
             <Button>Example</Button>

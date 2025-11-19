@@ -6,7 +6,7 @@ import PostSection from "@/components/post/post.section";
 export default function Section13_DarkMode() {
     return (
         <PostSection id="dark-mode">
-            <AnchorHeading headingLevel={2} id="dark-mode-heading">Dark Mode Support</AnchorHeading>
+            <AnchorHeading as={"h2"} id="dark-mode-heading">Dark Mode Support</AnchorHeading>
             <Code codeString={`@media (prefers-color-scheme: dark) {
     :root {
         --color-primary-400: hsl(212, 85%, 55%);

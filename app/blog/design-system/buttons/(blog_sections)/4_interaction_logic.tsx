@@ -13,7 +13,7 @@ export default function Section4() {
 
     return (
         <PostSection id="interaction-logic">
-            <AnchorHeading headingLevel={2} id="interaction-logic-heading">Interaction Logic</AnchorHeading>
+            <AnchorHeading as={"h2"} id="interaction-logic-heading">Interaction Logic</AnchorHeading>
             <p>
                 Every button interaction should feel complete: <span className="italic">"I acted. Something responded."</span>
             </p>
@@ -86,7 +86,7 @@ export default function useButton() {
     return { handleClick }
 }`} />
 
-            <AnchorHeading headingLevel={3}>Why These Choices Matter</AnchorHeading>
+            <AnchorHeading as={"h3"}>Why These Choices Matter</AnchorHeading>
             <p>
                 Each of these choices may seem small, but together they create a robust, fault-tolerant interaction layer that behaves consistently across environments.
             </p>

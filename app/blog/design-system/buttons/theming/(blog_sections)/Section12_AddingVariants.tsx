@@ -7,7 +7,7 @@ import PostSection from "@/components/post/post.section";
 export default function Section12_AddingVariants() {
     return (
         <PostSection id="adding-variants">
-            <AnchorHeading headingLevel={2} id="adding-variants-heading">Adding New Variants</AnchorHeading>
+            <AnchorHeading as={"h2"} id="adding-variants-heading">Adding New Variants</AnchorHeading>
             <Code codeString={`:root {
     --color-warning-400: hsl(45, 93%, 47%);
 }

@@ -13,11 +13,11 @@ import usePostCard from './usePostCard'
  * 
  * @param variant - Visual variant of the card, e.g. 'card' or 'featured'.
  * @param post - Post data including `slug`, `title`, and `image`.
- * @param headingLevel - Semantic heading level for the title (1-6). Defaults to 3.
+ * @param as - Semantic heading level for the title (1-6). Defaults to 3.
  * @returns The post card component.
  */
 
-export default function PostCard({ variant = 'card', post, headingLevel = 3 }: PostCardPropsType) {
+export default function PostCard({ variant = 'card', post, as = 3 }: PostCardPropsType) {
     const { image, title } = post
 
 
@@ -36,7 +36,7 @@ export default function PostCard({ variant = 'card', post, headingLevel = 3 }: P
                 className="post-card__title"
                 data-styled="filled"
                 data-variant="accent"
-                headingLevel={headingLevel}
+                as={as}
                 headingSize={4}>
                 <Link href={post.href}>{title}</Link>
             </Heading>

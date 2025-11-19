@@ -1,0 +1,119 @@
+@keyframes expandButton {
+    0% {
+        width: auto;
+        transform: scale(1);
+        box-shadow: -2px -2px 4px 7px var(--color-neutral-a4-light);
+        border-radius: var(--radius-md);
+    }
+
+    5% {
+        box-shadow:
+            -2px -2px 8px 12px var(--color-neutral-a6-light);
+    }
+
+    50% {
+        transform: scale(1.1);
+        box-shadow:
+            -2px -2px 12px 16px var(--color-neutral-a4-light);
+    }
+
+    75% {
+        box-shadow: -2px -2px 6px 10px var(--color-neutral-a2-light);
+        border-radius: var(--radius-md) 0 0 var(--radius-md);
+    }
+
+    99% {
+        box-shadow:
+            -2px -2px 4px 7px var(--color-neutral-a2-light);
+        border-radius: var(--radius-sm) 0 0 var(--radius-sm);
+    }
+
+    100% {
+        width: var(--expanded-button--width);
+        transform: scale(1);
+        box-shadow: none;
+        border-radius: 0;
+    }
+}
+
+@keyframes shrinkButton {
+    0% {
+        width: var(--expanded-button--width);
+        transform: scale(1);
+        box-shadow: none;
+        border-radius: 0;
+    }
+
+    5% {
+        box-shadow:
+            -2px -2px 8px 12px var(--color-neutral-a6-light);
+    }
+
+    50% {
+        transform: scale(1.1);
+        box-shadow:
+            -2px -2px 12px 16px var(--color-neutral-a4-light);
+    }
+
+    75% {
+        box-shadow: -2px -2px 6px 10px var(--color-neutral-a2-light);
+    }
+
+    99% {
+        box-shadow:
+            -2px -2px 4px 7px var(--color-neutral-a2-light);
+        border-radius: var(--radius-md);
+    }
+
+    100% {
+        width: auto;
+        transform: scale(1);
+        box-shadow: none;
+        border-radius: var(--radius-md);
+    }
+}
+
+/* Separate animation for the crisp outline */
+@keyframes expandButtonOutline {
+    0%,100% {
+        outline: 1px solid transparent;
+        outline-offset: 0px;
+    }
+
+    5% {
+        outline: 2px solid var(--color-neutral-100);
+        outline-offset: 6px;
+    }
+
+    50% {
+        outline: 2px solid var(--color-neutral-100);
+        outline-offset: 3px;
+    }
+
+    99% {
+        outline: 1px solid var(--color-neutral-100);
+        outline-offset: 2px;
+    }
+}
+
+@keyframes shrinkButtonOutline {
+    0%, 100% {
+        outline: 1px solid transparent;
+        outline-offset: 0px;
+    }
+
+    5% {
+        outline: 1px solid var(--color-neutral-900);
+        outline-offset: 1px;
+    }
+
+    50% {
+        outline: 2px solid var(--color-neutral-900);
+        outline-offset: 2px;
+    }
+
+    99% {
+        outline: 2px solid var(--color-neutral-900);
+        outline-offset: 4px;
+    }
+}

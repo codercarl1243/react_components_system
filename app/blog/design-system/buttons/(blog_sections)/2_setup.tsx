@@ -11,9 +11,9 @@ export default function Section2() {
 
     return (
         <PostSection id="project-setup">
-            <AnchorHeading headingLevel={2} id="project-setup-heading">Project Setup</AnchorHeading>
+            <AnchorHeading as={"h2"} id="project-setup-heading">Project Setup</AnchorHeading>
 
-            <AnchorHeading headingLevel={3} id="file-structure">File Structure</AnchorHeading>
+            <AnchorHeading as={"h3"} id="file-structure">File Structure</AnchorHeading>
             <p>
                 A well-defined folder structure makes components easier to reason about and maintain.
                 For our Button, we&apos;ll follow a consistent pattern that keeps logic, types, and styles clearly separated:
@@ -40,7 +40,7 @@ export default function Section2() {
                 while maintaining a clean boundary between <span className="italic">presentation</span>, <span className="italic">logic</span>, and <span className="italic">types</span>.
                 It also makes testing and refactoring predictable as your design system grows.
             </p>
-            <AnchorHeading headingLevel={3} id="dependencies">Dependencies</AnchorHeading>
+            <AnchorHeading as={"h3"} id="dependencies">Dependencies</AnchorHeading>
             <p> We&apos;ll use a couple of small, focused packages to support the component:</p>
             <List variant="none" spacing="tight">
                 <li><Link className="bold" href="https://www.npmjs.com/package/@remixicon/react">RemixIcons</Link> for an extensive and free icon library</li>

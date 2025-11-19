@@ -1,0 +1,119 @@
+.hamburger-menu--toggle {
+    display: none;
+    /* Hidden by default */
+    align-items: center;
+    gap: var(--spacing-sm);
+    position: fixed;
+    transition: border-radius 250ms ease-in-out;
+    top: 0;
+
+    &[data-position="right"] {
+        right: 0;
+        left: initial;
+    }
+
+    &[data-position="left"] {
+        left: 0;
+        right: initial;
+    }
+
+    &[data-state="open"] {
+        width: var(--expanded-burger-menu-width);
+        border-left: none;
+        border-bottom: none;
+        margin-inline: 0;
+        animation: expandButton 1000ms cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+
+        .icon {
+            animation: iconFadeSwap 1000ms cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+        }
+
+    }
+
+    &[data-state="closed"] {
+        animation: shrinkButton 550ms cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+
+        .icon {
+            animation: iconFadeSwap 500ms cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+        }
+    }
+
+    &:focus-visible {
+        --button-outline-offset: var(--spacing);
+    }
+}
+
+.hamburger-menu {
+    transition: transform 0ms ease-in-out;
+}
+
+main:has(.hamburger-menu--wrapper[data-mode="hamburger"]) {
+    grid-template-columns: 1fr;
+
+}
+
+.hamburger-menu--wrapper[data-mode="hamburger"] {
+    min-height: var(--bp-xs);
+    height: 100dvh;
+    position: fixed;
+    min-width: initial;
+
+    /* Show Button */
+    .hamburger-menu--toggle {
+        display: flex;
+    }
+
+    .hamburger-menu {
+        --right: initial;
+        --left: initial;
+        /* ⬇️ defaults to open state */
+        --translation: 0%;
+
+        position: fixed;
+        top: 0;
+        right: var(--right);
+        left: var(--left);
+        transform: translateX(var(--translation));
+        height: 100%;
+        width: var(--expanded-burger-menu-width);
+        overflow-y: auto;
+        transition: transform var(--overlay-transition-duration) ease-in-out;
+
+        &[data-state="inactive"] {
+            transition-duration: 0ms;
+        }
+
+        &[data-position="right"] {
+            --right: 0;
+
+            &[data-state="inactive"],
+            &[data-state="closed"] {
+                --translation: 100%;
+            }
+        }
+
+        &[data-position="left"] {
+            --left: 0;
+
+            &[data-state="inactive"],
+            &[data-state="closed"] {
+                --translation: -100%;
+            }
+        }
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .hamburger-menu--toggle {
+        animation: none !important;
+        transition: none !important;
+
+        .icon {
+            animation: none !important;
+        }
+    }
+
+    .hamburger-menu {
+        transition: none !important;
+    }
+}

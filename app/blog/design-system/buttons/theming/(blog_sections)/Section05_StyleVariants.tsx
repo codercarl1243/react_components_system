@@ -7,7 +7,7 @@ import PostSection from "@/components/post/post.section";
 export default function Section05_StyleVariants() {
     return (
         <PostSection id="style-variants">
-            <AnchorHeading headingLevel={2} id="style-variants-heading">Creating Style Variants</AnchorHeading>
+            <AnchorHeading as={"h2"} id="style-variants-heading">Creating Style Variants</AnchorHeading>
             <p>We'll create three button styles: Filled, Outlined, and Ghost, using <FunHighlight>data-style</FunHighlight> attributes instead of classes.</p>
             <Code codeString={`.button[data-style="outlined"] {
     --button-bg-color: var(--button-primary-color);

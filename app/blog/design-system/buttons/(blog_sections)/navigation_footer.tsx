@@ -7,7 +7,7 @@ export default function NavigationFooter() {
 
     return (
         <PostSection id="series-navigation">
-            <Heading headingLevel={2}>Continue the Series</Heading>
+            <Heading as={"h2"}>Continue the Series</Heading>
             <PostNavigation
                 next={{
                     href: "/blog/design-system/buttons/sliders",

@@ -8,12 +8,12 @@ export default function Section9() {
 
     return (
         <PostSection id="summary">
-            <AnchorHeading headingLevel={2} id="summary-heading">Summary</AnchorHeading>
+            <AnchorHeading as={"h2"} id="summary-heading">Summary</AnchorHeading>
             <p>
                 By combining type safety, clear accessibility semantics, and thorough testing, we have a <span className="bold">reliable foundation</span>.
             </p>
 
-            <AnchorHeading headingLevel={3} id="summary__features">
+            <AnchorHeading as={"h3"} id="summary__features">
                 What We Built
             </AnchorHeading>
             <List spacing="tight" variant="circle" aria-labelledby="summary__features">
@@ -24,7 +24,7 @@ export default function Section9() {
                 <li>Comprehensive test coverage for reliability</li>
             </List>
 
-            <AnchorHeading headingLevel={3} id="summary__impact">
+            <AnchorHeading as={"h3"} id="summary__impact">
                 Why It Matters
             </AnchorHeading>
             <List spacing="tight" variant="none" aria-labelledby="summary__impact">

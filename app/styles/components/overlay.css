@@ -1,0 +1,40 @@
+body:has([data-overlay="visible"]) {
+    overflow: hidden;
+}
+
+.overlay-backdrop {
+    position: fixed;
+    inset: 0;
+    opacity: 0;
+    background: var(--color-neutral-a9-dark);
+    transition: opacity var(--overlay-transition-duration) ease-in-out;
+    z-index: 2;
+    pointer-events: none;
+}
+
+body:has([data-overlay="visible"]) .overlay-backdrop {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+body:has([data-overlay="visible"]) .overlay-container[data-overlay="hidden"] {
+    z-index: 0;
+}
+
+.overlay-container {
+    position: relative;
+    isolation: isolate;
+    z-index: 3;
+}
+
+:where(.overlay-container[data-overlay="visible"] .overlay-control) {
+    position: relative;
+    z-index: 4;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .overlay-backdrop {
+        transition: none !important;
+    }
+}
+ 

@@ -9,3 +9,5 @@
 @import url('./components/index.css') layer(components);
 @import url('./utils/index.css') layer(utilities);
 @import url('./typography/index.css') layer(utilities);
+@import url('./animations/index.css') layer(utilities);
+

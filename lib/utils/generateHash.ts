@@ -1,30 +1,32 @@
-import { ReactNode } from "react";
+import type { ReactNode } from "react";
+import { LRUCache } from "./cache";
+import extractTextFromNode from "@/lib/utils/react/extractTextFromNode";
+
+
+const HASH_CACHE = new LRUCache<string, string>(250);
 
 const hashString = (text: string): string => {
-  return Array.from(text)
-    .reduce((acc, char) => ((acc << 5) - acc + char.charCodeAt(0)) | 0, 0)
-    .toString(16)
-    .replace(/^-/, '')
-    .slice(0, 8);
+  const hash = Array.from(text)
+    .reduce(
+      (acc, char) => (
+        (acc << 5) - acc + char.charCodeAt(0)
+      ) | 0, 0);
+
+  return (hash >>> 0).toString(16).padStart(8, '0');
 };
 
 export const generateHash = (text: string): string => {
-  return hashString(text);
+  const cached = HASH_CACHE.get(text);
+  if (cached !== undefined) return cached;
+
+  const hash = hashString(text);
+  HASH_CACHE.set(text, hash);
+
+  return hash;
 };
 
 export const generateHashFromChildren = (children: ReactNode): string => {
-  const extractText = (node: ReactNode): string => {
-    if (typeof node === "string" || typeof node === "number") {
-      return String(node);
-    }
-    if (Array.isArray(node)) {
-      return node.map(extractText).join("");
-    }
-    if (node && typeof node === "object" && "props" in node) {
-      return extractText((node as any).props?.children);
-    }
-    return "";
-  };
-  
-  return hashString(extractText(children));
+  const extractedText = extractTextFromNode(children);
+
+  return generateHash(extractedText);
 };

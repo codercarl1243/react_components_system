@@ -28,6 +28,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased main-wrapper font-main text-base`}
       >
+        <div className="overlay-backdrop" />
         <Header />
         <main id="main-content" tabIndex={-1} className="flow-8">
           {children}

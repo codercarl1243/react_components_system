@@ -8,12 +8,12 @@ export default function BlogPage() {
 
   return (
     <>
-      <Heading headingLevel={1}>Blogs</Heading>
+      <Heading as={"h1"}>Blogs</Heading>
         <List variant='none' className='post-card__list'>
         {blogPosts.map((post) => (
           <li key={post.id}>
             <PostCard
-              headingLevel={2}
+              as={"h2"}
               variant="card"
               post={post}
             />

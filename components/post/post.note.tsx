@@ -10,7 +10,7 @@ import clsx from 'clsx'
  * @example
  * ```tsx
  * <PostNote>
- *   <Heading headingLevel={4}>Important Note</Heading>
+ *   <Heading as={"h4"}>Important Note</Heading>
  *   <p>This is some important information that readers should pay attention to.</p>
  * </PostNote>
  * ```

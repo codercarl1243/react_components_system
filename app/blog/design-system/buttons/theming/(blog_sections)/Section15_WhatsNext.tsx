@@ -6,7 +6,7 @@ import PostSection from "@/components/post/post.section";
 export default function Section15_WhatsNext() {
     return (
         <PostSection id="whats-next">
-            <AnchorHeading headingLevel={2} id="whats-next-heading">What's Next</AnchorHeading>
+            <AnchorHeading as={"h2"} id="whats-next-heading">What's Next</AnchorHeading>
             <List>
                 <li>Button Groups — unified styling</li>
                 <li>Icon Buttons — icons only</li>

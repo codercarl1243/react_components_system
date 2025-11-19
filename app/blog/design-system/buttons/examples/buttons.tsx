@@ -5,7 +5,7 @@ import Heading from '@/components/heading';
 export default function Buttons() {
   return (
     <>
-      <Heading headingLevel={2}>Button Components</Heading>
+      <Heading as={"h2"}>Button Components</Heading>
       <fieldset>
         <legend>Base Button</legend>
         <Button>click me</Button>

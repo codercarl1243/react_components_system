@@ -11,7 +11,7 @@ export default function Section8() {
 
     return (
         <PostSection id="testing">
-            <AnchorHeading headingLevel={2} id="testing-heading">Testing</AnchorHeading>
+            <AnchorHeading as={"h2"} id="testing-heading">Testing</AnchorHeading>
             <p>
                 Testing ensures our button behaves predictably and remains accessible, even as the codebase evolves.
             </p>
@@ -24,7 +24,7 @@ export default function Section8() {
                 </p>
             </PostNote>
 
-            <AnchorHeading headingLevel={3} id="testing-setup">Set Up</AnchorHeading>
+            <AnchorHeading as={"h3"} id="testing-setup">Set Up</AnchorHeading>
             <p>
                 Before writing any tests, we need a predictable testing environment using <code>Jest</code> and <code>@testing-library/react</code>.
                 This setup allows our components to render in a virtual DOM and behave just as they would in the browser.
@@ -40,7 +40,7 @@ export default function Section8() {
             />
             <p>You will need a config file for Jest to work properly. I have shared my existing config file below</p>
 
-            <AnchorHeading headingLevel={3}>useButton Hook</AnchorHeading>
+            <AnchorHeading as={"h3"}>useButton Hook</AnchorHeading>
             <p>
                 The <InlineCode codeString="useButton" /> hook handles all interaction logic. These tests validate how the hook behaves in isolation — separate from any UI — ensuring that our event system is resilient and predictable.
             </p>
@@ -52,7 +52,7 @@ export default function Section8() {
             </List>
 
 
-            <AnchorHeading headingLevel={3}>Button Component</AnchorHeading>
+            <AnchorHeading as={"h3"}>Button Component</AnchorHeading>
             <p>
                 The <InlineCode codeString="Button" /> component connects logic to presentation. These tests focus on markup, accessibility, and visual stability.
             </p>
@@ -63,7 +63,7 @@ export default function Section8() {
                 <li><span className="bold">Interaction:</span> Responds correctly to mouse and keyboard events.</li>
                 <li><span className="bold">Visual Stability:</span> Prevents layout shift when icons or spinners appear.</li>
             </List>
-            <AnchorHeading headingLevel={4}>Accessibility Checks</AnchorHeading>
+            <AnchorHeading as={"h4"}>Accessibility Checks</AnchorHeading>
             <p>
                 Accessibility testing verifies that users with assistive technologies experience consistent, predictable behavior. We confirm:
             </p>

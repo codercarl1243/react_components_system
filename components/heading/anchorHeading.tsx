@@ -1,12 +1,14 @@
 import Heading from '@/components/heading'
-import type { HeadingPropsType } from '@/components/heading/heading.type'
+import type { HeadingPropsType, ValidHeadingTag } from '@/components/heading/heading.type'
 import Link from '@/components/link'
-import { generateSlug } from '@/lib/utils/generateSlug'
-import { extractTextFromChildren } from '@/components/heading/utils'
+import {generateHeadingId} from '@/components/heading/utils'
 
-export default function AnchorHeading({ id, ...props }: HeadingPropsType & { id?: string }) {
+export default function AnchorHeading<T extends ValidHeadingTag = "h3">({
+   id,
+   ...props
+  }: HeadingPropsType<T>) {
 
-  const headingId = id || generateSlug(extractTextFromChildren(props.children))
+  const headingId = id || generateHeadingId(props.children)
 
   return (
     <Link href={`#${headingId}`} className='link--heading'>

@@ -1,0 +1,14 @@
+@keyframes iconFadeSwap {
+    0% {
+        opacity: 0; /* Start hidden */
+        transform: scale(0.25);
+    }
+    60% {
+        opacity: 0; /* Give it extra time hidden */
+        transform: scale(0.5);
+    }
+    100% {
+        opacity: 1; /* Fade in with new icon */
+        transform: scale(1);
+    }
+}

@@ -1,3 +1,5 @@
+import { ReactElement, ReactNode } from "react";
+
 export function isNonEmptyString(value: unknown): value is string {
   return typeof value === "string" && value.trim().length > 0;
 }
@@ -103,4 +105,57 @@ export function isThenable(value: unknown): value is PromiseLike<unknown> {
     typeof value === 'object' &&
     typeof (value as PromiseLike<unknown>).then === 'function'
   )
+}
+
+/**
+ * Type guard that checks if a value is a valid React element.
+ * 
+ * @param node - The value to check
+ * @returns True if the value is a ReactElement with props
+ * 
+ * @example
+ * ```tsx
+ * const element = <div>Hello</div>;
+ * if (isReactElement(element)) {
+ *   console.log(element.props); // TypeScript knows props exists
+ * }
+ * ```
+ */
+export function isReactElement(node: unknown): node is ReactElement {
+  return (
+    node !== null &&
+    typeof node === "object" && 
+    "props" in node
+  );
+}
+
+/**
+ * Type guard that checks if a React element has children.
+ * 
+ * @param node - The value to check
+ * @returns True if the value is a ReactElement with non-null/undefined children
+ * 
+ * @example
+ * ```tsx
+ * const element = <div><span>Child</span></div>;
+ * if (hasChildren(element)) {
+ *   console.log(element.props.children); // TypeScript knows children exists
+ * }
+ * 
+ * // Empty elements return false
+ * const empty = <div />;
+ * hasChildren(empty); // false
+ * ```
+ */
+export function isReactElementWithChildren(
+  node: unknown
+): node is ReactElement & { props: { children?: ReactNode } } {
+  return (
+    node !== null &&
+    typeof node === "object" &&
+    "props" in node &&
+    node.props !== null &&
+    typeof node.props === "object" &&
+    "children" in node.props
+  );
 }
