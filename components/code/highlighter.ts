@@ -17,7 +17,7 @@ export async function getHighlighterSingleton(): Promise<Highlighter> {
     }
     const highlighterPromise = createHighlighter({
       themes: ['github-dark', 'light-plus'],
-      langs: ['tsx', 'ts', 'css', 'md', 'bash']
+      langs: ['tsx', 'ts', 'css', 'md', 'bash', 'html']
     }).catch(err => {
       // reset cache so a later retry can succeed
       delete globalForShiki.__highlighterPromise
