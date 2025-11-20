@@ -10,7 +10,7 @@ import Heading from "@/components/heading";
 export default function Section3() {
     return (
         <PostSection id="tokens">
-            <AnchorHeading as={"h2"} prefix="Step 1 —" id="tokens-heading">
+            <AnchorHeading as={"h2"} prefix="Step 1 —" id="global-tokens-heading">
                 Define Your Global Design Tokens
             </AnchorHeading>
             <p>
