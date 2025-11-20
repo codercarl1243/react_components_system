@@ -83,16 +83,10 @@ export default function Section3() {
             <p>
                 Before we move on to component tokens, it's worth looking at a few tools that can help you evaluate and build accessible colour palettes.
             </p>
-            <Heading as="h3">Tools for Designing Accessible Colour Palettes</Heading>
-            <p>Colour accessibility is one of the easiest ways to accidentally exclude users. </p>
-            <p>The tools below can help test contrast, generate accessible palettes, and validate combinations before you lock them into your design system.</p>
-            <List spacing="tight" variant="none">
-                <li><Link href="https://webaim.org/resources/contrastchecker/">WebAIM Contrast Checker</Link> — the gold standard for checking contrast ratios</li>
-                <li><Link href="https://contrast-grid.eightshapes.com/">Contrast Grid</Link> — compare entire colour palettes at once</li>
-                <li><Link href="https://venngage.com/tools/accessible-color-palette-generator">Venngage Accessible Palette Generator</Link> — create accessible palettes with contrast previews</li>
-                <li><Link href="https://colorable.jxnblk.com/">Colorable</Link> — explore combinations and immediately see WCAG contrast scores</li>
-                <li><Link href="https://color.review/">Color.review</Link> — preview colours with vision-deficiency simulations</li>
-            </List>
+
+            <p className="text-sm neutral-600">
+                For a list of tools that help you design accessible, contrast-safe colour palettes, see the <Link href="#resources-color-accessibility-tools">resources section</Link>.
+            </p>
         </PostSection>
     );
 }
