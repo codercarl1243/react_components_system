@@ -15,6 +15,22 @@
     align-items: center;
 }
 
+.heading-w-prefix {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+    margin-block: 2rem 1.25rem;
+}
+
+.heading-w-prefix .prefix {
+    font-size: var(--font-size-sm);
+    font-weight: 600;
+    color: var(--color-neutral-600);
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
 /* spacing */
 .heading:is(h3){
     --heading-margin-block-start: var(--spacing-sm);

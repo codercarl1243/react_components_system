@@ -9,4 +9,5 @@ export type BaseHeadingProps = {
     icon?: IconProps['icon'];
 };
 
-export type HeadingPropsType<T extends ValidHeadingTag = "h3"> =  PolymorphicProps<T, BaseHeadingProps>;
+export type HeadingPropsType<T extends ValidHeadingTag = "h3"> = PolymorphicProps<T, BaseHeadingProps>;
+export type AnchorHeadingPropsType<T extends ValidHeadingTag = "h3"> = PolymorphicProps<T, BaseHeadingProps & { prefix?: string; }>;
