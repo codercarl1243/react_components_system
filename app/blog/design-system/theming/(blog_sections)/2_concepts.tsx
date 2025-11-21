@@ -5,7 +5,7 @@ import Link from "@/components/link";
 import List from "@/components/list";
 import PostNote from "@/components/post/post.note";
 import PostSection from "@/components/post/post.section";
-import { RiCodeSSlashFill, RiCodeSSlashLine, RiPaletteFill, RiPaletteLine, RiPuzzleFill, RiPuzzleLine, RiStackFill, RiStackLine } from "@remixicon/react";
+import { RiCodeSSlashLine, RiPaletteLine, RiPuzzleLine, RiStackLine} from "@remixicon/react";
 
 export default function section2() {
 
@@ -22,11 +22,11 @@ export default function section2() {
 {/* TODO: add Icons here at the start of each li */}
             <List spacing="loose" variant="none">
                 <li>
-                    <span className="bold"><Icon icon={RiPaletteFill} color={"var(--color-primary-400)"}/> Design Tokens:</span> Global CSS variables that represent your <span className="fun-underline">brand colors</span>, <span className="fun-underline">spacing</span>, and <span className="fun-underline">typography</span> — the raw ingredients of your theme.
+                    <span className="bold"><Icon icon={RiPaletteLine} color={"var(--color-primary-400)"}/> Design Tokens:</span> Global CSS variables that represent your <span className="fun-underline">brand colors</span>, <span className="fun-underline">spacing</span>, and <span className="fun-underline">typography</span> — the raw ingredients of your theme.
                 </li>
                 <li>
                     <p>
-                        <span className="bold"><Icon icon={RiPuzzleFill} color={"var(--color-primary-400)"}/> Component Tokens:</span> Local, component-scoped CSS variables defined inside the component&apos;s own stylesheet.
+                        <span className="bold"><Icon icon={RiPuzzleLine} color={"var(--color-primary-400)"}/> Component Tokens:</span> Local, component-scoped CSS variables defined inside the component&apos;s own stylesheet.
                     </p>
                     <p>
                         These provide semantic hooks like <InlineCode codeString="--background-color" lang="css" />, <InlineCode codeString="--foreground-color" lang="css" />, and <InlineCode codeString="--border-color" lang="css" /> — the values the component actually uses, all mapped back to your global design tokens.
@@ -34,7 +34,7 @@ export default function section2() {
                 </li>
                 <li>
                     <p>
-                        <span className="bold"><Icon icon={RiCodeSSlashFill} color={"var(--color-primary-400)"}/> Data Attributes:</span> Lightweight CSS hooks such as <InlineCode codeString={`data-theme="dark"`} /> or <InlineCode codeString={`data-variant="primary"`} />.
+                        <span className="bold"><Icon icon={RiCodeSSlashLine} color={"var(--color-primary-400)"}/> Data Attributes:</span> Lightweight CSS hooks such as <InlineCode codeString={`data-theme="dark"`} /> or <InlineCode codeString={`data-variant="primary"`} />.
                     </p>
                     <p>
                         They don&apos;t require client-side JavaScript, but integrate cleanly with any JS that sets or toggles them.
@@ -42,7 +42,7 @@ export default function section2() {
                 </li>
                 <li>
                     <p>
-                        <span className="bold"><Icon icon={RiStackFill} color={"var(--color-primary-400)"}/> Cascade Layers:</span> Explicit precedence rules that ensure variants and themes override component defaults, regardless of selector specificity or source order.</p>
+                        <span className="bold"><Icon icon={RiStackLine} color={"var(--color-primary-400)"}/> Cascade Layers:</span> Explicit precedence rules that ensure variants and themes override component defaults, regardless of selector specificity or source order.</p>
                     <PostNote>
                         <p>Cascade layers are supported in all modern browsers (2022+).</p>
                         <p>
