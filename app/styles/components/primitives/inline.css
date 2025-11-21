@@ -1,0 +1,22 @@
+.inline-flow {
+  display: flex;
+  flex-direction: row;
+}
+
+.inline-wrap {
+  flex-wrap: wrap;
+}
+
+.inline-nowrap {
+  flex-wrap: nowrap;
+}
+
+.inline-align-start   { align-items: flex-start; }
+.inline-align-center  { align-items: center; }
+.inline-align-end     { align-items: flex-end; }
+.inline-align-stretch { align-items: stretch; }
+
+.inline-gap-0  { gap: 0; }
+.inline-gap-4  { gap: var(--space-4); }
+.inline-gap-8  { gap: var(--space-8); }
+.inline-gap-16 { gap: var(--space-16); }
