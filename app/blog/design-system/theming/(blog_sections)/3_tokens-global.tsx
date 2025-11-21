@@ -17,7 +17,7 @@ export default function Section3() {
                 Every theming system starts with a stable set of <span className="bold">global design tokens</span>. These are the reusable values your entire interface will rely on:
             </p>
             <List spacing="tight">
-                <li>colours</li>
+                <li>colors</li>
                 <li>spacing</li>
                 <li>typography</li>
                 <li>radii</li>
@@ -81,11 +81,11 @@ export default function Section3() {
                 These tokens become the building blocks for everything else. For example, a button <em>could</em> use <InlineCode codeString="background: var(--color-primary-400)" lang="css" /> — but ideally it shouldn&apos;t reference global tokens directly. Instead, it will use <span className="bold">component tokens</span> like <InlineCode codeString="--background-color" lang="css" /> or <InlineCode codeString="--foreground-color" lang="css" /> that map back to these values. We'll explore this pattern in the next section.
             </p>
             <p>
-                Before we move on to component tokens, it's worth looking at a few tools that can help you evaluate and build accessible colour palettes.
+                Before we move on to component tokens, it's worth looking at a few tools that can help you evaluate and build accessible color palettes.
             </p>
 
             <p className="text-sm neutral-600">
-                For a list of tools that help you design accessible, contrast-safe colour palettes, see the <Link href="#resources-color-accessibility-tools">resources section</Link>.
+                For a list of tools that help you design accessible, contrast-safe color palettes, see the <Link href="#resources-color-accessibility-tools">resources section</Link>.
             </p>
         </PostSection>
     );

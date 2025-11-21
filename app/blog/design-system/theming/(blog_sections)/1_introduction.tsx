@@ -20,7 +20,7 @@ export default function Section1() {
             />
             <Heading as={"h2"} id="introduction-heading">Why Theming Should Be Its Own System</Heading>
             <p>
-                As your component library grows, the cracks start to show: duplicated styles, slightly different colours, ad-hoc overrides, and components that behave inconsistently. It becomes clear that <span className="fun-underline">styling can't live inside individual components</span>.
+                As your component library grows, the cracks start to show: duplicated styles, slightly different colors, ad-hoc overrides, and components that behave inconsistently. It becomes clear that <span className="fun-underline">styling can't live inside individual components</span>.
             </p>
 
             <p>
