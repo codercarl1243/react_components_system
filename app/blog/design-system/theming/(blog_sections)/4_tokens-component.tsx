@@ -3,6 +3,7 @@ import InlineCode from "@/components/code/inlineCode";
 import Heading from "@/components/heading";
 import AnchorHeading from "@/components/heading/anchorHeading";
 import List from "@/components/list";
+import PostNote from "@/components/post/post.note";
 import PostSection from "@/components/post/post.section";
 
 export default function Section4() {
@@ -12,19 +13,13 @@ export default function Section4() {
       <AnchorHeading as="h2" prefix="Step 2 —" id="component-tokens-heading">
         Define Your Component Tokens
       </AnchorHeading>
-
       <p>
-        Global tokens define the visual language of your system, but components shouldn&apos;t reach for them directly. Instead, each component exposes its own <span className="bold fun-underline">semantic component tokens</span> (<span className="italic">the variables that describe what the component needs, not where the value comes from</span>).
+        <span className="fun-underline">Global tokens</span> define the visual language of your system.
       </p>
 
       <p>
-        These component tokens act as a translation layer between global design tokens and component styles.
+        But components shouldn't reach for them directly. Instead, each component exposes its own <span className="fun-underline">semantic component tokens</span> (<span className="italic">the variables that describe what the component needs, not where the value comes from</span>).
       </p>
-      <List spacing="tight" variant="none">
-        <li><strong>Semantic tokens</strong> - like <InlineCode codeString="--background-color" lang="css" /> define <span className="italic">what colors mean</span>.</li>
-        <li><strong>Component-specific tokens</strong> like <InlineCode codeString="--button-background-color" lang="css" /> decide <span className="italic">how the component uses them</span>.</li>
-      </List>
-
       <Heading as="h3">Why Component Tokens Matter</Heading>
       <List spacing="tight">
         <li><strong>Encapsulation:</strong> Components define <em>what</em> they need (background, foreground, border); themes define <em>which colors</em> to use.</li>
@@ -33,22 +28,35 @@ export default function Section4() {
         <li><strong>Accessibility:</strong> Foreground/background relationships are explicit and easy to audit for contrast.</li>
       </List>
 
+      <p>
+        Component tokens achieve this through a two-layer system:
+      </p>
+      <List spacing="tight" variant="decimal" ordered>
+        <li><strong>Semantic tokens</strong> define <em>what</em> colors mean <InlineCode codeString="--background-color" lang="css" /></li>
+        <li><strong>Component tokens</strong> decide <em>how</em> a component uses them <InlineCode codeString="--button-background-color" lang="css" /></li>
+      </List>
+
+
+
       <Heading as="h3">Example: Component Token Defaults</Heading>
       <p>
-        Here&apos;s what a basic set of component tokens might look like inside a button stylesheet:
+        Let&apos;s look at how a component applies this pattern in practice.
       </p>
-
+      <PostNote>
+        <p>Component tokens are prefixed to prevent naming clashes between components.</p>
+        <p><span className="italic">Example:</span> <InlineCode codeString="--button-background-color" lang="css" /></p>
+      </PostNote>
       <Code
         copyEnabled={false}
         lang="css"
         codeString={`/* Button Component Tokens */
 .button {
-  /* Default variant tokens (can be overridden by data-variant) */
+  /* Semantic tokens - defaults */
   --background-color: var(--color-primary-400);
   --foreground-color: var(--color-neutral-100);
   --border-color: var(--color-primary-600);
 
-  /* Component layer - how the button consumes variant tokens */
+  /* Component tokens - consume semantic tokens */
   --button-background-color: var(--background-color);
   --button-foreground-color: var(--foreground-color);
   --button-border-color: var(--border-color);
@@ -59,6 +67,7 @@ export default function Section4() {
   border: 1px solid var(--button-border-color);
 }`}
       />
+
       <p>These defaults provide the base appearance of your component.</p>
       <p>
         In the next step, we will use <InlineCode codeString="data-variant" /> attributes to override <InlineCode codeString="--background-color" lang="css" />, <InlineCode codeString="--foreground-color" lang="css" />, and <InlineCode codeString="--border-color" lang="css" /> — creating themes and variants without touching the button's internal CSS.
