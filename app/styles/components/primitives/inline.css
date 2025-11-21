@@ -17,6 +17,8 @@
 .inline-align-stretch { align-items: stretch; }
 
 .inline-gap-0  { gap: 0; }
-.inline-gap-4  { gap: var(--space-4); }
-.inline-gap-8  { gap: var(--space-8); }
-.inline-gap-16 { gap: var(--space-16); }
+.inline-gap-2  { gap: var(--spacing-sm); }
+.inline-gap-4  { gap: var(--spacing-md); }
+.inline-gap-6  { gap: var(--spacing-lg); }
+.inline-gap-8  { gap: var(--spacing-xl); }
+.inline-gap-16 { gap: calc(var(--space-16) * 2); }

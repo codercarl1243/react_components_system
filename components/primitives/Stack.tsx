@@ -1,10 +1,8 @@
 import clsx from "clsx";
-import { ElementType, PolymorphicProps } from "react";
+import type { ElementType } from "react";
+import { StackProps } from "@/components/primitives/types";;
 
-type StackProps<T extends ElementType = "div"> = PolymorphicProps<
-    T,
-    { gap?: 0 | 4 | 8 | 16 }
->
+
 
 /**
  * Stack — a lightweight polymorphic layout wrapper.
@@ -45,12 +43,19 @@ type StackProps<T extends ElementType = "div"> = PolymorphicProps<
  *   <p>Styled container</p>
  * </Stack>
  */
-export default function Stack<T extends ElementType = "div">({ as, gap = 4, className, children, ...props }: StackProps<T>) {
-    const Component = as || "div";
+export default function Stack<T extends ElementType = "div">({
+    gap = 4,
+    as,
+    className,
+    ...props
+}: StackProps<T>) {
+
+    const Component = as ?? "div"
 
     return (
-        <Component className={clsx(`flow-${gap}`, className)} {...props}>
-            {children}
-        </Component>
+        <Component
+            className={clsx(`flow-${gap}`, className)}
+            {...props}
+        />
     )
 }

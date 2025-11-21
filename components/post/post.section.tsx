@@ -1,5 +1,7 @@
-import type { ComponentProps } from 'react'
-import {Stack} from '@/components/primitives'
+import { Stack } from '@/components/primitives'
+import type { StackProps } from '@/components/primitives/types'
+
+type SectionProps = StackProps<'section'>;
 
 /**
  * A semantic section wrapper component for organizing content within blog posts.
@@ -23,7 +25,7 @@ import {Stack} from '@/components/primitives'
  * 
  * @returns A styled `<section>` element with layout wrapper and flow spacing applied.
  */
-export default function PostSection({ children, className, ...props }: ComponentProps<'section'>) {
+export default function PostSection({ children, className, ...props }: SectionProps) {
 
   return (
     <Stack as="section" className='post-section layout-wrapper' {...props}>

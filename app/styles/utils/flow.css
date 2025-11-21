@@ -1,25 +1,42 @@
-.flow-4 > *:not(:last-child) {
-  margin-block-end: calc(var(--spacing) * 4);
+.flow-2>*:not(:last-child) {
+  margin-block-end: var(--spacing-sm);
 }
 
-.flow-8 > *:not(:last-child) {
-  margin-block-end: calc(var(--spacing) * 8);
+.flow-4>*:not(:last-child) {
+  margin-block-end: var(--spacing-md);
 }
 
-.flow-16 > *:not(:last-child) {
+.flow-6>*:not(:last-child) {
+  margin-block-end: var(--spacing-lg);
+}
+
+.flow-8>*:not(:last-child) {
+  margin-block-end: var(--spacing-xl);
+}
+
+.flow-16>*:not(:last-child) {
   margin-block-end: calc(var(--spacing) * 16);
 }
 
 @media screen and (max-width: 30rem) {
-  .flow-4 > *:not(:last-child) {
-    margin-block-end: calc(var(--spacing) * 2);
+
+  .flow-2>*:not(:last-child) {
+    margin-block-end: var(--spacing);
   }
 
-  .flow-8 > *:not(:last-child) {
-    margin-block-end: calc(var(--spacing) * 4);
+  .flow-4>*:not(:last-child) {
+    margin-block-end: var(--spacing-sm);
   }
 
-  .flow-16 > *:not(:last-child) {
-    margin-block-end: calc(var(--spacing) * 8);
+  .flow-6>*:not(:last-child) {
+    margin-block-end: calc(var(--spacing) * 3);
+  }
+
+  .flow-8>*:not(:last-child) {
+    margin-block-end: var(--spacing-md);
+  }
+
+  .flow-16>*:not(:last-child) {
+    margin-block-end: var(--spacing-xl);
   }
 }

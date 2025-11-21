@@ -1,14 +1,6 @@
 import clsx from "clsx";
-import { ElementType, PolymorphicProps } from "react";
-
-type RowProps<T extends ElementType = "div"> = PolymorphicProps<
-  T,
-  {
-    gap?: 0 | 4 | 8 | 16;
-    align?: "start" | "center" | "end" | "stretch";
-    justify?: "start" | "center" | "end" | "between";
-  }
->;
+import { ElementType } from "react";
+import { RowProps } from "@/components/primitives/types";
 
 /**
  * Row — horizontal layout primitive.
@@ -29,18 +21,13 @@ export default function Row<T extends ElementType = "div">({
 }: RowProps<T>) {
   const Component = as || "div";
 
-  return (
-    <Component
-      className={clsx(
+  const classes = clsx(
         "row",
         `row-gap-${gap}`,
         `row-align-${align}`,
         `row-justify-${justify}`,
         className
-      )}
-      {...props}
-    >
-      {children}
-    </Component>
-  );
+      )
+
+  return <Component className={classes} {...props} />;
 }

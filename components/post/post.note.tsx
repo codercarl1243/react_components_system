@@ -2,6 +2,7 @@ import { type ComponentProps } from 'react'
 import Icon from '../icon'
 import { RiInformationLine } from '@remixicon/react'
 import clsx from 'clsx'
+import { Stack } from '../primitives';
 
 /**
  * A prominently styled note component for highlighting important information within blog posts.
@@ -31,16 +32,16 @@ export default function PostNote({ className, children, ...props }: ComponentPro
   if (!children) return;
 
   return (
-    <div
+    <Stack
       // data-expanded={"false"}
-      className={clsx(className, 'flow-4 post-note')}
+      className={clsx(className, 'post-note')}
       role={'note'}
       {...props}>
       <Icon icon={RiInformationLine} size={32} className="post-note__icon" />
-      <div className="flow-4 post-note__content">
+      <Stack className="post-note__content">
         {children}
-      </div>
+      </Stack>
 
-    </div>
+    </Stack>
   )
 }

@@ -1,7 +1,5 @@
-import clsx from "clsx";
-import { ElementType, PolymorphicProps } from "react";
-
-type BlockProps<T extends ElementType = "div"> = PolymorphicProps<T>
+import { ElementType } from "react";
+import { BlockProps } from "@/components/primitives/types";
 
 /**
  * Block — a lightweight polymorphic layout wrapper.
@@ -37,12 +35,8 @@ type BlockProps<T extends ElementType = "div"> = PolymorphicProps<T>
  *   <p>Styled container</p>
  * </Block>
  */
-export default function Block<T extends ElementType = "div">({ as, gap = 4, className, children, ...props }: BlockProps<T>) {
+export default function Block<T extends ElementType = "div">({ as, ...props }: BlockProps<T>) {
     const Component = as || "div";
 
-    return (
-        <Component {...props}>
-            {children}
-        </Component>
-    )
+    return <Component {...props} />
 }
