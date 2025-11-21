@@ -7,7 +7,7 @@ import PostNote from "@/components/post/post.note";
 import PostSection from "@/components/post/post.section";
 import { RiCodeSSlashLine, RiPaletteLine, RiPuzzleLine, RiStackLine} from "@remixicon/react";
 
-export default function section2() {
+export default function Section2() {
 
     return (
         <PostSection id="core-concepts">
