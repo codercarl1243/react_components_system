@@ -1,4 +1,12 @@
 .button {
+    --background-color: var(--surface, currentColor);
+    --foreground-color: var(--text-on-surface, transparent);
+    --border-color: var(--color-neutral-400, currentColor);
+    
+    --button-text-color: var(--foreground-color);
+    --button-background-color: var(--background-color);
+    --button-border-color: var(--border-color);
+
     /* Layout properties */
     --button-font-size: 1rem;
     --button-margin: var(--spacing-sm);
@@ -46,11 +54,11 @@
     box-shadow: none;
 
     /* Apply color properties (All Colors and variants defined below) */
-    background-color: var(--button-bg-color, transparent);
-    color: var(--button-color, currentColor);
+    background-color: var(--button-background-color, transparent);
+    color: var(--button-text-color, currentColor);
     border-color: var(--button-border-color, currentColor);
     box-shadow: var(--button-shadow, none);
-    outline-color: var(--button-outline-color, currentColor);
+    outline-color: var(--button-border-color, currentColor);
     outline-offset: var(--button-outline-offset);
 
     /* Typography */
@@ -69,19 +77,19 @@
 
     /* Interactive states - UX communication through outlines and transforms */
     &:hover {
-        outline: 1px solid var(--button-outline-color, currentColor);
+        outline: 1px solid var(--button-border-color, currentColor);
         box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2);
     }
 
     &:focus-visible {
-        outline: 2px solid var(--button-outline-color, currentColor);
+        outline: 2px solid var(--button-border-color);
         outline-offset: var(--button-outline-offset);
         box-shadow: none;
     }
 
     &:active,
     &[data-pressed="true"] {
-        outline: 1px dotted var(--button-outline-color, currentColor);
+        outline: 1px dotted var(--button-border-color, currentColor);
         transform: translateY(1px);
     }
 
@@ -89,8 +97,8 @@
     &:is(:disabled, [aria-disabled="true"]),
     &[data-variant]:is(:disabled, [aria-disabled="true"]),
     &[data-style]:is(:disabled, [aria-disabled="true"]) {
-        --button-bg-color: var(--color-neutral-200);
-        --button-color: var(--color-neutral-800);
+        --button-background-color: var(--color-neutral-200);
+        --button-text-color: var(--color-neutral-800);
         --button-border-color: var(--color-neutral-400);
         cursor: not-allowed;
 

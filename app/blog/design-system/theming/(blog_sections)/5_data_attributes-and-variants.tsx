@@ -9,7 +9,7 @@ import PostNote from "@/components/post/post.note";
 import PostSection from "@/components/post/post.section";
 import { Inline, Stack } from "@/components/primitives";
 import TabList from "@/components/tablist";
-
+import TokenFlowDiagram from '@/app/blog/design-system/theming/examples/5_data_attributes-and-variants'
 export default function Section5() {
   return (
     <PostSection id="data-attributes-variants" gap={6}>
@@ -27,7 +27,7 @@ export default function Section5() {
         </p>
 
         <p><span className="fun-underline">CSS does all of the heavy lifting</span> — the browser resolves the cascade for you.</p>
-
+        <TokenFlowDiagram />
         <PostNote>
           <p>A <span className="bold">variant</span> represents a semantic colour role such as <span className="italic">“primary”</span> or <span className="italic">“secondary”</span>.</p>
           <p className="text-sm neutral-600">Variants can be applied directly on a component, or a wrapper higher in the DOM to theme entire UI regions at once.</p>
@@ -173,8 +173,8 @@ export default function Section5() {
 </button>`}
         />
 
-        <Inline 
-        gap={2}
+        <Inline
+          gap={2}
         // style={{ display: "flex", gap: "var(--spacing-md)", justifyContent: "center" }}
         >
           <Button>Click me</Button>

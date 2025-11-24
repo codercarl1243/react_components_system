@@ -1,29 +1,32 @@
 .post-note {
-    --note-color: var(--color-neutral-900);
-    --note-background-color: var(--color-primary-100);
-    --note-border-color: var(--color-neutral-300);
+    --note-color: var(--foreground-color);
+    --note-background-color: var(--background-color);
+    --note-border-color: var(--border-color);
 
     position: relative;
-    background-color: var(--note-background-color);
-    color: var(--note-color);
+    background-color: var(--background-color);
+    color: var(--foreground-color);
+
     padding-block: 1.25em 1em;
     padding-inline: clamp(0.5em, 0.5em + 0.5vw, 1em);
-    box-shadow: inset 2px 2px 4px rgba(153, 105, 105, 0.1),
-        inset -2px -2px 4px rgba(255, 255, 255, 0.8);
+    box-shadow: inset 2px 2px 4px color-mix(in srgb, var(--background-color) 10%, transparent),
+        inset -2px -2px 4px color-mix(in srgb, var(--background-color) 90%, transparent);
     border: var(--border-thin);
-    border-color: var(--note-border-color);
-    border-left: 4px solid var(--color-primary-400);
+    border-color: var(--border-color);
+    border-left: 4px solid var(--border-color);
     border-radius: var(--radius-md);
 }
 
 .post-note__icon {
     pointer-events: none;
     background-color: var(--note-background-color);
-    color: var(--color-primary-400);
+    color: var(--note-color);
     border-radius: var(--radius-circle);
-
+    
     border: var(--border-thin);
-    border-color: currentColor;
+    border-color: var(--note-border-color);
+    border-right: 25px;
+    border-top: 25px;
     position: absolute;
     top: -0.5em;
     left: -0.5em;

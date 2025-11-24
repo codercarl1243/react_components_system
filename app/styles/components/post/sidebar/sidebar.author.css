@@ -16,7 +16,7 @@
 .author .author__avatar {
     overflow: hidden;
     border-radius: var(--radius-circle);
-    background-color: var(--color-neutral-100);
+    background-color: var(--surface);
     box-shadow: var(--shadow-sm);
 }
 

@@ -1,0 +1,89 @@
+[data-variant="neutral"] {
+  --variant-bg: var(--text-on-surface);
+  --variant-fg: var(--surface);
+  --variant-border: var(--color-neutral-400);
+  
+  --background-color: var(--variant-bg);
+  --foreground-color: var(--variant-fg);
+  --border-color: var(--variant-border);
+}
+
+[data-variant="muted"] {
+  --variant-bg: var(--color-neutral-400);
+  --variant-fg: var(--color-neutral-100);
+  --variant-border: var(--color-neutral-700);
+  
+  --background-color: var(--variant-bg);
+  --foreground-color: var(--variant-fg);
+  --border-color: var(--variant-border);
+}
+
+[data-variant="primary"] {
+  --variant-bg: var(--color-primary-400);
+  --variant-fg: var(--text-on-primary);
+  --variant-border: var(--color-primary-600);
+  
+  --background-color: var(--variant-bg);
+  --foreground-color: var(--variant-fg);
+  --border-color: var(--variant-border);
+}
+
+[data-variant="secondary"] {
+  --variant-bg: var(--color-secondary-400);
+  --variant-fg: var(--text-on-secondary);
+  --variant-border: var(--color-secondary-600);
+  
+  --background-color: var(--variant-bg);
+  --foreground-color: var(--variant-fg);
+  --border-color: var(--variant-border);
+}
+
+[data-variant="accent"] {
+  --variant-bg: var(--color-accent-400);
+  --variant-fg: var(--text-on-accent);
+  --variant-border: var(--color-accent-600);
+  
+  --background-color: var(--variant-bg);
+  --foreground-color: var(--variant-fg);
+  --border-color: var(--variant-border);
+}
+
+[data-variant="danger"] {
+  --variant-bg: var(--color-danger-400);
+  --variant-fg: var(--text-on-danger);
+  --variant-border: var(--color-danger-600);
+  
+  --background-color: var(--variant-bg);
+  --foreground-color: var(--variant-fg);
+  --border-color: var(--variant-border);
+}
+
+[data-variant="warning"] {
+  --variant-bg: var(--color-warning-400);
+  --variant-fg: var(--text-on-warning);
+  --variant-border: var(--color-warning-600);
+  
+  --background-color: var(--variant-bg);
+  --foreground-color: var(--variant-fg);
+  --border-color: var(--variant-border);
+}
+
+[data-variant="success"] {
+  --variant-bg: var(--color-success-400);
+  --variant-fg: var(--text-on-success);
+  --variant-border: var(--color-success-600);
+  
+  --background-color: var(--variant-bg);
+  --foreground-color: var(--variant-fg);
+  --border-color: var(--variant-border);
+}
+
+[data-variant="info"] {
+  --variant-bg: var(--color-info-200);
+  --variant-fg: var(--text-on-info);
+  --variant-border: var(--color-info-600);
+  
+  --background-color: var(--variant-bg);
+  --foreground-color: var(--variant-fg);
+  --border-color: var(--variant-border);
+}

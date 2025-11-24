@@ -1,6 +1,7 @@
 import clsx from "clsx";
 import type { ElementType } from "react";
 import type { InlineProps } from "@/components/primitives/types";
+import { applyDataAttributes } from "@/lib/utils/applyDataAttributes";
 
 
 
@@ -17,6 +18,8 @@ export default function Inline<T extends ElementType = "div">({
     gap = 4,
     align = "center",
     wrap = true,
+    variant,
+    variantAppearance,
     className,
     ...props
 }: InlineProps<T>) {
@@ -30,5 +33,9 @@ export default function Inline<T extends ElementType = "div">({
         className
     )
 
-    return <Component className={classes} {...props} />;
+    return <Component
+        {...applyDataAttributes({ variant, appearance: variantAppearance })}
+        className={classes}
+        {...props}
+    />;
 }

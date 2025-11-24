@@ -36,6 +36,8 @@ export default function PostNote({ className, children, ...props }: ComponentPro
       // data-expanded={"false"}
       className={clsx(className, 'post-note')}
       role={'note'}
+      variant='info'
+      variantAppearance='filled'
       {...props}>
       <Icon icon={RiInformationLine} size={32} className="post-note__icon" />
       <Stack className="post-note__content">

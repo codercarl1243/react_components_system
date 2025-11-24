@@ -1,6 +1,7 @@
 import clsx from "clsx";
 import { ElementType } from "react";
 import { RowProps } from "@/components/primitives/types";
+import { applyDataAttributes } from "@/lib/utils/applyDataAttributes";
 
 /**
  * Row — horizontal layout primitive.
@@ -15,19 +16,23 @@ export default function Row<T extends ElementType = "div">({
   gap = 4,
   align = "center",
   justify = "start",
+  variant,
+  variantAppearance,
   className,
-  children,
   ...props
 }: RowProps<T>) {
   const Component = as || "div";
 
   const classes = clsx(
-        "row",
-        `row-gap-${gap}`,
-        `row-align-${align}`,
-        `row-justify-${justify}`,
-        className
-      )
+    "row",
+    `row-gap-${gap}`,
+    `row-align-${align}`,
+    `row-justify-${justify}`,
+    className
+  )
 
-  return <Component className={classes} {...props} />;
+  return <Component
+    {...applyDataAttributes({ variant, appearance: variantAppearance })}
+    className={classes}
+    {...props} />;
 }

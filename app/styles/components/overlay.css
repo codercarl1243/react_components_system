@@ -6,7 +6,7 @@ body:has([data-overlay="visible"]) {
     position: fixed;
     inset: 0;
     opacity: 0;
-    background: var(--color-neutral-a9-dark);
+    background: color-mix(in srgb, var(--text-on-surface) 80%, transparent);
     transition: opacity var(--overlay-transition-duration) ease-in-out;
     z-index: 2;
     pointer-events: none;

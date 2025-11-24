@@ -1,6 +1,7 @@
 import clsx from "clsx";
 import type { ElementType } from "react";
-import { StackProps } from "@/components/primitives/types";;
+import { StackProps } from "@/components/primitives/types"; import { applyDataAttributes } from "@/lib/utils/applyDataAttributes";
+;
 
 
 
@@ -46,6 +47,8 @@ import { StackProps } from "@/components/primitives/types";;
 export default function Stack<T extends ElementType = "div">({
     gap = 4,
     as,
+    variant,
+    variantAppearance,
     className,
     ...props
 }: StackProps<T>) {
@@ -54,6 +57,7 @@ export default function Stack<T extends ElementType = "div">({
 
     return (
         <Component
+            {...applyDataAttributes({ variant, appearance: variantAppearance })}
             className={clsx(`flow-${gap}`, className)}
             {...props}
         />

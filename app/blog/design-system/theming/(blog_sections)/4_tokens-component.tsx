@@ -14,12 +14,16 @@ export default function Section4() {
         Define Your Component Tokens
       </AnchorHeading>
       <p>
-        <span className="fun-underline">Global tokens</span> define the visual language of your system.
+        <span className="bold fun-underline">Global tokens</span> define the visual language of your system.
       </p>
 
       <p>
-        But components shouldn't reach for them directly. Instead, each component exposes its own <span className="fun-underline">semantic component tokens</span> (<span className="italic">the variables that describe what the component needs, not where the value comes from</span>).
+        But components shouldn't reach for them directly. Instead, each component exposes its own <span className="bold fun-underline">semantic component tokens</span> (<span className="italic">the variables that describe what the component needs, not where the value comes from</span>).
       </p>
+      <p>
+        In the next step, we'll add a third layer — <span className="bold fun-underline">variant tokens</span> — these sit between global tokens and component tokens, letting you swap entire color roles without touching component code.
+      </p>
+      
       <Heading as="h3">Why Component Tokens Matter</Heading>
       <List spacing="tight">
         <li><strong>Encapsulation:</strong> Components define <em>what</em> they need (background, foreground, border); themes define <em>which colors</em> to use.</li>
@@ -35,8 +39,6 @@ export default function Section4() {
         <li><strong>Semantic tokens</strong> define <em>what</em> colors mean <InlineCode codeString="--background-color" lang="css" /></li>
         <li><strong>Component tokens</strong> decide <em>how</em> a component uses them <InlineCode codeString="--button-background-color" lang="css" /></li>
       </List>
-
-
 
       <Heading as="h3">Example: Component Token Defaults</Heading>
       <p>

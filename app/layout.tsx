@@ -26,6 +26,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
+        data-theme={"dark"}
         className={`${geistSans.variable} ${geistMono.variable} antialiased main-wrapper font-main text-base`}
       >
         <div className="overlay-backdrop" />

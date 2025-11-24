@@ -1,0 +1,29 @@
+[data-theme="light"] {
+    --surface: var(--color-neutral-100);
+    --text-on-surface: var(--color-neutral-900);
+
+    --text-on-primary: var(--color-neutral-100);
+    --text-on-secondary: var(--color-neutral-100);
+    --text-on-accent: var(--color-neutral-100);
+
+    --text-on-danger: var(--color-neutral-100);
+    --text-on-warning: var(--color-neutral-100);
+    --text-on-success: var(--color-neutral-100);
+    --text-on-info: var(--color-neutral-900);
+
+}
+
+
+[data-theme="dark"] {
+    --surface: var(--color-neutral-900);
+    --text-on-surface: var(--color-neutral-100);
+
+    --text-on-primary: var(--color-neutral-100);
+    --text-on-secondary: var(--color-neutral-100);
+    --text-on-accent: var(--color-neutral-100);
+
+    --text-on-danger: var(--color-neutral-100);
+    --text-on-warning: var(--color-neutral-100);
+    --text-on-success: var(--color-neutral-100);
+    --text-on-info: var(--color-neutral-900);
+}

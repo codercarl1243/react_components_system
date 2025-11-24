@@ -68,6 +68,7 @@ main:has(.hamburger-menu--wrapper[data-mode="hamburger"]) {
         --left: initial;
         /* ⬇️ defaults to open state */
         --translation: 0%;
+    background-color: var(--surface);
 
         position: fixed;
         top: 0;
