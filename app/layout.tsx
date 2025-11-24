@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import type { ReactNode } from 'react'
-import { Geist, Geist_Mono } from 'next/font/google'
+import { Geist, Playfair_Display } from 'next/font/google'
 import './styles/globals.css'
 import Footer from '@/components/layout/footer'
 import Header from '@/components/layout/header'
@@ -11,7 +11,7 @@ const geistSans = Geist({
   subsets: ['latin']
 })
 
-const geistMono = Geist_Mono({
+const playfairDisplay = Playfair_Display({
   variable: '--font-accent',
   subsets: ['latin']
 })
@@ -27,9 +27,9 @@ export default function RootLayout({
     <html lang="en">
       <body
         data-theme={"dark"}
-        className={`${geistSans.variable} ${geistMono.variable} antialiased main-wrapper font-main text-base`}
+        className={`${geistSans.variable} ${playfairDisplay.variable} antialiased main-wrapper font-main text-base`}
       >
-        <div className="overlay-backdrop" />
+        <div className="overlay-backdrop" aria-hidden="true" />
         <Header />
         <main id="main-content" tabIndex={-1} className="flow-8">
           {children}

@@ -28,7 +28,7 @@ export default function Section3() {
                 Each of these categories follows the same structure — stable values defined on <InlineCode codeString=":root" lang="css" /> and reused across your entire system.
                 They don't style anything on their own; they simply act as the <span className="fun-underline italic">source of truth</span>.
             </p>
-            <p className="text-sm neutral-600">
+            <p className="text-sm color-muted">
                 If you'd like to explore the full token set used in this project, you can view it on <Link href="https://github.com/codercarl1243/react_components_system/tree/main/styles/tokens">GitHub</Link>.
             </p>
 

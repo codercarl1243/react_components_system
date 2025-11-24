@@ -2,6 +2,7 @@ import clsx from 'clsx'
 import type { HeadingPropsType, ValidHeadingTag } from '@/components/heading/heading.type'
 import Icon from '@/components/icon'
 import { generateHeadingId, generateHeadingSize, getIconSize, getSizeClass } from '@/components/heading/utils'
+import { Inline } from '@/components/primitives';
 
 const DEFAULT_HEADING_TAG = 'h3';
 
@@ -26,6 +27,7 @@ export default function Heading<T extends ValidHeadingTag = "h3">({
   className,
   icon,
   id,
+  variant = "secondary",
   ...props
 }: HeadingPropsType<T>) {
 
@@ -35,17 +37,19 @@ export default function Heading<T extends ValidHeadingTag = "h3">({
   const resolvedHeadingSize = headingSize ?? generateHeadingSize(Component);
 
   return (
-    <Component
+    <Inline
+      as={Component}
       id={headingId}
-      className={clsx('font-main heading',
+      className={clsx('font-accent heading',
         { "heading-w-icon": icon },
         className,
         getSizeClass(resolvedHeadingSize))}
+      variant={variant}
       {...props}
     >
       {icon && <Icon icon={icon} size={getIconSize(resolvedHeadingSize)} />}
       <span className='heading__content'>{children}</span>
-    </Component>
+    </Inline>
   )
 
 }

@@ -13,9 +13,6 @@ export default function Buttons() {
         <Inline>
           <Button>default</Button>
           <Button variant='neutral'>neutral</Button>
-          <Button variant='muted'>muted</Button>
-          <Button variant='info'>info</Button>
-          <Button variant='success'>success</Button>
           <Button variant='danger'>danger</Button>
           <Button variant='warning'>warning</Button>
           <Button variant='primary'>primary</Button>
@@ -33,9 +30,6 @@ export default function Buttons() {
         <Inline>
           <Button variantAppearance="filled">default</Button>
           <Button variantAppearance="filled" variant='neutral'>neutral</Button>
-          <Button variantAppearance="filled" variant='muted'>muted</Button>
-          <Button variantAppearance="filled" variant='info'>info</Button>
-          <Button variantAppearance="filled" variant='success'>success</Button>
           <Button variantAppearance="filled" variant='danger'>danger</Button>
           <Button variantAppearance="filled" variant='warning'>warning</Button>
           <Button variantAppearance="filled" variant='primary'>primary</Button>
@@ -51,9 +45,6 @@ export default function Buttons() {
         <Inline>
           <Button variantAppearance="outlined">default</Button>
           <Button variantAppearance="outlined" variant='neutral'>neutral</Button>
-          <Button variantAppearance="outlined" variant='muted'>muted</Button>
-          <Button variantAppearance="outlined" variant='info'>info</Button>
-          <Button variantAppearance="outlined" variant='success'>success</Button>
           <Button variantAppearance="outlined" variant='danger'>danger</Button>
           <Button variantAppearance="outlined" variant='warning'>warning</Button>
           <Button variantAppearance="outlined" variant='primary'>primary</Button>
@@ -69,9 +60,6 @@ export default function Buttons() {
         <Inline>
           <Button variantAppearance="ghost">default</Button>
           <Button variantAppearance="ghost" variant='neutral'>neutral</Button>
-          <Button variantAppearance="ghost" variant='muted'>muted</Button>
-          <Button variantAppearance="ghost" variant='info'>info</Button>
-          <Button variantAppearance="ghost" variant='success'>success</Button>
           <Button variantAppearance="ghost" variant='danger'>danger</Button>
           <Button variantAppearance="ghost" variant='warning'>warning</Button>
           <Button variantAppearance="ghost" variant='primary'>primary</Button>

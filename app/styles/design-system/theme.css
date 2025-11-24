@@ -1,6 +1,7 @@
 [data-theme="light"] {
     --surface: var(--color-neutral-100);
     --text-on-surface: var(--color-neutral-900);
+    --text-muted: var(--color-neutral-400);
 
     --text-on-primary: var(--color-neutral-100);
     --text-on-secondary: var(--color-neutral-100);
@@ -17,6 +18,7 @@
 [data-theme="dark"] {
     --surface: var(--color-neutral-900);
     --text-on-surface: var(--color-neutral-100);
+    --text-muted: var(--color-neutral-300);
 
     --text-on-primary: var(--color-neutral-100);
     --text-on-secondary: var(--color-neutral-100);

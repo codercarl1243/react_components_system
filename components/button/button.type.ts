@@ -7,12 +7,15 @@ export type MouseEventType = MouseEvent<HTMLButtonElement>;
 export type ButtonClickHandler = (event: MouseEventType) => void | Promise<void>;
 
 export type TButtonAppearance = 'outlined' | 'filled' | 'ghost';
+export type TButtonVariant =  'primary' | 'secondary' | 'accent' | 'neutral' | 'danger' | 'warning';
 
 export type BaseButtonProps = {
     disabled?: boolean; 
     isLoading?: boolean;
     icon?: IconProps['icon'];
     onClick?: ButtonClickHandler;
+    variant?: TButtonVariant;
+    appearance?: TButtonAppearance;
 } & Omit<BlockProps<"button">, 'onClick' | 'disabled' | 'as'>;
 
 type AccessibleLabel =

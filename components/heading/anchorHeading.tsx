@@ -3,6 +3,7 @@ import type { AnchorHeadingPropsType, ValidHeadingTag } from '@/components/headi
 import Link from '@/components/link'
 import { generateHeadingId } from '@/components/heading/utils'
 import { stringUtils } from '@/lib/utils/string'
+import { Inline } from '@/components/primitives'
 
 export default function AnchorHeading<T extends ValidHeadingTag = "h3">({
   id,
@@ -25,9 +26,9 @@ export default function AnchorHeading<T extends ValidHeadingTag = "h3">({
   const normalizedPrefix = stringUtils.normalizeWhiteSpace(prefix)  + " ";
 
   return (
-    <div className="heading-w-prefix">
+    <Inline gap={2} className="heading-w-prefix">
       <span className="prefix">{normalizedPrefix}</span>
       {headingEl}
-    </div>
+    </Inline>
   );
 }

@@ -42,7 +42,7 @@
 
         /* Info */
         --color-info-100: hsl(188, 66%, 92%);
-        --color-info-200: hsl(188, 66%, 84%);
+        --color-info-200: hsl(189, 91%, 87%);
         --color-info-400: hsl(188, 66%, 79%);
         --color-info-600: hsl(188, 76%, 20%);
 
@@ -55,7 +55,7 @@
         --color-neutral-600: hsl(0, 0%, 30%);
         --color-neutral-700: hsl(0, 0%, 24%);
         --color-neutral-800: hsl(0, 0%, 15%);
-        --color-neutral-900: hsl(0 0%, 5%);
+        --color-neutral-900: hsl(0, 0%, 5%);
 
         --color-code-dark: hsl(225, 13%, 13%);
         --color-code-light: hsl(214, 13%, 90%);
