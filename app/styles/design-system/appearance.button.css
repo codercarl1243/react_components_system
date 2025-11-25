@@ -1,5 +1,5 @@
 
-.button[data-appearance="ghost"] {
+.button[data-appearance="ghost"]:not(:disabled):not([aria-disabled="true"])  {
     &:hover {
         --background-color: color-mix(in srgb, var(--foreground-color) 10%, transparent);
     }
