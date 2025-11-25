@@ -17,7 +17,7 @@ export default function Section5() {
         Apply Variants with Data Attributes
       </AnchorHeading>
 
-      <Stack>
+      <Stack className="layout-wrapper width-full">
         <p>
           With global tokens and component tokens in place, the final piece is deciding <em>which values</em> a component should use in different contexts. This is where <span className="bold">data attributes</span> come in.
         </p>
@@ -26,13 +26,9 @@ export default function Section5() {
           Instead of scattering variant logic across JavaScript or component props, you define variants through CSS attribute selectors like <InlineCode codeString='[data-variant="primary"]' lang="css" />. The browser handles the cascade automatically — no runtime overhead, no theme providers, no context.
         </p>
 
-        <p><span className="fun-underline">CSS does all of the heavy lifting</span> — the browser resolves the cascade for you.</p>
+        {/* <p><span className="fun-underline">CSS does all of the heavy lifting</span> — the browser resolves the cascade for you.</p> */}
         <TokenFlowDiagram />
-        <PostNote>
-          <p>A <span className="bold">variant</span> represents a semantic colour role such as <span className="italic">“primary”</span> or <span className="italic">“secondary”</span>.</p>
-          <p className="text-sm text-muted">Variants can be applied directly on a component, or a wrapper higher in the DOM to theme entire UI regions at once.</p>
-          <p>A <span className="bold">style</span> defines <em>how</em> a component consumes those tokens — for example, “filled” or “outlined”.</p>
-        </PostNote>
+
       </Stack>
 
       <Stack>
@@ -50,6 +46,7 @@ export default function Section5() {
         <p>
           Variants work by <span className="italic">overriding the semantic tokens</span> defined in each component. Because custom properties inherit, updating a semantic token at a higher level automatically updates every component token that references it — no component CSS needs to change.
         </p>
+        {/* Show override example */}
       </Stack>
       <Stack>
         <Heading as="h3">Cascade Layers: Ensuring Variants Always Win</Heading>
@@ -81,6 +78,7 @@ export default function Section5() {
         <p>
           Here's how you might define <InlineCode codeString="primary" /> and <InlineCode codeString="secondary" /> variants:
         </p>
+        {/* Update to show --variant-* tokens */}
         <TabList
           tabListName="data-attributes-variants_codeReference"
           className="code__reference"
@@ -135,17 +133,25 @@ export default function Section5() {
                   copyEnabled={false}
                   codeString={`/* ./design-system/variants.css - Global variant definitions */
 @layer design-system {
-  [data-variant="primary"] {
-    --background-color: var(--color-neutral-100);
-    --foreground-color: var(--color-primary-400);
-    --border-color: var(--color-primary-600);
-  }
+[data-variant="primary"] {
+  --variant-bg: var(--color-primary-400);
+  --variant-fg: var(--text-on-primary);
+  --variant-border: var(--color-primary-600);
+  
+  --background-color: var(--variant-bg);
+  --foreground-color: var(--variant-fg);
+  --border-color: var(--variant-border);
+}
 
-  [data-variant="secondary"] {
-    --background-color: var(--color-neutral-100);
-    --foreground-color: var(--color-secondary-400);
-    --border-color: var(--color-secondary-600);
-  }
+[data-variant="secondary"] {
+  --variant-bg: var(--color-secondary-400);
+  --variant-fg: var(--text-on-secondary);
+  --variant-border: var(--color-secondary-600);
+  
+  --background-color: var(--variant-bg);
+  --foreground-color: var(--variant-fg);
+  --border-color: var(--variant-border);
+}
 }`} />
               )
             }
@@ -154,7 +160,11 @@ export default function Section5() {
         <p>
           Now any element with <InlineCode codeString='data-variant="secondary"' /> will use the secondary colour palette. The component's internal CSS doesn't change — only the semantic token values do.
         </p>
-
+        <PostNote>
+          <p>A <span className="bold">variant</span> represents a semantic colour role such as <span className="italic">“primary”</span> or <span className="italic">“secondary”</span>.</p>
+          <p className="text-sm text-muted">Variants can be applied directly on a component, or a wrapper higher in the DOM to theme entire UI regions at once.</p>
+          <p>A <span className="bold">style</span> defines <em>how</em> a component consumes those tokens — for example, “filled” or “outlined”.</p>
+        </PostNote>
       </Stack>
 
       <Stack>
@@ -163,12 +173,12 @@ export default function Section5() {
           lang="tsx"
           copyEnabled={false}
           codeString={`// Default variant (uses component defaults)
-<button class="button">
+<button className="button">
   Click me
 </button>
 
 // Primary variant
-<button class="button" data-variant="primary">
+<button className="button" data-variant="primary">
   Get started
 </button>`}
         />
