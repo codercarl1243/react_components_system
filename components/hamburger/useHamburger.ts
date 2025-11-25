@@ -29,13 +29,13 @@ export default function useHamburger({
   const menuRef = useRef<HTMLElement | null>(null);
   const buttonRef = useRef<HTMLButtonElement | null>(null);
   useClickOutside(
-    wrapperRef,
     () => {
       if (isActive) {
         toggleMenuOpenState();
         buttonRef.current?.focus();
       }
     },
+    wrapperRef,
     menuState === "open" && isActive
   );
 
