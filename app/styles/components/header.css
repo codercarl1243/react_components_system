@@ -3,7 +3,6 @@
     flex-direction: column;
     gap: 1.5rem;
     padding-inline: 1rem;
-
 }
 
 .nav__primary a {
@@ -16,6 +15,12 @@
     min-width: var(--bp-xs);
     align-items: center;
     position: relative;
+}
+
+@media screen and (max-width: 35rem) {
+    .nav__primary a:first-child {
+        padding-block-start: var(--spacing-xl);
+    }
 }
 
 /*  DESKTOP */
