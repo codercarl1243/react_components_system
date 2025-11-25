@@ -99,6 +99,7 @@
     }
 
     
-.shiki-inline.text-nowrap span {
-    white-space: nowrap;
+.shiki-inline.text-nowrap .line span {
+    white-space: pre;
+    overflow-wrap: anywhere;
 }
