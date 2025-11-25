@@ -1,6 +1,7 @@
 import { ElementType } from "react";
 import { BlockProps } from "@/components/primitives/types";
 import { applyDataAttributes } from "@/lib/utils/applyDataAttributes";
+import clsx from "clsx";
 
 /**
  * Block — a lightweight polymorphic layout wrapper.
@@ -40,11 +41,13 @@ export default function Block<T extends ElementType = "div">({
     as,
     variant,
     variantAppearance,
+    className,
     ...props
 }: BlockProps<T>) {
     const Component = as || "div";
 
     return <Component
+        className={clsx("primitive", className)}
         {...applyDataAttributes({ variant, appearance: variantAppearance })}
         {...props}
     />

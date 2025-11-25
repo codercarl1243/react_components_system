@@ -24,8 +24,8 @@ export default function Row<T extends ElementType = "div">({
   const Component = as || "div";
 
   const classes = clsx(
-    "row",
-    `row-gap-${gap}`,
+    "primitive row",
+    `gap-row-${gap}`,
     `row-align-${align}`,
     `row-justify-${justify}`,
     className

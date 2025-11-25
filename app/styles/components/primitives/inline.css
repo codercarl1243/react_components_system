@@ -1,6 +1,7 @@
 .inline-flow {
   display: flex;
   flex-direction: row;
+  width: 100%;
 }
 
 .inline-wrap {
@@ -15,10 +16,3 @@
 .inline-align-center  { align-items: center; }
 .inline-align-end     { align-items: flex-end; }
 .inline-align-stretch { align-items: stretch; }
-
-.inline-gap-0  { gap: 0; }
-.inline-gap-2  { gap: var(--spacing-sm); }
-.inline-gap-4  { gap: var(--spacing-md); }
-.inline-gap-6  { gap: var(--spacing-lg); }
-.inline-gap-8  { gap: var(--spacing-xl); }
-.inline-gap-16 { gap: calc(var(--space-16) * 2); }

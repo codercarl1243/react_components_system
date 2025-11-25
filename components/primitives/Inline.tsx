@@ -26,9 +26,9 @@ export default function Inline<T extends ElementType = "div">({
     const Component = as || "div";
 
     const classes = clsx(
-        "inline-flow",
+        "primitive inline-flow",
         wrap ? "inline-wrap" : "inline-nowrap",
-        `inline-gap-${gap}`,
+        `gap-${gap}`,
         `inline-align-${align}`,
         className
     )

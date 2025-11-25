@@ -58,7 +58,7 @@ export default function Stack<T extends ElementType = "div">({
     return (
         <Component
             {...applyDataAttributes({ variant, appearance: variantAppearance })}
-            className={clsx(`flow-${gap}`, className)}
+            className={clsx(`primitive stack gap-row-${gap}`, className)}
             {...props}
         />
     )

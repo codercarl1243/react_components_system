@@ -12,8 +12,3 @@
 .row-justify-center  { justify-content: center; }
 .row-justify-end     { justify-content: flex-end; }
 .row-justify-between { justify-content: space-between; }
-
-.row-gap-0  { column-gap: 0; }
-.row-gap-4  { column-gap: var(--space-4); }
-.row-gap-8  { column-gap: var(--space-8); }
-.row-gap-16 { column-gap: var(--space-16); }
