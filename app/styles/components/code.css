@@ -78,7 +78,12 @@
         }
     }
 
-    @media (max-width: 768px) {
+    @media (max-width: 48rem) {
+        .shiki {
+            line-height: 1.2;
+
+        }
+
         .shiki-wrapper pre {
             max-height: 22rem;
             padding-inline-end: 0;
@@ -89,7 +94,7 @@
     .shiki-inline {
         background-color: var(--color-inline-bg);
         border: var(--border-thin);
-        padding: 0.125em 0.2em;
+        padding: 0.125em var(--spacing);
         border-radius: var(--radius-md);
         white-space: pre-wrap;
         word-break: break-word;
@@ -98,8 +103,9 @@
         -webkit-box-decoration-break: clone;
     }
 
-    
-.shiki-inline.text-nowrap .line span {
-    white-space: pre;
-    overflow-wrap: anywhere;
-}
+
+    .shiki-inline.text-nowrap {
+        white-space: pre-line;
+        overflow-wrap: break-word;
+        word-break: break-word;
+    }
