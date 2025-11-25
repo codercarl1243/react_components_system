@@ -26,12 +26,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        data-theme={"dark"}
-        className={`${geistSans.variable} ${playfairDisplay.variable} antialiased main-wrapper font-main text-base`}
+        data-theme={"light"}
+        className={`${geistSans.variable} ${playfairDisplay.variable} antialiased main-wrapper layout-wrapper font-main text-base`}
       >
         <div className="overlay-backdrop" aria-hidden="true" />
         <Header />
-        <main id="main-content" tabIndex={-1} className="flow-8">
+        <main id="main-content" tabIndex={-1} className="flow-8 width-full">
           {children}
         </main>
         <Footer />

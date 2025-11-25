@@ -4,5 +4,5 @@ import { Block } from '../primitives'
 
 export default function Post({ className, ...props }: PostPropsType) {
 
-  return <Block as="article" className={clsx('post', className)} {...props} />
+  return <Block as="article" className={clsx('post layout-wrapper width-full', className)} {...props} />
 }
