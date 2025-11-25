@@ -27,6 +27,7 @@ dd,
 ul,
 ol {
   margin-block: 0;
+  margin-inline: 0;
 }
 
 h1,
