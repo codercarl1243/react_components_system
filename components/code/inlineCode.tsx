@@ -1,7 +1,6 @@
 import { InlineCodeProps, SupportedLangs } from "./code.type";
 import { getHighlighterSingleton, getInlineCodeTheme } from "./highlighter";
 
-// TODO: add the option to enforce no wrap
 export default async function InlineCode({
     codeString,
     lang = 'tsx',
