@@ -57,6 +57,7 @@ main:has(.hamburger-menu--wrapper[data-mode="hamburger"]) {
     height: 100dvh;
     position: fixed;
     min-width: initial;
+    width: initial;
 
     /* Show Button */
     .hamburger-menu--toggle {
