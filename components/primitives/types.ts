@@ -23,7 +23,8 @@ export type Variant =
 export type VariantAppearance =
     | "filled"
     | "outlined"
-    | "ghost";
+    | "ghost"
+    | "primitive";
 
 /* ---------------------------------- */
 /*        Shared Style Props          */
