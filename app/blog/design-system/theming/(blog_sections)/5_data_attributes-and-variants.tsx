@@ -9,7 +9,7 @@ import PostNote from "@/components/post/post.note";
 import PostSection from "@/components/post/post.section";
 import { Inline, Stack } from "@/components/primitives";
 import TabList from "@/components/tablist";
-import TokenFlowDiagram from '@/app/blog/design-system/theming/examples/5_data_attributes-and-variants'
+import TokenFlowDiagram from '@/app/blog/design-system/theming/examples/5_TokenFlowDiagram'
 export default function Section5() {
   return (
     <PostSection id="data-attributes-variants" gap={6}>
@@ -30,7 +30,7 @@ export default function Section5() {
         <TokenFlowDiagram />
         <PostNote>
           <p>A <span className="bold">variant</span> represents a semantic colour role such as <span className="italic">“primary”</span> or <span className="italic">“secondary”</span>.</p>
-          <p className="text-sm neutral-600">Variants can be applied directly on a component, or a wrapper higher in the DOM to theme entire UI regions at once.</p>
+          <p className="text-sm text-muted">Variants can be applied directly on a component, or a wrapper higher in the DOM to theme entire UI regions at once.</p>
           <p>A <span className="bold">style</span> defines <em>how</em> a component consumes those tokens — for example, “filled” or “outlined”.</p>
         </PostNote>
       </Stack>

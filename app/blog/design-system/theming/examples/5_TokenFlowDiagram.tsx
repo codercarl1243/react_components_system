@@ -10,8 +10,10 @@ export default function token_flow_diagram() {
         <Inline
             as="figure"
             gap={16}
-            align="start"
+            align="stretch"
             className="theming-diagram"
+            variant="primary"
+            variantAppearance="primitive"
             wrap
         >
             <Stack
