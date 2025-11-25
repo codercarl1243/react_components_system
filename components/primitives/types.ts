@@ -13,8 +13,7 @@ export type Variant =
     | "success"
     | "info"
     | "neutral"
-    | "muted"
-    | "ghost";
+    | "muted";
 
 /* ---------------------------------- */
 /*      Variant Appearance Types      */
