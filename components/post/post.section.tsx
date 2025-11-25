@@ -28,7 +28,7 @@ type SectionProps = StackProps<'section'>;
 export default function PostSection({ children, className, ...props }: SectionProps) {
 
   return (
-    <Stack as="section" className='post-section layout-wrapper' {...props}>
+    <Stack as="section" className='post-section layout-wrapper width-bleed' {...props}>
       {children}
     </Stack>
   )
