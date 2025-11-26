@@ -1,4 +1,4 @@
-import { ReactElement, ReactNode } from "react";
+import { isValidElement, ReactElement, ReactNode } from "react";
 
 export function isNonEmptyString(value: unknown): value is string {
   return typeof value === "string" && value.trim().length > 0;
@@ -85,6 +85,12 @@ export function isNonEmptyObject(value: unknown): value is Record<string, unknow
   );
 }
 
+export function isNonEmptyArray<T>(
+  value: unknown
+): value is [T, ...T[]] {
+  return Array.isArray(value) && value.length > 0;
+}
+
 /**
   * Checks if a value is thenable (Promise-like).
   * 
@@ -124,7 +130,7 @@ export function isThenable(value: unknown): value is PromiseLike<unknown> {
 export function isReactElement(node: unknown): node is ReactElement {
   return (
     node !== null &&
-    typeof node === "object" && 
+    typeof node === "object" &&
     "props" in node
   );
 }
@@ -151,9 +157,7 @@ export function isReactElementWithChildren(
   node: unknown
 ): node is ReactElement & { props: { children?: ReactNode } } {
   return (
-    node !== null &&
-    typeof node === "object" &&
-    "props" in node &&
+    isValidElement(node) &&
     node.props !== null &&
     typeof node.props === "object" &&
     "children" in node.props
