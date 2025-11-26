@@ -1,33 +1,25 @@
 .post-note {
-    --note-color: var(--foreground-color);
-    --note-background-color: var(--background-color);
-    --note-border-color: var(--border-color);
-
     position: relative;
-    background-color: var(--background-color);
     color: var(--foreground-color);
 
     padding-block: 1.25em 1em;
     padding-inline: clamp(0.5em, 0.5em + 0.5vw, 1em);
     box-shadow: inset 2px 2px 4px color-mix(in srgb, var(--background-color) 10%, transparent),
         inset -2px -2px 4px color-mix(in srgb, var(--background-color) 90%, transparent);
-    border: var(--border-thin);
-    border-color: var(--border-color);
-    border-left: 4px solid var(--border-color);
-    border-radius: var(--radius-md);
+    border-left-width: 3px !important;
 }
 
 .post-note__icon {
     pointer-events: none;
-    background-color: var(--note-background-color);
-    color: var(--note-color);
+    background-color: inherit;
+    color: inherit;
     border-radius: var(--radius-circle);
     
     border: var(--border-thin);
-    border-color: var(--note-border-color);
+    border-color: inherit;
     border-right: 25px;
     border-top: 25px;
     position: absolute;
-    top: -0.5em;
-    left: -0.5em;
+    top: -0.4em;
+    left: -0.4em;
 }

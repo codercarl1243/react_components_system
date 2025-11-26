@@ -59,7 +59,7 @@ export type InlineProps<T extends ElementType = "div"> = PolymorphicProps<
     T,
     {
         gap?: Gap
-        align?: "start" | "center" | "end" | "stretch";
+        align?: "start" | "center" | "end" | "stretch" | "baseline";
         wrap?: boolean; // true = wrap (default), false = nowrap
     } & BaseStyleProps
 >;

@@ -16,7 +16,7 @@ import { applyDataAttributes } from "@/lib/utils/applyDataAttributes";
 export default function Inline<T extends ElementType = "div">({
     as,
     gap = 4,
-    align = "center",
+    align = "baseline",
     wrap = true,
     variant,
     variantAppearance,

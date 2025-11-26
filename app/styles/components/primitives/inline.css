@@ -1,7 +1,7 @@
 .inline-flow {
-  display: flex;
+  display: inline-flex;
   flex-direction: row;
-  width: 100%;
+  width: fit-content;
 }
 
 .inline-wrap {
@@ -16,3 +16,4 @@
 .inline-align-center  { align-items: center; }
 .inline-align-end     { align-items: flex-end; }
 .inline-align-stretch { align-items: stretch; }
+.inline-align-baseline { align-items: baseline; }

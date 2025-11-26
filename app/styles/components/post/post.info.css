@@ -1,0 +1,5 @@
+.postinfo {
+  font-size: var(--text-sm);
+  color: var(--text-muted);
+  gap: 0.5ch;
+}
