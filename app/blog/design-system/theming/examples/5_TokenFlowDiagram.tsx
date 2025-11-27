@@ -4,7 +4,7 @@ import { Inline, Row, Stack } from "@/components/primitives";
 import { RiCodeSSlashFill, RiPaletteFill, RiPuzzleFill } from "@remixicon/react";
 
 
-export default function token_flow_diagram() {
+export default function TokenFlowDiagram() {
 
     return (
         <Inline
