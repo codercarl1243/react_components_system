@@ -25,7 +25,7 @@ export default function Inline<T extends ElementType = "div">({
     className,
     ...props
 }: InlineProps<T>) {
-    const Component = as || "div";
+    const Component = as ?? "div";
 
     const classes = clsx(
         "primitive inline-flow",
