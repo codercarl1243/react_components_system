@@ -1,5 +1,6 @@
 import { Stack } from '@/components/primitives'
 import type { StackProps } from '@/components/primitives/types'
+import clsx from 'clsx';
 
 type SectionProps = StackProps<'section'>;
 
@@ -28,7 +29,7 @@ type SectionProps = StackProps<'section'>;
 export default function PostSection({ children, className, ...props }: SectionProps) {
 
   return (
-    <Stack as="section" className='post-section layout-wrapper width-bleed' {...props}>
+    <Stack as="section" className={clsx('post-section layout-wrapper width-bleed', className)} {...props}>
       {children}
     </Stack>
   )
