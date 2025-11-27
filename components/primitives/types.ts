@@ -41,6 +41,9 @@ export type BaseStyleProps = {
      * the variant’s color tokens are consumed.
      */
     variantAppearance?: VariantAppearance;
+} & {
+    'data-style': never;
+    'data-appearance': never;
 };
 
 /* ---------------------------------- */
