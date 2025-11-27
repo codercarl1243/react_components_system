@@ -42,8 +42,8 @@ export type BaseStyleProps = {
      */
     variantAppearance?: VariantAppearance;
 } & {
-    'data-style': never;
-    'data-appearance': never;
+    'data-style'?: never;
+    'data-appearance'?: never;
 };
 
 /* ---------------------------------- */
