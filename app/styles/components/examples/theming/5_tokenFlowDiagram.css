@@ -1,0 +1,9 @@
+.theming-diagram .theming-diagram-box--heading{
+    color: black;
+}
+.theming-diagram__component-layer .theming-diagram-box {
+    border: var(--border-thin);
+    border-color: var(--border-color);
+    border-style: dashed;
+    padding: var(--spacing-md);
+}

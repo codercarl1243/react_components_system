@@ -1,6 +1,7 @@
 [data-variant] {
   --background-color: var(--variant-bg);
   --foreground-color: var(--variant-fg);
+  --foreground-muted: color-mix(in srgb, var(--variant-fg, var(--text-on-surface)) 65%, var(--variant-surface, var(--surface)));
   --border-color: var(--variant-border);
   --surface-color: var(--variant-surface);
 }

@@ -1,6 +1,6 @@
 .post__banner {
   --post__banner_text-color: var(--color-neutral-100);
-  margin-block-end: calc(var(--spacing) * 4);
+  margin-block-end: var(--spacing-md);
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(2, 1fr);

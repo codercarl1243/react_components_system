@@ -10,6 +10,7 @@ import PostSection from "@/components/post/post.section";
 import { Inline, Stack } from "@/components/primitives";
 import TabList from "@/components/tablist";
 import TokenFlowDiagram from '@/app/blog/design-system/theming/examples/5_TokenFlowDiagram'
+import PostInfo from "@/components/post/post.info";
 export default function Section5() {
   return (
     <PostSection id="data-attributes-variants" gap={6}>
@@ -17,7 +18,7 @@ export default function Section5() {
         Apply Variants with Data Attributes
       </AnchorHeading>
 
-      <Stack className="layout-wrapper width-full">
+      <Stack>
         <p>
           With global tokens and component tokens in place, the final piece is deciding <em>which values</em> a component should use in different contexts. This is where <span className="bold">data attributes</span> come in.
         </p>
@@ -25,8 +26,7 @@ export default function Section5() {
         <p>
           Instead of scattering variant logic across JavaScript or component props, you define variants through CSS attribute selectors like <InlineCode codeString='[data-variant="primary"]' lang="css" />. The browser handles the cascade automatically — no runtime overhead, no theme providers, no context.
         </p>
-
-        {/* <p><span className="fun-underline">CSS does all of the heavy lifting</span> — the browser resolves the cascade for you.</p> */}
+        
         <TokenFlowDiagram />
 
       </Stack>
@@ -70,7 +70,7 @@ export default function Section5() {
 }`}
         />
 
-        <p className="text-sm neutral-600">More information on cascade layers can be found on the <Link href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/At-rules/@layer">MDN documentation</Link>.</p>
+        <PostInfo>More information on cascade layers can be found on the <Link href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/At-rules/@layer">MDN documentation</Link>.</PostInfo>
       </Stack>
 
       <Stack>
@@ -162,7 +162,7 @@ export default function Section5() {
         </p>
         <PostNote>
           <p>A <span className="bold">variant</span> represents a semantic colour role such as <span className="italic">“primary”</span> or <span className="italic">“secondary”</span>.</p>
-          <p className="text-sm text-muted">Variants can be applied directly on a component, or a wrapper higher in the DOM to theme entire UI regions at once.</p>
+          <PostInfo>Variants can be applied directly on a component, or a wrapper higher in the DOM to theme entire UI regions at once.</PostInfo>
           <p>A <span className="bold">style</span> defines <em>how</em> a component consumes those tokens — for example, “filled” or “outlined”.</p>
         </PostNote>
       </Stack>

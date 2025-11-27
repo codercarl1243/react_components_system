@@ -1,4 +1,3 @@
-import Code from "@/components/code";
 import InlineCode from "@/components/code/inlineCode";
 import Icon from "@/components/icon";
 import { Inline, Row, Stack } from "@/components/primitives";
@@ -23,7 +22,7 @@ export default function token_flow_diagram() {
                 variant="primary"
                 variantAppearance="primitive"
             >
-                <Row as="strong"><Icon icon={RiPaletteFill} color="var(--color-primary-400)" />Global Design Tokens</Row>
+                <Row as="strong" gap={2} className="theming-diagram-box--heading"><Icon icon={RiPaletteFill} color="var(--color-primary-400)" />Global Design Tokens</Row>
                 <InlineCode codeString={`--color-primary-400
 --color-secondary-400`} lang="css" />
             </Stack>
@@ -33,7 +32,7 @@ export default function token_flow_diagram() {
                 variant="secondary"
                 variantAppearance="primitive"
             >
-                <Row as="strong" gap={2}><Icon icon={RiCodeSSlashFill} color="var(--color-secondary-400)" />Variant Tokens</Row>
+                <Row as="strong" gap={2} className="theming-diagram-box--heading"><Icon icon={RiCodeSSlashFill} color="var(--color-secondary-400)" />Variant Tokens</Row>
                 <InlineCode codeString={`--background-color
 --foreground-color`} lang="css" />
             </Stack>
@@ -43,18 +42,21 @@ export default function token_flow_diagram() {
                 variant="accent"
                 variantAppearance="primitive"
             >
-                <Row as="strong" gap={2}><Icon icon={RiPuzzleFill} color="var(--color-accent-400)" />Component Layer</Row>
+                <Row as="strong" gap={2} className="theming-diagram-box--heading"><Icon icon={RiPuzzleFill} color="var(--color-accent-400)" />Component Layer</Row>
                 <Stack
                     gap={4}
-                    className="theming-diagram-box">
-                    <Row as="strong">Component Tokens</Row>
+                    className="theming-diagram-box"
+                    variant="accent"
+                    variantAppearance="filled"
+                    >
+                    <Row as="strong" className="theming-diagram-box--heading">Component Tokens</Row>
                     <InlineCode codeString={`--button-background-color
 --button-foreground-color`} lang="css" />
                 </Stack>
                 <Stack
                     gap={4}
                     className="theming-diagram-box">
-                    <Row as="strong">Component Styles</Row>
+                    <Row as="strong" className="theming-diagram-box--heading">Component Styles</Row>
                     <InlineCode codeString={`background-color: var(--button-background-color);
 color: var(--button-foreground-color);`} lang="css" />
                 </Stack>

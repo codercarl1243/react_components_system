@@ -1,9 +1,8 @@
 import clsx from "clsx";
 import type { ElementType } from "react";
-import { StackProps } from "@/components/primitives/types"; import { applyDataAttributes } from "@/lib/utils/applyDataAttributes";
-;
-
-
+import { StackProps } from "@/components/primitives/types"; 
+import { applyDataAttributes } from "@/lib/utils/applyDataAttributes";
+import { wrapTextChildren } from "@/lib/utils/react/wrapTextChildren";
 
 /**
  * Stack — a lightweight polymorphic layout wrapper.
@@ -50,16 +49,19 @@ export default function Stack<T extends ElementType = "div">({
     variant,
     variantAppearance,
     className,
+    children,
     ...props
 }: StackProps<T>) {
 
     const Component = as ?? "div"
-
+    const SafeChildren = wrapTextChildren(children);
     return (
         <Component
             {...applyDataAttributes({ variant, appearance: variantAppearance })}
             className={clsx(`primitive stack gap-row-${gap}`, className)}
             {...props}
-        />
+        >
+            {SafeChildren}
+        </Component>
     )
 }

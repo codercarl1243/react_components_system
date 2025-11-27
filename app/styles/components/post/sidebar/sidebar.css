@@ -17,7 +17,7 @@
 /*  DESKTOP */
 @media screen and (min-width: 35rem) {
     .post-sidebar__contents {
-        margin-block-start: calc(var(--spacing) * 10);
+        margin-block-start: var(--spacing-xl);
     }
 
     main:has(.post-sidebar) {
@@ -38,6 +38,6 @@
 @media screen and (max-width: 35rem) {
     .post-sidebar {
         align-items: center;
-        padding-block-start: calc(var(--spacing) * 16);
+        padding-block-start: var(--spacing-xxl);
     }
 }

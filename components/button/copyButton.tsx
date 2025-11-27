@@ -49,14 +49,14 @@ export function CopyButton({ text }: CopyButtonProps) {
     >
       {error
         ? (
-          <Icon icon={RiErrorWarningLine} color={'red'} />
+          <Icon icon={RiErrorWarningLine} variant="danger" />
         )
         : copied
           ? (
-            <Icon icon={RiCheckFill} color={'var(--color-accent-400)'} />
+            <Icon icon={RiCheckFill} variant='accent' />
           )
           : (
-            <Icon icon={RiFileCopyLine} />
+            <Icon icon={RiFileCopyLine} variant='accent' />
           )}
     </Button>
   )

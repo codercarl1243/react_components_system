@@ -8,9 +8,10 @@ export const sizeMap = {
 } as const
 
 export type PresetSize = keyof typeof sizeMap;
-
+export type TIconVariant =  'primary' | 'secondary' | 'accent' | 'neutral' | 'danger' | 'warning' | 'success';
 export type IconProps = {
   icon: ElementType;
   size?: PresetSize | number;
   color?: string;
+  variant?: TIconVariant;
 } & SVGProps<SVGSVGElement>;

@@ -3,6 +3,7 @@
         font-size: 1rem;
         background: var(--color-neutral-900);
         border-radius: var(--radius-md);
+        min-width: 0;
     }
 
     .shiki-wrapper .button--copy {

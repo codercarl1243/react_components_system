@@ -11,7 +11,7 @@ export default function TabList ({
     tabs, 
     orientation = 'horizontal', 
     className, 
-    'data-variant': buttonVariant,
+    variant: buttonVariant,
     ...props }: TabListProps) {
   const {
     activeId,
@@ -40,8 +40,8 @@ export default function TabList ({
                         id={item.id}
                         isSelected={activeId === item.id}
                         onClick={() => setActiveTab(item.id)}
-                        data-style={activeId === item.id ? "outlined" : "filled"}
-                        data-variant={buttonVariant}
+                        variantAppearance={activeId === item.id ? "outlined" : "filled"}
+                        variant={activeId === item.id ? "neutral" : buttonVariant }
                     >
                         {item.tabLabel}
                     </Tab>

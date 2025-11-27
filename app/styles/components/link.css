@@ -1,19 +1,35 @@
 .link {
-    color: var(--link-color, currentColor);
+    --link-color: var(--link-on-surface, currentColor);
+
+    color: var(--link-color);
     text-decoration: underline;
     text-decoration-color: var(--link-underline-color, currentColor);
     text-decoration-thickness: 0.125em;
     text-underline-offset: 0.2em;
     transition: text-decoration-color 0.2s ease;
+    white-space: normal;
+    overflow-wrap: break-word;
+    word-break: break-all;
+}
+
+a:not([class]):hover,
+a:not([class]):focus-visible,
+.link:hover,
+.link:focus-visible {
+    text-decoration-style: dotted;
+    text-decoration-color: var(--link-underline-color, currentColor);
 }
 
 .link--heading {
     position: relative;
-     text-decoration: none;
-     width: fit-content;
-     &:hover, &:focus-visible {
+    text-decoration: none;
+    width: fit-content;
+
+    &:hover,
+    &:focus-visible {
         text-decoration: underline;
         text-decoration-style: dotted;
+
         &:after {
             content: '#';
             position: absolute;
@@ -23,9 +39,9 @@
             font-size: var(--font-size-xl);
             font-weight: 600;
             font-family: var(--font-accent);
-            color: var(--color-neutral-300);
+            color: var(--text-muted);
         }
-     }
+    }
 }
 
 .link-w-icon {
@@ -34,34 +50,15 @@
     align-items: center;
     gap: var(--spacing);
 }
-.link:hover,
-.link:focus-visible {
-    text-decoration-style: dotted;
-}
+
 
 .external {
-    display: inline-flex;
     align-items: baseline;
-    gap: 0.2em;
+}
+.external .icon {
+    margin-left: var(--spacing);
 }
 
 .external .icon {
     flex-shrink: 0;
-}
-a:not([class]):hover,
-a:not([class]):focus-visible {
-    text-decoration-color: var(--color-primary-600);
-}
-
-/* Optional: Remove underline and add on hover instead */
-.link-subtle {
-    color: var(--color-primary-500);
-    text-decoration: none;
-    border-bottom: 1px solid transparent;
-    transition: border-bottom-color 0.2s ease;
-}
-
-.link-subtle:hover,
-.link-subtle:focus-visible {
-    border-bottom-color: var(--color-primary-400);
 }

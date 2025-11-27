@@ -15,7 +15,7 @@
 }
 
 .flow-16>*:not(:last-child) {
-  margin-block-end: calc(var(--spacing) * 16);
+  margin-block-end: var(--spacing-xxl);
 }
 
 @media screen and (max-width: 30rem) {

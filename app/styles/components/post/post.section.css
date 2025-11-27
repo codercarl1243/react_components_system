@@ -1,12 +1,16 @@
 .post-section {
-    --post-section-spacer: calc(var(--spacing) * 16);
+    --post-section-spacer: var(--spacing-xxl);
+
     position: relative;
-    display: grid;
-    align-content: start;
-    padding-block: calc(var(--spacing) * 8);
+    padding-block: var(--spacing-xl);
+}
+
+
+.post-section p {
+    max-width: 75ch;
 }
 .post-section h2, .post-section h3 {
-    scroll-margin-block-start: calc(var(--spacing) * 12);
+    scroll-margin-block-start: var(--spacing-xl);
 }
 
 .post-section:not(:last-of-type)::after {
@@ -18,11 +22,21 @@
     left: 0;
     right: 0;
     margin-inline: auto;
-    background-color: var(--color-neutral-200);
-    box-shadow: 1px 4px 10px var(--color-neutral-800);
+    background-color: var(--text-muted);
+    box-shadow: 1px 4px 10px var(--text-on-surface);
     pointer-events: none;
 }
 
 .post-section+.post-section {
     margin-block-start: var(--post-section-spacer);
+}
+
+@media screen and (max-width: 35rem) {
+    .post-section {
+       --post-section-spacer: var(--spacing-xl);  
+    }
+
+    .post-section:not(:last-of-type)::after {
+         width: min(95%);
+    }
 }

@@ -36,6 +36,13 @@ export default function Heading<T extends ValidHeadingTag = "h3">({
   const headingId = id || generateHeadingId(children)
   const resolvedHeadingSize = headingSize ?? generateHeadingSize(Component);
 
+  const content = icon ? (
+      <>
+      <Icon icon={icon} size={getIconSize(resolvedHeadingSize)} />
+      <span className='heading__content'>{children}</span>
+      </>
+  ) : children;
+
   return (
     <Inline
       as={Component}
@@ -47,9 +54,7 @@ export default function Heading<T extends ValidHeadingTag = "h3">({
       variant={variant}
       {...props}
     >
-      {icon && <Icon icon={icon} size={getIconSize(resolvedHeadingSize)} />}
-      <span className='heading__content'>{children}</span>
+      {content}
     </Inline>
   )
-
 }

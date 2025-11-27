@@ -1,4 +1,4 @@
-import type { ComponentPropsWithRef, MouseEvent } from 'react'
+import type { MouseEvent } from 'react'
 import { IconProps } from '@/components/icon/icon.type';
 import { BlockProps } from '../primitives/types';
 

@@ -1,4 +1,5 @@
 .primitive[data-appearance="primitive"] {
+    color: var(--foreground-color);
     padding: var(--spacing-sm) var(--spacing-md);
     background-color: var(--surface-color);
     border: var(--border-thin);

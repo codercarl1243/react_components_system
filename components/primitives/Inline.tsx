@@ -2,6 +2,7 @@ import clsx from "clsx";
 import type { ElementType } from "react";
 import type { InlineProps } from "@/components/primitives/types";
 import { applyDataAttributes } from "@/lib/utils/applyDataAttributes";
+import { wrapTextChildren } from "@/lib/utils/react/wrapTextChildren";
 
 
 
@@ -20,6 +21,7 @@ export default function Inline<T extends ElementType = "div">({
     wrap = true,
     variant,
     variantAppearance,
+    children,
     className,
     ...props
 }: InlineProps<T>) {
@@ -32,10 +34,13 @@ export default function Inline<T extends ElementType = "div">({
         `inline-align-${align}`,
         className
     )
-
+    const SafeChildren = wrapTextChildren(children);
+    
     return <Component
         {...applyDataAttributes({ variant, appearance: variantAppearance })}
         className={classes}
         {...props}
-    />;
+    >
+        {SafeChildren}
+    </Component>;
 }

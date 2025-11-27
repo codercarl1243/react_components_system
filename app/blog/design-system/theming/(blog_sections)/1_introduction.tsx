@@ -14,7 +14,7 @@ export default function Section1() {
                 subtitle="How to expose flexible, accessible styling through CSS variables, data-attributes, and React hooks. The foundation you'll use for buttons, navigation, cards, and every other component in your system."
                 headingId="theming-heading"
                 image={{
-                    src: '/images/blogs/theming/main-image.webp',
+                    src: '/og-image.png',
                     alt: ""
                 }}
             />

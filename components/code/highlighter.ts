@@ -16,7 +16,8 @@ export async function getHighlighterSingleton(): Promise<Highlighter> {
       logInfo('🟦 Creating new Shiki highlighter', { context: `getHighlighterSingleton` })
     }
     const highlighterPromise = createHighlighter({
-      themes: ['github-dark', 'light-plus'],
+      // themes: ['github-dark', 'light-plus'],
+      themes: ['github-dark-default', 'github-light'],
       langs: ['tsx', 'ts', 'css', 'md', 'bash', 'html']
     }).catch(err => {
       // reset cache so a later retry can succeed
@@ -32,7 +33,7 @@ export async function getHighlighterSingleton(): Promise<Highlighter> {
 export async function getInlineCodeTheme() {
   if (globalForShiki.__inlineTheme) return globalForShiki.__inlineTheme
   const highlighter = await getHighlighterSingleton()
-  const baseTheme = highlighter.getTheme('light-plus')
+  const baseTheme = highlighter.getTheme('github-light')
 
   globalForShiki.__inlineTheme = baseTheme
   return baseTheme
@@ -45,7 +46,9 @@ export async function getCustomTheme(): Promise<ThemeRegistration> {
   if (globalForShiki.__customTheme) return globalForShiki.__customTheme
 
   const highlighter = await getHighlighterSingleton()
-  const baseTheme = highlighter.getTheme('github-dark')
+  // const baseTheme = highlighter.getTheme('github-dark')
+  const baseTheme = highlighter.getTheme('github-dark-default')
+
 
   const customTheme: ThemeRegistration = {
     ...baseTheme,

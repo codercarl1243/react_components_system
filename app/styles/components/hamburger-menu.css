@@ -71,7 +71,7 @@ main:has(.hamburger-menu--wrapper[data-mode="hamburger"]) {
         --translation: 0%;
 
         background-color: var(--surface);
-        padding-block-start: calc(var(--spacing) * 16);
+        padding-block-start: var(--spacing-xxl);
 
         position: fixed;
         top: 0;

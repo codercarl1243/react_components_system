@@ -6,6 +6,7 @@ import PostNote from "@/components/post/post.note";
 import PostSection from "@/components/post/post.section";
 import Link from "@/components/link";
 import Heading from "@/components/heading";
+import PostInfo from "@/components/post/post.info";
 
 export default function Section3() {
     return (
@@ -28,9 +29,9 @@ export default function Section3() {
                 Each of these categories follows the same structure — stable values defined on <InlineCode codeString=":root" lang="css" /> and reused across your entire system.
                 They don't style anything on their own; they simply act as the <span className="fun-underline italic">source of truth</span>.
             </p>
-            <p className="text-sm color-muted">
+            <PostInfo>
                 If you'd like to explore the full token set used in this project, you can view it on <Link href="https://github.com/codercarl1243/react_components_system/tree/main/styles/tokens">GitHub</Link>.
-            </p>
+            </PostInfo>
 
             <p>
                 Below is a simplified example using color tokens. Your own project's tokens might be simpler or more extensive, but the structure remains the same.
@@ -84,9 +85,9 @@ export default function Section3() {
                 Before we move on to component tokens, it's worth looking at a few tools that can help you evaluate and build accessible color palettes.
             </p>
 
-            <p className="text-sm neutral-600">
+            <PostInfo>
                 For a list of tools that help you design accessible, contrast-safe color palettes, see the <Link href="#resources-color-accessibility-tools">resources section</Link>.
-            </p>
+            </PostInfo>
         </PostSection>
     );
 }

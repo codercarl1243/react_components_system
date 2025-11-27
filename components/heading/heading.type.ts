@@ -1,4 +1,3 @@
-import type { PolymorphicProps } from 'react'
 import type { IconProps } from '@/components/icon/icon.type';
 import type { InlineProps } from '@/components/primitives/types';
 
