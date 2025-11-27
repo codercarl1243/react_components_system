@@ -1,5 +1,18 @@
 import Post from "@/components/post";
-import { Components, Concepts, DarkMode, Introduction, DataAttributesAndVariants, Resources, Sidebar, Summary, Testing, Theme_hook, TokensGlobal, TokensComponent } from "./(blog_sections)";
+import {
+    Components,
+    Concepts,
+    DarkMode,
+    Introduction,
+    DataAttributesAndVariants,
+    Resources,
+    Sidebar,
+    Summary,
+    Testing,
+    Theme_hook,
+    TokensGlobal,
+    TokensComponent
+} from "./(blog_sections)";
 
 
 export default function ThemingPage() {
