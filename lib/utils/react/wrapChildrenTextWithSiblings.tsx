@@ -7,7 +7,7 @@ import { isNonEmptyString, isNullish, isReactElementWithChildren } from "@/lib/u
  *
  * Non-string children are returned unchanged.
  */
-export function wrapTextChildren(children: ReactNode): ReactNode {
+export function wrapChildrenTextWithSiblings(children: ReactNode): ReactNode {
   if (isNonEmptyString(children) || typeof children === "number") {
     return children;
   }

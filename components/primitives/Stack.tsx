@@ -2,7 +2,7 @@ import clsx from "clsx";
 import type { ElementType } from "react";
 import { StackProps } from "@/components/primitives/types"; 
 import { applyDataAttributes } from "@/lib/utils/applyDataAttributes";
-import { wrapTextChildren } from "@/lib/utils/react/wrapTextChildren";
+import { wrapChildrenTextWithSiblings } from "@/lib/utils/react/wrapChildrenTextWithSiblings";
 
 /**
  * Stack — a lightweight polymorphic layout wrapper.
@@ -54,7 +54,7 @@ export default function Stack<T extends ElementType = "div">({
 }: StackProps<T>) {
 
     const Component = as ?? "div"
-    const SafeChildren = wrapTextChildren(children);
+    const SafeChildren = wrapChildrenTextWithSiblings(children);
     return (
         <Component
             {...applyDataAttributes({ variant, appearance: variantAppearance })}

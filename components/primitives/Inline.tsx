@@ -2,7 +2,7 @@ import clsx from "clsx";
 import type { ElementType } from "react";
 import type { InlineProps } from "@/components/primitives/types";
 import { applyDataAttributes } from "@/lib/utils/applyDataAttributes";
-import { wrapTextChildren } from "@/lib/utils/react/wrapTextChildren";
+import { wrapChildrenTextWithSiblings } from "@/lib/utils/react/wrapChildrenTextWithSiblings";
 
 
 
@@ -34,7 +34,7 @@ export default function Inline<T extends ElementType = "div">({
         `inline-align-${align}`,
         className
     )
-    const SafeChildren = wrapTextChildren(children);
+    const SafeChildren = wrapChildrenTextWithSiblings(children);
     
     return <Component
         {...applyDataAttributes({ variant, appearance: variantAppearance })}

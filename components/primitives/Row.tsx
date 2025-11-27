@@ -2,7 +2,7 @@ import clsx from "clsx";
 import { ElementType } from "react";
 import { RowProps } from "@/components/primitives/types";
 import { applyDataAttributes } from "@/lib/utils/applyDataAttributes";
-import { wrapTextChildren } from "@/lib/utils/react/wrapTextChildren";
+import { wrapChildrenTextWithSiblings } from "@/lib/utils/react/wrapChildrenTextWithSiblings";
 
 /**
  * Row — horizontal layout primitive.
@@ -32,7 +32,7 @@ export default function Row<T extends ElementType = "div">({
     `row-justify-${justify}`,
     className
   )
-  const SafeChildren = wrapTextChildren(children);
+  const SafeChildren = wrapChildrenTextWithSiblings(children);
 
   return <Component
     {...applyDataAttributes({ variant, appearance: variantAppearance })}
