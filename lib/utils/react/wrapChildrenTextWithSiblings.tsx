@@ -2,10 +2,10 @@ import { Children, cloneElement, Fragment, type ReactNode } from "react";
 import { isNonEmptyString, isNullish, isReactElementWithChildren } from "@/lib/utils/guards";
 
 /**
- * Wraps string children in a <span> so layout primitives (Row, Inline, etc.)
+ * Wraps string children that have adjacent children in a <span> so layout primitives (Row, Inline, etc.)
  * can apply spacing (gap) consistently.
  *
- * Non-string children are returned unchanged.
+ * Non-string or lonely children are returned unchanged.
  */
 export function wrapChildrenTextWithSiblings(children: ReactNode): ReactNode {
   if (isNonEmptyString(children) || typeof children === "number") {
@@ -46,7 +46,7 @@ export function wrapChildrenTextWithSiblings(children: ReactNode): ReactNode {
 
     // Array → recurse
     if (Array.isArray(child)) {
-      const result = wrapTextChildren(child);
+      const result = wrapChildrenTextWithSiblings(child);
       if (result !== child) wrappingNeeded = true;
       return result;
     }
@@ -54,7 +54,7 @@ export function wrapChildrenTextWithSiblings(children: ReactNode): ReactNode {
     // React element → maybe a fragment
     if (isReactElementWithChildren(child)) {
       if (child.type === Fragment) {
-        const inner = wrapTextChildren(child.props.children);
+        const inner = wrapChildrenTextWithSiblings(child.props.children);
         if (inner !== child.props.children) wrappingNeeded = true;
         return cloneElement(child, child.props, inner);
       }
