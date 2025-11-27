@@ -16,7 +16,7 @@ export default function HamburgerMenu<T extends React.ElementType = "aside">({
         <Component
             ref={menuRef}
             className={clsx(
-                'hamburger-menu',
+                {'hamburger-menu': isActive},
                 className
             )}
             id={menuId}

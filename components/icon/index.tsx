@@ -4,6 +4,7 @@ export default function Icon({
   icon: IconComponent,
   size = 'md',
   color = 'currentColor',
+  variant,
   ...props
 }: IconProps) {
   const resolvedSize =
@@ -21,6 +22,7 @@ export default function Icon({
       color={color}
       aria-hidden={isDecorative ? 'true' : undefined}
       role={isDecorative ? undefined : 'img'}
+      data-variant={variant}
       focusable="false"
       {...props}
     />

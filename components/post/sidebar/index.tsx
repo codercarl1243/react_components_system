@@ -38,7 +38,8 @@ export default function PostSideBar({
     const hasExtras = author || Children.count(children) > 0;
 
     if (!hasContents && !hasRelated && !hasExtras) return null;
-
+// todo: calc height from y:top of sidebar -> y: bottom of the window
+//  update height when scrolling down to max height of window
     return (
         <Hamburger.Wrapper 
             as="div"
@@ -48,7 +49,7 @@ export default function PostSideBar({
         >
             <Hamburger.Toggle
                 className="sidebar-toggle-button"
-                data-style='filled'
+                variant='neutral'
                 ariaLabelWhenClosed="Open table of contents"
                 ariaLabelWhenOpen="Close table of contents"
                 openIcon={RiMenuFold3Line}

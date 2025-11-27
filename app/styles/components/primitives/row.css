@@ -1,0 +1,19 @@
+.row {
+  display: flex;
+  flex-direction: row;
+}
+
+.row > span {
+  flex: 0 1 auto;
+  min-width: 0;
+}
+
+.row-align-start   { align-items: flex-start; }
+.row-align-center  { align-items: center; }
+.row-align-end     { align-items: flex-end; }
+.row-align-stretch { align-items: stretch; }
+
+.row-justify-start   { justify-content: flex-start; }
+.row-justify-center  { justify-content: center; }
+.row-justify-end     { justify-content: flex-end; }
+.row-justify-between { justify-content: space-between; }

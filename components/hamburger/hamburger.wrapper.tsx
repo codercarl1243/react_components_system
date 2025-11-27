@@ -29,7 +29,7 @@ export default function HamburgerWrapper<T extends ElementType = "div">({
             <Component
                 ref={mergedRef}
                 className={clsx(
-                    "hamburger-menu--wrapper overlay-container",
+                    {"hamburger-menu--wrapper overlay-container": state.isActive},
                     className
                 )}
                 data-overlay={(state.menuState === "open" && state.isActive) ? "visible" : "hidden"}

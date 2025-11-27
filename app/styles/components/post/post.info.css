@@ -1,0 +1,4 @@
+.postinfo {
+  color: var(--foreground-muted, var(--text-muted));
+  gap: 0.5ch;
+}

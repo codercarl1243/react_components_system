@@ -2,7 +2,7 @@
   text-decoration-line: underline;
   text-decoration-color: var(--background);
   text-decoration-thickness: 3px;
-  text-underline-offset: 2px;
+  text-underline-offset: 4px;
 }
 
 .fun-underline:nth-of-type(9n+1) {

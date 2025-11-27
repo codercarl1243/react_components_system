@@ -1,0 +1,7 @@
+.stack {
+    display: grid;
+    /* grid-auto-rows: auto; */
+    /* grid-template-columns: minmax(0, 1fr);  */
+    /* max-width: 100%; */
+      min-width: 0;
+}

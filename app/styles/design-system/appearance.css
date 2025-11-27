@@ -1,0 +1,18 @@
+/* appearance.css - appearances transform the variant colors */
+[data-appearance="filled"] {
+    --background-color: var(--variant-bg);
+    --foreground-color: var(--variant-fg);
+    --border-color: var(--variant-border);
+}
+
+[data-appearance="outlined"] {
+    --background-color: transparent;
+    --foreground-color: var(--variant-bg);
+    --border-color: var(--variant-bg);
+}
+
+[data-appearance="ghost"] {
+    --background-color: transparent;
+    --foreground-color: var(--variant-bg);
+    --border-color: transparent;
+}

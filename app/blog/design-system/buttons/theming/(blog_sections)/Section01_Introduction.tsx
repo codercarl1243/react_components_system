@@ -29,7 +29,7 @@ export default function Section01_Introduction() {
             </List>
             <p>But there's one problem: <FunHighlight>it only comes in one color</FunHighlight>.</p>
             <p>
-                In this post, we'll transform the button into a <FunHighlight>themeable component</FunHighlight> that supports multiple variants (Primary, Secondary, Accent, Danger) and styles (Filled, Outlined, Ghost) while maintaining all the accessibility and functionality we've built.
+                In this post, we'll transform the button into a <FunHighlight>themeable component</FunHighlight> that supports multiple variants (Primary, Secondary, Accent, Danger) and styles (Filled & Outlined) while maintaining all the accessibility and functionality we've built.
             </p>
             <List>
                 <li>CSS custom properties for dynamic theming</li>

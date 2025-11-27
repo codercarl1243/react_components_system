@@ -1,5 +1,8 @@
-import clsx from 'clsx'
-import type { ComponentProps } from 'react'
+import { Stack } from '@/components/primitives'
+import type { StackProps } from '@/components/primitives/types'
+import clsx from 'clsx';
+
+type SectionProps = StackProps<'section'>;
 
 /**
  * A semantic section wrapper component for organizing content within blog posts.
@@ -23,10 +26,11 @@ import type { ComponentProps } from 'react'
  * 
  * @returns A styled `<section>` element with layout wrapper and flow spacing applied.
  */
-export default function PostSection ({ children, className, ...props }: ComponentProps<'section'>) {
+export default function PostSection({ children, className, ...props }: SectionProps) {
+
   return (
-        <section className={clsx('post-section layout-wrapper flow-4', className)} {...props}>
-            {children}
-        </section>
+    <Stack as="section" className={clsx('post-section layout-wrapper width-bleed', className)} {...props}>
+      {children}
+    </Stack>
   )
 }

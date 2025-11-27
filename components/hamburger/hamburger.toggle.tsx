@@ -15,7 +15,7 @@ export default function HamburgerToggle({
     children,
     ...props
 }: HamburgerButtonProps) {
-    const { menuState, menuId, toggleMenuOpenState, buttonRef, position } = useHamburgerContext();
+    const { menuState, menuId, isActive, toggleMenuOpenState, buttonRef, position } = useHamburgerContext();
 
     const IconToRender = menuState === "open" ? (closeIcon ?? RiCloseLargeLine) : (openIcon ?? RiMenuLine);
     const ariaLabelValue = menuState === "open" ? (ariaLabelWhenOpen ?? "Close menu") : (ariaLabelWhenClosed ?? "Open menu")
@@ -32,7 +32,8 @@ export default function HamburgerToggle({
             ref={buttonRef}
             icon={IconToRender}
             className={clsx(
-                'hamburger-menu--toggle overlay-control',
+                "hamburger-menu--toggle",
+                {'overlay-control': isActive},
                 className)}
         >
             {children}

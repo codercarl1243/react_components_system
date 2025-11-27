@@ -1,0 +1,8 @@
+.primitive[data-appearance="primitive"] {
+    color: var(--foreground-color);
+    padding: var(--spacing-sm) var(--spacing-md);
+    background-color: var(--surface-color);
+    border: var(--border-thin);
+    border-color: var(--border-color);
+    border-radius: var(--radius-md);
+}

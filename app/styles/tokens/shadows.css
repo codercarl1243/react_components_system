@@ -1,5 +1,5 @@
 :root {
-    --shadow-sm: -4px 0 12px rgba(0, 0, 0, 0.15);
-    --shadow-md: -8px 0 24px rgba(0, 0, 0, 0.15);
-    --shadow-lg: -12px 0 36px rgba(0, 0, 0, 0.15);
+    --shadow-sm: -4px 0 12px  color-mix(in srgb, var(--text-on-surface) 15%, transparent);
+    --shadow-md: -8px 0 24px color-mix(in srgb, var(--text-on-surface) 15%, transparent);
+    --shadow-lg: -12px 0 36px color-mix(in srgb, var(--text-on-surface) 15%, transparent);
 }

@@ -1,0 +1,7 @@
+
+.button-example--base {
+    background: var(--color-neutral-100);
+    border: 1px solid var(--color-accent-400);
+    border-radius: var(--radius-md);
+    padding: var(--spacing-md);
+}

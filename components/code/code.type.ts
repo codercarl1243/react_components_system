@@ -1,6 +1,6 @@
 import type { BundledLanguage } from "shiki";
 
-export type SupportedLangs = Extract<BundledLanguage, 'tsx' | 'ts' | 'css' | 'md' | 'bash' | 'text'>;
+export type SupportedLangs = Extract<BundledLanguage, 'tsx' | 'ts' | 'css' | 'md' | 'bash' | 'html' | 'text'>;
 
 export type CodeProps = {
   codeString: string;
@@ -13,4 +13,5 @@ export type CodeProps = {
 export type InlineCodeProps = {
   codeString: string;
   lang?: CodeProps['lang'];
+  noWrap?: boolean;
 }

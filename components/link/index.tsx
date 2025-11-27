@@ -39,7 +39,7 @@ export default function Link({ icon, children, className, href, ...props }: Link
     return (
       <a href={href} rel="noopener noreferrer" className={clsx(className, {'link-w-icon': icon}, 'link external')} {...props}>
         {icon && <Icon icon={icon} />}
-        <span>{children}</span>
+        {children}
         <Icon color={'currentColor'} icon={RiExternalLinkLine} size={'sm'} className='icon' />
       </a>
     )

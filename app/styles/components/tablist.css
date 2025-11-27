@@ -1,3 +1,6 @@
+.tablist {
+    min-width: 0;
+}
 .tablist__header {
     display: block;
     scrollbar-width: thin;

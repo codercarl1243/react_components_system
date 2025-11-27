@@ -1,0 +1,43 @@
+import clsx from "clsx";
+import { ElementType } from "react";
+import { RowProps } from "@/components/primitives/types";
+import { applyDataAttributes } from "@/lib/utils/applyDataAttributes";
+import { wrapChildrenTextWithSiblings } from "@/lib/utils/react/wrapChildrenTextWithSiblings";
+
+/**
+ * Row — horizontal layout primitive.
+ *
+ * Places children in a horizontal line with optional spacing,
+ * alignment, and justification.
+ *
+ * Perfect for "icon + text", button groups, toolbars, etc.
+ */
+export default function Row<T extends ElementType = "div">({
+  as,
+  gap = 4,
+  align = "center",
+  justify = "start",
+  variant,
+  variantAppearance,
+  className,
+  children,
+  ...props
+}: RowProps<T>) {
+  const Component = as || "div";
+
+  const classes = clsx(
+    "primitive row",
+    `gap-col-${gap}`,
+    `row-align-${align}`,
+    `row-justify-${justify}`,
+    className
+  )
+  const SafeChildren = wrapChildrenTextWithSiblings(children);
+
+  return <Component
+    {...applyDataAttributes({ variant, appearance: variantAppearance })}
+    className={classes}
+    {...props}>
+    {SafeChildren}
+  </Component>;
+}

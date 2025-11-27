@@ -6,6 +6,7 @@ import useButton from '@/components/button/useButton'
 import Spinner from '@/components/spinner'
 import Icon from '@/components/icon'
 import { handleKeyPress } from '@/lib/utils/keyboardHandlers'
+import { Block } from '../primitives'
 
 /**
  * A base, accessible button component that supports loading states and 
@@ -83,8 +84,8 @@ export default function Button({
     })
   }
   return (
-    <button
-      {...props}
+    <Block
+      as="button"
       className={clsx(className, { 'button-w-icon': icon }, 'button')}
       onClick={onClickHandler}
       aria-disabled={isLoading || disabled}
@@ -94,10 +95,11 @@ export default function Button({
       onKeyDown={onKeyDown}
       onKeyUp={onKeyUp}
       data-testid="base-button"
+      {...props}
     >
       {icon && <Icon icon={icon} />}
       <span className='button__content'>{children}</span>
       {isLoading && <Spinner />}
-    </button>
+    </Block>
   )
 }

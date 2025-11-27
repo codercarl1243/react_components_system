@@ -2,6 +2,7 @@ import { type ComponentProps } from 'react'
 import Icon from '../icon'
 import { RiInformationLine } from '@remixicon/react'
 import clsx from 'clsx'
+import { Stack } from '../primitives';
 
 /**
  * A prominently styled note component for highlighting important information within blog posts.
@@ -16,7 +17,7 @@ import clsx from 'clsx'
  * ```
  * 
  * @param children - The content to display in the note.
- * @param className - Additional CSS class names to apply to the note container. These are merged with the default 'post-note width-bleed' classes.
+ * @param className - Additional CSS class names to apply to the note container. These are merged with the default 'post-note' classes.
  * @param props - All other standard HTML div element attributes (id, data-*, aria-*, etc.)
  * 
  * @returns A styled note container with an information icon, or null if no children are provided.
@@ -31,16 +32,19 @@ export default function PostNote({ className, children, ...props }: ComponentPro
   if (!children) return;
 
   return (
-    <div
-      // data-expanded={"false"}
-      className={clsx(className, 'flow-4 post-note')}
+    <Stack
+      {...props}
+      className={clsx(className, 'post-note')}
+      gap={4}
       role={'note'}
-      {...props}>
-      <Icon icon={RiInformationLine} size={32} className="post-note__icon" />
-      <div className="flow-4 post-note__content">
+      variant='info'
+      variantAppearance='primitive'
+    >
+      <Icon icon={RiInformationLine} size={24} className="post-note__icon" />
+      <Stack className="post-note__content">
         {children}
-      </div>
+      </Stack>
 
-    </div>
+    </Stack>
   )
 }

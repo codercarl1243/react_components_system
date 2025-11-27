@@ -1,7 +1,7 @@
 .post-card__list {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 450px));
-    gap: calc(var(--spacing-md));
+    gap: var(--spacing-md);
 }
 
 .post-card {
@@ -11,7 +11,7 @@
     display: flex;
     flex-direction: column;
     box-shadow: var(--shadow-sm);
-    gap: calc(var(--spacing));
+    gap: var(--spacing);
     cursor: pointer;
     padding-block-end: var(--spacing-md)
 }

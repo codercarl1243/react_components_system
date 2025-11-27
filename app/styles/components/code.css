@@ -3,6 +3,7 @@
         font-size: 1rem;
         background: var(--color-neutral-900);
         border-radius: var(--radius-md);
+        min-width: 0;
     }
 
     .shiki-wrapper .button--copy {
@@ -78,7 +79,12 @@
         }
     }
 
-    @media (max-width: 768px) {
+    @media (max-width: 48rem) {
+        .shiki {
+            line-height: 1.2;
+
+        }
+
         .shiki-wrapper pre {
             max-height: 22rem;
             padding-inline-end: 0;
@@ -89,11 +95,18 @@
     .shiki-inline {
         background-color: var(--color-inline-bg);
         border: var(--border-thin);
-        padding: 0.125em 0.2em;
+        padding: 0.125em var(--spacing);
         border-radius: var(--radius-md);
         white-space: pre-wrap;
         word-break: break-word;
         overflow-wrap: break-word;
         box-decoration-break: clone;
         -webkit-box-decoration-break: clone;
+    }
+
+
+    .shiki-inline.text-nowrap {
+        white-space: pre-line;
+        overflow-wrap: break-word;
+        word-break: break-word;
     }

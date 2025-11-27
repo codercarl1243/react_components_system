@@ -131,8 +131,8 @@ export type BaseButtonProps = {
               <Code lang="css" codeString={`.button {
     /* Layout properties */
     --button-font-size: 1rem;
-    --button-margin: calc(var(--spacing) * 2);
-    --button-padding-y: calc(var(--spacing) * 2);
+    --button-margin: var(--spacing-sm);
+    --button-padding-y: var(--spacing-sm);
     --button-padding-x: var(--spacing);
     --button-icon-width: 24px;
     --button-spinner-width: 24px;
