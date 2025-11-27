@@ -83,7 +83,7 @@ export default function Section5() {
           tabListName="data-attributes-variants_codeReference"
           className="code__reference"
           defaultActiveTabId="[tbc]"
-          data-variant="accent"
+          variant="accent"
           orientation="horizontal"
           tabs={[
             {
