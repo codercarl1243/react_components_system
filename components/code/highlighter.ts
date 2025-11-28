@@ -120,10 +120,9 @@ export function highlightCustomTokens(
     const regex = new RegExp(replaceRegex, 'g');
     const attrs = [`data-variant="${variant}"`];
     if (appearance) attrs.push(`data-appearance="${appearance}"`);
-    result = result.replace(
-      regex,
-      `<span class="custom-code-highlight" ${attrs.join(' ')}>${token}</span>`
-    );
+    result = result.replace(regex, () => {
+      return `<span class="custom-code-highlight" ${attrs.join(' ')}>${token}</span>`;
+    });
   }
 
   return result;
