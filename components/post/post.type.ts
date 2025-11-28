@@ -1,6 +1,6 @@
 import type { ValidHeadingTag } from '@/components/heading/heading.type';
 import type { PostSummary, PostType } from '@/lib/blog/blog.types';
-import { BlockProps } from '@/components/primitives/types';
+import type { BlockProps } from '@/components/primitives/types';
 
 export type PostBannerContent  = Pick<PostType, 'title' | 'subtitle' | 'image'>;
 

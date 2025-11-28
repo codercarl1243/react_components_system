@@ -1,0 +1,53 @@
+/**
+ * Semantic color variants used across the design system.
+ *
+ * These variants map directly to design-token system
+ * (e.g. `--color-primary-*`, `--text-on-primary`, etc.)
+ *
+ * Components like Button, Link, InlineCode, PostNote, Card, etc.
+ * consume this type to ensure consistency across the entire UI.
+ *
+ * Example:
+ * ```ts
+ * <Button      variant="accent" />
+ * <InlineCode  highlightVariant="warning" />
+ * <PostNote    variant="info" />
+ * ```
+ */
+export type Variant =
+    | "primary"
+    | "secondary"
+    | "accent"
+    | "danger"
+    | "warning"
+    | "success"
+    | "info"
+    | "neutral"
+    | "muted";
+
+/**
+ * Visual appearance variants that control *how* a component is rendered,
+ * independent of its semantic color variant.
+ *
+ * These map to different visual treatments for interactive or decorative
+ * components such as Button, Tag, Chip, Badge, etc.
+ *
+ * The meaning of each:
+ *
+ * - **filled** — Solid background with foreground text (most prominent)
+ * - **outlined** — Transparent background with a 1px border
+ * - **ghost** — Minimal chrome, subtle hover/focus treatments
+ * - **primitive** — adds background to the primitive component. Only usable with primitives i.e. Row, Stack, Block etc.
+ *
+ * Example:
+ * ```ts
+ * <Button  variant="primary"   variantAppearance="filled" />
+ * <Button  variant="accent"    variantAppearance="outlined" />
+ * <Row     variant="primary"   variantAppearance="primitive" />
+ * ```
+ */
+export type VariantAppearance =
+    | "filled"
+    | "outlined"
+    | "ghost"
+    | "primitive";
