@@ -19,7 +19,7 @@ export default async function Code({
   }
 
   if (inline) {
-    return <InlineCode codeString={codeString} lang={lang} />
+    return <InlineCode codeString={codeString} lang={lang} noWrap={true} highlightTokens={highlightTokens} options={options}/>
   }
   
   const highlighter = await getHighlighterSingleton()
