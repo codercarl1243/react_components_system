@@ -1,10 +1,18 @@
 .shiki .custom-code-highlight {
-    background: var(--color-primary-400);
-    color: var(--text-on-primary);
+    background: var(--surface-color);
+    color: var(--color-neutral-900);
     padding: 0 0.15em;
+    border: var(--border-thin);
+    border-style: dashed;
+    border-color: var(--border-color);
     border-radius: var(--radius-sm);
     box-decoration-break: clone;
     -webkit-box-decoration-break: clone;
+}
+.shiki .custom-code-highlight:hover {
+    border-style: solid;
+    background:  var(--color-neutral-900);
+    color: var(--surface-color);
 }
 
 .shiki-wrapper {

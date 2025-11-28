@@ -11,7 +11,8 @@ export default async function Code({
   layout = 'content',
   title,
   copyEnabled = true,
-  highlightTokens = []
+  highlightTokens = [],
+  options
 }: CodeProps) {
   if (!codeString.trim()) {
     return null
@@ -33,7 +34,7 @@ export default async function Code({
       theme: customTheme
     }
   )
-  const highlightedCode = highlightCustomTokens(out, highlightTokens);
+  const highlightedCode = highlightCustomTokens(out, highlightTokens, options);
   const titleId = title ? `code-${createHash('sha1').update(title).digest('hex').slice(0, 8)}` : undefined;
 
   return (
