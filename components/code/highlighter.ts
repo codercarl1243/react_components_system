@@ -114,6 +114,7 @@ export function highlightCustomTokens(
   const appearance = options?.appearance;
 
   for (const token of tokens) {
+    if (!token) continue;
     const replaceRegex = token.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 
     const regex = new RegExp(replaceRegex, 'g');
