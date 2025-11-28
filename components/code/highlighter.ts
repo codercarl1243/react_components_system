@@ -1,4 +1,5 @@
 import { logError, logInfo } from '@/lib/logging/log'
+import { isNonEmptyArray } from '@/lib/utils/guards'
 import { createHighlighter, type Highlighter, type ThemeRegistration } from 'shiki'
 
 
@@ -94,4 +95,23 @@ export async function getCustomTheme(): Promise<ThemeRegistration> {
 
   globalForShiki.__customTheme = customTheme
   return customTheme
+}
+
+export function highlightCustomTokens(html: string, tokens: string[] = []) {
+    if (!isNonEmptyArray(tokens)) return html;
+
+    let result = html;
+
+    for (const token of tokens) {
+        const safe = token.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+
+        const regex = new RegExp(safe, 'g');
+
+        result = result.replace(
+            regex,
+            `<span class="custom-code-highlight">${token}</span>`
+        );
+    }
+
+    return result;
 }

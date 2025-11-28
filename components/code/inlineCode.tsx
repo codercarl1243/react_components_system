@@ -1,10 +1,11 @@
 import { InlineCodeProps, SupportedLangs } from "./code.type";
-import { getHighlighterSingleton, getInlineCodeTheme } from "./highlighter";
+import { getHighlighterSingleton, getInlineCodeTheme, highlightCustomTokens } from "./highlighter";
 
 export default async function InlineCode({
     codeString,
     lang = 'tsx',
-    noWrap = true
+    noWrap = true,
+    highlightTokens = []
 }: InlineCodeProps) {
 
     const highlighter = await getHighlighterSingleton()
@@ -20,7 +21,8 @@ export default async function InlineCode({
         }
     )
 
-    const innerHtml = out.replace(/^.*?<code[^>]*>|<\/code>.*$/gs, '')
+    let innerHtml = out.replace(/^.*?<code[^>]*>|<\/code>.*$/gs, '')
+    innerHtml = highlightCustomTokens(innerHtml, highlightTokens);
 
     // biome-ignore lint/security/noDangerouslySetInnerHtml: Shiki output is trusted in this context
     return (

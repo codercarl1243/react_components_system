@@ -9,9 +9,8 @@ export type CodeProps = {
   layout?: 'full' | 'bleed' | 'content';
   title?: string;
   copyEnabled?: boolean;
+  highlightTokens?: string[];
 }
-export type InlineCodeProps = {
-  codeString: string;
-  lang?: CodeProps['lang'];
+export type InlineCodeProps = Pick<CodeProps, 'codeString' | 'lang' | 'highlightTokens'> & {
   noWrap?: boolean;
 }
