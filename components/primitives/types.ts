@@ -44,7 +44,11 @@ export type InlineProps<T extends ElementType = "div"> = PolymorphicProps<
 >;
 
 export type StackProps<T extends ElementType = "div"> =
-    PolymorphicProps<T, { gap?: Gap; } & BaseStyleProps>;
+    PolymorphicProps<T, {
+        gap?: Gap;
+        align?: "start" | "center" | "end" | "stretch" | "baseline";
+        justify?: "start" | "center" | "end" | "stretch";
+    } & BaseStyleProps>;
 
 export type RowProps<T extends ElementType = "div"> = PolymorphicProps<
     T,

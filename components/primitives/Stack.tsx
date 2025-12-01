@@ -47,6 +47,8 @@ export default function Stack<T extends ElementType = "div">({
     gap = 4,
     as,
     variant,
+    align,
+    justify,
     variantAppearance,
     className,
     children,
@@ -58,7 +60,12 @@ export default function Stack<T extends ElementType = "div">({
     return (
         <Component
             {...applyDataAttributes({ variant, appearance: variantAppearance })}
-            className={clsx(`primitive stack gap-row-${gap}`, className)}
+            className={clsx(
+                `primitive stack`,
+                `gap-row-${gap}`, 
+                align ? `stack-align-${align}` : '',
+                justify ? `stack-justify-${justify}` : '',
+                className)}
             {...props}
         >
             {SafeChildren}

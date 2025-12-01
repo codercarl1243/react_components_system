@@ -1,8 +1,8 @@
 import type { ValidHeadingTag } from '@/components/heading/heading.type';
 import type { PostSummary, PostType } from '@/lib/blog/blog.types';
-import type { BlockProps } from '@/components/primitives/types';
+import type { BlockProps, StackProps } from '@/components/primitives/types';
 
-export type PostBannerContent  = Pick<PostType, 'title' | 'subtitle' | 'image'>;
+export type PostBannerContent = Pick<PostType, 'title' | 'subtitle' | 'image'>;
 
 export type PostBannerProps = {
   post?: PostBannerContent;
@@ -13,9 +13,14 @@ export type PostBannerProps = {
 }
 
 export type PostCardPropsType = {
-    variant?: 'featured' | 'card';
-    post: PostSummary;
-    as: Exclude<ValidHeadingTag, 'h1'>;
+  variant?: 'featured' | 'card';
+  post: PostSummary;
+  as: Exclude<ValidHeadingTag, 'h1'>;
 };
+
+export type SectionProps = StackProps<'section'> & {
+  width?: "content" | "bleed" | "full"
+};
+
 
 export type PostPropsType = BlockProps<'article'>;
