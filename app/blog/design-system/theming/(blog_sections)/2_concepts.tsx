@@ -12,17 +12,18 @@ import { RiCodeSSlashLine, RiPaletteLine, RiPuzzleLine, RiStackLine } from "@rem
 export default function Section2() {
 
     return (
-        <PostSection id="core-concepts" gap={6}>
-            <AnchorHeading as="h2" id="core-concepts-heading">Core Concepts: How CSS-Only Theming Works</AnchorHeading>
-
+        <PostSection id="core-concepts">
+            <AnchorHeading as="h2" id="core-concepts-heading">
+                Core Concepts: How CSS-Only Theming Works
+            </AnchorHeading>
             <p>
                 Before writing any code, we need a clear mental model of how CSS-only theming actually works. A pure CSS theming system isn&apos;t magic — it&apos;s a small set of powerful ideas working together.
             </p>
 
-            <Stack gap={2}>
+            <Stack>
                 <p className="bold">Here are the core building blocks:</p>
 
-                <List spacing="loose" variant="none">
+                <List spacing="normal" variant="none">
                     <li>
                         <p>
                             <span className="bold"><Icon icon={RiPaletteLine} color={"var(--color-primary-400)"} /> Design Tokens:</span> Global CSS variables that represent your <span className="fun-underline">brand colors</span>, <span className="fun-underline">spacing</span>, and <span className="fun-underline">typography</span> — the raw ingredients of your theme.

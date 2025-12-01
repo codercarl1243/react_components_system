@@ -11,22 +11,23 @@ import { Inline, Stack } from "@/components/primitives";
 import TabList from "@/components/tablist";
 import TokenFlowDiagram from '@/app/blog/design-system/theming/examples/5_TokenFlowDiagram'
 import PostInfo from "@/components/post/post.info";
+
 export default function Section5() {
   return (
-    <PostSection id="data-attributes-variants" gap={6}>
+    <PostSection id="data-attributes-variants">
       <AnchorHeading as="h2" prefix="Step 3 —" id="data-attributes-variants-heading">
         Apply Variants with Data Attributes
       </AnchorHeading>
 
       <Stack>
         <p>
-          With global tokens and component tokens in place, the final piece is deciding <em>which values</em> a component should use in different contexts. This is where <span className="bold">data attributes</span> come in.
+          With global tokens and component tokens in place, the final piece is deciding <em>which values</em> a component should use in different contexts. This is where <span className="bold">variants</span> come in.
         </p>
 
         <p>
           Instead of scattering variant logic across JavaScript or component props, you define variants through CSS attribute selectors like <InlineCode codeString='[data-variant="primary"]' lang="css" />. The browser handles the cascade automatically — no runtime overhead, no theme providers, no context.
         </p>
-        
+
         <TokenFlowDiagram />
 
       </Stack>
@@ -92,7 +93,6 @@ export default function Section5() {
               panelContent: (
                 <Code
                   lang="css"
-                  copyEnabled={false}
                   codeString={`/* components like switch buttons, icons, cards, modals, etc. */
 @layer components;
  /* design-token over rides */
@@ -108,7 +108,6 @@ export default function Section5() {
               panelContent: (
                 <Code
                   lang="css"
-                  copyEnabled={false}
                   codeString={`/* ./components/button.css - Button component (unchanged from previous section) */
 .button {
   --background-color: var(--color-primary-400);
@@ -126,33 +125,34 @@ export default function Section5() {
             },
             {
               id: 'data-attributes-variants_variant-styles',
-              tabLabel: 'variant.css',
+              tabLabel: 'variants.css',
               panelContent: (
                 <Code
                   lang="css"
                   copyEnabled={false}
-                  codeString={`/* ./design-system/variants.css - Global variant definitions */
-@layer design-system {
+                  codeString={`/* Universal mapping for all variants */
+[data-variant] {
+  --background-color: var(--variant-bg);
+  --foreground-color: var(--variant-fg);
+  --border-color: var(--variant-border);
+  --surface-color: var(--variant-surface);
+}
+
+/* Variants define their color palette */
 [data-variant="primary"] {
   --variant-bg: var(--color-primary-400);
   --variant-fg: var(--text-on-primary);
   --variant-border: var(--color-primary-600);
-  
-  --background-color: var(--variant-bg);
-  --foreground-color: var(--variant-fg);
-  --border-color: var(--variant-border);
+  --variant-surface: var(--color-primary-100);
 }
 
 [data-variant="secondary"] {
   --variant-bg: var(--color-secondary-400);
   --variant-fg: var(--text-on-secondary);
   --variant-border: var(--color-secondary-600);
-  
-  --background-color: var(--variant-bg);
-  --foreground-color: var(--variant-fg);
-  --border-color: var(--variant-border);
-}
-}`} />
+  --variant-surface: var(--color-secondary-100);
+}`}
+                />
               )
             }
           ]}
@@ -161,9 +161,15 @@ export default function Section5() {
           Now any element with <InlineCode codeString='data-variant="secondary"' /> will use the secondary colour palette. The component's internal CSS doesn't change — only the semantic token values do.
         </p>
         <PostNote>
-          <p>A <span className="bold">variant</span> represents a semantic colour role such as <span className="italic">“primary”</span> or <span className="italic">“secondary”</span>.</p>
-          <PostInfo>Variants can be applied directly on a component, or a wrapper higher in the DOM to theme entire UI regions at once.</PostInfo>
-          <p>A <span className="bold">style</span> defines <em>how</em> a component consumes those tokens — for example, “filled” or “outlined”.</p>
+          <p>
+            The <InlineCode codeString="[data-variant]" lang="css" /> selector establishes a universal mapping from variant palette tokens (<InlineCode codeString="--variant-bg" lang="css" />, etc.) to semantic tokens (<InlineCode codeString="--background-color" lang="css" />, etc.).
+          </p>
+          <p>
+            Each specific variant only needs to define its color palette — the mapping is handled automatically. This keeps variant definitions DRY and consistent.
+          </p>
+          <p>
+            This indirection becomes essential in the next section when we introduce <strong>appearances</strong> — modifiers like <InlineCode codeString="filled" />, <InlineCode codeString="outlined" />, or <InlineCode codeString="ghost" /> that transform how variant colors are applied to components.
+          </p>
         </PostNote>
       </Stack>
 
@@ -185,7 +191,6 @@ export default function Section5() {
 
         <Inline
           gap={2}
-        // style={{ display: "flex", gap: "var(--spacing-md)", justifyContent: "center" }}
         >
           <Button>Click me</Button>
           <Button data-variant="primary">Get started</Button>

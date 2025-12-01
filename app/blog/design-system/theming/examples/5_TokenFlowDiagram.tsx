@@ -1,69 +1,136 @@
-import InlineCode from "@/components/code/inlineCode";
+import Code from "@/components/code";
 import Icon from "@/components/icon";
-import { Inline, Row, Stack } from "@/components/primitives";
-import { RiCodeSSlashFill, RiPaletteFill, RiPuzzleFill } from "@remixicon/react";
+import { Row, Stack } from "@/components/primitives";
+import { RiArrowDownLongFill, RiCodeSSlashFill, RiPaletteFill, RiPuzzleFill } from "@remixicon/react";
 
 
 export default function TokenFlowDiagram() {
 
     return (
-        <Inline
+        <Stack
             as="figure"
-            gap={8}
+            gap={4}
             align="stretch"
             className="theming-diagram"
             variant="info"
             variantAppearance="primitive"
-            wrap
         >
             <Stack
                 gap={4}
                 className="theming-diagram-box"
                 variant="primary"
                 variantAppearance="primitive"
+                align="stretch"
             >
-                <Row as="strong" gap={2} className="theming-diagram-box--heading"><Icon icon={RiPaletteFill} color="var(--color-primary-400)" />Global Design Tokens</Row>
-                <InlineCode codeString={`--color-primary-400
---color-secondary-400`} lang="css" />
+                <Row as="strong" gap={2} className="theming-diagram-box--heading">
+                    <Icon icon={RiPaletteFill} color="var(--color-primary-400)" />
+                    Global Design Tokens
+                </Row>
+                <Code
+                    copyEnabled={false}
+                    codeString={`--color-primary-400: blue;
+--color-primary-600: darkblue;
+--color-neutral-100: white;`}
+                    lang="css" />
+            </Stack>
+            <Stack 
+            justify="center">
+                <Icon
+                    icon={RiArrowDownLongFill}
+                    size={42}
+                    color="var(--color-primary-400)"
+                />
             </Stack>
             <Stack
                 gap={4}
                 className="theming-diagram-box"
                 variant="secondary"
                 variantAppearance="primitive"
+                align="stretch"
             >
-                <Row as="strong" gap={2} className="theming-diagram-box--heading"><Icon icon={RiCodeSSlashFill} color="var(--color-secondary-400)" />Variant Tokens</Row>
-                <InlineCode codeString={`--background-color
---foreground-color`} lang="css" />
+                <Row as="strong" gap={2} className="theming-diagram-box--heading">
+                    <Icon icon={RiCodeSSlashFill} color="var(--color-secondary-400)" />
+                    Variant Tokens
+                </Row>
+                <Code
+                    highlightTokens={['var(--color-primary-400)', 'var(--color-neutral-100)', 'var(--color-primary-600)', 'var(--color-primary-100)']}
+                    options={{ variant: 'primary' }}
+                    copyEnabled={false}
+                    codeString={`/* Variant palette (consumes global tokens) */
+--variant-bg: var(--color-primary-400);
+--variant-fg: var(--color-neutral-100);
+--variant-border: var(--color-primary-600);
+--variant-surface: var(--color-primary-100);
+
+/* Semantic tokens (consumes variant palette) */
+--background-color: var(--variant-bg);
+--foreground-color: var(--variant-fg);
+--border-color: var(--variant-border);
+--surface-color: var(--variant-surface);`}
+                    lang="css" />
+            </Stack>
+            <Stack 
+            justify="center">
+                <Icon
+                    icon={RiArrowDownLongFill}
+                    size={42}
+                    color="var(--color-secondary-400)"
+                />
             </Stack>
             <Stack
                 gap={8}
                 className="theming-diagram-box theming-diagram__component-layer"
                 variant="accent"
                 variantAppearance="primitive"
+                align="stretch"
             >
-                <Row as="strong" gap={2} className="theming-diagram-box--heading"><Icon icon={RiPuzzleFill} color="var(--color-accent-400)" />Component Layer</Row>
+                <Row as="strong" gap={2} className="theming-diagram-box--heading">
+                    <Icon icon={RiPuzzleFill} color="var(--color-accent-400)" />
+                    Component Layer
+                </Row>
+
+
                 <Stack
                     gap={4}
                     className="theming-diagram-box"
                     variant="accent"
                     variantAppearance="filled"
-                    >
-                    <Row as="strong" className="theming-diagram-box--heading">Component Tokens</Row>
-                    <InlineCode codeString={`--button-background-color
---button-foreground-color`} lang="css" />
+                    align="stretch"
+                >
+                    <Row as="strong" className="theming-diagram-box--heading">
+                        Component Tokens
+                    </Row>
+                    <Code
+                        copyEnabled={false}
+                        highlightTokens={['var(--background-color)', 'var(--foreground-color)', 'var(--border-color)']}
+                        options={{ variant: 'secondary' }}
+                        codeString={`--button-background-color: var(--background-color);
+--button-foreground-color: var(--foreground-color);
+--button-border-color: var(--border-color);`}
+                        lang="css" />
                 </Stack>
+
+
                 <Stack
                     gap={4}
-                    className="theming-diagram-box">
-                    <Row as="strong" className="theming-diagram-box--heading">Component Styles</Row>
-                    <InlineCode codeString={`background-color: var(--button-background-color);
-color: var(--button-foreground-color);`} lang="css" />
+                    className="theming-diagram-box"
+                    align="stretch">
+                    <Row as="strong" className="theming-diagram-box--heading">
+                        Component Styles
+                    </Row>
+                    <Code
+                        copyEnabled={false}
+                        highlightTokens={['var(--button-background-color)', 'var(--button-foreground-color)', 'var(--button-border-color)']}
+                        options={{ variant: 'accent' }}
+                        codeString={`background: var(--button-background-color);
+color: var(--button-foreground-color);
+border: 1px solid var(--button-border-color);`}
+                        lang="css" />
                 </Stack>
             </Stack>
             <figcaption className="italic">
                 The three-layer token architecture: values flow from global, to Variants, and down to the component layer
             </figcaption>
-        </Inline>
+        </Stack>
     )
 }
