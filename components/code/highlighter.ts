@@ -92,7 +92,7 @@ export async function getCustomTheme(): Promise<ThemeRegistration> {
       comment: 'var(--color-neutral-300)',
     },
     colorReplacements: {
-      '#24292e': '--color-neutral-800)',
+      '#24292e': 'var(--color-neutral-800)',
     },
   }
 
