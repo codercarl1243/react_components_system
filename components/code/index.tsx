@@ -1,4 +1,4 @@
-import { getHighlighterSingleton, getCustomTheme } from '@/components/code/highlighter'
+import { getHighlighterSingleton, getCustomTheme, highlightCustomTokens } from '@/components/code/highlighter'
 import { CopyButton } from '@/components/button/copyButton'
 import { createHash } from 'crypto';
 import { CodeProps, SupportedLangs } from './code.type';
@@ -10,14 +10,16 @@ export default async function Code({
   inline = false,
   layout = 'content',
   title,
-  copyEnabled = true
+  copyEnabled = true,
+  highlightTokens = [],
+  options
 }: CodeProps) {
   if (!codeString.trim()) {
     return null
   }
 
   if (inline) {
-    return <InlineCode codeString={codeString} lang={lang} />
+    return <InlineCode codeString={codeString} lang={lang} noWrap={true} highlightTokens={highlightTokens} options={options}/>
   }
   
   const highlighter = await getHighlighterSingleton()
@@ -32,7 +34,7 @@ export default async function Code({
       theme: customTheme
     }
   )
-
+  const highlightedCode = highlightCustomTokens(out, highlightTokens, options);
   const titleId = title ? `code-${createHash('sha1').update(title).digest('hex').slice(0, 8)}` : undefined;
 
   return (
@@ -45,7 +47,7 @@ export default async function Code({
       )}
       {/* biome-ignore lint/security/noDangerouslySetInnerHtml: Shiki output is trusted in this context */}
       <div {...(title && { role: 'region', 'aria-labelledby': titleId, tabIndex: 0 })}
-        dangerouslySetInnerHTML={{ __html: out }} />
+        dangerouslySetInnerHTML={{ __html: highlightedCode }} />
     </div>
   )
 }

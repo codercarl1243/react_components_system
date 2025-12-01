@@ -1,29 +1,5 @@
+import { Variant, VariantAppearance } from "@/types/variant";
 import { ElementType, PolymorphicProps } from "react";
-
-/* ---------------------------------- */
-/*        Variant Types               */
-/* ---------------------------------- */
-
-export type Variant =
-    | "primary"
-    | "secondary"
-    | "accent"
-    | "danger"
-    | "warning"
-    | "success"
-    | "info"
-    | "neutral"
-    | "muted";
-
-/* ---------------------------------- */
-/*      Variant Appearance Types      */
-/* ---------------------------------- */
-
-export type VariantAppearance =
-    | "filled"
-    | "outlined"
-    | "ghost"
-    | "primitive";
 
 /* ---------------------------------- */
 /*        Shared Style Props          */
