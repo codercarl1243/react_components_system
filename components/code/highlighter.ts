@@ -96,8 +96,6 @@ export async function getCustomTheme(): Promise<ThemeRegistration> {
     },
   }
 
-  logInfo("🧧 customTheme", {data: customTheme})
-
   globalForShiki.__customTheme = customTheme
   return customTheme
 }
