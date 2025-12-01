@@ -1,6 +1,6 @@
   .layout-wrapper {
     --layout-min-width: var(--bp-xs);
-    --layout-max-width: var(--bp-xl);
+    --layout-max-width: 80ch;
     --layout-padding: clamp(0.25rem, 1vw, 1.5rem);
     --layout-bleed: clamp(0.25rem, 1.5vw, 3rem);
 

@@ -56,11 +56,12 @@ export async function getCustomTheme(): Promise<ThemeRegistration> {
   const customTheme: ThemeRegistration = {
     ...baseTheme,
     name: 'custom-github-dark',
+    bg: "var(--color-neutral-700)",
     settings: [
       {
         settings: {
-          foreground: baseTheme.settings?.[0]?.settings?.foreground || '#e1e4e8',
-          background: '#1c1e24',
+          foreground: baseTheme.settings?.[0]?.settings?.foreground || 'var(--color-neutral-300)',
+          background: 'var(--color-neutral-700)',
         },
       },
       ...(baseTheme.settings || []).slice(1).filter((token) => {
@@ -80,18 +81,18 @@ export async function getCustomTheme(): Promise<ThemeRegistration> {
           'string.comment',
         ],
         settings: {
-          foreground: '#9198a1',
+          foreground: 'var(--color-neutral-300)',
           fontStyle: 'italic',
         },
       },
     ],
     colors: {
       ...baseTheme.colors,
-      'editor.background': '#1c1e24',
-      comment: '#9198a1',
+      'editor.background': 'var(--color-neutral-800)',
+      comment: 'var(--color-neutral-300)',
     },
     colorReplacements: {
-      '#24292e': '#1c1e24',
+      '#24292e': 'var(--color-neutral-800)',
     },
   }
 

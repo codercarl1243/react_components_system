@@ -94,6 +94,10 @@
     .line:hover {
         background-color: var(--color-neutral-900);
     }
+    .line:hover .custom-code-highlight {
+        background-color: var(--color-neutral-900);
+        color: var(--surface-color);
+    }
 }
 
 @media (max-width: 48rem) {

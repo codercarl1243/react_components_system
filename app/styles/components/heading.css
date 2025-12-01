@@ -7,7 +7,8 @@
     color: var(--heading-color, var(--color-secondary-400));
 
     overflow-wrap: break-word;
-    text-wrap: balance;
+    word-break: keep-all;
+    text-wrap: auto;
     hyphens: auto;
 }
 
