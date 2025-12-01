@@ -8,18 +8,15 @@ import { wrapChildrenTextWithSiblings } from "@/lib/utils/react/wrapChildrenText
  * Stack — a lightweight polymorphic layout wrapper.
  *
  * This component provides consistent vertical spacing between its children
- * using your `flow-*` utility classes, while allowing you to choose the
- * rendered HTML element via the `as` prop.
- *
- * It is useful for grouping content in your design system or blog
- * without introducing layout-specific div wrappers everywhere.
+ * using `flow-*` utility classes, while allowing polymorphic choice of a HTML element via the `as` prop.
  *
  * @template T The HTML element or React component to render.
  *
  * @param {Object} props
  * @param {T} [props.as="div"] – The element type to render. Defaults to `<div>`.
  * @param {0 | 4 | 8 | 16} [props.gap=4] – Vertical spacing between children,
- * mapped to your `flow-{gap}` utility classes.
+ * @param {"start" | "center" | "end" | "stretch" | "baseline"} [props.align] – Vertical alignment of items.
+ * @param {"start" | "center" | "end" | "stretch"} [props.justify] – Horizontal justification of items.
  * @param {string} [props.className] – Additional class names to apply.
  * @param {React.ReactNode} [props.children] – The component children.
  *
@@ -47,6 +44,8 @@ export default function Stack<T extends ElementType = "div">({
     gap = 4,
     as,
     variant,
+    align,
+    justify,
     variantAppearance,
     className,
     children,
@@ -58,7 +57,12 @@ export default function Stack<T extends ElementType = "div">({
     return (
         <Component
             {...applyDataAttributes({ variant, appearance: variantAppearance })}
-            className={clsx(`primitive stack gap-row-${gap}`, className)}
+            className={clsx(
+                `primitive stack`,
+                `gap-row-${gap}`, 
+                align ? `stack-align-${align}` : '',
+                justify ? `stack-justify-${justify}` : '',
+                className)}
             {...props}
         >
             {SafeChildren}

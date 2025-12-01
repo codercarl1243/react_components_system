@@ -1,8 +1,6 @@
 import { Stack } from '@/components/primitives'
-import type { StackProps } from '@/components/primitives/types'
 import clsx from 'clsx';
-
-type SectionProps = StackProps<'section'>;
+import type { SectionProps } from './post.type';
 
 /**
  * A semantic section wrapper component for organizing content within blog posts.
@@ -26,10 +24,10 @@ type SectionProps = StackProps<'section'>;
  * 
  * @returns A styled `<section>` element with layout wrapper and flow spacing applied.
  */
-export default function PostSection({ children, className, ...props }: SectionProps) {
+export default function PostSection({ children, className, width = "content", ...props }: SectionProps) {
 
   return (
-    <Stack as="section" className={clsx('post-section layout-wrapper width-bleed', className)} {...props}>
+    <Stack as="section" className={clsx(`post-section layout-wrapper width-${width}`, className)} {...props}>
       {children}
     </Stack>
   )
