@@ -27,9 +27,10 @@ export default function Section5() {
         <p>
           Instead of scattering variant logic across JavaScript or component props, you define variants through CSS attribute selectors like <InlineCode codeString='[data-variant="primary"]' lang="css" />. The browser handles the cascade automatically — no runtime overhead, no theme providers, no context.
         </p>
-
         <TokenFlowDiagram />
-
+<p>
+  Notice the middle layer? Those <strong>variant palette tokens</strong> (<InlineCode codeString="--variant-bg" lang="css" />, etc.) sit between global tokens and semantic tokens. This indirection isn't just for organization—it's what enables a single variant to support multiple appearances. A <InlineCode codeString='data-variant="primary"' /> button can be filled, outlined, or ghost by remapping how these palette tokens flow into semantic tokens. We'll explore appearances in Section 6.
+</p>
       </Stack>
 
       <Stack>

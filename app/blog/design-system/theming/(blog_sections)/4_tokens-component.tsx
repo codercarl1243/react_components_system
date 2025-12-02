@@ -69,9 +69,18 @@ export default function Section4() {
           Component tokens achieve this through a two-layer system:
         </p>
         <List spacing="tight" variant="decimal" ordered>
-          <li><strong>Semantic tokens</strong> define <em>what</em> colors mean <InlineCode codeString="--background-color" lang="css" /></li>
-          <li><strong>Component tokens</strong> decide <em>how</em> a component uses them <InlineCode codeString="--button-background-color" lang="css" /></li>
+          <li>
+            <strong>Semantic tokens</strong> (<InlineCode codeString="--background-color" lang="css" />) — describe the <em>role</em> a color plays
+          </li>
+          <li>
+            <strong>Component tokens</strong> (<InlineCode codeString="--button-background-color" lang="css" />) — namespace those roles to prevent conflicts between components
+          </li>
         </List>
+        <PostNote>
+          <strong>Why the double indirection?</strong>
+          <p>Semantic tokens let variants change colors across <em>multiple components</em> at once. </p>
+          <p>Component tokens ensure a button's <InlineCode codeString="--background-color" lang="css" /> never clashes with a card's <InlineCode codeString="--background-color" lang="css" />.</p>
+        </PostNote>
         <p>
           In the next step, we will use <InlineCode codeString="data-variant" /> attributes to override <span className="italic">background</span>, <span className="italic">foreground</span>, and <span className="italic">border</span> colors — creating <strong>themes</strong> and <strong>variants</strong> without touching the button&apos;s internal CSS.
         </p>

@@ -7,7 +7,7 @@ import PostSection from "@/components/post/post.section";
 import Link from "@/components/link";
 import Heading from "@/components/heading";
 import PostInfo from "@/components/post/post.info";
-import { Stack } from "@/components/primitives";
+import { Inline, Stack } from "@/components/primitives";
 
 export default function Section3() {
     return (
@@ -17,39 +17,51 @@ export default function Section3() {
             </AnchorHeading>
             <Stack>
                 <p>
-                    Every theming system starts with a stable set of <span className="bold">global design tokens</span>. These are the reusable values your entire interface will rely on:
+                    Every theming system starts with a stable set of <span className="bold">global design tokens</span>. These are the reusable values your entire interface will rely on: colors, spacing, typography, radii, shadows, and breakpoints.
                 </p>
-                <List spacing="tight">
-                    <li>colors</li>
-                    <li>spacing</li>
-                    <li>typography</li>
-                    <li>radii</li>
-                    <li>shadows</li>
-                    <li>breakpoints</li>
-                </List>
                 <p>
-                    Each of these categories follows the same structure — stable values defined on <InlineCode codeString=":root" lang="css" /> and reused across your entire system.
-                    They don't style anything on their own; they simply act as the <span className="fun-underline italic">source of truth</span>.
+                    Each category follows the same structure—stable values defined on <InlineCode codeString=":root" lang="css" /> and reused across your entire system. They don't style anything on their own; they simply act as the <span className="fun-underline italic">source of truth</span>.
                 </p>
                 <PostInfo>
-                    If you'd like to explore the full token set used in this project, you can view it on <Link href="https://github.com/codercarl1243/react_components_system/tree/main/styles/tokens">GitHub</Link>.
+                    The full token set for this project is available on <Link href="https://github.com/codercarl1243/react_components_system/tree/main/styles/tokens">GitHub</Link>. Below, we'll focus on color tokens as they best demonstrate the pattern.
                 </PostInfo>
-
-                <p>
-                    Below is a simplified example using color tokens. Your own project's tokens might be simpler or more extensive, but the structure remains the same.
-                </p>
             </Stack>
 
             <Stack>
                 <Heading as="h3">Color Tokens</Heading>
-                <PostNote>
-                    <p>
-                        Modern design systems often use <span className="bold">OKLCH</span> for improved perceptual consistency and easier contrast management.
-                    </p>
-                    <p>
-                        This article uses <span className="bold">HSL</span> for <span className="fun-underline">clarity</span> and <span className="fun-underline">compatibility</span>, but the same token structure works with OKLCH if you prefer it.
-                    </p>
-                </PostNote>
+                
+                <p>
+                    Color tokens use a numeric scale where lower numbers represent lighter values and higher numbers represent darker ones. This makes it intuitive to find contrast pairs: <InlineCode codeString="--color-primary-400" /> <Inline
+                        as="span"
+                        style={{
+                            border: 'var(--border-thick)',
+                            backgroundColor: "var(--color-primary-400)",
+                            width: 'var(--spacing-lg)',
+                            height: '1lh',
+                            display: 'inline-block',
+                            verticalAlign: 'middle',
+                            borderRadius: 'var(--radius-sm)'
+                        }}
+                        aria-label="Primary 400 color swatch"
+                    /> (medium blue) naturally pairs with <InlineCode codeString="--color-neutral-100" /> <Inline
+                        as="span"
+                        style={{
+                            border: 'var(--border-thick)',
+                            backgroundColor: "var(--color-neutral-100)",
+                            width: 'var(--spacing-lg)',
+                            height: '1lh',
+                            display: 'inline-block',
+                            verticalAlign: 'middle',
+                            borderRadius: 'var(--radius-sm)'
+                        }}
+                        aria-label="Neutral 100 color swatch"
+                    /> (white) for accessible contrast.
+                </p>
+
+                <p>
+                    The pattern across all color scales is straightforward: mid-tier colors (400, 600) work on neutral backgrounds, while light tiers (100, 200) need darker neutral text (600, 700, 800) for readability. This separation between brand colors and neutral colors gives you both visual identity and accessibility—brand colors define <em>who you are</em>, neutral colors ensure <em>everyone can read it</em>.
+                </p>
+
                 <Code
                     lang="css"
                     codeString={`/* Global Color Tokens */
@@ -82,16 +94,18 @@ export default function Section3() {
                 `}
                 />
 
+                <PostNote>
+                    This article uses <span className="bold">HSL</span> for clarity and compatibility, but the same token structure works with <span className="bold">OKLCH</span> if you prefer improved perceptual consistency across lightness values.
+                </PostNote>
+
                 <p>
-                    These tokens become the building blocks for everything else. For example, a button <em>could</em> use <InlineCode codeString="background: var(--color-primary-400)" lang="css" /> — but ideally it shouldn&apos;t reference global tokens directly. Instead, it will use <span className="bold">component tokens</span> like <InlineCode codeString="--background-color" lang="css" /> or <InlineCode codeString="--foreground-color" lang="css" /> that map back to these values. We'll explore this pattern in the next section.
-                </p>
-                <p>
-                    Before we move on to component tokens, it's worth looking at a few tools that can help you evaluate and build accessible color palettes.
+                    These tokens become the building blocks for everything else. A button <em>could</em> reference <InlineCode codeString="var(--color-primary-400)" lang="css" /> directly, but it shouldn't. Instead, components use <span className="bold">semantic tokens</span> like <InlineCode codeString="--background-color" lang="css" /> that map back to these global values. This indirection is what makes the system flexible—we'll explore why in the next section.
                 </p>
             </Stack>
-             <PostInfo>
-                    For a list of tools that help you design accessible, contrast-safe color palettes, see the <Link href="#resources-color-accessibility-tools">resources section</Link>.
-                </PostInfo>
+            
+            <PostInfo>
+                For tools that help you design accessible, contrast-safe color palettes, see the <Link href="#resources-color-accessibility-tools">resources section</Link>.
+            </PostInfo>
         </PostSection>
     );
 }

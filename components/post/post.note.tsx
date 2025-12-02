@@ -31,7 +31,7 @@ export default function PostNote({ className, children, variant = 'info', showIc
     <Stack
       {...props}
       className={clsx(className, 'post-note')}
-      gap={4}
+      gap={2}
       role={'note'}
       variant={variant}
       variantAppearance='primitive'

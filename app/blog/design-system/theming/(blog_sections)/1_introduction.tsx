@@ -3,7 +3,7 @@ import Heading from "@/components/heading";
 import List from "@/components/list";
 import PostNote from "@/components/post/post.note";
 import PostSection from "@/components/post/post.section";
-import { Stack } from "@/components/primitives";
+import { Block, Inline, Stack } from "@/components/primitives";
 
 
 export default function Section1() {
@@ -21,7 +21,7 @@ export default function Section1() {
                     The solution isn&apos;t another tool or library. It&apos;s treating theming as what it actually is: <FunHighlight>the design-system backbone</FunHighlight> — a single source of truth that keeps components consistent, accessible, and maintainable across themes, brands, and platforms.
                 </p>
                 <PostNote variant="warning" showIcon={false}>
-                    <p><strong>Common problem:</strong> You add a new "success" button variant.</p>
+                    <p><strong>Common problem:</strong> You add a new <Inline as="span" variant="success" variantAppearance="primitive">success</Inline> button variant.</p>
                     <p>Now you need to update 12 different component files, worry about dark mode, and pray nothing breaks in production.</p>
                     <p>With proper theming architecture, you&apos;d change 3 lines of CSS.</p>
                 </PostNote>
