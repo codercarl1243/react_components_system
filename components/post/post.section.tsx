@@ -1,4 +1,4 @@
-import { Stack } from '@/components/primitives'
+import { Block } from '@/components/primitives'
 import clsx from 'clsx';
 import type { SectionProps } from './post.type';
 
@@ -24,11 +24,13 @@ import type { SectionProps } from './post.type';
  * 
  * @returns A styled `<section>` element with layout wrapper and flow spacing applied.
  */
-export default function PostSection({ children, className, width = "content", ...props }: SectionProps) {
+export default function PostSection({ children, className, width = "full", ...props }: SectionProps) {
 
   return (
-    <Stack as="section" className={clsx(`post-section layout-wrapper width-${width}`, className)} {...props}>
+    <Block as="section"
+      className={clsx(`post-section flow-6 layout-wrapper width-${width}`, className)}
+      {...props}>
       {children}
-    </Stack>
+    </Block>
   )
 }
