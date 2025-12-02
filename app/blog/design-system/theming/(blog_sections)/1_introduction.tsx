@@ -14,14 +14,19 @@ export default function Section1() {
             </Heading>
             <Stack>
                 <p>
-                    As your component library grows, the cracks start to show: duplicated styles, slightly different colors, ad-hoc overrides, and components that behave inconsistently. It becomes clear that <span className="fun-underline">styling can't live inside individual components</span>.
+                    As your component library grows, the cracks start to show: duplicated styles, slightly different colors, ad-hoc overrides, and components that behave inconsistently across themes. You&apos;ve tried inline styles, CSS-in-JS, and prop-based variants — but they all create more problems than they solve.
                 </p>
 
                 <p>
-                    The solution? Theming isn't an add-on — <FunHighlight>it's the design-system backbone</FunHighlight>, the single source of truth that keeps <span className="italic">every component</span> consistent, accessible, and future-friendly across branding, dark mode, and new variants.
+                    The solution isn&apos;t another tool or library. It&apos;s treating theming as what it actually is: <FunHighlight>the design-system backbone</FunHighlight> — a single source of truth that keeps components consistent, accessible, and maintainable across themes, brands, and platforms.
                 </p>
+                <PostNote variant="warning" showIcon={false}>
+                    <p><strong>Common problem:</strong> You add a new "success" button variant.</p>
+                    <p>Now you need to update 12 different component files, worry about dark mode, and pray nothing breaks in production.</p>
+                    <p>With proper theming architecture, you&apos;d change 3 lines of CSS.</p>
+                </PostNote>
                 <p>
-                    In this article, we&apos;ll build the theming architecture that powers the Design System — a simple, scalable approach built entirely on <strong>CSS variables and data attributes</strong>. No JavaScript theme providers. No context. Just clean, predictable CSS.
+                    In this article, we&apos;ll build the theming architecture that powers the Design System — a simple, scalable approach built entirely on <strong>CSS variables</strong> and <strong>data attributes</strong>. No JavaScript theme providers. No context. Just clean, predictable CSS.
                 </p>
             </Stack>
             <PostNote>

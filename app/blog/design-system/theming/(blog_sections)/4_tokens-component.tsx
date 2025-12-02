@@ -16,10 +16,10 @@ export default function Section4() {
       </AnchorHeading>
       <Stack>
         <p>
-          <span className="bold fun-underline">Global tokens</span> <span className="italic">(defined in Step 1)</span> define the visual language of your system.
+          Now that we have our <span className="bold fun-underline">Global tokens</span> from Step 1, define the visual language of your system.
         </p>
         <p>
-          But to keep the system expandable, components shouldn't reach for them directly. Instead, each component exposes its own <span className="bold"><span className="fun-underline">semantic</span> component tokens</span> (<span className="italic">the variables that describe what the component needs, not where the value comes from</span>).
+          But to keep the system expandable, components shouldn&apos;t reach for them directly. Instead, each component exposes its own <span className="bold"><span className="fun-underline">semantic</span> component tokens</span> (<span className="italic">the variables that describe what the component needs, not where the value comes from</span>).
         </p>
         <p>
           Let&apos;s look at how a component applies this pattern in practice.
@@ -52,7 +52,7 @@ export default function Section4() {
 
         <p>These defaults provide the base appearance of your component.</p>
         <p>
-          In the next step, we'll add a third layer — <span className="bold"><span className="fun-underline">variant</span> tokens </span>— these sit between global tokens and component tokens, letting you swap entire color roles without touching component code.
+          In the next step, we&apos;ll add a third layer — <span className="bold"><span className="fun-underline">variant</span> tokens </span>— these sit between global tokens and component tokens, letting you swap entire color roles without touching component code.
         </p>
       </Stack>
 
@@ -73,7 +73,7 @@ export default function Section4() {
           <li><strong>Component tokens</strong> decide <em>how</em> a component uses them <InlineCode codeString="--button-background-color" lang="css" /></li>
         </List>
         <p>
-          In the next step, we will use <InlineCode codeString="data-variant" /> attributes to override <span className="italic">background</span>, <span className="italic">foreground</span>, and <span className="italic">border</span> colors — creating <strong>themes</strong> and <strong>variants</strong> without touching the button's internal CSS.
+          In the next step, we will use <InlineCode codeString="data-variant" /> attributes to override <span className="italic">background</span>, <span className="italic">foreground</span>, and <span className="italic">border</span> colors — creating <strong>themes</strong> and <strong>variants</strong> without touching the button&apos;s internal CSS.
         </p>
       </Stack>
     </PostSection>
