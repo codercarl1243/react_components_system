@@ -1,6 +1,6 @@
 .primitive[data-appearance="primitive"] {
-    color: var(--foreground-color);
-    padding: var(--spacing-sm) var(--spacing-md);
+    color: var(--color-neutral-900);
+    padding: var(--spacing-sm) var(--spacing-sm);
     background-color: var(--surface-color);
     border: var(--border-thin);
     border-color: var(--border-color);
