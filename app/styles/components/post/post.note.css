@@ -5,21 +5,25 @@
     padding-block: 1.25em 1em;
     padding-inline: clamp(0.5em, 0.5em + 0.5vw, 1em);
     box-shadow: inset 2px 2px 4px color-mix(in srgb, var(--background-color) 10%, transparent),
-        inset -2px -2px 4px color-mix(in srgb, var(--background-color) 90%, transparent);
+        inset -1px -1px 2px color-mix(in srgb, var(--background-color) 90%, transparent);
     border-left-width: 3px !important;
 }
 
 .post-note__icon {
+    --icon-position: -0.6em;
+
+    position: absolute;
+    top: var(--icon-position);
+    left: var(--icon-position);
+
     pointer-events: none;
     background-color: inherit;
     color: inherit;
-    border-radius: var(--radius-circle);
-    
+    fill: currentColor;
+
     border: var(--border-thin);
     border-color: inherit;
-    border-right: 25px;
-    border-top: 25px;
-    position: absolute;
-    top: -0.6em;
-    left: -0.6em;
+    border-right: var(--spacing-xl);
+    border-top: var(--spacing-xl);
+    border-radius: var(--radius-circle);
 }
