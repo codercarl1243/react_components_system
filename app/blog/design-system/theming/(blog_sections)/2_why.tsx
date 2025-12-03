@@ -51,11 +51,11 @@ export default function Section2() {
                     <p>
                         <strong>The reality of ad-hoc theming:</strong>
                     </p>
-                    <List spacing="tight" variant="danger">
-                        <li>🔴 Designer updates the primary blue → you search-and-replace across 30 files</li>
-                        <li>🔴 Dark mode breaks because 6 components hardcoded light backgrounds</li>
-                        <li>🔴 New developer adds a button with <code>color: #3b82f6</code> instead of using your "primary" blue</li>
-                        <li>🔴 Three months later, your "primary" color has 7 different hex values in production</li>
+                    <List spacing="tight" marker="circle" variant="danger">
+                        <li>Designer updates the primary blue → you search-and-replace across 30 files</li>
+                        <li>Dark mode breaks because 6 components hardcoded light backgrounds</li>
+                        <li>New developer adds a button with <code>color: #3b82f6</code> instead of using your "primary" blue</li>
+                        <li>Three months later, your "primary" color has 7 different hex values in production</li>
                     </List>
                 </PostNote>
 

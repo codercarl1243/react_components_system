@@ -13,10 +13,10 @@
 }
 
 .list li::before {
-  --list-background-color: var(--background-color);
+  --list-marker-bg-color: var(--background-color, transparent);
   --list-color: var(--foreground-color, var(--color-secondary-400));
-  --list-border: none;
   --list-border-color: var(--border-color, transparent);
+  --list-border: none;
   --list-border-radius: 0;
 
   content: '';
@@ -28,7 +28,7 @@
   border: var(--list-border);
   border-color: var(--list-border-color);
   border-radius: var(--list-border-radius);
-  background-color: var(--list-background-color);
+  background-color: var(--list-marker-bg-color);
   color: var(--list-color);
 }
 
@@ -53,21 +53,22 @@
   margin-block-end: calc(var(--list-spacing) * 2);
 }
 
-/* Unordered list variants */
-.list--disc li::before,
-.list--square li::before {
-  background-color: var(--color-secondary-400);
+.list--disc li::before {
+  background: conic-gradient(var(--list-marker-bg-color), var(--surface-color), var(--list-border-color));
+  height: 1rem;
+  width: 1rem;
+  top: 0.35rem;
 }
 
+/* Unordered list variants */
 .list--disc li::before,
 .list--circle li::before {
   --list-border-radius: var(--radius-circle);
 }
 
 .list--circle li::before {
-  --list-background-color: var(--color-secondary-100);
+  --list-marker-bg-color: var(--surface-color);
   --list-border: var(--border-thin);
-  --list-border-color: var(--color-secondary-400);
 }
 
 /* Ordered list variants */
