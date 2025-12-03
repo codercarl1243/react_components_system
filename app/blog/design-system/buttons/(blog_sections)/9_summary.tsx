@@ -33,7 +33,7 @@ export default function Section9() {
                 <li><span className="bold"><Icon icon={RiPuzzle2Line} color="var(--color-primary-400)" /> For the system:</span> Foundation for toggles, switches, and complex button based components</li>
             </List>
             <p>
-                With these foundations in place, we&apos;re ready to move from reliable actions to expressive interactions.
+                With these foundations in place, we're ready to move from reliable actions to expressive interactions.
             </p>
         </PostSection>
     )

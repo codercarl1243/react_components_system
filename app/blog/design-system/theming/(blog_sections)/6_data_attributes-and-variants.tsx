@@ -12,7 +12,7 @@ import TabList from "@/components/tablist";
 import TokenFlowDiagram from '@/app/blog/design-system/theming/examples/5_TokenFlowDiagram'
 import PostInfo from "@/components/post/post.info";
 
-export default function Section5() {
+export default function Section6() {
   return (
     <PostSection id="data-attributes-variants">
       <AnchorHeading as="h2" prefix="Step 3 —" id="data-attributes-variants-heading">

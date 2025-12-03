@@ -59,7 +59,7 @@ export default function Section6() {
             <div className="flow-4">
                 <AnchorHeading as={"h3"}>Designing beyond WCAG</AnchorHeading>
                 <p>
-                    WCAG&apos;s four principles give us the foundation, but meeting the minimum isn&apos;t the goal. As developers, our job is to design buttons that feel <span className="fun-underline">consistent</span>, <span className="fun-underline">predictable</span>, and <span className="fun-underline">inclusive</span> in real-world situations.
+                    WCAG's four principles give us the foundation, but meeting the minimum isn't the goal. As developers, our job is to design buttons that feel <span className="fun-underline">consistent</span>, <span className="fun-underline">predictable</span>, and <span className="fun-underline">inclusive</span> in real-world situations.
                 </p>
                 <List variant="circle" spacing="loose">
                     <li>
@@ -122,7 +122,7 @@ min-height: 44px;`} copyEnabled={false} />
 
 
             <div className="flow-4">
-                <AnchorHeading as={"h4"}>Assistive Technology isn&apos;t everything</AnchorHeading>
+                <AnchorHeading as={"h4"}>Assistive Technology isn't everything</AnchorHeading>
                 <p>Screen readers and other assistive tech is definitely powerful and does level the field to some degree, but they don't solve all problems:</p>
                 {/* add icons to these dot points */}
                 <List variant="circle" spacing="tight">

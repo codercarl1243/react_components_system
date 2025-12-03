@@ -1,7 +1,6 @@
 import Code from "@/components/code";
 import InlineCode from "@/components/code/inlineCode";
 import AnchorHeading from "@/components/heading/anchorHeading";
-import List from "@/components/list";
 import PostNote from "@/components/post/post.note";
 import PostSection from "@/components/post/post.section";
 import Link from "@/components/link";
@@ -9,7 +8,7 @@ import Heading from "@/components/heading";
 import PostInfo from "@/components/post/post.info";
 import { Inline, Stack } from "@/components/primitives";
 
-export default function Section3() {
+export default function section4() {
     return (
         <PostSection id="tokens">
             <AnchorHeading as={"h2"} prefix="Step 1 —" id="global-tokens-heading">

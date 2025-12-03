@@ -1,5 +1,5 @@
 .list {
-  --list-spacing:  0.25em;
+  --list-spacing: 0.25em;
 
   margin: 0;
   list-style-type: none;
@@ -13,11 +13,23 @@
 }
 
 .list li::before {
+  --list-background-color: var(--background-color);
+  --list-color: var(--foreground-color, var(--color-secondary-400));
+  --list-border: none;
+  --list-border-color: var(--border-color, transparent);
+  --list-border-radius: 0;
+
+  content: '';
   position: absolute;
   left: 0;
   top: 0.5em;
   width: 0.6rem;
   height: 0.6rem;
+  border: var(--list-border);
+  border-color: var(--list-border-color);
+  border-radius: var(--list-border-radius);
+  background-color: var(--list-background-color);
+  color: var(--list-color);
 }
 
 /* Spacing variants */
@@ -42,25 +54,20 @@
 }
 
 /* Unordered list variants */
-.list--disc li::before {
-  content: '';
+.list--disc li::before,
+.list--square li::before {
   background-color: var(--color-secondary-400);
-  border-radius: 50%;
+}
+
+.list--disc li::before,
+.list--circle li::before {
+  --list-border-radius: var(--radius-circle);
 }
 
 .list--circle li::before {
-  content: '';
-  border: 1px solid var(--color-secondary-400);
-  background-color: var(--color-secondary-100);
-  border-radius: 50%;
-}
-
-.list--square li::before {
-  content: '';
-  width: 0.5rem;
-  height: 0.5rem;
-  border-radius: 0;
-  background-color: var(--color-secondary-400);
+  --list-background-color: var(--color-secondary-100);
+  --list-border: var(--border-thin);
+  --list-border-color: var(--color-secondary-400);
 }
 
 /* Ordered list variants */
@@ -74,11 +81,11 @@
   & li::before {
     counter-increment: ol-counter;
     font-weight: 600;
-    color: var(--color-secondary-400);
     top: 0;
     width: 1.5em;
   }
 }
+
 .list--decimal li::before {
   content: counter(ol-counter, decimal) '.';
 }

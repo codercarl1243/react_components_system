@@ -75,7 +75,7 @@ export default function Section8() {
             </List>
 
             <p>
-                Together, these tests ensure our button is stable, predictable, and safe to refactor. They provide developers with the confidence that visual updates or logic changes won&apos;t break accessibility or behavior.
+                Together, these tests ensure our button is stable, predictable, and safe to refactor. They provide developers with the confidence that visual updates or logic changes won't break accessibility or behavior.
             </p>
 
             <AnchorHeading>Testing Resources</AnchorHeading>

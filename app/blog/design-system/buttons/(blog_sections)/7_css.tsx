@@ -13,11 +13,11 @@ export default function Section7() {
         <PostSection id="css-and-theming">
             <AnchorHeading as={"h2"} id="css-and-theming-heading">CSS & Theming</AnchorHeading>
             <p>
-                Our CSS isn&apos;t just decorative — it enforces <FunHighlight>layout stability</FunHighlight>, <FunHighlight>WCAG compliance</FunHighlight>, and <FunHighlight>customizability</FunHighlight>. If you&apos;d like to see the full CSS without the explanation, it is available within the <Link href="#resources-heading">resources section</Link>
+                Our CSS isn't just decorative — it enforces <FunHighlight>layout stability</FunHighlight>, <FunHighlight>WCAG compliance</FunHighlight>, and <FunHighlight>customizability</FunHighlight>. If you'd like to see the full CSS without the explanation, it is available within the <Link href="#resources-heading">resources section</Link>
             </p>
             <p>This section focuses on two core design factors: <span className="bold">accessibility</span> and <span className="bold">brand consistency</span>.</p>
             <p>
-                Before diving into custom styles, it&apos;s worth mentioning the baseline that makes them work consistently across browsers.
+                Before diving into custom styles, it's worth mentioning the baseline that makes them work consistently across browsers.
             </p>
             <PostNote>
                 <p className="bold">CSS Reset</p>
@@ -25,9 +25,9 @@ export default function Section7() {
 
                 <p>If this is the first time you have come across this concept, here are a couple of general CSS Resets to get started with an app.</p>
                 <List spacing="tight">
-                    <li><Link href="https://piccalil.li/blog/a-more-modern-css-reset/">Andy Bell&apos;s modern reset</Link>: A great starting point for any app</li>
-                    <li><Link href="https://www.joshwcomeau.com/css/custom-css-reset/">Josh Comeau&apos;s CSS reset</Link>: this article goes pretty indepth with some great examples.</li>
-                    <li><Link href="https://github.com/jensimmons/cssremedy">Jen Simmons&apos; CSS Remedy</Link>: The baseline that the creators think CSS would start with if it was created today without having to worry about backwards compatibility.</li>
+                    <li><Link href="https://piccalil.li/blog/a-more-modern-css-reset/">Andy Bell's modern reset</Link>: A great starting point for any app</li>
+                    <li><Link href="https://www.joshwcomeau.com/css/custom-css-reset/">Josh Comeau's CSS reset</Link>: this article goes pretty indepth with some great examples.</li>
+                    <li><Link href="https://github.com/jensimmons/cssremedy">Jen Simmons' CSS Remedy</Link>: The baseline that the creators think CSS would start with if it was created today without having to worry about backwards compatibility.</li>
                 </List>
             </PostNote>
 
@@ -103,7 +103,7 @@ export default function Section7() {
             <p>CSS custom properties give us a flexible foundation for adapting to any color system or theme.</p>
             <AnchorHeading as={"h3"} id="css-custom-properties">Custom Properties for Theming</AnchorHeading>
             <p>
-                The button uses CSS custom properties for a lot of values that aren&apos;t actually defined yet. This gives us a <span className="italic">hook</span> into the code that we can use with design tokens and color variants to cascade naturally through the design system.
+                The button uses CSS custom properties for a lot of values that aren't actually defined yet. This gives us a <span className="italic">hook</span> into the code that we can use with design tokens and color variants to cascade naturally through the design system.
             </p>
 
             <Code lang="css"
@@ -149,7 +149,7 @@ export default function Section7() {
                 <p>You will see above that I am using color tokens that reference neutral, or primary etc. This is quite common to see in apps that have a lot of moving parts. We define <span className="italic">'tokens'</span> that are shared where they are needed. You can see this in use in common libraries such as <Link href="https://tailwindcss.com/docs/colors">TailwindCSS</Link> and <Link href="https://mui.com/material-ui/customization/color/">Material UI</Link></p>
 
                 <p>
-                    For fun (and to save some time), I asked one of our future AI overlords to generate a color palette — <span className="fun-underline">here&apos;s what I came up with after I got fed up with contrast issues</span>:
+                    For fun (and to save some time), I asked one of our future AI overlords to generate a color palette — <span className="fun-underline">here's what I came up with after I got fed up with contrast issues</span>:
                 </p>
                 <Code lang="css"
                     title="CSS Color Tokens"
@@ -191,7 +191,7 @@ export default function Section7() {
                 />
             </PostNote>
             <p>
-                With our tokens and variants defined, we&apos;ve built a flexible foundation that can scale across themes, brands, and accessibility requirements.
+                With our tokens and variants defined, we've built a flexible foundation that can scale across themes, brands, and accessibility requirements.
             </p>
 
             <AnchorHeading as={"h3"} id="css-button-states">Button States</AnchorHeading>

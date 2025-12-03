@@ -7,7 +7,7 @@ import PostNote from "@/components/post/post.note";
 import PostSection from "@/components/post/post.section";
 import { Stack } from "@/components/primitives";
 
-export default function Section4() {
+export default function Section5() {
 
   return (
     <PostSection id="component-tokens">
@@ -19,10 +19,10 @@ export default function Section4() {
           Now that we have our <span className="bold fun-underline">Global tokens</span> from Step 1, define the visual language of your system.
         </p>
         <p>
-          But to keep the system expandable, components shouldn&apos;t reach for them directly. Instead, each component exposes its own <span className="bold"><span className="fun-underline">semantic</span> component tokens</span> (<span className="italic">the variables that describe what the component needs, not where the value comes from</span>).
+          But to keep the system expandable, components shouldn't reach for them directly. Instead, each component exposes its own <span className="bold"><span className="fun-underline">semantic</span> component tokens</span> (<span className="italic">the variables that describe what the component needs, not where the value comes from</span>).
         </p>
         <p>
-          Let&apos;s look at how a component applies this pattern in practice.
+          Let's look at how a component applies this pattern in practice.
         </p>
         <PostNote>
           <p>Component tokens are prefixed to prevent naming clashes between components.</p>
@@ -52,7 +52,7 @@ export default function Section4() {
 
         <p>These defaults provide the base appearance of your component.</p>
         <p>
-          In the next step, we&apos;ll add a third layer — <span className="bold"><span className="fun-underline">variant</span> tokens </span>— these sit between global tokens and component tokens, letting you swap entire color roles without touching component code.
+          In the next step, we'll add a third layer — <span className="bold"><span className="fun-underline">variant</span> tokens </span>— these sit between global tokens and component tokens, letting you swap entire color roles without touching component code.
         </p>
       </Stack>
 
@@ -82,7 +82,7 @@ export default function Section4() {
           <p>Component tokens ensure a button's <InlineCode codeString="--background-color" lang="css" /> never clashes with a card's <InlineCode codeString="--background-color" lang="css" />.</p>
         </PostNote>
         <p>
-          In the next step, we will use <InlineCode codeString="data-variant" /> attributes to override <span className="italic">background</span>, <span className="italic">foreground</span>, and <span className="italic">border</span> colors — creating <strong>themes</strong> and <strong>variants</strong> without touching the button&apos;s internal CSS.
+          In the next step, we will use <InlineCode codeString="data-variant" /> attributes to override <span className="italic">background</span>, <span className="italic">foreground</span>, and <span className="italic">border</span> colors — creating <strong>themes</strong> and <strong>variants</strong> without touching the button's internal CSS.
         </p>
       </Stack>
     </PostSection>

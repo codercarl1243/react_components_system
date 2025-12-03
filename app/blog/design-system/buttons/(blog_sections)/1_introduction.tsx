@@ -22,7 +22,7 @@ export default function Section1() {
             <Heading as={"h2"} id="introduction-heading">Introduction</Heading>
             <p>
                 Buttons are the most re-used components in any interface — and the easiest to get wrong.
-                In this first post of the design system series, we&apos;re building a button that balances <FunHighlight>functionality</FunHighlight>, <FunHighlight>accessibility</FunHighlight>, and <FunHighlight>developer trust</FunHighlight>.
+                In this first post of the design system series, we're building a button that balances <FunHighlight>functionality</FunHighlight>, <FunHighlight>accessibility</FunHighlight>, and <FunHighlight>developer trust</FunHighlight>.
             </p>
             <p>
                 This isn't just another styled button. It's a <FunHighlight>design system foundation</FunHighlight> that scales gracefully and behaves predictably under real-world conditions.
@@ -36,7 +36,7 @@ export default function Section1() {
                 </List>
             </PostNote> */}
 
-            <p>By the end of this post, you&apos;ll understand how to design a button system that is:</p>
+            <p>By the end of this post, you'll understand how to design a button system that is:</p>
             <List ordered>
                 <li>Type-safe and accessible by default</li>
                 <li>Backed by a reusable hook for interaction logic</li>
