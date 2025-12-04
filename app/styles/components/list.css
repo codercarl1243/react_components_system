@@ -55,9 +55,10 @@
 
 .list--disc li::before {
   background: conic-gradient(var(--list-marker-bg-color), var(--surface-color), var(--list-border-color));
-  height: 1rem;
-  width: 1rem;
-  top: 0.35rem;
+  height: 0.85rem;
+  width: 0.85rem;
+  left:0.35rem;
+  top: 0.45rem;
 }
 
 /* Unordered list variants */
