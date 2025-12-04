@@ -1,7 +1,9 @@
 .color-swatch {
     border-radius: var(--radius-sm);
     padding: 0;
-    width: var(--spacing-xl);
+    margin: 0;
+    width: 1rem;
+    width: 1lh;
     aspect-ratio: 1;
     display: inline-block;
     vertical-align: middle;
