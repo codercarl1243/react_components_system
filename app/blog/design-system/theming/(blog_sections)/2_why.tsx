@@ -1,3 +1,5 @@
+import InlineCode from "@/components/code/inlineCode";
+import ColorSwatch from "@/components/colorSwatch";
 import FunHighlight from "@/components/decorations/FunHighlight";
 import Heading from "@/components/heading";
 import List from "@/components/list";
@@ -40,21 +42,19 @@ export default function Section2() {
             </Heading>
             <Stack>
                 <p>
-                    As your component library grows, the cracks start to show: duplicated styles, slightly different shades of the same color, ad-hoc <code>!important</code> overrides, and components that look fine in light mode but break in dark mode.
+                    As your component library grows, the cracks start to show: duplicated styles, slightly different shades of the same color, ad-hoc <InlineCode codeString="!important" lang="css" /> overrides, and components that look fine in light mode but break in dark mode.
                 </p>
 
                 <p>
                     Most teams try to solve this with inline styles, CSS-in-JS variables, or prop-based variants. But these approaches share a common flaw: <strong>they scatter theming logic across dozens of component files</strong>, making updates fragile and consistency nearly impossible.
                 </p>
 
-                <PostNote showIcon={false}>
-                    <p>
-                        <strong>The reality of ad-hoc theming:</strong>
-                    </p>
-                    <List spacing="tight" marker="circle" variant="danger">
-                        <li>Designer updates the primary blue → you search-and-replace across 30 files</li>
+                <PostNote showIcon={false} variant="neutral">
+                    <Heading as="h3" variant="neutral" className="fun-underline">The reality of ad-hoc theming</Heading>
+                    <List spacing="normal" marker="disc" variant="danger">
+                        <li>Designer updates the primary blue <ColorSwatch color="var(--color-primary-200)" aria-label="old primary blue color swatch" /> → <ColorSwatch color="var(--color-primary-400)" aria-label="new primary blue color swatch" /> and you're search-and-replacing across 30 files</li>
                         <li>Dark mode breaks because 6 components hardcoded light backgrounds</li>
-                        <li>New developer adds a button with <code>color: #3b82f6</code> instead of using your "primary" blue</li>
+                        <li>New developer adds a button with <InlineCode codeString="color: #3b82f6" lang="css" /> <ColorSwatch color="#3b82f6" aria-label="#3b82f6 color swatch" /> instead of using your "primary" token</li>
                         <li>Three months later, your "primary" color has 7 different hex values in production</li>
                     </List>
                 </PostNote>

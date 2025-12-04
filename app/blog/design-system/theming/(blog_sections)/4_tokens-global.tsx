@@ -7,6 +7,7 @@ import Link from "@/components/link";
 import Heading from "@/components/heading";
 import PostInfo from "@/components/post/post.info";
 import { Inline, Stack } from "@/components/primitives";
+import ColorSwatch from "@/components/colorSwatch";
 
 export default function section4() {
     return (
@@ -28,31 +29,13 @@ export default function section4() {
 
             <Stack>
                 <Heading as="h3">Color Tokens</Heading>
-                
+
                 <p>
-                    Color tokens use a numeric scale where lower numbers represent lighter values and higher numbers represent darker ones. This makes it intuitive to find contrast pairs: <InlineCode codeString="--color-primary-400" /> <Inline
-                        as="span"
-                        style={{
-                            border: 'var(--border-thick)',
-                            backgroundColor: "var(--color-primary-400)",
-                            width: 'var(--spacing-lg)',
-                            height: '1lh',
-                            display: 'inline-block',
-                            verticalAlign: 'middle',
-                            borderRadius: 'var(--radius-sm)'
-                        }}
+                    Color tokens use a numeric scale where lower numbers represent lighter values and higher numbers represent darker ones. This makes it intuitive to find contrast pairs: <InlineCode codeString="--color-primary-400" /> <ColorSwatch
+                        color="var(--color-primary-400)"
                         aria-label="Primary 400 color swatch"
-                    /> (medium blue) naturally pairs with <InlineCode codeString="--color-neutral-100" /> <Inline
-                        as="span"
-                        style={{
-                            border: 'var(--border-thick)',
-                            backgroundColor: "var(--color-neutral-100)",
-                            width: 'var(--spacing-lg)',
-                            height: '1lh',
-                            display: 'inline-block',
-                            verticalAlign: 'middle',
-                            borderRadius: 'var(--radius-sm)'
-                        }}
+                    /> (medium blue) naturally pairs with <InlineCode codeString="--color-neutral-100" />  <ColorSwatch
+                        color="var(--color-neutral-100)"
                         aria-label="Neutral 100 color swatch"
                     /> (white) for accessible contrast.
                 </p>
@@ -101,7 +84,7 @@ export default function section4() {
                     These tokens become the building blocks for everything else. A button <em>could</em> reference <InlineCode codeString="var(--color-primary-400)" lang="css" /> directly, but it shouldn't. Instead, components use <span className="bold">semantic tokens</span> like <InlineCode codeString="--background-color" lang="css" /> that map back to these global values. This indirection is what makes the system flexible—we'll explore why in the next section.
                 </p>
             </Stack>
-            
+
             <PostInfo>
                 For tools that help you design accessible, contrast-safe color palettes, see the <Link href="#resources-color-accessibility-tools">resources section</Link>.
             </PostInfo>
