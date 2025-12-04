@@ -5,6 +5,8 @@
   list-style-type: none;
   font-size: inherit;
   padding-inline-start: var(--spacing-sm);
+  line-height: var(--line-height-normal);
+  font-size: var(--font-size-base);
 }
 
 .list:not(.list--none) li {
@@ -24,7 +26,7 @@
   left: 0;
   top: 0.5em;
   width: 0.6rem;
-  height: 0.6rem;
+  aspect-ratio: 1;
   border: var(--list-border);
   border-color: var(--list-border-color);
   border-radius: var(--list-border-radius);
@@ -45,20 +47,19 @@
   --list-spacing: 0.4lh;
 }
 
-.list li>*:not(:last-child) {
+.list li:not(:last-child) {
   margin-block-end: var(--list-spacing);
 }
 
-.list li:not(:last-child) {
+.list li:last-child {
   margin-block-end: calc(var(--list-spacing) * 2);
 }
 
 .list--disc li::before {
   background: conic-gradient(var(--list-marker-bg-color), var(--surface-color), var(--list-border-color));
-  height: 0.85rem;
-  width: 0.85rem;
+  width: 0.75rem;
   left:0.35rem;
-  top: 0.45rem;
+  top: 0.35rem;
 }
 
 /* Unordered list variants */
