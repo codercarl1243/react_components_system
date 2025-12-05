@@ -29,7 +29,7 @@ export default function Section1() {
             </p>
             {/* <PostNote>
                 <p className="bold">In this series:</p>
-                <List variant="none" spacing="tight">
+                <List marker="none" spacing="tight">
                     <li><Link href="/blog/design-system/buttons/toggles">Toggles</Link></li>
                     <li><Link href="/blog/design-system/buttons/switches">Switches</Link></li>
                     <li><Link href="/blog/design-system/buttons/groups">Button Groups & Toolbars</Link></li>

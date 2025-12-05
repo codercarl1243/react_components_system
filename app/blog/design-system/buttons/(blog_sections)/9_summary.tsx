@@ -27,7 +27,7 @@ export default function Section9() {
             <AnchorHeading as={"h3"} id="summary__impact">
                 Why It Matters
             </AnchorHeading>
-            <List spacing="tight" variant="none" aria-labelledby="summary__impact">
+            <List spacing="tight" marker="none" aria-labelledby="summary__impact">
                 <li><span className="bold"><Icon icon={RiUserLine} color="var(--color-primary-400)" /> For users:</span> Predictable, accessible interactions across all devices</li>
                 <li><span className="bold"><Icon icon={RiCodeSSlashLine} color="var(--color-primary-400)" /> For developers:</span> Consistent API, and testable patterns with clear feedback</li>
                 <li><span className="bold"><Icon icon={RiPuzzle2Line} color="var(--color-primary-400)" /> For the system:</span> Foundation for toggles, switches, and complex button based components</li>

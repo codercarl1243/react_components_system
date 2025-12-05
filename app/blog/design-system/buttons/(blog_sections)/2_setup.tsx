@@ -42,7 +42,7 @@ export default function Section2() {
             </p>
             <AnchorHeading as={"h3"} id="dependencies">Dependencies</AnchorHeading>
             <p> We'll use a couple of small, focused packages to support the component:</p>
-            <List variant="none" spacing="tight">
+            <List marker="none" spacing="tight">
                 <li><Link className="bold" href="https://www.npmjs.com/package/@remixicon/react">RemixIcons</Link> for an extensive and free icon library</li>
                 <li><Link className="bold" href="https://www.npmjs.com/package/clsx">CLSX</Link> for clean, conditional class name handling</li>
             </List>

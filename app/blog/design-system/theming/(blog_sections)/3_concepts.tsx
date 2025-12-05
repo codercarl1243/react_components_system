@@ -23,7 +23,7 @@ export default function Section3() {
             <Stack>
                 <p className="bold">Here are the core building blocks:</p>
 
-                <List spacing="normal" variant="none">
+                <List spacing="normal" marker="none">
                     <li>
                         <p>
                             <span className="bold"><Icon icon={RiPaletteLine} color={"var(--color-primary-400)"} /> Design Tokens:

@@ -2,7 +2,7 @@ import clsx from 'clsx'
 import type { HeadingPropsType, ValidHeadingTag } from '@/components/heading/heading.type'
 import Icon from '@/components/icon'
 import { generateHeadingId, generateHeadingSize, getIconSize, getSizeClass } from '@/components/heading/utils'
-import { Inline } from '@/components/primitives';
+import { Block } from '@/components/primitives';
 
 const DEFAULT_HEADING_TAG = 'h3';
 
@@ -44,7 +44,7 @@ export default function Heading<T extends ValidHeadingTag = "h3">({
   ) : children;
 
   return (
-    <Inline
+    <Block
       as={Component}
       id={headingId}
       className={clsx('font-accent heading',
@@ -55,6 +55,6 @@ export default function Heading<T extends ValidHeadingTag = "h3">({
       {...props}
     >
       {content}
-    </Inline>
+    </Block>
   )
 }
