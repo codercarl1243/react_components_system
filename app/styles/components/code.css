@@ -53,13 +53,12 @@
             --line-background-color: var(--color-neutral-900);
             --line-color: var(--surface-color);
             --code-highlight-background-color: var(--color-neutral-900);
+            --code-highlight-color: var(--color-neutral-100);
 
-            .custom-code-highlight {
+            .custom-code-highlight:hover {
                 --code-highlight-border-color: var(--color-warning-400);
-                --code-highlight-color: var(--color-neutral-100);
                 --code-highlight-background-color: var(--color-neutral-900);
                 border-style: solid;
-
             }
         }
     }
