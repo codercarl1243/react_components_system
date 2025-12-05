@@ -30,7 +30,7 @@ export default function Page() {
     return (
         <>
             <Post>
-                <Buttons />
+                {/* <Buttons /> */}
                 <Foundation />
                 <Setup />
                 <BuildingTheButton />

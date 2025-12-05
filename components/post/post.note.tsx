@@ -1,8 +1,8 @@
-import { type ComponentProps } from 'react'
 import Icon from '../icon'
 import { RiInformationLine } from '@remixicon/react'
 import clsx from 'clsx'
 import { Stack } from '../primitives';
+import type { PostNotePropsType } from './post.type';
 
 /**
  * A prominently styled note component for highlighting important information within blog posts.
@@ -22,12 +22,8 @@ import { Stack } from '../primitives';
  * 
  * @returns A styled note container with an information icon, or null if no children are provided.
  * 
- * **Future Considerations:**
- * - Contains TODO for potential expandable/collapsible functionality
- * - Structure supports future enhancement without breaking changes
- * 
  */
-export default function PostNote({ className, children, ...props }: ComponentProps<'div'>) {
+export default function PostNote({ className, children, variant = 'info', showIcon = true, ...props }: PostNotePropsType) {
 
   if (!children) return;
 
@@ -35,12 +31,12 @@ export default function PostNote({ className, children, ...props }: ComponentPro
     <Stack
       {...props}
       className={clsx(className, 'post-note')}
-      gap={4}
+      gap={2}
       role={'note'}
-      variant='info'
+      variant={variant}
       variantAppearance='primitive'
     >
-      <Icon icon={RiInformationLine} size={24} className="post-note__icon" />
+      {showIcon ? <Icon icon={RiInformationLine} size={26} className="post-note__icon" /> : null}
       <Stack className="post-note__content">
         {children}
       </Stack>

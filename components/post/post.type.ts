@@ -1,6 +1,8 @@
 import type { ValidHeadingTag } from '@/components/heading/heading.type';
 import type { PostSummary, PostType } from '@/lib/blog/blog.types';
 import type { BlockProps, StackProps } from '@/components/primitives/types';
+import { ComponentProps } from 'react';
+import { Variant } from '@/types/variant';
 
 export type PostBannerContent = Pick<PostType, 'title' | 'subtitle' | 'image'>;
 
@@ -24,3 +26,8 @@ export type SectionProps = StackProps<'section'> & {
 
 
 export type PostPropsType = BlockProps<'article'>;
+
+export type PostNotePropsType = ComponentProps<'div'> & {
+  variant?: Variant;
+  showIcon?: boolean;
+};

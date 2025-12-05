@@ -1,4 +1,3 @@
-import { Inline } from "@/components/primitives";
 import type { RowProps } from "../primitives/types";
 import clsx from "clsx";
 import { wrapChildrenTextWithSiblings } from "@/lib/utils/react/wrapChildrenTextWithSiblings";

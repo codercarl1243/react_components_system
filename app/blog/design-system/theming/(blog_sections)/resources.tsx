@@ -15,7 +15,7 @@ export default function ButtonsResources() {
       <AnchorHeading as="h3" id="resources-color-accessibility-tools">Tools for Designing Accessible Color Palettes</AnchorHeading>
       <p>Color accessibility is one of the easiest ways to accidentally exclude users. </p>
       <p>The tools below can help test contrast, generate accessible palettes, and validate combinations before you lock them into your design system.</p>
-      <List spacing="tight" variant="none">
+      <List spacing="tight" marker="none">
         <li><Link href="https://webaim.org/resources/contrastchecker/">WebAIM Contrast Checker</Link> — the gold standard for checking contrast ratios</li>
         <li><Link href="https://contrast-grid.eightshapes.com/">Contrast Grid</Link> — compare entire color palettes at once</li>
         <li><Link href="https://venngage.com/tools/accessible-color-palette-generator">Venngage Accessible Palette Generator</Link> — create accessible palettes with contrast previews</li>

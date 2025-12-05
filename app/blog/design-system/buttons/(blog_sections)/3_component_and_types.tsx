@@ -18,7 +18,7 @@ export default function Section3() {
             </AnchorHeading>
             <p>Every design system needs a reliable base component to build from. </p>
             <p>
-                The goal here isn&apos;t to design every possible button — it&apos;s to define a solid foundation that future variants can build on without rewriting the essentials.
+                The goal here isn't to design every possible button — it's to define a solid foundation that future variants can build on without rewriting the essentials.
             </p>
             <List variant="circle" spacing="normal">
                 <li>Manages synchronous and asynchronous click events</li>
@@ -34,7 +34,7 @@ export default function Section3() {
                     This keeps our component lean and allows logic to be reused across other interactive elements like toggles or switches.
                 </p>
             </PostNote>
-            <p className="bold">Here&apos;s our base implementation:</p>
+            <p className="bold">Here's our base implementation:</p>
             <Code
                 title="button.tsx"
                 codeString={`'use client'

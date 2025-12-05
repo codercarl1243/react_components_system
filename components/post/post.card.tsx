@@ -17,7 +17,7 @@ import usePostCard from './usePostCard'
  * @returns The post card component.
  */
 
-export default function PostCard({ variant = 'card', post, as = 3 }: PostCardPropsType) {
+export default function PostCard({ variant = 'card', post, as = 'h3' }: PostCardPropsType) {
     const { image, title } = post
 
 

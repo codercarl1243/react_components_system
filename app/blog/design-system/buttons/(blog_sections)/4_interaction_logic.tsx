@@ -38,7 +38,7 @@ export default function Section4() {
                 Behind the scenes is a simple logging layer. Every click flows through a custom hook that tracks interactions and logs errors—without changing how errors propagate or promises resolve.
             </p>
             <p>
-                Before we dive into the implementation, let&apos;s clarify what responsibilities this hook needs to handle:
+                Before we dive into the implementation, let's clarify what responsibilities this hook needs to handle:
             </p>
             <p className="bold">The hook:</p>
             <List variant="circle">
@@ -103,10 +103,10 @@ export default function useButton() {
                 </li>
                 <li>
                     <p>
-                        <span className="bold">The <InlineCode codeString="void" /> operator</span> - Signals that we intentionally don&apos;t await the Promise (prevents ESLint "floating promise" warnings).
+                        <span className="bold">The <InlineCode codeString="void" /> operator</span> - Signals that we intentionally don't await the Promise (prevents ESLint "floating promise" warnings).
                     </p>
                     <p className="italic">
-                        We use <InlineCode codeString="Promise.resolve().catch()" /> to log unhandled rejections. If the user&apos;s handler already has error handling, our logging never runs.
+                        We use <InlineCode codeString="Promise.resolve().catch()" /> to log unhandled rejections. If the user's handler already has error handling, our logging never runs.
                     </p>
                 </li>
                 <li>

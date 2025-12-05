@@ -17,7 +17,7 @@ export default function Hero() {
 
       <div className="hero__content flow-8">
         <Heading as={"h1"} id="hero-heading" className="hero__content--heading">
-          Hey, I&apos;m Carl
+          Hey, I'm Carl
         </Heading>
 
         <div className="hero__content--subtitle text-lg flow-4">

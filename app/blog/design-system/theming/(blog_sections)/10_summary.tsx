@@ -7,7 +7,7 @@ export default function Section10() {
     return (
         <PostSection id="conclusion">
             <AnchorHeading as={"h2"} id="conclusion-heading">
-                Wrapping Up & What&apos;s Next
+                Wrapping Up & What's Next
             </AnchorHeading>
 
             <p>
@@ -23,7 +23,7 @@ export default function Section10() {
             </List>
 
             <p>
-                Next up, I&apos;ll be extending this foundation into a <strong>global brand-token system</strong> and exploring how to
+                Next up, I'll be extending this foundation into a <strong>global brand-token system</strong> and exploring how to
                 theme components like Cards, NavBars, Inputs, and Layout blocks.
             </p>
 

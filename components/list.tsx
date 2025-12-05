@@ -1,5 +1,7 @@
 import clsx from "clsx";
 import { ComponentProps } from "react";
+import { Block } from "./primitives";
+import { BlockProps } from "./primitives/types";
 
 type UlMarkers = 'default' | 'disc' | 'circle' | 'square' | 'none';
 type OlMarkers = 'default' | 'decimal' | 'lower-alpha' | 'upper-alpha' | 'lower-roman' | 'upper-roman' | 'none';
@@ -9,13 +11,13 @@ type BaseListProps = {
   spacing?: 'tight' | 'normal' | 'loose';
 };
 
-type UnorderedListProps = ComponentProps<'ul'> & BaseListProps & {
+type UnorderedListProps = BlockProps<'ul'> & BaseListProps & {
   ordered?: false;
-  variant?: UlMarkers;
+  marker?: UlMarkers;
 };
-type OrderedListProps = ComponentProps<'ol'> & BaseListProps & {
+type OrderedListProps = BlockProps<'ol'> & BaseListProps & {
   ordered: true;
-  variant?: OlMarkers;
+  marker?: OlMarkers;
 };
 
 type ListProps = UnorderedListProps | OrderedListProps;
@@ -24,7 +26,7 @@ export default function List({
   children,
   className,
   ordered = false,
-  variant = 'circle',
+  marker = 'circle',
   spacing = 'tight',
   ...props
 }: ListProps) {
@@ -35,7 +37,7 @@ export default function List({
     loose: 'list--loose'
   };
 
-  const ulVariantClasses: Record<UlMarkers, string> = {
+  const ulMarkerClasses: Record<UlMarkers, string> = {
     default: 'list--disc',
     disc: 'list--disc',
     circle: 'list--circle',
@@ -43,7 +45,7 @@ export default function List({
     none: 'list--none'
   };
 
-  const olVariantClasses: Record<OlMarkers, string> = {
+  const olMarkerClasses: Record<OlMarkers, string> = {
     default: 'list--decimal',
     decimal: 'list--decimal',
     'lower-alpha': 'list--lower-alpha',
@@ -53,28 +55,28 @@ export default function List({
     none: 'list--none'
   };
 
-  const variantClasses = ordered ? olVariantClasses[variant as OlMarkers] : ulVariantClasses[variant as UlMarkers];
+  const markerClasses = ordered ? olMarkerClasses[marker as OlMarkers] : ulMarkerClasses[marker as UlMarkers];
 
   const listClasses = clsx(
     'list',
-    variantClasses,
+    markerClasses,
     spacingClasses[spacing],
     className
   );
 
-  const role = variant === 'none' ? 'list' : undefined;
+  const role = marker === 'none' ? 'list' : undefined;
 
   if (ordered) {
     return (
-      <ol className={listClasses} role={role} {...(props as ComponentProps<'ol'>)}>
+      <Block as="ol" className={listClasses} role={role} {...props}>
         {children}
-      </ol>
+      </Block>
     );
   }
 
   return (
-    <ul className={listClasses} role={role} {...(props as ComponentProps<'ul'>)}>
+    <Block as="ul" className={listClasses} role={role} {...props}>
       {children}
-    </ul>
+    </Block>
   );
 }
