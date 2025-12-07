@@ -111,8 +111,6 @@ export default function TokenFlowDiagram() {
                             (button.css)
                         </Link>
                     </Row>
-
-
                     <Stack
                         gap={4}
                         className="theming-diagram-box"
@@ -132,8 +130,6 @@ export default function TokenFlowDiagram() {
 --button-border-color: var(--border-color);`}
                             lang="css" />
                     </Stack>
-
-
                     <Stack
                         gap={4}
                         className="theming-diagram-box"
@@ -156,7 +152,7 @@ border: 1px solid var(--button-border-color);`}
                 </figcaption>
             </Stack>
             <PostInfo>
-                    Want to see this architecture applied to a complete component? The <Link href="/blog/design-system/buttons">Building a Button Component</Link> article walks through creating a production-ready button using this exact theming system, including variants, states, and accessibility considerations.
+                Want to see this architecture applied to a complete component? The <Link href="/blog/design-system/buttons">Building a Button Component</Link> article walks through creating a production-ready button using this exact theming system, including variants, states, and accessibility considerations.
             </PostInfo>
         </>
     )
