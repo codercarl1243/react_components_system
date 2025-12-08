@@ -1,8 +1,7 @@
 import clsx from "clsx";
-import { ElementType } from "react";
-import { RowProps } from "@/components/primitives/types";
-import { applyDataAttributes } from "@/lib/utils/applyDataAttributes";
-import { wrapChildrenTextWithSiblings } from "@/lib/utils/react/wrapChildrenTextWithSiblings";
+import type { ElementType } from "react";
+import type { BlockProps, RowProps } from "@/components/primitives/types";
+import Block from "./Block";
 
 /**
  * Row — horizontal layout primitive.
@@ -13,17 +12,12 @@ import { wrapChildrenTextWithSiblings } from "@/lib/utils/react/wrapChildrenText
  * Perfect for "icon + text", button groups, toolbars, etc.
  */
 export default function Row<T extends ElementType = "div">({
-  as,
   gap = 4,
   align = "center",
   justify = "start",
-  variant,
-  variantAppearance,
   className,
-  children,
-  ...props
+  ...blockProps
 }: RowProps<T>) {
-  const Component = as || "div";
 
   const classes = clsx(
     "primitive row",
@@ -32,12 +26,7 @@ export default function Row<T extends ElementType = "div">({
     `row-justify-${justify}`,
     className
   )
-  const SafeChildren = wrapChildrenTextWithSiblings(children);
-
-  return <Component
-    {...applyDataAttributes({ variant, appearance: variantAppearance })}
+  return <Block
     className={classes}
-    {...props}>
-    {SafeChildren}
-  </Component>;
+    {...(blockProps as BlockProps<T>)} />
 }
