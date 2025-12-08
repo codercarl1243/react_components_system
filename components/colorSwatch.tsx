@@ -11,7 +11,7 @@ type ColorSwatchProps = BlockProps<'span'> & {
     size?: ColorSwatchSize;
 };
 
-export default function ColorSwatch({color = "transparent", shape, size, ...props}: ColorSwatchProps) {
+export default function ColorSwatch({color = "transparent", shape = "square", size = "md", ...props}: ColorSwatchProps) {
 
     const styles: CSSProperties = {
         '--surface-color': color,
