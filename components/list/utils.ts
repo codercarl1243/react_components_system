@@ -19,9 +19,10 @@ export const olMarkerClasses: Record<OlMarker, string> = {
 };
 
 export const getMarkerClass = (listType: ValidListTag, marker: OlMarker | UlMarker) => {
-    return listType === "ol"
-        ? olMarkerClasses[marker as OlMarker]
-        : ulMarkerClasses[marker  as UlMarker];
+    if (listType === "ol") {
+        return olMarkerClasses[marker as OlMarker] ?? olMarkerClasses.default;
+    }
+    return ulMarkerClasses[marker as UlMarker] ?? ulMarkerClasses.default;
 }
 
 export const getSpacingClass = (spacing: ValidSpacing) => {
