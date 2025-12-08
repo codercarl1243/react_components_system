@@ -40,7 +40,7 @@ export default function TabList ({
                         id={item.id}
                         isSelected={activeId === item.id}
                         onClick={() => setActiveTab(item.id)}
-                        variantAppearance={activeId === item.id ? "outlined" : "filled"}
+                        variantAppearance={"filled"}
                         variant={activeId === item.id ? "neutral" : buttonVariant }
                     >
                         {item.tabLabel}

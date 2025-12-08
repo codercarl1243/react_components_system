@@ -24,7 +24,7 @@ export default function Section6() {
                     alt="Four WCAG principles: Perceivable, Operable, Understandable, and Robust, each represented by an icon in a blue circle"
                 />
                 <p>Our Button component addresses key accessibility requirements across all four WCAG principles:</p>
-                <List variant="none" spacing="loose">
+                <List marker="none" spacing="loose">
                     <li>
                         <p>
                             <span className="bold"><Icon icon={RiContrastLine} /> Perceivable:</span> Sufficient contrast (4.5:1) and readable text at 200% zoom.
@@ -59,9 +59,9 @@ export default function Section6() {
             <div className="flow-4">
                 <AnchorHeading as={"h3"}>Designing beyond WCAG</AnchorHeading>
                 <p>
-                    WCAG&apos;s four principles give us the foundation, but meeting the minimum isn&apos;t the goal. As developers, our job is to design buttons that feel <span className="fun-underline">consistent</span>, <span className="fun-underline">predictable</span>, and <span className="fun-underline">inclusive</span> in real-world situations.
+                    WCAG's four principles give us the foundation, but meeting the minimum isn't the goal. As developers, our job is to design buttons that feel <span className="fun-underline">consistent</span>, <span className="fun-underline">predictable</span>, and <span className="fun-underline">inclusive</span> in real-world situations.
                 </p>
-                <List variant="circle" spacing="loose">
+                <List marker="circle" spacing="loose">
                     <li>
 
                         <p>
@@ -110,7 +110,7 @@ min-height: 44px;`} copyEnabled={false} />
                 </List>
                 <PostNote>
                     <p><span className="bold">Why <InlineCode codeString="aria-disabled" /> instead of <InlineCode codeString="disabled" />?</span></p>
-                    <List variant="none">
+                    <List marker="none">
                         <li><InlineCode codeString="disabled" /> removes the element from the accessibility tree and tab order.</li>
                         <li><InlineCode codeString="aria-disabled" /> keeps the button focusable, ensuring it remains discoverable.</li>
                     </List>
@@ -122,10 +122,10 @@ min-height: 44px;`} copyEnabled={false} />
 
 
             <div className="flow-4">
-                <AnchorHeading as={"h4"}>Assistive Technology isn&apos;t everything</AnchorHeading>
+                <AnchorHeading as={"h4"}>Assistive Technology isn't everything</AnchorHeading>
                 <p>Screen readers and other assistive tech is definitely powerful and does level the field to some degree, but they don't solve all problems:</p>
                 {/* add icons to these dot points */}
-                <List variant="circle" spacing="tight">
+                <List marker="circle" spacing="tight">
                     <li>Not all users with disabilities use screen readers</li>
                     <li>Visual feedback is critical for many users</li>
                     <li>Users benefit from predictable, stable UIs</li>
@@ -133,7 +133,7 @@ min-height: 44px;`} copyEnabled={false} />
 
                 <p>Our button addresses these concerns as much as possible, we ensure:</p>
                 {/* UPDATE for tick marks */}
-                <List variant="circle" spacing="tight">
+                <List marker="circle" spacing="tight">
                     <li>Semantic HTML and ARIA for screen readers</li>
                     <li>Visual state changes for sighted users</li>
                     <li>Stable layouts for cognitive accessibility</li>
@@ -145,7 +145,7 @@ min-height: 44px;`} copyEnabled={false} />
             <div className="flow-4">
                 <AnchorHeading as={"h4"}>Further Reading</AnchorHeading>
                 <p>For a dive into accessible button patterns:</p>
-                <List variant="none" spacing="tight">
+                <List marker="none" spacing="tight">
                     <li><Link href="https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Roles/button_role">MDN: Button Accessibility</Link></li>
                     <li><Link href="https://www.w3.org/WAI/ARIA/apg/patterns/button/">W3C ARIA Authoring Practices: Button</Link></li>
                     <li><Link href="https://adrianroselli.com/2021/01/multi-function-button.html">Adrian Roselli: Multi-Function Button</Link> - an in-depth article on creating a button with multiple states. This uses plain HTML, JS, & CSS.
@@ -153,7 +153,7 @@ min-height: 44px;`} copyEnabled={false} />
                     <li><Link href="https://kittygiraudel.com/2024/03/29/on-disabled-and-aria-disabled-attributes/">Kitty Giraudel: a comparison of aria-disabled and disabled</Link> - how the use of either is not explicitly wrong.</li>
                 </List>
                 <p className="bold">Design Systems: Buttons</p>
-                <List  variant="none" spacing="tight">
+                <List  marker="none" spacing="tight">
                     <li><Link href="https://m3.material.io/components/buttons/overview">Material Design</Link></li>
                     <li><Link href="https://developer.apple.com/design/human-interface-guidelines/buttons">Apple Human Interface Guidelines</Link></li>
                     <li><Link href="https://atlassian.design/components/button/examples">Atlassian</Link></li>

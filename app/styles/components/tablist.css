@@ -30,7 +30,7 @@
     padding-inline: 1em;
     padding-block-end: 1em;
 
-    & pre {
+    &:not(.height-min) pre {
         height: 30rem;
     }
 

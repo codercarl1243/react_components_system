@@ -1,10 +1,11 @@
 .list {
-  --list-spacing:  0.25em;
+  --list-spacing: 0.25em;
 
   margin: 0;
   list-style-type: none;
-  font-size: inherit;
   padding-inline-start: var(--spacing-sm);
+  line-height: var(--line-height-normal);
+  font-size: var(--font-size-base, inherit);
 }
 
 .list:not(.list--none) li {
@@ -13,11 +14,23 @@
 }
 
 .list li::before {
+  --list-marker-bg-color: var(--background-color, transparent);
+  --list-color: var(--foreground-color, var(--color-secondary-400));
+  --list-border-color: var(--border-color, transparent);
+  --list-border: none;
+  --list-border-radius: 0;
+
+  content: '';
   position: absolute;
   left: 0;
   top: 0.5em;
   width: 0.6rem;
-  height: 0.6rem;
+  aspect-ratio: 1;
+  border: var(--list-border);
+  border-color: var(--list-border-color);
+  border-radius: var(--list-border-radius);
+  background-color: var(--list-marker-bg-color);
+  color: var(--list-color);
 }
 
 /* Spacing variants */
@@ -33,34 +46,30 @@
   --list-spacing: 0.4lh;
 }
 
-.list li>*:not(:last-child) {
+.list li:not(:last-child) {
   margin-block-end: var(--list-spacing);
 }
 
-.list li:not(:last-child) {
+.list li:last-child {
   margin-block-end: calc(var(--list-spacing) * 2);
 }
 
-/* Unordered list variants */
 .list--disc li::before {
-  content: '';
-  background-color: var(--color-secondary-400);
-  border-radius: 50%;
+  background: conic-gradient(var(--list-marker-bg-color), var(--surface-color), var(--list-border-color));
+  width: 0.75rem;
+  left:0.35rem;
+  top: 0.35rem;
+}
+
+/* Unordered list variants */
+.list--disc li::before,
+.list--circle li::before {
+  --list-border-radius: var(--radius-circle);
 }
 
 .list--circle li::before {
-  content: '';
-  border: 1px solid var(--color-secondary-400);
-  background-color: var(--color-secondary-100);
-  border-radius: 50%;
-}
-
-.list--square li::before {
-  content: '';
-  width: 0.5rem;
-  height: 0.5rem;
-  border-radius: 0;
-  background-color: var(--color-secondary-400);
+  --list-marker-bg-color: var(--surface-color);
+  --list-border: var(--border-thin);
 }
 
 /* Ordered list variants */
@@ -74,11 +83,11 @@
   & li::before {
     counter-increment: ol-counter;
     font-weight: 600;
-    color: var(--color-secondary-400);
     top: 0;
     width: 1.5em;
   }
 }
+
 .list--decimal li::before {
   content: counter(ol-counter, decimal) '.';
 }

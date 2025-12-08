@@ -7,7 +7,7 @@
     --text-on-secondary: var(--color-neutral-100);
     --text-on-accent: var(--color-neutral-100);
     --text-on-danger: var(--color-neutral-100);
-    --text-on-warning: var(--color-neutral-100);
+    --text-on-warning: var(--color-neutral-900);
     --text-on-success: var(--color-neutral-100);
     --text-on-info: var(--color-neutral-900);
 

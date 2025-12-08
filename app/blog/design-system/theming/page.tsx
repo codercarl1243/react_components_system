@@ -1,15 +1,15 @@
 import Post from "@/components/post";
 import {
+    Introduction,
+    Why,
     Components,
     Concepts,
     DarkMode,
-    Introduction,
     DataAttributesAndVariants,
     Resources,
     Sidebar,
     Summary,
     Testing,
-    Theme_hook,
     TokensGlobal,
     TokensComponent
 } from "./(blog_sections)";
@@ -31,11 +31,11 @@ export default function ThemingPage() {
                     }}
                 />
                 <Introduction />
+                <Why />
                 <Concepts />
                 <TokensGlobal />
                 <TokensComponent />
                 <DataAttributesAndVariants />
-                <Theme_hook />
                 <DarkMode />
                 <Components />
                 <Testing />

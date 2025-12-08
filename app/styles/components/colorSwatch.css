@@ -1,0 +1,10 @@
+.color-swatch {
+    --color-swatch-width: 1lh;
+
+    padding: 0;
+    margin: 0;
+    width: var(--color-swatch-width, 1rem);
+    aspect-ratio: 1;
+    display: inline-block;
+    vertical-align: middle;
+}

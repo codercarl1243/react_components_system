@@ -1,10 +1,10 @@
 import type { ReactNode, HTMLAttributes, ComponentPropsWithRef } from 'react'
-import { BaseButtonProps } from '../button/button.type'
+import type { ButtonProps } from '../button/button.type'
 
 export type TabProps = Readonly<{
   id: string;
   isSelected: boolean;
-} & Omit<BaseButtonProps,
+} & Omit<ButtonProps,
   'id' | 'role' | 'tabIndex' | 'aria-selected' | 'aria-controls'
 >>
 
@@ -25,6 +25,6 @@ export type TabListProps = Readonly<{
   tabs: TabItem[];
   orientation?: 'vertical' | 'horizontal';
   defaultActiveTabId?: string;
-  variant?: BaseButtonProps['variant'];
+  variant?: ButtonProps['variant'];
   // TODO: figure out what I want to do re: heading for the tablist which can be used as an aria label or a Heading element
 } & Omit<HTMLAttributes<HTMLDivElement>, 'role' | 'onKeyDown' | 'aria-orientation' | 'aria-label'>>;

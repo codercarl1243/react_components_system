@@ -218,8 +218,8 @@ export function BaseButtonExample({ children }: { children?: ReactNode }) {
             <Button
                 onClick={addBubble}
                 isLoading={isLoading}
-                data-style="outlined"
-                data-variant="accent"
+                variantAppearance="outlined"
+                variant="accent"
                 aria-describedby="bubble-description"
                 icon={isLoading ? RiBubbleChartLine : RiWindyLine}
             >

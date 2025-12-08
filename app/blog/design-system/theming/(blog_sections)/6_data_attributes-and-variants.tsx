@@ -12,10 +12,10 @@ import TabList from "@/components/tablist";
 import TokenFlowDiagram from '@/app/blog/design-system/theming/examples/5_TokenFlowDiagram'
 import PostInfo from "@/components/post/post.info";
 
-export default function Section5() {
+export default function Section6() {
   return (
     <PostSection id="data-attributes-variants">
-      <AnchorHeading as="h2" prefix="Step 3 —" id="data-attributes-variants-heading">
+      <AnchorHeading as="h2" prefix="Step 3 —" id="data-attributes-variants-theming-heading">
         Apply Variants with Data Attributes
       </AnchorHeading>
 
@@ -25,11 +25,12 @@ export default function Section5() {
         </p>
 
         <p>
-          Instead of scattering variant logic across JavaScript or component props, you define variants through CSS attribute selectors like <InlineCode codeString='[data-variant="primary"]' lang="css" />. The browser handles the cascade automatically — no runtime overhead, no theme providers, no context.
+          Instead of scattering variant logic across JavaScript or component props, you define variants through CSS attribute selectors like <InlineCode codeString='[variant="primary"]' lang="css" />. The browser handles the cascade automatically — no runtime overhead, no theme providers, no context.
         </p>
-
         <TokenFlowDiagram />
-
+<p>
+  Notice the middle layer? Those <strong>variant palette tokens</strong> (<InlineCode codeString="--variant-bg" lang="css" />, etc.) sit between global tokens and semantic tokens. This indirection isn't just for organization—it's what enables a single variant to support multiple appearances. A <InlineCode codeString='variant="primary"' /> button can be filled, outlined, or ghost by remapping how these palette tokens flow into semantic tokens. We'll explore appearances in Section 6.
+</p>
       </Stack>
 
       <Stack>
@@ -52,7 +53,7 @@ export default function Section5() {
       <Stack>
         <Heading as="h3">Cascade Layers: Ensuring Variants Always Win</Heading>
         <p>
-          Without explicit ordering, <InlineCode codeString='[data-variant="secondary"]' lang="css" /> and <InlineCode codeString=".button" lang="css" /> have equal specificity — whichever appears last in your stylesheet wins. This makes the system fragile and order-dependent.
+          Without explicit ordering, <InlineCode codeString='[variant="secondary"]' lang="css" /> and <InlineCode codeString=".button" lang="css" /> have equal specificity — whichever appears last in your stylesheet wins. This makes the system fragile and order-dependent.
         </p>
         <p><span className="bold">Cascade layers</span> solve this by explicitly defining precedence:</p>
 
@@ -67,7 +68,7 @@ export default function Section5() {
 }
 
 @layer design-system {
-  [data-variant="secondary"] { --background-color: var(--color-secondary-400); }
+  [variant="secondary"] { --background-color: var(--color-secondary-400); }
 }`}
         />
 
@@ -139,14 +140,14 @@ export default function Section5() {
 }
 
 /* Variants define their color palette */
-[data-variant="primary"] {
+[variant="primary"] {
   --variant-bg: var(--color-primary-400);
   --variant-fg: var(--text-on-primary);
   --variant-border: var(--color-primary-600);
   --variant-surface: var(--color-primary-100);
 }
 
-[data-variant="secondary"] {
+[variant="secondary"] {
   --variant-bg: var(--color-secondary-400);
   --variant-fg: var(--text-on-secondary);
   --variant-border: var(--color-secondary-600);
@@ -193,7 +194,7 @@ export default function Section5() {
           gap={2}
         >
           <Button>Click me</Button>
-          <Button data-variant="primary">Get started</Button>
+          <Button variant="primary">Get started</Button>
         </Inline>
 
         <p>

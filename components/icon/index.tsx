@@ -22,7 +22,7 @@ export default function Icon({
       color={color}
       aria-hidden={isDecorative ? 'true' : undefined}
       role={isDecorative ? undefined : 'img'}
-      data-variant={variant}
+      variant={variant}
       focusable="false"
       {...props}
     />

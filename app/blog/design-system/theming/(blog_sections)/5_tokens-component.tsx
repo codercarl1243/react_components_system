@@ -7,22 +7,22 @@ import PostNote from "@/components/post/post.note";
 import PostSection from "@/components/post/post.section";
 import { Stack } from "@/components/primitives";
 
-export default function Section4() {
+export default function Section5() {
 
   return (
     <PostSection id="component-tokens">
-      <AnchorHeading as="h2" prefix="Step 2 —" id="component-tokens-heading">
+      <AnchorHeading as="h2" prefix="Step 2 —" id="component-tokens-theming-heading">
         Define Your Component Tokens
       </AnchorHeading>
       <Stack>
         <p>
-          <span className="bold fun-underline">Global tokens</span> <span className="italic">(defined in Step 1)</span> define the visual language of your system.
+          Now that we have our <span className="bold fun-underline">Global tokens</span> from Step 1, define the visual language of your system.
         </p>
         <p>
           But to keep the system expandable, components shouldn't reach for them directly. Instead, each component exposes its own <span className="bold"><span className="fun-underline">semantic</span> component tokens</span> (<span className="italic">the variables that describe what the component needs, not where the value comes from</span>).
         </p>
         <p>
-          Let&apos;s look at how a component applies this pattern in practice.
+          Let's look at how a component applies this pattern in practice.
         </p>
         <PostNote>
           <p>Component tokens are prefixed to prevent naming clashes between components.</p>
@@ -68,10 +68,19 @@ export default function Section4() {
         <p>
           Component tokens achieve this through a two-layer system:
         </p>
-        <List spacing="tight" variant="decimal" ordered>
-          <li><strong>Semantic tokens</strong> define <em>what</em> colors mean <InlineCode codeString="--background-color" lang="css" /></li>
-          <li><strong>Component tokens</strong> decide <em>how</em> a component uses them <InlineCode codeString="--button-background-color" lang="css" /></li>
+        <List spacing="tight" marker="decimal" as="ol">
+          <li>
+            <strong>Semantic tokens</strong> (<InlineCode codeString="--background-color" lang="css" />) — describe the <em>role</em> a color plays
+          </li>
+          <li>
+            <strong>Component tokens</strong> (<InlineCode codeString="--button-background-color" lang="css" />) — namespace those roles to prevent conflicts between components
+          </li>
         </List>
+        <PostNote>
+          <strong>Why the double indirection?</strong>
+          <p>Semantic tokens let variants change colors across <em>multiple components</em> at once. </p>
+          <p>Component tokens ensure a button's <InlineCode codeString="--background-color" lang="css" /> never clashes with a card's <InlineCode codeString="--background-color" lang="css" />.</p>
+        </PostNote>
         <p>
           In the next step, we will use <InlineCode codeString="data-variant" /> attributes to override <span className="italic">background</span>, <span className="italic">foreground</span>, and <span className="italic">border</span> colors — creating <strong>themes</strong> and <strong>variants</strong> without touching the button's internal CSS.
         </p>

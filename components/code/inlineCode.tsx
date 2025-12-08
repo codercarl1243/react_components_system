@@ -28,7 +28,7 @@ export default async function InlineCode({
     // biome-ignore lint/security/noDangerouslySetInnerHtml: Shiki output is trusted in this context
     return (
         <code
-            className={'shiki-inline shiki' + (noWrap && " text-nowrap")}
+            className={`shiki-inline shiki${noWrap ? " text-nowrap" : ""}`}
             dangerouslySetInnerHTML={{ __html: innerHtml }}
         />
     )

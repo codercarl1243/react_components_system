@@ -8,7 +8,7 @@ export default function Section06_ColorVariants() {
         <PostSection id="color-variants">
             <AnchorHeading as={"h2"} id="color-variants-heading">Creating Color Variants</AnchorHeading>
             <p>Now, we'll define Primary, Secondary, Accent, and Danger variants using semantic mappings.</p>
-            <Code codeString={`.button[data-variant="primary"] {
+            <Code codeString={`.button[variant="primary"] {
     --button-primary-color: var(--color-neutral-100);
     --button-secondary-color: var(--color-primary-400);
     --button-accent-color: var(--color-primary-600);

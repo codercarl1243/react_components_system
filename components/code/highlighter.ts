@@ -1,6 +1,5 @@
 import { logError, logInfo } from '@/lib/logging/log'
 import { isNonEmptyArray } from '@/lib/utils/guards'
-import type { Variant, VariantAppearance } from '@/types/variant'
 import { createHighlighter, type Highlighter, type ThemeRegistration } from 'shiki'
 import { HighlightCustomTokensOptions } from './code.type'
 
@@ -100,8 +99,6 @@ export async function getCustomTheme(): Promise<ThemeRegistration> {
   return customTheme
 }
 
-
-
 export function highlightCustomTokens(
   html: string,
   tokens: string[] = [],
@@ -116,15 +113,44 @@ export function highlightCustomTokens(
 
   for (const token of tokens) {
     if (!token) continue;
-    const replaceRegex = token.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 
-    const regex = new RegExp(replaceRegex, 'g');
-    const attrs = [`data-variant="${variant}"`];
-    if (appearance) attrs.push(`data-appearance="${appearance}"`);
-    result = result.replace(regex, () => {
-      return `<span class="custom-code-highlight" ${attrs.join(' ')}>${token}</span>`;
-    });
+    // Check if token is a data attribute pattern like 'data-variant="primary"'
+    const dataAttrMatch = token.match(/^(data-[\w-]+)="([^"]+)"$/);
+    
+    if (dataAttrMatch) {
+      const [, attrName, attrValue] = dataAttrMatch;
+      
+      // Match the attribute name, equals sign, and quoted value across multiple spans
+      // Example: <span>data-variant</span><span>=</span><span>"primary"</span>
+      const pattern = new RegExp(
+        `(<span[^>]*>\\s*${escapeRegex(attrName)}\\s*</span>` + // attribute name
+        `<span[^>]*>\\s*=\\s*</span>` +                          // equals sign
+        `<span[^>]*>\\s*"${escapeRegex(attrValue)}"\\s*</span>)`, // quoted value
+        'g'
+      );
+      
+      const attrs = [`data-variant="${variant}"`];
+      if (appearance) attrs.push(`data-appearance="${appearance}"`);
+      
+      result = result.replace(pattern, (match) => {
+        return `<span class="custom-code-highlight" ${attrs.join(' ')}>${match}</span>`;
+      });
+    } else {
+      // Fallback to original logic for non-attribute tokens
+      const replaceRegex = escapeRegex(token);
+      const regex = new RegExp(replaceRegex, 'g');
+      const attrs = [`data-variant="${variant}"`];
+      if (appearance) attrs.push(`data-appearance="${appearance}"`);
+      
+      result = result.replace(regex, () => {
+        return `<span class="custom-code-highlight" ${attrs.join(' ')}>${token}</span>`;
+      });
+    }
   }
 
   return result;
+}
+
+function escapeRegex(str: string): string {
+  return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }

@@ -17,6 +17,7 @@ export type BaseStyleProps = {
      * the variant’s color tokens are consumed.
      */
     variantAppearance?: VariantAppearance;
+    // className?: string;
 } & {
     'data-style'?: never;
     'data-appearance'?: never;
@@ -32,29 +33,35 @@ export type Gap = 0 | 2 | 4 | 6 | 8 | 16;
 /* ---------------------------------- */
 /*  Block — structural + Variants     */
 /* ---------------------------------- */
-export type BlockProps<T extends ElementType = "div"> = PolymorphicProps<T, BaseStyleProps>;
+export type BlockProps<
+    T extends ElementType = "div"
+> = PolymorphicProps<T, BaseStyleProps>;
 
-export type InlineProps<T extends ElementType = "div"> = PolymorphicProps<
-    T,
-    {
-        gap?: Gap
-        align?: "start" | "center" | "end" | "stretch" | "baseline";
-        wrap?: boolean; // true = wrap (default), false = nowrap
-    } & BaseStyleProps
->;
+/**
+ * Helper type for components that wrap Block with additional props.
+ */
+export type BlockWrapperProps<
+  T extends ElementType = "div",
+  AdditionalProps = object
+> = PolymorphicProps<T, BaseStyleProps & AdditionalProps>;
+
+export type InlineProps<T extends ElementType = "div"> = BlockWrapperProps<T, {
+    gap?: Gap
+    align?: "start" | "center" | "end" | "stretch" | "baseline";
+    wrap?: boolean; // true = wrap (default), false = nowrap
+}>
 
 export type StackProps<T extends ElementType = "div"> =
-    PolymorphicProps<T, {
+    BlockWrapperProps<T, {
         gap?: Gap;
         align?: "start" | "center" | "end" | "stretch" | "baseline";
         justify?: "start" | "center" | "end" | "stretch";
-    } & BaseStyleProps>;
+    }>;
 
-export type RowProps<T extends ElementType = "div"> = PolymorphicProps<
-    T,
+export type RowProps<T extends ElementType = "div"> = BlockWrapperProps<T,
     {
         gap?: Gap;
         align?: "start" | "center" | "end" | "stretch";
         justify?: "start" | "center" | "end" | "between";
-    } & BaseStyleProps
+    }
 >;

@@ -176,28 +176,28 @@ Notice we're not setting `background-color` directly. We're setting **semantic v
 
 ```css
 /* Primary (Blue) - Main actions */
-.button[data-variant="primary"] {
+.button[variant="primary"] {
   --button-primary-color: var(--color-neutral-100);
   --button-secondary-color: var(--color-primary-400);
   --button-accent-color: var(--color-primary-600);
 }
 
 /* Secondary (Green) - Confirmations */
-.button[data-variant="secondary"] {
+.button[variant="secondary"] {
   --button-primary-color: var(--color-neutral-100);
   --button-secondary-color: var(--color-secondary-400);
   --button-accent-color: var(--color-secondary-600);
 }
 
 /* Accent (Pink) - Emphasis */
-.button[data-variant="accent"] {
+.button[variant="accent"] {
   --button-primary-color: var(--color-neutral-100);
   --button-secondary-color: var(--color-accent-400);
   --button-accent-color: var(--color-accent-600);
 }
 
 /* Danger (Red) - Destructive actions */
-.button[data-variant="danger"] {
+.button[variant="danger"] {
   --button-primary-color: var(--color-neutral-100);
   --button-secondary-color: var(--color-danger-400);
   --button-accent-color: var(--color-danger-600);
@@ -209,15 +209,15 @@ Notice we're not setting `background-color` directly. We're setting **semantic v
 When you combine `data-style` and `data-variant`:
 
 ```tsx
-<Button data-style="outlined" data-variant="primary">
+<Button data-style="outlined" variant="primary">
   Primary Outlined
 </Button>
 ```
 
 The CSS cascade works like this:
 1. Base `.button` sets default semantic colors
-2. `[data-variant="primary"]` overrides with primary color tokens
-3. `[data-style="outlined"]` maps those to background/border/text
+2. `[variant="primary"]` overrides with primary color tokens
+3. `[variantAppearance="outlined"]` maps those to background/border/text
 4. Result: Blue outlined button
 
 **The beauty:** Adding a new style (like "soft" or "subtle") only requires defining ONE new mapping. All variants work automatically.
@@ -252,26 +252,26 @@ Now TypeScript will autocomplete and validate your variants!
 
 ```tsx
 {/* Filled variants (default style) */}
-<Button data-variant="primary">Save</Button>
-<Button data-variant="secondary">Confirm</Button>
-<Button data-variant="accent">Subscribe</Button>
-<Button data-variant="danger">Delete</Button>
+<Button variant="primary">Save</Button>
+<Button variant="secondary">Confirm</Button>
+<Button variant="accent">Subscribe</Button>
+<Button variant="danger">Delete</Button>
 
 {/* Outlined variants */}
-<Button data-style="outlined" data-variant="primary">Edit</Button>
-<Button data-style="outlined" data-variant="secondary">Add</Button>
+<Button variantAppearance="outlined" variant="primary">Edit</Button>
+<Button variantAppearance="outlined" variant="secondary">Add</Button>
 
 {/* Ghost variants */}
-<Button data-style="ghost" data-variant="primary">Learn More</Button>
-<Button data-style="ghost" data-variant="danger">Cancel</Button>
+<Button variantAppearance="ghost" variant="primary">Learn More</Button>
+<Button variantAppearance="ghost" variant="danger">Cancel</Button>
 
 {/* With icons */}
-<Button data-variant="primary" icon={RiSaveLine}>
+<Button variant="primary" icon={RiSaveLine}>
   Save Changes
 </Button>
 
 {/* Loading states maintain variant colors */}
-<Button data-variant="secondary" isLoading>
+<Button variant="secondary" isLoading>
   Processing...
 </Button>
 ```
@@ -342,8 +342,8 @@ export function ButtonShowcase() {
             {variants.map(variant => (
               <Button 
                 key={variant}
-                data-style={style}
-                data-variant={variant}
+                variantAppearance={style}
+                variant={variant}
               >
                 {variant}
               </Button>
@@ -369,7 +369,7 @@ Want to add a "warning" variant? Just add the color tokens:
   --color-warning-600: hsl(45, 93%, 35%);
 }
 
-.button[data-variant="warning"] {
+.button[variant="warning"] {
   --button-primary-color: var(--color-neutral-100);
   --button-secondary-color: var(--color-warning-400);
   --button-accent-color: var(--color-warning-600);

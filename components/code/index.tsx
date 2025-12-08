@@ -4,6 +4,14 @@ import { createHash } from 'crypto';
 import { CodeProps, SupportedLangs } from './code.type';
 import InlineCode from './inlineCode';
 
+/**
+ * TODO: make Hover tooltip util that takes in {k | v}
+ * K - String that will be wrapped in a span and will have a tooltip on hover
+ * V - The String/ React Element that will be displayed in the tooltip.
+ * 
+ * TODO: make tooltip that sits at the top level of the DOM that will be shared with all other hoverTips
+ *  */ 
+
 export default async function Code({
   codeString,
   lang = 'tsx',

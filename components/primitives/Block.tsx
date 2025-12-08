@@ -1,7 +1,8 @@
-import { ElementType } from "react";
-import { BlockProps } from "@/components/primitives/types";
+import type { ElementType } from "react";
+import type { BlockProps } from "@/components/primitives/types";
 import { applyDataAttributes } from "@/lib/utils/applyDataAttributes";
 import clsx from "clsx";
+import { wrapChildrenTextWithSiblings } from "@/lib/utils/react/wrapChildrenTextWithSiblings";
 
 /**
  * Block — a lightweight polymorphic layout wrapper.
@@ -42,13 +43,18 @@ export default function Block<T extends ElementType = "div">({
     variant,
     variantAppearance,
     className,
+    children,
     ...props
 }: BlockProps<T>) {
     const Component = as || "div";
+
+    const SafeChildren = wrapChildrenTextWithSiblings(children);
 
     return <Component
         className={clsx("primitive", className)}
         {...applyDataAttributes({ variant, appearance: variantAppearance })}
         {...props}
-    />
+    >
+        {SafeChildren}
+    </Component>
 }

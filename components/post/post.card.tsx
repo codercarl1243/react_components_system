@@ -5,6 +5,7 @@ import type { PostCardPropsType } from './post.type'
 import Link from '@/components/link'
 import Heading from '@/components/heading'
 import usePostCard from './usePostCard'
+import { Block } from '../primitives';
 
 /** 
  * Render a clickable post card with an image and title.
@@ -17,15 +18,16 @@ import usePostCard from './usePostCard'
  * @returns The post card component.
  */
 
-export default function PostCard({ variant = 'card', post, as = 3 }: PostCardPropsType) {
+export default function PostCard({ variant = 'card', post, as = 'h3' }: PostCardPropsType) {
     const { image, title } = post
 
 
     const { handleClick, handleMouseDown, handleMouseUp, handleMouseLeave } = usePostCard(post.href)
 
     return (
-        <article
-            data-variant={variant}
+        <Block
+            as="article"
+            // variant={variant}
             onClick={handleClick}
             className="post-card"
             onMouseDown={handleMouseDown}
@@ -35,7 +37,7 @@ export default function PostCard({ variant = 'card', post, as = 3 }: PostCardPro
             <Heading
                 className="post-card__title"
                 data-styled="filled"
-                data-variant="accent"
+                variant="accent"
                 as={as}
                 headingSize={4}>
                 <Link href={post.href}>{title}</Link>
@@ -49,6 +51,6 @@ export default function PostCard({ variant = 'card', post, as = 3 }: PostCardPro
                 className='post-card__image'
                 variant={variant}
             />
-        </article>
+        </Block>
     )
 }
