@@ -23,7 +23,7 @@ export default function AnchorHeading<T extends ValidHeadingTag = "h3">({
     return headingEl;
   }
 
-  const normalizedPrefix = stringUtils.normalizeWhiteSpace(prefix)  + " ";
+  const normalizedPrefix = `${stringUtils.normalizeWhiteSpace(prefix)} `;
 
   return (
     <Inline gap={2} className="heading-w-prefix">
