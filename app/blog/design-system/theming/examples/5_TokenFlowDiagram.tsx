@@ -6,6 +6,7 @@ import { Row, Stack } from "@/components/primitives";
 import { RiArrowDownLongFill, RiCodeSSlashFill, RiPaletteFill, RiPuzzleFill } from "@remixicon/react";
 
 
+// TODO: add config for location of code to maintain the hrefs if needed
 export default function TokenFlowDiagram() {
 
     return (
