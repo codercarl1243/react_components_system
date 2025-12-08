@@ -1,6 +1,5 @@
 import { logError, logInfo } from '@/lib/logging/log'
 import { isNonEmptyArray } from '@/lib/utils/guards'
-import type { Variant, VariantAppearance } from '@/types/variant'
 import { createHighlighter, type Highlighter, type ThemeRegistration } from 'shiki'
 import { HighlightCustomTokensOptions } from './code.type'
 
@@ -99,35 +98,6 @@ export async function getCustomTheme(): Promise<ThemeRegistration> {
   globalForShiki.__customTheme = customTheme
   return customTheme
 }
-
-
-
-// export function highlightCustomTokens(
-//   html: string,
-//   tokens: string[] = [],
-//   options?: HighlightCustomTokensOptions
-// ) {
-//   if (!isNonEmptyArray(tokens)) return html;
-
-//   let result = html;
-
-//   const variant = options?.variant ?? 'primary';
-//   const appearance = options?.appearance;
-
-//   for (const token of tokens) {
-//     if (!token) continue;
-//     const replaceRegex = token.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-
-//     const regex = new RegExp(replaceRegex, 'g');
-//     const attrs = [`data-variant="${variant}"`];
-//     if (appearance) attrs.push(`data-appearance="${appearance}"`);
-//     result = result.replace(regex, () => {
-//       return `<span class="custom-code-highlight" ${attrs.join(' ')}>${token}</span>`;
-//     });
-//   }
-
-//   return result;
-// }
 
 export function highlightCustomTokens(
   html: string,
