@@ -48,7 +48,7 @@ export default function Stack<T extends ElementType = "div">({
 }: StackProps<T>) {
 
     const classes = clsx(
-                `primitive stack`,
+                `stack`,
                 `gap-row-${gap}`, 
                 align ? `stack-align-${align}` : '',
                 justify ? `stack-justify-${justify}` : '',

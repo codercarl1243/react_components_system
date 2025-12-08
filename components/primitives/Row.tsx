@@ -20,7 +20,7 @@ export default function Row<T extends ElementType = "div">({
 }: RowProps<T>) {
 
   const classes = clsx(
-    "primitive row",
+    "row",
     `gap-col-${gap}`,
     `row-align-${align}`,
     `row-justify-${justify}`,

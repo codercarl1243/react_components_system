@@ -18,7 +18,7 @@ export default function Inline<T extends ElementType = "div">({
 }: InlineProps<T>) {
 
     const classes = clsx(
-        "primitive inline-flow",
+        "inline-flow",
         wrap ? "inline-wrap" : "inline-nowrap",
         `gap-${gap}`,
         `inline-align-${align}`,
