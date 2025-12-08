@@ -4,8 +4,6 @@ import Icon from '@/components/icon'
 import { generateHeadingId, generateHeadingSize, getIconSize, getSizeClass } from '@/components/heading/utils'
 import { Block } from '@/components/primitives';
 
-const DEFAULT_HEADING_TAG = 'h3';
-
 /**
  * Render a semantic heading element with configurable visual size.
  *
@@ -21,7 +19,6 @@ const DEFAULT_HEADING_TAG = 'h3';
  */
 
 export default function Heading<T extends ValidHeadingTag = "h3">({
-  as,
   headingSize,
   children,
   className,
@@ -31,26 +28,24 @@ export default function Heading<T extends ValidHeadingTag = "h3">({
   ...props
 }: HeadingPropsType<T>) {
 
-  const Component = as ?? DEFAULT_HEADING_TAG
-
   const headingId = id || generateHeadingId(children)
-  const resolvedHeadingSize = headingSize ?? generateHeadingSize(Component);
+  const resolvedHeadingSize = headingSize ?? generateHeadingSize(props.as ?? 'h3');
+  const headingClasses = clsx('font-accent heading',
+    { "heading-w-icon": icon },
+    className,
+    getSizeClass(resolvedHeadingSize));
 
   const content = icon ? (
-      <>
+    <>
       <Icon icon={icon} size={getIconSize(resolvedHeadingSize)} />
       <span className='heading__content'>{children}</span>
-      </>
+    </>
   ) : children;
 
   return (
     <Block
-      as={Component}
       id={headingId}
-      className={clsx('font-accent heading',
-        { "heading-w-icon": icon },
-        className,
-        getSizeClass(resolvedHeadingSize))}
+      className={headingClasses}
       variant={variant}
       {...props}
     >
