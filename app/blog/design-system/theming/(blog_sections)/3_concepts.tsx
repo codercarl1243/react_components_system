@@ -43,7 +43,7 @@ export default function Section3() {
                     </li>
                     <li>
                         <p>
-                            <span className="bold"><Icon icon={RiCodeSSlashLine} color={"var(--color-primary-400)"} /> Data Attributes:</span> Lightweight CSS hooks such as <InlineCode codeString={`data-theme="dark"`} /> or <InlineCode codeString={`data-variant="primary"`} />.
+                            <span className="bold"><Icon icon={RiCodeSSlashLine} color={"var(--color-primary-400)"} /> Data Attributes:</span> Lightweight CSS hooks such as <InlineCode codeString={`data-theme="dark"`} /> or <InlineCode codeString={`variant="primary"`} />.
                         </p>
                         <p>
                             They don't require client-side JavaScript, but integrate cleanly with any JS that sets or toggles them.

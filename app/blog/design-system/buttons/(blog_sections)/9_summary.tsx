@@ -16,7 +16,7 @@ export default function Section9() {
             <AnchorHeading as={"h3"} id="summary__features">
                 What We Built
             </AnchorHeading>
-            <List spacing="tight" variant="circle" aria-labelledby="summary__features">
+            <List spacing="tight" marker="circle" aria-labelledby="summary__features">
                 <li>Type-safe component with async operation support</li>
                 <li>Unhandled errors are logged automatically</li>
                 <li>CSS custom properties for flexible theming and variants</li>

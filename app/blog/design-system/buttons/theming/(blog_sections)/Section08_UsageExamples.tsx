@@ -7,8 +7,8 @@ export default function Section08_UsageExamples() {
     return (
         <PostSection id="usage-examples">
             <AnchorHeading as={"h2"} id="usage-examples-heading">Usage Examples</AnchorHeading>
-            <Code codeString={`<Button data-variant="primary">Save</Button>
-<Button data-style="outlined" data-variant="secondary">Add</Button>`}/>
+            <Code codeString={`<Button variant="primary">Save</Button>
+<Button variantAppearance="outlined" variant="secondary">Add</Button>`}/>
             <PostNote>
                 <p>Variants and styles can be freely combined — each adapts automatically through the cascade.</p>
             </PostNote>

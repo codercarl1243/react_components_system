@@ -6,7 +6,7 @@ import PostSection from "@/components/post/post.section";
 import Link from "@/components/link";
 import Heading from "@/components/heading";
 import PostInfo from "@/components/post/post.info";
-import { Inline, Stack } from "@/components/primitives";
+import { Stack } from "@/components/primitives";
 import ColorSwatch from "@/components/colorSwatch";
 
 export default function section4() {

@@ -13,7 +13,7 @@ export default function ButtonsResources() {
         tabListName="code_reference"
         className="code__reference"
         defaultActiveTabId="code_button"
-        data-variant="accent"
+        variant="accent"
         orientation="horizontal"
         tabs={[
           {
@@ -290,20 +290,20 @@ button.button {
     --button-accent-color: var(--color-neutral-600);
 }
 
-.button[data-variant="primary"] {
+.button[variant="primary"] {
     --button-primary-color: var(--color-neutral-100);
     --button-secondary-color: var(--color-primary-400);
     --button-accent-color: var(--color-primary-600);
 }
 
-.button[data-variant="secondary"] {
+.button[variant="secondary"] {
     --button-primary-color: var(--color-neutral-100);
     --button-secondary-color: var(--color-secondary-400);
     --button-accent-color: var(--color-secondary-600);
 
 }
 
-.button[data-variant="accent"] {
+.button[variant="accent"] {
     --button-primary-color: var(--color-neutral-100);
     --button-secondary-color: var(--color-accent-400);
     --button-accent-color: var(--color-accent-600);
@@ -450,7 +450,7 @@ describe('Button', () => {
   })
 
   test('applies data-variant prop', () => {
-    render(<Button data-variant="primary">click me</Button>)
+    render(<Button variant="primary">click me</Button>)
     expect(screen.getByTestId('base-button')).toHaveAttribute('data-variant', 'primary')
   })
 

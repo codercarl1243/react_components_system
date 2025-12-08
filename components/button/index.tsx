@@ -35,7 +35,7 @@ import { Block } from '../primitives'
  * <Button disabled onClick={handleSave}>Save</Button>
  * 
  * // With variant styling
- * <Button data-variant="primary" data-style="filled">
+ * <Button variant="primary" variantAppearance="filled">
  *   Click Me
  * </Button>
  */

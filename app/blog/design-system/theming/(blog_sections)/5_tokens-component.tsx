@@ -68,7 +68,7 @@ export default function Section5() {
         <p>
           Component tokens achieve this through a two-layer system:
         </p>
-        <List spacing="tight" variant="decimal" ordered>
+        <List spacing="tight" marker="decimal" as="ol">
           <li>
             <strong>Semantic tokens</strong> (<InlineCode codeString="--background-color" lang="css" />) — describe the <em>role</em> a color plays
           </li>

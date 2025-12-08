@@ -14,7 +14,7 @@ export default function Section8() {
             <Code lang="tsx" codeString={`export function Button({ variant = 'primary', ...props }: ButtonProps) {
   return (
     <button
-      data-variant={variant}
+      variant={variant}
       {...props}
     />
   )

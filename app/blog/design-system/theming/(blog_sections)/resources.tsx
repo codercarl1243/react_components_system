@@ -28,7 +28,7 @@ export default function ButtonsResources() {
         tabListName="code_reference"
         className="code__reference"
         defaultActiveTabId="[tbc]"
-        data-variant="accent"
+        variant="accent"
         orientation="horizontal"
         tabs={[
           {

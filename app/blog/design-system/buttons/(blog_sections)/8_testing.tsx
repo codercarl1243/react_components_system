@@ -44,7 +44,7 @@ export default function Section8() {
             <p>
                 The <InlineCode codeString="useButton" /> hook handles all interaction logic. These tests validate how the hook behaves in isolation — separate from any UI — ensuring that our event system is resilient and predictable.
             </p>
-            <List variant="circle" spacing="tight">
+            <List marker="circle" spacing="tight">
                 <li><span className="bold">Event Handling:</span> Verifies that user-provided click handlers run safely for both synchronous and asynchronous cases.</li>
                 <li><span className="bold">Error Logging:</span> Ensures unhandled Promise rejections and synchronous errors are logged without interfering with execution.</li>
                 <li><span className="bold">Return Value:</span> Confirms the hook returns a stable, curried function signature that can be reused across components.</li>
@@ -56,7 +56,7 @@ export default function Section8() {
             <p>
                 The <InlineCode codeString="Button" /> component connects logic to presentation. These tests focus on markup, accessibility, and visual stability.
             </p>
-            <List variant="circle" spacing="tight">
+            <List marker="circle" spacing="tight">
                 <li><span className="bold">Rendering:</span> Renders with the correct text, role, and variant props.</li>
                 <li><span className="bold">Accessibility:</span> Applies <InlineCode codeString="aria-disabled" />, keyboard focus, and meets minimum touch target requirements.</li>
                 <li><span className="bold">Loading State:</span> Disables interaction, updates <InlineCode codeString="aria-live" /> regions, and provides visual feedback.</li>
@@ -67,7 +67,7 @@ export default function Section8() {
             <p>
                 Accessibility testing verifies that users with assistive technologies experience consistent, predictable behavior. We confirm:
             </p>
-            <List variant="circle" spacing="tight">
+            <List marker="circle" spacing="tight">
                 <li>Focus visibility is maintained at all times.</li>
                 <li><InlineCode codeString="aria-disabled" /> accurately reflects the visual state.</li>
                 <li>Keyboard interaction is fully supported.</li>
@@ -83,7 +83,7 @@ export default function Section8() {
                 className="code__reference"
                 tabListName="testing_resources"
                 defaultActiveTabId="code_button"
-                data-variant="accent"
+                variant="accent"
                 orientation="horizontal"
                 tabs={[
                     {
@@ -213,7 +213,7 @@ describe('Button', () => {
   })
 
   test('applies data-variant prop', () => {
-    render(<Button data-variant="primary">click me</Button>)
+    render(<Button variant="primary">click me</Button>)
     expect(screen.getByTestId('base-button')).toHaveAttribute('data-variant', 'primary')
   })
 

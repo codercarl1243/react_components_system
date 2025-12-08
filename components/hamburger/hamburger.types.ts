@@ -1,5 +1,5 @@
 import type { ElementType, PolymorphicProps, RefObject } from "react";
-import type { BaseButtonProps } from "@/components/button/button.type";
+import type { ButtonProps } from "@/components/button/button.type";
 import type { IconProps } from "@/components/icon/icon.type";
 
 type Position = "left" | "right";
@@ -18,7 +18,7 @@ export type HamburgerState = {
 }
 
 export type HamburgerButtonProps = Omit<
-    BaseButtonProps,
+    ButtonProps,
     'aria-controls' | 'aria-expanded' | 'aria-label' | 'data-open' | 'icon'
 > & {
     closeIcon?: IconProps['icon'];

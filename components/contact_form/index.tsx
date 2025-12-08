@@ -57,7 +57,7 @@ export default function ContactForm() {
                 <List
                     className="contact-form__errors"
                     aria-label="Form errors"
-                    variant='none'
+                    marker='none'
                 >
                     {state.formErrors.map((error, index) => (
                         <li key={`form-error-${index}`}>{error}</li>
@@ -116,8 +116,8 @@ export default function ContactForm() {
                 <Button
                     icon={RiMailLine}
                     type="submit"
-                    data-variant="primary"
-                    data-style={"filled"}
+                    variant="primary"
+                    variantAppearance={"filled"}
                     isLoading={pending}>
                     Send message
                 </Button>

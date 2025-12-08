@@ -48,7 +48,7 @@ export default function Section5() {
             <AnchorHeading as={"h3"}>Preventing Duplicate Actions</AnchorHeading>
             {/* IMAGE IDEA: Diagram showing click blocked by disabled/loading branch */}
             <p>Async operations can take time, and users often click again if nothing happens immediately. Our button prevents duplicate submissions with a combination of logic and semantics:</p>
-            <List ordered>
+            <List as="ol">
                 <li>
                     Checking <InlineCode codeString="isLoading || disabled" /> before executing the handler
                 </li>

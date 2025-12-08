@@ -19,7 +19,7 @@ import {
 import { generateMetadataForPost } from "@/lib/utils/generateMeta/post";
 import { getRelatedPosts } from "@/lib/blog/blog.data";
 import { asPostId } from "@/lib/blog/blog.utils";
-import Buttons from './examples/buttons'
+// import Buttons from './examples/buttons'
 const postId = asPostId('design__button__01');
 
 export const metadata: Metadata = generateMetadataForPost(postId);

@@ -37,7 +37,7 @@ export default function Section1() {
             </PostNote> */}
 
             <p>By the end of this post, you'll understand how to design a button system that is:</p>
-            <List ordered>
+            <List as="ol">
                 <li>Type-safe and accessible by default</li>
                 <li>Backed by a reusable hook for interaction logic</li>
                 <li>Styled with built-in accessibility and state awareness</li>

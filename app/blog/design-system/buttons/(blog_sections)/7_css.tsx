@@ -59,7 +59,7 @@ export default function Section7() {
             />
             <p>From here we add in our layer of bias which meet WCAG requirements and ensure consistent UX.</p>
             <p>You will notice a couple of things here:</p>
-            <List spacing="tight" variant="circle">
+            <List spacing="tight" marker="circle">
                 <li><span className="bold">Margins:</span> Extra space reduces accidental clicks — helpful for users with limited mobility or when surfing on bumpy public transport.</li>
                 <li><span className="bold">Grid Layout:</span> Three columns keep icons, text, and spinners aligned without causing layout shifts when states change.</li>
             </List>

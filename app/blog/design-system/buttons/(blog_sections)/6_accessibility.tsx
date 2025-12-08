@@ -61,7 +61,7 @@ export default function Section6() {
                 <p>
                     WCAG's four principles give us the foundation, but meeting the minimum isn't the goal. As developers, our job is to design buttons that feel <span className="fun-underline">consistent</span>, <span className="fun-underline">predictable</span>, and <span className="fun-underline">inclusive</span> in real-world situations.
                 </p>
-                <List variant="circle" spacing="loose">
+                <List marker="circle" spacing="loose">
                     <li>
 
                         <p>
@@ -125,7 +125,7 @@ min-height: 44px;`} copyEnabled={false} />
                 <AnchorHeading as={"h4"}>Assistive Technology isn't everything</AnchorHeading>
                 <p>Screen readers and other assistive tech is definitely powerful and does level the field to some degree, but they don't solve all problems:</p>
                 {/* add icons to these dot points */}
-                <List variant="circle" spacing="tight">
+                <List marker="circle" spacing="tight">
                     <li>Not all users with disabilities use screen readers</li>
                     <li>Visual feedback is critical for many users</li>
                     <li>Users benefit from predictable, stable UIs</li>
@@ -133,7 +133,7 @@ min-height: 44px;`} copyEnabled={false} />
 
                 <p>Our button addresses these concerns as much as possible, we ensure:</p>
                 {/* UPDATE for tick marks */}
-                <List variant="circle" spacing="tight">
+                <List marker="circle" spacing="tight">
                     <li>Semantic HTML and ARIA for screen readers</li>
                     <li>Visual state changes for sighted users</li>
                     <li>Stable layouts for cognitive accessibility</li>

@@ -27,7 +27,7 @@ export default function Section4() {
                 <p>
                     This whimsical demo shows what's possible when buttons provide rich feedback. The bubbles are decorative, but the <span className="italic">principles</span> are production-ready:
                 </p>
-                <List ordered spacing="tight">
+                <List as="ol" spacing="tight">
                     <li>The button prevents duplicate clicks during loading (isLoading state)</li>
                     <li>Visual feedback stays within the button's boundaries — <span className="italic">no unexpected layout shifts</span></li>
                     <li>Visual feedback is paired with accessible announcements using a live region</li>
@@ -41,7 +41,7 @@ export default function Section4() {
                 Before we dive into the implementation, let's clarify what responsibilities this hook needs to handle:
             </p>
             <p className="bold">The hook:</p>
-            <List variant="circle">
+            <List marker="circle">
                 <li>Logs clicks in development</li>
                 <li>Logs synchronous errors (then re-throws them)</li>
                 <li>Attaches logging to unhandled Promise rejections</li>
@@ -90,7 +90,7 @@ export default function useButton() {
             <p>
                 Each of these choices may seem small, but together they create a robust, fault-tolerant interaction layer that behaves consistently across environments.
             </p>
-            <List variant="circle" spacing="loose">
+            <List marker="circle" spacing="loose">
                 <li>
                     <p>
                         <span className="bold">Curried function</span> - <InlineCode codeString="handleClick(onClick)(event)" /> allows us to configure the handler once and reuse it.

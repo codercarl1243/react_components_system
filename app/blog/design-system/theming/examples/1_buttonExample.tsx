@@ -30,7 +30,7 @@ export default function ButtonExample() {
                 tabListName={"button_example_code"}
                 className="height-min code__reference"
                 defaultActiveTabId="button_example_code--primary"
-                data-variant="accent"
+                variant="accent"
                 orientation="horizontal"
                 tabs={[
                     {
@@ -41,7 +41,7 @@ export default function ButtonExample() {
                                 lang="html"
                                 copyEnabled={false}
                                 highlightTokens={[`primary`, `filled`]}
-                                codeString={`<button class="button" data-variant="primary" data-appearance="filled">
+                                codeString={`<button class="button" variant="primary" data-appearance="filled">
     Primary
 </button>`} />
                         )
@@ -54,7 +54,7 @@ export default function ButtonExample() {
                                 lang="html"
                                 copyEnabled={false}
                                 highlightTokens={[`secondary`, `ghost`]}
-                                codeString={`<button class="button" data-variant="secondary" data-appearance="ghost">
+                                codeString={`<button class="button" variant="secondary" data-appearance="ghost">
     Secondary
 </button>`} />
                         )
@@ -67,7 +67,7 @@ export default function ButtonExample() {
                                 lang="html"
                                 copyEnabled={false}
                                 highlightTokens={[`accent`, `outlined`]}
-                                codeString={`<button class="button" data-variant="accent" data-appearance="outlined">
+                                codeString={`<button class="button" variant="accent" data-appearance="outlined">
     Accent
 </button>`} />
                         )

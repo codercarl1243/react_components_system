@@ -20,7 +20,7 @@ export default function Section3() {
             <p>
                 The goal here isn't to design every possible button — it's to define a solid foundation that future variants can build on without rewriting the essentials.
             </p>
-            <List variant="circle" spacing="normal">
+            <List marker="circle" spacing="normal">
                 <li>Manages synchronous and asynchronous click events</li>
                 <li>Communicates loading and disabled states</li>
                 <li>Preserves accessibility and focus behavior</li>
@@ -85,7 +85,7 @@ export default function Button({
     )
 }`} />
             <AnchorHeading as={"h4"}>Key Decisions</AnchorHeading>
-            <List variant="circle" spacing="normal">
+            <List marker="circle" spacing="normal">
                 <li>
                     <InlineCode codeString={`clsx(className, 'button')`} /> - Combines user-provided
                     classes with our base class for flexible, predictable styling.
@@ -120,7 +120,7 @@ export default function Button({
             <p>
                 TypeScript helps ensure our component remains predictable and extensible. The type definitions below create a contract between the UI and its behavior — protecting both consumers and contributors.
             </p>
-            <List variant="circle" spacing="normal">
+            <List marker="circle" spacing="normal">
                 <li>Support both synchronous and asynchronous click handlers</li>
                 <li>Extends native button props safely</li>
                 <li>Allow custom data attributes for styling</li>
@@ -146,7 +146,7 @@ export type BaseButtonProps = {
             <AnchorHeading as={"h4"}>
                 Types Breakdown
             </AnchorHeading>
-            <List variant="circle" spacing="normal">
+            <List marker="circle" spacing="normal">
                 <li>
                     <InlineCode codeString={`MouseEventType`} /> -  Alias for cleaner references throughout the component.
                 </li>
