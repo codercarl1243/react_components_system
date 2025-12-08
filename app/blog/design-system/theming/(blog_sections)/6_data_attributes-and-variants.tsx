@@ -159,7 +159,7 @@ export default function Section6() {
           ]}
         />
         <p>
-          Now any element with <InlineCode codeString='variant="secondary"' /> will use the secondary colour palette. The component's internal CSS doesn't change — only the semantic token values do.
+          Now any element with <InlineCode codeString='data-variant="secondary"' /> will use the secondary colour palette. The component's internal CSS doesn't change — only the semantic token values do.
         </p>
         <PostNote>
           <p>
@@ -185,7 +185,7 @@ export default function Section6() {
 </button>
 
 // Primary variant
-<button className="button" variant="primary">
+<button className="button" data-variant="primary">
   Get started
 </button>`}
         />
