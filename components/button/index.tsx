@@ -1,7 +1,7 @@
 'use client'
 
 import clsx from 'clsx'
-import { BaseButtonProps, MouseEventType } from '@/components/button/button.type'
+import type { ButtonProps, MouseEventType } from '@/components/button/button.type'
 import useButton from '@/components/button/useButton'
 import Spinner from '@/components/spinner'
 import Icon from '@/components/icon'
@@ -49,7 +49,7 @@ export default function Button({
   ref,
   icon,
   ...props
-}: BaseButtonProps) {
+}: ButtonProps) {
   const { handleClick } = useButton()
 
   /**
