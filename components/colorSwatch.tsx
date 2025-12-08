@@ -3,7 +3,7 @@ import { Block } from "./primitives";
 import { BlockProps } from "./primitives/types";
 
 type ColorSwatchShape = "square" | "circle";
-type ColorSwatchSize = "xs" | "sm" | "md" | "lg";
+type ColorSwatchSize =  "sm" | "md" | "lg";
 
 type ColorSwatchProps = BlockProps<'span'> & {
     color?: string;
@@ -15,8 +15,9 @@ export default function ColorSwatch({color = "transparent", shape, size, ...prop
 
     const styles: CSSProperties = {
         '--surface-color': color,
-        '--border-color': 'currentColor'
-
+        '--border-color': 'currentColor',
+        '--border-radius': shape === 'square' ? 'var(--radius-sm)' : 'var(--radius-circle)',
+        '--color-swatch-width': size === 'lg' ? '1.5lh' : size === 'md' ? '1lh' : '0.75lh'
     }
 
     return (
