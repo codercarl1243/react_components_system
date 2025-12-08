@@ -15,7 +15,7 @@ import PostInfo from "@/components/post/post.info";
 export default function Section6() {
   return (
     <PostSection id="data-attributes-variants">
-      <AnchorHeading as="h2" prefix="Step 3 —" id="data-attributes-variants-heading">
+      <AnchorHeading as="h2" prefix="Step 3 —" id="data-attributes-variants-theming-heading">
         Apply Variants with Data Attributes
       </AnchorHeading>
 

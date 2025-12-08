@@ -11,7 +11,7 @@ export default function Section5() {
 
   return (
     <PostSection id="component-tokens">
-      <AnchorHeading as="h2" prefix="Step 2 —" id="component-tokens-heading">
+      <AnchorHeading as="h2" prefix="Step 2 —" id="component-tokens-theming-heading">
         Define Your Component Tokens
       </AnchorHeading>
       <Stack>

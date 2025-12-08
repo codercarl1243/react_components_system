@@ -10,7 +10,7 @@ import { Stack } from "@/components/primitives";
 export default function Section2() {
     return (
         <PostSection id="introduction">
-            <Heading as={"h2"} id="introduction-heading">
+            <Heading as={"h2"} id="why-theming-heading">
                 Why Theming Should Be Its Own System
             </Heading>
             <Stack>

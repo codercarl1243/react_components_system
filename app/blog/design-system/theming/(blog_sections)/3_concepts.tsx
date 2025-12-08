@@ -13,7 +13,7 @@ export default function Section3() {
 
     return (
         <PostSection id="core-concepts">
-            <AnchorHeading as="h2" id="core-concepts-heading">
+            <AnchorHeading as="h2" id="core-concepts -theming-heading">
                 Core Concepts: How CSS-Only Theming Works
             </AnchorHeading>
             <p>

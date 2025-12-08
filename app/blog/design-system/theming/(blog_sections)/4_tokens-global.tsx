@@ -12,7 +12,7 @@ import ColorSwatch from "@/components/colorSwatch";
 export default function section4() {
     return (
         <PostSection id="tokens">
-            <AnchorHeading as={"h2"} prefix="Step 1 —" id="global-tokens-heading">
+            <AnchorHeading as={"h2"} prefix="Step 1 —" id="global-tokens-theming-heading">
                 Define Your Global Design Tokens
             </AnchorHeading>
             <Stack>

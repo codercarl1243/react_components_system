@@ -10,7 +10,7 @@ export default function Section1() {
     return (
         <PostSection id="preview">
             <Stack gap={4}>
-                <Heading as="h2" id="preview-heading">
+                <Heading as="h2" id="intro-theming-heading">
                     What We're Building
                 </Heading>
                 <p>
