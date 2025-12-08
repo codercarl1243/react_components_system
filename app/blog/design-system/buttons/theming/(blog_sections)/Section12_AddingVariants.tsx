@@ -11,7 +11,7 @@ export default function Section12_AddingVariants() {
             <Code codeString={`:root {
     --color-warning-400: hsl(45, 93%, 47%);
 }
-.button[variant="warning"] {
+.button[data-variant="warning"] {
     --button-secondary-color: var(--color-warning-400);
 }`} lang="css" />
             <PostNote>

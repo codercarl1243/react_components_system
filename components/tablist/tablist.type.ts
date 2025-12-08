@@ -1,5 +1,5 @@
 import type { ReactNode, HTMLAttributes, ComponentPropsWithRef } from 'react'
-import { ButtonProps } from '../button/button.type'
+import type { ButtonProps } from '../button/button.type'
 
 export type TabProps = Readonly<{
   id: string;
