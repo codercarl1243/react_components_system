@@ -1,18 +1,15 @@
-import type { ReactNode, HTMLAttributes, ComponentPropsWithRef } from 'react'
-import type { ButtonProps } from '../button/button.type'
+import type { ComponentPropsWithRef, ReactNode } from 'react'
+import type { ButtonProps } from '@/components/button/button.type'
 
 export type TabProps = Readonly<{
-  id: string;
   isSelected: boolean;
 } & Omit<ButtonProps,
-  'id' | 'role' | 'tabIndex' | 'aria-selected' | 'aria-controls'
+  'role' | 'tabIndex' | 'aria-selected' | 'aria-controls'
 >>
 
-export type TabPanelProps = Readonly<{
-  id: string;
-} & Omit<ComponentPropsWithRef<'div'>,
-  'id' | 'role' | 'tabIndex' | 'aria-labelledby'
->>
+export type TabPanelProps = Omit<ComponentPropsWithRef<'div'>,
+  'role' | 'tabIndex' | 'aria-labelledby'
+>
 
 export type TabItem = Readonly<{
   id: string;
@@ -25,6 +22,6 @@ export type TabListProps = Readonly<{
   tabs: TabItem[];
   orientation?: 'vertical' | 'horizontal';
   defaultActiveTabId?: string;
-  variant?: ButtonProps['variant'];
+  variant: ButtonProps['variant'];
   // TODO: figure out what I want to do re: heading for the tablist which can be used as an aria label or a Heading element
-} & Omit<HTMLAttributes<HTMLDivElement>, 'role' | 'onKeyDown' | 'aria-orientation' | 'aria-label'>>;
+} & Omit<ComponentPropsWithRef<'div'>, 'role' | 'onKeyDown' | 'aria-orientation' | 'aria-label'>>;
