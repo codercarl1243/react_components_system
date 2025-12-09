@@ -1,4 +1,4 @@
-import { TabPanelProps } from './tablist.type'
+import { TabPanelProps } from '@/components/tablist/tablist.type'
 import clsx from 'clsx'
 
 export default function Panel ({
@@ -6,7 +6,6 @@ export default function Panel ({
   id,
   ref,
   hidden,
-  children,
   ...props
 }: TabPanelProps) {
   return (
@@ -19,8 +18,6 @@ export default function Panel ({
             aria-labelledby={`tab-${id}`}
             tabIndex={-1}
             hidden={hidden}
-        >
-            {children}
-        </div>
+        />
   )
 }
