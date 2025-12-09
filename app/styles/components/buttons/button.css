@@ -2,7 +2,7 @@
     --background-color: var(--surface, currentColor);
     --foreground-color: var(--text-on-surface, transparent);
     --border-color: var(--color-neutral-400, currentColor);
-    
+
     --button-text-color: var(--foreground-color);
     --button-background-color: var(--background-color);
     --button-border-color: var(--border-color);
@@ -21,23 +21,25 @@
 
     /* Layout - reserve space for icon and spinner to prevent layout shift*/
     display: grid;
+    grid-template-areas: "icon content spinner";
     grid-template-columns: var(--button-icon-width) fit-content(100%) var(--button-spinner-width);
     gap: var(--spacing);
     align-items: center;
     white-space: nowrap;
 
     /* icon | text | spinner */
-    & .button__content {
-        grid-column: 2;
+
+    &>* {
+        grid-area: content;
     }
 
     & .spinner {
-        grid-column: 3;
+        grid-area: spinner;
         justify-self: center;
     }
 
     &.button-w-icon .icon {
-        grid-column: 1;
+        grid-area: icon;
         justify-self: center;
     }
 
