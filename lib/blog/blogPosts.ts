@@ -9,6 +9,28 @@ export const BLOG_BASE_PATH = '/blog';
 export const BLOG_DESIGN_SYSTEM_PATH = `${BLOG_BASE_PATH}/design-system`;
 export const BLOG_ACCESSIBILITY_PATH = `${BLOG_BASE_PATH}/accessibility`;
 
+const design_system__theming: readonly Readonly<PostType>[] = [
+    {
+        id: asPostId('design__theming_01'),
+        title: 'design-system',
+        subtitle: 'Building a design system using CSS',
+        excerpt: 'build a robust, library and framework agnostic design system',
+        relatedPostIds: [],
+        pathFragment: '/theming',
+        lastModified: new Date('2025-12-10'),
+        createdAt: new Date('2025-09-30'),
+        published: true,
+        featured: true,
+        image: {
+            src: '/og-image.png',
+            alt: 'TBA'
+        },
+        authorId: CODER_CARL_ID,
+        subject: `${BLOG_SUBJECTS.DESIGN_SYSTEM}`,
+        keywords: [BLOG_KEYWORDS.THEMING, BLOG_KEYWORDS.FOUNDATIONS, BLOG_KEYWORDS.DESIGN_SYSTEM],
+        categories: [BLOG_CATEGORIES.DESIGN_SYSTEM, BLOG_CATEGORIES.TOOLING],
+    },
+]
 const ButtonPosts: readonly Readonly<PostType>[] = [
     {
         id: asPostId('design__button__01'),
@@ -89,6 +111,7 @@ const ButtonPosts: readonly Readonly<PostType>[] = [
 ];
 
 export const BLOG_POSTS: PostType[] = [
+    ...design_system__theming,
     ...ButtonPosts
 ];
 
