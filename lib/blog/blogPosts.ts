@@ -114,4 +114,3 @@ export const BLOG_POSTS: PostType[] = [
     ...design_system__theming,
     ...ButtonPosts
 ];
-
