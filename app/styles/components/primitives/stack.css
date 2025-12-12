@@ -1,18 +1,46 @@
 .stack {
-    display: grid;
-    grid-auto-rows: auto;
-    grid-template-columns: minmax(0, 1fr); 
-    /* max-width: 100%; */
-      min-width: 0;
+  display: grid;
+  grid-auto-rows: auto;
+  grid-template-columns: minmax(0, 1fr);
+  min-width: 0;
 }
 
-.stack-align-start   { align-items: start; }
-.stack-align-center  { align-items: center; }
-.stack-align-end     { align-items: end; }
-.stack-align-stretch { align-items: stretch; }
-.stack-align-baseline { align-items: baseline; }
+.stack>* {
+  grid-column: 1;
+}
 
-.stack-justify-start   { justify-items: start; }
-.stack-justify-center  { justify-items: center; }
-.stack-justify-end     { justify-items: end; }
-.stack-justify-stretch { justify-items: stretch; }
+.stack-align-start {
+  align-items: start;
+}
+
+.stack-align-center {
+  align-items: center;
+}
+
+.stack-align-end {
+  align-items: end;
+}
+
+.stack-align-stretch {
+  align-items: stretch;
+}
+
+.stack-align-baseline {
+  align-items: baseline;
+}
+
+.stack-justify-start {
+  justify-items: start;
+}
+
+.stack-justify-center {
+  justify-items: center;
+}
+
+.stack-justify-end {
+  justify-items: end;
+}
+
+.stack-justify-stretch {
+  justify-items: stretch;
+}
