@@ -1,14 +1,15 @@
 import type { BlockProps } from "@/components/primitives/types";
+import type { ReactNode } from "react";
 
 export type SelectOptionProps = BlockProps<'option'> & {
-    label: string;
+    label: ReactNode;
     value: string;
 };
 
 export type SelectProps =
     BlockProps<"select"> & {
-        label?: string;
+        label?: ReactNode;
         options: SelectOptionProps[];
-        error?: string;
-        helperText?: string;
+        error?: ReactNode;
+        helperText?: ReactNode;
     };

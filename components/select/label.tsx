@@ -1,7 +1,8 @@
 import { Block } from "@/components/primitives";
+import { ReactNode } from "react";
 
 
-export default function Label({ label, id }: { label: string; id: string; }) {
+export default function Label({ label, id }: { label: ReactNode; id: string; }) {
 
     return (
         <Block
