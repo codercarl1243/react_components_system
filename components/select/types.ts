@@ -1,7 +1,7 @@
 import type { BlockProps } from "@/components/primitives/types";
 import type { ReactNode } from "react";
 
-export type LabelProps =  {id: string;} & Omit<BlockProps<"label">, "as" | "htmlFor" >;
+export type LabelProps =  {selectId: string;} & Omit<BlockProps<"label">, "as" | "htmlFor" >;
 
 export type SelectOptionProps = BlockProps<'option'> & {
     label: ReactNode;
