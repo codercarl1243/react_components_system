@@ -6,6 +6,8 @@ export type SelectOptionProps = BlockProps<'option'> & {
     value: string;
 };
 
+export type LabelProps = { label: ReactNode; id: string } & Omit<BlockProps<"label">, "as" | "htmlFor" | "children">;
+
 export type SelectProps =
     BlockProps<"select"> & {
         label?: ReactNode;

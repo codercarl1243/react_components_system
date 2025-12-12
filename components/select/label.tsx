@@ -1,14 +1,15 @@
 import { Block } from "@/components/primitives";
-import { ReactNode } from "react";
+import type { LabelProps } from "@/components/select/types";
 
 
-export default function Label({ label, id }: { label: ReactNode; id: string; }) {
+export default function Label({ label, id, ...props }: LabelProps) {
 
     return (
         <Block
             as="label"
             className="select-label"
             htmlFor={id}
+            {...props}
         >
             {label}
         </Block>
