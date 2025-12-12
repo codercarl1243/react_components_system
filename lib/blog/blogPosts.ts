@@ -16,7 +16,7 @@ const design_system__theming: readonly Readonly<PostType>[] = [
         subtitle: 'Building a design system using CSS',
         excerpt: 'build a robust, library and framework agnostic design system',
         relatedPostIds: [],
-        pathFragment: '/theming',
+        pathFragment: 'theming',
         lastModified: new Date('2025-12-10'),
         createdAt: new Date('2025-09-30'),
         published: true,
