@@ -1,7 +1,7 @@
 import type { BlockProps } from "@/components/primitives/types";
 import type { ReactNode } from "react";
 
-export type LabelProps = { label: ReactNode; id: string } & Omit<BlockProps<"label">, "as" | "htmlFor" | "children">;
+export type LabelProps =  {id: string;} & Omit<BlockProps<"label">, "as" | "htmlFor" >;
 
 export type SelectOptionProps = BlockProps<'option'> & {
     label: ReactNode;
@@ -15,5 +15,5 @@ type SelectBaseProps = BlockProps<"select"> & {
 };
 
 export type SelectProps =
-    | (SelectBaseProps & { label?: undefined })
-    | (SelectBaseProps & { label: ReactNode; id: string });
+    | (SelectBaseProps & { labelChildren?: undefined })
+    | (SelectBaseProps & { labelChildren: ReactNode; id: string });

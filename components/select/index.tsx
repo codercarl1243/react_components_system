@@ -5,7 +5,7 @@ import SelectOption from "@/components/select/option";
 import Label from "@/components/select/label";
 
 export default function Select({
-    label,
+    labelChildren,
     id,
     options,
     error,
@@ -22,7 +22,7 @@ export default function Select({
     
     return (
         <Block as="span" className={clsx("select-wrapper", error && 'contains-error', className)}>
-            {label && <Label id={resolvedId} label={label} />}
+            {labelChildren && <Label id={resolvedId}>{labelChildren}</Label>}
             <Block
                 as="select"
                 id={resolvedId}
