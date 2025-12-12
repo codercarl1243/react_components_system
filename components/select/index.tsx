@@ -34,7 +34,7 @@ export default function Select({
                 aria-describedby={helperText ? `${resolvedId}-help` : undefined}
                 {...rest}
             >
-                {options.map((opt, idx) => <SelectOption key={idx} label={opt.label} value={opt.value} />)}
+                {options.map((opt) => <SelectOption key={opt.value} {...opt} />)}
             </Block>
 
             {helperText && (
