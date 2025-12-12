@@ -11,14 +11,14 @@ import { Inline, Stack } from "@/components/primitives";
 import TabList from "@/components/tablist";
 import TokenFlowDiagram from '@/app/blog/design-system/theming/examples/5_TokenFlowDiagram'
 import PostInfo from "@/components/post/post.info";
-
+import AppearanceConfigurator from '../examples/6_AppearanceExamples'
 export default function Section6() {
   return (
     <PostSection id="data-attributes-variants">
       <AnchorHeading as="h2" prefix="Step 3 —" id="data-attributes-variants-theming-heading">
         Apply Variants with Data Attributes
       </AnchorHeading>
-
+    <AppearanceConfigurator />
       <Stack>
         <p>
           With global tokens and component tokens in place, the final piece is deciding <em>which values</em> a component should use in different contexts. This is where <span className="bold">variants</span> come in.
