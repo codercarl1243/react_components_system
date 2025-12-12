@@ -22,7 +22,7 @@ export default function Select({
     
     return (
         <Block as="span" className={clsx("select-wrapper", error && 'contains-error', className)}>
-            {labelChildren && <Label id={resolvedId}>{labelChildren}</Label>}
+            {labelChildren && <Label selectId={resolvedId}>{labelChildren}</Label>}
             <Block
                 as="select"
                 id={resolvedId}
