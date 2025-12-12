@@ -3,6 +3,7 @@ import { Block } from "@/components/primitives";
 import type { SelectProps } from "@/components/select/types";
 import SelectOption from "@/components/select/option";
 import Label from "@/components/select/label";
+import { useId } from "react";
 
 export default function Select({
     labelChildren,
@@ -15,7 +16,8 @@ export default function Select({
     ...rest
 }: SelectProps) {
 
-    const resolvedId = id || `select-${Math.random().toString(36).slice(2)}`;
+    const generatedId = useId();
+    const resolvedId = id || `select-${generatedId}`;
     const helperId = helperText ? `${resolvedId}-help` : undefined;
     const errorId = error ? `${resolvedId}-error` : undefined;
     const describedBy = [helperId, errorId].filter(Boolean).join(" ") || undefined;
