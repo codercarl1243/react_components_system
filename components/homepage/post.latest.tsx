@@ -11,7 +11,7 @@ export default function LatestPosts(){
     return (
        <Stack className="homepage--latest-posts">
          <Heading as="h2">Latest posts</Heading>
-        <List marker='none' className='latest-posts__list'>
+        <List as="ul" marker="none" className='latest-posts__list'>
                 {posts.map((post) => (
                   <Stack as="li" key={post.id} variant="accent" variantAppearance="outlined">
                     {post.title}
