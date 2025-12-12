@@ -16,7 +16,10 @@ export default function Select({
 }: SelectProps) {
 
     const resolvedId = id || `select-${Math.random().toString(36).slice(2)}`;
-
+    const helperId = helperText ? `${resolvedId}-help` : undefined;
+    const errorId = error ? `${resolvedId}-error` : undefined;
+    const describedBy = [helperId, errorId].filter(Boolean).join(" ") || undefined;
+    
     return (
         <Block as="span" className={clsx("select-wrapper", error && 'contains-error', className)}>
             {label && <Label id={resolvedId} label={label} />}
@@ -31,7 +34,7 @@ export default function Select({
                     error && "select--error"
                 )}
                 aria-invalid={!!error}
-                aria-describedby={helperText ? `${resolvedId}-help` : undefined}
+                aria-describedby={describedBy}
                 {...rest}
             >
                 {options.map((opt) => <SelectOption key={opt.value} {...opt} />)}
@@ -40,7 +43,7 @@ export default function Select({
             {helperText && (
                 <Block
                     as="p"
-                    id={`${resolvedId}-help`}
+                    id={helperId}
                     className="select-helper"
                 >
                     {helperText}
@@ -48,7 +51,13 @@ export default function Select({
             )}
 
             {error && (
-                <Block as="p" className="select-error" variant="danger" variantAppearance="outlined">
+                <Block
+                    as="p"
+                    id={errorId}
+                    className="select-error"
+                    variant="danger"
+                    variantAppearance="outlined"
+                >
                     {error}
                 </Block>
             )}
