@@ -21,6 +21,6 @@ export default function ColorSwatch({color = "transparent", shape = "square", si
     }
 
     return (
-        <Block as="span" variant="neutral" variantAppearance="surface" className="color-swatch" style={styles} {...props} />
+        <Block as="span" variant="neutral" variantAppearance="tonal" className="color-swatch" style={styles} {...props} />
     )
 }

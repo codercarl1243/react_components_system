@@ -17,13 +17,13 @@ export default function TokenFlowDiagram() {
                 align="stretch"
                 className="theming-diagram"
                 variant="info"
-                variantAppearance="surface"
+                variantAppearance="tonal"
             >
                 <Stack
                     gap={4}
                     className="theming-diagram-box"
                     variant="primary"
-                    variantAppearance="surface"
+                    variantAppearance="tonal"
                     align="stretch"
                 >
                     <Row as="strong" gap={2} className="theming-diagram-box--heading">
@@ -55,7 +55,7 @@ export default function TokenFlowDiagram() {
                     gap={4}
                     className="theming-diagram-box"
                     variant="secondary"
-                    variantAppearance="surface"
+                    variantAppearance="tonal"
                     align="stretch"
                 >
                     <Row as="strong" gap={2} className="theming-diagram-box--heading">
@@ -98,7 +98,7 @@ export default function TokenFlowDiagram() {
                     gap={8}
                     className="theming-diagram-box theming-diagram__component-layer"
                     variant="accent"
-                    variantAppearance="surface"
+                    variantAppearance="tonal"
                     align="stretch"
                 >
                     <Row as="strong" gap={2} className="theming-diagram-box--heading">

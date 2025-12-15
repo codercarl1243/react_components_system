@@ -8,15 +8,15 @@ import Tablist from "@/components/tablist";
 export default function ButtonExample() {
 
     return (
-        <Block as="figure" style={{ paddingInlineStart: "1rem" }} variant="neutral" variantAppearance="surface" className="flow-4">
+        <Stack as="figure" variant="neutral" variantAppearance="tonal" className="surface" gap={2}>
             <Heading as="h3" headingSize={4} className="center">Button Examples</Heading>
-            <Stack variant="neutral" variantAppearance="surface" style={{ width: "100%" }}>
+            <Stack>
                 <p className="text-sm text-muted">Basic unstyled button</p>
                 <div>
                     <button>Click Me</button>
                 </div>
             </Stack>
-            <Stack variant="neutral" variantAppearance="surface">
+            <Stack>
                 <p className="text-sm">
                     With theming — controlled by <InlineCode codeString="data-variant" lang="html" /> and <InlineCode codeString="data-appearance" lang="html" />
                 </p>
@@ -89,6 +89,6 @@ export default function ButtonExample() {
             <figcaption className="text-sm text-muted italic" >
                 A single button component with three different visual styles, controlled entirely through data attributes
             </figcaption >
-        </Block>
+        </Stack>
     )
 }

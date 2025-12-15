@@ -13,7 +13,7 @@ import Block from "./Block";
  *
  * @param {Object} props
  * @param {T} [props.as="div"] – The element type to render. Defaults to `<div>`.
- * @param {0 | 4 | 8 | 16} [props.gap=4] – Vertical spacing between children,
+ * @param {0 | 2 | 4 | 6 | 8 | 16} [props.gap=4] – Vertical spacing between children,
  * @param {"start" | "center" | "end" | "stretch" | "baseline"} [props.align] – Vertical alignment of items.
  * @param {"start" | "center" | "end" | "stretch"} [props.justify] – Horizontal justification of items.
  * @param {string} [props.className] – Additional class names to apply.

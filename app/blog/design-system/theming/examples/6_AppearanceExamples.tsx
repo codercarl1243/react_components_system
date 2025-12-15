@@ -42,7 +42,7 @@ export default function AppearanceConfigurator() {
         <Block
             as="figure"
             variant="accent"
-            variantAppearance="surface"
+            variantAppearance="tonal"
             className="flow-4"
         >
             <Heading as="h3" headingSize={4} className="center">
@@ -84,7 +84,7 @@ export default function AppearanceConfigurator() {
                     gap={2}
 
                     variant={variant ?? "neutral"}
-                    variantAppearance={appearance ?? "surface"}
+                    variantAppearance={appearance ?? "tonal"}
                     style={{ padding: '2rem', borderRadius: 'var(--radius-md)' }}
                 >
 

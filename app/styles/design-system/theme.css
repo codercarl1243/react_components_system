@@ -12,3 +12,8 @@
     --text-muted: var(--color-neutral-300);
     --link-on-surface: var(--color-primary-200);
 }
+
+body {
+  background-color: var(--surface);
+  color: var(--text-on-surface);
+}

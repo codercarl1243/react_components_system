@@ -1,0 +1,5 @@
+.surface {
+    padding: var(--spacing-sm);
+    border: var(--border-thin);
+    border-radius: var(--radius-md);
+}
