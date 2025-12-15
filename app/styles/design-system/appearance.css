@@ -1,18 +1,45 @@
-/* appearance.css - appearances transform the variant colors */
+/* 
+Appearances transform the variant colors
+*/
+
+/* For buttons, badges, pills - bold/prominent */
 [data-appearance="filled"] {
     --background-color: var(--variant-bg);
     --foreground-color: var(--variant-fg);
     --border-color: var(--variant-border);
 }
 
+/* For secondary buttons, outlined badges */
 [data-appearance="outlined"] {
     --background-color: transparent;
     --foreground-color: var(--variant-bg);
     --border-color: var(--variant-bg);
 }
 
+/* For tertiary buttons */
 [data-appearance="ghost"] {
     --background-color: transparent;
     --foreground-color: var(--variant-bg);
     --border-color: transparent;
 }
+
+/* For callouts, notices, informational containers */
+[data-appearance="surface"] {
+    --background-color: var(--variant-surface);
+}
+/* 
+.primitive[data-appearance="primitive"] {
+    --background-color: var(--surface-color);
+    --foreground-color: var(--variant-fg);
+
+    color: var(--color-neutral-900);
+    padding: var(--spacing-sm);
+    background-color: var(--surface-color);
+    border: var(--border-thin);
+    border-color: var(--border-color);
+    border-radius: var(--border-radius, var(--radius-md));
+}
+
+.primitive[data-appearance="primitive"][data-variant] {
+    --foreground-color: var(--color-neutral-900);
+} */

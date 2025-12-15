@@ -1,14 +1,15 @@
 import ContactForm from '@/components/contact_form';
-import Hero from '@/components/hero';
-import LatestPosts from '@/components/post/post.latest';
+import Hero from '@/components/homepage/hero';
+import LatestPosts from '@/components/homepage/post.latest';
+import { Stack } from '@/components/primitives';
 
 export default function Home() {
 
   return (
-    <div className='layout-wrapper flow-4'>
+    <Stack className='layout-wrapper homepage' align='center'>
       <Hero />
       <LatestPosts />
       <ContactForm />
-    </div>
+    </Stack>
   )
 }

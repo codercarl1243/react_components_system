@@ -1,6 +1,6 @@
 
 .heading {
-    --heading-color: var(--background-color, currentColor);
+    --heading-color: var(--foreground-color, currentColor);
 
     margin-block-start: var(--heading-margin-block-start, var(--spacing-md));
     margin-block-end: var(--heading-margin-block-end, 0);

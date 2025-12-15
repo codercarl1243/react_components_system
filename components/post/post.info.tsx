@@ -1,13 +1,9 @@
-import type { RowProps } from "../primitives/types";
+import type { RowProps } from "@/components/primitives/types";
 import clsx from "clsx";
-import { wrapChildrenTextWithSiblings } from "@/lib/utils/react/wrapChildrenTextWithSiblings";
+import { Block } from "@/components/primitives";
 
 
-export default function PostInfo({ children, className, ...props }: RowProps) {
+export default function PostInfo({ className, ...props }: RowProps) {
 
-    return (
-        <p className={clsx("postinfo text-sm", className)} {...props}>
-            {wrapChildrenTextWithSiblings(children)}
-        </p>
-    )
+    return <Block as="p" className={clsx("postinfo text-sm", className)} {...props} />
 }

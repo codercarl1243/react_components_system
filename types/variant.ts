@@ -37,17 +37,17 @@ export type Variant =
  * - **filled** — Solid background with foreground text (most prominent)
  * - **outlined** — Transparent background with a 1px border
  * - **ghost** — Minimal chrome, subtle hover/focus treatments
- * - **primitive** — adds background to the primitive component. Only usable with primitives i.e. Row, Stack, Block etc.
+ * - **tonal** — adds background to the component.
  *
  * Example:
  * ```ts
  * <Button  variant="primary"   variantAppearance="filled" />
  * <Button  variant="accent"    variantAppearance="outlined" />
- * <Row     variant="primary"   variantAppearance="primitive" />
+ * <Row     variant="primary"   variantAppearance="tonal" />
  * ```
  */
 export type VariantAppearance =
     | "filled"
     | "outlined"
     | "ghost"
-    | "primitive";
+    | "tonal";

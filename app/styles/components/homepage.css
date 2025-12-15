@@ -1,0 +1,12 @@
+.homepage {
+
+}
+
+.homepage--latest-posts {
+
+}
+.latest-posts__list li{
+    border: var(--border-thin);
+    border-color: var(--border-color);
+    padding: var(--spacing-sm);
+}

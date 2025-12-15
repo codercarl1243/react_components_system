@@ -24,11 +24,11 @@ export default function Section1() {
                 <p>
                     Everything we build is framework-agnostic. The CSS works identically in React, Vue, Svelte, or plain HTML — your framework just consumes the theming system, it doesn't own it.
                 </p>
-                <PostNote variant="muted" showIcon={false} >
+                <PostNote variant="warning" showIcon={false} >
                     <p>
                         <strong>This article is for you if you want to:</strong>
                     </p>
-                    <List spacing="tight" variant="success">
+                    <List spacing="loose">
                         <li>Build a predictable, centralized styling system without JavaScript overhead</li>
                         <li>Support multiple themes and variants without prop drilling or context</li>
                         <li>Write less CSS by letting tokens cascade through your component tree</li>
