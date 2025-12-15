@@ -41,21 +41,21 @@ export default function AppearanceConfigurator() {
     return (
         <Block
             as="figure"
-            variant="neutral"
-            variantAppearance="primitive"
+            variant="accent"
+            variantAppearance="surface"
             className="flow-4"
         >
-            <Heading as="h3" headingSize={4} variant="neutral" className="center">
+            <Heading as="h3" headingSize={4} className="center">
                 Variant x Appearance Configurator
             </Heading>
 
-            <Stack gap={4}>
+            <Stack gap={4} >
                 <p className="text-sm">
                     <strong>Variants</strong> define <em>which colors</em> to use.
                     <strong>Appearances</strong> define <em>how</em> to apply them.
                 </p>
-                <PostInfo>
-                    Select different combinations to see how the same component adapts. 
+                <PostInfo variant="muted">
+                    Select different combinations to see how the same component adapts.
                     Notice how each variant maintains its color identity across all appearances.
                 </PostInfo>
                 {/* Controls */}
@@ -63,7 +63,7 @@ export default function AppearanceConfigurator() {
 
                     <Select
                         id="variant-select"
-                        label="Variant:"
+                        labelChildren="Variant:"
                         options={variants}
                         value={variant}
                         onChange={handleSetVariant}
@@ -71,7 +71,7 @@ export default function AppearanceConfigurator() {
 
                     <Select
                         id="appearance-select"
-                        label="Appearance:"
+                        labelChildren="Appearance:"
                         options={appearances}
                         value={appearance}
                         onChange={handleSetAppearance}
@@ -80,20 +80,17 @@ export default function AppearanceConfigurator() {
                 </Inline>
 
                 {/* Live Preview */}
-                <Stack
+                <Inline
                     gap={2}
-                    variant="neutral"
-                    variantAppearance="primitive"
+
+                    variant={variant ?? "neutral"}
+                    variantAppearance={appearance ?? "surface"}
                     style={{ padding: '2rem', borderRadius: 'var(--radius-md)' }}
                 >
-                    <p className="text-sm text-muted">Result:</p>
-                    <Button
-                        variant={variant}
-                        variantAppearance={appearance}
-                    >
-                        {variant ? variant.charAt(0).toUpperCase() + variant.slice(1) : 'Plain'} Button
-                    </Button>
-                </Stack>
+
+                        {variant ? variant.charAt(0).toUpperCase() + variant.slice(1) : 'Plain'} + 
+                        {appearance ? appearance.charAt(0).toUpperCase() + appearance.slice(1) : 'Plain'}
+                </Inline>
 
                 {/* Generated Code */}
                 <Stack gap={2}>

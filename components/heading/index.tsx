@@ -47,6 +47,7 @@ export default function Heading<T extends ValidHeadingTag = "h3">({
       id={headingId}
       className={headingClasses}
       variant={variant}
+      variantAppearance='outlined'
       {...props}
     >
       {content}

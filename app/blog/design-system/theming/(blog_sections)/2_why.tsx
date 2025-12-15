@@ -23,7 +23,7 @@ export default function Section2() {
                 </p>
 
                 <PostNote showIcon={false} variant="neutral">
-                    <Heading as="h3" variant="neutral" className="fun-underline">The reality of ad-hoc theming</Heading>
+                    <Heading as="h3">The reality of ad-hoc theming</Heading>
                     <List spacing="normal" marker="disc" variant="danger">
                         <li>Designer updates the primary blue <ColorSwatch color="var(--color-primary-200)" aria-label="old primary blue color swatch" /> → <ColorSwatch color="var(--color-primary-400)" aria-label="new primary blue color swatch" /> and you're search-and-replacing across 30 files</li>
                         <li>Dark mode breaks because 6 components hardcoded light backgrounds</li>

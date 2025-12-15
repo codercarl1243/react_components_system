@@ -28,7 +28,7 @@ export default function Section1() {
                     <p>
                         <strong>This article is for you if you want to:</strong>
                     </p>
-                    <List spacing="tight" variant="success">
+                    <List spacing="loose" variant="success">
                         <li>Build a predictable, centralized styling system without JavaScript overhead</li>
                         <li>Support multiple themes and variants without prop drilling or context</li>
                         <li>Write less CSS by letting tokens cascade through your component tree</li>
