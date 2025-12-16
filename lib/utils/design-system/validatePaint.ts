@@ -1,23 +1,14 @@
 import { logWarning } from "@/lib/logging/log";
-import { PaintChannel, PaintPreset } from "@/types/paint";
+import { PAINT_CHANNELS, PAINT_PRESETS, type PaintChannel, type PaintPreset } from "@/types/paint";
 import { isNonEmptyString, isNonEmptyArray, isNullish } from "@/lib/utils/guards";
-
-const PAINT_PRESETS = ['all', 'surface'] as const;
-const PAINT_CHANNELS = ['background', 'foreground', 'border'] as const;
-
+import { isOneOfTokens } from "@/lib/utils/design-system/tokens";
 
 function isPaintPreset(value: unknown): value is PaintPreset {
-  return (
-    typeof value === 'string' &&
-    (PAINT_PRESETS as readonly string[]).includes(value)
-  );
+  return isOneOfTokens(PAINT_PRESETS, value)
 }
 
 function isPaintChannel(value: unknown): value is PaintChannel {
-  return (
-    typeof value === 'string' &&
-    (PAINT_CHANNELS as readonly string[]).includes(value)
-  );
+  return isOneOfTokens(PAINT_CHANNELS, value)
 }
 
 function extractPaintStrings(input: unknown): string[] {
@@ -43,12 +34,14 @@ export default function validatePaint(paint: unknown) {
   const hasPreset = values.some(isPaintPreset);
   const hasChannel = values.some(isPaintChannel);
 
-  const hasUnknown = values.some(
+  const unknownValues = values.filter(
     v => !isPaintPreset(v) && !isPaintChannel(v)
   );
 
-  if (hasUnknown) {
-    logWarning(`[Block] Unknown paint value: "${values.join(" ")}"`);
+  if (unknownValues.length > 0) {
+    logWarning(
+      `[Block] Unknown paint value(s): "${unknownValues.join(' ')}"`
+    );
   }
 
   if (hasPreset && hasChannel) {
