@@ -4,7 +4,7 @@
   margin: 0;
   list-style-type: none;
   padding-inline-start: var(--spacing-sm);
-  line-height: var(--line-height-normal);
+  line-height: var(--line-height-relaxed);
   font-size: var(--font-size-base, inherit);
 }
 
