@@ -1,5 +1,4 @@
 import Heading from '@/components/heading'
-import { Stack } from '@/components/primitives'
 
 export default function Hero() {
 
