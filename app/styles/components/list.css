@@ -8,6 +8,10 @@
   font-size: var(--font-size-base, inherit);
 }
 
+.list-none li {
+  padding: 0;
+}
+
 .list:not(.list--none) li {
   position: relative;
   padding-inline-start: 1.5em;
@@ -16,7 +20,6 @@
 .list li::before {
   --list-marker-bg-color: var(--background-color, transparent);
   --list-color: var(--foreground-color, var(--color-secondary-400));
-  --list-border-color: var(--border-color, transparent);
   --list-border: none;
   --list-border-radius: 0;
 
@@ -27,7 +30,7 @@
   width: 0.6rem;
   aspect-ratio: 1;
   border: var(--list-border);
-  border-color: var(--list-border-color);
+  border-color: var(--border-color);
   border-radius: var(--list-border-radius);
   background-color: var(--list-marker-bg-color);
   color: var(--list-color);
@@ -50,12 +53,8 @@
   margin-block-end: var(--list-spacing);
 }
 
-.list li:last-child {
-  margin-block-end: calc(var(--list-spacing) * 2);
-}
-
 .list--disc li::before {
-  background: conic-gradient(var(--list-marker-bg-color), var(--surface-color), var(--list-border-color));
+  background: conic-gradient(var(--list-marker-bg-color), var(--surface-color), var(--border-color));
   width: 0.75rem;
   left:0.35rem;
   top: 0.35rem;
