@@ -7,7 +7,7 @@
 }
 
 .post-note.has-icon {
-    padding-block: var(--spacing-lg) var(--spacing-md);
+    padding: var(--spacing-lg) var(--spacing-md);
 }
 
 .post-note__icon {

@@ -27,8 +27,6 @@ export default function ColorSwatch({ color = "transparent", shape = "square", s
 
     return (
         <Block as="span"
-            // variant="neutral" 
-            // variantAppearance="tonal" 
             paint="surface"
             className="color-swatch"
             style={styles}

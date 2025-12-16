@@ -1,18 +1,12 @@
 .footer {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    /* align-items: center; */
+    /* justify-content: center; */
+    width: 100%;
     text-align: center;
-
     padding-block: var(--spacing-md);
-    background-color: var(--color-primary-400);
-    color: var(--color-neutral-100);
+    padding-inline: var(--spacing-lg);
 }
-.footer .link {
-    --link-color:  var(--color-neutral-100);
 
-}
 .footer p {
     margin: 0;
 }
