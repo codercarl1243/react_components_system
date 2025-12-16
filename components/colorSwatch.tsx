@@ -3,7 +3,7 @@ import { Block } from "./primitives";
 import { BlockProps } from "./primitives/types";
 
 type ColorSwatchShape = "square" | "circle";
-type ColorSwatchSize =  "sm" | "md" | "lg";
+type ColorSwatchSize = "sm" | "md" | "lg";
 
 type ColorSwatchProps = BlockProps<'span'> & {
     color?: string;
@@ -11,16 +11,27 @@ type ColorSwatchProps = BlockProps<'span'> & {
     size?: ColorSwatchSize;
 };
 
-export default function ColorSwatch({color = "transparent", shape = "square", size = "md", ...props}: ColorSwatchProps) {
+export default function ColorSwatch({ color = "transparent", shape = "square", size = "md", ...props }: ColorSwatchProps) {
 
     const styles: CSSProperties = {
-        '--surface-color': color,
-        '--border-color': 'currentColor',
-        '--border-radius': shape === 'square' ? 'var(--radius-sm)' : 'var(--radius-circle)',
-        '--color-swatch-width': size === 'lg' ? '1.5lh' : size === 'md' ? '1lh' : '0.75lh'
-    }
+        '--background-color': color,
+        '--border-color': 'var(--text-on-surface)',
+        '--border-radius': shape === 'circle'
+            ? 'var(--radius-circle)'
+            : 'var(--radius-sm)',
+        '--color-swatch-width':
+            size === 'lg' ? '1.5lh' :
+                size === 'sm' ? '0.75lh' :
+                    '1lh'
+    };
 
     return (
-        <Block as="span" variant="neutral" variantAppearance="tonal" className="color-swatch" style={styles} {...props} />
+        <Block as="span"
+            // variant="neutral" 
+            // variantAppearance="tonal" 
+            paint="surface"
+            className="color-swatch"
+            style={styles}
+            {...props} />
     )
 }
