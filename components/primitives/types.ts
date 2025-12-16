@@ -1,9 +1,11 @@
-import { Variant, VariantAppearance } from "@/types/variant";
-import { ElementType, PolymorphicProps } from "react";
+import type { Paint } from "@/types/paint";
+import type { Variant, VariantAppearance } from "@/types/variant";
+import type { ElementType, PolymorphicProps } from "react";
 
 /* ---------------------------------- */
 /*        Shared Style Props          */
 /* ---------------------------------- */
+
 
 export type BaseStyleProps = {
     /**
@@ -17,10 +19,20 @@ export type BaseStyleProps = {
      * the variant’s color tokens are consumed.
      */
     variantAppearance?: VariantAppearance;
-    // className?: string;
+
+    /**
+     * Opt-in paint behavior.
+     *
+     * - Presets: 'all', 'surface'
+     * - Channels: 'background', 'foreground', 'border'
+     *
+     * Channels may be combined.
+     */
+    paint?: Paint;
 } & {
     'data-style'?: never;
     'data-appearance'?: never;
+    'data-paint'?: never;
 };
 
 /* ---------------------------------- */
@@ -41,8 +53,8 @@ export type BlockProps<
  * Helper type for components that wrap Block with additional props.
  */
 export type BlockWrapperProps<
-  T extends ElementType = "div",
-  AdditionalProps = object
+    T extends ElementType = "div",
+    AdditionalProps = object
 > = PolymorphicProps<T, BaseStyleProps & AdditionalProps>;
 
 export type InlineProps<T extends ElementType = "div"> = BlockWrapperProps<T, {
