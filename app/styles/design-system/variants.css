@@ -1,7 +1,33 @@
+/*
+Variant API
+
+Variants define semantic color palettes.
+They provide named color tokens that describe intent
+(e.g. primary, danger, success), not visual treatment.
+
+Variants DO NOT apply paint or styling directly.
+
+They expose the following semantic tokens:
+- --variant-bg       → primary emphasis color
+- --variant-fg       → text / icon color on variant backgrounds
+- --variant-border   → border color for variant emphasis
+- --variant-surface  → low-emphasis / tonal surface color
+
+These tokens are:
+- mapped by the appearance layer
+- applied by the paint layer
+- inherited by child elements and decorators (e.g. list markers)
+*/
+
+/* Resolve variant tokens into shared color variables when present */
 [data-variant] {
   --background-color: var(--variant-bg);
   --foreground-color: var(--variant-fg);
-  --foreground-muted: color-mix(in srgb, var(--foreground-color, var(--text-on-surface)) 65%, var(--variant-surface, var(--surface)));
+  --foreground-muted: color-mix(
+    in srgb,
+    var(--foreground-color, var(--text-on-surface)) 65%,
+    var(--variant-surface, var(--surface))
+  );
   --border-color: var(--variant-border);
   --surface-color: var(--variant-surface);
 }

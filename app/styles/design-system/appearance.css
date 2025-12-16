@@ -1,45 +1,41 @@
-/* 
-Appearances transform the variant colors
+/*
+Appearance API
+
+Appearances map semantic variant tokens to resolved color variables.
+They DO NOT apply paint directly.
+
+Actual painting (background, foreground, border) is opt-in and controlled
+by the `data-paint` attribute on the component.
+
+variant → provides tokens
+appearance → maps tokens
+paint → applies them
 */
 
-/* For buttons, badges, pills - bold/prominent */
+/* Strong, high-emphasis application (buttons, badges, pills) */
 [data-appearance="filled"] {
     --background-color: var(--variant-bg);
     --foreground-color: var(--variant-fg);
     --border-color: var(--variant-border);
 }
 
-/* For secondary buttons, outlined badges */
+/* Medium emphasis with visible outline */
 [data-appearance="outlined"] {
     --background-color: transparent;
     --foreground-color: var(--variant-bg);
     --border-color: var(--variant-bg);
 }
 
-/* For tertiary buttons */
+/* Low emphasis, text-forward appearance */
 [data-appearance="ghost"] {
     --background-color: transparent;
     --foreground-color: var(--variant-bg);
     --border-color: transparent;
 }
 
-/* For callouts, notices, informational containers */
-[data-appearance="surface"] {
+/* Tonal surface application (callouts, notices, containers) */
+[data-appearance="tonal"] {
     --background-color: var(--variant-surface);
-}
-/* 
-.primitive[data-appearance="primitive"] {
-    --background-color: var(--surface-color);
     --foreground-color: var(--variant-fg);
-
-    color: var(--color-neutral-900);
-    padding: var(--spacing-sm);
-    background-color: var(--surface-color);
-    border: var(--border-thin);
-    border-color: var(--border-color);
-    border-radius: var(--border-radius, var(--radius-md));
+    --border-color: var(--variant-border);
 }
-
-.primitive[data-appearance="primitive"][data-variant] {
-    --foreground-color: var(--color-neutral-900);
-} */
