@@ -4,6 +4,7 @@ import { applyDataAttributes } from "@/lib/utils/applyDataAttributes";
 import clsx from "clsx";
 import { wrapChildrenTextWithSiblings } from "@/lib/utils/react/wrapChildrenTextWithSiblings";
 import validatePaint from "@/lib/utils/design-system/validatePaint";
+import toPaintAttribute from "@/lib/utils/design-system/toPaintAttribute";
 
 /**
  * Block — a lightweight, polymorphic primitive and styling boundary.
@@ -80,7 +81,7 @@ export default function Block<T extends ElementType = "div">({
     const Component = as || "div";
 
     validatePaint(paint);
-    const paintAttr = Array.isArray(paint) ? paint.join(' ') : paint;
+    const paintAttr = toPaintAttribute(paint);
 
     const SafeChildren = wrapChildrenTextWithSiblings(children);
 
