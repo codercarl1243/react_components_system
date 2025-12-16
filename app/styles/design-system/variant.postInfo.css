@@ -1,4 +1,0 @@
-.postinfo[data-variant] a {
-  font-weight: 500;
-  color: color-mix(in srgb, var(--link-on-surface) 50%, black);
-}
