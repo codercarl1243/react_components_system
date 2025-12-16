@@ -30,7 +30,7 @@ export default function FunHighlight({ children,
         const delay = MIN_DELAY_MS + (hashInt >> 8) % MAX_DELAY_RANGE_MS;
 
         return {
-            '--background': `var(--color-emphasis-${colorIndex}00)`,
+            '--fun-highlight': `var(--color-emphasis-${colorIndex}00)`,
             '--transitionDelay': `${delay}ms`,
         };
     }, [children]);
