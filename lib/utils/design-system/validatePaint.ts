@@ -11,9 +11,9 @@ export default function validatePaint(paint: unknown) {
   const hasPreset = values.some(v => PAINT_PRESETS.includes(v as any));
   const hasChannel = values.some(v => PAINT_CHANNELS.includes(v as any));
 
-if (!hasPreset && !hasChannel) {
-  console.warn(`[Block] Unknown paint value: "${values.join(" ")}"`);
-}
+  if (!hasPreset && !hasChannel) {
+    console.warn(`[Block] Unknown paint value: "${values.join(" ")}"`);
+  }
 
   if (hasPreset && hasChannel) {
     console.warn(
