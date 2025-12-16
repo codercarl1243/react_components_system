@@ -1,16 +1,5 @@
 .post-note {
-    --postnote-bg-color: var(--background-color, var(--surface));
-    --postnote-fg-color: var(--foreground-color, var(--text-on-surface));
-    --postnote-border-color: var(--border-color, var(--color-neutral-600));
-    --heading-color: var(--postnote-fg-color);
-    
     position: relative;
-    color: var(--postnote-fg-color);
-    background-color: var(--postnote-bg-color);
-    border: var(--border-thin);
-    border-color: var(--postnote-border-color);
-    border-radius: var(--radius-md);
-    padding-block: var(--spacing-sm);
     padding-inline: clamp(var(--spacing-sm), var(--spacing) + 0.25vw, var(--spacing-md));
     box-shadow: inset 2px 2px 4px color-mix(in srgb, var(--postnote-bg-color) 10%, transparent),
         inset -1px -1px 2px color-mix(in srgb, var(--postnote-bg-color) 90%, transparent);

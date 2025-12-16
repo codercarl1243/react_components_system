@@ -31,13 +31,14 @@ export default function PostNote({ className, children, variant = 'info', showIc
     <Stack
       {...props}
       className={clsx(className, 
-        'post-note',
+        'post-note surface',
         {'has-icon': showIcon}
       )}
       gap={2}
       role={'note'}
       variant={variant}
       variantAppearance='tonal'
+      paint="surface"
     >
       {showIcon ? <Icon icon={RiInformationLine} size={32} className="post-note__icon" /> : null}
       <Stack className="post-note__content">
