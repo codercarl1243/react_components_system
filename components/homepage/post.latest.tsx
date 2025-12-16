@@ -6,7 +6,6 @@ import List from "../list";
 
 export default function LatestPosts(){
     const posts = getMostRecentPosts();
-    console.log(posts)
 
     return (
        <Stack className="homepage--latest-posts">

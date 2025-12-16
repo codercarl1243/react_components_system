@@ -1,7 +1,5 @@
 'use client';
-import Button from "@/components/button"
 import { ButtonProps } from "@/components/button/button.type"
-import Code from "@/components/code"
 import Heading from "@/components/heading"
 import PostInfo from "@/components/post/post.info"
 import { Block, Inline, Stack } from "@/components/primitives"
