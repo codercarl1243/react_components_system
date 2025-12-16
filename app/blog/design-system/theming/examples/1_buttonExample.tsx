@@ -2,7 +2,7 @@ import Button from "@/components/button";
 import Code from "@/components/code";
 import InlineCode from "@/components/code/inlineCode";
 import Heading from "@/components/heading";
-import { Stack, Inline, Block } from "@/components/primitives";
+import { Stack, Inline } from "@/components/primitives";
 import Tablist from "@/components/tablist";
 
 export default function ButtonExample() {

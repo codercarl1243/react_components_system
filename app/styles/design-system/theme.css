@@ -1,11 +1,29 @@
+/*
+Theme API
+
+Themes define global, environment-level color tokens.
+They describe the default canvas and baseline text colors
+before any component opts into styling.
+
+Themes do NOT:
+- define variants
+- apply component styling
+- control appearance or paint behavior
+
+Theme tokens are consumed by:
+- the variant layer (as defaults)
+- global elements (e.g. body)
+*/
+
+/* Light theme */
 [data-theme="light"] {
     --surface: var(--color-neutral-100);
-    --text-on-surface: var(--color-neutral-900);  
+    --text-on-surface: var(--color-neutral-900);
     --text-muted: var(--color-neutral-500);
     --link-on-surface: var(--color-primary-600);
 }
 
-
+/* Dark theme */
 [data-theme="dark"] {
     --surface: var(--color-neutral-900);
     --text-on-surface: var(--color-neutral-100);
@@ -13,7 +31,8 @@
     --link-on-surface: var(--color-primary-200);
 }
 
+/* Global defaults */
 body {
-  background-color: var(--surface);
-  color: var(--text-on-surface);
+    background-color: var(--surface);
+    color: var(--text-on-surface);
 }
