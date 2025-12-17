@@ -13,17 +13,24 @@ export default function ButtonExample() {
             <Stack>
                 <p className="text-sm text-muted">Basic unstyled button</p>
                 <div>
-                    <button>Click Me</button>
+                    <button aria-label="Unstyled button example">Click Me</button>
                 </div>
             </Stack>
+
             <Stack>
                 <p className="text-sm">
-                    With theming — controlled by <InlineCode codeString="data-variant" lang="html" /> and <InlineCode codeString="data-appearance" lang="html" />
+                    With theming — controlled by <InlineCode codeString="data-variant" /> and <InlineCode codeString="data-appearance" />
                 </p>
                 <Inline gap={2}>
-                    <Button variant="primary">Primary</Button>
-                    <Button variant="secondary" variantAppearance="ghost">Secondary</Button>
-                    <Button variant="accent" variantAppearance="outlined">Accent</Button>
+                    <Button variant="primary" aria-label="Primary filled button example">
+                        Primary
+                    </Button>
+                    <Button variant="secondary" variantAppearance="ghost" aria-label="Secondary ghost button example">
+                        Secondary
+                    </Button>
+                    <Button variant="accent" variantAppearance="outlined" aria-label="Accent outlined button example">
+                        Accent
+                    </Button>
                 </Inline>
             </Stack>
             <Tablist

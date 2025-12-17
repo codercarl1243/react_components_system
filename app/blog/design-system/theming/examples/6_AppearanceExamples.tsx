@@ -1,4 +1,5 @@
 'use client';
+import Button from "@/components/button";
 import { ButtonProps } from "@/components/button/button.type"
 import Heading from "@/components/heading"
 import PostInfo from "@/components/post/post.info"
@@ -41,7 +42,8 @@ export default function AppearanceConfigurator() {
             as="figure"
             variant="accent"
             variantAppearance="tonal"
-            className="flow-4"
+            paint="border"
+            className="flow-4 appearanceExamples surface-frame"
         >
             <Heading as="h3" headingSize={4} className="center">
                 Variant x Appearance Configurator
@@ -78,34 +80,16 @@ export default function AppearanceConfigurator() {
                 </Inline>
 
                 {/* Live Preview */}
-                <Inline
-                    gap={2}
-
+                <Button
                     variant={variant ?? "neutral"}
                     variantAppearance={appearance ?? "tonal"}
+                    paint="all"
                     style={{ padding: '2rem', borderRadius: 'var(--radius-md)' }}
                 >
 
                         {variant ? variant.charAt(0).toUpperCase() + variant.slice(1) : 'Plain'} + 
                         {appearance ? appearance.charAt(0).toUpperCase() + appearance.slice(1) : 'Plain'}
-                </Inline>
-
-                {/* Generated Code */}
-                <Stack gap={2}>
-                    {/* <Code
-                        lang="html"
-                        title="Generated code:"
-                        copyEnabled={false}
-                        highlightTokens={[variant || '', appearance || '']}
-                        codeString={`<button 
-    class="button" 
-    data-variant="${variant}" 
-    data-appearance="${appearance}"
->
-    ${variant ? variant.charAt(0).toUpperCase() + variant.slice(1) : 'Plain'} Button
-</button>`}
-                    /> */}
-                </Stack>
+                </Button>
             </Stack>
 
             <figcaption className="text-sm text-muted italic">

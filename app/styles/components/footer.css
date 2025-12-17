@@ -1,6 +1,5 @@
 .footer {
-    /* align-items: center; */
-    /* justify-content: center; */
+    justify-content: center;
     width: 100%;
     text-align: center;
     padding-block: var(--spacing-md);

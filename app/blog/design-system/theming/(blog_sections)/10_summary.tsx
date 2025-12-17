@@ -15,7 +15,7 @@ export default function Section10() {
                 will ever build.
             </p>
 
-            <List>
+            <List as="ul">
                 <li>CSS variables define tokens</li>
                 <li>Variants expose semantic colors</li>
                 <li>ThemeProvider controls global theming</li>

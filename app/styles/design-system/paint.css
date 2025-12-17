@@ -34,8 +34,8 @@ Examples:
     background-color: var(--background-color, transparent);
 
     /* Adjust link styling for painted surfaces */
-    --link-color: color-mix(in srgb,
-            var(--link-on-surface) 50%,
+    --link-color-onPaint: color-mix(in srgb,
+            var(--link-color) 50%,
             black);
 }
 

@@ -1,11 +1,12 @@
-import { CSSProperties } from "react";
-import { Block } from "./primitives";
-import { BlockProps } from "./primitives/types";
+import type { CSSProperties } from "react";
+import { Block } from "@/components/primitives";
+import type { BlockProps } from "./primitives/types";
+import type { AccessibleLabel } from "@/types/accessibility";
 
 type ColorSwatchShape = "square" | "circle";
 type ColorSwatchSize = "sm" | "md" | "lg";
 
-type ColorSwatchProps = BlockProps<'span'> & {
+type ColorSwatchProps = AccessibleLabel & BlockProps<'span'> & {
     color?: string;
     shape?: ColorSwatchShape;
     size?: ColorSwatchSize;
@@ -29,6 +30,7 @@ export default function ColorSwatch({ color = "transparent", shape = "square", s
         <Block as="span"
             paint="surface"
             className="color-swatch"
+            role="img"
             style={styles}
             {...props} />
     )

@@ -14,8 +14,8 @@ import PostInfo from "@/components/post/post.info";
 import AppearanceConfigurator from '../examples/6_AppearanceExamples'
 export default function Section6() {
   return (
-    <PostSection id="data-attributes-variants">
-      <AnchorHeading as="h2" prefix="Step 3 —" id="data-attributes-variants-theming-heading">
+    <PostSection id="data-attributes-theming">
+      <AnchorHeading as="h2" prefix="Step 3 —" id="data-attributes-theming-heading">
         Apply Variants with Data Attributes
       </AnchorHeading>
     <AppearanceConfigurator />
@@ -35,7 +35,7 @@ export default function Section6() {
 
       <Stack>
         <Heading as="h3">Why Data Attributes?</Heading>
-        <List spacing="tight">
+        <List as="ul" spacing="loose" marker="none">
           <li><strong>Framework-agnostic:</strong> They work in React, Vue, Svelte, plain HTML — anywhere CSS is supported.</li>
           <li><strong>Zero runtime cost:</strong> The browser handles the cascade natively; there's no JavaScript re-rendering or context propagation.</li>
           <li><strong>Explicit and debuggable:</strong> You can see a component's variant directly in the DOM, making debugging straightforward.</li>

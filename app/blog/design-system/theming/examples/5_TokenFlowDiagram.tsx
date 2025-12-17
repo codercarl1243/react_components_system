@@ -18,6 +18,7 @@ export default function TokenFlowDiagram() {
                 className="theming-diagram"
                 variant="info"
                 variantAppearance="tonal"
+                paint="border"
             >
                 <Stack
                     gap={4}
@@ -25,6 +26,8 @@ export default function TokenFlowDiagram() {
                     variant="primary"
                     variantAppearance="tonal"
                     align="stretch"
+                    paint="surface"
+
                 >
                     <Row as="strong" gap={2} className="theming-diagram-box--heading">
                         <Icon icon={RiPaletteFill} color="var(--color-primary-400)" />
@@ -56,6 +59,7 @@ export default function TokenFlowDiagram() {
                     className="theming-diagram-box"
                     variant="secondary"
                     variantAppearance="tonal"
+                    paint="surface"
                     align="stretch"
                 >
                     <Row as="strong" gap={2} className="theming-diagram-box--heading">
@@ -99,6 +103,7 @@ export default function TokenFlowDiagram() {
                     className="theming-diagram-box theming-diagram__component-layer"
                     variant="accent"
                     variantAppearance="tonal"
+                    paint="surface"
                     align="stretch"
                 >
                     <Row as="strong" gap={2} className="theming-diagram-box--heading">

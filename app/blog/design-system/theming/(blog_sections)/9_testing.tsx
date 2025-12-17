@@ -11,7 +11,7 @@ export default function Section9() {
                 How to Test Your Theme System
             </AnchorHeading>
 
-            <List>
+            <List as="ul">
                 <li>Snapshot test light vs dark themes</li>
                 <li>Test variant CSS variables render correctly</li>
                 <li>Ensure contrast ratios remain accessible across themes</li>

@@ -5,9 +5,9 @@
     padding-inline: 1rem;
 }
 
-.nav__primary a {
+/* .nav__primary a {
     color: var(--color-primary-400);
-}
+} */
 
 .header--wrapper {
     display: flex;

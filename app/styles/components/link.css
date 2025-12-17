@@ -1,7 +1,5 @@
 .link {
-    --link-color: var(--link-on-surface, currentColor);
-
-    color: var(--link-color);
+    color: var(--link-color-onPaint, --link-color);
     text-decoration: underline;
     text-decoration-color: var(--link-underline-color, currentColor);
     text-decoration-thickness: 0.125em;

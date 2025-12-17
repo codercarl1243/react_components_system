@@ -38,7 +38,7 @@ export default function PostNote({ className, children, variant = 'info', showIc
       role={'note'}
       variant={variant}
       variantAppearance='tonal'
-      paint="surface"
+      paint="all"
     >
       {showIcon ? <Icon icon={RiInformationLine} size={32} className="post-note__icon" /> : null}
       <Stack className="post-note__content">

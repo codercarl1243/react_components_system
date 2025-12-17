@@ -10,7 +10,7 @@ import { Stack } from "@/components/primitives";
 export default function Section5() {
 
   return (
-    <PostSection id="component-tokens">
+    <PostSection id="component-tokens-theming">
       <AnchorHeading as="h2" prefix="Step 2 —" id="component-tokens-theming-heading">
         Define Your Component Tokens
       </AnchorHeading>
@@ -58,7 +58,7 @@ export default function Section5() {
 
       <Stack>
         <Heading as="h3">Why Component Tokens Matter</Heading>
-        <List spacing="tight">
+        <List spacing="loose" marker="none">
           <li><strong>Encapsulation:</strong> Components define <em>what</em> they need (background, foreground, border); themes define <em>which colors</em> to use.</li>
           <li><strong>Flexibility:</strong> You can change a theme, variant, or visual style by adjusting only the mapped values — without refactoring component CSS.</li>
           <li><strong>Consistency:</strong> Every component uses the same semantic vocabulary.</li>
