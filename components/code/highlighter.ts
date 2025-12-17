@@ -14,9 +14,7 @@ const globalForShiki = globalThis
 
 export async function getHighlighterSingleton(): Promise<Highlighter> {
   if (!globalForShiki.__highlighterPromise) {
-    if (process.env.NODE_ENV !== 'production') {
-      logInfo('🟦 Creating new Shiki highlighter', { context: `getHighlighterSingleton` })
-    }
+    logInfo('🟦 Creating new Shiki highlighter', { context: `getHighlighterSingleton` })
     const highlighterPromise = createHighlighter({
       // themes: ['github-dark', 'light-plus'],
       themes: ['github-dark-default', 'github-light'],
@@ -116,10 +114,10 @@ export function highlightCustomTokens(
 
     // Check if token is a data attribute pattern like 'data-variant="primary"'
     const dataAttrMatch = token.match(/^(data-[\w-]+)="([^"]+)"$/);
-    
+
     if (dataAttrMatch) {
       const [, attrName, attrValue] = dataAttrMatch;
-      
+
       // Match the attribute name, equals sign, and quoted value across multiple spans
       // Example: <span>data-variant</span><span>=</span><span>"primary"</span>
       const pattern = new RegExp(
@@ -128,10 +126,10 @@ export function highlightCustomTokens(
         `<span[^>]*>\\s*"${escapeRegex(attrValue)}"\\s*</span>)`, // quoted value
         'g'
       );
-      
+
       const attrs = [`data-variant="${variant}"`];
       if (appearance) attrs.push(`data-appearance="${appearance}"`);
-      
+
       result = result.replace(pattern, (match) => {
         return `<span class="custom-code-highlight" ${attrs.join(' ')}>${match}</span>`;
       });
@@ -141,7 +139,7 @@ export function highlightCustomTokens(
       const regex = new RegExp(replaceRegex, 'g');
       const attrs = [`data-variant="${variant}"`];
       if (appearance) attrs.push(`data-appearance="${appearance}"`);
-      
+
       result = result.replace(regex, () => {
         return `<span class="custom-code-highlight" ${attrs.join(' ')}>${token}</span>`;
       });
