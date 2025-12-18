@@ -32,6 +32,13 @@ These tokens are:
   --surface-color: var(--variant-surface);
 }
 
+[data-variant="inverse"] {
+  --variant-bg: var(--text-on-surface);
+  --variant-fg: var(--surface);
+  --variant-border: var(--color-neutral-500);
+  --variant-surface: var(--text-on-surface);
+}
+
 [data-variant="neutral"] {
   --variant-bg: var(--surface);
   --variant-fg: var(--text-on-surface);
