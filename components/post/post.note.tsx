@@ -25,7 +25,7 @@ import type { PostNotePropsType } from './post.type';
  */
 export default function PostNote({ className, children, variant = 'info', showIcon = true, ...props }: PostNotePropsType) {
 
-  if (!children) return;
+  if (!children) return null;
 
   return (
     <Stack
