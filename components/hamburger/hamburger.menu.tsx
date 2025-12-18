@@ -10,7 +10,7 @@ export default function HamburgerMenu<T extends React.ElementType = "aside">({
 }: HamburgerMenuProps<T>) {
     const Component = as || "aside";
     const { menuState, isActive, menuRef, menuId, position } = useHamburgerContext();
-    const dialogProps = isActive ? {role: "dialog","aria-modal": true} : {}
+    const dialogProps = (isActive && menuState === "open") ? {role: "dialog","aria-modal": true} : {}
 
     return (
         <Component

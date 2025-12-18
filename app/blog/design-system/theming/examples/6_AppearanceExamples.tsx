@@ -81,13 +81,12 @@ export default function AppearanceConfigurator() {
 
                 {/* Live Preview */}
                 <Button
-                    variant={variant ?? "neutral"}
-                    variantAppearance={appearance ?? "tonal"}
-                    paint="all"
-                    style={{ padding: '2rem', borderRadius: 'var(--radius-md)' }}
+                    variant={variant}
+                    variantAppearance={appearance}
+                    style={{width: "fit-content"}}
                 >
 
-                        {variant ? variant.charAt(0).toUpperCase() + variant.slice(1) : 'Plain'} + 
+                        {variant ? variant.charAt(0).toUpperCase() + variant.slice(1) : 'Plain'}{' '}+{' '} 
                         {appearance ? appearance.charAt(0).toUpperCase() + appearance.slice(1) : 'Plain'}
                 </Button>
             </Stack>
