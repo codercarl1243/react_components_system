@@ -28,6 +28,7 @@ export default function useHamburger({
 
   const menuRef = useRef<HTMLElement | null>(null);
   const buttonRef = useRef<HTMLButtonElement | null>(null);
+
   useClickOutside(
     () => {
       if (isActive) {
@@ -50,6 +51,7 @@ export default function useHamburger({
   useFocusTrap({
     containerRef: wrapperRef,
     isActive: Boolean(menuState === "open" && isActive),
+    focusableSelector: 'button, [href]:not(#skip-link), input, select, textarea, [tabindex]:not([tabindex="-1"])'
   });
 
   // close when switching to desktop
