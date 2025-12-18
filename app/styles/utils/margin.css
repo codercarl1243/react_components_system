@@ -1,0 +1,179 @@
+/* ---------------------------------- */
+/* Margin – all sides                 */
+/* ---------------------------------- */
+
+.m-2 {
+    margin: var(--spacing);
+}
+
+.m-4 {
+    margin: var(--spacing-sm);
+}
+
+.m-8 {
+    margin: var(--spacing-md);
+}
+
+.m-12 {
+    margin: var(--spacing-lg);
+}
+
+.m-16 {
+    margin: var(--spacing-xl);
+}
+
+/* ---------------------------------- */
+/* Margin – axis                      */
+/* ---------------------------------- */
+
+.mx-auto {
+    margin-inline: auto;
+}
+
+.mx-2 {
+    margin-inline: var(--spacing);
+}
+
+.mx-4 {
+    margin-inline: var(--spacing-sm);
+}
+
+.mx-8 {
+    margin-inline: var(--spacing-md);
+}
+
+.mx-12 {
+    margin-inline: var(--spacing-lg);
+}
+
+.mx-16 {
+    margin-inline: var(--spacing-xl);
+}
+
+.my-2 {
+    margin-block: var(--spacing);
+}
+
+.my-4 {
+    margin-block: var(--spacing-sm);
+}
+
+.my-8 {
+    margin-block: var(--spacing-md);
+}
+
+.my-12 {
+    margin-block: var(--spacing-lg);
+}
+
+.my-16 {
+    margin-block: var(--spacing-xl);
+}
+
+/* ---------------------------------- */
+/* Margin – individual sides          */
+/* ---------------------------------- */
+
+.mt-0 {
+    margin-block-start: 0;
+}
+
+.mt-2 {
+    margin-block-start: var(--spacing);
+}
+
+.mt-4 {
+    margin-block-start: var(--spacing-sm);
+}
+
+.mt-8 {
+    margin-block-start: var(--spacing-md);
+}
+
+.mt-12 {
+    margin-block-start: var(--spacing-lg);
+}
+
+.mt-16 {
+    margin-block-start: var(--spacing-xl);
+}
+
+.mb-0 {
+    margin-block-end: 0;
+}
+
+.mb-2 {
+    margin-block-end: var(--spacing);
+}
+
+.mb-4 {
+    margin-block-end: var(--spacing-sm);
+}
+
+.mb-8 {
+    margin-block-end: var(--spacing-md);
+}
+
+.mb-12 {
+    margin-block-end: var(--spacing-lg);
+}
+
+.mb-16 {
+    margin-block-end: var(--spacing-xl);
+}
+
+.ml-auto {
+    margin-inline-start: auto;
+}
+
+.ml-0 {
+    margin-inline-start: 0;
+}
+
+.ml-2 {
+    margin-inline-start: var(--spacing);
+}
+
+.ml-4 {
+    margin-inline-start: var(--spacing-sm);
+}
+
+.ml-8 {
+    margin-inline-start: var(--spacing-md);
+}
+
+.ml-12 {
+    margin-inline-start: var(--spacing-lg);
+}
+
+.ml-16 {
+    margin-inline-start: var(--spacing-xl);
+}
+
+.mr-auto {
+    margin-inline-end: auto;
+}
+
+.mr-0 {
+    margin-inline-end: 0;
+}
+
+.mr-2 {
+    margin-inline-end: var(--spacing);
+}
+
+.mr-4 {
+    margin-inline-end: var(--spacing-sm);
+}
+
+.mr-8 {
+    margin-inline-end: var(--spacing-md);
+}
+
+.mr-12 {
+    margin-inline-end: var(--spacing-lg);
+}
+
+.mr-16 {
+    margin-inline-end: var(--spacing-xl);
+}

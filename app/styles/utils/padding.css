@@ -1,0 +1,167 @@
+/* ---------------------------------- */
+/* Padding – all sides                */
+/* ---------------------------------- */
+
+.p-2 {
+    padding: var(--spacing);
+}
+
+.p-4 {
+    padding: var(--spacing-sm);
+}
+
+.p-8 {
+    padding: var(--spacing-md);
+}
+
+.p-12 {
+    padding: var(--spacing-lg);
+}
+
+.p-16 {
+    padding: var(--spacing-xl);
+}
+
+/* ---------------------------------- */
+/* Padding – axis                     */
+/* ---------------------------------- */
+
+.px-2 {
+    padding-inline: var(--spacing);
+}
+
+.px-4 {
+    padding-inline: var(--spacing-sm);
+}
+
+.px-8 {
+    padding-inline: var(--spacing-md);
+}
+
+.px-12 {
+    padding-inline: var(--spacing-lg);
+}
+
+.px-16 {
+    padding-inline: var(--spacing-xl);
+}
+
+.py-2 {
+    padding-block: var(--spacing);
+}
+
+.py-4 {
+    padding-block: var(--spacing-sm);
+}
+
+.py-8 {
+    padding-block: var(--spacing-md);
+}
+
+.py-12 {
+    padding-block: var(--spacing-lg);
+}
+
+.py-16 {
+    padding-block: var(--spacing-xl);
+}
+
+/* ---------------------------------- */
+/* Padding – individual sides         */
+/* ---------------------------------- */
+
+.pt-0 {
+    padding-block-start: 0;
+}
+
+.pt-2 {
+    padding-block-start: var(--spacing);
+}
+
+.pt-4 {
+    padding-block-start: var(--spacing-sm);
+}
+
+.pt-8 {
+    padding-block-start: var(--spacing-md);
+}
+
+.pt-12 {
+    padding-block-start: var(--spacing-lg);
+}
+
+.pt-16 {
+    padding-block-start: var(--spacing-xl);
+}
+
+.pb-0 {
+    padding-block-end: 0;
+}
+
+.pb-2 {
+    padding-block-end: var(--spacing);
+}
+
+.pb-4 {
+    padding-block-end: var(--spacing-sm);
+}
+
+.pb-8 {
+    padding-block-end: var(--spacing-md);
+}
+
+.pb-12 {
+    padding-block-end: var(--spacing-lg);
+}
+
+.pb-16 {
+    padding-block-end: var(--spacing-xl);
+}
+
+.pl-0 {
+    padding-inline-start: 0;
+}
+
+.pl-2 {
+    padding-inline-start: var(--spacing);
+}
+
+.pl-4 {
+    padding-inline-start: var(--spacing-sm);
+}
+
+.pl-8 {
+    padding-inline-start: var(--spacing-md);
+}
+
+.pl-12 {
+    padding-inline-start: var(--spacing-lg);
+}
+
+.pl-16 {
+    padding-inline-start: var(--spacing-xl);
+}
+
+.pr-0 {
+    padding-inline-end: 0;
+}
+
+.pr-2 {
+    padding-inline-end: var(--spacing);
+}
+
+.pr-4 {
+    padding-inline-end: var(--spacing-sm);
+}
+
+.pr-8 {
+    padding-inline-end: var(--spacing-md);
+}
+
+.pr-12 {
+    padding-inline-end: var(--spacing-lg);
+}
+
+.pr-16 {
+    padding-inline-end: var(--spacing-xl);
+}
