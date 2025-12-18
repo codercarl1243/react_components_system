@@ -23,27 +23,26 @@ export default function Section3() {
             <Stack>
                 <p className="bold">Here are the core building blocks:</p>
 
-                <List spacing="normal" marker="none">
-                    <li>
+                <List spacing="loose" marker="none">
+                    <li className="flow-4">
                         <p>
-                            <span className="bold"><Icon icon={RiPaletteLine} color={"var(--color-primary-400)"} /> Design Tokens:
-                            </span> Global CSS variables that represent your <span className="fun-underline">brand colors</span>, <span className="fun-underline">spacing</span>, and <span className="fun-underline">typography</span> — the raw ingredients of your theme.
+                            <Inline as="strong" gap={2}><Icon icon={RiPaletteLine} color={"var(--color-primary-400)"} />Design Tokens:</Inline> Global CSS variables that represent your <span className="fun-underline">brand colors</span>, <span className="fun-underline">spacing</span>, and <span className="fun-underline">typography</span> — the raw ingredients of your theme.
                         </p>
-                        <PostInfo>
+                        <PostInfo paint="surface" variantAppearance="tonal" variant="inverse" className="surface-frame p-4">
                             <strong>Why:</strong> Without these, you'd hardcode <InlineCode lang="css" codeString="hsl(212, 75%, 40%)"/> in 50 places. Good luck updating your brand colors.
                         </PostInfo>
                     </li>
-                    <li>
+                    <li className="flow-2">
                         <p>
-                            <Inline as="strong"><Icon icon={RiPuzzleLine} color={"var(--color-primary-400)"} /> Component Tokens:</Inline> Local, component-scoped CSS variables defined inside the component's own stylesheet.
+                            <Inline as="strong" gap={2}><Icon icon={RiPuzzleLine} color={"var(--color-primary-400)"} />Component Tokens:</Inline> Local, component-scoped CSS variables defined inside the component's own stylesheet.
                         </p>
-                        <p>
+                        <p className="text-sm">
                             These provide semantic hooks like <InlineCode codeString="--background-color" lang="css" />, <InlineCode codeString="--foreground-color" lang="css" />, and <InlineCode codeString="--border-color" lang="css" /> — the values the component actually uses, all mapped back to your global design tokens.
                         </p>
                     </li>
-                    <li>
+                    <li className="flow-4">
                         <p>
-                            <span className="bold"><Icon icon={RiCodeSSlashLine} color={"var(--color-primary-400)"} /> Data Attributes:</span> Lightweight CSS hooks such as <InlineCode codeString={`data-theme="dark"`} /> or <InlineCode codeString={`variant="primary"`} />.
+                            <Inline as="strong" gap={2}><Icon icon={RiCodeSSlashLine} color={"var(--color-primary-400)"} />Data Attributes:</Inline> Lightweight CSS hooks such as <InlineCode codeString={`data-theme="dark"`} /> or <InlineCode codeString={`variant="primary"`} />.
                         </p>
                         <p>
                             They don't require client-side JavaScript, but integrate cleanly with any JS that sets or toggles them.
@@ -51,7 +50,7 @@ export default function Section3() {
                     </li>
                     <li>
                         <p>
-                            <span className="bold"><Icon icon={RiStackLine} color={"var(--color-primary-400)"} /> Cascade Layers:</span> Explicit precedence rules that ensure variants and themes override component defaults, regardless of selector specificity or source order.</p>
+                            <Inline as="strong"gap={2}><Icon icon={RiStackLine} color={"var(--color-primary-400)"} />Cascade Layers:</Inline> Explicit precedence rules that ensure variants and themes override component defaults, regardless of selector specificity or source order.</p>
                     </li>
                 </List>
             </Stack>

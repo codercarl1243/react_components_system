@@ -98,47 +98,45 @@ Keep them separate.
 */
 
 .surface-frame {
+    /* Base geometry */
     --frame-radius: var(--radius-md);
-    --frame-inset: var(--spacing-sm);
+
+    /* Default inset (overridable) */
+    --frame-inset-base: var(--spacing);
+    --frame-inset: var(--frame-inset-base);
 
     border: var(--border-thin);
-    border-radius: var(--frame-radius);
-
-    /* Pre-compute the radius a nested frame *should* use */
-    --frame-radius-nested: max(0px, calc(var(--frame-radius) - var(--frame-inset)));
+    border-radius: var(--frame-radius-effective, var(--frame-radius));
 }
 
-/* When a frame is inside another frame, it inherits the nested radius */
+/* Nested surface frames derive a smaller radius */
 .surface-frame .surface-frame {
-    --frame-radius: var(--frame-radius-nested);
+    --frame-radius-effective: clamp(0px,
+            calc(var(--frame-radius) - var(--frame-inset)),
+            999px);
 }
 
-/* ---------------------------------- */
-/* Surface frame inset utilities      */
-/* Controls nested radius geometry    */
-/* Numbers align with spacing scale   */
-/* ---------------------------------- */
-
+/* Geometry utilities — single responsibility */
 .frame-inset-0 {
-    --frame-inset: 0px;
+    --frame-inset-base: 0px;
 }
 
 .frame-inset-2 {
-    --frame-inset: var(--spacing);
+    --frame-inset-base: var(--spacing);
 }
 
 .frame-inset-4 {
-    --frame-inset: var(--spacing-sm);
+    --frame-inset-base: var(--spacing-sm);
 }
 
 .frame-inset-8 {
-    --frame-inset: var(--spacing-md);
+    --frame-inset-base: var(--spacing-md);
 }
 
 .frame-inset-12 {
-    --frame-inset: var(--spacing-lg);
+    --frame-inset-base: var(--spacing-lg);
 }
 
 .frame-inset-16 {
-    --frame-inset: var(--spacing-xl);
+    --frame-inset-base: var(--spacing-xl);
 }

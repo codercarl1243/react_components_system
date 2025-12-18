@@ -8,20 +8,11 @@ import Tablist from "@/components/tablist";
 export default function ButtonExample() {
 
     return (
-        <Stack as="figure" variant="neutral" variantAppearance="tonal" className="surface" gap={2}>
+        <Stack as="figure" variant="inverse" variantAppearance="tonal" paint="all" className="text-sm surface-frame p-8 frame-inset-8" gap={2}>
             <Heading as="h3" headingSize={4} className="center">Button Examples</Heading>
-            <Stack>
-                <p className="text-sm text-muted">Basic unstyled button</p>
-                <div>
-                    <button aria-label="Unstyled button example">Click Me</button>
-                </div>
-            </Stack>
-
-            <Stack>
-                <p className="text-sm">
-                    With theming — controlled by <InlineCode codeString="data-variant" /> and <InlineCode codeString="data-appearance" />
-                </p>
-                <Inline gap={2}>
+            
+            <Stack variant="neutral" paint="border" className="p-4 surface-frame">
+                <Inline gap={2} style={{width: "100%", justifyContent: "center"}}>
                     <Button variant="primary" aria-label="Primary filled button example">
                         Primary
                     </Button>
@@ -76,18 +67,6 @@ export default function ButtonExample() {
                                 highlightTokens={[`accent`, `outlined`]}
                                 codeString={`<button class="button" data-variant="accent" data-appearance="outlined">
     Accent
-</button>`} />
-                        )
-                    },
-                    {
-                        id: 'button_example_code--unstyled',
-                        tabLabel: 'unstyled',
-                        panelContent: (
-                            <Code
-                                lang="html"
-                                copyEnabled={false}
-                                codeString={`<button>
-    Click Me
 </button>`} />
                         )
                     }

@@ -12,11 +12,9 @@
 }
 
 .post-note__icon {
-    --icon-position: -0.75em;
-
     position: absolute;
-    top: var(--icon-position);
-    left: var(--icon-position);
+    top: -0.75em;
+    left: -1.25em;
 
     pointer-events: none;
     background-color: inherit;
