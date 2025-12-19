@@ -31,7 +31,7 @@ export default function PostNote({ className, children, variant = 'info', showIc
     <Stack
       {...props}
       className={clsx(className, 
-        'post-note surface-frame',
+        'post-note surface-frame py-8 px-4',
         {'has-icon': showIcon}
       )}
       gap={2}
@@ -40,7 +40,7 @@ export default function PostNote({ className, children, variant = 'info', showIc
       variantAppearance='tonal'
       paint="all"
     >
-      {showIcon ? <Icon icon={RiInformationLine} size={32} className="post-note__icon" /> : null}
+      {showIcon ? <Icon icon={RiInformationLine} size={28} className="post-note__icon" /> : null}
       <Stack className="post-note__content">
         {children}
       </Stack>

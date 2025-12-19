@@ -4,7 +4,7 @@
     padding-block: var(--spacing-lg);
     box-shadow: inset 2px 2px 4px color-mix(in srgb, var(--background-color) 10%, transparent),
         inset -1px -1px 2px color-mix(in srgb, var(--background-color) 90%, transparent);
-    border-left-width: 3px;
+    border-left-width: 3px !important;
 }
 
 .post-note.has-icon {
@@ -13,8 +13,8 @@
 
 .post-note__icon {
     position: absolute;
-    top: -0.75em;
-    left: -1.25em;
+    top: -0.65em;
+    left: -1em;
 
     pointer-events: none;
     background-color: inherit;

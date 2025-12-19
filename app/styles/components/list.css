@@ -14,7 +14,7 @@
 
 .list:not(.list--none) li {
   position: relative;
-  padding-inline-start: 1.5em;
+  padding-inline-start: 1.25em;
 }
 
 .list li::before {
@@ -25,8 +25,8 @@
 
   content: '';
   position: absolute;
-  left: 0;
-  top: 0.5em;
+  left: 0.15em;
+  top: 0.35em;
   width: 0.6rem;
   aspect-ratio: 1;
   border: var(--list-border);
@@ -56,8 +56,8 @@
 .list--disc li::before {
   background: conic-gradient(var(--list-marker-bg-color), var(--surface-color), var(--border-color));
   width: 0.75rem;
-  left:0.35rem;
-  top: 0.35rem;
+  left: 0;
+  top: 0.35em;
 }
 
 /* Unordered list variants */
