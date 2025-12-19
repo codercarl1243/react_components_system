@@ -1,21 +1,21 @@
 import { logError, logInfo } from '@/lib/logging/log'
 import { isNonEmptyArray } from '@/lib/utils/guards'
 import { createHighlighter, type Highlighter, type ThemeRegistration } from 'shiki'
-import { HighlightCustomTokensOptions } from './code.type'
+import type { HighlightCustomTokensOptions, HighlightTokens } from './code.type'
+import { cache } from 'react'
 
 
 declare global {
   var __highlighterPromise: Promise<Highlighter> | undefined
-  var __customTheme: ThemeRegistration | undefined
-  var __inlineTheme: ThemeRegistration | undefined
 }
 const globalForShiki = globalThis
 
-
-export async function getHighlighterSingleton(): Promise<Highlighter> {
+export const getHighlighter = cache(async () => {
   if (!globalForShiki.__highlighterPromise) {
+
     logInfo('🟦 Creating new Shiki highlighter', { context: `getHighlighterSingleton` })
-    const highlighterPromise = createHighlighter({
+
+    globalForShiki.__highlighterPromise = createHighlighter({
       // themes: ['github-dark', 'light-plus'],
       themes: ['github-dark-default', 'github-light'],
       langs: ['tsx', 'ts', 'css', 'md', 'bash', 'html']
@@ -25,30 +25,27 @@ export async function getHighlighterSingleton(): Promise<Highlighter> {
       logError('Failed to create shiki Highlighter', err, { context: "getHighlighterSingleton" })
       throw err
     })
-    globalForShiki.__highlighterPromise = highlighterPromise
   }
+
   return globalForShiki.__highlighterPromise
-}
+});
 
-export async function getInlineCodeTheme() {
-  if (globalForShiki.__inlineTheme) return globalForShiki.__inlineTheme
-  const highlighter = await getHighlighterSingleton()
-  const baseTheme = highlighter.getTheme('github-light')
+export const getLoadedLanguages = cache(async () => {
+  const highlighter = await getHighlighter();
+  return new Set(highlighter.getLoadedLanguages?.() ?? []);
+});
 
-  globalForShiki.__inlineTheme = baseTheme
-  return baseTheme
-}
+export const getInlineCodeTheme = cache(async () => {
+  const highlighter = await getHighlighter()
+  return highlighter.getTheme('github-light')
+});
 
 /**
  * Builds a custom GitHub Dark theme variant with modified colors.
  */
-export async function getCustomTheme(): Promise<ThemeRegistration> {
-  if (globalForShiki.__customTheme) return globalForShiki.__customTheme
-
-  const highlighter = await getHighlighterSingleton()
-  // const baseTheme = highlighter.getTheme('github-dark')
+export const getCodeTheme = cache(async (): Promise<ThemeRegistration> => {
+  const highlighter = await getHighlighter()
   const baseTheme = highlighter.getTheme('github-dark-default')
-
 
   const customTheme: ThemeRegistration = {
     ...baseTheme,
@@ -93,13 +90,12 @@ export async function getCustomTheme(): Promise<ThemeRegistration> {
     },
   }
 
-  globalForShiki.__customTheme = customTheme
   return customTheme
-}
+})
 
 export function highlightCustomTokens(
   html: string,
-  tokens: string[] = [],
+  tokens: HighlightTokens = [],
   options?: HighlightCustomTokensOptions
 ) {
   if (!isNonEmptyArray(tokens)) return html;

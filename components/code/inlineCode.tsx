@@ -1,5 +1,5 @@
 import { InlineCodeProps, SupportedLangs } from "./code.type";
-import { getHighlighterSingleton, getInlineCodeTheme, highlightCustomTokens } from "./highlighter";
+import { getHighlighter, getInlineCodeTheme, getLoadedLanguages, highlightCustomTokens } from "./highlighter";
 
 export default async function InlineCode({
     codeString,
@@ -9,16 +9,19 @@ export default async function InlineCode({
     options
 }: InlineCodeProps) {
 
-    const highlighter = await getHighlighterSingleton()
-    const loadedLanguages = new Set(highlighter.getLoadedLanguages?.() ?? [])
+    const [highlighter, theme, loadedLanguages] = await Promise.all([
+        getHighlighter(),
+        getInlineCodeTheme(),
+        getLoadedLanguages(),
+    ]);
+
     const safeLanguage = (loadedLanguages.has(lang) ? lang : 'text') as SupportedLangs
-    const inlineTheme = await getInlineCodeTheme();
 
     const out = highlighter.codeToHtml(
         codeString,
         {
             lang: safeLanguage,
-            theme: inlineTheme
+            theme: theme
         }
     )
 
