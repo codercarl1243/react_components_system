@@ -35,7 +35,7 @@ Examples:
 
     /* Adjust link styling for painted surfaces */
     --link-color-onPaint: color-mix(in srgb,
-            var(--link-color) 50%,
+            var(--link-color) 85%,
             black);
 }
 

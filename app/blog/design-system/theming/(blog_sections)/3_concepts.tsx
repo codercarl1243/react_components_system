@@ -28,7 +28,7 @@ export default function Section3() {
                         <p>
                             <Inline as="strong" gap={2}><Icon icon={RiPaletteLine} color={"var(--color-primary-400)"} />Design Tokens:</Inline> Global CSS variables that represent your <span className="fun-underline">brand colors</span>, <span className="fun-underline">spacing</span>, and <span className="fun-underline">typography</span> — the raw ingredients of your theme.
                         </p>
-                        <PostInfo paint="surface" variantAppearance="tonal" variant="inverse" className="surface-frame p-4">
+                        <PostInfo>
                             <strong>Why:</strong> Without these, you'd hardcode <InlineCode lang="css" codeString="hsl(212, 75%, 40%)"/> in 50 places. Good luck updating your brand colors.
                         </PostInfo>
                     </li>

@@ -1,4 +1,3 @@
-
 import Post from "@/components/post";
 import { type Metadata } from "next";
 import {
@@ -19,7 +18,6 @@ import {
 import { generateMetadataForPost } from "@/lib/utils/generateMeta/post";
 import { getRelatedPosts } from "@/lib/blog/blog.data";
 import { asPostId } from "@/lib/blog/blog.utils";
-// import Buttons from './examples/buttons'
 const postId = asPostId('design__button__01');
 
 export const metadata: Metadata = generateMetadataForPost(postId);
@@ -30,7 +28,6 @@ export default function Page() {
     return (
         <>
             <Post>
-                {/* <Buttons /> */}
                 <Foundation />
                 <Setup />
                 <BuildingTheButton />

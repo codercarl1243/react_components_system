@@ -31,7 +31,7 @@ export default function PostNote({ className, children, variant = 'info', showIc
     <Stack
       {...props}
       className={clsx(className, 
-        'post-note surface-frame py-8 px-4',
+        'post-note surface-frame py-8 pr-4 pl-8',
         {'has-icon': showIcon}
       )}
       gap={2}

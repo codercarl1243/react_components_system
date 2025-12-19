@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import Icon from '../icon'
 import { RiCheckFill, RiErrorWarningLine, RiFileCopyLine } from '@remixicon/react'
 import Button from '@/components/button'
+import { logError } from '@/lib/logging/log'
 
 interface CopyButtonProps {
   text: string;
@@ -19,6 +20,14 @@ export function CopyButton({ text }: CopyButtonProps) {
     setIsSupported(!!navigator.clipboard)
   }, [])
 
+  useEffect(() => {
+    if (!copied) return
+
+    const id = setTimeout(() => setCopied(false), 1250)
+    return () => clearTimeout(id)
+  }, [copied])
+
+
   // Don't render anything until we've checked support
   if (isSupported === null || !isSupported) {
     return null
@@ -29,13 +38,13 @@ export function CopyButton({ text }: CopyButtonProps) {
       await navigator.clipboard.writeText(text)
       setCopied(true)
       setError(false)
-      setTimeout(() => setCopied(false), 1250)
     } catch (err) {
       setError(true)
       // eslint-disable-next-line no-console
-      console.log("error copying content to clipboard", err)
+      logError("error copying content to clipboard", err)
     }
   }
+
 
   return (
     <Button

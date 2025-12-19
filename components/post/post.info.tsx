@@ -3,7 +3,11 @@ import clsx from "clsx";
 import { Block } from "@/components/primitives";
 
 
-export default function PostInfo({ className, ...props }: RowProps) {
+export default function PostInfo({ className, paint, variant, variantAppearance, ...props }: RowProps) {
 
-    return <Block as="p" className={clsx("postinfo text-sm", className)} {...props} />
+    return <Block as="p"
+        paint={paint ?? "all"}
+        variant={variant ?? "neutral"}
+        variantAppearance={variantAppearance ?? "tonal"}
+        className={clsx("postinfo text-sm surface-frame p-4", className)} {...props} />
 }

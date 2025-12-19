@@ -1,0 +1,24 @@
+.theming_buttonExample {
+    [data-code-block] {
+        display: none;
+    }
+
+    [data-code-block][data-code-key] {
+        display: block;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 150ms ease;
+    }
+
+    .code-example {
+        position: relative;
+    }
+
+    /* Target based on figure's data-active */
+    &[data-active="primary_filled"] [data-code-key="primary_filled"],
+    &[data-active="secondary_ghost"] [data-code-key="secondary_ghost"],
+    &[data-active="accent_outlined"] [data-code-key="accent_outlined"] {
+        opacity: 1;
+        pointer-events: auto;
+    }
+}

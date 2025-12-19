@@ -3,7 +3,7 @@ import List from "@/components/list";
 import PostNote from "@/components/post/post.note";
 import PostSection from "@/components/post/post.section";
 import { Stack } from "@/components/primitives";
-import ButtonExample from "../examples/1_buttonExample";
+import ButtonExample from "../examples/1_buttonExample/example.server";
 
 export default function Section1() {
 
