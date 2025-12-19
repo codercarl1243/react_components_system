@@ -1,17 +1,20 @@
 /* ---------------------------------- */
 /* Padding – all sides                */
 /* ---------------------------------- */
-
-.p-2 {
-    padding: var(--spacing);
+.p-0 {
+    padding: 0;
 }
 
-.p-4 {
+.p-2 {
     padding: var(--spacing-sm);
 }
 
+.p-4 {
+    padding: var(--spacing);
+}
+
 .p-8 {
-    padding: var(--spacing-md);
+    padding: var(--spacing-lg);
 }
 
 .p-12 {
@@ -25,17 +28,20 @@
 /* ---------------------------------- */
 /* Padding – axis                     */
 /* ---------------------------------- */
-
-.px-2 {
-    padding-inline: var(--spacing);
+.px-0 {
+    padding-inline: 0;
 }
 
-.px-4 {
+.px-2 {
     padding-inline: var(--spacing-sm);
 }
 
+.px-4 {
+    padding-inline: var(--spacing);
+}
+
 .px-8 {
-    padding-inline: var(--spacing-md);
+    padding-inline: var(--spacing-lg);
 }
 
 .px-12 {
@@ -46,16 +52,20 @@
     padding-inline: var(--spacing-xl);
 }
 
-.py-2 {
-    padding-block: var(--spacing);
+.py-0 {
+    padding-block: 0;
 }
 
-.py-4 {
+.py-2 {
     padding-block: var(--spacing-sm);
 }
 
+.py-4 {
+    padding-block: var(--spacing);
+}
+
 .py-8 {
-    padding-block: var(--spacing-md);
+    padding-block: var(--spacing-lg);
 }
 
 .py-12 {
@@ -75,15 +85,15 @@
 }
 
 .pt-2 {
-    padding-block-start: var(--spacing);
-}
-
-.pt-4 {
     padding-block-start: var(--spacing-sm);
 }
 
+.pt-4 {
+    padding-block-start: var(--spacing);
+}
+
 .pt-8 {
-    padding-block-start: var(--spacing-md);
+    padding-block-start: var(--spacing-lg);
 }
 
 .pt-12 {
@@ -99,15 +109,15 @@
 }
 
 .pb-2 {
-    padding-block-end: var(--spacing);
-}
-
-.pb-4 {
     padding-block-end: var(--spacing-sm);
 }
 
+.pb-4 {
+    padding-block-end: var(--spacing);
+}
+
 .pb-8 {
-    padding-block-end: var(--spacing-md);
+    padding-block-end: var(--spacing-lg);
 }
 
 .pb-12 {
@@ -123,15 +133,15 @@
 }
 
 .pl-2 {
-    padding-inline-start: var(--spacing);
-}
-
-.pl-4 {
     padding-inline-start: var(--spacing-sm);
 }
 
+.pl-4 {
+    padding-inline-start: var(--spacing);
+}
+
 .pl-8 {
-    padding-inline-start: var(--spacing-md);
+    padding-inline-start: var(--spacing-lg);
 }
 
 .pl-12 {
@@ -147,15 +157,15 @@
 }
 
 .pr-2 {
-    padding-inline-end: var(--spacing);
-}
-
-.pr-4 {
     padding-inline-end: var(--spacing-sm);
 }
 
+.pr-4 {
+    padding-inline-end: var(--spacing);
+}
+
 .pr-8 {
-    padding-inline-end: var(--spacing-md);
+    padding-inline-end: var(--spacing-lg);
 }
 
 .pr-12 {

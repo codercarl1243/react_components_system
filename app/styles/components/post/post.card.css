@@ -1,7 +1,7 @@
 .post-card__list {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 450px));
-    gap: var(--spacing-md);
+    gap: var(--spacing-lg);
 }
 
 .post-card {
@@ -11,9 +11,9 @@
     display: flex;
     flex-direction: column;
     box-shadow: var(--shadow-sm);
-    gap: var(--spacing);
+    gap: var(--spacing-sm);
     cursor: pointer;
-    padding-block-end: var(--spacing-md)
+    padding-block-end: var(--spacing-lg)
 }
 
 .post-card:hover {

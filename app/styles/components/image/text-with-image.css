@@ -15,7 +15,7 @@
     display: grid;
     grid-template-columns: var(--grid-template-cols);
     grid-template-rows: var(--grid-template-rows);
-    gap: var(--spacing-sm);
+    gap: var(--spacing);
     place-items: center;
 }
 
@@ -33,7 +33,7 @@
 .text-with-image .image {
     grid-column: var(--grid-column--image);
     grid-row: var(--grid-row--image);
-    margin-inline: var(--spacing-md);
+    margin-inline: var(--spacing-lg);
 }
 
 .text-with-image .text-with-image__text {

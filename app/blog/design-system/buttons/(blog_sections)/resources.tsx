@@ -131,9 +131,9 @@ export type BaseButtonProps = {
               <Code lang="css" codeString={`.button {
     /* Layout properties */
     --button-font-size: 1rem;
-    --button-margin: var(--spacing-sm);
-    --button-padding-y: var(--spacing-sm);
-    --button-padding-x: var(--spacing);
+    --button-margin: var(--spacing);
+    --button-padding-y: var(--spacing);
+    --button-padding-x: var(--spacing-sm);
     --button-icon-width: 24px;
     --button-spinner-width: 24px;
     /* WCAG Target Size Requirements */
@@ -144,7 +144,7 @@ export type BaseButtonProps = {
     /* Layout - reserve space for icon and spinner to prevent layout shift*/
     display: grid;
     grid-template-columns: var(--button-icon-width) fit-content(100%) var(--button-spinner-width);
-    gap: var(--spacing);
+    gap: var(--spacing-sm);
     align-items: center;
     white-space: nowrap;
 

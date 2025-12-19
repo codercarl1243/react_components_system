@@ -82,17 +82,17 @@
     --button-padding-x: 0;
     --button-padding-y: 0;
     top: 0.5lh;
-    right: var(--spacing);
+    right: var(--spacing-sm);
 }
 
 .shiki-wrapper:has(.code-title) {
-    padding: var(--spacing);
+    padding: var(--spacing-sm);
 
     .code-header {
-        padding-inline-start: var(--spacing);
-        padding-block: var(--spacing);
+        padding-inline-start: var(--spacing-sm);
+        padding-block: var(--spacing-sm);
         display: flex;
-        gap: var(--spacing-md);
+        gap: var(--spacing-sm-md);
         justify-content: space-between;
         align-items: center;
     }
@@ -128,7 +128,7 @@
 .shiki-inline {
     background-color: var(--color-inline-bg);
     border: var(--border-thin);
-    padding: 0.125em var(--spacing);
+    padding: 0.125em var(--spacing-sm);
     border-radius: var(--radius-md);
     white-space: pre-wrap;
     word-break: break-word;

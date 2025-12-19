@@ -3,7 +3,7 @@
 
   margin: 0;
   list-style-type: none;
-  padding-inline-start: var(--spacing-sm);
+  padding-inline-start: var(--spacing);
   line-height: var(--line-height-relaxed);
   font-size: var(--font-size-base, inherit);
 }

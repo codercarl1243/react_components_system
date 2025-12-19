@@ -5,9 +5,9 @@
 
     /* Layout properties */
     --button-font-size: 1rem;
-    --button-margin: var(--spacing-sm);
-    --button-padding-y: var(--spacing-sm);
-    --button-padding-x: var(--spacing);
+    --button-margin: var(--spacing);
+    --button-padding-y: var(--spacing);
+    --button-padding-x: var(--spacing-sm);
     --button-icon-width: 24px;
     --button-spinner-width: 24px;
     /* WCAG Target Size Requirements */

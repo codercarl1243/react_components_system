@@ -23,7 +23,7 @@
   box-decoration-break: clone;
   -webkit-box-decoration-break: clone;
   border-radius: var(--radius-md);
-  padding-inline: var(--spacing);
+  padding-inline: var(--spacing-sm);
   opacity: 0;
   transform: scale(0.98);
   transition:

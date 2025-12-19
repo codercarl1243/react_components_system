@@ -2,7 +2,7 @@
     display: none;
     /* Hidden by default */
     align-items: center;
-    gap: var(--spacing-sm);
+    gap: var(--spacing);
     position: fixed;
     transition: border-radius 250ms ease-in-out;
     top: 0;
@@ -39,7 +39,7 @@
     }
 
     &:focus-visible {
-        --button-outline-offset: var(--spacing);
+        --button-outline-offset: var(--spacing-sm);
     }
 }
 

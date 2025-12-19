@@ -81,9 +81,9 @@ Inset utilities control how much the nested radius is reduced.
 They do NOT add spacing or padding.
 
 .frame-inset-0   → no inset (flat nesting)
-.frame-inset-2   → var(--spacing)
-.frame-inset-4   → var(--spacing-sm)
-.frame-inset-8   → var(--spacing-md)
+.frame-inset-2   → var(--spacing-sm)
+.frame-inset-4   → var(--spacing)
+.frame-inset-8   → var(--spacing-lg)
 .frame-inset-12  → var(--spacing-lg)
 .frame-inset-16  → var(--spacing-xl)
 
@@ -102,7 +102,7 @@ Keep them separate.
     --frame-radius: var(--radius-md);
 
     /* Default inset (overridable) */
-    --frame-inset-base: var(--spacing);
+    --frame-inset-base: var(--spacing-sm);
     --frame-inset: var(--frame-inset-base);
 
     border: var(--border-thin);
@@ -122,15 +122,15 @@ Keep them separate.
 }
 
 .frame-inset-2 {
-    --frame-inset-base: var(--spacing);
-}
-
-.frame-inset-4 {
     --frame-inset-base: var(--spacing-sm);
 }
 
+.frame-inset-4 {
+    --frame-inset-base: var(--spacing);
+}
+
 .frame-inset-8 {
-    --frame-inset-base: var(--spacing-md);
+    --frame-inset-base: var(--spacing-lg);
 }
 
 .frame-inset-12 {

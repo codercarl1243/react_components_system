@@ -1,6 +1,6 @@
 .post__banner {
   --post__banner_text-color: var(--color-neutral-100);
-  margin-block-end: var(--spacing-md);
+  margin-block-end: var(--spacing-lg);
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(2, 1fr);
@@ -27,7 +27,7 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: auto auto;
-  row-gap: var(--spacing);
+  row-gap: var(--spacing-sm);
 
   align-items: center;
   justify-items: center;

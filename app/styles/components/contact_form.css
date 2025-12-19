@@ -19,9 +19,9 @@
 }
 
 .contact-form__status:not([data-status="idle"]) {
-    margin-block: var(--spacing-md);
-    margin-inline: var(--spacing);
-    padding: var(--spacing-md);
+    margin-block: var(--spacing-lg);
+    margin-inline: var(--spacing-sm);
+    padding: var(--spacing-lg);
 
     &[data-status="success"] {
         --border-color: var(--color-secondary-400);

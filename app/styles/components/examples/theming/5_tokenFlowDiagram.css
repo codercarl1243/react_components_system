@@ -2,10 +2,10 @@
     color: black;
 }
 .theming-diagram {
-    padding: var(--spacing-md);
+    padding: var(--spacing-lg);
 }
 .theming-diagram-box {
-    padding: var(--spacing-md) var(--spacing-lg);
+    padding: var(--spacing-lg) var(--spacing-lg);
 }
 .theming-diagram__component-layer .theming-diagram-box {
     border-style: dashed;

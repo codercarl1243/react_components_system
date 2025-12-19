@@ -10,5 +10,5 @@
 .figure-caption {
     color: var(--color-neutral-500);
     padding-inline: clamp(0.25em, 1vw, 0.5em);
-    padding-block-start: var(--spacing-sm);
+    padding-block-start: var(--spacing);
 }

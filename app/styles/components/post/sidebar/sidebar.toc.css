@@ -1,11 +1,11 @@
 .toc-list {
     list-style: none;
     margin: 0;
-    padding-inline-start: var(--spacing-sm);
+    padding-inline-start: var(--spacing);
 }
 
 .toc-list>*:not(:last-child) {
-    margin-block-end: var(--spacing-sm);
+    margin-block-end: var(--spacing);
 }
 
 .toc-item {
@@ -14,7 +14,7 @@
 }
 
 .toc-item--active {
-    transform: translateX(var(--spacing-sm));
+    transform: translateX(var(--spacing));
 }
 
 .toc-item--active::before {

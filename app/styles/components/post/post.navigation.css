@@ -1,11 +1,11 @@
 .post-navigation {
   margin: var(--spacing-xl) 0;
-  padding: var(--spacing-md) var(--spacing-sm);
+  padding: var(--spacing-lg) var(--spacing);
 
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: var(--spacing-md);
+  gap: var(--spacing-lg);
   max-width: 100%;
 }
 
@@ -14,11 +14,11 @@
   place-content: center;
   min-height: 5rem;
   border-radius: 1rem;
-  padding: var(--spacing-md);
+  padding: var(--spacing-lg);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   border: 1px solid transparent;
   transition: box-shadow 0.2s ease, border-color 0.2s ease;
-  gap: var(--spacing-sm);
+  gap: var(--spacing);
 
   &:hover {
     transform: translateY(1px);
@@ -28,7 +28,7 @@
 
   &:focus-visible {
     outline: 2px solid var(--color-neutral-200);
-    outline-offset: var(--spacing-md);
+    outline-offset: var(--spacing-lg);
     outline-style: dashed;
     border-radius: 12px;
   }
