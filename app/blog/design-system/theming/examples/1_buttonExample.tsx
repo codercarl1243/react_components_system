@@ -1,6 +1,5 @@
 import Button from "@/components/button";
 import Code from "@/components/code";
-import InlineCode from "@/components/code/inlineCode";
 import Heading from "@/components/heading";
 import { Stack, Inline } from "@/components/primitives";
 import Tablist from "@/components/tablist";
@@ -8,10 +7,10 @@ import Tablist from "@/components/tablist";
 export default function ButtonExample() {
 
     return (
-        <Stack as="figure" variant="inverse" variantAppearance="tonal" paint="all" className="text-sm surface-frame p-8 frame-inset-8" gap={2}>
+        <Stack as="figure" variant="muted" variantAppearance="tonal" paint="all" className="text-sm surface-frame p-8 frame-inset-8" gap={2}>
             <Heading as="h3" headingSize={4} className="center">Button Examples</Heading>
             
-            <Stack variant="neutral" paint="border" className="p-4 surface-frame">
+            <Stack variant="neutral" paint="all" className="p-4 surface-frame">
                 <Inline gap={2} style={{width: "100%", justifyContent: "center"}}>
                     <Button variant="primary" aria-label="Primary filled button example">
                         Primary
