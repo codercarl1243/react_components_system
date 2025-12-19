@@ -1,8 +1,11 @@
-import { highlightCustomTokens, getHighlighter, getCodeTheme, getLoadedLanguages } from '@/components/code/highlighter'
+
 import { CopyButton } from '@/components/button/copyButton'
 import { createHash } from 'crypto';
 import { CodeProps, SupportedLangs } from './code.type';
 import { isEmptyString } from '@/lib/utils/guards';
+import { getHighlighter, getLoadedLanguages } from '@/components/code/code.resources.server';
+import { getCodeTheme } from '@/components/code/code.theme.server';
+import { highlightCustomTokens } from '@/components/code/code.utilities.server';
 
 export default async function Code({
   codeString,

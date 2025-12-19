@@ -1,5 +1,7 @@
-import { InlineCodeProps, SupportedLangs } from "./code.type";
-import { getHighlighter, getInlineCodeTheme, getLoadedLanguages, highlightCustomTokens } from "./highlighter";
+import { getHighlighter, getLoadedLanguages } from "@/components/code/code.resources.server";
+import { getInlineCodeTheme } from "@/components/code/code.theme.server";
+import { InlineCodeProps, SupportedLangs } from "@/components/code/code.type";
+import { highlightCustomTokens } from "@/components/code/code.utilities.server";
 
 export default async function InlineCode({
     codeString,
