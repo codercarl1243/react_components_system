@@ -3,6 +3,8 @@
 import { useState } from 'react'
 import Button from '@/components/button'
 import type { CodeKey } from './codeMap'
+import type { ButtonProps } from '@/components/button/button.type'
+import { Inline } from '@/components/primitives'
 
 export default function ButtonExampleClient({
   keys,
@@ -15,26 +17,31 @@ export default function ButtonExampleClient({
 
   return (
     <figure
-      className="surface-frame p-8 frame-inset-8 theming_buttonExample"
+      className="surface-frame p-8 frame-inset-8 flow-8 theming_buttonExample"
       data-active={active}
     >
-      <figcaption className="text-sm text-muted center mb-4">
+      <figcaption>
         Click a button to see its code:
       </figcaption>
 
       {/* Controls */}
-      <div className="flex gap-2 justify-center mb-6">
-        {keys.map((key) => (
+      <Inline className=''>
+        {keys.map((key) => {
+          const [variant, appearance] = key.split("_");
+          return (
           <Button
             key={key}
             type="button"
+            className='mx-auto'
             aria-pressed={active === key}
+            variant={variant as ButtonProps['variant']}
+            variantAppearance={appearance as ButtonProps['variantAppearance']}
             onClick={() => setActive(key)}
           >
-            {key.replace('_', ' ')}
+            {variant + " " + appearance}
           </Button>
-        ))}
-      </div>
+        )})}
+      </Inline>
 
       {/* Code blocks */}
       <div className="code-example">
