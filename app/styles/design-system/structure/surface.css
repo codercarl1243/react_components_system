@@ -134,9 +134,9 @@ Keep them separate.
 }
 
 .frame-inset-12 {
-    --frame-inset-base: var(--spacing-lg);
+    --frame-inset-base: var(--spacing-xl);
 }
 
 .frame-inset-16 {
-    --frame-inset-base: var(--spacing-xl);
+    --frame-inset-base: var(--spacing-xxl);
 }
