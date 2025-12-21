@@ -40,7 +40,6 @@ export function CopyButton({ text }: CopyButtonProps) {
       setError(false)
     } catch (err) {
       setError(true)
-      // eslint-disable-next-line no-console
       logError("error copying content to clipboard", err)
     }
   }
