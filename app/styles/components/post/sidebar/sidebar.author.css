@@ -6,7 +6,7 @@
     display: flex;
     align-items: center;
     flex-wrap: wrap;
-    gap: var(--spacing-md);
+    gap: var(--spacing-lg);
 }
 
 .author .author__name {
@@ -22,5 +22,5 @@
 
 .author__avatar img {
     border-radius: var(--radius-circle);
-    padding: var(--spacing);
+    padding: var(--spacing-sm);
 }

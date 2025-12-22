@@ -1,7 +1,5 @@
 .link {
-    --link-color: var(--link-on-surface, currentColor);
-
-    color: var(--link-color);
+    color: var(--link-color-onPaint, --link-color);
     text-decoration: underline;
     text-decoration-color: var(--link-underline-color, currentColor);
     text-decoration-thickness: 0.125em;
@@ -48,7 +46,7 @@ a:not([class]):focus-visible,
     display: grid;
     grid-template-columns: 24px fit-content(100%);
     align-items: center;
-    gap: var(--spacing);
+    gap: var(--spacing-sm);
 }
 
 
@@ -56,7 +54,7 @@ a:not([class]):focus-visible,
     align-items: baseline;
 }
 .external .icon {
-    margin-left: var(--spacing);
+    margin-left: var(--spacing-sm);
 }
 
 .external .icon {

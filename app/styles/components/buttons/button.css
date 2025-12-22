@@ -1,17 +1,13 @@
 .button {
-    --background-color: var(--surface, currentColor);
-    --foreground-color: var(--text-on-surface, transparent);
-    --border-color: var(--color-neutral-400, currentColor);
-
     --button-text-color: var(--foreground-color);
     --button-background-color: var(--background-color);
     --button-border-color: var(--border-color);
 
     /* Layout properties */
     --button-font-size: 1rem;
-    --button-margin: var(--spacing-sm);
-    --button-padding-y: var(--spacing-sm);
-    --button-padding-x: var(--spacing);
+    --button-margin: var(--spacing);
+    --button-padding-y: var(--spacing);
+    --button-padding-x: var(--spacing-sm);
     --button-icon-width: 24px;
     --button-spinner-width: 24px;
     /* WCAG Target Size Requirements */
@@ -55,10 +51,6 @@
     outline: 0;
     box-shadow: none;
 
-    /* Apply color properties (All Colors and variants defined below) */
-    background-color: var(--button-background-color, transparent);
-    color: var(--button-text-color, currentColor);
-    border-color: var(--button-border-color, currentColor);
     box-shadow: var(--button-shadow, none);
     outline-color: var(--button-border-color, currentColor);
     outline-offset: var(--button-outline-offset);
@@ -99,9 +91,9 @@
     &:is(:disabled, [aria-disabled="true"]),
     &[data-variant]:is(:disabled, [aria-disabled="true"]),
     &[data-style]:is(:disabled, [aria-disabled="true"]) {
-        --button-background-color: var(--color-neutral-200);
-        --button-text-color: var(--color-neutral-800);
-        --button-border-color: var(--color-neutral-400);
+        --background-color: var(--color-neutral-200);
+        --foreground-color: var(--color-neutral-800);
+        --border-color: var(--color-neutral-400);
         cursor: not-allowed;
 
         &:hover,

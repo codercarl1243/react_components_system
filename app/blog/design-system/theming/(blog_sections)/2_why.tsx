@@ -9,7 +9,7 @@ import { Stack } from "@/components/primitives";
 
 export default function Section2() {
     return (
-        <PostSection id="introduction">
+        <PostSection id="why-theming">
             <Heading as={"h2"} id="why-theming-heading">
                 Why Theming Should Be Its Own System
             </Heading>
@@ -24,7 +24,7 @@ export default function Section2() {
 
                 <PostNote showIcon={false} variant="neutral">
                     <Heading as="h3">The reality of ad-hoc theming</Heading>
-                    <List spacing="normal" marker="disc" variant="danger">
+                    <List as="ul" spacing="normal" marker="disc" variant="danger">
                         <li>Designer updates the primary blue <ColorSwatch color="var(--color-primary-200)" aria-label="old primary blue color swatch" /> → <ColorSwatch color="var(--color-primary-400)" aria-label="new primary blue color swatch" /> and you're search-and-replacing across 30 files</li>
                         <li>Dark mode breaks because 6 components hardcoded light backgrounds</li>
                         <li>New developer adds a button with <InlineCode codeString="color: #3b82f6" lang="css" /> <ColorSwatch color="#3b82f6" aria-label="#3b82f6 color swatch" /> instead of using your "primary" token</li>

@@ -21,31 +21,28 @@ Examples:
   data-paint="surface"               // Preset (do not mix with channels)
 */
 
-
-/* Individual channels - composable with ~= */
-.block[data-paint~="background"] {
-    background-color: var(--background-color, transparent);
-}
-
-.block[data-paint~="foreground"] {
+/* Foreground channel */
+.block[data-paint~="foreground"],
+.block[data-paint="all"] {
     color: var(--foreground-color, inherit);
 }
 
-/* Shared border styles for anything that paints borders */
+/* Background channel (and presets that include background) */
+.block[data-paint~="background"],
+.block[data-paint="all"],
+.block[data-paint="surface"] {
+    background-color: var(--background-color, transparent);
+
+    /* Adjust link styling for painted surfaces */
+    --link-color-onPaint: color-mix(in srgb,
+            var(--link-color) 85%,
+            black);
+}
+
+/* Border channel (and presets that include border) */
 .block[data-paint~="border"],
 .block[data-paint="all"],
 .block[data-paint="surface"] {
     border: var(--border-thin);
     border-color: var(--border-color, transparent);
-}
-
-/* Preset: all = background + foreground + border */
-.block[data-paint="all"] {
-    background-color: var(--background-color, transparent);
-    color: var(--foreground-color, inherit);
-}
-
-/* Preset: surface = background + border */
-.block[data-paint="surface"] {
-    background-color: var(--background-color, transparent);
 }

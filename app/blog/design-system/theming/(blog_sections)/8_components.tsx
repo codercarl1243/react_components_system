@@ -22,7 +22,7 @@ export default function Section8() {
 
             <p>That's it. All styling is driven by:</p>
 
-            <List>
+            <List as="ul">
                 <li>Global tokens</li>
                 <li>Theme provider</li>
                 <li>Variant mapping</li>

@@ -18,19 +18,17 @@ import type { SectionProps } from './post.type';
  * </PostSection>
  * ```
  * 
- * @param children - The content to render inside the section. Typically includes headings, paragraphs, lists, or other post content.
  * @param className - Additional CSS class names to apply to the section element. These will be merged with the default classes.
  * @param props - All other standard HTML section element attributes (id, aria-*, data-*, etc.)
  * 
  * @returns A styled `<section>` element with layout wrapper and flow spacing applied.
  */
-export default function PostSection({ children, className, width = "full", ...props }: SectionProps) {
+export default function PostSection({ className, width = "full", ...props }: SectionProps) {
 
   return (
-    <Block as="section"
+    <section
       className={clsx(`post-section flow-6 layout-wrapper width-${width}`, className)}
-      {...props}>
-      {children}
-    </Block>
+      {...props}
+    />
   )
 }

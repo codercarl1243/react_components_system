@@ -1,45 +1,38 @@
-import { getHighlighterSingleton, getCustomTheme, highlightCustomTokens } from '@/components/code/highlighter'
+
 import { CopyButton } from '@/components/button/copyButton'
 import { createHash } from 'crypto';
 import { CodeProps, SupportedLangs } from './code.type';
-import InlineCode from './inlineCode';
-
-/**
- * TODO: make Hover tooltip util that takes in {k | v}
- * K - String that will be wrapped in a span and will have a tooltip on hover
- * V - The String/ React Element that will be displayed in the tooltip.
- * 
- * TODO: make tooltip that sits at the top level of the DOM that will be shared with all other hoverTips
- *  */ 
+import { isEmptyString } from '@/lib/utils/guards';
+import { getHighlighter, getLoadedLanguages } from '@/components/code/code.resources.server';
+import { getCodeTheme } from '@/components/code/code.theme.server';
+import { highlightCustomTokens } from '@/components/code/code.utilities.server';
 
 export default async function Code({
   codeString,
   lang = 'tsx',
-  inline = false,
   layout = 'content',
   title,
   copyEnabled = true,
   highlightTokens = [],
   options
 }: CodeProps) {
-  if (!codeString.trim()) {
+  if (isEmptyString(codeString)) {
     return null
   }
 
-  if (inline) {
-    return <InlineCode codeString={codeString} lang={lang} noWrap={true} highlightTokens={highlightTokens} options={options}/>
-  }
-  
-  const highlighter = await getHighlighterSingleton()
-  const loadedLanguages = new Set(highlighter.getLoadedLanguages?.() ?? [])
+  const [highlighter, theme, loadedLanguages] = await Promise.all([
+    getHighlighter(),
+    getCodeTheme(),
+    getLoadedLanguages(),
+  ]);
+
   const safeLanguage = (loadedLanguages.has(lang) ? lang : 'text') as SupportedLangs
-  const customTheme = await getCustomTheme()
 
   const out = highlighter.codeToHtml(
     codeString,
     {
       lang: safeLanguage,
-      theme: customTheme
+      theme: theme
     }
   )
   const highlightedCode = highlightCustomTokens(out, highlightTokens, options);

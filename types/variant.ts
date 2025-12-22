@@ -23,6 +23,7 @@ export type Variant =
     | "success"
     | "info"
     | "neutral"
+    | "inverse"
     | "muted";
 
 /**

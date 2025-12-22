@@ -310,7 +310,7 @@ Each variant needs hover, focus, and active states:
 
 .button:focus-visible {
   outline: 2px solid var(--button-outline-color);
-  outline-offset: var(--spacing);
+  outline-offset: var(--spacing-sm);
 }
 
 .button:active,

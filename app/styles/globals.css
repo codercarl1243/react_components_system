@@ -1,8 +1,8 @@
 @layer tokens;       /* Design tokens like colors, shadows, spacing. */
-@layer base;         /* Resets, base components (buttons, links etc.), global element styles. */
-@layer components;   /* component variants like switch buttons, icons, cards, modals, etc. */
+@layer base;         /* Resets,  global element styles. */
+@layer design-system; /* contextual semantics (paint, variants, surfaces, theme) */
+@layer components;   /* base components (buttons, links etc.) and their variants */
 @layer utilities;    /* Helper classes like, .sr-only, grid utilities, typography, margin/padding helpers, etc. */
-@layer design-system;
 
 @import url('./tokens/index.css') layer(tokens);
 @import url('./base/index.css') layer(base);

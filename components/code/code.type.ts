@@ -8,14 +8,15 @@ export type HighlightCustomTokensOptions = {
   appearance?: VariantAppearance;
 }
 
+export type HighlightTokens = readonly string[];
+
 export type CodeProps = {
   codeString: string;
   lang?: SupportedLangs;
-  inline?: boolean;
   layout?: 'full' | 'bleed' | 'content';
   title?: string;
   copyEnabled?: boolean;
-  highlightTokens?: string[];
+  highlightTokens?: HighlightTokens;
   options?: HighlightCustomTokensOptions;
 }
 export type InlineCodeProps = Pick<CodeProps, 'codeString' | 'lang' | 'highlightTokens' | 'options'> & {

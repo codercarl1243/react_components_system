@@ -75,13 +75,13 @@
         --color-neutral-a9-light: color-mix(in srgb, var(--color-neutral-100) 90%, transparent);
 
         /* Emphasis colors */
-        --color-emphasis-100: hsl(16, 84%, 60%);
-        --color-emphasis-200: hsl(262, 83%, 58%);
-        --color-emphasis-300: hsl(172, 66%, 50%);
-        --color-emphasis-400: hsl(75, 85%, 60%);
-        --color-emphasis-500: hsl(330, 81%, 60%);
-        --color-emphasis-600: hsl(198, 93%, 60%);
-        --color-emphasis-700: hsl(142, 71%, 45%);
-        --color-emphasis-800: hsl(234, 89%, 74%);
-        --color-emphasis-900: hsl(45, 93%, 58%);
+        --color-emphasis-100: #ef7143;
+        --color-emphasis-200: #B189F5;
+        --color-emphasis-300: #2bd4bd;
+        --color-emphasis-400: #c4f042;
+        --color-emphasis-500: #F278B5;
+        --color-emphasis-600: #3abff8;
+        --color-emphasis-700: #21c45d;
+        --color-emphasis-800: #828df8;
+        --color-emphasis-900: #f8c630;
     }

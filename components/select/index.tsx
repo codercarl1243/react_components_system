@@ -29,8 +29,9 @@ export default function Select({
                 as="select"
                 id={resolvedId}
                 ref={ref}
-                variantAppearance="outlined"
+                variantAppearance="filled"
                 variant="neutral"
+                paint="all"
                 className={clsx(
                     "select",
                     error && "select--error"

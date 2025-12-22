@@ -26,8 +26,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        data-theme={"light"}
-        // data-theme={"dark"}
+        // data-theme={"light"}
+        data-theme={"dark"}
         className={`${geistSans.variable} ${playfairDisplay.variable} antialiased main-wrapper font-main text-base`}
       >
         <div className="overlay-backdrop" aria-hidden="true" />

@@ -24,13 +24,11 @@ export default function IconButton({
     'aria-labelledby': ariaLabelledBy,
     ...props }: IconButtonProps) {
 
-    if (process.env.NODE_ENV !== 'production') {
-         const hasValidLabel = ariaLabel?.trim() || ariaLabelledBy?.trim();
-        if (!hasValidLabel) {
-            logWarning(
-                'IconButton requires aria-label or aria-labelledby for accessibility.'
-            );
-        }
+    const hasValidLabel = ariaLabel?.trim() || ariaLabelledBy?.trim();
+    if (!hasValidLabel) {
+        logWarning(
+            'IconButton requires aria-label or aria-labelledby for accessibility.'
+        );
     }
 
     return (

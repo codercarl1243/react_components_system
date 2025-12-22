@@ -20,7 +20,7 @@ Theme tokens are consumed by:
     --surface: var(--color-neutral-100);
     --text-on-surface: var(--color-neutral-900);
     --text-muted: var(--color-neutral-500);
-    --link-on-surface: var(--color-primary-600);
+    --link-color: var(--color-primary-600);
 }
 
 /* Dark theme */
@@ -28,7 +28,7 @@ Theme tokens are consumed by:
     --surface: var(--color-neutral-900);
     --text-on-surface: var(--color-neutral-100);
     --text-muted: var(--color-neutral-300);
-    --link-on-surface: var(--color-primary-200);
+    --link-color: var(--color-primary-200);
 }
 
 /* Global defaults */

@@ -1,26 +1,37 @@
-import { CSSProperties } from "react";
-import { Block } from "./primitives";
-import { BlockProps } from "./primitives/types";
+import type { CSSProperties } from "react";
+import { Block } from "@/components/primitives";
+import type { BlockProps } from "./primitives/types";
+import type { AccessibleLabel } from "@/types/accessibility";
 
 type ColorSwatchShape = "square" | "circle";
-type ColorSwatchSize =  "sm" | "md" | "lg";
+type ColorSwatchSize = "sm" | "md" | "lg";
 
-type ColorSwatchProps = BlockProps<'span'> & {
+type ColorSwatchProps = AccessibleLabel & BlockProps<'span'> & {
     color?: string;
     shape?: ColorSwatchShape;
     size?: ColorSwatchSize;
 };
 
-export default function ColorSwatch({color = "transparent", shape = "square", size = "md", ...props}: ColorSwatchProps) {
+export default function ColorSwatch({ color = "transparent", shape = "square", size = "md", ...props }: ColorSwatchProps) {
 
     const styles: CSSProperties = {
-        '--surface-color': color,
-        '--border-color': 'currentColor',
-        '--border-radius': shape === 'square' ? 'var(--radius-sm)' : 'var(--radius-circle)',
-        '--color-swatch-width': size === 'lg' ? '1.5lh' : size === 'md' ? '1lh' : '0.75lh'
-    }
+        '--background-color': color,
+        '--border-color': 'var(--text-on-surface)',
+        '--border-radius': shape === 'circle'
+            ? 'var(--radius-circle)'
+            : 'var(--radius-sm)',
+        '--color-swatch-width':
+            size === 'lg' ? '1.5lh' :
+                size === 'sm' ? '0.75lh' :
+                    '1lh'
+    };
 
     return (
-        <Block as="span" variant="neutral" variantAppearance="tonal" className="color-swatch" style={styles} {...props} />
+        <Block as="span"
+            paint="surface"
+            className="color-swatch"
+            role="img"
+            style={styles}
+            {...props} />
     )
 }

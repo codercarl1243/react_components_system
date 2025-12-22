@@ -5,9 +5,9 @@
     padding-inline: 1rem;
 }
 
-.nav__primary a {
+/* .nav__primary a {
     color: var(--color-primary-400);
-}
+} */
 
 .header--wrapper {
     display: flex;
@@ -26,11 +26,11 @@
 /*  DESKTOP */
 @media screen and (min-width: 35rem) {
     .header--wrapper {
-        padding: var(--spacing-sm) var(--spacing-md);
+        padding: var(--spacing) var(--spacing-lg);
     }
 
     .nav__primary {
-        padding-block: var(--spacing);
+        padding-block: var(--spacing-sm);
         margin-right: auto;
         flex-direction: row;
     }

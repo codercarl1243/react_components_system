@@ -25,21 +25,22 @@ import type { PostNotePropsType } from './post.type';
  */
 export default function PostNote({ className, children, variant = 'info', showIcon = true, ...props }: PostNotePropsType) {
 
-  if (!children) return;
+  if (!children) return null;
 
   return (
     <Stack
       {...props}
       className={clsx(className, 
-        'post-note',
+        'post-note surface-frame py-8 pr-4 pl-8',
         {'has-icon': showIcon}
       )}
       gap={2}
       role={'note'}
       variant={variant}
       variantAppearance='tonal'
+      paint="all"
     >
-      {showIcon ? <Icon icon={RiInformationLine} size={32} className="post-note__icon" /> : null}
+      {showIcon ? <Icon icon={RiInformationLine} size={28} className="post-note__icon" /> : null}
       <Stack className="post-note__content">
         {children}
       </Stack>

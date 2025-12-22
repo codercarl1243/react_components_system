@@ -95,6 +95,7 @@ export default function Button({
       onKeyDown={onKeyDown}
       onKeyUp={onKeyUp}
       data-testid="base-button"
+      paint="all"
       {...props}
     >
       {icon && <Icon icon={icon} />}

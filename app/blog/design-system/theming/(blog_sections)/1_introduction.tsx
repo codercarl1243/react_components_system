@@ -3,14 +3,14 @@ import List from "@/components/list";
 import PostNote from "@/components/post/post.note";
 import PostSection from "@/components/post/post.section";
 import { Stack } from "@/components/primitives";
-import ButtonExample from "../examples/1_buttonExample";
+import ButtonExample from "../examples/1_buttonExample/example.server";
 
 export default function Section1() {
 
     return (
-        <PostSection id="preview">
+        <PostSection id="introduction-theming">
             <Stack gap={4}>
-                <Heading as="h2" id="intro-theming-heading">
+                <Heading as="h2" id="introduction-theming-heading">
                     What We're Building
                 </Heading>
                 <p>
@@ -28,7 +28,7 @@ export default function Section1() {
                     <p>
                         <strong>This article is for you if you want to:</strong>
                     </p>
-                    <List spacing="loose">
+                    <List as="ul" spacing="loose" variant="primary">
                         <li>Build a predictable, centralized styling system without JavaScript overhead</li>
                         <li>Support multiple themes and variants without prop drilling or context</li>
                         <li>Write less CSS by letting tokens cascade through your component tree</li>

@@ -1,4 +1,5 @@
 'use client'
+import { logWarning } from '@/lib/logging/log'
 import { handleKeyPress } from '@/lib/utils/keyboardHandlers'
 import type { KeyPressCallbackMap } from '@/lib/utils/keyboardHandlers.type'
 import { useRef, useState, useEffect, useCallback, type KeyboardEvent } from 'react'
@@ -32,10 +33,8 @@ export default function useTablist(defaultTabId?: string) {
       if (activeTabExists) {
         return
       }
-      if (process.env.NODE_ENV !== 'production') {
-        // eslint-disable-next-line no-console
-        console.warn(`Tab with id "${activeId}" not found, falling back to first tab`)
-      }
+
+      logWarning(`Tab with id "${activeId}" not found, falling back to first tab`)
     }
 
     setActiveId(tabs[0].id)
