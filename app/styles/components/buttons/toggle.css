@@ -1,0 +1,14 @@
+.toggle-group {
+  display: inline-flex;
+  gap: var(--spacing-xs);
+}
+
+.toggle-group[data-orientation="vertical"] {
+  flex-direction: column;
+}
+
+.toggle-button[aria-pressed="true"] {
+   --background-color: var(--surface-color);
+  /* active */
+  border: var(--border-thick);
+}
