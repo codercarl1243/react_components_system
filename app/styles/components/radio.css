@@ -1,0 +1,48 @@
+/* TODO: fix all of this */
+.radiogroup {
+    display: grid;
+    gap: var(--spacing-sm, 0.75rem);
+    padding: 0;
+    border: none;
+}
+
+.radiogroup > legend {
+  font-weight: 600;
+  margin-block-end: var(--spacing-xs, 0.5rem);
+  padding: 0;
+}
+
+.radiogroup label {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-xs, 0.5rem);
+  cursor: pointer;
+  line-height: 1.2;
+}
+
+.radio-input {
+    inline-size: 1rem;
+    block-size: 1rem;
+    margin: 0;
+
+    accent-color: var(--color-accent-400, currentColor);
+
+    /* Keep native focus ring */
+    cursor: pointer;
+}
+
+.radio-input:focus-visible {
+  outline: 2px solid var(--color-focus, currentColor);
+  outline-offset: 2px;
+}
+
+.radio-input:disabled + label,
+label:has(+ .radio-input:disabled),
+label:has(.radio-input:disabled) {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.radiogroup--hidden {
+  display: contents; /* optional */
+}
