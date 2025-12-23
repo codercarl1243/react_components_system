@@ -22,14 +22,17 @@ type RadioGroupItem = Omit<RadioInputProps, 'id' | 'name'> & {
 type HiddenRadioGroupItem = RadioGroupItem & {
     visualElement: ReactElement;
 };
+type RadioGroupLayout = 'horizontal' | 'vertical';
 
 export type RadioGroupProps =  BlockWrapperProps<'fieldset', {
     name: string;
     items: RadioGroupItem[];
     legendChild: ReactNode;
+    layout?: RadioGroupLayout;
 }>
 
 export type HiddenRadioGroupProps = BlockWrapperProps<'div', {
     name: string;
     items: HiddenRadioGroupItem[];
+    layout?: RadioGroupLayout;
 }> & AccessibleLabel;
