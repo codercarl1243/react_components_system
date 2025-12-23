@@ -21,8 +21,8 @@ export default function ToggleGroup({
 
     return (
         <Block
-            className={clsx("togglegroup", className)}
-            data-layout={orientation}
+            className={clsx("toggle-group", className)}
+            data-orientation={orientation}
             aria-label={ariaLabel}
             aria-labelledby={ariaLabelledBy}
             {...props}>
@@ -31,7 +31,7 @@ export default function ToggleGroup({
                     key={itemValue}
                     {...item}
                     pressed={itemValue === value}
-                    onClick={() => onValueChange(itemValue)}
+                    onClick={() => onValueChange?.(value)}
                 />
             ))}
         </Block>
