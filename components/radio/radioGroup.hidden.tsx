@@ -3,19 +3,19 @@ import { Block } from "@/components/primitives";
 import type { HiddenRadioGroupProps } from "./types";
 import RadioInput from "./input";
 import { logWarning } from "@/lib/logging/log";
-import { isEmptyString } from "@/lib/utils/guards";
+import { isEmptyString, isNullish } from "@/lib/utils/guards";
 import clsx from "clsx";
 
 export default function HiddenRadioGroup({
     items,
     name,
-    layout = "horizontal",
+    orientation = "horizontal",
     "aria-label": ariaLabel,
     "aria-labelledby": ariaLabelledBy,
     ...props }: HiddenRadioGroupProps) {
 
 
-    if (isEmptyString(name)) {
+    if (isNullish(name) || isEmptyString(name)) {
         logWarning("HiddenRadioGroup: `name` must be a non-empty string for proper grouping and accessibility.")
     }
 
@@ -27,7 +27,7 @@ export default function HiddenRadioGroup({
         <Block
             {...props}
             role="radiogroup"
-            data-layout={layout}
+            data-layout={orientation}
             aria-label={ariaLabel}
             aria-labelledby={ariaLabelledBy}
             className="radiogroup radiogroup--hidden radiogroup--hidden__wrapper">
@@ -50,7 +50,7 @@ export default function HiddenRadioGroup({
                         name={name}
                         value={value}
                         visuallyHidden
-                        className={clsx("sr-only radiogroup--hidden__input", className)}
+                        className={clsx("radiogroup--hidden__input", className)}
                     />
 
                     {visualElement}

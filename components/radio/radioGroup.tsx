@@ -2,22 +2,22 @@ import { Fragment } from "react/jsx-runtime";
 import { Block } from "@/components/primitives";
 import RadioInput from "./input";
 import type { RadioGroupProps } from "./types";
-import { isEmptyString } from "@/lib/utils/guards";
+import { isEmptyString, isNullish } from "@/lib/utils/guards";
 import { logWarning } from "@/lib/logging/log";
 
 export default function RadioGroup({
     items,
     name,
     legendChild,
-    layout = "horizontal",
+    orientation = "horizontal",
     ...props }: RadioGroupProps) {
 
-    if (isEmptyString(name)) {
+    if (isNullish(name) || isEmptyString(name)) {
         logWarning("RadioGroup: `name` must be a non-empty string for proper grouping and accessibility.")
     }
 
     return (
-        <Block as="fieldset" {...props} data-layout={layout} className="radiogroup">
+        <Block as="fieldset" {...props} data-layout={orientation} className="radiogroup">
             <legend id={`${name}-legend`}>{legendChild}</legend>
             {items.map(({
                 id,
