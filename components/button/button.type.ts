@@ -33,7 +33,6 @@ export type ToggleGroupItem = Omit<
   "pressed" | "onClick"
 > & {
   value: string;
-  toggleLabel: ReactNode;
 };
 
 export type ToggleGroupProps = BlockWrapperProps<'div',

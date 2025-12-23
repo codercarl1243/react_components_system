@@ -8,7 +8,6 @@
 }
 
 .toggle-button[aria-pressed="true"] {
-   --background-color: var(--surface-color);
-  /* active */
+  --background-color: var(--surface-color);
   border: var(--border-thick);
 }
