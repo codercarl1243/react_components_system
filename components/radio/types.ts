@@ -10,7 +10,7 @@ export type RadioInputProps = Omit<
     ComponentPropsWithRef<"input">,
     "type" | "onChange" | "checked" | "defaultChecked"
 > & {
-    type?: "radio";
+    type: never;
     visuallyHidden?: boolean;
 } & ControlledRadioProps;
 

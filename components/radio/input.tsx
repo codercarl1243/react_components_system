@@ -9,12 +9,12 @@ export default function RadioInput({
 
     return (
         <input
+            {...props}
             type="radio"
             className={clsx(
                 { "sr-only": visuallyHidden },
                 "radio-input",
                 className)}
-            {...props}
         />
     )
 }
