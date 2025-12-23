@@ -1,4 +1,4 @@
-import { Fragment } from "react/jsx-runtime";
+import { Fragment } from "react";
 import { Block } from "@/components/primitives";
 import type { HiddenRadioGroupProps } from "./types";
 import RadioInput from "./input";

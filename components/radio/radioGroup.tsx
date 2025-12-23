@@ -1,4 +1,4 @@
-import { Fragment } from "react/jsx-runtime";
+import { Fragment } from "react";
 import { Block } from "@/components/primitives";
 import RadioInput from "./input";
 import type { RadioGroupProps } from "./types";
@@ -33,7 +33,7 @@ export default function RadioGroup({
                         value={value}
                         {...inputProps}
                     />
-                </ Fragment>
+                </Fragment>
             ))}
         </Block>
     )
