@@ -25,7 +25,6 @@ export type IconButtonProps = AccessibleLabel & Omit<ButtonProps, 'children'>;
 
 export type ToggleButtonProps = ButtonProps & {
   pressed: boolean | "false" | "mixed" | "true" | undefined;
-  toggleLabel: ReactNode;
 }
 
 export type ToggleGroupItem = Omit<

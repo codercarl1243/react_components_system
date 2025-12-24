@@ -3,7 +3,7 @@ import Button from "..";
 import type { ToggleButtonProps } from "../button.type";
 
 /**
- * ToggleButton
+ * **ToggleButton**
  *
  * A controlled toggle button built on top of the base `Button` component.
  *
@@ -26,17 +26,6 @@ import type { ToggleButtonProps } from "../button.type";
  * - Visual state should be derived from `[aria-pressed="true"]`
  * - No internal state or data attributes are required
  *
- * ## When to Use
- * - View mode toggles (e.g. Preview / Code)
- * - Theme or layout switches
- * - Filter or display controls
- *
- * ## When NOT to Use
- * - Form inputs (use `RadioGroup` or `CheckboxGroup`)
- * - Values that should be submitted with a form
- *
- * @component
- *
  * @example
  * ```tsx
  * const [active, setActive] = useState(false);
@@ -49,7 +38,7 @@ import type { ToggleButtonProps } from "../button.type";
  * </ToggleButton>
  * ```
  */
-export default function Toggle({ pressed, toggleLabel, className, ...props }: ToggleButtonProps) {
+export default function Toggle({ pressed, children, className, ...props }: ToggleButtonProps) {
 
     return (
         <Button
@@ -57,6 +46,6 @@ export default function Toggle({ pressed, toggleLabel, className, ...props }: To
             aria-pressed={pressed}
             type="button"
             {...props}
-        >{toggleLabel}</Button>
+        >{children}</Button>
     )
 }
