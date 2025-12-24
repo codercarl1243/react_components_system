@@ -1,10 +1,16 @@
 'use client'
 
 import { useState } from 'react'
-import Button from '@/components/button'
 import type { CodeKey } from './codeMap'
 import type { ButtonProps } from '@/components/button/button.type'
 import { Inline } from '@/components/primitives'
+import { ToggleGroup } from '@/components/button/toggle'
+
+function formatLabel(key: CodeKey) {
+  return key
+    .replace('_', ' ')
+    .replace(/\b\w/g, c => c.toUpperCase());
+}
 
 export default function ButtonExampleClient({
   keys,
@@ -14,6 +20,17 @@ export default function ButtonExampleClient({
   children: React.ReactNode
 }) {
   const [active, setActive] = useState<CodeKey>(keys[0])
+
+  const constructToggle = (key: CodeKey) => {
+    const [variant, appearance] = key.split("_");
+
+    return {
+      value: key,
+      variant: variant as ButtonProps['variant'],
+      variantAppearance: appearance as ButtonProps['variantAppearance'],
+      children: formatLabel(key),
+    };
+  };
 
   return (
     <figure
@@ -25,22 +42,13 @@ export default function ButtonExampleClient({
       </figcaption>
 
       {/* Controls */}
-      <Inline className=''>
-        {keys.map((key) => {
-          const [variant, appearance] = key.split("_");
-          return (
-          <Button
-            key={key}
-            type="button"
-            className='mx-auto'
-            aria-pressed={active === key}
-            variant={variant as ButtonProps['variant']}
-            variantAppearance={appearance as ButtonProps['variantAppearance']}
-            onClick={() => setActive(key)}
-          >
-            {variant + " " + appearance}
-          </Button>
-        )})}
+      <Inline>
+        <ToggleGroup
+          items={keys.map(constructToggle)}
+          aria-label="Example of buttons with different theming"
+          value={active}
+          onValueChange={(next) => setActive(next as CodeKey)}
+        />
       </Inline>
 
       {/* Code blocks */}

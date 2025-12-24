@@ -22,7 +22,7 @@ export default function ButtonExample() {
               lang="html"
               title="HTML (framework-agnostic):"
               highlightTokens={tokens}
-              options={{ variant }}
+              options={{ variant: "secondary" }}
               codeString={code}
               copyEnabled
             />

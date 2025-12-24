@@ -2,9 +2,9 @@
     --line-background-color: inherit;
     --line-color: inherit;
 
-    --code-highlight-border-color: var(--border-color);
+    --code-highlight-border-color: var(--border-color, var(--color-primary-400));
     --code-highlight-color: var(--color-neutral-900);
-    --code-highlight-background-color: var(--surface-color);
+    --code-highlight-background-color: var(--surface-color, var(--color-primary-200));
 
     position: relative;
     font-size: 1rem;
@@ -44,7 +44,7 @@
             width: 100%;
             background-color: var(--line-background-color) !important;
 
-            & span {
+            .custom-code-highlight {
                 color: var(--line-color) !important;
             }
         }
