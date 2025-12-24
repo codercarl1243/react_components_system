@@ -1,4 +1,4 @@
-import type { MouseEvent } from 'react'
+import type { MouseEvent, ReactElement, ReactNode } from 'react'
 import type { IconProps } from '@/components/icon/icon.type';
 import type { BlockWrapperProps } from '../primitives/types';
 import type { AccessibleLabel } from '@/types/accessibility';
@@ -22,3 +22,23 @@ type BaseButtonProps = {
 export type ButtonProps = Omit<BlockWrapperProps<"button", BaseButtonProps>, 'as'>
 
 export type IconButtonProps = AccessibleLabel & Omit<ButtonProps, 'children'>;
+
+export type ToggleButtonProps = ButtonProps & {
+  pressed: boolean | "false" | "mixed" | "true" | undefined;
+}
+
+export type ToggleGroupItem = Omit<
+  ToggleButtonProps,
+  "pressed" | "onClick"
+> & {
+  value: string;
+};
+
+export type ToggleGroupProps = BlockWrapperProps<'div',
+  {
+    value: string;
+    onValueChange: (value: string) => void;
+    items: ToggleGroupItem[];
+    orientation?: 'horizontal' | 'vertical';
+  } & AccessibleLabel
+>;
