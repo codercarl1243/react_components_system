@@ -1,6 +1,6 @@
-import { Block } from "@/components/primitives";
-import type { ToggleGroupProps } from "../button.type";
 import clsx from "clsx";
+import { Block } from "@/components/primitives";
+import type { ToggleGroupProps } from "./type";
 import Toggle from "./toggle";
 import { logWarning } from "@/lib/logging/log";
 
@@ -31,7 +31,7 @@ export default function ToggleGroup({
                     key={itemValue}
                     {...item}
                     pressed={itemValue === value}
-                    onClick={() => onValueChange?.(value)}
+                    onClick={() => onValueChange?.(itemValue)}
                 />
             ))}
         </Block>
