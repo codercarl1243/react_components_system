@@ -72,12 +72,11 @@ export default function section4() {
   --color-neutral-600: hsl(0, 0%, 30%);
   --color-neutral-800: hsl(0, 0%, 15%);
   --color-neutral-900: hsl(248, 62%, 5%);
-}
-                `}
+}`}
                 />
 
                 <PostNote>
-                    This article uses <span className="bold">HSL</span> for clarity and compatibility, but the same token structure works with <span className="bold">OKLCH</span> if you prefer improved perceptual consistency across lightness values.
+                    <p>This article uses <span className="bold">HSL</span> for clarity and compatibility, but the same token structure works with <span className="bold">OKLCH</span> if you prefer improved perceptual consistency across lightness values.</p>
                 </PostNote>
 
                 <p>
