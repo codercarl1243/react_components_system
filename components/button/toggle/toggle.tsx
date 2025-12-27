@@ -1,6 +1,6 @@
 import clsx from "clsx";
 import Button from "..";
-import type { ToggleButtonProps } from "../button.type";
+import type { ToggleProps } from "./type";
 
 /**
  * **ToggleButton**
@@ -38,7 +38,7 @@ import type { ToggleButtonProps } from "../button.type";
  * </ToggleButton>
  * ```
  */
-export default function Toggle({ pressed, children, className, ...props }: ToggleButtonProps) {
+export default function Toggle({ pressed, children, className, ...props }: ToggleProps) {
 
     return (
         <Button

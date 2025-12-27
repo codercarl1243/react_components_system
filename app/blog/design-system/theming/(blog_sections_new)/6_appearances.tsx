@@ -3,9 +3,9 @@ import PostSection from "@/components/post/post.section";
 
 export default function section4() {
     return (
-        <PostSection id="appearances-theming">
-            <AnchorHeading as={"h2"} prefix="Step 4 —" id="appearances-theming-heading">
-                Appearances
+        <PostSection id="appearance-tokens-theming">
+            <AnchorHeading as={"h2"} prefix="Step 4 —" id="appearance-tokens-theming-heading">
+                Appearance Tokens
             </AnchorHeading>
             {/* Why appearances are needed: Same variant, different visual styles */}
             {/* Explain [data-appearance] (filled, outlined, ghost) */}

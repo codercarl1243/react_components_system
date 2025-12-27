@@ -26,7 +26,7 @@ export default function TokenFlowDiagram() {
                     variant="primary"
                     variantAppearance="tonal"
                     align="stretch"
-                    paint="surface"
+                    paint="all"
 
                 >
                     <Row as="strong" gap={2} className="theming-diagram-box--heading">
@@ -59,7 +59,7 @@ export default function TokenFlowDiagram() {
                     className="theming-diagram-box"
                     variant="secondary"
                     variantAppearance="tonal"
-                    paint="surface"
+                    paint="all"
                     align="stretch"
                 >
                     <Row as="strong" gap={2} className="theming-diagram-box--heading">

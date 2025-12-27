@@ -34,9 +34,7 @@ Examples:
     background-color: var(--background-color, transparent);
 
     /* Adjust link styling for painted surfaces */
-    --link-color-onPaint: color-mix(in srgb,
-            var(--link-color) 85%,
-            black);
+    --link-color-onPaint: var(--color-primary-600);
 }
 
 /* Border channel (and presets that include border) */
