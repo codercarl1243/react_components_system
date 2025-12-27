@@ -42,14 +42,13 @@ export default function ButtonExampleClient({
       </figcaption>
 
       {/* Controls */}
-      <Inline>
         <ToggleGroup
+        className='theming_buttonExample__buttons'
           items={keys.map(constructToggle)}
           aria-label="Example of buttons with different theming"
           value={active}
           onValueChange={(next) => setActive(next as CodeKey)}
         />
-      </Inline>
 
       {/* Code blocks */}
       <div className="code-example">
