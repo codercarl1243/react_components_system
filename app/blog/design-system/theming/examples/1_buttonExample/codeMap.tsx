@@ -1,19 +1,31 @@
 export const CODE_MAP = {
   primary_filled: {
-    tokens: ["primary", "filled"],
-    code: `<button class="button" data-variant="primary" data-appearance="filled">
+    code: `<button 
+  class="button" 
+  data-variant="primary" 
+  data-appearance="filled" 
+  data-paint="all"
+  >
   Primary Filled
 </button>`,
   },
   secondary_ghost: {
-    tokens: ["secondary", "ghost"],
-    code: `<button class="button" data-variant="secondary" data-appearance="ghost">
+    code: `<button 
+  class="button" 
+  data-variant="secondary" 
+  data-appearance="ghost" 
+  data-paint="all"
+  >
   Secondary Ghost
 </button>`,
   },
   accent_outlined: {
-    tokens: ["accent", "outlined"],
-    code: `<button class="button" data-variant="accent" data-appearance="outlined">
+    code: `<button 
+  class="button" 
+  data-variant="accent" 
+  data-appearance="outlined" 
+  data-paint="all"
+>
   Accent Outlined
 </button>`,
   },

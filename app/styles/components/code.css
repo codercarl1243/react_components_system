@@ -83,8 +83,8 @@
     --button-margin: 0;
     --button-padding-x: 0;
     --button-padding-y: 0;
-    top: 0.5lh;
-    right: var(--spacing-sm);
+    top: var(--spacing);
+    right: var(--spacing-md);
 }
 
 .shiki-wrapper:has(.code-title) {
