@@ -36,6 +36,6 @@ paint → applies them
 /* Tonal surface application (callouts, notices, containers) */
 [data-appearance="tonal"] {
     --background-color: var(--variant-surface);
-    --foreground-color: var(--variant-fg);
+    --foreground-color: var(--variant-text-on-surface);
     --border-color: var(--variant-border);
 }

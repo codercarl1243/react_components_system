@@ -6,6 +6,7 @@ import { isEmptyString } from '@/lib/utils/guards';
 import { getHighlighter, getLoadedLanguages } from '@/components/code/code.resources.server';
 import { getCodeTheme } from '@/components/code/code.theme.server';
 import { highlightCustomTokens } from '@/components/code/code.utilities.server';
+import Block from '@/components/primitives/Block';
 
 export default async function Code({
   codeString,
@@ -39,7 +40,7 @@ export default async function Code({
   const titleId = title ? `code-${createHash('sha1').update(title).digest('hex').slice(0, 8)}` : undefined;
 
   return (
-    <div className={`shiki-wrapper width-${layout}`}>
+    <Block className={`shiki-wrapper width-${layout}`} variant="inverse" paint={"all"}>
       {(title || copyEnabled) && (
         <div className="code-header">
           {title && <div id={titleId} className="code-title">{title}</div>}
@@ -49,6 +50,6 @@ export default async function Code({
       {/* biome-ignore lint/security/noDangerouslySetInnerHtml: Shiki output is trusted in this context */}
       <div {...(title && { role: 'region', 'aria-labelledby': titleId, tabIndex: 0 })}
         dangerouslySetInnerHTML={{ __html: highlightedCode }} />
-    </div>
+    </Block>
   )
 }

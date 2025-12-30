@@ -28,21 +28,21 @@ export default function section4() {
                 An appearance does not introduce new colors. It does not care which variant is active. Its only responsibility is to map a variant's palette to semantic styling tokens such as background, foreground, and border.
             </p>
             <Code lang="css" codeString={`[data-appearance="filled"] {
-  --background-color: var(--variant-bg);
-  --foreground-color: var(--variant-fg);
-  --border-color: var(--variant-border);
+    --background-color: var(--variant-bg);
+    --foreground-color: var(--variant-fg);
+    --border-color: var(--variant-border);
 }
 
-[data-appearance="outlined"] {
-  --background-color: transparent;
-  --foreground-color: var(--variant-bg);
-  --border-color: var(--variant-bg);
+[data-appearance="tonal"] {
+    --background-color: var(--variant-surface);
+    --foreground-color: var(--variant-text-on-surface);
+    --border-color: var(--variant-border);
 }
 
 [data-appearance="ghost"] {
-  --background-color: transparent;
-  --foreground-color: var(--variant-bg);
-  --border-color: transparent;
+    --background-color: transparent;
+    --foreground-color: var(--variant-bg);
+    --border-color: transparent;
 }`} />
             <p>
                 Each appearance consumes the same variant palette, but produces a different visual result. This is what allows a single variant to be reused across many visual contexts.
@@ -51,7 +51,7 @@ export default function section4() {
 
             <p>If appearance logic lived inside variants, every visual change would require new variant names. By separating appearance, meaning stays stable while visual treatment can evolve independently.
             </p>
-            <PostNote variant="neutral">
+            <PostNote variant="inverse">
                 <p className="bold">Appearances Still Do Not Apply Styling</p>
                 <p>At this point, even with both <InlineCode codeString="data-variant" /> and <InlineCode codeString="data-appearance" /> present, nothing is painted. No background appears. No text color changes.</p>
 

@@ -13,16 +13,15 @@ export default function Icon({
       : size
 
   const isDecorative = !(props['aria-label'] || props['aria-labelledby']);
-  
+  const resolvedColor = variant ? `var(--color-${variant}-400)`: color
   return (
     <IconComponent
       className="icon"
       width={resolvedSize}
       height={resolvedSize}
-      color={color}
+      color={resolvedColor}
       aria-hidden={isDecorative ? 'true' : undefined}
       role={isDecorative ? undefined : 'img'}
-      variant={variant}
       focusable="false"
       {...props}
     />

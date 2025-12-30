@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import Icon from '../icon'
+import Icon from '@/components/icon'
 import { RiCheckFill, RiErrorWarningLine, RiFileCopyLine } from '@remixicon/react'
 import Button from '@/components/button'
 import { logError } from '@/lib/logging/log'
@@ -49,7 +49,7 @@ export function CopyButton({ text }: CopyButtonProps) {
     <Button
       onClick={copyToClipboard}
       variantAppearance={copied ? 'outlined' : 'filled'}
-      variant={copied ? undefined : 'accent'}
+      variant={error ? 'inverse' : 'accent'}
       aria-label="Copy to clipboard"
       title={error ? 'Copy failed' : copied ? 'Copied!' : 'Copy to clipboard'}
       className='button--copy'
@@ -64,7 +64,7 @@ export function CopyButton({ text }: CopyButtonProps) {
             <Icon icon={RiCheckFill} variant='accent' />
           )
           : (
-            <Icon icon={RiFileCopyLine} variant='accent' />
+            <Icon icon={RiFileCopyLine} />
           )}
     </Button>
   )

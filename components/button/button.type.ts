@@ -8,7 +8,7 @@ export type MouseEventType = MouseEvent<HTMLButtonElement>;
 export type ButtonClickHandler = (event: MouseEventType) => void | Promise<void>;
 
 export type TButtonAppearance = 'outlined' | 'filled' | 'ghost';
-export type TButtonVariant = 'primary' | 'secondary' | 'accent' | 'neutral' | 'danger' | 'warning';
+export type TButtonVariant = 'primary' | 'secondary' | 'accent' | 'neutral' | 'danger' | 'warning' | 'inverse';
 
 type BaseButtonProps = {
   disabled?: boolean;

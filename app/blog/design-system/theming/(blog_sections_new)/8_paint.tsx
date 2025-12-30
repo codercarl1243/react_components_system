@@ -1,9 +1,10 @@
+import Button from "@/components/button";
 import Code from "@/components/code";
 import InlineCode from "@/components/code/inlineCode";
 import Heading from "@/components/heading";
 import AnchorHeading from "@/components/heading/anchorHeading";
 import PostSection from "@/components/post/post.section";
-import { Block, Stack } from "@/components/primitives";
+import { Block, Inline, Stack } from "@/components/primitives";
 
 export default function section4() {
     return (
@@ -50,20 +51,46 @@ export default function section4() {
                 Paint channels are composable. You can request only what you need.
             </p>
 
-            <Stack className="surface-frame p-4">
-                <Code lang="tsx" codeString={`<span class="block"
-        data-variant="primary"
-        data-appearance="outlined"
-        data-paint="all">
+            <Stack as="figure" className="surface-frame p-4">
+                <Code lang="tsx" codeString={`{/*  Background only, no text or border color */}
+<div class="block" 
+    data-variant="info" 
+    data-appearance="tonal"
+    data-paint="background foreground">
+  Tonal container
+</div>
+
+{/*  Everything */}
+<div class="block" 
+    data-variant="primary" 
+    data-appearance="filled"
+    data-paint="all">
   Fully styled element
-</span>`} />
-                <Block as="span"
-                    variant="primary"
-                    variantAppearance="filled"
-                    paint="all"
-                    className="p-2"
-                    style={{ width: "max-content" }}
-                >Fully styled element</Block>
+</div>`} />
+
+                <Inline align="center" style={{ width: "100%" }}>
+                    <Block as="span"
+                        variant="info"
+                        variantAppearance="tonal"
+                        paint={["background", "foreground"]}
+                        className="p-2 mx-auto"
+                        style={{ width: "max-content" }}
+                    >
+                        Tonal container
+                    </Block>
+                    <Block as="span"
+                        variant="primary"
+                        variantAppearance="filled"
+                        paint="all"
+                        className="p-2 mx-auto"
+                        style={{ width: "max-content" }}
+                    >
+                        Fully styled element
+                    </Block>
+                </Inline>
+                <figcaption>
+                    Paint controls which styling channels are applied. Variants and appearances provide values, but nothing is rendered until paint is requested.
+                </figcaption>
             </Stack>
             <Heading as="h3">Why Paint Matters</Heading>
             <p>

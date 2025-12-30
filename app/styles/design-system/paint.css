@@ -32,9 +32,6 @@ Examples:
 .block[data-paint="all"],
 .block[data-paint="surface"] {
     background-color: var(--background-color, transparent);
-
-    /* Adjust link styling for painted surfaces */
-    --link-color-onPaint: var(--color-primary-600);
 }
 
 /* Border channel (and presets that include border) */

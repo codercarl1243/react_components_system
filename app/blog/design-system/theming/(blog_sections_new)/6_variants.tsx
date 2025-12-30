@@ -46,13 +46,7 @@ export default function section4() {
   --variant-fg: var(--color-neutral-100);
   --variant-border: var(--color-primary-600);
   --variant-surface: var(--color-primary-100);
-}
-
-[data-variant="danger"] {
-  --variant-bg: var(--color-accent-400);
-  --variant-fg: var(--color-neutral-100);
-  --variant-border: var(--color-accent-600);
-  --variant-surface: var(--color-accent-100);
+  --variant-text-on-surface: var(--color-primary-600);
 }`} />
             <p>
                 Every variant exposes the <em>same</em> semantic interface. This consistency is what allows appearances and paint to remain generic.

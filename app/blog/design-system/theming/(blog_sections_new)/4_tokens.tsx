@@ -24,7 +24,7 @@ export default function section4() {
                 <p>
                     In this guide, we'll focus on <span className="bold">color tokens</span> as they best demonstrate how values flow through the rest of the system..
                 </p>
-                <PostInfo>
+                <PostInfo variant="inverse">
                     <span className="italic">
                         The full token set for this project is available on <Link href="https://github.com/codercarl1243/react_components_system/tree/main/styles/tokens">GitHub</Link>.
                     </span>
