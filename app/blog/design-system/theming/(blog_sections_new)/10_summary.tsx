@@ -1,7 +1,7 @@
 import AnchorHeading from "@/components/heading/anchorHeading";
 import PostSection from "@/components/post/post.section";
 
-export default function section4() {
+export default function section10() {
     return (
         <PostSection id="advanced-topics-theming">
             <AnchorHeading as={"h2"} id="advanced-topics-theming-heading">

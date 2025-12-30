@@ -4,7 +4,7 @@ import Heading from "@/components/heading";
 import AnchorHeading from "@/components/heading/anchorHeading";
 import PostSection from "@/components/post/post.section";
 
-export default function section4() {
+export default function section5() {
     return (
         <PostSection id="structural-boundaries">
             <AnchorHeading as={"h2"} prefix="Step 2 —" id="structural-boundaries-heading">

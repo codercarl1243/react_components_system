@@ -20,12 +20,23 @@ const appearances = [
     { value: '', label: 'None (default)' },
     { value: 'filled', label: 'Filled' },
     { value: 'outlined', label: 'Outlined' },
+     { value: 'tonal', label: 'Tonal' },
     { value: 'ghost', label: 'Ghost' }
 ];
 
-export default function AppearanceConfigurator() {
+const paints = [
+    { value: '', label: 'None (default)' },
+    { value: 'foreground', label: 'Foreground' },
+    { value: 'background', label: 'Background' },
+    { value: 'border', label: 'Border' },
+    { value: 'surface', label: 'Surface' },
+    { value: 'all', label: 'All' },
+]
+
+export default function ButtonConfigurator() {
     const [variant, setVariant] = useState<ButtonProps['variant']>()
     const [appearance, setAppearance] = useState<ButtonProps['variantAppearance']>()
+    const [paint, setPaint] = useState<ButtonProps['paint']>()
 
     const handleSetVariant = (event: ChangeEvent<HTMLSelectElement>) => {
         if (event.currentTarget.value === '') setVariant(undefined);
@@ -35,6 +46,10 @@ export default function AppearanceConfigurator() {
     const handleSetAppearance = (event: ChangeEvent<HTMLSelectElement>) => {
         if (event.currentTarget.value === '') setAppearance(undefined);
         setAppearance(event.currentTarget.value as ButtonProps['variantAppearance']);
+    }
+    const handleSetPaint = (event: ChangeEvent<HTMLSelectElement>) => {
+        if (event.currentTarget.value === '') setPaint(undefined);
+        setPaint(event.currentTarget.value as ButtonProps['paint']);
     }
 
     return (
@@ -46,13 +61,12 @@ export default function AppearanceConfigurator() {
             className="flow-4 appearanceExamples surface-frame"
         >
             <Heading as="h3" headingSize={4} className="center">
-                Variant x Appearance Configurator
+                Button Configurator
             </Heading>
 
             <Stack gap={4} >
-                <p className="text-sm">
-                    <strong>Variants</strong> define <em>which colors</em> to use.
-                    <strong>Appearances</strong> define <em>how</em> to apply them.
+                <p>
+                    5 variants * 4 appearances * 6 paint options = 120 possible combinations
                 </p>
                 <PostInfo variant="muted">
                     Select different combinations to see how the same component adapts.
@@ -76,23 +90,31 @@ export default function AppearanceConfigurator() {
                         value={appearance}
                         onChange={handleSetAppearance}
                     />
+                    <Select
+                        id="paint-select"
+                        labelChildren="Paint:"
+                        options={paints}
+                        value={paint}
+                        onChange={handleSetPaint}
+                    />
 
                 </Inline>
-
-                {/* Live Preview */}
                 <Button
                     variant={variant}
                     variantAppearance={appearance}
-                    style={{width: "fit-content"}}
+                    paint={paint}
+                    style={{ width: "fit-content" }}
                 >
-
-                        {variant ? variant.charAt(0).toUpperCase() + variant.slice(1) : 'Plain'}{' '}+{' '} 
-                        {appearance ? appearance.charAt(0).toUpperCase() + appearance.slice(1) : 'Plain'}
+                    Click Me
                 </Button>
+                <p>variant: {variant}</p>
+                <p>appearance: {appearance}</p>
+                <p>paint: {paint}</p>
             </Stack>
 
             <figcaption className="text-sm text-muted italic">
-                5 variants x 3 appearances = 15 visual styles from a single component!
+                Variants provide meaning, appearances control treatment, and paint applies styling.
+                Changing any layer updates the result without changing the component.
             </figcaption>
         </Block>
     )

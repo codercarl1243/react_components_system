@@ -64,7 +64,6 @@ label {
 /* A elements that don't have a class get default styles */
 a:not([class]) {
   text-decoration-skip-ink: auto;
-  color: var(--link-color, currentColor);
   text-decoration: underline;
   text-decoration-color: currentColor;
   text-decoration-thickness: 0.125em;
@@ -99,11 +98,11 @@ textarea:not([rows]) {
   scroll-margin-block: 5ex;
 }
 
-@media (prefers-color-scheme: dark) {
+/* @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;
   }
-}
+} */
 
 @media (prefers-reduced-motion: reduce) {
 

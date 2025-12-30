@@ -5,7 +5,7 @@ import AnchorHeading from "@/components/heading/anchorHeading";
 import PostNote from "@/components/post/post.note";
 import PostSection from "@/components/post/post.section";
 
-export default function section4() {
+export default function section7() {
     return (
         <PostSection id="appearance">
             <AnchorHeading as={"h2"} prefix="step 4 -" id="appearance-heading">

@@ -7,7 +7,7 @@ import Structure from './(blog_sections_new)/5_structure'
 import Variants from './(blog_sections_new)/6_variants'
 import Appearance from './(blog_sections_new)/7_appearance'
 import Paint from './(blog_sections_new)/8_paint'
-
+import PuttingItAllTogether from './(blog_sections_new)/9_puttingItAllTogether'
 // import {
 //     Introduction,
 //     Why,
@@ -47,6 +47,7 @@ export default function ThemingPage() {
                 <Variants />
                 <Appearance />
                 <Paint />
+                <PuttingItAllTogether />
                 {/* <Why />
                 <Concepts />
                 <TokensGlobal />
