@@ -8,7 +8,7 @@ export default function section5() {
     return (
         <PostSection id="structural-boundaries">
             <AnchorHeading as={"h2"} prefix="Step 2 —" id="structural-boundaries-heading">
-                Establish Structural Boundaries
+                Establish structural boundaries
             </AnchorHeading>
             <p>
                 Before we introduce meaning, treatment, or color, we need a place for structure to live.
@@ -24,14 +24,14 @@ export default function section5() {
                 Here's a simplified example using a button:
             </p>
             <Code lang="css" codeString={`.button {
-                /* Structural styling only */
-                padding: var(--space-2) var(--space-4);
-            border-radius: var(--radius-md);
-            font-size: var(--text-base);
-            font-weight: 500;
-            cursor: pointer;
+    /* Structural styling only */
+    padding: var(--space-2) var(--space-4);
+    border-radius: var(--radius-md);
+    font-size: var(--text-base);
+    font-weight: 500;
+    cursor: pointer;
 
-  /* No background, color, or border applied here */
+    /* No background, color, or border applied here */
 }`} />
             <p>
                 At this stage, the button has no visual identity. It defines spacing, typography, and interaction — nothing more.
@@ -40,7 +40,7 @@ export default function section5() {
             <p>
                 That might feel incomplete, but it's intentional. Visual styling does not belong to the component itself.
             </p>
-            <Heading as="h3">The Paint Boundary</Heading>
+            <Heading as="h3" headingSize={4}>The paint boundary</Heading>
             <p>
                 The question then becomes: <em>how do visual styles get applied?</em>
             </p>

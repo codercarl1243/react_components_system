@@ -1,0 +1,16 @@
+.appearanceExamples__select-group {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+    gap: var(--space-4);
+
+    justify-content: center;
+    align-items: start;
+    place-items: center;
+    width: 100%;
+    max-width: var(--bp-md);
+}
+
+
+.appearanceExamples__select-group--select .select {
+    width: fit-content;
+}

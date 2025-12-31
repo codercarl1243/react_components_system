@@ -7,7 +7,7 @@ export default function section3() {
     return (
         <PostSection id="why">
             <AnchorHeading as={"h2"} id="why-heading">
-                Why This Approach Works
+                Why this approach works
             </AnchorHeading>
             <p>
                 Most theming systems scatter styling logic across components. A button implements variants one way, a card implements them slightly differently, and six months later nobody remembers which approach is canonical.

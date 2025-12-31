@@ -40,10 +40,6 @@ export default function section4() {
                     /> (white) for accessible contrast.
                 </p>
 
-                <p>
-                    The pattern across all color scales is straightforward: mid-tier colors (400, 600) work on neutral backgrounds, while light tiers (100, 200) need darker neutral text (600, 700, 800) for readability. This separation between brand colors and neutral colors gives you both visual identity and accessibility—brand colors define <em>who you are</em>, neutral colors ensure <em>everyone can read it</em>.
-                </p>
-
                 <Code
                     lang="css"
                     codeString={`/* Global Color Tokens */

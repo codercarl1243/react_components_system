@@ -30,9 +30,3 @@ Theme tokens are consumed by:
     --text-muted: var(--color-neutral-300);
     --link-color: var(--color-primary-200);
 }
-
-/* Global defaults */
-body {
-    background-color: var(--surface, initial);
-    color: var(--text-on-surface, initial);
-}

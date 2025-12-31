@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import type { CodeKey } from './codeMap'
 import type { ButtonProps } from '@/components/button/button.type'
-import { Inline } from '@/components/primitives'
+import { Block, Inline } from '@/components/primitives'
 import { ToggleGroup } from '@/components/button/toggle'
 
 function formatLabel(key: CodeKey) {
@@ -33,8 +33,11 @@ export default function ButtonExampleClient({
   };
 
   return (
-    <figure
+    <Block as="figure"
       className="surface-frame p-8 frame-inset-8 flow-8 theming_buttonExample"
+      variant="inverse"
+      variantAppearance='outlined'
+      paint="all"
       data-active={active}
     >
       <figcaption>
@@ -54,6 +57,6 @@ export default function ButtonExampleClient({
       <div className="code-example">
         {children}
       </div>
-    </figure>
+    </Block>
   )
 }

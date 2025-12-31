@@ -10,7 +10,7 @@ export default function section8() {
     return (
         <PostSection id="paint">
             <AnchorHeading as={"h2"} prefix="step 5 -" id="paint-heading">
-                Paint — Making Styling Explicit
+                Paint — Making styling explicit
             </AnchorHeading>
             <p>
                 Even with variants and appearances defined, there's still a problem:
@@ -92,7 +92,7 @@ export default function section8() {
                     Paint controls which styling channels are applied. Variants and appearances provide values, but nothing is rendered until paint is requested.
                 </figcaption>
             </Stack>
-            <Heading as="h3">Why Paint Matters</Heading>
+            <Heading as="h3">Why paint matters</Heading>
             <p>
                 Paint creates a strict styling boundary. Layout wrappers can provide semantic
                 context without gaining visual weight. Structural elements remain structural.

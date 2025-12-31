@@ -20,7 +20,7 @@ const appearances = [
     { value: '', label: 'None (default)' },
     { value: 'filled', label: 'Filled' },
     { value: 'outlined', label: 'Outlined' },
-     { value: 'tonal', label: 'Tonal' },
+    { value: 'tonal', label: 'Tonal' },
     { value: 'ghost', label: 'Ghost' }
 ];
 
@@ -58,26 +58,26 @@ export default function ButtonConfigurator() {
             variant="accent"
             variantAppearance="tonal"
             paint="border"
-            className="flow-4 appearanceExamples surface-frame"
+            className="flow-4 py-8 px-4 appearanceExamples surface-frame"
         >
             <Heading as="h3" headingSize={4} className="center">
                 Button Configurator
             </Heading>
 
             <Stack gap={4} >
-                <p>
+                <Block as="p" className="text-sm center surface-frame" variant="inverse" paint="all">
                     5 variants * 4 appearances * 6 paint options = 120 possible combinations
-                </p>
+                </Block>
                 <PostInfo variant="muted">
                     Select different combinations to see how the same component adapts.
                     Notice how each variant maintains its color identity across all appearances.
                 </PostInfo>
                 {/* Controls */}
-                <Inline gap={4} wrap>
-
+                <Block className="mx-auto appearanceExamples__select-group">
                     <Select
                         id="variant-select"
-                        labelChildren="Variant:"
+                        labelChildren="Variant"
+                        className="appearanceExamples__select-group--select"
                         options={variants}
                         value={variant}
                         onChange={handleSetVariant}
@@ -85,31 +85,31 @@ export default function ButtonConfigurator() {
 
                     <Select
                         id="appearance-select"
-                        labelChildren="Appearance:"
+                        labelChildren="Appearance"
+                        className="appearanceExamples__select-group--select"
                         options={appearances}
                         value={appearance}
                         onChange={handleSetAppearance}
                     />
                     <Select
                         id="paint-select"
-                        labelChildren="Paint:"
+                        labelChildren="Paint"
+                        className="appearanceExamples__select-group--select"
                         options={paints}
                         value={paint}
                         onChange={handleSetPaint}
                     />
-
-                </Inline>
-                <Button
-                    variant={variant}
-                    variantAppearance={appearance}
-                    paint={paint}
-                    style={{ width: "fit-content" }}
-                >
-                    Click Me
-                </Button>
-                <p>variant: {variant}</p>
-                <p>appearance: {appearance}</p>
-                <p>paint: {paint}</p>
+                </Block>
+                <span style={{ width: "fit-content", marginInline: "auto" }}>
+                    <Button
+                        variant={variant}
+                        variantAppearance={appearance}
+                        paint={paint}
+                        style={{ width: "fit-content" }}
+                    >
+                        Click Me
+                    </Button>
+                </span>
             </Stack>
 
             <figcaption className="text-sm text-muted italic">

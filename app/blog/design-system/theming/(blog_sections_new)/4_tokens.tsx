@@ -19,10 +19,11 @@ export default function section4() {
                 <p>
                     Every theming system starts with a stable set of <span className="bold">global tokens</span>. These are the raw values your entire interface relies on: colors, spacing, typography, radii, shadows, and breakpoints.
                 </p>
-                <p>These tokens define the <em>visual environment</em> — not component behavior.</p>
-
                 <p>
-                    In this guide, we'll focus on <span className="bold">color tokens</span> as they best demonstrate how values flow through the rest of the system..
+                    These tokens define the <em>visual environment</em> — not component behavior.
+                </p>
+                <p>
+                    In this guide, we'll focus on <span className="bold">color tokens</span> as they best demonstrate how values flow through the rest of the system.
                 </p>
                 <PostInfo variant="inverse">
                     <span className="italic">
@@ -32,52 +33,32 @@ export default function section4() {
             </Stack>
 
             <Stack>
-                <Heading as="h3">Color Tokens</Heading>
+                <Heading as="h3" headingSize={4}>Color tokens</Heading>
                 <p>
                     Color tokens use a numeric scale where lower numbers represent lighter values and higher numbers represent darker ones.
                 </p>
-                <p>This makes it intuitive to find contrast pairs: <Inline as="span" align="center" gap={2} wrap={false}><InlineCode codeString="--color-primary-400" /> <ColorSwatch
-                    color="var(--color-primary-400)"
-                    aria-label="Primary 400 color swatch"
-                /> </Inline> (medium blue) naturally pairs with <Inline as="span" align="center" gap={2} wrap={false}><InlineCode codeString="--color-neutral-100" />  <ColorSwatch
-                    color="var(--color-neutral-100)"
-                    aria-label="Neutral 100 color swatch"
-                /></Inline> (white) for accessible contrast.</p>
+                <p>
+                    This makes it intuitive to find contrast pairs: <Inline as="span" align="center" gap={2} wrap={false}><InlineCode codeString="--color-primary-400" /><ColorSwatch color="var(--color-primary-400)" aria-label="Primary 400 color swatch"/> </Inline> (medium blue) naturally pairs with <Inline as="span" align="center" gap={2} wrap={false}><InlineCode codeString="--color-neutral-100" /><ColorSwatch color="var(--color-neutral-100)" aria-label="Neutral 100 color swatch" /></Inline> (white) for accessible contrast.
+                </p>
 
                 <Code
                     lang="css"
                     title="Global Color Tokens"
                     codeString={`:root {
-    /* Primary (Blue) */
+    /* Primary */
     --color-primary-100: hsl(203, 31%, 95%);
     --color-primary-200: hsl(211, 38%, 88%);
     --color-primary-400: hsl(212, 75%, 40%);
     --color-primary-600: hsl(212, 76%, 28%);
 
-    /* Secondary (Green) */
-    --color-secondary-100: hsl(155, 33%, 93%);
-    --color-secondary-200: hsl(153, 29%, 84%);
-    --color-secondary-400: hsl(155, 65%, 26%);
-    --color-secondary-600: hsl(155, 67%, 18%);
-
-    /* Accent (Pink) */
-    --color-accent-100: hsl(327, 22%, 90%);
-    --color-accent-200: hsl(316, 25%, 88%);
-    --color-accent-400: hsl(314, 71%, 41%);
-    --color-accent-600: hsl(314, 71%, 28%);
-
     /* Neutrals */
     --color-neutral-100: hsl(0, 0%, 100%);
-    --color-neutral-400: hsl(0, 0%, 46%);
-    --color-neutral-600: hsl(0, 0%, 30%);
-    --color-neutral-800: hsl(0, 0%, 15%);
     --color-neutral-900: hsl(248, 62%, 5%);
 }`}
                 />
-
-                <PostNote>
-                    <p>This article uses <span className="bold">HSL</span> for clarity and compatibility, but the same token structure works with <span className="bold">OKLCH</span> if you prefer improved perceptual consistency across lightness values.</p>
-                </PostNote>
+                <PostInfo>
+                    All other color scales in the system follow the same naming and numeric structure.
+                </PostInfo>
                 <p>
                     These tokens are intentionally generic. They describe <em>what colors exist</em>, not <em>what they're used for</em>.
                 </p>

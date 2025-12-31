@@ -38,6 +38,7 @@ Examples:
 .block[data-paint~="border"],
 .block[data-paint="all"],
 .block[data-paint="surface"] {
-    border: var(--border-thin);
-    border-color: var(--border-color, transparent);
+    border-width: var(--border-width-thin);
+    border-style: var(--border-style-solid);
+    border-color: var(--border-color, var(--text-on-surface, currentColor));
 }

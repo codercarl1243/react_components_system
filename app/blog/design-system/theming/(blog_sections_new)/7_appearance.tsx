@@ -9,7 +9,7 @@ export default function section7() {
     return (
         <PostSection id="appearance">
             <AnchorHeading as={"h2"} prefix="step 4 -" id="appearance-heading">
-                Appearance Mappings
+                Appearance mappings
             </AnchorHeading>
             <p>
                 With semantic meaning defined, we can now decide how that meaning is expressed visually.
@@ -23,7 +23,7 @@ export default function section7() {
             <p>
                 Variants answer <em>what does this represent?</em>. Appearances answer <em>how should it be presented?</em>
             </p>
-            <Heading as="h3">Appearance Is a Mapping Layer</Heading>
+            <Heading as="h3" headingSize={4}>Appearance is a mapping layer</Heading>
             <p>
                 An appearance does not introduce new colors. It does not care which variant is active. Its only responsibility is to map a variant's palette to semantic styling tokens such as background, foreground, and border.
             </p>
@@ -47,7 +47,7 @@ export default function section7() {
             <p>
                 Each appearance consumes the same variant palette, but produces a different visual result. This is what allows a single variant to be reused across many visual contexts.
             </p>
-            <Heading as="h3">Why Appearance Is Separate from Variant</Heading>
+            <Heading as="h3" headingSize={4}>Why appearance is separate from variant</Heading>
 
             <p>If appearance logic lived inside variants, every visual change would require new variant names. By separating appearance, meaning stays stable while visual treatment can evolve independently.
             </p>

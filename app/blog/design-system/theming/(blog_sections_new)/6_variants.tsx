@@ -26,7 +26,7 @@ export default function section6() {
                 This distinction is critical. If variants encode presentation, the system collapses under its own weight.
             </p>
 
-            <Heading as="h3">
+            <Heading as="h3" headingSize={4}>
                 Variants Define Palettes, Not Properties
             </Heading>
             <p>
@@ -51,7 +51,7 @@ export default function section6() {
             <p>
                 Every variant exposes the <em>same</em> semantic interface. This consistency is what allows appearances and paint to remain generic.
             </p>
-            <Heading as="h3">Why Variants Must Stay Semantic</Heading>
+            <Heading as="h3">Why variants must stay semantic</Heading>
 
             <p>
                 Variants must remain semantic. Once they encode presentation — <InlineCode codeString="primary-outline" />, <InlineCode codeString="danger-ghost" />, <InlineCode codeString="subtle-primary" /> — the system begins to fragment.
@@ -65,7 +65,7 @@ export default function section6() {
                 Variants define <em>what something represents</em>, not <em>how it looks</em>. If a visual change is needed, it belongs in the <span className="bold">appearance</span> layer.
             </p>
 
-            <Heading as="h3">Variants Do Not Apply Styling</Heading>
+            <Heading as="h3" headingSize={4}>Variants do not apply styling</Heading>
             <p>
                 Variants only define tokens. They do not apply background, foreground, or border styles.
             </p>
