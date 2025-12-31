@@ -24,7 +24,8 @@ export default function section8() {
                 Paint solves this by making styling explicit. Nothing is applied unless it's
                 deliberately requested.
             </p>
-            <Code lang="css" codeString={`/* Foreground channel */
+            <Code lang="css" 
+            codeString={`/* Foreground channel */
 .block[data-paint~="foreground"],
 .block[data-paint="all"] {
   color: var(--foreground-color, inherit);
@@ -50,7 +51,12 @@ export default function section8() {
             </p>
 
             <Stack as="figure" className="surface-frame p-4">
-                <Code lang="tsx" codeString={`{/*  Background only, no text or border color */}
+                <Code lang="tsx" 
+                highlightTokens={[
+  'data-paint="background foreground"',
+  'data-paint="all"'
+]}
+                codeString={`{/*  Background only, no text or border color */}
 <div class="block" 
     data-variant="info" 
     data-appearance="tonal"

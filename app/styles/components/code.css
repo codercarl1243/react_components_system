@@ -40,7 +40,7 @@
             width: 100%;
             background-color: var(--line-background-color) !important;
 
-            .custom-code-highlight {
+            .custom-code-highlight span {
                 color: var(--line-color) !important;
             }
         }

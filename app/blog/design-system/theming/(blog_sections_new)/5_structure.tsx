@@ -23,11 +23,12 @@ export default function section5() {
             <p>
                 Here's a simplified example using a button:
             </p>
-            <Code lang="css" codeString={`.button {
+            <Code lang="css"
+                codeString={`.button {
     /* Structural styling only */
-    padding: var(--space-2) var(--space-4);
-    border-radius: var(--radius-md);
-    font-size: var(--text-base);
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    font-size: 1rem;
     font-weight: 500;
     cursor: pointer;
 
@@ -50,12 +51,13 @@ export default function section5() {
             <p>
                 Paint acts as a strict boundary. Components opt into styling explicitly, and only through paint.
             </p>
-            <Code lang="css" codeString={`.block[data-paint~="background"] { background-color: var(--background-color); }
+            <Code lang="css" 
+            codeString={`.block[data-paint~="background"] { background-color: var(--background-color); }
 .block[data-paint~="foreground"] { color: var(--foreground-color); }
 .block[data-paint~="border"] { border-color: var(--border-color); }
 `} />
             <p>
-                Any component that extends the base primitive <InlineCode codeString=".block"/> automatically gains access to paint behavior — without implementing it itself.
+                Any component that extends the base primitive <InlineCode codeString=".block" /> automatically gains access to paint behavior — without implementing it itself.
             </p>
 
             <p>

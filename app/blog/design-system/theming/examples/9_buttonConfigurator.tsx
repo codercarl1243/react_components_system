@@ -33,10 +33,99 @@ const paints = [
     { value: 'all', label: 'All' },
 ]
 
+function paintIncludes(
+    paint: string | string[] | undefined,
+    channel: string
+) {
+    if (!paint) return false;
+    return Array.isArray(paint)
+        ? paint.includes(channel)
+        : paint.split(" ").includes(channel);
+}
+
+type PaintMessage = {
+    id: string;
+    when: (state: {
+        variant?: string;
+        appearance?: string;
+        paint?: string | string[];
+    }) => boolean;
+    tone: "info" | "warning";
+    title: string;
+    body: string;
+};
+
+export const PAINT_MESSAGES: PaintMessage[] = [
+    {
+        id: "filled-foreground-only",
+        when: ({ appearance, paint }) =>
+            appearance === "filled" &&
+            paintIncludes(paint, "foreground") &&
+            !paintIncludes(paint, "background"),
+        tone: "warning",
+        title: "Why did the text disappear?",
+        body:
+            "Filled appearances use a light foreground color intended for use on a painted background. " +
+            "When only the foreground channel is painted, there’s no background to provide contrast."
+    },
+
+    {
+        id: "variant-without-appearance",
+        when: ({ variant, appearance }) =>
+            Boolean(variant) && !appearance,
+        tone: "info",
+        title: "Variant without appearance",
+        body:
+            "Variants define semantic values, but appearances map those values to styling tokens. " +
+            "Without an appearance, there’s nothing to apply visually."
+    },
+    {
+        id: "variant-no-appearance-foreground",
+        when: ({ variant, appearance, paint }) =>
+            Boolean(variant) &&
+            !appearance &&
+            paintIncludes(paint, "foreground"),
+        tone: "info",
+        title: "Variant selected without appearance",
+        body:
+            "Variants define semantic values, but appearances decide how those values are mapped to styling tokens. " +
+            "When a variant is used without an appearance, the foreground color may not contrast with the surface."
+    },
+    {
+        id: "paint-without-values",
+        when: ({ paint, variant, appearance }) =>
+            Boolean(paint) && !variant && !appearance,
+        tone: "info",
+        title: "Paint applies existing values",
+        body:
+            "Paint applies styling tokens, but it doesn’t define them. " +
+            "Without a variant or appearance, there are no values to apply."
+    },
+
+    {
+        id: "outlined-background-only",
+        when: ({ appearance, paint }) =>
+            appearance === "outlined" &&
+            paintIncludes(paint, "background") &&
+            !paintIncludes(paint, "foreground") &&
+            !paintIncludes(paint, "border"),
+        tone: "info",
+        title: "Background-only paint with outlined appearance",
+        body:
+            "Outlined appearances typically rely on foreground or border paint. " +
+            "Background-only paint may produce little or no visible change."
+    }
+];
+
+
 export default function ButtonConfigurator() {
     const [variant, setVariant] = useState<ButtonProps['variant']>()
     const [appearance, setAppearance] = useState<ButtonProps['variantAppearance']>()
     const [paint, setPaint] = useState<ButtonProps['paint']>()
+
+    const activeMessages = PAINT_MESSAGES.filter(msg =>
+        msg.when({ variant, appearance, paint })
+    );
 
     const handleSetVariant = (event: ChangeEvent<HTMLSelectElement>) => {
         if (event.currentTarget.value === '') setVariant(undefined);
@@ -64,14 +153,8 @@ export default function ButtonConfigurator() {
                 Button Configurator
             </Heading>
 
-            <Stack gap={4} >
-                <Block as="p" className="text-sm center surface-frame" variant="inverse" paint="all">
-                    5 variants * 4 appearances * 6 paint options = 120 possible combinations
-                </Block>
-                <PostInfo variant="muted">
-                    Select different combinations to see how the same component adapts.
-                    Notice how each variant maintains its color identity across all appearances.
-                </PostInfo>
+            <Stack gap={8} >
+
                 {/* Controls */}
                 <Block className="mx-auto appearanceExamples__select-group">
                     <Select
@@ -100,6 +183,7 @@ export default function ButtonConfigurator() {
                         onChange={handleSetPaint}
                     />
                 </Block>
+
                 <span style={{ width: "fit-content", marginInline: "auto" }}>
                     <Button
                         variant={variant}
@@ -110,6 +194,23 @@ export default function ButtonConfigurator() {
                         Click Me
                     </Button>
                 </span>
+                <Block role="status"
+                    aria-live="polite"
+                    className="flow-4">
+                    <p className="text-sm center "> 5 variants * 4 appearances * 6 paint options = 120 possible combinations</p>
+                    {activeMessages.length === 0 ? (
+                        <PostInfo className="mx-auto center" variant="muted">
+                            Adjust the controls above to explore how variant, appearance, and paint interact.
+                        </PostInfo>
+                    ) : (
+                        activeMessages.map(message => (
+                            <PostInfo as="div" className="mx-auto" key={message.id} variant={message.tone}>
+                                <p><strong>{message.title}</strong></p>
+                                <p>{message.body}</p>
+                            </PostInfo>
+                        ))
+                    )}
+                </Block>
             </Stack>
 
             <figcaption className="text-sm text-muted italic">
