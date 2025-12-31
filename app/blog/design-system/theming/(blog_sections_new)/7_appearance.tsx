@@ -8,7 +8,7 @@ import PostSection from "@/components/post/post.section";
 export default function section7() {
     return (
         <PostSection id="appearance">
-            <AnchorHeading as={"h2"} prefix="step 4 -" id="appearance-heading">
+            <AnchorHeading as={"h2"} prefix="Step 4 -" id="appearance-heading">
                 Appearance mappings
             </AnchorHeading>
             <p>

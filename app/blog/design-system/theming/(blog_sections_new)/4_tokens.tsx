@@ -23,7 +23,7 @@ export default function section4() {
                     These tokens define the <em>visual environment</em> — not component behavior.
                 </p>
                 <p>
-                    In this guide, we'll focus on <span className="bold">color tokens</span> as they best demonstrate how values flow through the rest of the system.
+                    We'll focus on <span className="bold">color tokens</span> as they best demonstrate how values flow through the rest of the system.
                 </p>
                 <PostInfo variant="inverse">
                     <span className="italic">

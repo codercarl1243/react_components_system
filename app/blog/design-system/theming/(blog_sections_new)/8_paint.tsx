@@ -1,6 +1,4 @@
-import Button from "@/components/button";
 import Code from "@/components/code";
-import InlineCode from "@/components/code/inlineCode";
 import Heading from "@/components/heading";
 import AnchorHeading from "@/components/heading/anchorHeading";
 import PostSection from "@/components/post/post.section";
@@ -9,7 +7,7 @@ import { Block, Inline, Stack } from "@/components/primitives";
 export default function section8() {
     return (
         <PostSection id="paint">
-            <AnchorHeading as={"h2"} prefix="step 5 -" id="paint-heading">
+            <AnchorHeading as={"h2"} prefix="Step 5 -" id="paint-heading">
                 Paint — Making styling explicit
             </AnchorHeading>
             <p>
@@ -94,31 +92,10 @@ export default function section8() {
             </Stack>
             <Heading as="h3">Why paint matters</Heading>
             <p>
-                Paint creates a strict styling boundary. Layout wrappers can provide semantic
-                context without gaining visual weight. Structural elements remain structural.
-                Styling only happens when explicitly requested.
+                Paint creates a strict styling boundary. Layout wrappers can provide semantic context without gaining visual weight. Structural elements remain structural. Styling only happens when explicitly requested.
             </p>
-
             <p>
-                This is especially important for primitives like
-                <InlineCode codeString="Block" />, <InlineCode codeString="Stack" />, and <InlineCode codeString="Row" />.
-            </p>
-            <Code lang="tsx" codeString={`<!-- Stack provides structure and tokens, but no paint -->
-<div class="stack" data-variant="primary">
-  <h2>Heading</h2>
-  <p>Content has access to primary tokens but isn't painted</p>
-</div>
-
-<!-- Same stack, now explicitly painted -->
-<div class="stack" 
-     data-variant="primary" 
-     data-appearance="tonal"
-     data-paint="surface">
-  <h2>Heading</h2>
-  <p>Now the container has a tonal primary background</p>
-</div>`} />
-            <p>
-                Without paint, styling leaks. With paint, styling is intentional.
+                Without paint, styling leaks. With paint, styling is <span className="fun-underline">intentional</span>.
             </p>
         </PostSection>
     );

@@ -22,7 +22,7 @@ export default function section3() {
                 <li><strong>Paint</strong> defines what actually gets styled</li>
 
             </List>
-            <p><InlineCode codeString="Components" /> consume these layers without reimplementing them</p>
+            <p><strong>Components</strong> consume these layers without reimplementing them</p>
             <p>
                 When you need to add a new variant, you add it to the variant layer. When you need a new appearance, you add it to the appearance layer. Components don't change. The boundaries hold.
             </p>
