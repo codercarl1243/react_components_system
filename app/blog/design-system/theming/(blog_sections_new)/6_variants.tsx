@@ -62,7 +62,7 @@ export default function Section6() {
             </p>
 
             <p>
-                Variants define <em>what something represents</em>, not <em>how it looks</em>. If a visual change is needed, it belongs in the <span className="bold">appearance</span> layer.
+                Variants define <em>what something represents</em>, not <em>how it looks</em>. If a visual change is needed, it belongs in the <strong>appearance</strong>layer.
             </p>
 
             <Heading as="h3" headingSize={4}>Variants do not apply styling</Heading>
@@ -73,7 +73,7 @@ export default function Section6() {
                 At this stage, nothing changes visually — and that's intentional. Meaning exists before treatment.
             </p>
             <p>
-                In the next step, we'll introduce the <span className="bold">appearance</span> layer, which maps semantic palettes to visual outcomes.
+                In the next step, we'll introduce the <strong>appearance</strong> layer, which maps semantic palettes to visual outcomes.
             </p>
 
         </PostSection>
