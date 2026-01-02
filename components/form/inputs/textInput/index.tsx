@@ -43,7 +43,7 @@ export default function TextInput(
                 </p>
             )}
             <Block
-                as={"input"}
+                as="input"
                 id={inputId}
                 aria-invalid={!!error}
                 aria-describedby={ariaDescribedByIds}

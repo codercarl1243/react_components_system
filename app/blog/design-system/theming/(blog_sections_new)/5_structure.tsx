@@ -4,7 +4,7 @@ import Heading from "@/components/heading";
 import AnchorHeading from "@/components/heading/anchorHeading";
 import PostSection from "@/components/post/post.section";
 
-export default function section5() {
+export default function Section5() {
     return (
         <PostSection id="structural-boundaries">
             <AnchorHeading as={"h2"} prefix="Step 2 —" id="structural-boundaries-heading">
@@ -23,7 +23,8 @@ export default function section5() {
             <p>
                 Here's a simplified example using a button:
             </p>
-            <Code lang="css"
+            <Code
+                lang="css"
                 codeString={`.button {
     /* Structural styling only */
     padding: 0.5rem 1rem;
@@ -51,13 +52,14 @@ export default function section5() {
             <p>
                 Paint acts as a strict boundary. Components opt into styling explicitly, and only through paint.
             </p>
-            <Code lang="css" 
-            codeString={`.block[data-paint~="background"] { background-color: var(--background-color); }
+            <Code
+                lang="css"
+                codeString={`.block[data-paint~="background"] { background-color: var(--background-color); }
 .block[data-paint~="foreground"] { color: var(--foreground-color); }
 .block[data-paint~="border"] { border-color: var(--border-color); }
 `} />
             <p>
-                Any component that extends the base primitive <InlineCode codeString=".block" /> automatically gains access to paint behavior — without implementing it itself.
+                Any component that extends the base primitive <InlineCode codeString="block" /> automatically gains access to paint behavior — without implementing it itself.
             </p>
 
             <p>

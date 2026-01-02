@@ -1,4 +1,4 @@
-import Post from "@/components/post";;
+import Post from "@/components/post";
 import Introduction from "./(blog_sections_new)/1_introduction";
 import WhatWeAreBuilding from "./(blog_sections_new)/2_whatWeAreBuilding";
 import Why from './(blog_sections_new)/3_why';
@@ -10,7 +10,6 @@ import Paint from './(blog_sections_new)/8_paint';
 import PuttingItAllTogether from './(blog_sections_new)/9_puttingItAllTogether';
 import Summary from './(blog_sections_new)/10_summary';
 import PostBanner from "@/components/post/post.banner";
-
 
 export default function ThemingPage() {
 

@@ -68,7 +68,7 @@
 
 .list--circle li::before {
   --list-marker-bg-color: var(--surface-color);
-  --list-border: var(--border-thin);
+  --list-border: var(--border-width-thin) solid currentColor;
 }
 
 /* Ordered list variants */

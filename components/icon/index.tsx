@@ -7,13 +7,15 @@ export default function Icon({
   variant,
   ...props
 }: IconProps) {
+
   const resolvedSize =
     typeof size === 'string' && size in sizeMap
       ? sizeMap[size]
-      : size
+      : size;
 
   const isDecorative = !(props['aria-label'] || props['aria-labelledby']);
-  const resolvedColor = variant ? `var(--color-${variant}-400)`: color
+  const resolvedColor = variant ? `var(--color-${variant}-400)` : color;
+
   return (
     <IconComponent
       className="icon"

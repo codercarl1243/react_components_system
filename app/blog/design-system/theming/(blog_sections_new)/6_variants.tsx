@@ -5,7 +5,7 @@ import AnchorHeading from "@/components/heading/anchorHeading";
 import List from "@/components/list";
 import PostSection from "@/components/post/post.section";
 
-export default function section6() {
+export default function Section6() {
     return (
         <PostSection id="variants">
             <AnchorHeading as={"h2"} prefix="Step 3 —" id="variants-heading">
@@ -62,7 +62,7 @@ export default function section6() {
             </p>
 
             <p>
-                Variants define <em>what something represents</em>, not <em>how it looks</em>. If a visual change is needed, it belongs in the <span className="bold">appearance</span> layer.
+                Variants define <em>what something represents</em>, not <em>how it looks</em>. If a visual change is needed, it belongs in the <strong>appearance</strong>layer.
             </p>
 
             <Heading as="h3" headingSize={4}>Variants do not apply styling</Heading>
@@ -73,7 +73,7 @@ export default function section6() {
                 At this stage, nothing changes visually — and that's intentional. Meaning exists before treatment.
             </p>
             <p>
-                In the next step, we'll introduce the <span className="bold">appearance</span> layer, which maps semantic palettes to visual outcomes.
+                In the next step, we'll introduce the <strong>appearance</strong> layer, which maps semantic palettes to visual outcomes.
             </p>
 
         </PostSection>

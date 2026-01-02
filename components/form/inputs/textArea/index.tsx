@@ -43,7 +43,7 @@ export default function TextArea(
                 </p>
             )}
             <Block
-                as={"textarea"}
+                as="textarea"
                 id={inputId}
                 aria-invalid={!!error}
                 aria-describedby={ariaDescribedByIds}

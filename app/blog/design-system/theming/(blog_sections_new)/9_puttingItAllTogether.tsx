@@ -3,7 +3,7 @@ import List from "@/components/list";
 import PostSection from "@/components/post/post.section";
 import ButtonConfigurator from "../examples/9_buttonConfigurator";
 
-export default function section9() {
+export default function Section9() {
     return (
         <PostSection id="putting-it-all-together">
             <AnchorHeading as={"h2"} id="putting-it-all-together-heading">
