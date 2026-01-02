@@ -7,7 +7,11 @@
     --radius-circle: 50%;   /* Perfect circle for squares */
     --radius-full: 9999px;  /* Pill shape / fully rounded */
 
-    /* Border width + style tokens */
-    --border-thin: 1px solid;
-    --border-thick: 2px solid;
+    /* Border widths */
+    --border-width-thin: 1px;
+    --border-width-thick: 2px;
+
+    /* Border styles */
+    --border-style-solid: solid;
+    --border-style-dashed: dashed;
 }

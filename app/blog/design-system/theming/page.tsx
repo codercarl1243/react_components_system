@@ -1,18 +1,14 @@
-import Post from "@/components/post";
-import {
-    Introduction,
-    Why,
-    Components,
-    Concepts,
-    DarkMode,
-    DataAttributesAndVariants,
-    Resources,
-    Sidebar,
-    Summary,
-    Testing,
-    TokensGlobal,
-    TokensComponent
-} from "./(blog_sections)";
+import Post from "@/components/post";;
+import Introduction from "./(blog_sections_new)/1_introduction";
+import WhatWeAreBuilding from "./(blog_sections_new)/2_whatWeAreBuilding";
+import Why from './(blog_sections_new)/3_why';
+import Tokens from './(blog_sections_new)/4_tokens';
+import Structure from './(blog_sections_new)/5_structure';
+import Variants from './(blog_sections_new)/6_variants';
+import Appearance from './(blog_sections_new)/7_appearance';
+import Paint from './(blog_sections_new)/8_paint';
+import PuttingItAllTogether from './(blog_sections_new)/9_puttingItAllTogether';
+import Summary from './(blog_sections_new)/10_summary';
 import PostBanner from "@/components/post/post.banner";
 
 
@@ -22,8 +18,8 @@ export default function ThemingPage() {
         <>
             <Post>
                 <PostBanner
-                    title="Building a Theming System for Your React Design System"
-                    subtitle="How to expose flexible, accessible styling through CSS variables, data-attributes, and React hooks. The foundation you'll use for buttons, navigation, cards, and every other component in your system."
+                    title="Building a Theming System"
+                    subtitle="A Practical Implementation Guide"
                     headingId="theming-heading"
                     image={{
                         src: '/og-image.png',
@@ -31,18 +27,17 @@ export default function ThemingPage() {
                     }}
                 />
                 <Introduction />
+                <WhatWeAreBuilding />
                 <Why />
-                <Concepts />
-                <TokensGlobal />
-                <TokensComponent />
-                <DataAttributesAndVariants />
-                <DarkMode />
-                <Components />
-                <Testing />
-                <Resources />
+                <Tokens />
+                <Structure />
+                <Variants />
+                <Appearance />
+                <Paint />
+                <PuttingItAllTogether />
                 <Summary />
             </Post>
-            <Sidebar />
+            {/* <Sidebar /> */}
         </>
     )
 }

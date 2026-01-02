@@ -9,9 +9,9 @@ import PostNote from "@/components/post/post.note";
 import PostSection from "@/components/post/post.section";
 import { Inline, Stack } from "@/components/primitives";
 import TabList from "@/components/tablist";
-import TokenFlowDiagram from '@/app/blog/design-system/theming/examples/5_TokenFlowDiagram'
+import TokenFlowDiagram from '@/app/blog/design-system/theming/examples/2_whatWeAreBuilding'
 import PostInfo from "@/components/post/post.info";
-import AppearanceConfigurator from '../examples/6_AppearanceExamples'
+import AppearanceConfigurator from '../examples/9_buttonConfigurator'
 export default function Section6() {
   return (
     <PostSection id="data-attributes-theming">

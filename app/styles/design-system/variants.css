@@ -8,10 +8,11 @@ They provide named color tokens that describe intent
 Variants DO NOT apply paint or styling directly.
 
 They expose the following semantic tokens:
-- --variant-bg       → primary emphasis color
-- --variant-fg       → text / icon color on variant backgrounds
-- --variant-border   → border color for variant emphasis
-- --variant-surface  → low-emphasis / tonal surface color
+- --variant-bg                → primary emphasis color
+- --variant-fg                → text / icon color on variant backgrounds
+- --variant-surface           → low-emphasis / tonal surface color
+- --variant-text-on-surface   → Text / icon color intended for use on --variant-surface.
+- --variant-border            → border color for variant emphasis
 
 These tokens are:
 - mapped by the appearance layer
@@ -33,10 +34,22 @@ These tokens are:
 }
 
 [data-variant="inverse"] {
-  --variant-bg: var(--text-on-surface);
-  --variant-fg: var(--surface);
-  --variant-border: var(--color-neutral-500);
-  --variant-surface: var(--text-on-surface);
+  --_surface: color-mix(
+    in srgb,
+    var(--text-on-surface) 85%,
+    var(--surface) 15%
+  );
+  --_fg: var(--surface);
+
+  --variant-bg: var(--_surface);
+  --variant-fg: var(--_fg);
+  --variant-surface: var(--_surface);
+  --variant-text-on-surface: var(--_fg);
+  --variant-border: color-mix(
+  in srgb,
+  var(--_fg) 50%,
+  var(--_surface) 50%
+);
 }
 
 [data-variant="neutral"] {
@@ -44,6 +57,7 @@ These tokens are:
   --variant-fg: var(--text-on-surface);
   --variant-border: var(--color-neutral-400);
   --variant-surface: var(--surface);
+  --variant-text-on-surface: var(--text-on-surface);
 }
 
 [data-variant="muted"] {
@@ -51,12 +65,14 @@ These tokens are:
   --variant-fg: var(--color-neutral-600);
   --variant-border: var(--color-neutral-700);
   --variant-surface: var(--color-neutral-200);
+  --variant-text-on-surface: var(--color-neutral-600);
 }
 
 [data-variant="primary"] {
   --variant-bg: var(--color-primary-400);
   --variant-fg: var(--color-neutral-100);
   --variant-border: var(--color-primary-600);
+  --variant-text-on-surface: var(--color-primary-600);
   --variant-surface: var(--color-primary-100);
 }
 
@@ -64,6 +80,7 @@ These tokens are:
   --variant-bg: var(--color-secondary-400);
   --variant-fg: var(--color-neutral-100);
   --variant-border: var(--color-secondary-600);
+  --variant-text-on-surface: var(--color-secondary-600);
   --variant-surface: var(--color-secondary-100);
 }
 
@@ -71,6 +88,7 @@ These tokens are:
   --variant-bg: var(--color-accent-400);
   --variant-fg: var(--color-neutral-100);
   --variant-border: var(--color-accent-600);
+  --variant-text-on-surface: var(--color-accent-600);
   --variant-surface: var(--color-accent-100);
 }
 
@@ -78,6 +96,7 @@ These tokens are:
   --variant-bg: var(--color-danger-400);
   --variant-fg: var(--color-neutral-100);
   --variant-border: var(--color-danger-600);
+  --variant-text-on-surface: var(--color-danger-600);
   --variant-surface: var(--color-danger-100);
 }
 
@@ -85,6 +104,7 @@ These tokens are:
   --variant-bg: var(--color-warning-400);
   --variant-fg: var(--color-neutral-900);
   --variant-border: var(--color-warning-600);
+  --variant-text-on-surface: var(--color-warning-600);
   --variant-surface: var(--color-warning-100);
 }
 
@@ -92,12 +112,14 @@ These tokens are:
   --variant-bg: var(--color-success-400);
   --variant-fg: var(--color-neutral-100);
   --variant-border: var(--color-success-600);
+  --variant-text-on-surface: var(--color-success-600);
   --variant-surface: var(--color-success-100);
 }
 
 [data-variant="info"] {
   --variant-bg: var(--color-info-200);
-  --variant-fg: var(--color-neutral-900);
+  --variant-fg: var(--color-neutral-700);
   --variant-border: var(--color-info-600);
+  --variant-text-on-surface: var(--color-info-600);
   --variant-surface: var(--color-info-100);
 }

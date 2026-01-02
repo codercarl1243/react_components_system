@@ -2,10 +2,6 @@
     --line-background-color: inherit;
     --line-color: inherit;
 
-    --code-highlight-border-color: var(--border-color);
-    --code-highlight-color: var(--color-neutral-900);
-    --code-highlight-background-color: var(--surface-color);
-
     position: relative;
     font-size: 1rem;
     background: var(--color-neutral-900);
@@ -44,7 +40,7 @@
             width: 100%;
             background-color: var(--line-background-color) !important;
 
-            & span {
+            .custom-code-highlight span {
                 color: var(--line-color) !important;
             }
         }
@@ -58,6 +54,7 @@
             .custom-code-highlight:hover {
                 --code-highlight-border-color: var(--color-warning-400);
                 --code-highlight-background-color: var(--color-neutral-900);
+                --line-color: var(--color-neutral-100);
                 border-style: solid;
             }
         }
@@ -65,10 +62,15 @@
 }
 
 .shiki .custom-code-highlight {
+    --code-highlight-border-color: var(--border-color, var(--color-primary-400));
+    --code-highlight-color: var(--color-neutral-900);
+    --code-highlight-background-color: var(--surface-color, var(--color-primary-200));
+
     --line-color: var(--code-highlight-color);
+
     background: var(--code-highlight-background-color);
     padding: 0 0.15em;
-    border: var(--border-thin);
+    border-width: var(--border-width-thin);
     border-style: dashed;
     border-color: var(--code-highlight-border-color);
     border-radius: var(--radius-sm);
@@ -81,8 +83,8 @@
     --button-margin: 0;
     --button-padding-x: 0;
     --button-padding-y: 0;
-    top: 0.5lh;
-    right: var(--spacing-sm);
+    top: var(--spacing);
+    right: var(--spacing-md);
 }
 
 .shiki-wrapper:has(.code-title) {
@@ -99,12 +101,12 @@
 
     .button--copy {
         position: relative;
-        top: 0;
-        right: 0;
+        top: -2px;
+        right: 2px;
     }
 
     .code-title {
-        color: var(--color-neutral-300);
+        /* color: var(--color-neutral-300); */
         font-style: italic;
         font-weight: 500;
         margin: 0;
@@ -127,7 +129,7 @@
 
 .shiki-inline {
     background-color: var(--color-inline-bg);
-    border: var(--border-thin);
+    border: var(--border-width-thin) solid;
     padding: 0.125em var(--spacing-sm);
     border-radius: var(--radius-md);
     white-space: pre-wrap;

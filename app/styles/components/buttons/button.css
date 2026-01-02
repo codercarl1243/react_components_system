@@ -1,8 +1,4 @@
 .button {
-    --button-text-color: var(--foreground-color);
-    --button-background-color: var(--background-color);
-    --button-border-color: var(--border-color);
-
     /* Layout properties */
     --button-font-size: 1rem;
     --button-margin: var(--spacing);
@@ -52,7 +48,7 @@
     box-shadow: none;
 
     box-shadow: var(--button-shadow, none);
-    outline-color: var(--button-border-color, currentColor);
+    outline-color: var(--border-color, currentColor);
     outline-offset: var(--button-outline-offset);
 
     /* Typography */
@@ -71,19 +67,19 @@
 
     /* Interactive states - UX communication through outlines and transforms */
     &:hover {
-        outline: 1px solid var(--button-border-color, currentColor);
+        outline: 1px solid var(--border-color, currentColor);
         box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2);
     }
 
     &:focus-visible {
-        outline: 2px solid var(--button-border-color);
+        outline: 2px solid var(--border-color);
         outline-offset: var(--button-outline-offset);
         box-shadow: none;
     }
 
     &:active,
     &[data-pressed="true"] {
-        outline: 1px dotted var(--button-border-color, currentColor);
+        outline: 1px dotted var(--border-color, currentColor);
         transform: translateY(1px);
     }
 

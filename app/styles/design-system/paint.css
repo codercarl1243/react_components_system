@@ -32,17 +32,13 @@ Examples:
 .block[data-paint="all"],
 .block[data-paint="surface"] {
     background-color: var(--background-color, transparent);
-
-    /* Adjust link styling for painted surfaces */
-    --link-color-onPaint: color-mix(in srgb,
-            var(--link-color) 85%,
-            black);
 }
 
 /* Border channel (and presets that include border) */
 .block[data-paint~="border"],
 .block[data-paint="all"],
 .block[data-paint="surface"] {
-    border: var(--border-thin);
-    border-color: var(--border-color, transparent);
+    border-width: var(--border-width-thin);
+    border-style: var(--border-style-solid);
+    border-color: var(--border-color, var(--text-on-surface, currentColor));
 }

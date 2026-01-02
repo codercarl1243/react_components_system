@@ -49,6 +49,8 @@ ol[role='list'] {
 
 /* Set core body defaults */
 body {
+  background-color: var(--surface, initial);
+  color: var(--text-on-surface, initial);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   min-height: 100dvh;
@@ -64,9 +66,8 @@ label {
 /* A elements that don't have a class get default styles */
 a:not([class]) {
   text-decoration-skip-ink: auto;
-  color: var(--link-color, currentColor);
   text-decoration: underline;
-  text-decoration-color: var(--link-underline-color, currentColor);
+  text-decoration-color: currentColor;
   text-decoration-thickness: 0.125em;
   text-underline-offset: 0.2em;
   transition: text-decoration-color 0.2s ease;
@@ -99,11 +100,11 @@ textarea:not([rows]) {
   scroll-margin-block: 5ex;
 }
 
-@media (prefers-color-scheme: dark) {
+/* @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;
   }
-}
+} */
 
 @media (prefers-reduced-motion: reduce) {
 

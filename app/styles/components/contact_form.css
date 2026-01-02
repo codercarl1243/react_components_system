@@ -8,7 +8,7 @@
 .contact-form__status {
     --border-color: transparent;
 
-    border: var(--border-thin);
+    border: 1px solid transparent;
     border-radius: var(--radius-md);
     background-color: var(--bg-color, transparent);
 
@@ -22,14 +22,4 @@
     margin-block: var(--spacing-lg);
     margin-inline: var(--spacing-sm);
     padding: var(--spacing-lg);
-
-    &[data-status="success"] {
-        --border-color: var(--color-secondary-400);
-        --bg-color: var(--color-secondary-200);
-    }
-
-    &[data-status="error"] {
-        --border-color: var(--color-danger-400);
-        --bg-color: var(--color-danger-200);
-    }
 }
