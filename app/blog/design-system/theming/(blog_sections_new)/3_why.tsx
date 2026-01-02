@@ -1,9 +1,8 @@
-import InlineCode from "@/components/code/inlineCode";
 import AnchorHeading from "@/components/heading/anchorHeading";
 import List from "@/components/list";
 import PostSection from "@/components/post/post.section";
 
-export default function section3() {
+export default function Section3() {
     return (
         <PostSection id="why">
             <AnchorHeading as={"h2"} id="why-heading">

@@ -4,7 +4,7 @@ import AnchorHeading from "@/components/heading/anchorHeading";
 import PostSection from "@/components/post/post.section";
 import { Block, Inline, Stack } from "@/components/primitives";
 
-export default function section8() {
+export default function Section8() {
     return (
         <PostSection id="paint">
             <AnchorHeading as={"h2"} prefix="Step 5 -" id="paint-heading">

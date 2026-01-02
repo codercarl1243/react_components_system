@@ -5,11 +5,10 @@ import Heading from "@/components/heading";
 import AnchorHeading from "@/components/heading/anchorHeading";
 import Link from "@/components/link";
 import PostInfo from "@/components/post/post.info";
-import PostNote from "@/components/post/post.note";
 import PostSection from "@/components/post/post.section";
 import { Inline, Stack } from "@/components/primitives";
 
-export default function section4() {
+export default function Section4() {
     return (
         <PostSection id="global-tokens">
             <AnchorHeading as={"h2"} prefix="Step 1 —" id="global-tokens-heading">

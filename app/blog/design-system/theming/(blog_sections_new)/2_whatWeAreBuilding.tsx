@@ -1,7 +1,8 @@
 import AnchorHeading from "@/components/heading/anchorHeading";
 import PostSection from "@/components/post/post.section";
 import ButtonExample from "../examples/1_buttonExample/example.server";
-import WhatWeAreBuildingDiagram from '../examples/2_whatWeAreBuilding'
+import WhatWeAreBuildingDiagram from '../examples/2_whatWeAreBuilding';
+
 export default function Section2() {
     return (
         <PostSection id="what-we-are-building">

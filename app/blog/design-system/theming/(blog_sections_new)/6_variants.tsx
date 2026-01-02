@@ -5,7 +5,7 @@ import AnchorHeading from "@/components/heading/anchorHeading";
 import List from "@/components/list";
 import PostSection from "@/components/post/post.section";
 
-export default function section6() {
+export default function Section6() {
     return (
         <PostSection id="variants">
             <AnchorHeading as={"h2"} prefix="Step 3 —" id="variants-heading">
