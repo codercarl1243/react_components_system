@@ -21,7 +21,7 @@
     color: inherit;
     fill: currentColor;
 
-    border: var(--border-thin);
+    border: var(--border-width-thin) solid;
     border-color: inherit;
     border-right: var(--spacing-xl);
     border-top: var(--spacing-xl);
