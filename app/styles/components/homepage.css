@@ -1,6 +1,8 @@
-.homepage {
-
-}
+@media screen and (max-width: 35rem ) {
+    .homepage {
+        padding-block-start: 4rem;
+    }
+}    
 
 .homepage--latest-posts {
 

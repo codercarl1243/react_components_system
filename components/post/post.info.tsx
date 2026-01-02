@@ -1,9 +1,9 @@
-import type { RowProps } from "@/components/primitives/types";
+import type { BlockProps } from "@/components/primitives/types";
 import clsx from "clsx";
 import { Block } from "@/components/primitives";
 
 
-export default function PostInfo({ className, paint, variant, variantAppearance, ...props }: RowProps) {
+export default function PostInfo({ className, paint, variant, variantAppearance, ...props }: BlockProps) {
 
     return <Block as="p"
         paint={paint ?? "all"}

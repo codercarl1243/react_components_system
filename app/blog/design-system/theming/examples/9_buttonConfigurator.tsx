@@ -3,7 +3,7 @@ import Button from "@/components/button";
 import { ButtonProps } from "@/components/button/button.type"
 import Heading from "@/components/heading"
 import PostInfo from "@/components/post/post.info"
-import { Block, Inline, Stack } from "@/components/primitives"
+import { Block, Stack } from "@/components/primitives"
 import Select from "@/components/select"
 import { ChangeEvent, useState } from "react"
 
@@ -52,7 +52,7 @@ type PaintMessage = {
     }) => boolean;
     tone: "info" | "warning";
     title: string;
-    body: string;
+    body: string[];
 };
 
 export const PAINT_MESSAGES: PaintMessage[] = [
@@ -64,9 +64,10 @@ export const PAINT_MESSAGES: PaintMessage[] = [
             !paintIncludes(paint, "background"),
         tone: "warning",
         title: "Why did the text disappear?",
-        body:
-            "Filled appearances use a light foreground color intended for use on a painted background. " +
-            "When only the foreground channel is painted, there’s no background to provide contrast."
+        body: [
+            "Filled appearances use a light foreground color intended for use on a painted background.",
+            "When only the foreground channel is painted, there's no background to provide contrast."
+        ]
     },
 
     {
@@ -75,9 +76,10 @@ export const PAINT_MESSAGES: PaintMessage[] = [
             Boolean(variant) && !appearance,
         tone: "info",
         title: "Variant without appearance",
-        body:
-            "Variants define semantic values, but appearances map those values to styling tokens. " +
-            "Without an appearance, there’s nothing to apply visually."
+        body: [
+            "Variants define semantic values, but appearances map those values to styling tokens.",
+            "Without an appearance, there's nothing to apply visually."
+        ]
     },
     {
         id: "variant-no-appearance-foreground",
@@ -87,9 +89,11 @@ export const PAINT_MESSAGES: PaintMessage[] = [
             paintIncludes(paint, "foreground"),
         tone: "info",
         title: "Variant selected without appearance",
-        body:
-            "Variants define semantic values, but appearances decide how those values are mapped to styling tokens. " +
+        body: [
+            "Variants define semantic values, but appearances decide how those values are mapped to styling tokens.",
             "When a variant is used without an appearance, the foreground color may not contrast with the surface."
+        ]
+
     },
     {
         id: "paint-without-values",
@@ -97,9 +101,11 @@ export const PAINT_MESSAGES: PaintMessage[] = [
             Boolean(paint) && !variant && !appearance,
         tone: "info",
         title: "Paint applies existing values",
-        body:
-            "Paint applies styling tokens, but it doesn’t define them. " +
+        body: [
+            "Paint applies styling tokens, but it doesn't define them.",
             "Without a variant or appearance, there are no values to apply."
+        ]
+
     },
 
     {
@@ -111,9 +117,11 @@ export const PAINT_MESSAGES: PaintMessage[] = [
             !paintIncludes(paint, "border"),
         tone: "info",
         title: "Background-only paint with outlined appearance",
-        body:
-            "Outlined appearances typically rely on foreground or border paint. " +
+        body: [
+            "Outlined appearances typically rely on foreground or border paint.",
             "Background-only paint may produce little or no visible change."
+        ]
+
     }
 ];
 
@@ -144,10 +152,10 @@ export default function ButtonConfigurator() {
     return (
         <Block
             as="figure"
-            variant="accent"
-            variantAppearance="tonal"
+            variant="secondary"
+            variantAppearance="outlined"
             paint="border"
-            className="flow-4 py-8 px-4 appearanceExamples surface-frame"
+            className="flow-4 py-8 px-4 appearanceExamples surface-frame frame-inset-8"
         >
             <Heading as="h3" headingSize={4} className="center">
                 Button Configurator
@@ -197,26 +205,24 @@ export default function ButtonConfigurator() {
                 <Block role="status"
                     aria-live="polite"
                     className="flow-4">
-                    <p className="text-sm center "> 5 variants * 4 appearances * 6 paint options = 120 possible combinations</p>
-                    {activeMessages.length === 0 ? (
-                        <PostInfo className="mx-auto center" variant="muted">
-                            Adjust the controls above to explore how variant, appearance, and paint interact.
-                        </PostInfo>
-                    ) : (
+                    <PostInfo className="mx-auto center" variant="info" paint={["foreground"]}>
+                        Adjust the controls above to explore how variant, appearance, and paint interact.
+                    </PostInfo>
+                    {
                         activeMessages.map(message => (
-                            <PostInfo as="div" className="mx-auto" key={message.id} variant={message.tone}>
+                            <PostInfo as="div" paint={["background", "foreground"]} className="mx-auto flow-6" key={message.id} variant={message.tone}>
                                 <p><strong>{message.title}</strong></p>
-                                <p>{message.body}</p>
+                                {message.body.map((line, index) => <p key={`${message.id}-${index}`}>{line}</p>)}
                             </PostInfo>
                         ))
-                    )}
+                    }
                 </Block>
             </Stack>
 
-            <figcaption className="text-sm text-muted italic">
+            <Block as="figcaption" paint="border" variant="secondary" variantAppearance="outlined" className="text-sm italic px-4 py-2 surface-frame">
                 Variants provide meaning, appearances control treatment, and paint applies styling.
                 Changing any layer updates the result without changing the component.
-            </figcaption>
+            </Block>
         </Block>
     )
 }

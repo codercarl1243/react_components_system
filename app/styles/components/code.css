@@ -70,7 +70,7 @@
 
     background: var(--code-highlight-background-color);
     padding: 0 0.15em;
-    border: var(--border-thin);
+    border-width: var(--border-width-thin);
     border-style: dashed;
     border-color: var(--code-highlight-border-color);
     border-radius: var(--radius-sm);
@@ -129,7 +129,7 @@
 
 .shiki-inline {
     background-color: var(--color-inline-bg);
-    border: var(--border-thin);
+    border: var(--border-width-thin) solid;
     padding: 0.125em var(--spacing-sm);
     border-radius: var(--radius-md);
     white-space: pre-wrap;

@@ -5,7 +5,8 @@ import { handleContact } from '@/app/actions/contact';
 import List from '@/components/list';
 import Link from '@/components/link';
 import { RiMailLine } from '@remixicon/react';
-import { Text, TextArea } from '@/components/form/inputs';
+import { TextArea, TextInput } from '@/components/form/inputs';
+import { Block, Stack } from '../primitives';
 
 
 const initialState = {
@@ -55,6 +56,7 @@ export default function ContactForm() {
         if (state.formErrors.length > 0) {
             return (
                 <List
+                    as="ul"
                     className="contact-form__errors"
                     aria-label="Form errors"
                     marker='none'
@@ -74,18 +76,21 @@ export default function ContactForm() {
             <fieldset className="contact-form__fieldset">
                 <legend className="contact-form__legend">Contact Me</legend>
 
-                <div
+                <Block
                     role="status"
                     aria-live="polite"
                     aria-atomic="true"
                     data-status={derivedStatus}
-                    className="contact-form__status"
+                    className="contact-form__status surface-frame"
+                    paint={derivedStatus === 'idle' ? undefined : "all"}
+                    variant={derivedStatus === "success" ? "success" : derivedStatus === "error" ? "danger" : "neutral"}
+                    variantAppearance='tonal'
                 >
                     {renderStatus()}
-                </div>
+                </Block>
 
-                <div className="flow-4">
-                    <Text
+                <Stack gap={2}>
+                    <TextInput
                         id="contact-name"
                         label="Name"
                         name="name"
@@ -94,7 +99,7 @@ export default function ContactForm() {
                         required
                         error={state.fieldErrors.name}
                     />
-                    <Text
+                    <TextInput
                         id="contact-email"
                         label="Email"
                         name="email"
@@ -111,7 +116,7 @@ export default function ContactForm() {
                         required
                         error={state.fieldErrors.message}
                     />
-                </div>
+                </Stack>
 
                 <Button
                     icon={RiMailLine}
