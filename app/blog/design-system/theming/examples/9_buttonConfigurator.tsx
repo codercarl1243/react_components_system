@@ -136,16 +136,25 @@ export default function ButtonConfigurator() {
     );
 
     const handleSetVariant = (event: ChangeEvent<HTMLSelectElement>) => {
-        if (event.currentTarget.value === '') setVariant(undefined);
+        if (event.currentTarget.value === '') {
+            setVariant(undefined);
+            return;
+        }
         setVariant(event.currentTarget.value as ButtonProps['variant']);
     }
 
     const handleSetAppearance = (event: ChangeEvent<HTMLSelectElement>) => {
-        if (event.currentTarget.value === '') setAppearance(undefined);
+        if (event.currentTarget.value === '') {
+            setAppearance(undefined);
+            return;
+        }
         setAppearance(event.currentTarget.value as ButtonProps['variantAppearance']);
     }
     const handleSetPaint = (event: ChangeEvent<HTMLSelectElement>) => {
-        if (event.currentTarget.value === '') setPaint(undefined);
+        if (event.currentTarget.value === '') {
+            setPaint(undefined);
+            return;
+        }
         setPaint(event.currentTarget.value as ButtonProps['paint']);
     }
 
