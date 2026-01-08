@@ -170,7 +170,6 @@ export type BaseButtonProps = {
     -webkit-appearance: none;
     appearance: none;
     background: none;
-    border: var(--border-thin);
     border-radius: var(--radius-md);
     outline: 0;
     box-shadow: none;

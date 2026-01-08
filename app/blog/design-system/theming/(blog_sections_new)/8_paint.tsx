@@ -42,8 +42,7 @@ export default function Section8() {
 .block[data-paint~="border"],
 .block[data-paint="all"],
 .block[data-paint="surface"] {
-  border: var(--border-thin);
-  border-color: var(--border-color, transparent);
+  border: 1px solid var(--border-color, transparent);
 }`} />
 
             <p>
