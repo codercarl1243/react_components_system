@@ -1,5 +1,5 @@
 'use client'
-import { type ChangeEvent, useActionState, useEffect, useRef, useState } from 'react'
+import { type FormEvent, startTransition, useActionState, useEffect, useRef, useState } from 'react'
 import Button from '@/components/button'
 import { handleContact } from '@/app/actions/contact';
 import List from '@/components/list';
@@ -7,7 +7,6 @@ import Link from '@/components/link';
 import { RiMailLine } from '@remixicon/react';
 import { TextArea, TextInput } from '@/components/form/inputs';
 import { Block, Stack } from '@/components/primitives';
-import { isNullish } from '@/lib/utils/guards';
 
 const initialState = {
     status: "idle" as const,
@@ -20,33 +19,14 @@ export default function ContactForm() {
     const formRef = useRef<HTMLFormElement>(null);
     const [touchedFields, setTouchedFields] = useState<Record<string, boolean>>({});
 
-    const [name, setName] = useState("");
-    const [email, setEmail] = useState("");
-    const [message, setMessage] = useState("")
-
     function markTouched(name: string) {
         setTouchedFields(prev => ({ ...prev, [name]: true }));
-    }
-
-    function handleSetName(e: ChangeEvent<HTMLInputElement>) {
-         if (isNullish(e.currentTarget.value)) return;
-        markTouched("name")
-        setName(e.currentTarget.value);
-    }
-    function handleSetEmail(e: ChangeEvent<HTMLInputElement>) {
-        if (isNullish(e.currentTarget.value)) return;
-        markTouched("email")
-        setEmail(e.currentTarget.value);
-    }
-    function handleSetMessage(e: ChangeEvent<HTMLTextAreaElement>) {
-         if (isNullish(e.currentTarget.value)) return;
-        markTouched("message")
-        setMessage(e.currentTarget.value);
     }
 
     useEffect(() => {
         if (state.status === "success") {
             formRef.current?.reset();
+            setTouchedFields({})
         }
     }, [state.status]);
 
@@ -96,13 +76,15 @@ export default function ContactForm() {
         return null;
     }
 
-    function handleSubmit(formData: FormData){
-        setTouchedFields({});
-        formAction(formData)
-    }
+  function onSubmit(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    setTouchedFields({});
+    startTransition(() => formAction(new FormData(e.currentTarget)));
+    
+  }
 
     return (
-        <form ref={formRef} className="contact-form" action={handleSubmit} noValidate>
+        <form ref={formRef} className="contact-form" onSubmit={onSubmit} noValidate>
             <fieldset className="contact-form__fieldset">
                 <legend className="contact-form__legend">Contact Me</legend>
 
@@ -128,8 +110,7 @@ export default function ContactForm() {
                         autoComplete="name"
                         required
                         errorMessage={touchedFields.name ? undefined : state.fieldErrors.name}
-                        value={name}
-                        onChange={handleSetName}
+                        onBlur={() => markTouched("name")}
                     />
                     <TextInput
                         id="contact-email"
@@ -138,9 +119,8 @@ export default function ContactForm() {
                         type="email"
                         autoComplete="email"
                         required
+                        onBlur={() => markTouched("email")}
                         errorMessage={touchedFields.email ? undefined : state.fieldErrors.email}
-                        value={email}
-                        onChange={handleSetEmail}
                     />
                     <TextArea
                         id="contact-message"
@@ -148,9 +128,8 @@ export default function ContactForm() {
                         name="message"
                         rows={5}
                         required
+                        onBlur={() => markTouched("message")}
                         errorMessage={touchedFields.message ? undefined : state.fieldErrors.message}
-                        value={message}
-                        onChange={handleSetMessage}
                     />
                 </Stack>
 
