@@ -1,15 +1,14 @@
 import clsx from "clsx";
 import { useId } from "react";
 import type { TextInputProps } from "@/components/form/inputs/textInput/textInput.types";
-import { RiErrorWarningFill } from "@remixicon/react";
-import Icon from "@/components/icon";
 import { Block } from "@/components/primitives";
+import FormFieldWrapper from "@/components/form/field";
 
 export default function TextInput(
     {
         helper,
         label,
-        error,
+        errorMessage,
         className,
         required,
         id,
@@ -21,37 +20,31 @@ export default function TextInput(
 
     const ariaDescribedByIds = [
         helper ? `${inputId}-helper` : null,
-        error ? `${inputId}-error` : null,
+        errorMessage ? `${inputId}-error` : null,
     ]
         .filter(Boolean)
         .join(" ") || undefined;
 
     return (
-        <div className="input-group" data-invalid={error ? true : undefined}>
-            <label htmlFor={inputId} className="input-group__label">
-                {label}
-                {required && <span className="input-group__required" aria-hidden="true">*</span>}
-            </label>
-            {helper && (
-                <p id={`${inputId}-helper`} className="input-group__helper text-sm">
-                    {helper}
-                </p>
-            )}
-            {error && (
-                <p id={`${inputId}-error`} className="input-group__error">
-                    <Icon icon={RiErrorWarningFill} /> {error}
-                </p>
-            )}
+
+        <FormFieldWrapper
+            inputId={inputId}
+            label={label}
+            helper={helper}
+            required={required}
+            errorMessage={errorMessage}
+        >
             <Block
                 as="input"
                 id={inputId}
-                aria-invalid={!!error}
+                aria-invalid={!!errorMessage}
                 aria-describedby={ariaDescribedByIds}
                 aria-required={required}
-                className={clsx("input-group__input", className)}
+                className={clsx("input-group__input text-input", className)}
                 required={required}
                 {...props}
             />
-        </div>
+        </FormFieldWrapper>
+
     );
 }
