@@ -1,9 +1,9 @@
 'use client';
-import { useFocusTrap } from '@/hooks/useFocusTrap';
+import { useFocusTrap } from '@/lib/hooks/useFocusTrap';
 import { usePathname } from 'next/navigation';
 import { useEffect, useId, useRef, useState } from 'react'
-import { useClickOutside } from '@/hooks/useClickOutside';
-import { useMediaQuery } from '@/hooks/useMediaQuery';
+import { useClickOutside } from '@/lib/hooks/useClickOutside';
+import { useMediaQuery } from '@/lib/hooks/useMediaQuery';
 import type { HamburgerState, useHamburgerProps } from '@/components/hamburger/hamburger.types';
 
 export default function useHamburger({
