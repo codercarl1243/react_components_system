@@ -1,35 +1,21 @@
 'use client'
-import { type FormEvent, startTransition, useActionState, useEffect, useRef, useState } from 'react'
 import Button from '@/components/button'
-import { handleContact } from '@/app/actions/contact';
 import List from '@/components/list';
 import Link from '@/components/link';
 import { RiMailLine } from '@remixicon/react';
 import { TextArea, TextInput } from '@/components/form/inputs';
 import { Block, Stack } from '@/components/primitives';
+import { useServerValidatedForm } from '@/lib/hooks/useServerValidation';
+import { handleContact } from '@/app/actions/contact';
 
 const initialState = {
-    status: "idle" as const,
-    fieldErrors: {},
-    formErrors: [],
+  status: "idle" as const,
+  fieldErrors: {},
+  formErrors: [],
 };
 
 export default function ContactForm() {
-    const [state, formAction, pending] = useActionState(handleContact, initialState);
-    const formRef = useRef<HTMLFormElement>(null);
-    const [touchedFields, setTouchedFields] = useState<Record<string, boolean>>({});
-
-    function markTouched(name: string) {
-        setTouchedFields(prev => ({ ...prev, [name]: true }));
-    }
-
-    useEffect(() => {
-        if (state.status === "success") {
-            formRef.current?.reset();
-            setTouchedFields({})
-        }
-    }, [state.status]);
-
+    const { formRef, state, pending, getError, deleteError, handleSubmit } = useServerValidatedForm(handleContact, initialState);
 
     function getStatus() {
         if (state.formErrors.length > 0) return "error";
@@ -39,6 +25,8 @@ export default function ContactForm() {
     }
 
     const derivedStatus = getStatus();
+    const statusVariant = derivedStatus === "success" ? "success" : derivedStatus === "error" ? "danger" : "neutral";
+    const statusPaint = derivedStatus === 'idle' ? undefined : "all";
 
     function renderStatus() {
         if (state.status === "success") {
@@ -76,15 +64,8 @@ export default function ContactForm() {
         return null;
     }
 
-  function onSubmit(e: FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    setTouchedFields({});
-    startTransition(() => formAction(new FormData(e.currentTarget)));
-    
-  }
-
     return (
-        <form ref={formRef} className="contact-form" onSubmit={onSubmit} noValidate>
+        <form ref={formRef} className="contact-form" onSubmit={handleSubmit} noValidate>
             <fieldset className="contact-form__fieldset">
                 <legend className="contact-form__legend">Contact Me</legend>
 
@@ -94,8 +75,8 @@ export default function ContactForm() {
                     aria-atomic="true"
                     data-status={derivedStatus}
                     className="contact-form__status"
-                    paint={derivedStatus === 'idle' ? undefined : "all"}
-                    variant={derivedStatus === "success" ? "success" : derivedStatus === "error" ? "danger" : "neutral"}
+                    paint={statusPaint}
+                    variant={statusVariant}
                     variantAppearance='tonal'
                 >
                     {renderStatus()}
@@ -109,8 +90,8 @@ export default function ContactForm() {
                         type="text"
                         autoComplete="name"
                         required
-                        errorMessage={touchedFields.name ? undefined : state.fieldErrors.name}
-                        onChange={() => markTouched("name")}
+                        errorMessage={getError("name")}
+                        onChange={deleteError}
                     />
                     <TextInput
                         id="contact-email"
@@ -119,8 +100,8 @@ export default function ContactForm() {
                         type="email"
                         autoComplete="email"
                         required
-                        onChange={() => markTouched("email")}
-                        errorMessage={touchedFields.email ? undefined : state.fieldErrors.email}
+                        errorMessage={getError("email")}
+                        onChange={deleteError}
                     />
                     <TextArea
                         id="contact-message"
@@ -128,8 +109,8 @@ export default function ContactForm() {
                         name="message"
                         rows={5}
                         required
-                        onChange={() => markTouched("message")}
-                        errorMessage={touchedFields.message ? undefined : state.fieldErrors.message}
+                        errorMessage={getError("message")}
+                        onChange={deleteError}
                     />
                 </Stack>
 
