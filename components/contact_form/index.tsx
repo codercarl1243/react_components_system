@@ -110,7 +110,7 @@ export default function ContactForm() {
                         autoComplete="name"
                         required
                         errorMessage={touchedFields.name ? undefined : state.fieldErrors.name}
-                        onBlur={() => markTouched("name")}
+                        onChange={() => markTouched("name")}
                     />
                     <TextInput
                         id="contact-email"
@@ -119,7 +119,7 @@ export default function ContactForm() {
                         type="email"
                         autoComplete="email"
                         required
-                        onBlur={() => markTouched("email")}
+                        onChange={() => markTouched("email")}
                         errorMessage={touchedFields.email ? undefined : state.fieldErrors.email}
                     />
                     <TextArea
@@ -128,7 +128,7 @@ export default function ContactForm() {
                         name="message"
                         rows={5}
                         required
-                        onBlur={() => markTouched("message")}
+                        onChange={() => markTouched("message")}
                         errorMessage={touchedFields.message ? undefined : state.fieldErrors.message}
                     />
                 </Stack>
