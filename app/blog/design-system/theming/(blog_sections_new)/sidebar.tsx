@@ -14,7 +14,7 @@ export default function ThemingSideBar({ relatedPosts }: PostSideBarProps) {
                 { id: 'structural-boundaries', href: '#structural-boundaries', label: 'Structural boundaries' },
                 { id: 'variants', href: '#variants', label: 'Variants' },
                 { id: 'appearance', href: '#appearance', label: 'Appearance mapping' },
-                { id: 'paint', href: '#paint', label: ' Paint — explicit styling' },
+                { id: 'paint', href: '#paint', label: 'Paint — explicit styling' },
                 { id: 'putting-it-all-together', href: '#putting-it-all-together', label: 'Putting it all together' },
                 { id: 'summary', href: '#summary', label: "Summary" },
                 // { id: 'resources', href: '#resources', label: "Code & Resources" }
