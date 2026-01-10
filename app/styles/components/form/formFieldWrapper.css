@@ -3,7 +3,7 @@
 .input-group:has(.input-group__input:disabled)
 */
 .input-group {
-    --field-accent-color: currentColor;
+    --input-group-accent-color: currentColor;
 
     position: relative;
     display: grid;
@@ -26,11 +26,11 @@
     }
 
     &:focus-within {
-        --field-accent-color: var(--color-primary-400);
+        --input-group-accent-color: var(--color-primary-400);
     }
 
     .input-group__label {
-        color: var(--field-accent-color);
+        color: var(--input-group-accent-color);
         transition: color 0.2s ease;
     }
 
@@ -50,22 +50,7 @@
         font-size: var(--font-size-xs);
     }
 
-    .input-group__input {
-        padding: var(--spacing) var(--spacing-lg);
-        border: 1px solid var(--field-accent-color);
-        border-radius: var(--radius-sm);
-        transition: border-color 0.2s ease, outline-color 0.2s ease;
 
-        &:focus-visible {
-            outline: 2px solid var(--field-accent-color);
-            outline-offset: 2px;
-        }
-
-        &[aria-invalid="true"] {
-            border-color: var(--color-danger-400);
-            outline-color: var(--color-danger-400);
-        }
-    }
 
     textarea.input-group__input {
         padding: var(--spacing);
@@ -77,5 +62,30 @@
 @media screen and (max-width: 35rem) {
     .input-group {
         margin-block-end: var(--spacing);
+    }
+}
+
+.input-group__input {
+    --input-group-input-padding: var(--spacing) var(--spacing-lg);
+    --input-group-input-border-color: var(--input-group-accent-color);
+
+    padding: var(--input-group-input-padding);
+    border: var(--border-width-thin) solid;
+    border-radius: var(--radius-sm);
+    transition: border-color 0.2s ease, outline-color 0.2s ease;
+
+    &:hover {
+        outline: var(--border-width-thin) solid var(--input-group-accent-color);
+        outline-offset: 1px;
+    }
+
+    &:focus-visible {
+        outline: var(--border-width-thick) solid var(--input-group-accent-color);
+        outline-offset: 2px;
+    }
+
+    &[aria-invalid="true"] {
+        border-color: var(--color-danger-400);
+        outline-color: var(--color-danger-400);
     }
 }

@@ -6,8 +6,8 @@ import PostSection from "@/components/post/post.section";
 export default function Section1() {
 
     return (
-        <PostSection id="introduction-theming">
-            <AnchorHeading as={"h2"} id="introduction-theming-heading">
+        <PostSection id="introduction">
+            <AnchorHeading as={"h2"} id="introduction-heading">
                 Introduction
             </AnchorHeading>
             <p>

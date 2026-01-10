@@ -4,7 +4,7 @@ import useHamburger from "@/components/hamburger/useHamburger";
 import { HamburgerContext } from "@/components/hamburger/context";
 import { HamburgerWrapperProps } from "@/components/hamburger/hamburger.types";
 import { useRef, type ElementType } from "react";
-import { useMergedRef } from "@/hooks/useMergedRef";
+import { useMergedRef } from "@/lib/hooks/useMergedRef";
 
 export default function HamburgerWrapper<T extends ElementType = "div">({
     as,
