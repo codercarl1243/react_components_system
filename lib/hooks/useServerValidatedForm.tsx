@@ -10,7 +10,7 @@ type ServerAction<TState> = (
 
 export function useServerValidatedForm
   <TState extends {
-    status: string
+    status: 'idle' | 'success' | 'error' | 'unknown_error'
     fieldErrors: Record<string, string>
   }
   >(
@@ -62,6 +62,7 @@ export function useServerValidatedForm
 
   function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    if (pending) return;
     const formData = new FormData(e.currentTarget);
     startTransition(() => {
       formAction(formData);
