@@ -5,7 +5,7 @@ import Link from '@/components/link';
 import { RiMailLine } from '@remixicon/react';
 import { TextArea, TextInput } from '@/components/form/inputs';
 import { Block, Stack } from '@/components/primitives';
-import { useServerValidatedForm } from '@/lib/hooks/useServerValidation';
+import { useServerValidatedForm } from '@/lib/hooks/useServerValidatedForm';
 import { handleContact } from '@/app/actions/contact';
 
 const initialState = {
