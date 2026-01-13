@@ -1,42 +1,35 @@
-import Heading from "@/components/heading";
+import AnchorHeading from "@/components/heading/anchorHeading";
+import Link from "@/components/link";
 import List from "@/components/list";
-import PostNote from "@/components/post/post.note";
 import PostSection from "@/components/post/post.section";
-import { Stack } from "@/components/primitives";
-import ButtonExample from "../examples/1_buttonExample/example.server";
 
 export default function Section1() {
 
     return (
-        <PostSection id="introduction-theming">
-            <Stack gap={4}>
-                <Heading as="h2" id="introduction-theming-heading">
-                    What We're Building
-                </Heading>
-                <p>
-                    By the end of this article, you'll have a complete, scalable theming system powered entirely by <strong>CSS variables</strong> and <strong>data attributes</strong> — no runtime theme providers, no context, and no JavaScript re-renders.
-                </p>
+        <PostSection id="introduction">
+            <AnchorHeading as={"h2"} id="introduction-heading">
+                Introduction
+            </AnchorHeading>
+            <p>
+                In the previous posts, we focused on architecture and enforcement.
+            </p>
+            <List as="ul" marker="none" spacing="loose">
+                <li><Link href="./foundations">Design System Foundations</Link> introduced a layered token model and explained why styling systems break without clear boundaries.</li>
 
-                <p>
-                    Here's what it looks like in action:
-                </p>
-                <ButtonExample />
-                <p>
-                    Everything we build is framework-agnostic. The CSS works identically in React, Vue, Svelte, or plain HTML — your framework just consumes the theming system, it doesn't own it.
-                </p>
-                <PostNote variant="warning" showIcon={false} >
-                    <p>
-                        <strong>This article is for you if you want to:</strong>
-                    </p>
-                    <List as="ul" spacing="loose" variant="primary">
-                        <li>Build a predictable, centralized styling system without JavaScript overhead</li>
-                        <li>Support multiple themes and variants without prop drilling or context</li>
-                        <li>Write less CSS by letting tokens cascade through your component tree</li>
-                        <li>Maintain accessibility across all theme combinations</li>
-                        <li>Ensure your theming works flawlessly with SSR and static site generation</li>
-                    </List>
-                </PostNote>
-            </Stack>
+                <li><Link href="./primitives">Primitive Components</Link> introduced primitives and showed how those boundaries can be enforced structurally.</li>
+            </List>
+            <p>
+                <em>This post is different.</em>
+            </p>
+            <p>
+                Here, we'll build the system <span className="fun-underline bold">step</span> by <span className="fun-underline bold">step</span>.
+            </p>
+            <p>
+                This is a practical, implementation-focused deep dive. We'll write real code, make concrete decisions, and look at how the theory from earlier posts translates into something you can actually ship.
+            </p>
+            <p>
+                If you're looking for the why, start with the earlier posts. If you want to know how this is built, you're in the right place.
+            </p>
         </PostSection>
     )
 }

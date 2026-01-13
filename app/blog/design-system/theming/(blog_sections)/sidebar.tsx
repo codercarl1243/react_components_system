@@ -7,16 +7,16 @@ export default function ThemingSideBar({ relatedPosts }: PostSideBarProps) {
     return (
         <PostSideBar
             contents={[
-                { id: 'introduction-theming', href: '#introduction-theming', label: "Introduction" },
-                { id: 'why-theming', href: '#why-theming', label: 'Why' },
-                { id: 'core-concepts-theming', href: '#core-concepts-theming', label: 'Core Concepts' },
-                { id: 'global-tokens-theming', href: '#global-tokens-theming', label: 'Global Tokens' },
-                { id: 'variant-tokens-theming', href: '#variant-tokens-theming', label: 'Variant Tokens' },
-                { id: 'component-tokens-theming', href: '#component-tokens-theming', label: 'Component Tokens' },
-                { id: 'appearance-tokens-theming', href: '#appearance-tokens-theming', label: 'Appearance Tokens' },
-                { id: 'bringing-it-all-together-theming', href: '#bringing-it-all-together-theming', label: 'Bringing it all together' },
-                { id: 'advanced-topics-theming', href: '#advanced-topics-theming', label: 'Advanced Topics' },
-                { id: 'whats-next', href: '#whats-next', label: "What's Next" },
+                { id: 'introduction', href: '#introduction', label: "Introduction" },
+                { id: 'what-we-are-building', href: '#what-we-are-building', label: "What we're building" },
+                { id: 'why', href: '#why', label: 'Why this approach' },
+                { id: 'global-tokens', href: '#global-tokens', label: 'Global Tokens' },
+                { id: 'structural-boundaries', href: '#structural-boundaries', label: 'Structural boundaries' },
+                { id: 'variants', href: '#variants', label: 'Variants' },
+                { id: 'appearance', href: '#appearance', label: 'Appearance mapping' },
+                { id: 'paint', href: '#paint', label: 'Paint — explicit styling' },
+                { id: 'putting-it-all-together', href: '#putting-it-all-together', label: 'Putting it all together' },
+                { id: 'summary', href: '#summary', label: "Summary" },
                 { id: 'resources', href: '#resources', label: "Code & Resources" }
             ]}
             // Fillers

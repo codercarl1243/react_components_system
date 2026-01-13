@@ -3,31 +3,28 @@ import List from "@/components/list";
 import PostSection from "@/components/post/post.section";
 
 export default function Section10() {
-
     return (
-        <PostSection id="conclusion">
-            <AnchorHeading as={"h2"} id="conclusion-heading">
-                Wrapping Up & What's Next
+        <PostSection id="summary">
+            <AnchorHeading as={"h2"} id="summary-heading">
+                Summary
             </AnchorHeading>
-
             <p>
-                You now have a full theming system for your design system — not just for buttons, but for every component you
-                will ever build.
+                By this point, you should have a complete picture:
             </p>
-
-            <List as="ul">
-                <li>CSS variables define tokens</li>
-                <li>Variants expose semantic colors</li>
-                <li>ThemeProvider controls global theming</li>
-                <li>useTheme() gives React components access</li>
+            <List as="ul" spacing="loose">
+                <li>why the system is structured the way it is</li>
+                <li>how the layers fit together</li>
+                <li>how components consume the system safely</li>
             </List>
-
             <p>
-                Next up, I'll be extending this foundation into a <strong>global brand-token system</strong> and exploring how to
-                theme components like Cards, NavBars, Inputs, and Layout blocks.
+                What we've built so far defines the rules of the system — but rules alone
+                don't enforce themselves.
             </p>
-
-            <p>Stay tuned — and happy styling! 🎨</p>
+            <p>
+                In the next post, we'll introduce <strong>primitive components</strong> and
+                show how they enforce these boundaries in real interfaces, turning this
+                theming model into something composable and safe to build on.
+            </p>
         </PostSection>
-    )
+    );
 }
