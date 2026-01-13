@@ -17,17 +17,24 @@ export default function ButtonsResources() {
       <p>
         This post focuses on <strong>system-level theming</strong> — using tokens, CSS variables, and clear styling boundaries to support light/dark modes, variants, and surfaces without component rewrites.
       </p>
+      <p>
+        At its core, the system is built on CSS custom properties and their inheritance model. For a deeper understanding of how variables flow, cascade, and override, see the <Link href="https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties">MDN guide on CSS Custom Properties</Link>.
+      </p>
       <AnchorHeading as="h3" id="resources-color-accessibility-tools">Theme validation & color systems</AnchorHeading>
       <p>
         Color accessibility is one of the easiest ways to accidentally exclude users — and one of the easiest to fix with the right tools.
       </p>
-      <p>The tools below can help test contrast, generate accessible palettes, and sanity-check theme decisions before you lock them into your design system.</p>
+      <p>
+        Color decisions in this system are evaluated against established accessibility guidelines. For a concise overview of contrast requirements and success criteria, see the <Link href="https://www.w3.org/WAI/WCAG21/quickref/">WCAG 2.1 Quick Reference guide</Link>.
+      </p>
+      <p>
+        The tools below can help test contrast, generate accessible palettes, and sanity-check theme decisions before you lock them into your design system.
+      </p>
       <List spacing="loose" marker="circle" as="ul">
         <li><Link href="https://webaim.org/resources/contrastchecker/">WebAIM Contrast Checker</Link> — the gold standard for checking contrast ratios</li>
         <li><Link href="https://contrast-grid.eightshapes.com/">Contrast Grid</Link> — compare entire color palettes at once</li>
         <li><Link href="https://color.review/">Color.review</Link> — preview colors with vision-deficiency simulations</li>
       </List>
-
       <Heading as={"h3"}>Theming Pipeline (Reference)</Heading>
       <p>
         The snippets below represent the core building blocks discussed in this post — <FunHighlight>tokens</FunHighlight>, <FunHighlight>data attributes</FunHighlight>, and <FunHighlight>CSS layering</FunHighlight> used to implement theming without coupling styles to components.
@@ -95,11 +102,6 @@ They do not affect styling until mapped by appearance and applied via paint.
 [data-variant] {
   --background-color: var(--variant-bg);
   --foreground-color: var(--variant-fg);
-  --foreground-muted: color-mix(
-    in srgb,
-    var(--foreground-color, var(--text-on-surface)) 65%,
-    var(--variant-surface, var(--surface))
-  );
   --border-color: var(--variant-border);
   --surface-color: var(--variant-surface);
 }
