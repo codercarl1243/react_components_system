@@ -9,7 +9,7 @@ import TabList from "@/components/tablist";
 import TokenFlowDiagram from "../examples/2_whatWeAreBuilding";
 import { Block } from "@/components/primitives";
 
-export default function ButtonsResources() {
+export default function Resources() {
 
   return (
     <PostSection id="resources">
