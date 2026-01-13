@@ -17,7 +17,7 @@ export default function ThemingSideBar({ relatedPosts }: PostSideBarProps) {
                 { id: 'paint', href: '#paint', label: 'Paint — explicit styling' },
                 { id: 'putting-it-all-together', href: '#putting-it-all-together', label: 'Putting it all together' },
                 { id: 'summary', href: '#summary', label: "Summary" },
-                // { id: 'resources', href: '#resources', label: "Code & Resources" }
+                { id: 'resources', href: '#resources', label: "Code & Resources" }
             ]}
             // Fillers
             relatedPosts={relatedPosts}
