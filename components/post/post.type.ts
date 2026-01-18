@@ -15,9 +15,7 @@ export type PostBannerProps = {
 }
 
 export type PostCardPropsType = {
-  variant?: 'featured' | 'card';
   post: PostSummary;
-  as: Exclude<ValidHeadingTag, 'h1'>;
 };
 
 export type SectionProps = StackProps<'section'> & {

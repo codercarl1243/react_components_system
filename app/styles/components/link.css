@@ -1,13 +1,28 @@
+
 .link {
     color: var(--link-color-override, var(--link-color));
-
-    text-decoration: underline;
     text-decoration-color: currentColor;
     text-decoration-thickness: 0.125em;
     text-underline-offset: 0.2em;
     white-space: normal;
     overflow-wrap: break-word;
     word-break: keep-all;
+}
+
+.link:not(.link--surface) {
+    text-decoration: underline;
+}
+
+.link--surface {
+    --link-color-override: currentColor;
+     text-decoration: none;
+     display: inline-block;
+}
+
+.link--surface:focus-visible,
+.link--surface:hover {
+  outline: 2px solid currentColor;
+  outline-offset: 0.25em;
 }
 
 a:not([class]):hover,

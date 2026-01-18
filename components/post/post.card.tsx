@@ -6,6 +6,8 @@ import Link from '@/components/link'
 import Heading from '@/components/heading'
 import usePostCard from './usePostCard'
 import { Block } from '../primitives';
+import clsx from 'clsx';
+import CategoryPill from '@/components/post/post.category';
 
 /** 
  * Render a clickable post card with an image and title.
@@ -18,39 +20,35 @@ import { Block } from '../primitives';
  * @returns The post card component.
  */
 
-export default function PostCard({ variant = 'card', post, as = 'h3' }: PostCardPropsType) {
-    const { image, title } = post
+export default function PostCard({ post }: PostCardPropsType) {
+    const { image, title, excerpt, href, featured, categories } = post
 
 
     const { handleClick, handleMouseDown, handleMouseUp, handleMouseLeave } = usePostCard(post.href)
 
     return (
-        <Block
-            as="article"
-            // variant={variant}
-            onClick={handleClick}
-            className="post-card"
-            onMouseDown={handleMouseDown}
-            onMouseUp={handleMouseUp}
-            onMouseLeave={handleMouseLeave}
+        <Link
+            href={post.href}
+            className="lpost-card__link link--surface"
         >
-            <Heading
-                className="post-card__title"
-                data-styled="filled"
-                variant="accent"
-                as={as}
-                headingSize={4}>
-                <Link href={post.href}>{title}</Link>
-            </Heading>
-            {post.excerpt && (
-                <p className="post-card__excerpt">{post.excerpt}</p>
-            )}
-            <Image
-                src={image.src}
-                alt={image.alt}
-                className='post-card__image'
-                variant={variant}
-            />
-        </Block>
+            <Block
+                as="article"
+                className={clsx(
+                    "post-card p-2 pt-0",
+                    featured && "post-card--featured")}
+                onClick={handleClick}
+                onMouseDown={handleMouseDown}
+                onMouseUp={handleMouseUp}
+                onMouseLeave={handleMouseLeave}
+            >
+                {featured && <Image
+                    variant="card"
+                    alt={image.alt}
+                    src={image.src} />}
+                <Heading as="h3" >{title}</Heading>
+                {featured && <p className="latest-posts__excerpt">{excerpt}</p>}
+                {categories.map(category => <CategoryPill key={post.id + category} category={category} />)}
+            </Block>
+        </Link>
     )
 }

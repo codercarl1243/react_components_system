@@ -4,12 +4,13 @@ import type { PostType, PostSummary, PostId, BlogSubject } from "@/lib/blog/blog
 /**
  * lightweight summary for cards and lists
  */
-export function toPostSummary({ id, subject, pathFragment, title, image, excerpt, lastModified, categories, authorId }: PostType): PostSummary {
+export function toPostSummary({ id, subject, pathFragment, featured, title, image, excerpt, lastModified, categories, authorId }: PostType): PostSummary {
     const href = buildBlogHref(subject, pathFragment);
 
     return {
         id,
         href,
+        featured,
         title,
         image,
         excerpt,

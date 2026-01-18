@@ -42,7 +42,7 @@ const ButtonPosts: readonly Readonly<PostType>[] = [
         lastModified: new Date('2025-10-10'),
         createdAt: new Date('2025-09-30'),
         published: true,
-        featured: true,
+        featured: false,
         image: {
             src: '/images/blogs/button-base/main-image.webp',
             alt: 'Accessible button components with variants and states'

@@ -3,3 +3,16 @@
         padding-block-start: 4rem;
     }
 }
+
+.latest-posts__post .image {
+    height: 100px;
+    display: inline-block;
+}
+.homepage--latest-posts {
+    width: fit-content;
+}
+.latest-posts__link:hover .latest-posts__post,
+    .latest-posts__link:focus-visible .latest-posts__post {
+  outline: 2px solid currentColor;
+  outline-offset: 0.25em;
+}
