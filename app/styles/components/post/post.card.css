@@ -1,19 +1,7 @@
-.post-card__list {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 450px));
-    gap: var(--spacing-lg);
-}
 
 .post-card {
-    border: var(--border-width-thin) solid var(--color-neutral-200);
-    border-radius: var(--radius-lg);
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
     box-shadow: var(--shadow-sm);
-    gap: var(--spacing-sm);
     cursor: pointer;
-    padding-block-end: var(--spacing-lg)
 }
 
 .post-card:hover {
@@ -27,18 +15,13 @@
 }
 
 .post-card .post-card__image {
+    display: inline-block;
+    border: 1px solid red;
+    height: 100px;
+
     overflow: hidden;
     img {
         width: 200%  !important;
         height: auto;
     }
-}
-
-.post-card__title {
-    order: 1;
-    text-align: center;
-}
-
-.post-card__image {
-    order: 0;
 }

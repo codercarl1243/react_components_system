@@ -29,7 +29,7 @@ export default function PostCard({ post }: PostCardPropsType) {
     return (
         <Link
             href={post.href}
-            className="lpost-card__link link--surface"
+            className="post-card__link link--surface"
         >
             <Block
                 as="article"
@@ -44,7 +44,8 @@ export default function PostCard({ post }: PostCardPropsType) {
                 {featured && <Image
                     variant="card"
                     alt={image.alt}
-                    src={image.src} />}
+                    src={image.src} 
+                    className='post-card__image'/>}
                 <Heading as="h3" >{title}</Heading>
                 {featured && <p className="latest-posts__excerpt">{excerpt}</p>}
                 {categories.map(category => <CategoryPill key={post.id + category} category={category} />)}

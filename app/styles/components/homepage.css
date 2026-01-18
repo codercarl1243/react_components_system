@@ -5,14 +5,12 @@
 }
 
 .latest-posts__post .image {
-    height: 100px;
-    display: inline-block;
 }
 .homepage--latest-posts {
     width: fit-content;
 }
-.latest-posts__link:hover .latest-posts__post,
-    .latest-posts__link:focus-visible .latest-posts__post {
+.latest-posts__list .post-card__link:hover .post-card,
+.latest-posts__list .post-card__link:focus-visible .post-card {
   outline: 2px solid currentColor;
   outline-offset: 0.25em;
 }
