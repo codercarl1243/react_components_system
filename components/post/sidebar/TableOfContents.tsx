@@ -4,10 +4,12 @@ import Link from '@/components/link';
 import clsx from "clsx";
 import { useMemo, type MouseEvent } from "react";
 import { useScrollSpy } from "@/lib/hooks/useScrollSpy";
+import { PostSideBarProps } from "./sidebar.type";
+import { isNonEmptyArray, isNullish } from "@/lib/utils/guards";
 
-type ToCProps = {
-    items: { id: string; href: string; label: string }[]
-}
+// type ToCProps = {
+//     items: { id: string; href: string; label: string }[]
+// }
 
 /**
  * Render a table of contents for a post, with links to each section.
@@ -17,12 +19,11 @@ type ToCProps = {
  * @returns The table of contents navigation or `null` when there are no items.
  */
 
-export default function TableOfContents({ items }: ToCProps) {
+export default function TableOfContents({ contents }: { contents: PostSideBarProps['contents'] }) {
+    if (isNullish(contents) || !isNonEmptyArray(contents)) return null;
 
-    const ids = useMemo(() => items.map((item) => item.id), [items]);
+    const ids = useMemo(() => contents.map((item) => item.id), [contents]);
     const { activeId } = useScrollSpy({ ids });
-
-    if (items.length === 0) return null;
 
     const handleContentsClick = (e: MouseEvent<HTMLAnchorElement>, href: string) => {
         e.preventDefault();
@@ -44,7 +45,7 @@ export default function TableOfContents({ items }: ToCProps) {
         <nav className="post-sidebar__contents flow-4" aria-labelledby="toc-heading">
             <Heading as={"h2"} id="toc-heading">Table of contents</Heading>
             <ol className='toc-list'>
-                {items.map(item => {
+                {contents.map(item => {
                     const isActive = activeId === item.id;
                     return (
                         <li key={item.id} className={clsx('toc-item', { 'toc-item--active': isActive })}>
