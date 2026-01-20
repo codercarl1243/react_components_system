@@ -12,7 +12,7 @@ export default function CategoryPill({category}: CategoryPillProps) {
           variant="secondary"
           variantAppearance="tonal"
           paint={["foreground", "background"]}
-          className="latest-posts__meta surface-frame mr-2 px-2"
+          className="latest-posts__meta surface-frame px-2"
         >
           {category}
         </Block>

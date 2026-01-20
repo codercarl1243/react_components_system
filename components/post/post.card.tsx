@@ -1,55 +1,65 @@
-'use client';
+"use client";
 
 import Image from '@/components/image'
 import type { PostCardPropsType } from './post.type'
 import Link from '@/components/link'
 import Heading from '@/components/heading'
-import usePostCard from './usePostCard'
-import { Block } from '../primitives';
-import clsx from 'clsx';
+import { Block, Inline } from '../primitives';
+import { type MouseEvent as ReactMouseEvent } from 'react';
 import CategoryPill from '@/components/post/post.category';
+import { applyDataAttributes } from '@/lib/utils/applyDataAttributes';
 
 /** 
  * Render a clickable post card with an image and title.
  * The entire card is clickable and navigates to the post URL.
- * Handles long-presses to allow text selection without navigation.
+ * Does not navigate when text is selected.
  * 
- * @param variant - Visual variant of the card, e.g. 'card' or 'featured'.
  * @param post - Post data including `slug`, `title`, and `image`.
- * @param as - Semantic heading level for the title (1-6). Defaults to 3.
  * @returns The post card component.
  */
 
 export default function PostCard({ post }: PostCardPropsType) {
-    const { image, title, excerpt, href, featured, categories } = post
 
-
-    const { handleClick, handleMouseDown, handleMouseUp, handleMouseLeave } = usePostCard(post.href)
+    const {
+        image,
+        title,
+        excerpt,
+        href,
+        featured,
+        categories
+    } = post
 
     return (
-        <Link
-            href={post.href}
-            className="post-card__link link--surface"
+        <Block
+            as="article"
+            {...applyDataAttributes({ featured })}
+            className="post-card flow-2 surface-frame"
         >
-            <Block
-                as="article"
-                className={clsx(
-                    "post-card p-2 pt-0",
-                    featured && "post-card--featured")}
-                onClick={handleClick}
-                onMouseDown={handleMouseDown}
-                onMouseUp={handleMouseUp}
-                onMouseLeave={handleMouseLeave}
+            <Link
+                href={href}
+                className="post-card__link post-card__overlay link--surface"
+                aria-labelledby={`heading-post-${post.id}`}
+            />
+            {featured && <Image
+                variant="card"
+                alt={image.alt}
+                src={image.src}
+                className="post-card__image" />}
+            <Heading
+                as="h3"
+                id={`heading-post-${post.id}`}
+                className="post-card__heading mt-0 px-2"
             >
-                {featured && <Image
-                    variant="card"
-                    alt={image.alt}
-                    src={image.src} 
-                    className='post-card__image'/>}
-                <Heading as="h3" >{title}</Heading>
-                {featured && <p className="latest-posts__excerpt">{excerpt}</p>}
-                {categories.map(category => <CategoryPill key={post.id + category} category={category} />)}
-            </Block>
-        </Link>
+                <span className="selectable-text">{title}</span>
+            </Heading>
+            {featured && <p className="post-card__excerpt px-2">
+                <span className="selectable-text">
+                    {excerpt}
+                </span>
+            </p>}
+            <Inline wrap className='post-card__meta px-2 pb-2' gap={2}>
+                {categories.map(category => <CategoryPill key={`${post.id}-${category}`} category={category} />)}
+            </Inline>
+        </Block>
     )
 }

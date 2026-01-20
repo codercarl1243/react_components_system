@@ -22,7 +22,7 @@ const design_system__theming: readonly Readonly<PostType>[] = [
         published: true,
         featured: true,
         image: {
-            src: '/og-image.png',
+            src: '/images/blogs/design-system/theming/main-image.webp',
             alt: 'TBA'
         },
         authorId: CODER_CARL_ID,

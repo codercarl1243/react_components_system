@@ -23,7 +23,7 @@ export default function ThemingPage() {
                     subtitle="A Practical Implementation Guide"
                     headingId="theming-heading"
                     image={{
-                        src: '/og-image.png',
+                        src: '/images/blogs/design-system/theming/main-image.webp',
                         alt: ""
                     }}
                 />
