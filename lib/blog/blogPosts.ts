@@ -12,8 +12,8 @@ export const BLOG_ACCESSIBILITY_PATH = `${BLOG_BASE_PATH}/accessibility`;
 const design_system__theming: readonly Readonly<PostType>[] = [
     {
         id: asPostId('design__theming_01'),
-        title: 'design-system',
-        subtitle: 'Building a design system using CSS',
+        title: 'Building a Theming System',
+        subtitle: 'A Practical Implementation Guide',
         excerpt: 'build a robust, library and framework agnostic design system',
         relatedPostIds: [],
         pathFragment: 'theming',
