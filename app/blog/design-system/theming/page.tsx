@@ -1,4 +1,15 @@
+import { notFound } from "next/navigation";
+
+/** Data */
+import { getBlogPostById, getRelatedPosts } from "@/lib/blog/blog.data";
+import { getAuthorById } from "@/lib/blog/authors/authors.data";
+
+/** Layout */
 import Post from "@/components/post";
+import PostBanner from "@/components/post/post.banner";
+import PostSideBar from "@/components/post/sidebar";
+
+/** Sections */
 import Introduction from "./(blog_sections)/1_introduction";
 import WhatWeAreBuilding from "./(blog_sections)/2_whatWeAreBuilding";
 import Why from './(blog_sections)/3_why';
@@ -10,22 +21,34 @@ import Paint from './(blog_sections)/8_paint';
 import PuttingItAllTogether from './(blog_sections)/9_puttingItAllTogether';
 import Summary from './(blog_sections)/10_summary';
 import Resources from './(blog_sections)/resources';
-import PostBanner from "@/components/post/post.banner";
-import Sidebar from "./(blog_sections)/sidebar";
+
+const TABLE_OF_CONTENTS = [
+    { id: 'introduction', href: '#introduction', label: "Introduction" },
+    { id: 'what-we-are-building', href: '#what-we-are-building', label: "What we're building" },
+    { id: 'why', href: '#why', label: 'Why this approach' },
+    { id: 'global-tokens', href: '#global-tokens', label: 'Global Tokens' },
+    { id: 'structural-boundaries', href: '#structural-boundaries', label: 'Structural boundaries' },
+    { id: 'variants', href: '#variants', label: 'Variants' },
+    { id: 'appearance', href: '#appearance', label: 'Appearance mapping' },
+    { id: 'paint', href: '#paint', label: 'Paint — explicit styling' },
+    { id: 'putting-it-all-together', href: '#putting-it-all-together', label: 'Putting it all together' },
+    { id: 'summary', href: '#summary', label: "Summary" },
+    { id: 'resources', href: '#resources', label: "Code & Resources" }
+] as const;
 
 export default function ThemingPage() {
+    const post = getBlogPostById('design__theming_01');
+    if (!post) {
+        notFound();
+    }
+    const relatedPosts = getRelatedPosts(post.id);
+    const author = getAuthorById(post.authorId);
 
     return (
         <>
             <Post>
                 <PostBanner
-                    title="Building a Theming System"
-                    subtitle="A Practical Implementation Guide"
-                    headingId="theming-heading"
-                    image={{
-                        src: '/images/blogs/design-system/theming/main-image.webp',
-                        alt: ""
-                    }}
+                    post={post}
                 />
                 <Introduction />
                 <WhatWeAreBuilding />
@@ -39,7 +62,11 @@ export default function ThemingPage() {
                 <Summary />
                 <Resources />
             </Post>
-            <Sidebar />
+            <PostSideBar
+                contents={TABLE_OF_CONTENTS}
+                relatedPosts={relatedPosts}
+                author={author}
+            />
         </>
     )
 }
