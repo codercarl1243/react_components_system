@@ -1,6 +1,6 @@
 import Image from '@/components/image'
 import Heading from '@/components/heading'
-import type { PostBannerProps } from '@/components/post/post.type'
+import type { PostType } from '@/lib/blog/blog.types';
 
 /**
  * A hero banner component for blog posts that displays the main title, optional subtitle, and hero image.
@@ -27,29 +27,28 @@ import type { PostBannerProps } from '@/components/post/post.type'
  * 
  * @returns A banner section containing the hero image (if provided), main heading (h1), and subtitle (if provided).
  */
-export default function PostBanner({ post, title, headingId, subtitle, image }: PostBannerProps) {
+export default function PostBanner({ post }: {post: PostType}) {
+  if (!post) return null;
 
-  const displayTitle = title ?? post?.title ?? 'Untitled Post'
-  const displaySubtitle = subtitle ?? post?.subtitle
-  const displayImage = image ?? post?.image
+  const {title, id, subtitle, image } = post;
 
   return (
     <div className="post__banner font-accent width-full">
-      {displayImage?.src && (
+      {image?.src && (
         <Image
-          src={displayImage.src}
-          alt={displayImage.alt ?? ''}
+          src={image.src}
+          alt={image.alt ?? ''}
           variant="banner"
           className="post__banner__image"
         />
       )}
       <div className="post__banner__text">
-        <Heading as={"h1"} id={headingId} className="post__banner__text-heading">
-          {displayTitle}
+        <Heading as={"h1"} id={`heading-${id}`} className="post__banner__text-heading">
+          {title}
         </Heading>
-        {displaySubtitle && (
+        {subtitle && (
           <p className="italic text-lg post__banner__text-subtitle">
-            {displaySubtitle}
+            {subtitle}
           </p>
         )}
       </div>
