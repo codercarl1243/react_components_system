@@ -49,14 +49,14 @@ export function getBlogPostsSummaries(includeUnpublished = false): PostSummary[]
 /**
  * Get a blog post by its ID
  */
-export function getBlogPostById(id: PostId): PostType | undefined {
+export function getBlogPostById(id: PostId | string): PostType | undefined {
     return getBlogPosts().find(post => post.id === id);
 }
 
 /**
  * Get related posts for a given post ID
  */
-export function getRelatedPosts(postId: PostId): PostSummary[] {
+export function getRelatedPosts(postId: PostId | string): PostSummary[] {
     const post = getBlogPostById(postId);
     if (!post) return [];
 
@@ -133,7 +133,7 @@ export function getPostsByKeyword(query: string): PostSummary[] {
 /**
  * Get a posts by its Author
  */
-export function getPostSummariesByAuthorId(authorId: AuthorId): PostSummary[] {
+export function getPostSummariesByAuthorId(authorId: AuthorId | string): PostSummary[] {
     const author = getAuthorById(authorId);
     if (!author) return [];
 
