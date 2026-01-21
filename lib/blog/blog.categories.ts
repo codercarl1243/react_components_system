@@ -5,4 +5,5 @@ export const BLOG_CATEGORIES = {
   REACT: 'react',
   TOOLING: 'tooling',
   PERFORMANCE: 'performance',
+  FOUNDATIONS: 'foundations',
 } as const;

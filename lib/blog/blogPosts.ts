@@ -30,6 +30,37 @@ const design_system__theming: readonly Readonly<PostType>[] = [
         keywords: [BLOG_KEYWORDS.THEMING, BLOG_KEYWORDS.FOUNDATIONS, BLOG_KEYWORDS.DESIGN_SYSTEM],
         categories: [BLOG_CATEGORIES.DESIGN_SYSTEM, BLOG_CATEGORIES.TOOLING],
     },
+    {
+        id: asPostId('design__primitives_01'),
+        title: 'Primitives as Styling Boundaries',
+        subtitle: 'Structuring Layout Without Leaking Styles',
+        excerpt: 'Design layout primitives that enforce structure, spacing, and composition without owning visual styling.',
+        relatedPostIds: [
+            asPostId('design__theming_01'),
+        ],
+        pathFragment: 'primitives',
+        lastModified: new Date('2025-12-15'),
+        createdAt: new Date('2025-10-05'),
+        published: true,
+        featured: false,
+        image: {
+            src: '/images/blogs/design-system/primitives/main-image.webp',
+            alt: 'Abstract layout blocks representing structural primitives and styling boundaries'
+        },
+        authorId: CODER_CARL_ID,
+        subject: `${BLOG_SUBJECTS.DESIGN_SYSTEM}`,
+        keywords: [
+            BLOG_KEYWORDS.PRIMITIVES,
+            BLOG_KEYWORDS.LAYOUT,
+            BLOG_KEYWORDS.DESIGN_SYSTEM,
+            BLOG_KEYWORDS.STRUCTURE,
+        ],
+        categories: [
+            BLOG_CATEGORIES.DESIGN_SYSTEM,
+            BLOG_CATEGORIES.FOUNDATIONS,
+        ],
+    }
+
 ]
 const ButtonPosts: readonly Readonly<PostType>[] = [
     {
