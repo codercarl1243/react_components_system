@@ -3,14 +3,3 @@
         padding-block-start: 4rem;
     }
 }
-
-.latest-posts__post .image {
-}
-.homepage--latest-posts {
-    width: fit-content;
-}
-.latest-posts__list .post-card__link:hover .post-card,
-.latest-posts__list .post-card__link:focus-visible .post-card {
-  outline: 2px solid currentColor;
-  outline-offset: 0.25em;
-}
