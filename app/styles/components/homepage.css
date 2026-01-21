@@ -1,5 +1,42 @@
-@media screen and (max-width: 35rem ) {
-    .homepage {
-        padding-block-start: 4rem;
-    }
+@media screen and (max-width: 35rem) {
+  .homepage {
+    padding-block-start: 4rem;
+  }
+}
+
+.homepage--latest-posts {
+  container-type: inline-size;
+  container-name: latest-posts;
+  width: 100%;
+}
+
+.latest-posts__grid {
+  /* padding: var(--spacing-lg); */
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing);
+}
+
+@container latest-posts (min-width: 30rem) {
+  .latest-posts__grid {
+    grid-template-columns: 4fr 3fr;
+    grid-auto-rows: 1fr;
+    row-gap: 1rem;
+  }
+
+  .latest-posts__featured {
+    grid-column: 1;
+    grid-row: span 3;
+  }
+  .latest-posts__featured .post-card__featured {
+    height: 100%;
+  }
+
+  .latest-posts__item {
+    align-self: stretch;
+    grid-column: 2;
+  }
+
+
 }

@@ -7,10 +7,8 @@ export default function Home() {
 
   return (
     <Block className='layout-wrapper homepage pb-8 flow-16'>
-      <Row className='width-full'>
-        <Hero />
-        <LatestPosts />
-      </Row>
+      <Hero />
+      <LatestPosts />
       <ContactForm />
     </Block>
   )

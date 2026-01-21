@@ -7,6 +7,7 @@ import Heading from '@/components/heading'
 import { Block, Inline } from '../primitives';
 import CategoryPill from '@/components/post/post.category';
 import { applyDataAttributes } from '@/lib/utils/applyDataAttributes';
+import clsx from 'clsx';
 
 /** 
  * Render a clickable post card with an image and title.
@@ -32,7 +33,7 @@ export default function PostCard({ post }: PostCardPropsType) {
         <Block
             as="article"
             {...applyDataAttributes({ featured })}
-            className="post-card flow-2 surface-frame"
+            className={clsx("flow-2 surface-frame post-card", {"post-card__featured": featured})}
         >
             <Link
                 href={href}

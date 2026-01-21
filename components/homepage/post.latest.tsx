@@ -1,34 +1,32 @@
 import Heading from "@/components/heading";
 import { getMostRecentPosts } from "@/lib/blog/blog.data";
-import { Stack } from "@/components/primitives";
+import { Block, Stack } from "@/components/primitives";
 import List from "@/components/list";
-import PostCard from "../post/post.card";
+import PostCard from "@/components/post/post.card";
+import { logInfo } from "@/lib/logging/log";
 
 export default function LatestPosts() {
-  const posts = getMostRecentPosts(3);
-  console.log("Posts", posts)
-
-  const postCards = posts.map((post) => (
-    <li
-      key={post.id + "homepageCard"}>
-      <PostCard post={post} />
-    </li>
-  ))
+  const { posts, featuredPost } = getMostRecentPosts(3);
+  logInfo("posts", { data: { ...posts } })
+  logInfo("featured post", { data: { ...featuredPost } })
 
   return (
-    <Stack
-      className="surface-frame frame-inset-2 p-2 px-4 homepage--latest-posts"
+    <Block
+      className="homepage--latest-posts width-bleed"
     >
       <Heading as="h2" className="center" headingSize={5}>Latest posts</Heading>
-      <List
-        as="ul"
-        marker="none"
-        className='latest-posts__list p-0'
-      >
-        {postCards}
-      </List>
+        <List as="ul" marker="none" className="latest-posts__grid">
+          <li className="latest-post latest-posts__featured">
+            <PostCard post={featuredPost} />
+          </li>
 
-    </Stack>
+          {posts.map(post => (
+            <li key={post.id} className="latest-post latest-posts__item">
+              <PostCard post={post} />
+            </li>
+          ))}
+        </List>
+    </Block>
   )
 }
 

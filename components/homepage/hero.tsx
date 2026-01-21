@@ -3,7 +3,7 @@ import Heading from '@/components/heading'
 export default function Hero() {
 
   return (
-    <div>
+    <div className='width-bleed'>
       <Heading as={"h1"} id="hero-heading">
         Hey, I'm Carl
       </Heading>

@@ -1,6 +1,8 @@
 .post-card {
-    box-shadow: var(--shadow-sm);
+    /* TODO: fix this. shadow token not available here?? */
+    /* box-shadow: var(--shadow-sm); */
     position: relative;
+    height: 100%;
 }
 
 .post-card__overlay {
@@ -43,9 +45,17 @@
     }
 }
 
-.post-card__link:active .post-card,
+.post-card:has(.post-card__link:active),
+.post-card:has(.post-card__link:focus-visible),
 .post-card:hover {
-    box-shadow: var(--shadow-md);
+    /* TODO: fix this. shadow token not available here?? */
+    /* box-shadow: var(--shadow-md); */
+    outline: 1px solid red !important;
+}
+
+.post-card .post-card__link {
+        --link-color-override: transparent;
+    outline: 0;
 }
 
 .post-card:hover .post-card__image img,
