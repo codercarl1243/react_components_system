@@ -5,7 +5,6 @@ import type { PostCardPropsType } from './post.type'
 import Link from '@/components/link'
 import Heading from '@/components/heading'
 import { Block, Inline } from '../primitives';
-import { type MouseEvent as ReactMouseEvent } from 'react';
 import CategoryPill from '@/components/post/post.category';
 import { applyDataAttributes } from '@/lib/utils/applyDataAttributes';
 

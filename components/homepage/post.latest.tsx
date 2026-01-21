@@ -8,7 +8,7 @@ export default function LatestPosts() {
   const posts = getMostRecentPosts(3);
   console.log("Posts", posts)
 
-  const PostCards = posts.map((post) => (
+  const postCards = posts.map((post) => (
     <li
       key={post.id + "homepageCard"}>
       <PostCard post={post} />
@@ -25,7 +25,7 @@ export default function LatestPosts() {
         marker="none"
         className='latest-posts__list p-0'
       >
-        {PostCards}
+        {postCards}
       </List>
 
     </Stack>
