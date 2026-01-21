@@ -1,20 +1,17 @@
-import { BlogCategory } from "@/lib/blog/blog.types";
 import { Block } from "@/components/primitives";
+import clsx from "clsx";
+import type { PostCategoryPillProps } from "@/components/post/post.type";
 
-type CategoryPillProps = {
-    category: BlogCategory;
-}
-
-export default function CategoryPill({category}: CategoryPillProps) {
+export default function CategoryPill({ category, className }: PostCategoryPillProps) {
   return (
-        <Block
-          as="span"
-          variant="secondary"
-          variantAppearance="tonal"
-          paint={["foreground", "background"]}
-          className="latest-posts__meta surface-frame px-2"
-        >
-          {category}
-        </Block>
+    <Block
+      as="span"
+      variant="secondary"
+      variantAppearance="tonal"
+      paint={["foreground", "background"]}
+      className={clsx(className, "category-pill surface-frame px-2")}
+    >
+      {category}
+    </Block>
   );
 }
