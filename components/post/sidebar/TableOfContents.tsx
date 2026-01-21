@@ -7,16 +7,24 @@ import { useScrollSpy } from "@/lib/hooks/useScrollSpy";
 import { PostSideBarProps } from "./sidebar.type";
 import { isNonEmptyArray, isNullish } from "@/lib/utils/guards";
 
-// type ToCProps = {
-//     items: { id: string; href: string; label: string }[]
-// }
-
 /**
- * Render a table of contents for a post, with links to each section.
- * The currently active section is highlighted based on scroll position.
- * Clicking a link smoothly scrolls the target section into view.
- * @param items - Array of table-of-contents entries; each item should contain `id`, `href` and `label`.
- * @returns The table of contents navigation or `null` when there are no items.
+ * Renders a table of contents for a post.
+ *
+ * Displays a list of section links derived from the provided contents and
+ * highlights the currently active section based on scroll position.
+ * Clicking a link scrolls the target section into view using smooth scrolling
+ * (unless the user has enabled reduced motion) and updates the URL hash
+ * without triggering a native jump.
+ *
+ * If no contents are provided, or the contents array is empty, nothing is rendered.
+ *
+ * @component
+ *
+ * @param contents - An ordered list of table-of-contents items, each containing
+ * a section id, hash href, and display label.
+ *
+ * @returns A navigation element containing the table of contents, or `null`
+ * when there are no items to display.
  */
 
 export default function TableOfContents({ contents }: { contents: PostSideBarProps['contents'] }) {
