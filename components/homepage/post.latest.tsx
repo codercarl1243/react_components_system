@@ -14,7 +14,7 @@ export default function LatestPosts() {
     <Block
       className="homepage--latest-posts width-bleed"
     >
-      <Heading as="h2" className="center" headingSize={5}>Latest posts</Heading>
+      <Heading as="h2" className="center mb-4" headingSize={4}>Latest posts</Heading>
         <List as="ul" marker="none" className="latest-posts__grid">
           <li className="latest-post latest-posts__featured">
             <PostCard post={featuredPost} />
