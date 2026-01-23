@@ -5,7 +5,7 @@ import clsx from "clsx";
 import { useMemo, type MouseEvent } from "react";
 import { useScrollSpy } from "@/lib/hooks/useScrollSpy";
 import { PostSideBarProps } from "./sidebar.type";
-import { isNonEmptyArray, isNullish } from "@/lib/utils/guards";
+import { isNonEmptyArray } from "@/lib/utils/guards";
 
 /**
  * Renders a table of contents for a post.
@@ -28,10 +28,13 @@ import { isNonEmptyArray, isNullish } from "@/lib/utils/guards";
  */
 
 export default function TableOfContents({ contents }: { contents: PostSideBarProps['contents'] }) {
-    if (isNullish(contents) || !isNonEmptyArray(contents)) return null;
 
-    const ids = useMemo(() => contents.map((item) => item.id), [contents]);
+    const contentsArray = isNonEmptyArray(contents) ? contents : [];
+    const ids = useMemo(() => contentsArray.map((item) => item.id), [contentsArray]);
     const { activeId } = useScrollSpy({ ids });
+
+    if (contentsArray.length === 0 ) return null;
+
 
     const handleContentsClick = (e: MouseEvent<HTMLAnchorElement>, href: string) => {
         e.preventDefault();
@@ -53,7 +56,7 @@ export default function TableOfContents({ contents }: { contents: PostSideBarPro
         <nav className="post-sidebar__contents flow-4" aria-labelledby="toc-heading">
             <Heading as={"h2"} id="toc-heading">Table of contents</Heading>
             <ol className='toc-list'>
-                {contents.map(item => {
+                {contentsArray.map(item => {
                     const isActive = activeId === item.id;
                     return (
                         <li key={item.id} className={clsx('toc-item', { 'toc-item--active': isActive })}>
