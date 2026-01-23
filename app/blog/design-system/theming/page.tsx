@@ -1,8 +1,5 @@
-import { notFound } from "next/navigation";
-
 /** Data */
-import { getBlogPostById, getRelatedPosts } from "@/lib/blog/blog.data";
-import { getAuthorById } from "@/lib/blog/authors/authors.data";
+import getBlogPostPageData from "@/lib/blog/blog.page-data";
 
 /** Layout */
 import Post from "@/components/post";
@@ -22,6 +19,7 @@ import PuttingItAllTogether from './(blog_sections)/9_puttingItAllTogether';
 import Summary from './(blog_sections)/10_summary';
 import Resources from './(blog_sections)/resources';
 
+
 const TABLE_OF_CONTENTS = [
     { id: 'introduction', href: '#introduction', label: "Introduction" },
     { id: 'what-we-are-building', href: '#what-we-are-building', label: "What we're building" },
@@ -37,12 +35,8 @@ const TABLE_OF_CONTENTS = [
 ] as const;
 
 export default function ThemingPage() {
-    const post = getBlogPostById('design__theming_01');
-    if (!post) {
-        notFound();
-    }
-    const relatedPosts = getRelatedPosts(post.id);
-    const author = getAuthorById(post.authorId);
+
+    const { post, relatedPosts, author } = getBlogPostPageData("design__theming_01");
 
     return (
         <>
