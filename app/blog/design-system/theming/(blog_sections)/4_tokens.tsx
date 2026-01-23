@@ -4,7 +4,6 @@ import ColorSwatch from "@/components/colorSwatch";
 import Heading from "@/components/heading";
 import AnchorHeading from "@/components/heading/anchorHeading";
 import Link from "@/components/link";
-import PostInfo from "@/components/post/post.info";
 import PostNote from "@/components/post/post.note";
 import PostSection from "@/components/post/post.section";
 import { Inline, Stack } from "@/components/primitives";
