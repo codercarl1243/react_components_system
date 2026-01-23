@@ -76,7 +76,7 @@ export function getRelatedPosts(postId: PostId | string): PostSummary[] {
  */
 export function getMostRecentPosts(
     limit = 3
-): { posts: PostSummary[]; featuredPost: PostSummary } {
+): { posts: PostSummary[]; featuredPost: PostSummary | undefined } {
     const sortedPosts = sortByModifiedDate(getBlogPosts());
 
     const explicitFeatured = sortedPosts.find(post => post.featured);
@@ -86,6 +86,7 @@ export function getMostRecentPosts(
     // Defensive guard (in case there are no posts at all)
     if (!featuredSource) {
         logWarning("No blog posts available to feature");
+        return { posts: [], featuredPost: undefined };
     }
 
     const featuredPost = toPostSummary(featuredSource);
