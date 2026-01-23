@@ -34,7 +34,7 @@ const TABLE_OF_CONTENTS = [
 ] as const;
 
 export default function FoundationsPage() {
-    const { post, relatedPosts, author } = getBlogPostPageData("design__theming_01");
+    const { post, relatedPosts, author } = getBlogPostPageData("design__foundations_01");
     return (
         <>
             <Post>
