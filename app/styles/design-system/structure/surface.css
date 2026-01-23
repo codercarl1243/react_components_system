@@ -105,7 +105,7 @@ Keep them separate.
     --frame-inset-base: var(--spacing-sm);
     --frame-inset: var(--frame-inset-base);
 
-    border: var(--border-width-thin) solid;
+    border: var(--border-width-thin) solid var(--border-color);
     border-radius: var(--frame-radius-effective, var(--frame-radius));
 }
 

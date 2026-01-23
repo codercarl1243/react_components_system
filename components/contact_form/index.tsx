@@ -65,7 +65,7 @@ export default function ContactForm() {
     }
 
     return (
-        <form ref={formRef} className="contact-form" onSubmit={handleSubmit} noValidate>
+        <form ref={formRef} className="contact-form width-bleed" onSubmit={handleSubmit} noValidate>
             <fieldset className="contact-form__fieldset">
                 <legend className="contact-form__legend">Contact Me</legend>
 

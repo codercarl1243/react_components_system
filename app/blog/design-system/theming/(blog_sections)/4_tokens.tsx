@@ -4,7 +4,7 @@ import ColorSwatch from "@/components/colorSwatch";
 import Heading from "@/components/heading";
 import AnchorHeading from "@/components/heading/anchorHeading";
 import Link from "@/components/link";
-import PostInfo from "@/components/post/post.info";
+import PostNote from "@/components/post/post.note";
 import PostSection from "@/components/post/post.section";
 import { Inline, Stack } from "@/components/primitives";
 
@@ -24,11 +24,6 @@ export default function Section4() {
                 <p>
                     We'll focus on <span className="bold">color tokens</span> as they best demonstrate how values flow through the rest of the system.
                 </p>
-                <PostInfo variant="inverse">
-                    <span className="italic">
-                        The full token set for this project is available on <Link href="https://github.com/codercarl1243/react_components_system/tree/main/styles/tokens">GitHub</Link>.
-                    </span>
-                </PostInfo>
             </Stack>
 
             <Stack>
@@ -55,9 +50,9 @@ export default function Section4() {
     --color-neutral-900: hsl(248, 62%, 5%);
 }`}
                 />
-                <PostInfo>
-                    All other color scales in the system follow the same naming and numeric structure.
-                </PostInfo>
+                <p>
+                    All other color scales in the system follow the <em>same</em> naming and numeric structure.
+                </p>
                 <p>
                     These tokens are intentionally generic. They describe <em>what colors exist</em>, not <em>what they're used for</em>.
                 </p>
@@ -66,9 +61,12 @@ export default function Section4() {
                 </p>
             </Stack>
 
-            <PostInfo>
-                For tools that help you design accessible, contrast-safe color palettes, see the <Link href="#resources-color-accessibility-tools">resources section</Link>.
-            </PostInfo>
+            <PostNote>
+               <p> For tools that help you design accessible, contrast-safe color palettes, see the <Link href="#resources-color-accessibility-tools">resources section</Link>.</p>
+               <p className="italic">
+                        The full token set for this project is available on <Link href="https://github.com/codercarl1243/react_components_system/tree/main/styles/tokens">GitHub</Link>.
+                    </p>
+            </PostNote>
         </PostSection>
     );
 }

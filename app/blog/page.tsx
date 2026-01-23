@@ -13,8 +13,6 @@ export default function BlogPage() {
         {blogPosts.map((post) => (
           <li key={post.id}>
             <PostCard
-              as={"h2"}
-              variant="card"
               post={post}
             />
           </li>

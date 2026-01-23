@@ -2,6 +2,7 @@ import Code from "@/components/code";
 import InlineCode from "@/components/code/inlineCode";
 import Heading from "@/components/heading";
 import AnchorHeading from "@/components/heading/anchorHeading";
+import PostNote from "@/components/post/post.note";
 import PostSection from "@/components/post/post.section";
 
 export default function Section5() {
@@ -54,18 +55,26 @@ export default function Section5() {
             </p>
             <Code
                 lang="css"
-                codeString={`.block[data-paint~="background"] { background-color: var(--background-color); }
-.block[data-paint~="foreground"] { color: var(--foreground-color); }
-.block[data-paint~="border"] { border-color: var(--border-color); }
-`} />
-            <p>
-                Any component that extends the base primitive <InlineCode codeString="block" /> automatically gains access to paint behavior — without implementing it itself.
-            </p>
-
+                codeString={`.block[data-paint~="background"] { 
+    background-color: var(--background-color); 
+}
+.block[data-paint~="foreground"] { 
+    color: var(--foreground-color); 
+}
+.block[data-paint~="border"] { 
+    border-color: var(--border-color); 
+}`} />
+            <PostNote className="flow-4" variant="neutral" showIcon={false}>
+                <p>
+                    Any component that extends the base primitive <InlineCode codeString="<Block />" lang="tsx" /> automatically gains access to paint behavior — without implementing it itself.
+                </p>
+                <p>
+                    We will explore this more later on.
+                </p>
+            </PostNote>
             <p>
                 This keeps structural components simple and predictable, while ensuring visual application happens in one place.
             </p>
-
             <p>
                 With structure in place, we can now define meaning.
             </p>

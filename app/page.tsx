@@ -1,7 +1,7 @@
 import ContactForm from '@/components/contact_form';
 import Hero from '@/components/homepage/hero';
 import LatestPosts from '@/components/homepage/post.latest';
-import { Block } from '@/components/primitives';
+import { Block, Row } from '@/components/primitives';
 
 export default function Home() {
 

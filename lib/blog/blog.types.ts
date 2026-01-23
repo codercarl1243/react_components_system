@@ -64,4 +64,5 @@ export type PostSummary = {
     lastModified: PostType['lastModified'];
     authorId: AuthorId;
     categories: BlogCategory[];
+    featured: PostType["featured"];
 };

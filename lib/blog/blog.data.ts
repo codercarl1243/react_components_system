@@ -5,9 +5,10 @@ import type { PostId, PostType, PostSummary, BlogCategory, BlogSubject, BlogGlob
 import { computePostScore, toPostSummary } from "@/lib/blog/blog.utils";
 import { BLOG_POSTS } from "@/lib/blog/blogPosts";
 import { BLOG_CATEGORIES } from "@/lib/blog/blog.categories";
-import { BLOG_KEYWORDS } from "./blog.keywords";
-import { BLOG_SUBJECTS } from "./blog.subjects";
+import { BLOG_KEYWORDS } from "@/lib/blog/blog.keywords";
+import { BLOG_SUBJECTS } from "@/lib/blog/blog.subjects";
 import { sortByModifiedDate } from '@/lib/blog/blog.sort';
+import { logWarning } from "@/lib/logging/log";
 
 export const BLOG_BASE_PATH = '/blog';
 /**
@@ -49,14 +50,15 @@ export function getBlogPostsSummaries(includeUnpublished = false): PostSummary[]
 /**
  * Get a blog post by its ID
  */
-export function getBlogPostById(id: PostId): PostType | undefined {
-    return getBlogPosts().find(post => post.id === id);
+export function getBlogPostById(id: PostId | string): PostType | undefined {
+    return getBlogPosts()
+        .find(post => post.id === id);
 }
 
 /**
  * Get related posts for a given post ID
  */
-export function getRelatedPosts(postId: PostId): PostSummary[] {
+export function getRelatedPosts(postId: PostId | string): PostSummary[] {
     const post = getBlogPostById(postId);
     if (!post) return [];
 
@@ -67,26 +69,43 @@ export function getRelatedPosts(postId: PostId): PostSummary[] {
 }
 
 /**
- * sorted by date
+ * Returns the most recent posts, always including a featured post.
+ *
+ * If no post is explicitly marked as featured, the most recently
+ * modified post is used as the featured fallback.
  */
-export function getMostRecentPosts(limit = 3): PostSummary[] {
-    const posts = getBlogPosts();
+export function getMostRecentPosts(
+    limit = 3
+): { posts: PostSummary[]; featuredPost: PostSummary | undefined } {
+    const sortedPosts = sortByModifiedDate(getBlogPosts());
 
-    return sortByModifiedDate(posts)
+    const explicitFeatured = sortedPosts.find(post => post.featured);
+
+    const featuredSource = explicitFeatured ?? sortedPosts[0];
+
+    // Defensive guard (in case there are no posts at all)
+    if (!featuredSource) {
+        logWarning("No blog posts available to feature");
+        return { posts: [], featuredPost: undefined };
+    }
+
+    const featuredPost = toPostSummary(featuredSource);
+
+    const posts = sortedPosts
+        .filter(post => post !== featuredSource)
         .slice(0, limit)
         .map(toPostSummary);
+
+    return { featuredPost, posts };
 }
 
 /**
  * Featured Flag = true
  */
-export function getFeaturedPosts(limit = 3): PostSummary[] {
-    const posts = getBlogPosts();
-
-    return posts
+export function getFeaturedPost(): PostSummary | undefined {
+    return getBlogPosts()
         .filter(post => post.featured)
-        .slice(0, limit)
-        .map(toPostSummary);
+        .map(toPostSummary)[0];
 }
 
 /**
@@ -133,7 +152,7 @@ export function getPostsByKeyword(query: string): PostSummary[] {
 /**
  * Get a posts by its Author
  */
-export function getPostSummariesByAuthorId(authorId: AuthorId): PostSummary[] {
+export function getPostSummariesByAuthorId(authorId: AuthorId | string): PostSummary[] {
     const author = getAuthorById(authorId);
     if (!author) return [];
 

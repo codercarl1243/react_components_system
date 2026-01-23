@@ -17,4 +17,7 @@ export const BLOG_KEYWORDS = {
     UX: 'ux',
     DESIGN_SYSTEM: 'design-system',
     THEMING: 'theming',
+    LAYOUT: 'layout',
+    STRUCTURE: 'structure',
+    PRIMITIVES: 'primitives'
 } as const;

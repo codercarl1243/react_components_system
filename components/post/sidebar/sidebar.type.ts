@@ -13,7 +13,7 @@ export type TableOfContentsItem = {
 };
 
 export type PostSideBarProps = {
-    contents?: TableOfContentsItem[]
+    contents?: readonly TableOfContentsItem[]
     relatedPosts?: PostSummary[];
     author?: Author;
 } & ComponentProps<'aside'>;

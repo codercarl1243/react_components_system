@@ -1,7 +1,7 @@
 'use client';
 import { Children } from 'react'
 import clsx from 'clsx'
-import ToC from './TableOfContents';
+import TableOfContents from './TableOfContents';
 import RelatedPosts from './RelatedPosts';
 import Author from './author';
 import { PostSideBarProps } from './sidebar.type';
@@ -60,7 +60,7 @@ export default function PostSideBar({
                 className={clsx('post-sidebar flow-8', className)}
                 {...props}
             >
-                {hasContents && <ToC items={contents} />}
+                {hasContents && <TableOfContents contents={contents} />}
                 {hasRelated && <RelatedPosts posts={relatedPosts} />}
                 {author && <Author author={author} />}
                 {children}

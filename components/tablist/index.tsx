@@ -4,27 +4,35 @@ import Tab from '@/components/tablist/tab'
 import useTablist from '@/components/tablist/useTablist'
 import Panel from '@/components/tablist/panel'
 import clsx from 'clsx'
+import { Block } from '@/components/primitives'
 
-export default function TabList ({
-    defaultActiveTabId, 
+export default function TabList({
+    defaultActiveTabId,
     tabListName,
-    tabs, 
-    orientation = 'horizontal', 
-    className, 
+    tabs,
+    orientation = 'horizontal',
+    className,
     variant,
     ...props }: TabListProps) {
 
-  const {
-    activeId,
-    setActiveTab,
-    tablistRef,
-    handleKeyDown,
-  } = useTablist(defaultActiveTabId)
+    const {
+        activeId,
+        setActiveTab,
+        tablistRef,
+        handleKeyDown,
+    } = useTablist(defaultActiveTabId)
 
-  if (!tabs?.length) return null
+    if (!tabs?.length) return null
 
-  return (
-        <div className={clsx('tablist', className)} {...props}>
+    return (
+        <Block 
+        className={clsx('tablist surface-frame', className)} 
+        variant='muted'
+        variantAppearance='filled'
+        paint="all"
+        {...props}
+        
+        >
             <div
                 className="tablist__header"
                 role="tablist"
@@ -36,17 +44,17 @@ export default function TabList ({
                     const tabId = `${tabListName}-tab-${item.id}`;
 
                     return (
-                    <Tab
-                        key={tabId}
-                        id={item.id}
-                        isSelected={activeId === item.id}
-                        onClick={() => setActiveTab(item.id)}
-                        variantAppearance={"filled"}
-                        variant={activeId === item.id ? "neutral" : variant }
-                    >
-                        {item.tabLabel}
-                    </Tab>
-                )
+                        <Tab
+                            key={tabId}
+                            id={item.id}
+                            isSelected={activeId === item.id}
+                            onClick={() => setActiveTab(item.id)}
+                            variantAppearance={"tonal"}
+                            variant={activeId === item.id ? "neutral" : variant}
+                        >
+                            {item.tabLabel}
+                        </Tab>
+                    )
                 })}
             </div>
             <div className="tablist__content">
@@ -60,6 +68,6 @@ export default function TabList ({
                     </Panel>
                 ))}
             </div>
-        </div>
-  )
+        </Block>
+    )
 }

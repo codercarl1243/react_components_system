@@ -90,10 +90,49 @@ export function isNonEmptyObject(value: unknown): value is Record<string, unknow
   );
 }
 
+/**
+ * Type guard that checks whether a value is a non-empty array.
+ *
+ * When this guard returns true, TypeScript can safely treat the value
+ * as a tuple with at least one element (`[T, ...T[]]`), enabling access
+ * to the first item without additional length checks.
+ *
+ * @example
+ * ```ts
+ * if (isNonEmptyArray(items)) {
+ *   const first = items[0]; // safe
+ * }
+ * ```
+ *
+ * @param value - The value to test.
+ * @returns True if the value is an array with at least one element.
+ */
 export function isNonEmptyArray<T>(
   value: unknown
 ): value is [T, ...T[]] {
   return Array.isArray(value) && value.length > 0;
+}
+/**
+ * Type guard that checks whether a value is an empty array.
+ *
+ * This guard confirms that the value is an array whose length is zero.
+ * It does not narrow the array to an empty tuple type (`[]`), as the
+ * array may still be mutated or populated later.
+ *
+ * @example
+ * ```ts
+ * if (isEmptyArray(items)) {
+ *   // items.length === 0
+ * }
+ * ```
+ *
+ * @param value - The value to test.
+ * @returns True if the value is an array with no elements.
+ */
+export function isEmptyArray(
+  value: unknown
+): value is readonly unknown[] {
+  return Array.isArray(value) && value.length === 0;
 }
 
 /**

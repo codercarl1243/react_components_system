@@ -1,44 +1,72 @@
-.post-card__list {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 450px));
-    gap: var(--spacing-lg);
-}
-
 .post-card {
-    border: var(--border-width-thin) solid var(--color-neutral-200);
-    border-radius: var(--radius-lg);
+    --border-color: var(--color-neutral-200);
+    position: relative;
+    height: 100%;
     overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    box-shadow: var(--shadow-sm);
-    gap: var(--spacing-sm);
-    cursor: pointer;
-    padding-block-end: var(--spacing-lg)
 }
 
-.post-card:hover {
-    box-shadow: var(--shadow-md);
+.post-card__overlay {
+    cursor: pointer;
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+}
 
-    .post-card__image {
-        img {
-            width: 100% !important;
-        }
-    }
+.post-card .selectable-text {
+    pointer-events: auto;
+    user-select: text;
+    cursor: text;
+}
+
+.post-card__heading,
+.post-card__excerpt,
+.post-card__meta {
+    position: relative;
+    z-index: 2;
+    pointer-events: none;
 }
 
 .post-card .post-card__image {
+    display: inline-block;
+    height: max(100px, 50%);
     overflow: hidden;
+    width: 100%;
+
     img {
-        width: 200%  !important;
-        height: auto;
+        width: max(250px, 100%) !important;
+        height: 100%;
+        transform: scale(1.25) translate(-8%, -8%);
+        filter: grayscale(100%) contrast(0.75);
+        transition:
+            filter 600ms cubic-bezier(0, 0.25, 0.3, 1),
+            transform 600ms cubic-bezier(0.22, 1, 0.36, 1);
     }
 }
 
-.post-card__title {
-    order: 1;
-    text-align: center;
+.post-card:has(.post-card__link:active),
+.post-card:has(.post-card__link:focus-visible),
+.post-card:hover {
+    box-shadow: var(--shadow-sm);
 }
 
-.post-card__image {
-    order: 0;
+.post-card .post-card__link {
+    --link-color-override: transparent;
+    outline: 0;
+}
+
+.post-card:hover .post-card__image,
+.post-card:focus-within .post-card__image {
+
+    img {
+        transform: scale(1) translate(0, 0);
+        filter: grayscale(0%) saturate(1.05);
+    }
+
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .post-card__image img {
+        transform: none;
+        transition: none;
+    }
 }

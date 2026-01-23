@@ -4,25 +4,37 @@ import Link from '@/components/link';
 import clsx from "clsx";
 import { useMemo, type MouseEvent } from "react";
 import { useScrollSpy } from "@/lib/hooks/useScrollSpy";
-
-type ToCProps = {
-    items: { id: string; href: string; label: string }[]
-}
+import { PostSideBarProps } from "./sidebar.type";
+import { isNonEmptyArray } from "@/lib/utils/guards";
 
 /**
- * Render a table of contents for a post, with links to each section.
- * The currently active section is highlighted based on scroll position.
- * Clicking a link smoothly scrolls the target section into view.
- * @param items - Array of table-of-contents entries; each item should contain `id`, `href` and `label`.
- * @returns The table of contents navigation or `null` when there are no items.
+ * Renders a table of contents for a post.
+ *
+ * Displays a list of section links derived from the provided contents and
+ * highlights the currently active section based on scroll position.
+ * Clicking a link scrolls the target section into view using smooth scrolling
+ * (unless the user has enabled reduced motion) and updates the URL hash
+ * without triggering a native jump.
+ *
+ * If no contents are provided, or the contents array is empty, nothing is rendered.
+ *
+ * @component
+ *
+ * @param contents - An ordered list of table-of-contents items, each containing
+ * a section id, hash href, and display label.
+ *
+ * @returns A navigation element containing the table of contents, or `null`
+ * when there are no items to display.
  */
 
-export default function TableOfContents({ items }: ToCProps) {
+export default function TableOfContents({ contents }: { contents: PostSideBarProps['contents'] }) {
 
-    const ids = useMemo(() => items.map((item) => item.id), [items]);
+    const contentsArray = isNonEmptyArray(contents) ? contents : [];
+    const ids = useMemo(() => contentsArray.map((item) => item.id), [contentsArray]);
     const { activeId } = useScrollSpy({ ids });
 
-    if (items.length === 0) return null;
+    if (contentsArray.length === 0 ) return null;
+
 
     const handleContentsClick = (e: MouseEvent<HTMLAnchorElement>, href: string) => {
         e.preventDefault();
@@ -44,7 +56,7 @@ export default function TableOfContents({ items }: ToCProps) {
         <nav className="post-sidebar__contents flow-4" aria-labelledby="toc-heading">
             <Heading as={"h2"} id="toc-heading">Table of contents</Heading>
             <ol className='toc-list'>
-                {items.map(item => {
+                {contentsArray.map(item => {
                     const isActive = activeId === item.id;
                     return (
                         <li key={item.id} className={clsx('toc-item', { 'toc-item--active': isActive })}>

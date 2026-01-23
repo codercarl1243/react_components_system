@@ -1,4 +1,3 @@
-import Button from "@/components/button";
 import Code from "@/components/code";
 import Icon from "@/components/icon";
 import Link from "@/components/link";

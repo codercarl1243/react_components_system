@@ -8,7 +8,9 @@
 .header--wrapper {
     display: flex;
     min-height: 5rem;
+    max-width: 80ch;
     min-width: var(--bp-xs);
+    margin-inline: auto;
     align-items: center;
     position: relative;
 }
