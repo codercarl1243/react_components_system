@@ -15,7 +15,10 @@ const design_system__theming: readonly Readonly<PostType>[] = [
         title: 'Building a Theming System',
         subtitle: 'A Practical Implementation Guide',
         excerpt: 'build a robust, library and framework agnostic design system',
-        relatedPostIds: [],
+        relatedPostIds: asPostIds([
+            'design__primitives_01',
+            'design__foundations_01',
+        ]),
         pathFragment: 'theming',
         lastModified: new Date('2025-12-10'),
         createdAt: new Date('2025-09-30'),
@@ -35,9 +38,10 @@ const design_system__theming: readonly Readonly<PostType>[] = [
         title: 'Primitives as Styling Boundaries',
         subtitle: 'Structuring Layout Without Leaking Styles',
         excerpt: 'Design layout primitives that enforce structure, spacing, and composition without owning visual styling.',
-        relatedPostIds: [
-            asPostId('design__theming_01'),
-        ],
+        relatedPostIds: asPostIds([
+            'design__theming_01',
+            'design__foundations_01',
+        ]),
         pathFragment: 'primitives',
         lastModified: new Date('2025-12-15'),
         createdAt: new Date('2025-10-05'),
@@ -59,7 +63,37 @@ const design_system__theming: readonly Readonly<PostType>[] = [
             BLOG_CATEGORIES.DESIGN_SYSTEM,
             BLOG_CATEGORIES.FOUNDATIONS,
         ],
+    },
+    {
+        id: asPostId('design__foundations_01'),
+        title: 'Design System Foundations',
+        subtitle: 'Principles, Constraints, and Boundaries',
+        excerpt: 'Establish the foundational principles that shape structure, theming, tokens, and components in a scalable design system.',
+        relatedPostIds: asPostIds([
+            'design__theming_01',
+            'design__primitives_01',
+        ]),
+        pathFragment: 'foundations',
+        lastModified: new Date('2025-12-05'),
+        createdAt: new Date('2025-09-20'),
+        published: true,
+        featured: false,
+        image: {
+            src: '/images/blogs/design-system/foundations/main-image.webp',
+            alt: 'Abstract architectural layers representing design system foundations and boundaries'
+        },
+        authorId: CODER_CARL_ID,
+        subject: `${BLOG_SUBJECTS.DESIGN_SYSTEM}`,
+        keywords: [
+            BLOG_KEYWORDS.FOUNDATIONS,
+            BLOG_KEYWORDS.DESIGN_SYSTEM,
+        ],
+        categories: [
+            BLOG_CATEGORIES.DESIGN_SYSTEM,
+            BLOG_CATEGORIES.FOUNDATIONS,
+        ],
     }
+
 
 ]
 const ButtonPosts: readonly Readonly<PostType>[] = [
@@ -68,7 +102,10 @@ const ButtonPosts: readonly Readonly<PostType>[] = [
         title: 'Buttons',
         subtitle: 'Foundations of an Accessible Button System',
         excerpt: 'Build a robust, accessible button foundation for your design system.',
-        relatedPostIds: asPostIds(['design__button__slider__01', 'design__button__toggle__01']),
+        relatedPostIds: asPostIds([
+            'design__button__slider__01',
+            'design__button__toggle__01'
+        ]),
         pathFragment: '/buttons',
         lastModified: new Date('2025-10-10'),
         createdAt: new Date('2025-09-30'),
