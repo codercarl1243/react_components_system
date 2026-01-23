@@ -2,7 +2,6 @@ import Code from "@/components/code";
 import InlineCode from "@/components/code/inlineCode";
 import Heading from "@/components/heading";
 import AnchorHeading from "@/components/heading/anchorHeading";
-import PostInfo from "@/components/post/post.info";
 import PostNote from "@/components/post/post.note";
 import PostSection from "@/components/post/post.section";
 
