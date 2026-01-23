@@ -31,7 +31,7 @@
     height: max(100px, 50%);
     overflow: hidden;
     width: 100%;
-    
+
     img {
         width: max(250px, 100%) !important;
         height: 100%;
@@ -56,12 +56,10 @@
 
 .post-card:hover .post-card__image,
 .post-card:focus-within .post-card__image {
-    
+
     img {
         transform: scale(1) translate(0, 0);
-      
         filter: grayscale(0%) saturate(1.05);
-        transform: scale(1);
     }
 
 }
