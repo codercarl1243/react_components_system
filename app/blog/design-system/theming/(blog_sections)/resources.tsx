@@ -41,7 +41,7 @@ export default function Resources() {
       </p>
       <TabList
         tabListName="theming_code_reference"
-        className="code__reference"
+        className="code__reference height-min"
         defaultActiveTabId="theme-tokens"
         variant="accent"
         orientation="horizontal"
