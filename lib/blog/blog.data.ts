@@ -51,7 +51,8 @@ export function getBlogPostsSummaries(includeUnpublished = false): PostSummary[]
  * Get a blog post by its ID
  */
 export function getBlogPostById(id: PostId | string): PostType | undefined {
-    return getBlogPosts().find(post => post.id === id);
+    return getBlogPosts()
+        .find(post => post.id === id);
 }
 
 /**
@@ -63,7 +64,7 @@ export function getRelatedPosts(postId: PostId | string): PostSummary[] {
 
     return post.relatedPostIds
         .map(getBlogPostById)
-        .filter((p): p is PostType => !!p)
+        .filter((p) => !!p)
         .map(toPostSummary);
 }
 
