@@ -7,8 +7,6 @@ import { logInfo } from "@/lib/logging/log";
 
 export default function LatestPosts() {
   const { posts, featuredPost } = getMostRecentPosts(3);
-  logInfo("posts", { data: { ...posts } })
-  logInfo("featured post", { data: { ...featuredPost } })
 
   return (
     <Block
