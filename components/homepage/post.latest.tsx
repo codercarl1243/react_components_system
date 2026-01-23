@@ -1,6 +1,6 @@
 import Heading from "@/components/heading";
 import { getMostRecentPosts } from "@/lib/blog/blog.data";
-import { Block, Stack } from "@/components/primitives";
+import { Block } from "@/components/primitives";
 import List from "@/components/list";
 import PostCard from "@/components/post/post.card";
 import { logInfo } from "@/lib/logging/log";
