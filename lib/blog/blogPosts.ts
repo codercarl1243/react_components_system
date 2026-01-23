@@ -93,9 +93,8 @@ const design_system__theming: readonly Readonly<PostType>[] = [
             BLOG_CATEGORIES.FOUNDATIONS,
         ],
     }
+];
 
-
-]
 const ButtonPosts: readonly Readonly<PostType>[] = [
     {
         id: asPostId('design__button__01'),
