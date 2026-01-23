@@ -64,7 +64,7 @@ export function getRelatedPosts(postId: PostId | string): PostSummary[] {
 
     return post.relatedPostIds
         .map(getBlogPostById)
-        .filter((p) => !!p)
+        .filter((p): p is PostType => !!p)
         .map(toPostSummary);
 }
 
