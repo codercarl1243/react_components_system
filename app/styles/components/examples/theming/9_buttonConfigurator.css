@@ -13,3 +13,37 @@
 .appearanceExamples__select-group--select .select {
     width: fit-content;
 }
+
+.appearanceExamples {
+    .button {
+        /* Kill inherited variant values */
+        --variant-bg: transparent;
+        --variant-fg: transparent;
+        --variant-border: transparent;
+        --variant-surface: transparent;
+
+        --background-color: var(--variant-bg);
+        --foreground-color: var(--variant-fg);
+        --border-color: var(--variant-border);
+        --surface-color: var(--variant-surface);
+
+        transition: none !important;
+    }
+
+    /* Remove default border/shadow only when border isn't being painted */
+    .button:not([data-paint~="border"],
+        [data-paint~="surface"],
+        [data-paint~="all"]) {
+
+        border: none !important;
+        box-shadow: none !important;
+        /* outline: none !important; */
+    }
+
+    /* Hide text unless foreground (or surface/all) is being painted */
+    .block.button:not([data-paint~="foreground"],
+        [data-paint~="surface"],
+        [data-paint~="all"]) .button__content {
+        color: transparent !important;
+    }
+}

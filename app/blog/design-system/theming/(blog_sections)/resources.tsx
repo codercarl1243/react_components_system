@@ -96,7 +96,8 @@ body {
                 lang="css"
                 codeString={`/*
 Variant tokens are inert by default.
-They do not affect styling until mapped by appearance and applied via paint.
+They do not affect styling until mapped by appearance 
+and applied via paint.
 */
 
 [data-variant] {
@@ -114,7 +115,8 @@ They do not affect styling until mapped by appearance and applied via paint.
   --variant-surface: var(--color-primary-100);
 }
 /* 
- Additional variants (secondary, danger, success, etc.) follow the same contract and are omitted here for clarity.
+ Additional variants (secondary, danger, success, etc.) 
+ follow the same contract and are omitted here for clarity.
 */  
 `} />)
           },
