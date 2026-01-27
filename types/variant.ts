@@ -24,7 +24,8 @@ export type Variant =
     | "info"
     | "neutral"
     | "inverse"
-    | "muted";
+    | "muted"
+    | 'transparent';
 
 /**
  * Visual appearance variants that control *how* a component is rendered,
