@@ -1,13 +1,35 @@
 'use client';
 import Button from "@/components/button";
-import { ButtonProps } from "@/components/button/button.type"
 import Heading from "@/components/heading"
 import PostInfo from "@/components/post/post.info"
 import { Block, Stack } from "@/components/primitives"
 import Select from "@/components/select"
-import { ChangeEvent, useState } from "react"
+import type { Paint, PaintChannel, PaintPreset } from "@/types/paint";
+import type { VariantAppearance, Variant } from "@/types/variant";
+import { type ChangeEvent, useState } from "react"
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 
-const variants = [
+// The demo allows an empty string of ‘', but the real typing does not.
+type ExampleAppearance = VariantAppearance | '';
+type ExampleVariant = Variant | '';
+type ExamplePaint = PaintPreset | PaintChannel | '';
+
+type PaintState = {
+    variant?: ExampleVariant;
+    appearance?: ExampleAppearance;
+    paint: ExamplePaint;
+}
+
+type PaintMessage = {
+    id: string;
+    when: (state: PaintState) => boolean;
+    tone: "info" | "warning";
+    title: string;
+    body: string[] | ((state: PaintState) => string[]);
+};
+
+
+const variants: { value: ExampleVariant; label: string }[] = [
     { value: '', label: 'None (default)' },
     { value: 'primary', label: 'Primary' },
     { value: 'secondary', label: 'Secondary' },
@@ -16,7 +38,7 @@ const variants = [
     { value: 'success', label: 'Success' }
 ];
 
-const appearances = [
+const appearances: { value: ExampleAppearance; label: string }[] = [
     { value: '', label: 'None (default)' },
     { value: 'filled', label: 'Filled' },
     { value: 'outlined', label: 'Outlined' },
@@ -24,7 +46,7 @@ const appearances = [
     { value: 'ghost', label: 'Ghost' }
 ];
 
-const paints = [
+const paints: { value: ExamplePaint; label: string }[] = [
     { value: '', label: 'None (default)' },
     { value: 'foreground', label: 'Foreground' },
     { value: 'background', label: 'Background' },
@@ -34,7 +56,7 @@ const paints = [
 ]
 
 function paintIncludes(
-    paint: string | string[] | undefined,
+    paint: ExamplePaint,
     channel: string
 ) {
     if (!paint) return false;
@@ -43,126 +65,10 @@ function paintIncludes(
         : paint.split(" ").includes(channel);
 }
 
-type PaintMessage = {
-    id: string;
-    when: (state: {
-        variant?: string;
-        appearance?: string;
-        paint?: string | string[];
-    }) => boolean;
-    tone: "info" | "warning";
-    title: string;
-    body: string[];
-};
-
-// export const PAINT_MESSAGES: PaintMessage[] = [
-//     {
-//         id: "filled-foreground-only",
-//         when: ({ appearance, paint }) =>
-//             appearance === "filled" &&
-//             paintIncludes(paint, "foreground") &&
-//             !paintIncludes(paint, "background"),
-//         tone: "warning",
-//         title: "Why did the text disappear?",
-//         body: [
-//             "Filled appearances use a light foreground color intended for use on a painted background.",
-//             "When only the foreground channel is painted, there's no background to provide contrast."
-//         ]
-//     },
-//     {
-//         id: "variant-without-appearance",
-//         when: ({ variant, appearance }) =>
-//             Boolean(variant) && !appearance,
-//         tone: "info",
-//         title: "Variant without appearance",
-//         body: [
-//             "Variants define semantic values, but appearances map those values to styling tokens.",
-//             "Without an appearance, there's nothing to apply visually."
-//         ]
-//     },
-//     {
-//         id: "variant-no-appearance-foreground",
-//         when: ({ variant, appearance, paint }) =>
-//             Boolean(variant) &&
-//             !appearance &&
-//             paintIncludes(paint, "foreground"),
-//         tone: "info",
-//         title: "Variant selected without appearance",
-//         body: [
-//             "Variants define semantic values, but appearances decide how those values are mapped to styling tokens.",
-//             "When a variant is used without an appearance, the foreground color may not contrast with the surface."
-//         ]
-
-//     },
-//     {
-//         id: "paint-without-values",
-//         when: ({ paint, variant, appearance }) =>
-//             Boolean(paint) && !variant && !appearance,
-//         tone: "info",
-//         title: "Paint applies existing values",
-//         body: [
-//             "Paint applies styling tokens, but it doesn't define them.",
-//             "Without a variant or appearance, there are no values to apply."
-//         ]
-
-//     },
-//     {
-//         id: "outlined-background-only",
-//         when: ({ appearance, paint }) =>
-//             appearance === "outlined" &&
-//             paintIncludes(paint, "background") &&
-//             !paintIncludes(paint, "foreground") &&
-//             !paintIncludes(paint, "border"),
-//         tone: "info",
-//         title: "Background-only paint with outlined appearance",
-//         body: [
-//             "Outlined appearances typically rely on foreground or border paint.",
-//             "Background-only paint may produce little or no visible change."
-//         ]
-//     },
-//     {
-//     id: "variant-appearance-without-paint",
-//     when: ({ variant, appearance, paint }) =>
-//         Boolean(variant) &&
-//         Boolean(appearance) &&
-//         !paint,
-//     tone: "info",
-//     title: "Variant and appearance selected, but no paint",
-// body: [
-//     "You've chosen a variant and an appearance, but you haven't told the system where to apply them.",
-//     "Paint controls which parts of the button are styled, such as the text, background, or border.",
-//     "Select a paint option to see the appearance take effect."
-// ]
-
-// },
-// {
-//     id: "appearance-without-variant-with-paint",
-//     when: ({ variant, appearance, paint }) =>
-//         !variant && Boolean(appearance) && Boolean(paint),
-//     tone: "info",
-//     title: "Appearance selected without variant",
-//     body: [
-//         "Appearances define how values are treated, but they don't define the values themselves.",
-//         "Paint decides which styling channels are affected, but without a variant there is no semantic color to apply."
-//     ]
-// },
-// {
-//     id: "appearance-only-no-variant-no-paint",
-//     when: ({ variant, appearance, paint }) =>
-//         !variant && Boolean(appearance) && !paint,
-//     tone: "info",
-//     title: "Appearance selected, but nothing to style",
-//     body: [
-//         "Appearances control how styles are applied, but they don't choose any colors or channels by themselves.",
-//         "Add a variant to provide a semantic value, and paint to choose where it should be applied."
-//     ]
-// },
-
-// ];
-
 export const PAINT_MESSAGES: PaintMessage[] = [
     {
         id: "filled-foreground-only",
+        // Warn when user has selected appearance or variant or paint and text would not be visible
         when: ({ appearance, paint }) => {
             // 1) Which appearances behave like "filled-style" in your system?
             // - filled: yes
@@ -193,26 +99,41 @@ export const PAINT_MESSAGES: PaintMessage[] = [
         },
         tone: "warning",
         title: "Why is there no text?",
-        body: [
-            "This style expects light text to be shown on a painted background.",
-            "Right now you're painting the text or border, but not the background, so there's nothing for the text to contrast against.",
-            "Try adding background paint or choose a different appearance to make the text readable."
-        ]
+        body: ({ paint }) => {
+            const hasForeground = paintIncludes(paint, "foreground");
+            const hasBorder = paintIncludes(paint, "border");
+            let paintedParts: string;
+
+            if (hasForeground && hasBorder) {
+                paintedParts = "the text and the border";
+            } else if (hasForeground) {
+                paintedParts = "the text";
+            } else if (hasBorder) {
+                paintedParts = "the border";
+            } else {
+                paintedParts = "part of the button";
+            }
+
+            return [
+                `This style expects light text to be shown on a painted background.`,
+                `Right now you're painting ${paintedParts}, but not the background, so there's nothing for the text to contrast against.`,
+                `Try adding background paint or choose a different appearance to make the text readable.`
+            ]
+        }
     },
 
     {
-        id: "variant-without-appearance",
-        when: ({ variant, appearance }) =>
-            Boolean(variant) && !appearance,
+        id: "variant-without-paint",
+        when: ({ variant, paint }) =>
+            Boolean(variant) && !paint,
         tone: "info",
-        title: "You picked a variant, but no style",
+        title: "You picked a variant, but no paint has been applied",
         body: [
             "The variant sets what the button means, like primary or danger.",
-            "But without an appearance, there's no visual style to show that meaning.",
-            "Choose an appearance to see the variant take effect."
+            "But without paint, there's nothing on the canvas to show that meaning.",
+            "Choose a paint to see the variant take effect."
         ]
     },
-
     {
         id: "variant-no-appearance-foreground",
         when: ({ variant, appearance, paint }) =>
@@ -277,9 +198,9 @@ export const PAINT_MESSAGES: PaintMessage[] = [
         when: ({ variant, appearance, paint }) =>
             !variant && Boolean(appearance) && Boolean(paint),
         tone: "info",
-        title: "Style chosen, but no meaning",
+        title: "appearance chosen, but no context given",
         body: [
-            "You've picked how the button should look and where to apply it.",
+            "You've picked how the button should look (appearance) and where to apply it (paint).",
             "But you haven't chosen what value to use for that style.",
             "Choose a variant to give the appearance something to work with."
         ]
@@ -299,37 +220,130 @@ export const PAINT_MESSAGES: PaintMessage[] = [
     }
 ];
 
-export default function ButtonConfigurator() {
-    const [variant, setVariant] = useState<ButtonProps['variant']>()
-    const [appearance, setAppearance] = useState<ButtonProps['variantAppearance']>()
-    const [paint, setPaint] = useState<ButtonProps['paint']>()
+function toButtonPaint(paint: ExamplePaint): Paint | undefined {
+    if (!paint) return undefined;
 
+    // Presets must be passed directly
+    if (paint === 'all' || paint === 'surface') {
+        return paint;
+    }
+
+    // Channels must be wrapped
+    return [paint];
+}
+
+export default function ButtonConfigurator() {
+    const [variant, setVariant] = useState<ExampleVariant>('')
+    const [appearance, setAppearance] = useState<ExampleAppearance>('')
+    const [paint, setPaint] = useState<ExamplePaint>('')
+
+    // Show the most important messages, limited to 2
     const activeMessages = PAINT_MESSAGES.filter(msg =>
         msg.when({ variant, appearance, paint })
-    );
+    ).sort((a, b) => {
+        if (a.tone === 'warning' && b.tone !== 'warning') return -1;
+        if (a.tone !== 'warning' && b.tone === 'warning') return 1;
+        return 0;
+    })
+        .slice(0, 2);
 
     const handleSetVariant = (event: ChangeEvent<HTMLSelectElement>) => {
-        if (event.currentTarget.value === '') {
-            setVariant(undefined);
-            return;
-        }
-        setVariant(event.currentTarget.value as ButtonProps['variant']);
+        setVariant(event.currentTarget.value as ExampleVariant);
     }
 
     const handleSetAppearance = (event: ChangeEvent<HTMLSelectElement>) => {
-        if (event.currentTarget.value === '') {
-            setAppearance(undefined);
-            return;
-        }
-        setAppearance(event.currentTarget.value as ButtonProps['variantAppearance']);
+        setAppearance(event.currentTarget.value as ExampleAppearance);
     }
     const handleSetPaint = (event: ChangeEvent<HTMLSelectElement>) => {
-        if (event.currentTarget.value === '') {
-            setPaint(undefined);
-            return;
-        }
-        setPaint(event.currentTarget.value as ButtonProps['paint']);
+        setPaint(event.currentTarget.value as ExamplePaint);
     }
+    const shouldReduceMotion = useReducedMotion();
+
+
+    const Controls = () => {
+        return (
+            <Block className="mx-auto appearanceExamples__select-group">
+                <Select
+                    id="variant-select"
+                    labelChildren="Variant"
+                    className="appearanceExamples__select-group--select"
+                    options={variants}
+                    value={variant}
+                    onChange={handleSetVariant}
+                />
+
+                <Select
+                    id="appearance-select"
+                    labelChildren="Appearance"
+                    className="appearanceExamples__select-group--select"
+                    options={appearances}
+                    value={appearance}
+                    onChange={handleSetAppearance}
+                />
+                <Select
+                    id="paint-select"
+                    labelChildren="Paint"
+                    className="appearanceExamples__select-group--select"
+                    options={paints}
+                    value={paint}
+                    onChange={handleSetPaint}
+                />
+            </Block>
+        )
+    }
+
+    const ButtonExample = () => {
+        return (
+            <span className="appearanceExamples__button-wrapper" style={{ width: "fit-content", marginInline: "auto" }}>
+                <Button
+                    variant={variant || undefined}
+                    appearance={appearance || undefined}
+                    paint={toButtonPaint(paint)}
+                    style={{ width: "fit-content" }}
+                >
+                    Example Button
+                </Button>
+            </span>
+        )
+    }
+
+    const Messages = () => {
+        return (
+            <Block role="status"
+                aria-live="polite"
+                className="flow-4">
+                <PostInfo className="mx-auto center" variant="info" paint={["foreground"]}>
+                    Adjust the controls above to explore how variant, appearance, and paint interact.
+                </PostInfo>
+                <AnimatePresence>
+                    {
+                        activeMessages.map((message, index) => {
+                            const lines =
+                                typeof message.body === "function"
+                                    ? message.body({ variant, appearance, paint })
+                                    : message.body;
+
+                            return (
+                                <motion.div
+                                    key={message.id}
+                                    initial={{ opacity: 0, y: 6 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    exit={{ opacity: 0, y: -4 }}
+                                    transition={{ duration: shouldReduceMotion ? 0 : 0.18, delay: index * 0.05, ease: "easeOut" }}>
+                                    <PostInfo as="div" paint={["background", "foreground"]} className="mx-auto flow-6" key={message.id} variant={message.tone}>
+                                        <p><strong>{message.title}</strong></p>
+                                        {lines.map((line, index) => <p key={`${message.id}-${index}`}>{line}</p>)}
+                                    </PostInfo>
+                                </motion.div>
+                            )
+                        })
+                    }
+                </AnimatePresence>
+            </Block>
+        )
+    }
+
+
 
     return (
         <Block
@@ -353,61 +367,9 @@ export default function ButtonConfigurator() {
             </Heading>
 
             <Stack gap={8} >
-
-                {/* Controls */}
-                <Block className="mx-auto appearanceExamples__select-group">
-                    <Select
-                        id="variant-select"
-                        labelChildren="Variant"
-                        className="appearanceExamples__select-group--select"
-                        options={variants}
-                        value={variant}
-                        onChange={handleSetVariant}
-                    />
-
-                    <Select
-                        id="appearance-select"
-                        labelChildren="Appearance"
-                        className="appearanceExamples__select-group--select"
-                        options={appearances}
-                        value={appearance}
-                        onChange={handleSetAppearance}
-                    />
-                    <Select
-                        id="paint-select"
-                        labelChildren="Paint"
-                        className="appearanceExamples__select-group--select"
-                        options={paints}
-                        value={paint}
-                        onChange={handleSetPaint}
-                    />
-                </Block>
-
-                <span style={{ width: "fit-content", marginInline: "auto" }}>
-                    <Button
-                        variant={variant}
-                        variantAppearance={appearance}
-                        paint={paint}
-                        style={{ width: "fit-content" }}
-                    >
-                        Click Me
-                    </Button>
-                </span>
-                <Block role="status"
-                    aria-live="polite"
-                    className="flow-4">
-                    <PostInfo className="mx-auto center" variant="info" paint={["foreground"]}>
-                        Adjust the controls above to explore how variant, appearance, and paint interact.
-                    </PostInfo>
-                    {
-                        activeMessages.map(message => (
-                            <PostInfo as="div" paint={["background", "foreground"]} className="mx-auto flow-6" key={message.id} variant={message.tone}>
-                                <p><strong>{message.title}</strong></p>
-                                {message.body.map((line, index) => <p key={`${message.id}-${index}`}>{line}</p>)}
-                            </PostInfo>
-                        ))
-                    }
-                </Block>
+                <Controls />
+                <ButtonExample />
+                <Messages />
             </Stack>
         </Block>
     )
