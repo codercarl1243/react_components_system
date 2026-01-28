@@ -1,5 +1,4 @@
 'use client';
-import Button from "@/components/button";
 import Heading from "@/components/heading"
 import PostInfo from "@/components/post/post.info"
 import { Block, Stack } from "@/components/primitives"
