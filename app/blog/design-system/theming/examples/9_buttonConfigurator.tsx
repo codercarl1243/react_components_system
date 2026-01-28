@@ -74,9 +74,8 @@ export const PAINT_MESSAGES: PaintMessage[] = [
             // - default (no appearance): yes (your default uses filled colors)
             // - outlined: only include this if outlined ALSO uses filled-style foreground in your design
             const isFilledStyle =
-                appearance === "filled" ||
-                !appearance && variant ||
-                appearance === "outlined"; // <- keep ONLY if it truly behaves like filled colors
+                Boolean(appearance === "filled" ||
+                !appearance && variant);
 
             // 2) What did the user ask to paint?
             const hasForeground = paintIncludes(paint, "foreground");
@@ -91,10 +90,11 @@ export const PAINT_MESSAGES: PaintMessage[] = [
             // - User is painting something visible (foreground or border)
             // - But they did NOT paint a background-like channel
             // - And we are in a filled-style context
-            const isPaintingVisibleParts = hasForeground || hasBorder;
+            const isPaintingText = hasForeground;
+
             const hasAnyBackgroundLikePaint = hasBackground || hasSurface || hasAll;
 
-            return isFilledStyle && isPaintingVisibleParts && !hasAnyBackgroundLikePaint;
+            return isFilledStyle && isPaintingText && !hasAnyBackgroundLikePaint;
         },
         tone: "warning",
         title: "Why is there no text?",

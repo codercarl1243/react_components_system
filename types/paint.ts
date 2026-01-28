@@ -6,7 +6,7 @@
  *
  * Examples:
  * - "all"     → apply foreground, background, and border
- * - "surface" → apply background and foreground in a surface-safe way
+ * - "surface" → apply background and border (no text coloring)
  *
  * Presets are intentionally kept separate from channels because:
  * - they behave differently
