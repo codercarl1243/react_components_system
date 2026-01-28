@@ -1,5 +1,6 @@
 import Image from '@/components/image'
 import Heading from '@/components/heading'
+import { Block } from '@/components/primitives';
 import type { PostType } from '@/lib/blog/blog.types';
 
 
@@ -51,9 +52,15 @@ export default function PostBanner({ post }: {post: PostType}) {
           {title}
         </Heading>
         {subtitle && (
-          <p className="italic text-lg post__banner__text-subtitle">
+          <Block 
+          as="p" 
+          // variant='neutral'
+          // variantAppearance='filled'
+          // paint={["background", "foreground"]}
+          className="italic text-lg post__banner__text-subtitle px-2 mt-auto"
+          >
             {subtitle}
-          </p>
+          </Block>
         )}
       </div>
     </div>
