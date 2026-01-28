@@ -1,0 +1,112 @@
+.example-component {
+    color: transparent;
+    border-color: transparent;
+    background-color: transparent;
+    /* variants */
+    &[data-example-variant] {
+        --background-example-color: var(--variant-example-bg);
+        --foreground-example-color: var(--variant-example-fg);
+        --border-example-color: var(--variant-example-border);
+        --surface-example-color: var(--variant-example-surface);
+    }
+
+    &[data-example-variant="primary"] {
+        --variant-example-bg: var(--color-primary-400);
+        --variant-example-fg: var(--color-neutral-100);
+        --variant-example-border: var(--color-primary-600);
+        --variant-example-text-on-surface: var(--color-primary-600);
+        --variant-example-surface: var(--color-primary-100);
+    }
+
+    &[data-example-variant="secondary"] {
+        --variant-example-bg: var(--color-secondary-400);
+        --variant-example-fg: var(--color-neutral-100);
+        --variant-example-border: var(--color-secondary-600);
+        --variant-example-text-on-surface: var(--color-secondary-600);
+        --variant-example-surface: var(--color-secondary-100);
+    }
+
+    &[data-example-variant="accent"] {
+        --variant-example-bg: var(--color-accent-400);
+        --variant-example-fg: var(--color-neutral-100);
+        --variant-example-border: var(--color-accent-600);
+        --variant-example-text-on-surface: var(--color-accent-600);
+        --variant-example-surface: var(--color-accent-100);
+    }
+
+    &[data-example-variant="danger"] {
+        --variant-example-bg: var(--color-danger-400);
+        --variant-example-fg: var(--color-neutral-100);
+        --variant-example-border: var(--color-danger-600);
+        --variant-example-text-on-surface: var(--color-danger-600);
+        --variant-example-surface: var(--color-danger-100);
+    }
+
+    &[data-example-variant="warning"] {
+        --variant-example-bg: var(--color-warning-400);
+        --variant-example-fg: var(--color-neutral-900);
+        --variant-example-border: var(--color-warning-600);
+        --variant-example-text-on-surface: var(--color-warning-600);
+        --variant-example-surface: var(--color-warning-100);
+    }
+
+    &[data-example-variant="success"] {
+        --variant-example-bg: var(--color-success-400);
+        --variant-example-fg: var(--color-neutral-100);
+        --variant-example-border: var(--color-success-600);
+        --variant-example-text-on-surface: var(--color-success-600);
+        --variant-example-surface: var(--color-success-100);
+    }
+
+    /* appearance */
+    /* Strong, high-emphasis application (buttons, badges, pills) */
+    &[data-example-appearance="filled"] {
+        --background-example-color: var(--variant-example-bg);
+        --foreground-example-color: var(--variant-example-fg);
+        --border-example-color: var(--variant-example-border);
+    }
+
+    /* Medium emphasis with visible outline */
+    &[data-example-appearance="outlined"] {
+        --background-example-color: transparent;
+        --foreground-example-color: var(--variant-example-bg);
+        --border-example-color: var(--variant-example-bg);
+    }
+
+    /* Low emphasis, text-forward appearance */
+    &[data-example-appearance="ghost"] {
+        --background-example-color: transparent;
+        --foreground-example-color: var(--variant-example-bg);
+        --border-example-color: transparent;
+    }
+
+    /* Tonal surface application (callouts, notices, containers) */
+    &[data-example-appearance="tonal"] {
+        --background-example-color: var(--variant-example-surface);
+        --foreground-example-color: var(--variant-example-text-on-surface);
+        --border-example-color: var(--variant-example-border);
+    }
+
+    /* paint */
+    /* Foreground channel */
+    &[data-example-paint~="foreground"],
+    &[data-example-paint="all"] {
+        color: var(--foreground-example-color, transparent);
+    }
+
+    /* Background channel (and presets that include background) */
+    &[data-example-paint~="background"],
+    &[data-example-paint="all"],
+    &[data-example-paint="surface"] {
+        background-color: var(--background-example-color, transparent);
+    }
+
+    /* Border channel (and presets that include border) */
+    &[data-example-paint~="border"],
+    &[data-example-paint="all"],
+    &[data-example-paint="surface"] {
+        border-width: var(--border-width-thin);
+        border-style: var(--border-style-solid);
+        border-color: var(--border-example-color, transparent);
+    }
+}

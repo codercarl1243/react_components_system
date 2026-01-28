@@ -69,14 +69,14 @@ export const PAINT_MESSAGES: PaintMessage[] = [
     {
         id: "filled-foreground-only",
         // Warn when user has selected appearance or variant or paint and text would not be visible
-        when: ({ appearance, paint }) => {
+        when: ({ appearance, variant, paint }) => {
             // 1) Which appearances behave like "filled-style" in your system?
             // - filled: yes
             // - default (no appearance): yes (your default uses filled colors)
             // - outlined: only include this if outlined ALSO uses filled-style foreground in your design
             const isFilledStyle =
                 appearance === "filled" ||
-                !appearance ||
+                !appearance && variant ||
                 appearance === "outlined"; // <- keep ONLY if it truly behaves like filled colors
 
             // 2) What did the user ask to paint?
@@ -99,9 +99,10 @@ export const PAINT_MESSAGES: PaintMessage[] = [
         },
         tone: "warning",
         title: "Why is there no text?",
-        body: ({ paint }) => {
+        body: ({ paint, appearance }) => {
             const hasForeground = paintIncludes(paint, "foreground");
             const hasBorder = paintIncludes(paint, "border");
+            const styleName = appearance === "filled" ? "filled" : "default";
             let paintedParts: string;
 
             if (hasForeground && hasBorder) {
@@ -115,7 +116,7 @@ export const PAINT_MESSAGES: PaintMessage[] = [
             }
 
             return [
-                `This style expects light text to be shown on a painted background.`,
+                `The ${styleName} style contains text the same color as the background.`,
                 `Right now you're painting ${paintedParts}, but not the background, so there's nothing for the text to contrast against.`,
                 `Try adding background paint or choose a different appearance to make the text readable.`
             ]
@@ -124,8 +125,10 @@ export const PAINT_MESSAGES: PaintMessage[] = [
 
     {
         id: "variant-without-paint",
-        when: ({ variant, paint }) =>
-            Boolean(variant) && !paint,
+        when: ({ variant, appearance, paint }) =>
+            Boolean(variant) &&
+            !appearance &&
+            !paint,
         tone: "info",
         title: "You picked a variant, but no paint has been applied",
         body: [
@@ -164,8 +167,9 @@ export const PAINT_MESSAGES: PaintMessage[] = [
 
     {
         id: "outlined-background-only",
-        when: ({ appearance, paint }) =>
+        when: ({ appearance, variant, paint }) =>
             appearance === "outlined" &&
+            Boolean(variant) &&
             paintIncludes(paint, "background") &&
             !paintIncludes(paint, "foreground") &&
             !paintIncludes(paint, "border"),
@@ -295,14 +299,15 @@ export default function ButtonConfigurator() {
     const ButtonExample = () => {
         return (
             <span className="appearanceExamples__button-wrapper" style={{ width: "fit-content", marginInline: "auto" }}>
-                <Button
-                    variant={variant || undefined}
-                    appearance={appearance || undefined}
-                    paint={toButtonPaint(paint)}
+                <button
+                    data-example-variant={variant || undefined}
+                    data-example-appearance={appearance || undefined}
+                    data-example-paint={toButtonPaint(paint)}
                     style={{ width: "fit-content" }}
+                    className="button example-component"
                 >
-                    Example Button
-                </Button>
+                    <span>Example Button</span>
+                </button>
             </span>
         )
     }
@@ -315,7 +320,7 @@ export default function ButtonConfigurator() {
                 <PostInfo className="mx-auto center" variant="info" paint={["foreground"]}>
                     Adjust the controls above to explore how variant, appearance, and paint interact.
                 </PostInfo>
-                <AnimatePresence>
+                <AnimatePresence initial={false} mode="wait">
                     {
                         activeMessages.map((message, index) => {
                             const lines =
@@ -326,10 +331,17 @@ export default function ButtonConfigurator() {
                             return (
                                 <motion.div
                                     key={message.id}
-                                    initial={{ opacity: 0, y: 6 }}
-                                    animate={{ opacity: 1, y: 0 }}
-                                    exit={{ opacity: 0, y: -4 }}
-                                    transition={{ duration: shouldReduceMotion ? 0 : 0.18, delay: index * 0.05, ease: "easeOut" }}>
+                                    layout
+                                    initial={{ opacity: 0, height: 0, scale: 0.98, x: -2 }}
+                                    animate={{ opacity: 1, height: "auto", scale: 1, x: 0 }}
+                                    exit={{ opacity: 0, height: 0, scale: 0.98, x: -2 }}
+                                    transition={{
+                                        duration: shouldReduceMotion ? 0 : 0.22,
+                                        ease: "easeOut",
+                                        delay: index * 0.06
+                                    }}
+                                    style={{ overflow: "hidden" }}
+                                >
                                     <PostInfo as="div" paint={["background", "foreground"]} className="mx-auto flow-6" key={message.id} variant={message.tone}>
                                         <p><strong>{message.title}</strong></p>
                                         {lines.map((line, index) => <p key={`${message.id}-${index}`}>{line}</p>)}
