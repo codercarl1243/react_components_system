@@ -5,8 +5,8 @@ import PostSection from "@/components/post/post.section";
 export default function Section5() {
 
     return (
-        <PostSection id="">
-            <AnchorHeading as="h2" id="-heading" prefix="part 4 -">Paint</AnchorHeading>
+        <PostSection id="paint">
+            <AnchorHeading as="h2" id="paint-heading" prefix="part 4 -">Paint</AnchorHeading>
             <p className="bold italic">Making Styling Explicit</p>
 
             <p>

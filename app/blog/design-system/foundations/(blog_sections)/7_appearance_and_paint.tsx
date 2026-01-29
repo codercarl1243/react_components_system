@@ -4,8 +4,8 @@ import PostSection from "@/components/post/post.section";
 export default function Section6() {
 
     return (
-        <PostSection id="">
-            <AnchorHeading as="h2" id="-heading">Why Appearance and Paint Belong Together</AnchorHeading>
+        <PostSection id="appearance-and-paint">
+            <AnchorHeading as="h2" id="appearance-and-paint-heading">Why Appearance and Paint Belong Together</AnchorHeading>
             <p>
                 Appearance without paint is still implicit. Paint without appearance lacks meaning.
             </p>

@@ -10,7 +10,7 @@ import PostSection from "@/components/post/post.section";
 export default function Section1() {
     return (
         <PostSection id="introduction">
-            <PostBanner
+            {/* <PostBanner
                 title="The Button"
                 subtitle="The most complex of the basic components"
                 headingId="the-button-heading"
@@ -18,7 +18,7 @@ export default function Section1() {
                     src: '/images/blogs/button-base/main-image.webp',
                     alt: ""
                 }}
-            />
+            /> */}
             <Heading as={"h2"} id="introduction-heading">Introduction</Heading>
             <p>
                 Buttons are the most re-used components in any interface — and the easiest to get wrong.

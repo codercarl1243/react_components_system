@@ -1,4 +1,4 @@
-export { default as Foundation } from './1_introduction';
+export { default as Introduction } from './1_introduction';
 export { default as Setup } from './2_setup';
 export { default as BuildingTheButton } from './3_component_and_types';
 export { default as InteractionLogic } from './4_interaction_logic';

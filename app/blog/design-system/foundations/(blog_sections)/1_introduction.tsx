@@ -1,11 +1,14 @@
+import AnchorHeading from "@/components/heading/anchorHeading";
 import List from "@/components/list";
 import PostSection from "@/components/post/post.section";
-
 
 export default function Introduction() {
 
     return (
-        <PostSection id="introduction-theming">
+        <PostSection id="introduction">
+            <AnchorHeading as={"h2"} id="introduction-heading">
+                Introduction
+            </AnchorHeading>
             <p>Design systems don't usually break all at once. They decay.</p>
 
             <p>A color change ripples through unrelated components. Variants quietly multiply to cover edge cases. Dark mode works — until contrast breaks and newly introduced colors don't fit the system.</p>

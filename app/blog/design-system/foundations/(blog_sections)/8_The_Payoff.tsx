@@ -4,8 +4,8 @@ import PostSection from "@/components/post/post.section";
 export default function Section7() {
 
     return (
-        <PostSection id="">
-            <AnchorHeading as="h2" id="-heading">The Payoff of a Layered System</AnchorHeading>
+        <PostSection id="the-payoff">
+            <AnchorHeading as="h2" id="the-payoff-heading">The Payoff of a Layered System</AnchorHeading>
             <p>
                 With these layers in place, the design system becomes easier to reason about and cheaper to change. Themes can switch without touching components. Variants remain semantic over time. Visual treatments stay reusable instead of proliferating.
             </p>

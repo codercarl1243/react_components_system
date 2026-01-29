@@ -39,12 +39,7 @@ export default function Section4() {
   background: transparent;
   color: var(--variant-bg);
   border: 1px solid var(--variant-bg);
-}
-
-[data-appearance="ghost"] {
-  background: transparent;
-  color: var(--variant-bg);
-}`}/>
+}`} />
         </PostSection>
     )
 }
