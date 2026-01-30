@@ -14,7 +14,7 @@
   z-index: 1;
   border-radius: var(--radius-lg);
   border: 8px solid rgba(0, 0, 0, 0.642);
-  opacity: 0.5;
+  opacity: 0.75;
 }
 
 .post__banner__text {
@@ -35,9 +35,19 @@
 }
 
 .post__banner__text-heading {
+  --outline-color: color-mix(in srgb, currentColor 75%, var(--color-neutral-900));
   grid-column: 1 / -1;
   grid-row: 1;
   text-align: center;
+   text-shadow:
+    -1px -1px 0 var(--outline-color),
+     1px -1px 0 var(--outline-color),
+    -1px  1px 0 var(--outline-color),
+     1px  1px 0 var(--outline-color),
+     0   -1px 0 var(--outline-color),
+     0    1px 0 var(--outline-color),
+    -1px  0   0 var(--outline-color),
+     1px  0   0 var(--outline-color);
 }
 
 .post__banner__text-subtitle {
