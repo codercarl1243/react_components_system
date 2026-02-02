@@ -1,4 +1,4 @@
-import BlogLink from "@/app/styles/components/post/post.blogLink";
+import BlogLink from "@/components/post/post.blogLink";
 import AnchorHeading from "@/components/heading/anchorHeading";
 import List from "@/components/list";
 import PostSection from "@/components/post/post.section";

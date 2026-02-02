@@ -5,7 +5,7 @@
   grid-template-rows: repeat(2, 1fr);
   aspect-ratio: 3/1;
   isolation: isolate;
-    z-index: 0;
+  z-index: 0;
 }
 
 .post__banner__image {
@@ -39,15 +39,15 @@
   grid-column: 1 / -1;
   grid-row: 1;
   text-align: center;
-   text-shadow:
+  text-shadow:
     -1px -1px 0 var(--outline-color),
-     1px -1px 0 var(--outline-color),
-    -1px  1px 0 var(--outline-color),
-     1px  1px 0 var(--outline-color),
-     0   -1px 0 var(--outline-color),
-     0    1px 0 var(--outline-color),
-    -1px  0   0 var(--outline-color),
-     1px  0   0 var(--outline-color);
+    1px -1px 0 var(--outline-color),
+    -1px 1px 0 var(--outline-color),
+    1px 1px 0 var(--outline-color),
+    0 -1px 0 var(--outline-color),
+    0 1px 0 var(--outline-color),
+    -1px 0 0 var(--outline-color),
+    1px 0 0 var(--outline-color);
 }
 
 .post__banner__text-subtitle {
@@ -59,6 +59,7 @@
   margin-inline: auto;
   z-index: 0;
   color: white;
+
   &:before {
     content: "";
     position: absolute;

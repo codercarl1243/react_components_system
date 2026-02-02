@@ -64,35 +64,6 @@ const design_system__theming: readonly Readonly<PostType>[] = [
             BLOG_CATEGORIES.FOUNDATIONS,
         ],
     },
-    {
-        id: asPostId('design__foundations_01'),
-        title: 'Design System Foundations',
-        subtitle: 'Principles, Constraints, and Boundaries',
-        excerpt: 'Establish the foundational principles that shape structure, theming, tokens, and components in a scalable design system.',
-        relatedPostIds: asPostIds([
-            'design__theming_01',
-            'design__primitives_01',
-        ]),
-        pathFragment: 'foundations',
-        lastModified: new Date('2025-12-05'),
-        createdAt: new Date('2025-09-20'),
-        published: true,
-        featured: false,
-        image: {
-            src: '/images/blogs/design-system/foundations/main-image.webp',
-            alt: 'Abstract architectural layers representing design system foundations and boundaries'
-        },
-        authorId: CODER_CARL_ID,
-        subject: `${BLOG_SUBJECTS.DESIGN_SYSTEM}`,
-        keywords: [
-            BLOG_KEYWORDS.FOUNDATIONS,
-            BLOG_KEYWORDS.DESIGN_SYSTEM,
-        ],
-        categories: [
-            BLOG_CATEGORIES.DESIGN_SYSTEM,
-            BLOG_CATEGORIES.FOUNDATIONS,
-        ],
-    }
 ];
 
 const ButtonPosts: readonly Readonly<PostType>[] = [
@@ -108,7 +79,7 @@ const ButtonPosts: readonly Readonly<PostType>[] = [
         pathFragment: '/buttons',
         lastModified: new Date('2025-10-10'),
         createdAt: new Date('2025-09-30'),
-        published: true,
+        published: false,
         featured: false,
         image: {
             src: '/images/blogs/button-base/main-image.webp',
@@ -119,26 +90,26 @@ const ButtonPosts: readonly Readonly<PostType>[] = [
         keywords: [BLOG_KEYWORDS.BUTTONS, BLOG_KEYWORDS.FOUNDATIONS, BLOG_KEYWORDS.ACCESSIBILITY, BLOG_KEYWORDS.DESIGN_SYSTEM],
         categories: [BLOG_CATEGORIES.DESIGN_SYSTEM, BLOG_CATEGORIES.ACCESSIBILITY],
     },
-    {
-        id: asPostId('design__button__theming__01'),
-        title: 'Buttons - Theming & Variants',
-        subtitle: 'Building a flexible color system for scalable, accessible design',
-        excerpt: 'Transform your button into a themeable component with multiple variants and styles.',
-        relatedPostIds: asPostIds(['design__button__01']),
-        pathFragment: 'buttons/theming',
-        lastModified: new Date('2025-10-15'),
-        createdAt: new Date('2025-10-05'),
-        published: true,
-        featured: false,
-        image: {
-            src: '/og-image.png',
-            alt: 'Grid of buttons in different colors and styles representing design system variants'
-        },
-        authorId: CODER_CARL_ID,
-        subject: `${BLOG_SUBJECTS.DESIGN_SYSTEM}`,
-        keywords: [BLOG_KEYWORDS.BUTTONS, BLOG_KEYWORDS.THEMING, BLOG_KEYWORDS.DESIGN_SYSTEM],
-        categories: [BLOG_CATEGORIES.DESIGN_SYSTEM],
-    }
+    // {
+    //     id: asPostId('design__button__theming__01'),
+    //     title: 'Buttons - Theming & Variants',
+    //     subtitle: 'Building a flexible color system for scalable, accessible design',
+    //     excerpt: 'Transform your button into a themeable component with multiple variants and styles.',
+    //     relatedPostIds: asPostIds(['design__button__01']),
+    //     pathFragment: 'buttons/theming',
+    //     lastModified: new Date('2025-10-15'),
+    //     createdAt: new Date('2025-10-05'),
+    //     published: true,
+    //     featured: false,
+    //     image: {
+    //         src: '/og-image.png',
+    //         alt: 'Grid of buttons in different colors and styles representing design system variants'
+    //     },
+    //     authorId: CODER_CARL_ID,
+    //     subject: `${BLOG_SUBJECTS.DESIGN_SYSTEM}`,
+    //     keywords: [BLOG_KEYWORDS.BUTTONS, BLOG_KEYWORDS.THEMING, BLOG_KEYWORDS.DESIGN_SYSTEM],
+    //     categories: [BLOG_CATEGORIES.DESIGN_SYSTEM],
+    // }
     // {
     //     id: asPostId('design__button__slider__01'),
     //     title: 'Slider Buttons',
