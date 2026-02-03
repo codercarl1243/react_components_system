@@ -62,6 +62,9 @@
         inset: 0;
         height: 100%;
         opacity: 0.5;
+        img{
+            height: 100%;
+        }
     }
 
     &:hover .post-card__image,

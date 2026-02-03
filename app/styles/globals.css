@@ -12,3 +12,4 @@
 @import url('./typography/index.css') layer(utilities);
 @import url('./animations/index.css') layer(utilities);
 @import url('./design-system/index.css') layer(design-system);
+@import url('./pages/about.css') layer(components);

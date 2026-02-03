@@ -1,22 +1,27 @@
 import Heading from "@/components/heading";
 import List from "@/components/list";
-import { Stack } from "@/components/primitives";
-
+import { Inline, Row, Stack } from "@/components/primitives";
+import Image from '@/components/image'
 
 export default function AboutPage() {
 
 
     return (
-        <div className="layout-wrapper flow-8">
+        <div className="layout-wrapper flow-8 about-page">
             <Stack
                 as="section">
                 <Heading as="h1" headingSize={2}>About Me</Heading>
-                <p>
-                    I am a Full stack developer with a strong focus on <span className="fun-underline">front-end architecture</span>, <span className="fun-underline">accessibility</span>, and just <span className="fun-underline">building enjoyable user experiences</span>.
-                </p>
-                <p>
-                    I specialise in building systems that are easier to understand, maintain, and remain reliable over time. This often means defining clear boundaries and improving how UI and logic evolve together.
-                </p>
+                <div className="about-page__intro">
+                    <Image alt="" src="/images/carl_portrait.webp" height={250} width={200} variant="card" className="about-page__intro--portrait"/>
+                    <Stack className="about-page__intro--text">
+                        <p>
+                            I am a Full stack developer with a strong focus on <span className="fun-underline">front-end architecture</span>, <span className="fun-underline">accessibility</span>, and just <span className="fun-underline">building enjoyable user experiences</span>.
+                        </p>
+                        <p>
+                            I specialise in building systems that are easier to understand, maintain, and remain reliable over time. This often means defining clear boundaries and improving how UI and logic evolve together.
+                        </p>
+                    </Stack>
+                </div>
             </Stack>
             <Stack
                 as="section"
