@@ -1,9 +1,9 @@
 .footer {
-    --link-color-override: var(--color-primary-100);
     justify-content: center;
     width: 100%;
     text-align: center;
-    padding-block: var(--spacing-lg);
+    padding-block-end: var(--spacing-lg);
+    padding-block-start: var(--spacing-3xl);
     padding-inline: var(--spacing-lg);
 }
 

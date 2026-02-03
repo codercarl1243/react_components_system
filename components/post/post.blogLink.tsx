@@ -9,6 +9,11 @@ type BlogLinkProps = {
 } & LinkProps;
 
 export default function BlogLink({ id, children }: BlogLinkProps) {
+
+    if (!id) {
+          logWarning(`no post id given to blogLink: ${children}`)
+        return <>{children}</>
+    }
     const post = getBlogPostById(id);
 
     if (!post) {

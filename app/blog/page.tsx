@@ -7,13 +7,31 @@ import BlogLink from '@/components/post/post.blogLink';
 import Post from '@/components/post';
 import PostSection from '@/components/post/post.section';
 import Image from '@/components/image';
+
+function chunk<T>(arr: T[], size: number) {
+  const result: T[][] = [];
+  for (let i = 0; i < arr.length; i += size) {
+    result.push(arr.slice(i, i + size));
+  }
+  return result;
+}
+
+
 export default function BlogPage() {
   const blogPosts = getBlogPostsSummaries();
+  const examplePosts = [...blogPosts, ...blogPosts, ...blogPosts, ...blogPosts].map(
+    (post, index) => ({
+      ...post,
+      featured: index % 4 === 0
+    })
+  );
+const groups = chunk(examplePosts, 4);
+
 
   return (
     <Post>
       <PostSection>
-        <Image className="width-full" alt={''} src={'/images/blogs/main-image.webp'} variant='hero' height={400}/>
+        <Image className="width-full" alt={''} src={'/images/blogs/main-image.webp'} variant='hero' height={400} />
         <Heading as={"h1"}>Blogs</Heading>
         <p>Design systems don't usually break all at once. They decay.</p>
 
@@ -43,14 +61,26 @@ export default function BlogPage() {
         <Heading as="h2">All Posts</Heading>
         {/* <p>Below you'll find all posts in this series.
         Filter or sort them by topic depending on what you're looking for:</p> */}
-        <List marker='none' className='post-card__list'>
-          {blogPosts.map((post) => (
-            <li key={post.id}>
-              <PostCard
-                post={post}
-              />
-            </li>
-          ))}
+        <List as="ul" marker="none" className='post-card__grid-container p-0 flow-6'>
+          <li>
+            <List as="ul" marker="none" className='post-card__grid p-0'>
+              {groups[0].map((post, index) => <li key={post.id + index}>
+                <PostCard
+                  post={post}
+                />
+              </li>)}
+            </List>
+          </li>
+
+          <li>
+            <List as="ul" marker="none" className='post-card__grid p-0' data-side="right">
+              {groups[1].map((post, index) => <li key={post.id + index}>
+                <PostCard
+                  post={post}
+                />
+              </li>)}
+            </List>
+          </li>
         </List>
       </PostSection>
     </Post>
