@@ -210,9 +210,12 @@ Examples:
           {
             id: "flow-diagram",
             tabLabel: "theming flow",
-            panelContent: <Block paint="background" variant="neutral" variantAppearance="filled">
-              <Heading className="px-4">Token Flow Through the System</Heading>
-              <TokenFlowDiagram /></Block>
+            panelContent: (
+              <Block paint="background" variant="neutral" variantAppearance="filled">
+                <Heading className="px-4">Token Flow Through the System</Heading>
+                <TokenFlowDiagram />
+              </Block>
+            )
           }
         ]}
       />
