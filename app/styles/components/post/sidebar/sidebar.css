@@ -41,6 +41,5 @@
 @media screen and (max-width: 35rem) {
     .post-sidebar {
         align-items: center;
-        /* padding-block-start: var(--spacing-xxl); */
     }
 }
