@@ -93,7 +93,6 @@
   }
 
   .post__banner__text-subtitle::before {
-    border-radius: 0;
     border-radius: 0 10px 10px 0;
     height: 200%;
     border: 2px solid var(--surface);
