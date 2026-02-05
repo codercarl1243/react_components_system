@@ -72,17 +72,13 @@ export default function BlogPage() {
         {/* <p>Below you'll find all posts in this series.
         Filter or sort them by topic depending on what you're looking for:</p> */}
         <List as="ul" marker="none" className='post-card__grid-container p-0 flow-6'>
-          <li>
-            <List as="ul" marker="none" className='post-card__grid p-0'>
-              {groups[0]}
+          {groups.map((group, index) => {
+            return (<li>
+            <List as="ul" marker="none" className='post-card__grid p-0' data-side={index % 2 ? "right" : "left"}>
+              {group}
             </List>
-          </li>
-
-          <li>
-            <List as="ul" marker="none" className='post-card__grid p-0' data-side="right">
-              {groups[1]}
-            </List>
-          </li>
+          </li>)
+          })}
         </List>
       </PostSection>
     </Post>
