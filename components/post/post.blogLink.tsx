@@ -8,7 +8,7 @@ type BlogLinkProps = {
     id: PostId | string;
 } & LinkProps;
 
-export default function BlogLink({ id, children }: BlogLinkProps) {
+export default function BlogLink({ id, children, ...props }: BlogLinkProps) {
 
     if (!id) {
           logWarning(`no post id given to blogLink: ${children}`)
@@ -23,5 +23,5 @@ export default function BlogLink({ id, children }: BlogLinkProps) {
         }
         return null;
     }
-    return <Link href={post.href}>{children ?? post.title}</Link>
+    return <Link href={post.href} {...props}>{children ?? post.title}</Link>
 }
