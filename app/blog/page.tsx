@@ -7,6 +7,7 @@ import BlogLink from '@/components/post/post.blogLink';
 import Post from '@/components/post';
 import PostSection from '@/components/post/post.section';
 import Image from '@/components/image';
+import { logInfo } from '@/lib/logging/log';
 
 function chunk<T>(arr: T[], size: number) {
   const result: T[][] = [];
@@ -20,14 +21,23 @@ function chunk<T>(arr: T[], size: number) {
 export default function BlogPage() {
   const blogPosts = getBlogPostsSummaries();
   const examplePosts = [...blogPosts, ...blogPosts, ...blogPosts, ...blogPosts].map(
-    (post, index) => ({
-      ...post,
-      featured: index % 4 === 0
-    })
+    (post, index) => {
+      const layout = index % 4 === 0 ? "large" : "default";
+
+      return (
+        <li key={post.id + index} data-layout={layout}>
+          <PostCard
+            post={post}
+            layout={layout}
+          />
+        </li>
+      )
+    }
   );
-const groups = chunk(examplePosts, 4);
 
+  const groups = chunk(examplePosts, 4);
 
+  logInfo("data", { data: { groups } })
   return (
     <Post>
       <PostSection>
@@ -64,21 +74,13 @@ const groups = chunk(examplePosts, 4);
         <List as="ul" marker="none" className='post-card__grid-container p-0 flow-6'>
           <li>
             <List as="ul" marker="none" className='post-card__grid p-0'>
-              {groups[0].map((post, index) => <li key={post.id + index}>
-                <PostCard
-                  post={post}
-                />
-              </li>)}
+              {groups[0]}
             </List>
           </li>
 
           <li>
             <List as="ul" marker="none" className='post-card__grid p-0' data-side="right">
-              {groups[1].map((post, index) => <li key={post.id + index}>
-                <PostCard
-                  post={post}
-                />
-              </li>)}
+              {groups[1]}
             </List>
           </li>
         </List>

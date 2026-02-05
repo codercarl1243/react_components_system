@@ -11,7 +11,6 @@
 }
 
 .latest-posts__grid {
-  /* padding: var(--spacing-lg); */
   padding: 0;
   display: grid;
   grid-template-columns: 1fr;
@@ -29,7 +28,7 @@
     grid-column: 1;
     grid-row: span 3;
   }
-  .latest-posts__featured .post-card__featured {
+  .latest-posts__featured .post-card[data-layout="large"] {
     height: 100%;
   }
 

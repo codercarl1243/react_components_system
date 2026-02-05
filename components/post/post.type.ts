@@ -6,6 +6,7 @@ import type { Variant } from '@/types/variant';
 
 export type PostCardPropsType = {
   post: PostSummary;
+  layout?: "default" | "large";
 };
 
 export type SectionProps = StackProps<'section'> & {

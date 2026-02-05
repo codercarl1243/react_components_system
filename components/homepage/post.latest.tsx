@@ -14,7 +14,7 @@ export default function LatestPosts() {
       <Heading as="h2" className="center mb-4" headingSize={4}>Latest posts</Heading>
       <List as="ul" marker="none" className="latest-posts__grid">
         {featuredPost && <li className="latest-post latest-posts__featured">
-          <PostCard post={featuredPost} />
+          <PostCard post={featuredPost} layout="large"/>
         </li>}
 
         {posts.map(post => (

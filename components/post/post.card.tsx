@@ -18,7 +18,7 @@ import clsx from 'clsx';
  * @returns The post card component.
  */
 
-export default function PostCard({ post }: PostCardPropsType) {
+export default function PostCard({ post, layout = "default" }: PostCardPropsType) {
 
     const {
         image,
@@ -32,8 +32,8 @@ export default function PostCard({ post }: PostCardPropsType) {
     return (
         <Block
             as="article"
-            {...applyDataAttributes({ featured })}
-            className={clsx("flow-2 surface-frame post-card", {"post-card__featured": featured})}
+            {...applyDataAttributes({ layout, featured })}
+            className="flow-2 surface-frame post-card"
         >
             <Link
                 href={href}
@@ -52,12 +52,14 @@ export default function PostCard({ post }: PostCardPropsType) {
             >
                 <span className="selectable-text">{title}</span>
             </Heading>
-            {featured && <p className="post-card__excerpt px-2">
-                <span className="selectable-text">
-                    {excerpt}
-                </span>
-            </p>}
-            <Inline wrap className='post-card__meta px-2 pb-2' gap={2}>
+            {layout === "large" && (
+                <p className="post-card__excerpt px-4">
+                    <span className="selectable-text">
+                        {excerpt}
+                    </span>
+                </p>
+            )}
+            <Inline wrap className='post-card__meta px-4 pb-2' gap={2}>
                 {categories.map(category => <CategoryPill key={`${post.id}-${category}`} category={category} />)}
             </Inline>
         </Block>
