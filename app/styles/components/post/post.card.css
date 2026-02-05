@@ -4,6 +4,8 @@
     height: max(150px, 100%);
     overflow: hidden;
     outline: 1px solid;
+    border-color: var(--border-color);
+    transition: outline-offset 150ms ease-in-out;
 }
 
 .post-card__overlay {
@@ -34,6 +36,7 @@
     position: absolute;
     top: calc(50% + var(--spacing));
 }
+
 .post-card__meta {
     position: absolute;
     bottom: 0;
@@ -43,7 +46,7 @@
     display: inline-block;
     overflow: hidden;
     width: 100%;
-    
+
     img {
         width: max(250px, 100%) !important;
         height: 100%;
@@ -58,6 +61,7 @@
 .post-card[data-layout="large"] .post-card__image {
     height: clamp(100px, 50%, 100%) !important;
     background-color: transparent !important;
+
     img {
         object-fit: cover;
         transform: scale(1.25) translate(-8%, -8%);
@@ -75,31 +79,25 @@
             height: 100%;
         }
     }
-
-    &:hover .post-card__image,
-    &:focus-within .post-card__image {
-        img {
-            transform: scale(1) translate(0, 0) !important;
-            filter: grayscale(50%) saturate(1.05);
-            /* border: 1px solid red; */
-        }
-    }
-}
-
-.post-card:hover .post-card__image,
-.post-card:focus-within .post-card__image {
-    img {
-        transform: scale(1) translate(0, 0);
-        filter: grayscale(0%) saturate(1.05);
-    }
 }
 
 .post-card:has(.post-card__link:active),
 .post-card:has(.post-card__link:focus-visible),
-.post-card:hover {
+.post-card:hover,
+.post-card:focus-within {
     box-shadow: var(--shadow-sm);
-    border-bottom-color: var(--color-neutral-400) !important;
-    border-right-color: var(--color-neutral-400) !important;
+    outline-offset: 4px;
+
+    .post-card__image {
+        img {
+            transform: scale(1) translate(0, 0);
+            filter: grayscale(0%) saturate(1.05);
+        }
+    }
+}
+
+.post-card:has(.post-card__link:active) {
+    outline-style: dashed;
 }
 
 .post-card .post-card__link {
@@ -143,10 +141,10 @@
 
     /* left hand side */
     .post-card__grid>li {
-        grid-column:  4/6;
+        grid-column: 4/6;
     }
 
-    .post-card__grid>li[data-layout="large"]{
+    .post-card__grid>li[data-layout="large"] {
         grid-column: 1 / 4;
         grid-row: span 3;
     }
@@ -154,11 +152,11 @@
     /* Right hand side */
     .post-card__grid[data-side="right"] {
         li[data-layout="large"] {
-             grid-column: 3 / 6;
+            grid-column: 3 / 6;
         }
 
         li {
-             grid-column: 1 / 3;
+            grid-column: 1 / 3;
         }
     }
 }
