@@ -20,7 +20,7 @@ function chunk<T>(arr: T[], size: number) {
 
 export default function BlogPage() {
   const blogPosts = getBlogPostsSummaries();
-  const examplePosts = [...blogPosts, ...blogPosts, ...blogPosts, ...blogPosts].map(
+  const formattedPosts = blogPosts.map(
     (post, index) => {
       const layout = index % 4 === 0 ? "large" : "default";
 
@@ -35,7 +35,7 @@ export default function BlogPage() {
     }
   );
 
-  const groups = chunk(examplePosts, 4);
+  const groups = chunk(formattedPosts, 4);
 
   logInfo("data", { data: { groups } })
   return (
@@ -73,7 +73,7 @@ export default function BlogPage() {
         Filter or sort them by topic depending on what you're looking for:</p> */}
         <List as="ul" marker="none" className='post-card__grid-container p-0 flow-6'>
           {groups.map((group, index) => {
-            return (<li>
+            return (<li key={"post-card__grid-group" + index}>
             <List as="ul" marker="none" className='post-card__grid p-0' data-side={index % 2 ? "right" : "left"}>
               {group}
             </List>
