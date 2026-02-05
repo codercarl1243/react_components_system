@@ -60,7 +60,7 @@
   z-index: 0;
   color: white;
 
-  &:before {
+  &::before {
     content: "";
     position: absolute;
     z-index: -1;
