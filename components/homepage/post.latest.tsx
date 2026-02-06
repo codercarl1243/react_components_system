@@ -14,7 +14,7 @@ export default function LatestPosts() {
       <Heading as="h2" className="center mb-4" headingSize={4}>Latest posts</Heading>
       <div className="post-card__grid-container">
         <List as="ul" marker="none" className="post-card__grid p-0 flow-6">
-          {featuredPost && <li className="latest-post latest-posts__featured" data-layout="large">
+          {featuredPost && <li key={featuredPost.id} className="latest-post latest-posts__featured" data-layout="large">
             <PostCard post={featuredPost} layout="large" />
           </li>}
 
