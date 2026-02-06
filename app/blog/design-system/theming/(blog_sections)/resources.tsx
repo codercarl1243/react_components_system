@@ -80,7 +80,7 @@ export default function Resources() {
           Color accessibility is one of the easiest ways to accidentally exclude users — and one of the easiest to fix with the right tools.
         </p>
         <List spacing="loose" marker="circle" as="ul">
-          <li><Link href="https://www.w3.org/WAI/WCAG21/quickref/">WCAG 2.1 Quick Reference guide</Link> - a concise overview of contrast requirements and success criteria</li>
+          <li><Link href="https://www.w3.org/WAI/WCAG21/quickref/">WCAG 2.1 Quick Reference guide</Link> — a concise overview of contrast requirements and success criteria</li>
           <li><Link href="https://webaim.org/resources/contrastchecker/">WebAIM Contrast Checker</Link> — the gold standard for checking contrast ratios</li>
           <li><Link href="https://contrast-grid.eightshapes.com/">Contrast Grid</Link> — compare entire color palettes at once</li>
           <li><Link href="https://color.review/">Color.review</Link> — preview colors with vision-deficiency simulations</li>
