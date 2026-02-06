@@ -1,5 +1,6 @@
 import Heading from "@/components/heading";
 import Image from '@/components/image'
+import Link from "@/components/link";
 import { SidebarAuthorProps } from "@/components/post/sidebar/sidebar.type";
 
 export default function SidebarAuthor({ author }: SidebarAuthorProps) {
@@ -9,7 +10,7 @@ export default function SidebarAuthor({ author }: SidebarAuthorProps) {
             <Heading as={"h2"} id="post-sidebar-author-heading" className="sr-only">
                 About the Author
             </Heading>
-            <div className="author">
+            <Link className="author" href="/about">
                 {author.avatarUrl && (
                     <Image
                         src={author.avatarUrl}
@@ -19,7 +20,7 @@ export default function SidebarAuthor({ author }: SidebarAuthorProps) {
                     />
                 )}
                 <p className="author__name">{author.name}</p>
-            </div>
+            </Link>
         </section>
     )
 }

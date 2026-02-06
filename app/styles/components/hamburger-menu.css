@@ -80,6 +80,7 @@ main:has(.hamburger-menu--wrapper[data-mode="hamburger"]) {
         transform: translateX(var(--translation));
         height: 100%;
         width: var(--expanded-burger-menu-width);
+        padding-block-start: var(--spacing-3xl);
         overflow-y: auto;
         transition: transform var(--overlay-transition-duration) ease-in-out;
 

@@ -6,7 +6,7 @@ export const CODER_CARL_ID = asAuthorId('coderCarl1243');
 
 export const CODER_CARL: Author = {
     id: CODER_CARL_ID,
-    avatarUrl: '/images/heroImage_200x200.webp',
+    avatarUrl: '/images/carl_portrait.webp',
     name: "carl davidson",
     postIds: asPostIds([
         'design__button__01', 

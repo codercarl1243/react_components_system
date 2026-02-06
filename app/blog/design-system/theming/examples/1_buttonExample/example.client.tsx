@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import type { CodeKey } from './codeMap'
 import type { ButtonProps } from '@/components/button/button.type'
-import { Block, Inline } from '@/components/primitives'
+import { Block } from '@/components/primitives'
 import { ToggleGroup } from '@/components/button/toggle'
 
 function formatLabel(key: CodeKey) {
@@ -46,7 +46,7 @@ export default function ButtonExampleClient({
 
       {/* Controls */}
         <ToggleGroup
-        className='theming_buttonExample__buttons'
+          className='theming_buttonExample__buttons'
           items={keys.map(constructToggle)}
           aria-label="Example of buttons with different theming"
           value={active}

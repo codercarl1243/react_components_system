@@ -1,5 +1,8 @@
 /** Data */
 import getBlogPostPageData from "@/lib/blog/blog.page-data";
+import { generateMetadataForPost } from "@/lib/utils/generateMeta";
+import { asPostId } from "@/lib/blog/blog.utils";
+import { type Metadata } from "next";
 
 /** Layout */
 import Post from "@/components/post";
@@ -7,18 +10,19 @@ import PostBanner from "@/components/post/post.banner";
 import PostSideBar from "@/components/post/sidebar";
 
 /** Sections */
-import Introduction from "./(blog_sections)/introduction";
-import Section1 from './(blog_sections)/section1';
-import Section2 from './(blog_sections)/section2';
-import Section3 from './(blog_sections)/section3';
-import Section4 from './(blog_sections)/section4';
-import Section5 from './(blog_sections)/section5';
-import Section6 from './(blog_sections)/section6';
-import Section7 from './(blog_sections)/section7';
-import WhatsNext from "./(blog_sections)/whatsNext";
-import Resources from "./(blog_sections)/resources"
+// import Introduction from "./(blog_sections)/1_introduction";
+// import WhatWeAreBuilding from "./(blog_sections)/2_whatWeAreBuilding";
+// import Why from './(blog_sections)/3_why';
+// import Tokens from './(blog_sections)/4_tokens';
+// import Structure from './(blog_sections)/5_structure';
+// import Variants from './(blog_sections)/6_variants';
+// import Appearance from './(blog_sections)/7_appearance';
+// import Paint from './(blog_sections)/8_paint';
+// import PuttingItAllTogether from './(blog_sections)/9_puttingItAllTogether';
+// import Summary from './(blog_sections)/10_summary';
+// import Resources from './(blog_sections)/resources';
 
-// TODO: complete this
+
 const TABLE_OF_CONTENTS = [
     // { id: 'introduction', href: '#introduction', label: "Introduction" },
     // { id: 'what-we-are-building', href: '#what-we-are-building', label: "What we're building" },
@@ -33,24 +37,30 @@ const TABLE_OF_CONTENTS = [
     // { id: 'resources', href: '#resources', label: "Code & Resources" }
 ] as const;
 
-export default function FoundationsPage() {
-    const { post, relatedPosts, author } = getBlogPostPageData("design__foundations_01");
+const postId = asPostId('design__primitives_01');
+export const metadata: Metadata = generateMetadataForPost(postId);
+
+export default function ThemingPage() {
+
+    const { post, relatedPosts, author } = getBlogPostPageData(postId);
+
     return (
         <>
             <Post>
                 <PostBanner
                     post={post}
                 />
-                <Introduction />
-                <Section1 />
-                <Section2 />
-                <Section3 />
-                <Section4 />
-                <Section5 />
-                <Section6 />
-                <Section7 />
-                <WhatsNext />
-                <Resources />
+                {/* <Introduction />
+                <WhatWeAreBuilding />
+                <Why />
+                <Tokens />
+                <Structure />
+                <Variants />
+                <Appearance />
+                <Paint />
+                <PuttingItAllTogether />
+                <Summary />
+                <Resources /> */}
             </Post>
             <PostSideBar
                 contents={TABLE_OF_CONTENTS}

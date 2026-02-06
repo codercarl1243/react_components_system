@@ -8,8 +8,7 @@
 .header--wrapper {
     display: flex;
     min-height: 5rem;
-    max-width: 80ch;
-    min-width: var(--bp-xs);
+    width: clamp(var(--bp-xs),85%, var(--bp-xl));
     margin-inline: auto;
     align-items: center;
     position: relative;
@@ -17,7 +16,7 @@
 
 @media screen and (max-width: 35rem) {
     .nav__primary a:first-child {
-        padding-block-start: var(--spacing-xl);
+        padding-block-start: var(--spacing-xxl);
     }
 }
 
@@ -25,6 +24,7 @@
 @media screen and (min-width: 35rem) {
     .header--wrapper {
         padding: var(--spacing) var(--spacing-lg);
+           padding-block: var(--spacing-xxl);
     }
 
     .nav__primary {

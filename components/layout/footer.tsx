@@ -6,7 +6,7 @@ import { Inline } from '@/components/primitives'
 export default function Footer ({ className, ...props }: ComponentProps<'footer'>) {
   const year = new Date().getFullYear()
   return (
-        <Inline as="footer" variant="primary" variantAppearance="filled" paint="all" align="center" className={clsx('footer', className)} {...props}>
+        <Inline as="footer" align="center" className={clsx('footer', className)} {...props}>
             <p>&copy; {year} Carl Davidson. All rights reserved. <span>|</span> <Link href="mailto:codercarl1243@gmail.com">codercarl1243@gmail.com</Link></p>
         </Inline>
   )

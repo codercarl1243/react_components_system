@@ -9,7 +9,7 @@ import PostSection from "@/components/post/post.section";
 export default function Section01_Introduction() {
     return (
         <PostSection id="introduction">
-            <PostBanner
+            {/* <PostBanner
                 title="Button Theming & Variants"
                 headingId="button-theming-heading"
                 subtitle="Building a flexible color system for scalable, accessible design"
@@ -17,7 +17,7 @@ export default function Section01_Introduction() {
                    src: '/images/blogs/buttons-theming/main-image.webp',
                     alt: "Grid of buttons in different colors and styles representing design system variants"
                 }}
-            />
+            /> */}
             <AnchorHeading as={"h2"} id="introduction-heading">Introduction</AnchorHeading>
             <p>
                 You've built a solid button component — it's:

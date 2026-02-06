@@ -1,0 +1,16 @@
+
+.post-section .link--heading {
+    color: transparent;
+    .heading {
+        text-decoration: underline;
+        text-decoration-color: transparent;
+    }
+    &:hover .heading {
+            text-decoration-style: dashed;
+            text-decoration-color: currentColor;
+        }
+    &:focus-within .heading {
+            text-decoration-style: solid;
+            text-decoration-color: currentColor;
+        }
+}

@@ -5,7 +5,7 @@ export const CODE_MAP = {
   data-variant="primary" 
   data-appearance="filled" 
   data-paint="all"
-  >
+>
   Primary Filled
 </button>`,
   },
@@ -15,7 +15,7 @@ export const CODE_MAP = {
   data-variant="secondary" 
   data-appearance="ghost" 
   data-paint="all"
-  >
+>
   Secondary Ghost
 </button>`,
   },

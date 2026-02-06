@@ -1,5 +1,8 @@
 /** Data */
 import getBlogPostPageData from "@/lib/blog/blog.page-data";
+import { generateMetadataForPost } from "@/lib/utils/generateMeta";
+import { asPostId } from "@/lib/blog/blog.utils";
+import { type Metadata } from "next";
 
 /** Layout */
 import Post from "@/components/post";
@@ -34,9 +37,12 @@ const TABLE_OF_CONTENTS = [
     { id: 'resources', href: '#resources', label: "Code & Resources" }
 ] as const;
 
+const postId = asPostId('design__theming_01');
+export const metadata: Metadata = generateMetadataForPost(postId);
+
 export default function ThemingPage() {
 
-    const { post, relatedPosts, author } = getBlogPostPageData("design__theming_01");
+    const { post, relatedPosts, author } = getBlogPostPageData(postId);
 
     return (
         <>

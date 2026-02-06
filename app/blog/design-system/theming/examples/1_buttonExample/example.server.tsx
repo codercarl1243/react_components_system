@@ -8,7 +8,7 @@ export default function ButtonExample() {
   return (
     <ButtonExampleClient keys={keys}>
       {keys.map((key) => {
-        const { tokens, code } = CODE_MAP[key]
+        const { code } = CODE_MAP[key]
         const [variant] = key.split('_') as [
           Variant
         ]
@@ -21,7 +21,6 @@ export default function ButtonExample() {
             <Code
               lang="html"
               title="HTML (framework-agnostic):"
-              highlightTokens={tokens}
               options={{ variant }}
               codeString={code}
               copyEnabled

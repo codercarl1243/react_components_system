@@ -38,7 +38,7 @@ export default function PostBanner({ post }: {post: PostType}) {
   const {title, id, subtitle, image } = post;
 
   return (
-    <div className="post__banner font-accent width-full">
+    <div className="post__banner font-accent width-bleed">
       {image?.src && (
         <Image
           src={image.src}
