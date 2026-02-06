@@ -7,52 +7,104 @@ import List from "@/components/list";
 import PostSection from "@/components/post/post.section";
 import TabList from "@/components/tablist";
 import TokenFlowDiagram from "../examples/2_whatWeAreBuilding";
-import { Block } from "@/components/primitives";
+import { Block, Stack } from "@/components/primitives";
+import InlineCode from "@/components/code/inlineCode";
+import PostNote from "@/components/post/post.note";
 
 export default function Resources() {
 
   return (
-    <PostSection id="resources">
-      <AnchorHeading as={"h2"} id="resources-heading">Code & Resources</AnchorHeading>
-      <p>
-        This post focuses on <strong>system-level theming</strong> — using tokens, CSS variables, and clear styling boundaries to support light/dark modes, variants, and surfaces without component rewrites.
-      </p>
-      <p>
-        At its core, the system is built on CSS custom properties and their inheritance model. For a deeper understanding of how variables flow, cascade, and override, see the <Link href="https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties">MDN guide on CSS Custom Properties</Link>.
-      </p>
-      <AnchorHeading as="h3" id="resources-color-accessibility-tools">Theme validation & color systems</AnchorHeading>
-      <p>
-        Color accessibility is one of the easiest ways to accidentally exclude users — and one of the easiest to fix with the right tools.
-      </p>
-      <p>
-        Color decisions in this system are evaluated against established accessibility guidelines. For a concise overview of contrast requirements and success criteria, see the <Link href="https://www.w3.org/WAI/WCAG21/quickref/">WCAG 2.1 Quick Reference guide</Link>.
-      </p>
-      <p>
-        The tools below can help test contrast, generate accessible palettes, and sanity-check theme decisions before you lock them into your design system.
-      </p>
-      <List spacing="loose" marker="circle" as="ul">
-        <li><Link href="https://webaim.org/resources/contrastchecker/">WebAIM Contrast Checker</Link> — the gold standard for checking contrast ratios</li>
-        <li><Link href="https://contrast-grid.eightshapes.com/">Contrast Grid</Link> — compare entire color palettes at once</li>
-        <li><Link href="https://color.review/">Color.review</Link> — preview colors with vision-deficiency simulations</li>
-      </List>
-      <Heading as={"h3"}>Theming Pipeline (Reference)</Heading>
-      <p>
-        The snippets below represent the core building blocks discussed in this post — <FunHighlight>tokens</FunHighlight>, <FunHighlight>data attributes</FunHighlight>, and <FunHighlight>CSS layering</FunHighlight> used to implement theming without coupling styles to components.
-      </p>
-      <TabList
-        tabListName="theming_code_reference"
-        className="code__reference height-min"
-        defaultActiveTabId="theme-tokens"
-        variant="accent"
-        orientation="horizontal"
-        tabs={[
-          {
-            id: 'theme-tokens',
-            tabLabel: 'theme.css',
-            panelContent: (
-              <Code
-                lang="css"
-                codeString={`/*
+    <PostSection id="resources" className="flow-8">
+      <Stack>
+        <AnchorHeading as={"h2"} id="resources-heading">Code & Resources</AnchorHeading>
+        <p className="italic">
+          This section exists to document constraints, tradeoffs, and reference material — not to introduce new concepts.
+        </p>
+        <p>
+          This post focuses on <strong>system-level theming</strong> — using tokens, CSS variables, and clear styling boundaries to support light/dark modes, variants, and surfaces without component rewrites.
+        </p>
+        <p>
+          At its core, the system is built on CSS custom properties and their inheritance model. For a deeper understanding of how variables flow, cascade, and override, see the <Link href="https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties">MDN guide on CSS Custom Properties</Link>.
+        </p>
+      </Stack>
+      <Stack>
+        <AnchorHeading as="h3" headingSize={4} id="resources-notes">Notes & Tradeoffs</AnchorHeading>
+        <p>
+          This system makes specific architectural decisions. Understanding these constraints is key to using it effectively:</p>
+        <List as="ol" spacing="loose" marker="lower-roman">
+          <li className="flow-4">
+            <p>
+              <strong>Variants do not compose.</strong>{" "}
+              When multiple <InlineCode codeString="data-variant" lang="html" /> attributes exist in a subtree, the closest ancestor wins.
+            </p>
+            <p>
+              If a child needs a different semantic meaning, it must opt in <em className="fun-underline">explicitly</em>.
+            </p>
+          </li>
+          <li className="flow-4">
+            <p>
+              <strong>Interactive states are layered separately.</strong>{" "}
+              This system defines meaning (<em>variant</em>) and mapping (<em>appearance</em>), not interaction timing.
+            </p>
+            <p>
+              Hover, focus, and active states are handled at the appearance or component layer.
+            </p>
+          </li>
+          <li className="flow-4">
+            <p>
+              <strong>Paint presets are exclusive.</strong>{" "}
+              Presets like <code>surface</code> and <code>all</code> should not be mixed with composable paint channels.
+            </p>
+            <p>
+              This is a deliberate constraint to avoid ambiguous styling outcomes.
+            </p>
+            <PostNote>
+              This constraint is intentional and documented rather than enforced by default.
+              Teams that need stricter guarantees can enforce it through typing, linting, or review conventions.
+            </PostNote>
+          </li>
+          <li className="flow-4">
+            <p>
+              <strong>Missing tokens fall back silently.</strong>{" "}
+              If a variant or appearance is undefined, CSS variable fallbacks apply.
+            </p>
+            <p>
+              This favors resilience over strict enforcement.
+            </p>
+          </li>
+        </List>
+      </Stack>
+      <Stack>
+        <AnchorHeading as="h3" headingSize={4}id="resources-color-accessibility-tools">Theme validation & color systems</AnchorHeading>
+        <p>
+          Color accessibility is one of the easiest ways to accidentally exclude users — and one of the easiest to sanity-check with the right tools.
+        </p>
+        <List spacing="loose" marker="circle" as="ul">
+          <li><Link href="https://www.w3.org/WAI/WCAG21/quickref/">WCAG 2.1 Quick Reference guide</Link> - a concise overview of contrast requirements and success criteria</li>
+          <li><Link href="https://webaim.org/resources/contrastchecker/">WebAIM Contrast Checker</Link> — the gold standard for checking contrast ratios</li>
+          <li><Link href="https://contrast-grid.eightshapes.com/">Contrast Grid</Link> — compare entire color palettes at once</li>
+          <li><Link href="https://color.review/">Color.review</Link> — preview colors with vision-deficiency simulations</li>
+        </List>
+      </Stack>
+      <Stack>
+        <Heading as={"h3"} headingSize={4}>Theming Pipeline (Reference)</Heading>
+        <p>
+          The snippets below represent the core building blocks discussed in this post — <span className="no-wrap"><FunHighlight>tokens</FunHighlight>,</span> <span className="no-wrap"><FunHighlight>data attributes</FunHighlight>,</span> and <FunHighlight>CSS layering</FunHighlight> used to implement theming without coupling styles to components.
+        </p>
+        <TabList
+          tabListName="theming_code_reference"
+          className="code__reference height-min"
+          defaultActiveTabId="theme-tokens"
+          variant="accent"
+          orientation="horizontal"
+          tabs={[
+            {
+              id: 'theme-tokens',
+              tabLabel: 'theme.css',
+              panelContent: (
+                <Code
+                  lang="css"
+                  codeString={`/*
 Theme API
 
 Themes define global, environment-level color tokens.
@@ -87,14 +139,14 @@ body {
     color: var(--text-on-surface);
 }
 `} />)
-          },
-          {
-            id: "variants-layer",
-            tabLabel: "variants.css",
-            panelContent: (
-              <Code
-                lang="css"
-                codeString={`/*
+            },
+            {
+              id: "variants-layer",
+              tabLabel: "variants.css",
+              panelContent: (
+                <Code
+                  lang="css"
+                  codeString={`/*
 Variant tokens are inert by default.
 They do not affect styling until mapped by appearance 
 and applied via paint.
@@ -119,14 +171,14 @@ and applied via paint.
  follow the same contract and are omitted here for clarity.
 */  
 `} />)
-          },
-          {
-            id: "appearance-layer",
-            tabLabel: "appearance.css",
-            panelContent: (
-              <Code
-                lang="css"
-                codeString={`/*
+            },
+            {
+              id: "appearance-layer",
+              tabLabel: "appearance.css",
+              panelContent: (
+                <Code
+                  lang="css"
+                  codeString={`/*
 Appearance API
 
 Appearances map semantic variant tokens to resolved color variables.
@@ -157,14 +209,14 @@ paint → applies them
   .... insert more appearances as your project needs (outlined, ghost etc.)
 */  
 `} />)
-          },
-          {
-            id: "paint-boundaries",
-            tabLabel: "paint.css",
-            panelContent: (
-              <Code
-                lang="css"
-                codeString={`/*
+            },
+            {
+              id: "paint-boundaries",
+              tabLabel: "paint.css",
+              panelContent: (
+                <Code
+                  lang="css"
+                  codeString={`/*
 Paint API
 
 Paint is opt-in and applies only to Block (and primitives composed from Block).
@@ -206,19 +258,20 @@ Examples:
 .block[data-paint="surface"] {
     border: 1px solid var(--border-color, var(--text-on-surface, currentColor));
 }`} />)
-          },
-          {
-            id: "flow-diagram",
-            tabLabel: "theming flow",
-            panelContent: (
-              <Block paint="background" variant="neutral" variantAppearance="filled">
-                <Heading className="px-4">Token Flow Through the System</Heading>
-                <TokenFlowDiagram />
-              </Block>
-            )
-          }
-        ]}
-      />
+            },
+            {
+              id: "flow-diagram",
+              tabLabel: "theming flow",
+              panelContent: (
+                <Block paint="all" variant="neutral" variantAppearance="filled">
+                  <Heading className="px-4">Token Flow Through the System</Heading>
+                  <TokenFlowDiagram />
+                </Block>
+              )
+            }
+          ]}
+        />
+      </Stack>
     </PostSection>
   )
 }
