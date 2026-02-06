@@ -264,7 +264,7 @@ Examples:
               tabLabel: "theming flow",
               panelContent: (
                 <Block paint="all" variant="neutral" variantAppearance="filled">
-                  <Heading className="px-4">Token Flow Through the System</Heading>
+                  <Heading as="h4" className="px-4">Token Flow Through the System</Heading>
                   <TokenFlowDiagram />
                 </Block>
               )
