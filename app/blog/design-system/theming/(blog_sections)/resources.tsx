@@ -43,6 +43,15 @@ export default function Resources() {
           </li>
           <li className="flow-4">
             <p>
+              <strong>Missing tokens fall back silently.</strong>{" "}
+              If a variant or appearance is undefined, CSS variable fallbacks apply.
+            </p>
+            <p>
+              This favors resilience over strict enforcement.
+            </p>
+          </li>
+          <li className="flow-4">
+            <p>
               <strong>Interactive states are layered separately.</strong>{" "}
               This system defines meaning (<em>variant</em>) and mapping (<em>appearance</em>), not interaction timing.
             </p>
@@ -63,19 +72,10 @@ export default function Resources() {
               Teams that need stricter guarantees can enforce it through typing, linting, or review conventions.
             </PostNote>
           </li>
-          <li className="flow-4">
-            <p>
-              <strong>Missing tokens fall back silently.</strong>{" "}
-              If a variant or appearance is undefined, CSS variable fallbacks apply.
-            </p>
-            <p>
-              This favors resilience over strict enforcement.
-            </p>
-          </li>
         </List>
       </Stack>
       <Stack>
-        <AnchorHeading as="h3" headingSize={4}id="resources-color-accessibility-tools">Theme validation & color systems</AnchorHeading>
+        <AnchorHeading as="h3" headingSize={4} id="resources-color-accessibility-tools">Theme validation & color systems</AnchorHeading>
         <p>
           Color accessibility is one of the easiest ways to accidentally exclude users — and one of the easiest to fix with the right tools.
         </p>
