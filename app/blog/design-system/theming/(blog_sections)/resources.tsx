@@ -77,7 +77,7 @@ export default function Resources() {
       <Stack>
         <AnchorHeading as="h3" headingSize={4}id="resources-color-accessibility-tools">Theme validation & color systems</AnchorHeading>
         <p>
-          Color accessibility is one of the easiest ways to accidentally exclude users — and one of the easiest to sanity-check with the right tools.
+          Color accessibility is one of the easiest ways to accidentally exclude users — and one of the easiest to fix with the right tools.
         </p>
         <List spacing="loose" marker="circle" as="ul">
           <li><Link href="https://www.w3.org/WAI/WCAG21/quickref/">WCAG 2.1 Quick Reference guide</Link> - a concise overview of contrast requirements and success criteria</li>
