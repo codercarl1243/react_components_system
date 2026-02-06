@@ -13,7 +13,7 @@ export default function Section1() {
             <p>
                 In the previous posts, we focused on architecture and enforcement.
             </p>
-            <List as="ul" marker="none" spacing="loose">
+            <List as="ul" marker="circle" spacing="loose">
                 <li><BlogLink id="design__foundations_01" /> introduced a layered token model and explained why styling systems break without clear boundaries.</li>
 
                 <li><BlogLink id="design__primitives_01"/> introduced primitives and showed how those boundaries can be enforced structurally.</li>
