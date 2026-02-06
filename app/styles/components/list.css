@@ -38,7 +38,7 @@
 
 /* Spacing variants */
 .list--tight {
-  --list-spacing: var(--spacing-sm)
+  --list-spacing: var(--spacing-sm);
 }
 
 .list--normal {
