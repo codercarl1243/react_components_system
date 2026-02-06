@@ -62,7 +62,7 @@ export default function Resources() {
           <li className="flow-4">
             <p>
               <strong>Paint presets are exclusive.</strong>{" "}
-              Presets like <code>surface</code> and <code>all</code> should not be mixed with composable paint channels.
+              Presets like <InlineCode codeString="surface" lang="html"/> and <InlineCode codeString="all" lang="html" /> should not be mixed with composable paint channels.
             </p>
             <p>
               This is a deliberate constraint to avoid ambiguous styling outcomes.
