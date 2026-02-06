@@ -23,11 +23,9 @@ export default function List<T extends ValidListTag = "ul">({
         className
     );
 
-    const role = marker === "none" ? "list" : undefined;
-
     return <Block
         className={listClasses}
-        role={role}
+        role={"list"}
         {...props}
     />
 }
