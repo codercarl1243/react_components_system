@@ -38,15 +38,15 @@
 
 /* Spacing variants */
 .list--tight {
-  --list-spacing: 0.15lh;
+  --list-spacing: var(--spacing-sm)
 }
 
 .list--normal {
-  --list-spacing: 0.25lh;
+  --list-spacing: var(--spacing);
 }
 
 .list--loose {
-  --list-spacing: 0.4lh;
+  --list-spacing: var(--spacing-lg);
 }
 
 .list li:not(:last-child) {
@@ -83,8 +83,17 @@
     counter-increment: ol-counter;
     font-weight: 600;
     top: 0;
+    left: -0.5em;
     width: 1.5em;
+    text-align: right;
+    white-space: nowrap;
   }
+}
+
+.list--upper-roman li::before,
+.list--lower-roman li::before {
+  width: 1.75em;
+  left: -0.75em;
 }
 
 .list--decimal li::before {
