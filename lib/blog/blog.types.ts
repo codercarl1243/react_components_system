@@ -11,8 +11,8 @@ export type PostId = Branded<string, 'PostId'>;
 
 // ---------- META INFO ----------
 export type PostMeta = {
-    title?: string;
-    description?: string;
+    title: string;
+    description: string;
     ogImage?: string;
 };
 
@@ -51,7 +51,7 @@ export type PostType = {
     /** Categories are top-level grouping labels for filtering and navigation. */
     categories: BlogCategory[];
     /** Optional SEO metadata overrides. */
-    meta?: PostMeta;
+    meta: PostMeta;
 };
 
 // ---------- SUMMARY ----------
