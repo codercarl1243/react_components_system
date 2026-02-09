@@ -29,11 +29,20 @@ export default function Section4() {
             <Stack>
                 <Heading as="h3" headingSize={4}>Color tokens</Heading>
                 <p>
-                    Color tokens use a numeric scale where lower numbers represent lighter values and higher numbers represent darker ones.
+                    Defining a base theme in terms of surface and text colors establishes a contrast-safe foundation before any semantic color roles are introduced.
                 </p>
+
                 <p>
-                    This makes it intuitive to find contrast pairs: <Inline as="span" align="center" gap={2} wrap={false}><InlineCode codeString="--color-primary-400" /><ColorSwatch color="var(--color-primary-400)" aria-label="Primary 400 color swatch"/> </Inline> (medium blue) naturally pairs with <Inline as="span" align="center" gap={2} wrap={false}><InlineCode codeString="--color-neutral-100" /><ColorSwatch color="var(--color-neutral-100)" aria-label="Neutral 100 color swatch" /></Inline> (white) for accessible contrast.
+                    Global color tokens use a numeric scale where lower numbers represent lighter values and higher numbers represent darker ones.
                 </p>
+
+                <p>
+                    Together, this gives the system room to define explicit contrast guarantees at different points in the scale, without baking semantic meaning into raw values.
+                </p>
+                {/* This section may belong in 6_variants */}
+                {/* <p>
+                    This makes it intuitive to find contrast pairs: <Inline as="span" align="center" gap={2} wrap={false}><InlineCode codeString="--color-primary-400" /><ColorSwatch color="var(--color-primary-400)" aria-label="Primary 400 color swatch" /> </Inline> (medium blue) naturally pairs with <Inline as="span" align="center" gap={2} wrap={false}><InlineCode codeString="--color-neutral-100" /><ColorSwatch color="var(--color-neutral-100)" aria-label="Neutral 100 color swatch" /></Inline> (white) for accessible contrast.
+                </p> */}
 
                 <Code
                     lang="css"
@@ -57,15 +66,15 @@ export default function Section4() {
                     These tokens are intentionally generic. They describe <em>what colors exist</em>, not <em>what they're used for</em>.
                 </p>
                 <p>
-                    That translation — from raw values to semantic meaning — happens in the <span className="bold">variant layer</span>, which we'll define next.
+                    That translation — from raw values to semantic meaning — happens in the <span className="bold">variant layer</span>, which we'll introduce later.
                 </p>
             </Stack>
 
             <PostNote>
-               <p> For tools that help you design accessible, contrast-safe color palettes, see the <Link href="#resources-color-accessibility-tools">resources section</Link>.</p>
-               <p className="italic">
-                        The full token set for this project is available on <Link href="https://github.com/codercarl1243/react_components_system/tree/main/styles/tokens">GitHub</Link>.
-                    </p>
+                <p> For tools that help you design accessible, contrast-safe color palettes, see the <Link href="#resources-color-accessibility-tools">resources section</Link>.</p>
+                <p className="italic">
+                    The full token set for this project is available on <Link href="https://github.com/codercarl1243/react_components_system/tree/main/styles/tokens">GitHub</Link>.
+                </p>
             </PostNote>
         </PostSection>
     );

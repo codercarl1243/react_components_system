@@ -12,7 +12,10 @@ export default function Section5() {
                 Establish structural boundaries
             </AnchorHeading>
             <p>
-                Before we introduce meaning, treatment, or color, we need a place for structure to live.
+                Before we introduce meaning, treatment, or color, we need to be clear about where styling decisions are allowed to happen.
+            </p>
+            <p>
+                This step intentionally pauses on structure to clarify system expectations and make architectural boundaries explicit — not to introduce variants or visual styles.
             </p>
             <p>
                 Structural components are responsible for <em>shape</em>, <em>layout</em>, and <em>interaction affordances</em> — not visual styling. They define how something behaves and occupies space, but they do not decide how it looks.
@@ -22,7 +25,7 @@ export default function Section5() {
                 This separation is deliberate. If components apply color, background, or borders directly, styling logic quickly becomes duplicated and inconsistent. Instead, components expose a stable structural surface that higher layers can decorate.
             </p>
             <p>
-                Here's a simplified example using a button:
+                Here's a simplified example showing a purely structural button:
             </p>
             <Code
                 lang="css"
@@ -51,7 +54,10 @@ export default function Section5() {
                 Rather than letting every component decide when to apply background, foreground, or border styles, we centralize that responsibility in a single layer: <span className="bold">paint</span>.
             </p>
             <p>
-                Paint acts as a strict boundary. Components opt into styling explicitly, and only through paint.
+               Paint defines the boundary. Components opt in explicitly — and nowhere else.
+            </p>
+            <p>
+                Some paint channels are ambient, while others are constructive. Background color can be applied directly, but borders must be created by paint when opted into, since they do not exist by default.
             </p>
             <Code
                 lang="css"
@@ -62,21 +68,13 @@ export default function Section5() {
     color: var(--foreground-color); 
 }
 .block[data-paint~="border"] { 
-    border-color: var(--border-color); 
+    border: 1px solid var(--border-color); 
 }`} />
-            <PostNote className="flow-4" variant="neutral" showIcon={false}>
-                <p>
-                    Any component that extends the base primitive <InlineCode codeString="<Block />" lang="tsx" /> automatically gains access to paint behavior — without implementing it itself.
-                </p>
-                <p>
-                    We will explore this more later on.
-                </p>
-            </PostNote>
             <p>
                 This keeps structural components simple and predictable, while ensuring visual application happens in one place.
             </p>
             <p>
-                With structure in place, we can now define meaning.
+                With structural expectations in place, we can now introduce meaning.
             </p>
             <p>
                 In the next step, we'll introduce the variant layer, which translates raw theme tokens into semantic intent.

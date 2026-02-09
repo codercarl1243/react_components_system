@@ -45,9 +45,13 @@ export default function TokenFlowDiagram() {
 --link-color: var(--color-primary-400);`}
         />
       </Stack>
-
-      <Icon icon={RiArrowDownLongFill} className="mx-auto" />
-
+      <div
+        style={{
+          height: "1px",
+          marginBlock: "var(--spacing-lg)",
+          backgroundColor: "var(--text-muted)",
+        }}
+      />
       {/* Variant */}
       <Stack
         gap={4}
