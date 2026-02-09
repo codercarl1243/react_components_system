@@ -10,28 +10,26 @@ export default function Section2() {
                 What we're building
             </AnchorHeading>
             <p>
-                The architecture from the first 2 posts in this series wasn't theoretical. It was
-                describing a real system — one built entirely with CSS custom properties and data attributes.
+                Before diving into the details, it helps to see the shape of the system as a whole. 
+                The diagram below shows how raw theme values move through the system and are progressively shaped before a component ever reads them.
             </p>
-
-            <p>
-                Before we start writing code, let's establish the flow. The diagram below shows how theme
-                tokens are transformed step by step — through variant, appearance, and paint — before
-                components consume the result.
-            </p>
-
             <WhatWeAreBuildingDiagram />
-
             <p>
-                Here's what that system looks like in practice:
+                <strong className="fun-underline">Design principle:</strong> In this system, <em>theme</em> is treated as environmental context. 
+                It establishes contrast and foreground/background relationships, while expressive meaning is handled by variants and appearance.
+            </p>
+            <p>
+                In practice, this layered styling model allows a single component to adapt its appearance using a small set of attributes. 
+                The explicit opt-in design keeps styling decisions intentional and prevents accidental coupling.
             </p>
             <ButtonExample />
             <p>
-                Three attributes. Same component. A predictable system that scales without multiplying component logic.
+                The important detail here isn't the button itself — it's that the component remains unaware of <em>how</em> the theme is constructed. It simply consumes the result.
             </p>
 
             <p>
-                Everything we build here is <em>framework-agnostic</em> at the styling layer. React is used as a consumer, not as the owner of the design system.
+                Everything we build here is <em>framework-agnostic</em> at the styling layer. 
+                React is used as a consumer, not as the owner of the design system.
             </p>
         </PostSection>
     )

@@ -32,7 +32,7 @@ export default function TokenFlowDiagram() {
         <Row as="strong" gap={2}>
           <Icon icon={RiPaletteFill} />
           Theme Tokens
-          <Link href="https://github.com/codercarl1243/react_components_system/tree/main/styles/tokens">
+          <Link href="https://github.com/codercarl1243/react_components_system/tree/main/app/styles/tokens">
             (tokens)
           </Link>
         </Row>
@@ -67,10 +67,12 @@ export default function TokenFlowDiagram() {
         <Code
           copyEnabled={false}
           lang="css"
-          codeString={`--variant-bg: var(--color-primary-400);
---variant-fg: var(--color-neutral-100);
---variant-border: var(--color-primary-600);
---variant-surface: var(--color-primary-100);`}
+          codeString={`[data-variant="primary"] {
+  --variant-bg: var(--color-primary-400);
+  --variant-fg: var(--color-neutral-100);
+  --variant-border: var(--color-primary-600);
+  --variant-surface: var(--color-primary-100);
+}`}
         />
       </Stack>
 
@@ -95,9 +97,11 @@ export default function TokenFlowDiagram() {
         <Code
           copyEnabled={false}
           lang="css"
-          codeString={`--background-color: var(--variant-bg);
---foreground-color: var(--variant-fg);
---border-color: var(--variant-border);`}
+          codeString={`[data-appearance="filled"] {
+  --background-color: var(--variant-bg);
+  --foreground-color: var(--variant-fg);
+  --border-color: var(--variant-border);
+}`}
         />
       </Stack>
 
@@ -114,7 +118,7 @@ export default function TokenFlowDiagram() {
         <Row as="strong" gap={2}>
           <Icon icon={RiCheckboxCircleFill} />
           Paint (Application)
-                <Link href="https://github.com/codercarl1243/react_components_system/blob/main/app/styles/design-system/paint.css">
+          <Link href="https://github.com/codercarl1243/react_components_system/blob/main/app/styles/design-system/paint.css">
             (paint.css)
           </Link>
         </Row>
