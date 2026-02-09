@@ -2,34 +2,29 @@ import BlogLink from "@/components/post/post.blogLink";
 import AnchorHeading from "@/components/heading/anchorHeading";
 import List from "@/components/list";
 import PostSection from "@/components/post/post.section";
+import { Stack } from "@/components/primitives";
 
 export default function Section1() {
 
     return (
         <PostSection id="introduction">
-            <AnchorHeading as={"h2"} id="introduction-heading">
+            <AnchorHeading as="h2" id="introduction-heading">
                 Introduction
             </AnchorHeading>
-            <p>
-                In the previous posts, we focused on architecture and enforcement.
-            </p>
-            <List as="ul" marker="circle" spacing="loose">
-                <li><BlogLink id="design__foundations_01" /> introduced a layered token model and explained why styling systems break without clear boundaries.</li>
+            <Stack>
+                <p>
+                    Building a scalable theming system for a component library requires deliberate structure and long-term thinking. Without that structure, theming is usually where things start to break — duplicated colors, leaky variants, and fragile dark mode overrides.
+                </p>
 
-                <li><BlogLink id="design__primitives_01"/> introduced primitives and showed how those boundaries can be enforced structurally.</li>
-            </List>
-            <p>
-                <em>This post is different.</em>
-            </p>
-            <p>
-                Here, we'll build the system <span className="fun-underline bold">step</span> by <span className="fun-underline bold">step</span>.
-            </p>
-            <p>
-                This is a practical, implementation-focused deep dive. We'll write real code, make concrete decisions, and look at how the theory from earlier posts translates into something you can actually ship.
-            </p>
-            <p>
-                If you're looking for the why, start with the earlier posts. If you want to know how this is built, you're in the right place.
-            </p>
+                <p>
+                    This post focuses on fixing that — not with another library, but by treating theming as a first-class concern and designing a <strong>theming system</strong> that scales alongside your component library.
+                </p>
+
+                <p>
+                    <strong className="fun-underline">TL;DR</strong> — This is an <em>implementation-focused</em> look at building the foundation of a scalable theming system, with the decisions and trade-offs behind each layer explained —
+                    from raw values to a theming approach that stays maintainable as it scales.
+                </p>
+            </Stack>
         </PostSection>
     )
 }
