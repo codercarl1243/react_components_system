@@ -27,18 +27,20 @@ import { Hamburger } from '@/components/hamburger';
  */
 export default function PostSideBar({
     contents = [],
-    relatedPosts = [],
+    // relatedPosts = [],
     author,
     className,
     children,
     ...props
 }: PostSideBarProps) {
     const hasContents = contents.length > 0;
-    const hasRelated = relatedPosts.length > 0;
+    // const hasRelated = relatedPosts.length > 0;
     const hasExtras = author || Children.count(children) > 0;
 
-    if (!hasContents && !hasRelated && !hasExtras) return null;
-// todo: calc height from y:top of sidebar -> y: bottom of the window
+    // if (!hasContents && !hasRelated && !hasExtras) return null;
+
+    if (!hasContents && !hasExtras) return null;
+    // todo: calc height from y:top of sidebar -> y: bottom of the window
 //  update height when scrolling down to max height of window
     return (
         <Hamburger.Wrapper 
@@ -61,7 +63,7 @@ export default function PostSideBar({
                 {...props}
             >
                 {hasContents && <TableOfContents contents={contents} />}
-                {hasRelated && <RelatedPosts posts={relatedPosts} />}
+                {/* {hasRelated && <RelatedPosts posts={relatedPosts} />} */}
                 {author && <Author author={author} />}
                 {children}
             </Hamburger.Menu>

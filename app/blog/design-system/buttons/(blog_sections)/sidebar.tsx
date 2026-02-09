@@ -20,7 +20,7 @@ export default function ButtonsSideBar({ relatedPosts }: PostSideBarProps) {
                 { id: 'resources', href: '#resources', label: "Code & Resources" }
             ]}
             // Fillers
-            relatedPosts={relatedPosts}
+      // relatedPosts={relatedPosts}
             author={CODER_CARL}
         />
     )

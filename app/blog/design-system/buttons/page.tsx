@@ -70,7 +70,7 @@ export default function Page() {
             </Post >
             <PostSideBar
                 contents={TABLE_OF_CONTENTS}
-                relatedPosts={relatedPosts}
+                // relatedPosts={relatedPosts}
                 author={author}
             />
         </>
