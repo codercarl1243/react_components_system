@@ -46,7 +46,7 @@ export default function ButtonExampleClient({
 
       {/* Controls */}
         <ToggleGroup
-          className='theming_buttonExample__buttons'
+          className='theming_buttonExample__buttons mx-auto'
           items={keys.map(constructToggle)}
           aria-label="Example of buttons with different theming"
           value={active}
