@@ -84,4 +84,10 @@
         --color-emphasis-700: #21c45d;
         --color-emphasis-800: #828df8;
         --color-emphasis-900: #f8c630;
+
+        /* Interactive element colors */
+        --color-link-100: hsl(218, 61%, 92%);
+        --color-link-200: hsl(220, 65%, 82%);
+        --color-link-400: hsl(220, 70%, 45%);
+        --color-link-600: hsl(220, 75%, 32%);
     }
