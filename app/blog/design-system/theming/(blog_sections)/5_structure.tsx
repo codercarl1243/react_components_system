@@ -4,6 +4,7 @@ import Heading from "@/components/heading";
 import AnchorHeading from "@/components/heading/anchorHeading";
 import PostNote from "@/components/post/post.note";
 import PostSection from "@/components/post/post.section";
+import { Block, Row } from "@/components/primitives";
 
 export default function Section5() {
     return (
@@ -11,16 +12,34 @@ export default function Section5() {
             <AnchorHeading as={"h2"} prefix="Step 2 —" id="structural-boundaries-heading">
                 Establish structural boundaries
             </AnchorHeading>
-            <p>
-                Before we introduce meaning, treatment, or color, we need to be clear about where styling decisions are allowed to happen.
-            </p>
-            <p>
+            <p style={{
+                marginBottom: "0"
+            }}>
                 This step intentionally pauses on structure to clarify system expectations and make architectural boundaries explicit — not to introduce variants or visual styles.
             </p>
-            <p>
-                Structural components are responsible for <em>shape</em>, <em>layout</em>, and <em>interaction affordances</em> — not visual styling. They define how something behaves and occupies space, but they do not decide how it looks.
-            </p>
-
+            <Block as="aside"
+                style={{
+                    margin: "2rem 0",
+                    padding: "1rem 1.25rem",
+                    borderLeft: "4px solid var(--text-muted)",
+                    display: "grid",
+                    gap: "0.5rem",
+                }}>
+                <Row as="strong"
+                    className="font-accent"
+                    style={{
+                        fontSize: "0.75rem",
+                        fontWeight: 600,
+                        letterSpacing: "0.08em",
+                        textTransform: "uppercase",
+                        color: "var(--text-muted)",
+                    }}
+                >System rule</Row>
+                <p className="m-0">
+                    Structural components do not apply visual styling.
+                </p>
+            </Block>
+            <p>Structural components are responsible for <em>shape</em>, <em>layout</em>, and <em>interaction affordances</em> — not visual styling. They define how something behaves and occupies space, but they do not decide how it looks.</p>
             <p>
                 This separation is deliberate. If components apply color, background, or borders directly, styling logic quickly becomes duplicated and inconsistent. Instead, components expose a stable structural surface that higher layers can decorate.
             </p>
@@ -54,7 +73,7 @@ export default function Section5() {
                 Rather than letting every component decide when to apply background, foreground, or border styles, we centralize that responsibility in a single layer: <span className="bold">paint</span>.
             </p>
             <p>
-               Paint defines the boundary. Components opt in explicitly — and nowhere else.
+                Paint defines the boundary. Components opt in explicitly — and nowhere else.
             </p>
             <p>
                 Some paint channels are ambient, while others are constructive. Background color can be applied directly, but borders must be created by paint when opted into, since they do not exist by default.
