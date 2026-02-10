@@ -1,15 +1,16 @@
-
-button[data-appearance="ghost"]:not(:disabled):not([aria-disabled="true"])  {
+button[data-appearance="ghost"]:not(:disabled):not([aria-disabled="true"]) {
     &:hover {
-        --background-color: color-mix(in srgb, var(--foreground-color) 10%, transparent);
+        --background-color: color-mix(in srgb, currentColor 15%, var(--text-on-surface));
     }
+
     &:focus-visible {
-      --border-color: color-mix(in srgb, var(--foreground-color) 10%, transparent);
+        --background-color: color-mix(in srgb, currentColor 40%, var(--text-on-surface));
         outline-offset: var(--spacing-sm);
     }
-     &:active,
-     &[data-pressed="true"] {
+
+    &:active,
+    &[data-pressed="true"] {
         outline-style: dashed;
-        --background-color: color-mix(in srgb, var(--foreground-color) 20%, transparent);
-     }
+        --background-color: color-mix(in srgb, currentColor 20%, var(--text-on-surface));
+    }
 }
