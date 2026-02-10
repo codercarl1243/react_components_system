@@ -2,6 +2,7 @@
     color: transparent;
     border-color: transparent;
     background-color: transparent;
+
     /* variants */
     &[data-example-variant] {
         --background-example-color: var(--variant-example-bg);
@@ -78,6 +79,21 @@
         --background-example-color: transparent;
         --foreground-example-color: var(--variant-example-bg);
         --border-example-color: transparent;
+
+        &:hover {
+            --background-example-color: color-mix(in srgb, currentColor 15%, var(--text-on-surface));
+        }
+
+        &:focus-visible {
+            --background-example-color: color-mix(in srgb, currentColor 40%, var(--text-on-surface));
+            outline-offset: var(--spacing-sm);
+        }
+
+        &:active,
+        &[data-pressed="true"] {
+            outline-style: dashed;
+            --background-example-color: color-mix(in srgb, currentColor 20%, var(--text-on-surface));
+        }
     }
 
     /* Tonal surface application (callouts, notices, containers) */
