@@ -49,17 +49,18 @@ export default function Section8() {
                 Paint channels are composable. You can request only what you need.
             </p>
 
-            <Stack as="figure" className="surface-frame p-4">
-                <Code lang="tsx" 
+            <Stack as="figure" className="surface-frame p-4" variant="light" variantAppearance="filled" paint="all">
+                <Code 
+                lang="tsx" 
                 highlightTokens={[
-  'data-paint="background foreground"',
+  'data-paint="foreground"',
   'data-paint="all"'
 ]}
-                codeString={`{/*  Background only, no text or border color */}
+                codeString={`{/*  No background or border color */}
 <div class="block" 
     data-variant="info" 
     data-appearance="tonal"
-    data-paint="background foreground">
+    data-paint="foreground">
   Tonal container
 </div>
 
@@ -75,7 +76,7 @@ export default function Section8() {
                     <Block as="span"
                         variant="info"
                         variantAppearance="tonal"
-                        paint={["background", "foreground"]}
+                        paint={["foreground"]}
                         className="p-2 mx-auto"
                         style={{ width: "max-content" }}
                     >

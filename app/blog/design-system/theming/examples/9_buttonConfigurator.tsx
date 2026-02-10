@@ -359,9 +359,9 @@ export default function ButtonConfigurator() {
     return (
         <Block
             as="figure"
-            variant="secondary"
-            variantAppearance="outlined"
-            paint="border"
+            variant="light"
+            variantAppearance="filled"
+            paint="all"
             className="flow-4 py-8 px-4 appearanceExamples surface-frame frame-inset-8"
         >
             <Block

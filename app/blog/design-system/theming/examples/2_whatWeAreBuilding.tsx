@@ -41,8 +41,7 @@ export default function TokenFlowDiagram() {
           copyEnabled={false}
           lang="css"
           codeString={`--surface: var(--color-neutral-100);
---text-on-surface: var(--color-neutral-900);
---link-color: var(--color-primary-400);`}
+--text-on-surface: var(--color-neutral-900);`}
         />
       </Stack>
       <div
