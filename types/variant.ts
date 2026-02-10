@@ -15,17 +15,19 @@
  * ```
  */
 export type Variant =
-    | "primary"
-    | "secondary"
     | "accent"
     | "danger"
-    | "warning"
-    | "success"
+    | "dark"
     | "info"
-    | "neutral"
     | "inverse"
+    | "light"
     | "muted"
-    | 'transparent';
+    | "neutral"
+    | "primary"
+    | "secondary"
+    | "success"
+    | "transparent"
+    | "warning";
 
 /**
  * Visual appearance variants that control *how* a component is rendered,

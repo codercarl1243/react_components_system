@@ -62,6 +62,22 @@ These tokens are:
   --variant-text-on-surface: var(--color-neutral-600);
 }
 
+[data-variant="light"]{
+  --variant-bg: var(--color-neutral-100);
+  --variant-fg: var(--color-neutral-900);
+  --variant-border: var(--color-neutral-700);
+  --variant-surface: var(--color-neutral-200);
+  --variant-text-on-surface: var(--color-neutral-600);
+}
+
+[data-variant="dark"]{
+  --variant-bg: var(--color-neutral-900);
+  --variant-fg: var(--color-neutral-100);
+  --variant-border: var(--color-neutral-200);
+  --variant-surface: var(--color-neutral-700);
+  --variant-text-on-surface: var(--color-neutral-200);
+}
+
 [data-variant="primary"] {
   --variant-bg: var(--color-primary-400);
   --variant-fg: var(--color-neutral-100);
