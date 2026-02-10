@@ -17,6 +17,7 @@ paint → applies them
     --background-color: var(--variant-bg);
     --foreground-color: var(--variant-fg);
     --border-color: var(--variant-border);
+    --link-color: var(--link-on-filled);
 }
 
 /* Medium emphasis with visible outline */
@@ -38,4 +39,5 @@ paint → applies them
     --background-color: var(--variant-surface);
     --foreground-color: var(--variant-text-on-surface);
     --border-color: var(--variant-border);
+    --link-color: var(--link-on-filled);
 }
