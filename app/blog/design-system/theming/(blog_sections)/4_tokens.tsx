@@ -19,7 +19,7 @@ export default function Section4() {
                 }}>
                     Every robust theming system starts with a stable set of <span className="bold">global tokens</span>. These are the raw values your entire interface relies on: colors, spacing, typography, radii, shadows, and breakpoints.
                 </p>
-                <Block as="aside"
+                <aside
                     style={{
                         margin: "2rem 0",
                         padding: "1rem 1.25rem",
@@ -40,7 +40,7 @@ export default function Section4() {
                     <p className="m-0">
                         Global tokens describe the environment, not behavior or meaning.
                     </p>
-                </Block>
+                </aside>
                 <p>
                     We'll focus on <span className="bold">color tokens</span> as they best demonstrate how values flow through the rest of the system.
                 </p>

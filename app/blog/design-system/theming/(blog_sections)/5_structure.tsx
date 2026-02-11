@@ -3,7 +3,7 @@ import Heading from "@/components/heading";
 import AnchorHeading from "@/components/heading/anchorHeading";
 import PostNote from "@/components/post/post.note";
 import PostSection from "@/components/post/post.section";
-import { Block, Row } from "@/components/primitives";
+import { Row } from "@/components/primitives";
 
 export default function Section5() {
     return (
@@ -16,7 +16,7 @@ export default function Section5() {
             }}>
                 This step intentionally pauses on structure to clarify system expectations and make architectural boundaries explicit — not to introduce variants or visual styles.
             </p>
-            <Block as="aside"
+            <aside
                 style={{
                     margin: "2rem 0",
                     padding: "1rem 1.25rem",
@@ -37,7 +37,7 @@ export default function Section5() {
                 <p className="m-0">
                     Structural components do not apply visual styling.
                 </p>
-            </Block>
+            </aside>
             <p>Structural components are responsible for <em>shape</em>, <em>layout</em>, and <em>interaction affordances</em> — not visual styling. They define how something behaves and occupies space, but they do not decide how it looks.</p>
             <p>
                 This separation is deliberate. If components apply color, background, or borders directly, styling logic quickly becomes duplicated and inconsistent. Instead, components expose a stable structural surface that higher layers can decorate.

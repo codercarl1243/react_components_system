@@ -19,6 +19,9 @@ export const olMarkerClasses: Record<OlMarker, string> = {
 };
 
 export const getMarkerClass = (listType: ValidListTag, marker: OlMarker | UlMarker) => {
+    if (listType === "dl") {
+        return 'list--definition pl-0 flow-4'; // no marker class
+    }
     if (listType === "ol") {
         return olMarkerClasses[marker as OlMarker] ?? olMarkerClasses.default;
     }
