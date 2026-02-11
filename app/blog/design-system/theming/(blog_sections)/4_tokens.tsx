@@ -1,4 +1,5 @@
 import Code from "@/components/code";
+import InlineCode from "@/components/code/inlineCode";
 import Heading from "@/components/heading";
 import AnchorHeading from "@/components/heading/anchorHeading";
 import Link from "@/components/link";
@@ -52,27 +53,45 @@ export default function Section4() {
                 </p>
 
                 <p>
-                    Together, this gives the system room to define explicit contrast guarantees at different points in the scale, without baking semantic meaning into raw values.
+                    This gives the system room to define explicit contrast guarantees at different points in the scale, without baking semantic meaning into raw values.
                 </p>
-                <Code
-                    lang="css"
-                    title="colors.css - Global color tokens"
-                    codeString={`:root {
+                <Block as="figure" variant="neutral" variantAppearance="filled" paint={"all"} className="surface-frame p-4">
+                    <Code
+                        lang="css"
+                        title="colors.css - Global color tokens"
+                        codeString={`:root {
     /* Neutrals */
-    --color-neutral-100: hsl(248, 0%, 100%);
-    --color-neutral-400: hsl(248, 0%, 60%);
-    --color-neutral-600: hsl(248, 0%, 40%);
-    --color-neutral-900: hsl(248, 60%, 5%);
+    --color-neutral-100: hsl(0, 0%, 100%);
+    --color-neutral-400: hsl(248, 0%, 46%);
+    --color-neutral-900: hsl(0, 0%, 0%);
+
+    /* Primary (Blue) */
+    --color-primary-400: hsl(212, 75%, 48%);
+
+    /* Secondary (Green) */
+    --color-secondary-400: hsl(155, 65%, 32%);
+
+    /* Additional color scales omitted for clarity */
 }`}
-                />
+                    />
+                    <figcaption className="pt-4 pb-2 italic text-sm">
+                        Example color scale where the mid-range <InlineCode codeString="400" lang="css" /> values meets a 4.5:1 contrast ratio against both <InlineCode codeString="100" lang="css" /> and <InlineCode codeString="900" lang="css" />.
+                    </figcaption>
+                </Block>
                 <p>
-                    All other color scales in the system follow the <em>same</em> naming and numeric structure.
+                    All other color scales in the system follow the <em>same</em> naming and numeric structure,
+                    describing <em>what colors exist</em> — not <em>what they're used for</em>.
+                </p>
+                <p>These raw values need context. That's where theme comes in.</p>
+            </div>
+
+            <div className="flow-6">
+                <Heading as="h3" headingSize={4}>Theme</Heading>
+                <p>
+                    Up to this point, everything we've defined is global and context-free. Theme is the first place where those values are given meaning.
                 </p>
                 <p>
-                    These tokens are intentionally generic. They describe <em>what colors exist</em>, not <em>what they're used for</em>.
-                </p>
-                <p>
-                    Defining a base theme in terms of surface and text colors establishes a contrast-safe foundation before any semantic color roles are introduced.
+                    Theme defines surface and text colors, establishing a predictable, contrast-safe environment.
                 </p>
                 <Code
                     lang="css"
@@ -92,15 +111,11 @@ body {
   color: var(--text-on-surface);
 }`}
                 />
-
-                <p>
-                    Later on we will introduce <em>semantic meaning</em> within the <span className="bold">variant layer</span>.
-                </p>
             </div>
-            <PostNote>
+            <PostNote className="my-8">
                 <p> For tools that help you design accessible, contrast-safe color palettes, see the <Link href="#resources-color-accessibility-tools">resources section</Link>.</p>
                 <p className="italic">
-                    The full token set for this project is available on <Link href="https://github.com/codercarl1243/react_components_system/tree/main/styles/tokens">GitHub</Link>.
+                    The full token set for this project is available on <Link href="https://github.com/codercarl1243/react_components_system/tree/main/app/styles/tokens">GitHub</Link>.
                 </p>
             </PostNote>
         </PostSection>

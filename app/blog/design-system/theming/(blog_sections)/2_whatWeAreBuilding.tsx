@@ -11,22 +11,19 @@ export default function Section2() {
             </AnchorHeading>
             <p>
                 Before diving into the details, it helps to see the shape of the system as a whole. 
-                The diagram below shows how raw theme values move through the system and are progressively shaped before a component ever reads them.
+                The diagram below shows how raw values move through the system and are progressively shaped before a component ever reads them.
             </p>
             <WhatWeAreBuildingDiagram />
             <p>
-                <strong className="fun-underline">Design principle:</strong> In this system, <em>theme</em> is treated as environmental context. 
-                It establishes contrast and foreground/background relationships, while expressive meaning is handled by variants and appearance.
+                In practice, a layered styling model allows a single component to adapt its appearance using a small set of attributes. 
             </p>
             <p>
-                In practice, this layered styling model allows a single component to adapt its appearance using a small set of attributes. 
-                The explicit opt-in design keeps styling decisions intentional and prevents accidental coupling.
+                This explicit opt-in design keeps styling decisions intentional and prevents accidental coupling. Here's what that looks like:
             </p>
             <ButtonExample />
             <p>
-                The important detail here isn't the button itself — it's that the component remains unaware of <em>how</em> the theme is constructed. It simply consumes the result.
+                The important detail here isn't the button itself — it's that the component remains unaware of <em>how</em> the styling is constructed. It simply consumes the result.
             </p>
-
             <p>
                 Everything we build here is <em>framework-agnostic</em> at the styling layer. 
                 React is used as a consumer, not as the owner of the design system.

@@ -1,5 +1,4 @@
 import Code from "@/components/code";
-import InlineCode from "@/components/code/inlineCode";
 import Heading from "@/components/heading";
 import AnchorHeading from "@/components/heading/anchorHeading";
 import PostNote from "@/components/post/post.note";
@@ -72,12 +71,6 @@ export default function Section5() {
             <p>
                 Rather than letting every component decide when to apply background, foreground, or border styles, we centralize that responsibility in a single layer: <span className="bold">paint</span>.
             </p>
-            <p>
-                Paint defines the boundary. Components opt in explicitly — and nowhere else.
-            </p>
-            <p>
-                Some paint channels are ambient, while others are constructive. Background color can be applied directly, but borders must be created by paint when opted into, since they do not exist by default.
-            </p>
             <Code
                 lang="css"
                 codeString={`.block[data-paint~="background"] { 
@@ -89,6 +82,17 @@ export default function Section5() {
 .block[data-paint~="border"] { 
     border: 1px solid var(--border-color); 
 }`} />
+            <p>
+                Paint defines the boundary. Components opt in explicitly — and nowhere else.
+            </p>
+            <PostNote variant="neutral">
+                <p>
+                    <strong>Paint channel behavior</strong><br />
+                    Some paint channels are <em>ambient</em>, meaning they apply directly when present (such as background or foreground).
+                    Others are <em>constructive</em>: borders do not exist unless paint explicitly creates them.
+                </p>
+            </PostNote>
+
             <p>
                 This keeps structural components simple and predictable, while ensuring visual application happens in one place.
             </p>

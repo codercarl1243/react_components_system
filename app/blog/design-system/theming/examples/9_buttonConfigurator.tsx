@@ -3,30 +3,10 @@ import Heading from "@/components/heading"
 import PostInfo from "@/components/post/post.info"
 import { Block, Stack } from "@/components/primitives"
 import Select from "@/components/select"
-import type { Paint, PaintChannel, PaintPreset } from "@/types/paint";
-import type { VariantAppearance, Variant } from "@/types/variant";
+import type { Paint } from "@/types/paint";
 import { type ChangeEvent, useState } from "react"
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
-
-// The demo allows an empty string of ‘', but the real typing does not.
-type ExampleAppearance = VariantAppearance | '';
-type ExampleVariant = Variant | '';
-type ExamplePaint = PaintPreset | PaintChannel | '';
-
-type PaintState = {
-    variant?: ExampleVariant;
-    appearance?: ExampleAppearance;
-    paint: ExamplePaint;
-}
-
-type PaintMessage = {
-    id: string;
-    when: (state: PaintState) => boolean;
-    tone: "info" | "warning";
-    title: string;
-    body: string[] | ((state: PaintState) => string[]);
-};
-
+import { ExampleAppearance, ExamplePaint, ExampleVariant, PaintMessage } from "./exampleTypes";
 
 const variants: { value: ExampleVariant; label: string }[] = [
     { value: '', label: 'None (default)' },

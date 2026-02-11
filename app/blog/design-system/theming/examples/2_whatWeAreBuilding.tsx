@@ -21,7 +21,7 @@ export default function TokenFlowDiagram() {
       variantAppearance="tonal"
       paint="border"
     >
-      {/* Theme */}
+      {/* Global */}
       <Stack
         gap={4}
         className="theming-diagram-box surface-frame"
@@ -31,7 +31,7 @@ export default function TokenFlowDiagram() {
       >
         <Row as="strong" gap={2}>
           <Icon icon={RiPaletteFill} />
-          Theme Tokens
+          Global Tokens
           <Link href="https://github.com/codercarl1243/react_components_system/tree/main/app/styles/tokens">
             (tokens)
           </Link>
@@ -40,17 +40,27 @@ export default function TokenFlowDiagram() {
         <Code
           copyEnabled={false}
           lang="css"
-          codeString={`--surface: var(--color-neutral-100);
---text-on-surface: var(--color-neutral-900);`}
+          codeString={`:root {
+  /* Neutrals */
+  --color-neutral-100: hsl(0, 0%, 100%);
+  --color-neutral-400: hsl(0, 0%, 46%);
+  --color-neutral-900: hsl(0, 0%, 5%);
+
+  /* Semantic color scales */
+  --color-primary-100: hsl(203, 31%, 90%);
+  --color-primary-400: hsl(212, 75%, 40%);
+  --color-primary-600: hsl(212, 76%, 28%);
+
+  --color-danger-400: hsl(0, 87%, 35%);
+  --color-success-400: hsl(142, 54%, 30%);
+  
+  /* ...additional color scales follow same pattern */
+}`}
         />
       </Stack>
-      <div
-        style={{
-          height: "1px",
-          marginBlock: "var(--spacing-lg)",
-          backgroundColor: "var(--text-muted)",
-        }}
-      />
+
+      <Icon icon={RiArrowDownLongFill} className="mx-auto" />
+
       {/* Variant */}
       <Stack
         gap={4}
@@ -139,9 +149,9 @@ export default function TokenFlowDiagram() {
         />
       </Stack>
       <figcaption className="italic text-sm">
-        Tokens flow downward through the system. Theme defines the environment,
-        variants add meaning, appearances map treatment, paint applies styling,
-        and components simply consume the result.
+        Tokens flow downward through the system. Global tokens define raw values,
+        variants add meaning, appearances map treatment, paint applies styling.
+        Components consume the final result without knowing how it was built.
       </figcaption>
     </Stack>
   );
