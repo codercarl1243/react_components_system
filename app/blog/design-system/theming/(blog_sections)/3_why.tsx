@@ -14,7 +14,7 @@ export default function Section3() {
             <p>
                 This system avoids that by making decisions once, in the right layer:
             </p>
-            <List as="ol" variant="primary" variantAppearance="outlined">
+            <List as="ol" variant="secondary" variantAppearance="outlined">
                 <li><strong>Global tokens</strong> define your visual language</li>
                 <li><strong>Variants</strong> define semantic color roles</li>
                 <li><strong>Appearances</strong> define visual treatments</li>

@@ -4,28 +4,42 @@ import Heading from "@/components/heading";
 import AnchorHeading from "@/components/heading/anchorHeading";
 import PostNote from "@/components/post/post.note";
 import PostSection from "@/components/post/post.section";
+import { Row } from "@/components/primitives";
 
 export default function Section7() {
     return (
         <PostSection id="appearance">
-            <AnchorHeading as={"h2"} prefix="Step 4 -" id="appearance-heading">
+            <AnchorHeading as={"h2"} prefix="Step 4 —" id="appearance-heading">
                 Appearance mappings
             </AnchorHeading>
-            <p>
+            <p style={{marginBottom: "0"}}>
                 With semantic meaning defined, we can now decide how that meaning is expressed visually.
             </p>
-
-            <PostNote showIcon={false} variant="neutral">
-                <p>
-                    Appearances define <em>visual treatment</em>. They map a variant's semantic palette to styling tokens without introducing new colors or meaning.
+            <aside
+                style={{
+                    margin: "2rem 0",
+                    padding: "1rem 1.25rem",
+                    borderLeft: "4px solid var(--text-muted)",
+                    display: "grid",
+                    gap: "0.5rem",
+                }}>
+                <Row as="strong"
+                    className="font-accent"
+                    style={{
+                        fontSize: "0.75rem",
+                        fontWeight: 600,
+                        letterSpacing: "0.08em",
+                        textTransform: "uppercase",
+                        color: "var(--text-muted)",
+                    }}
+                >System rule</Row>
+                <p className="m-0">
+                    Appearance maps a variant's semantic palette — it does not introduce meaning or apply paint.
                 </p>
-            </PostNote>
+            </aside>
             <p>
-                Variants answer <em>what does this represent?</em>. Appearances answer <em>how should it be presented?</em>
-            </p>
-            <Heading as="h3" headingSize={4}>Appearance is a mapping layer</Heading>
-            <p>
-                An appearance does not introduce new colors. It does not care which variant is active. Its only responsibility is to map a variant's palette to semantic styling tokens such as background, foreground, and border.
+                An appearance maps a variant's semantic palette to styling tokens
+                such as background, foreground, and border.
             </p>
             <Code lang="css" codeString={`[data-appearance="filled"] {
     --background-color: var(--variant-bg);
@@ -35,31 +49,26 @@ export default function Section7() {
 
 [data-appearance="tonal"] {
     --background-color: var(--variant-surface);
-    --foreground-color: var(--variant-text-on-surface);
+    --foreground-color: var(--variant-fg-on-surface);
     --border-color: var(--variant-border);
 }
 
-[data-appearance="ghost"] {
+[data-appearance="outlined"] {
     --background-color: transparent;
     --foreground-color: var(--variant-bg);
-    --border-color: transparent;
+    --border-color: var(--variant-border);
 }`} />
             <p>
-                Each appearance consumes the same variant palette, but produces a different visual result. This is what allows a single variant to be reused across many visual contexts.
+                Each appearance consumes the same variant palette, but produces a different visual result. 
+                This allows a single variant to be reused across many visual contexts.
             </p>
-            <Heading as="h3" headingSize={4}>Why appearance is separate from variant</Heading>
-
-            <p>If appearance logic lived inside variants, every visual change would require new variant names. By separating appearance, meaning stays stable while visual treatment can evolve independently.
-            </p>
-            <PostNote variant="inverse">
-                <p className="bold">Appearances Still Do Not Apply Styling</p>
-                <p>At this point, even with both <InlineCode codeString="data-variant" /> and <InlineCode codeString="data-appearance" /> present, nothing is painted. No background appears. No text color changes.</p>
-
-                That final step is intentional, and it belongs to a single layer.
+            <PostNote variant="neutral">
+                <p className="bold">Appearance prepares. Paint applies.</p>
+                <p>
+                    Even with both <InlineCode codeString="data-variant" lang="html" /> and <InlineCode codeString="data-appearance" lang="html" /> present, no CSS properties are set yet.
+                    That responsibility belongs to the paint layer.
+                </p>
             </PostNote>
-            <p>
-                In the next step, we'll introduce <span className="bold">paint</span>, which explicitly applies these tokens to actual CSS properties.
-            </p>
         </PostSection>
     );
 }

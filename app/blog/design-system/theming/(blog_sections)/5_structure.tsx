@@ -68,7 +68,7 @@ export default function Section5() {
             <p>
                 The question then becomes: <em>how do visual styles get applied?</em>
             </p>
-            <p>
+            <p className="mb-4">
                 Rather than letting every component decide when to apply background, foreground, or border styles, we centralize that responsibility in a single layer: <span className="bold">paint</span>.
             </p>
             <Code
@@ -82,7 +82,7 @@ export default function Section5() {
 .block[data-paint~="border"] { 
     border: 1px solid var(--border-color); 
 }`} />
-            <p>
+            <p className="my-4">
                 Paint defines the boundary. Components opt in explicitly — and nowhere else.
             </p>
             <PostNote variant="neutral">

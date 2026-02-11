@@ -46,7 +46,7 @@ export default function Section6() {
                 </p>
             </aside>
             <p>
-                When variants begin to encode presentation, change becomes expensive. Visual adjustments require duplicating logic or increasing specificity, and components accumulate special cases.
+                When variants encode presentation, change becomes expensive. Visual adjustments require duplicated logic or increasing specificity, and components accumulate special cases.
             </p>
 
             <Heading as="h3" headingSize={4}>
@@ -68,7 +68,7 @@ export default function Section6() {
 
                 <div>
                     <dt>border</dt>
-                    <dd>border or outline colors.</dd>
+                    <dd>Border or outline color.</dd>
                 </div>
 
                 <div>
@@ -92,24 +92,10 @@ export default function Section6() {
   --variant-fg-on-surface: var(--color-primary-600);
 }`} />
             <p>
-                Every variant exposes the <em>same</em> semantic interface. This consistency is what allows appearances and paint to remain generic.
-            </p>
-            <Heading as="h3" headingSize={4}>Why variants must stay semantic</Heading>
-
-            <p>
-                Variants must remain semantic. Once they encode presentation — <InlineCode codeString="primary-outline" />, <InlineCode codeString="danger-ghost" />, <InlineCode codeString="subtle-primary" /> — the system begins to fragment.
+                Because the interface is consistent, appearance and paint can remain generic.
             </p>
 
             <p>
-                Meaning becomes unstable, appearances lose their role, and components start accumulating variant-specific logic.
-            </p>
-
-            <p>
-                Variants define <em>what something represents</em>, not <em>how it looks</em>. If a visual change is needed, it belongs in the <strong>appearance</strong> layer.
-            </p>
-
-            <p>
-                Variants only define tokens. They do not apply background, foreground, or border styles.
                 At this stage, nothing changes visually — and that's intentional. Meaning exists before treatment.
             </p>
             <p>

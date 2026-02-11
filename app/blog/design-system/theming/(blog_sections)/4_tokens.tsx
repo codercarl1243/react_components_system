@@ -82,7 +82,9 @@ export default function Section4() {
                     All other color scales in the system follow the <em>same</em> naming and numeric structure,
                     describing <em>what colors exist</em> — not <em>what they're used for</em>.
                 </p>
-                <p>These raw values need context. That's where theme comes in.</p>
+                <p>
+                    These raw values need context. That's where <strong className="fun-underline">theme</strong> comes in.
+                </p>
             </div>
 
             <div className="flow-6">
