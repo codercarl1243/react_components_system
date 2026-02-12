@@ -1,7 +1,7 @@
 import Code from "@/components/code";
 import AnchorHeading from "@/components/heading/anchorHeading";
 import PostSection from "@/components/post/post.section";
-import { Block, Inline, Row, Stack } from "@/components/primitives";
+import { Block, Inline, Stack } from "@/components/primitives";
 import Rule from "@/components/rule";
 
 export default function Section8() {

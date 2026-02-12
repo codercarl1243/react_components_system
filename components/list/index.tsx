@@ -9,7 +9,7 @@ import type { ListProps, ValidListTag } from "@/components/list/types";
 // If fixed this will mean that we dont have to pass an 'as' prop to render a ul.
 
 export default function List<T extends ValidListTag = "ul">({
-    marker = "default",
+    marker,
     spacing = "tight",
     className,
     ...props
@@ -18,7 +18,7 @@ export default function List<T extends ValidListTag = "ul">({
     const listType = props.as ?? "ul";
     const listClasses = clsx(
         "list",
-        getMarkerClass(listType, marker),
+        getMarkerClass(listType, (marker ?? "default")),
         getSpacingClass(spacing),
         className
     );

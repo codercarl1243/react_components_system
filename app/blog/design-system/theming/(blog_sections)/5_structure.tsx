@@ -3,7 +3,6 @@ import Heading from "@/components/heading";
 import AnchorHeading from "@/components/heading/anchorHeading";
 import PostNote from "@/components/post/post.note";
 import PostSection from "@/components/post/post.section";
-import { Row } from "@/components/primitives";
 import Rule from "@/components/rule";
 
 export default function Section5() {

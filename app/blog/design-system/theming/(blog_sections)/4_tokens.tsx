@@ -5,7 +5,7 @@ import AnchorHeading from "@/components/heading/anchorHeading";
 import Link from "@/components/link";
 import PostNote from "@/components/post/post.note";
 import PostSection from "@/components/post/post.section";
-import { Block, Row } from "@/components/primitives";
+import { Block } from "@/components/primitives";
 import Rule from "@/components/rule";
 
 export default function Section4() {

@@ -4,7 +4,6 @@ import Heading from "@/components/heading";
 import AnchorHeading from "@/components/heading/anchorHeading";
 import List from "@/components/list";
 import PostSection from "@/components/post/post.section";
-import { Row } from "@/components/primitives";
 import Rule from "@/components/rule";
 
 export default function Section6() {

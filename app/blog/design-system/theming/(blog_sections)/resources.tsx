@@ -1,5 +1,4 @@
 import Code from "@/components/code";
-import FunHighlight from "@/components/decorations/FunHighlight";
 import Heading from "@/components/heading";
 import AnchorHeading from "@/components/heading/anchorHeading";
 import Link from "@/components/link";
