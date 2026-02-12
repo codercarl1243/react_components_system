@@ -65,6 +65,7 @@
         --background-example-color: var(--variant-example-bg);
         --foreground-example-color: var(--variant-example-fg);
         --border-example-color: var(--variant-example-border);
+        outline-color: var(--border-example-color, transparent);
     }
 
     /* Medium emphasis with visible outline */
@@ -72,6 +73,7 @@
         --background-example-color: transparent;
         --foreground-example-color: var(--variant-example-bg);
         --border-example-color: var(--variant-example-bg);
+        outline-color: var(--border-example-color, transparent);
     }
 
     /* Low emphasis, text-forward appearance */
@@ -79,20 +81,22 @@
         --background-example-color: transparent;
         --foreground-example-color: var(--variant-example-bg);
         --border-example-color: transparent;
+        outline-color: var(--border-example-color, transparent);
+
 
         &:hover {
-            --background-example-color: color-mix(in srgb, currentColor 15%, var(--text-on-surface));
+            --background-example-color: color-mix(in srgb, currentColor 15%, var(--surface));
         }
 
         &:focus-visible {
-            --background-example-color: color-mix(in srgb, currentColor 40%, var(--text-on-surface));
+            --background-example-color: color-mix(in srgb, currentColor 40%, var(--surface));
             outline-offset: var(--spacing-sm);
         }
 
         &:active,
         &[data-pressed="true"] {
             outline-style: dashed;
-            --background-example-color: color-mix(in srgb, currentColor 20%, var(--text-on-surface));
+            --background-example-color: color-mix(in srgb, currentColor 20%, var(--surface));
         }
     }
 
