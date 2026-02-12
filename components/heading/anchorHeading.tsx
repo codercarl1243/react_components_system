@@ -8,15 +8,26 @@ import { Inline } from '@/components/primitives'
 export default function AnchorHeading<T extends ValidHeadingTag = "h3">({
   id,
   prefix,
+  children,
   ...props
 }: AnchorHeadingPropsType<T>) {
 
-  const headingId = id || generateHeadingId(props.children)
-
+  const headingId = id || generateHeadingId(children)
+  
   const headingEl = (
-    <Link href={`#${headingId}`} className='link--heading'>
-      <Heading {...props} id={headingId} />
-    </Link>
+    <Heading
+      {...props}
+      id={headingId}
+      tabIndex={-1}
+      className="heading-with-anchor"
+    >
+      <Link
+        href={`#${headingId}`}
+        className="link--heading"
+      >
+        {children}
+      </Link>
+    </Heading>
   )
 
   if (!prefix) {
