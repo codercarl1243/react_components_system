@@ -1,6 +1,7 @@
 .toggle-group {
   display: inline-flex;
   gap: var(--spacing-xs);
+  justify-content: center;
 }
 
 .toggle-group[data-orientation="vertical"] {

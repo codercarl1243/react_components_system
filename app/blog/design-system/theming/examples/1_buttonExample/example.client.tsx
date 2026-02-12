@@ -4,7 +4,6 @@ import { useState } from 'react'
 import type { CodeKey } from './codeMap'
 import type { ButtonProps } from '@/components/button/button.type'
 import { Block } from '@/components/primitives'
-import { ToggleGroup } from '@/components/button/toggle'
 
 function formatLabel(key: CodeKey) {
   return key
@@ -25,7 +24,6 @@ export default function ButtonExampleClient({
     const [variant, appearance] = key.split("_");
 
     return {
-      value: key,
       variant: variant as ButtonProps['variant'],
       variantAppearance: appearance as ButtonProps['variantAppearance'],
       children: formatLabel(key),
@@ -40,18 +38,30 @@ export default function ButtonExampleClient({
       paint="all"
       data-active={active}
     >
-      <figcaption>
+      <figcaption className='text-sm italic'>
         Click a button to see its code:
       </figcaption>
-
-      {/* Controls */}
-        <ToggleGroup
-          className='theming_buttonExample__buttons'
-          items={keys.map(constructToggle)}
-          aria-label="Example of buttons with different theming"
-          value={active}
-          onValueChange={(next) => setActive(next as CodeKey)}
-        />
+      <Block
+        className={"toggle-group theming_buttonExample__buttons mx-auto"}
+        aria-label="Example of buttons with different theming">
+        {keys.map((key => {
+          const { variant, variantAppearance, children } = constructToggle(key)
+          return <button
+            data-example-variant={variant || undefined}
+            data-example-appearance={variantAppearance || undefined}
+            data-example-paint={"all"}
+            type='button'
+            style={{ width: "fit-content" }}
+            className="button example-component"
+            aria-pressed={active === key}
+            onClick={() => setActive(key)}
+            key={key}
+          >
+            <span>{children}</span>
+          </button>
+        }
+        ))}
+      </Block>
 
       {/* Code blocks */}
       <div className="code-example">

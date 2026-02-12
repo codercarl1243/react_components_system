@@ -3,30 +3,10 @@ import Heading from "@/components/heading"
 import PostInfo from "@/components/post/post.info"
 import { Block, Stack } from "@/components/primitives"
 import Select from "@/components/select"
-import type { Paint, PaintChannel, PaintPreset } from "@/types/paint";
-import type { VariantAppearance, Variant } from "@/types/variant";
+import type { Paint } from "@/types/paint";
 import { type ChangeEvent, useState } from "react"
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
-
-// The demo allows an empty string of ‘', but the real typing does not.
-type ExampleAppearance = VariantAppearance | '';
-type ExampleVariant = Variant | '';
-type ExamplePaint = PaintPreset | PaintChannel | '';
-
-type PaintState = {
-    variant?: ExampleVariant;
-    appearance?: ExampleAppearance;
-    paint: ExamplePaint;
-}
-
-type PaintMessage = {
-    id: string;
-    when: (state: PaintState) => boolean;
-    tone: "info" | "warning";
-    title: string;
-    body: string[] | ((state: PaintState) => string[]);
-};
-
+import { ExampleAppearance, ExamplePaint, ExampleVariant, PaintMessage } from "./exampleTypes";
 
 const variants: { value: ExampleVariant; label: string }[] = [
     { value: '', label: 'None (default)' },
@@ -75,11 +55,10 @@ export const PAINT_MESSAGES: PaintMessage[] = [
             // - outlined: only include this if outlined ALSO uses filled-style foreground in your design
             const isFilledStyle =
                 Boolean(appearance === "filled" ||
-                !appearance && variant);
+                    !appearance && variant);
 
             // 2) What did the user ask to paint?
             const hasForeground = paintIncludes(paint, "foreground");
-            const hasBorder = paintIncludes(paint, "border");
 
             // 3) Background (or background-providing channels)
             const hasBackground = paintIncludes(paint, "background");
@@ -262,106 +241,12 @@ export default function ButtonConfigurator() {
     }
     const shouldReduceMotion = useReducedMotion();
 
-
-    const Controls = () => {
-        return (
-            <Block className="mx-auto appearanceExamples__select-group">
-                <Select
-                    id="variant-select"
-                    labelChildren="Variant"
-                    className="appearanceExamples__select-group--select"
-                    options={variants}
-                    value={variant}
-                    onChange={handleSetVariant}
-                />
-
-                <Select
-                    id="appearance-select"
-                    labelChildren="Appearance"
-                    className="appearanceExamples__select-group--select"
-                    options={appearances}
-                    value={appearance}
-                    onChange={handleSetAppearance}
-                />
-                <Select
-                    id="paint-select"
-                    labelChildren="Paint"
-                    className="appearanceExamples__select-group--select"
-                    options={paints}
-                    value={paint}
-                    onChange={handleSetPaint}
-                />
-            </Block>
-        )
-    }
-
-    const ButtonExample = () => {
-        return (
-            <span className="appearanceExamples__button-wrapper" style={{ width: "fit-content", marginInline: "auto" }}>
-                <button
-                    data-example-variant={variant || undefined}
-                    data-example-appearance={appearance || undefined}
-                    data-example-paint={toButtonPaint(paint)}
-                    style={{ width: "fit-content" }}
-                    className="button example-component"
-                >
-                    <span>Example Button</span>
-                </button>
-            </span>
-        )
-    }
-
-    const Messages = () => {
-        return (
-            <Block role="status"
-                aria-live="polite"
-                className="flow-4">
-                <PostInfo className="mx-auto center" variant="info" paint={["foreground"]}>
-                    Adjust the controls above to explore how variant, appearance, and paint interact.
-                </PostInfo>
-                <AnimatePresence initial={false} mode="wait">
-                    {
-                        activeMessages.map((message, index) => {
-                            const lines =
-                                typeof message.body === "function"
-                                    ? message.body({ variant, appearance, paint })
-                                    : message.body;
-
-                            return (
-                                <motion.div
-                                    key={message.id}
-                                    layout
-                                    initial={{ opacity: 0, height: 0, scale: 0.98, x: -2 }}
-                                    animate={{ opacity: 1, height: "auto", scale: 1, x: 0 }}
-                                    exit={{ opacity: 0, height: 0, scale: 0.98, x: -2 }}
-                                    transition={{
-                                        duration: shouldReduceMotion ? 0 : 0.22,
-                                        ease: "easeOut",
-                                        delay: index * 0.06
-                                    }}
-                                    style={{ overflow: "hidden" }}
-                                >
-                                    <PostInfo as="div" paint={["background", "foreground"]} className="mx-auto flow-6" key={message.id} variant={message.tone}>
-                                        <p><strong>{message.title}</strong></p>
-                                        {lines.map((line, index) => <p key={`${message.id}-${index}`}>{line}</p>)}
-                                    </PostInfo>
-                                </motion.div>
-                            )
-                        })
-                    }
-                </AnimatePresence>
-            </Block>
-        )
-    }
-
-
-
     return (
         <Block
             as="figure"
-            variant="secondary"
-            variantAppearance="outlined"
-            paint="border"
+            variant="light"
+            variantAppearance="filled"
+            paint="all"
             className="flow-4 py-8 px-4 appearanceExamples surface-frame frame-inset-8"
         >
             <Block
@@ -378,9 +263,83 @@ export default function ButtonConfigurator() {
             </Heading>
 
             <Stack gap={8} >
-                <Controls />
-                <ButtonExample />
-                <Messages />
+                <Block className="mx-auto appearanceExamples__select-group">
+                    <Select
+                        id="variant-select"
+                        labelChildren="Variant"
+                        className="appearanceExamples__select-group--select"
+                        options={variants}
+                        value={variant}
+                        onChange={handleSetVariant}
+                    />
+
+                    <Select
+                        id="appearance-select"
+                        labelChildren="Appearance"
+                        className="appearanceExamples__select-group--select"
+                        options={appearances}
+                        value={appearance}
+                        onChange={handleSetAppearance}
+                    />
+                    <Select
+                        id="paint-select"
+                        labelChildren="Paint"
+                        className="appearanceExamples__select-group--select"
+                        options={paints}
+                        value={paint}
+                        onChange={handleSetPaint}
+                    />
+                </Block>
+                <span className="appearanceExamples__button-wrapper" style={{ width: "fit-content", marginInline: "auto" }}>
+                    <button
+                        data-example-variant={variant || undefined}
+                        data-example-appearance={appearance || undefined}
+                        data-example-paint={toButtonPaint(paint)}
+                        style={{ width: "fit-content" }}
+                        className="button example-component"
+                        type='button'
+                    >
+                        <span>Example Button</span>
+                    </button>
+                </span>
+                <Block role="status"
+                    aria-live="polite"
+                    className="flow-4">
+                    <PostInfo className="mx-auto center" variant="info" paint={["foreground"]}>
+                        Adjust the controls above to explore how variant, appearance, and paint interact.
+                    </PostInfo>
+                    <AnimatePresence initial={false} mode="wait">
+                        {
+                            activeMessages.map((message, index) => {
+                                const lines =
+                                    typeof message.body === "function"
+                                        ? message.body({ variant, appearance, paint })
+                                        : message.body;
+
+                                return (
+                                    <motion.div
+                                        key={message.id}
+                                        layout
+                                        initial={{ opacity: 0, height: 0, scale: 0.98, x: -2 }}
+                                        animate={{ opacity: 1, height: "auto", scale: 1, x: 0 }}
+                                        exit={{ opacity: 0, height: 0, scale: 0.98, x: -2 }}
+                                        transition={{
+                                            duration: shouldReduceMotion ? 0 : 0.22,
+                                            ease: "easeOut",
+                                            delay: index * 0.06
+                                        }}
+                                        style={{ overflow: "hidden" }}
+                                    >
+                                        <PostInfo as="div" paint={["background", "foreground"]} className="mx-auto flow-6" key={message.id} variant={message.tone}>
+                                            <p><strong>{message.title}</strong></p>
+                                            {lines.map((line, index) => <p key={`${message.id}-${index}`}>{line}</p>)}
+                                        </PostInfo>
+                                    </motion.div>
+                                )
+                            })
+                        }
+                    </AnimatePresence>
+                </Block>
             </Stack>
         </Block>
     )

@@ -9,21 +9,26 @@ export default function Section10() {
                 Summary
             </AnchorHeading>
             <p>
-                By this point, you should have a complete picture:
+                This system is defined by a set of contracts between its layers.
             </p>
             <List as="ul" spacing="loose">
-                <li>why the system is structured the way it is</li>
-                <li>how the layers fit together</li>
-                <li>how components consume the system safely</li>
+                <li><strong>Structure</strong> defines layout — never styling.</li>
+                <li><strong>Theme</strong> establishes the contrast baseline for all other styling decisions.</li>
+                <li><strong>Variant</strong> communicates intent — never presentation.</li>
+                <li><strong>Appearance</strong> defines treatment — never meaning.</li>
+                <li><strong>Paint</strong> applies styling — only when explicitly requested.</li>
             </List>
             <p>
-                What we've built so far defines the rules of the system — but rules alone
-                don't enforce themselves.
+                Each layer depends only on the layer beneath it.
             </p>
             <p>
-                In the next post, we'll introduce <strong>primitive components</strong> and
-                show how they enforce these boundaries in real interfaces, turning this
-                theming model into something composable and safe to build on.
+                These contracts make the system predictable.
+                They prevent styling drift, reduce duplication,
+                and allow meaning and presentation to evolve independently.
+            </p>
+            <p>
+                In the next post, we'll introduce <strong>primitive components</strong> —
+                structural building blocks that make these contracts practical in real interfaces.
             </p>
         </PostSection>
     );

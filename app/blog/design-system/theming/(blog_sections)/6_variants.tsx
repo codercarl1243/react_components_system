@@ -4,6 +4,7 @@ import Heading from "@/components/heading";
 import AnchorHeading from "@/components/heading/anchorHeading";
 import List from "@/components/list";
 import PostSection from "@/components/post/post.section";
+import Rule from "@/components/rule";
 
 export default function Section6() {
     return (
@@ -15,15 +16,18 @@ export default function Section6() {
                 With structure in place, we can now introduce meaning.
             </p>
             <p>
-                Variants are the layer where raw theme tokens are translated into semantic intent. A variant does not describe how something looks — it describes what it represents.
+                Variants are the layer where raw tokens are translated into semantic intent.
             </p>
-
-            <p>
-                <InlineCode codeString="primary" lang="css" /> communicates emphasis. <InlineCode codeString="danger" lang="css" /> communicates risk. <InlineCode codeString="success" lang="css" /> communicates confirmation. None of these imply a specific visual treatment.
+            <p style={{
+                marginBottom: "0"
+            }}>
+                <InlineCode codeString="primary" lang="css" /> communicates emphasis. <InlineCode codeString="danger" lang="css" /> communicates risk. <InlineCode codeString="success" lang="css" /> communicates confirmation.
             </p>
-
+            <Rule>
+                A variant does not describe how something looks — it communicates intent.
+            </Rule>
             <p>
-                This distinction is critical. If variants encode presentation, the system collapses under its own weight.
+                When variants encode presentation, change becomes expensive. Visual adjustments require duplicated logic or increasing specificity, and components accumulate special cases.
             </p>
 
             <Heading as="h3" headingSize={4}>
@@ -32,11 +36,31 @@ export default function Section6() {
             <p>
                 A variant's responsibility is to expose a color palette, not to apply styling. Each variant defines the same small, predictable set of semantic values:
             </p>
-            <List as="ul">
-                <li>background</li>
-                <li>foreground</li>
-                <li>border</li>
-                <li>surface</li>
+            <List as="dl">
+                <div>
+                    <dt>background</dt>
+                    <dd>Applied to the element itself.</dd>
+                </div>
+
+                <div>
+                    <dt>foreground</dt>
+                    <dd>Content color within the element.</dd>
+                </div>
+
+                <div>
+                    <dt>border</dt>
+                    <dd>Border or outline color.</dd>
+                </div>
+
+                <div>
+                    <dt>surface</dt>
+                    <dd>A contextual container tone used for nested or elevated regions.</dd>
+                </div>
+
+                <div>
+                    <dt>foreground on surface</dt>
+                    <dd>Content color used within a surface context.</dd>
+                </div>
             </List>
             <p>
                 These values describe relationships, not CSS properties.
@@ -46,36 +70,18 @@ export default function Section6() {
   --variant-fg: var(--color-neutral-100);
   --variant-border: var(--color-primary-600);
   --variant-surface: var(--color-primary-100);
-  --variant-text-on-surface: var(--color-primary-600);
+  --variant-fg-on-surface: var(--color-primary-600);
 }`} />
             <p>
-                Every variant exposes the <em>same</em> semantic interface. This consistency is what allows appearances and paint to remain generic.
-            </p>
-            <Heading as="h3">Why variants must stay semantic</Heading>
-
-            <p>
-                Variants must remain semantic. Once they encode presentation — <InlineCode codeString="primary-outline" />, <InlineCode codeString="danger-ghost" />, <InlineCode codeString="subtle-primary" /> — the system begins to fragment.
+                Because the interface is consistent, appearance and paint can remain generic.
             </p>
 
-            <p>
-                Meaning becomes unstable, appearances lose their role, and components start accumulating variant-specific logic.
-            </p>
-
-            <p>
-                Variants define <em>what something represents</em>, not <em>how it looks</em>. If a visual change is needed, it belongs in the <strong>appearance</strong>layer.
-            </p>
-
-            <Heading as="h3" headingSize={4}>Variants do not apply styling</Heading>
-            <p>
-                Variants only define tokens. They do not apply background, foreground, or border styles.
-            </p>
             <p>
                 At this stage, nothing changes visually — and that's intentional. Meaning exists before treatment.
             </p>
             <p>
                 In the next step, we'll introduce the <strong>appearance</strong> layer, which maps semantic palettes to visual outcomes.
             </p>
-
         </PostSection>
     );
 }

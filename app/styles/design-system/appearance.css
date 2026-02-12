@@ -17,6 +17,7 @@ paint → applies them
     --background-color: var(--variant-bg);
     --foreground-color: var(--variant-fg);
     --border-color: var(--variant-border);
+    --link-color: var(--link-on-filled);
 }
 
 /* Medium emphasis with visible outline */
@@ -36,6 +37,7 @@ paint → applies them
 /* Tonal surface application (callouts, notices, containers) */
 [data-appearance="tonal"] {
     --background-color: var(--variant-surface);
-    --foreground-color: var(--variant-text-on-surface);
+    --foreground-color: var(--variant-fg-on-surface);
     --border-color: var(--variant-border);
+    --link-color: var(--link-on-filled);
 }

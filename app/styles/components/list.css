@@ -115,3 +115,18 @@
 .list--upper-roman li::before {
   content: counter(ol-counter, upper-roman) '.';
 }
+
+/* Definitional list */
+.list--definition {
+  display: grid;
+  gap: var(--spacing-sm);
+}
+
+.list--definition dt {
+  font-weight: 600;
+}
+
+.list--definition dd {
+  margin: 0;
+  color: var(--text-muted);
+}

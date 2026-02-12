@@ -1,9 +1,9 @@
 import Code from "@/components/code";
-import InlineCode from "@/components/code/inlineCode";
 import Heading from "@/components/heading";
 import AnchorHeading from "@/components/heading/anchorHeading";
 import PostNote from "@/components/post/post.note";
 import PostSection from "@/components/post/post.section";
+import Rule from "@/components/rule";
 
 export default function Section5() {
     return (
@@ -11,18 +11,20 @@ export default function Section5() {
             <AnchorHeading as={"h2"} prefix="Step 2 —" id="structural-boundaries-heading">
                 Establish structural boundaries
             </AnchorHeading>
-            <p>
-                Before we introduce meaning, treatment, or color, we need a place for structure to live.
+            <p style={{
+                marginBottom: "0"
+            }}>
+                This step intentionally pauses on structure to clarify system expectations and make architectural boundaries explicit — not to introduce variants or visual styles.
             </p>
-            <p>
-                Structural components are responsible for <em>shape</em>, <em>layout</em>, and <em>interaction affordances</em> — not visual styling. They define how something behaves and occupies space, but they do not decide how it looks.
-            </p>
-
+            <Rule>
+                Structural components do not apply visual styling.
+            </Rule>
+            <p>Structural components are responsible for <em>shape</em>, <em>layout</em>, and <em>interaction affordances</em> — not visual styling. They define how something behaves and occupies space, but they do not decide how it looks.</p>
             <p>
                 This separation is deliberate. If components apply color, background, or borders directly, styling logic quickly becomes duplicated and inconsistent. Instead, components expose a stable structural surface that higher layers can decorate.
             </p>
             <p>
-                Here's a simplified example using a button:
+                Here's a simplified example showing a purely structural button:
             </p>
             <Code
                 lang="css"
@@ -47,11 +49,8 @@ export default function Section5() {
             <p>
                 The question then becomes: <em>how do visual styles get applied?</em>
             </p>
-            <p>
+            <p className="mb-4">
                 Rather than letting every component decide when to apply background, foreground, or border styles, we centralize that responsibility in a single layer: <span className="bold">paint</span>.
-            </p>
-            <p>
-                Paint acts as a strict boundary. Components opt into styling explicitly, and only through paint.
             </p>
             <Code
                 lang="css"
@@ -62,24 +61,27 @@ export default function Section5() {
     color: var(--foreground-color); 
 }
 .block[data-paint~="border"] { 
-    border-color: var(--border-color); 
+    border: 1px solid var(--border-color); 
 }`} />
-            <PostNote className="flow-4" variant="neutral" showIcon={false}>
+            <p className="my-4">
+                Paint defines the boundary. Components opt in explicitly — and nowhere else.
+            </p>
+            <PostNote variant="neutral">
                 <p>
-                    Any component that extends the base primitive <InlineCode codeString="<Block />" lang="tsx" /> automatically gains access to paint behavior — without implementing it itself.
-                </p>
-                <p>
-                    We will explore this more later on.
+                    <strong>Paint channel behavior</strong><br />
+                    Some paint channels are <em>ambient</em>, meaning they apply directly when present (such as background or foreground).
+                    Others are <em>constructive</em>: borders do not exist unless paint explicitly creates them.
                 </p>
             </PostNote>
+
             <p>
                 This keeps structural components simple and predictable, while ensuring visual application happens in one place.
             </p>
             <p>
-                With structure in place, we can now define meaning.
+                With structural expectations in place, we can now introduce meaning.
             </p>
             <p>
-                In the next step, we'll introduce the variant layer, which translates raw theme tokens into semantic intent.
+                In the next step, we'll introduce the variant layer, which translates raw tokens into semantic intent.
             </p>
         </PostSection>
     );

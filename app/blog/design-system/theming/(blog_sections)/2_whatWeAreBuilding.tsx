@@ -10,28 +10,26 @@ export default function Section2() {
                 What we're building
             </AnchorHeading>
             <p>
-                The architecture from the first 2 posts in this series wasn't theoretical. It was
-                describing a real system — one built entirely with CSS custom properties and data attributes.
+                Before diving into the details, it helps to see the shape of the system as a whole.
+                The diagram below shows how raw values move through the system and are progressively shaped before a component ever reads them.
             </p>
-
-            <p>
-                Before we start writing code, let's establish the flow. The diagram below shows how theme
-                tokens are transformed step by step — through variant, appearance, and paint — before
-                components consume the result.
-            </p>
-
             <WhatWeAreBuildingDiagram />
-
             <p>
-                Here's what that system looks like in practice:
+                In practice, a layered styling model allows a single component to adapt its appearance using a small set of attributes.
+            </p>
+            <p>
+                This explicit opt-in design keeps styling decisions intentional and prevents accidental coupling. Here's what that looks like:
             </p>
             <ButtonExample />
             <p>
-                Three attributes. Same component. A predictable system that scales without multiplying component logic.
+                The important detail here isn't the button itself — it's that the component remains unaware of <em>how</em> the styling is constructed. It simply consumes the result.
             </p>
-
             <p>
-                Everything we build here is <em>framework-agnostic</em> at the styling layer. React is used as a consumer, not as the owner of the design system.
+                Everything we build here is <em>framework-agnostic</em> at the styling layer.
+                React is used as a consumer, not as the owner of the design system.
+            </p>
+            <p>
+                This separation is not incidental — it's enforced by the contracts between each layer.
             </p>
         </PostSection>
     )

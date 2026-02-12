@@ -210,7 +210,7 @@ export function logError(
   error: unknown,
   options?: TErrorLogOptions
 ): void {
-  log(message, 'error', safeToString(error), options);
+  log(message, 'error', error, options);
 }
 
 function safeToString(value: unknown): string {

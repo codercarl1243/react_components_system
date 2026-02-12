@@ -15,6 +15,11 @@ const design_system__theming: readonly Readonly<PostType>[] = [
         title: 'Building a Theming System',
         subtitle: 'A Practical Implementation Guide',
         excerpt: 'build a robust, library and framework agnostic design system',
+        meta: {
+            title: 'Building a Theming System',
+            description:
+                'Build a scalable, maintainable theming system using clear layers, explicit opt-in styling, and framework-agnostic CSS.',
+        },
         relatedPostIds: asPostIds([
             'design__primitives_01',
             'design__foundations_01',
@@ -37,7 +42,14 @@ const design_system__theming: readonly Readonly<PostType>[] = [
         id: asPostId('design__primitives_01'),
         title: 'Primitives as Styling Boundaries',
         subtitle: 'Structuring Layout Without Leaking Styles',
+        // TODO: come up with a better description
         excerpt: 'Design layout primitives that enforce structure, spacing, and composition without owning visual styling.',
+        meta: {
+            title: 'Primitives as Styling Boundaries',
+            // TODO: come up with a better description
+            description:
+                'Design layout primitives that enforce structure, spacing, and composition without owning visual styling.',
+        },
         relatedPostIds: asPostIds([
             'design__theming_01',
             'design__foundations_01',
@@ -72,6 +84,13 @@ const ButtonPosts: readonly Readonly<PostType>[] = [
         title: 'Buttons',
         subtitle: 'Foundations of an Accessible Button System',
         excerpt: 'Build a robust, accessible button foundation for your design system.',
+        meta: {
+            // TODO: xcome up with a better title
+            title: 'Buttons',
+            // TODO: come up with a better description
+            description:
+                'Build a robust, accessible button foundation for your design system.',
+        },
         relatedPostIds: asPostIds([
             'design__button__slider__01',
             'design__button__toggle__01'

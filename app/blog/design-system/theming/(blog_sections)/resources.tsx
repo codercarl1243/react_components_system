@@ -1,5 +1,4 @@
 import Code from "@/components/code";
-import FunHighlight from "@/components/decorations/FunHighlight";
 import Heading from "@/components/heading";
 import AnchorHeading from "@/components/heading/anchorHeading";
 import Link from "@/components/link";
@@ -18,23 +17,21 @@ export default function Resources() {
       <Stack>
         <AnchorHeading as={"h2"} id="resources-heading">Code & Resources</AnchorHeading>
         <p className="italic">
-          This section exists to document constraints, tradeoffs, and reference material — not to introduce new concepts.
+          This section documents constraints, tradeoffs, and reference material — it does not introduce new concepts.
         </p>
         <p>
-          This post focuses on <strong>system-level theming</strong> — using tokens, CSS variables, and clear styling boundaries to support light/dark modes, variants, and surfaces without component rewrites.
-        </p>
-        <p>
-          At its core, the system is built on CSS custom properties and their inheritance model. For a deeper understanding of how variables flow, cascade, and override, see the <Link href="https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties">MDN guide on CSS Custom Properties</Link>.
+          The system is built on CSS custom properties and their inheritance model. For a deeper understanding of how css variables work, see the <Link href="https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties">MDN guide on CSS Custom Properties</Link>.
         </p>
       </Stack>
       <Stack>
         <AnchorHeading as="h3" headingSize={4} id="resources-notes">Notes & Tradeoffs</AnchorHeading>
         <p>
-          This system makes specific architectural decisions. Understanding these constraints is key to using it effectively:</p>
+          Key architectural constraints:
+        </p>
         <List as="ol" spacing="loose" marker="lower-roman">
           <li className="flow-4">
             <p>
-              <strong>Variants do not compose.</strong>{" "}
+              <strong>Variants do not compose.</strong>
               When multiple <InlineCode codeString="data-variant" lang="html" /> attributes exist in a subtree, the closest ancestor wins.
             </p>
             <p>
@@ -43,7 +40,7 @@ export default function Resources() {
           </li>
           <li className="flow-4">
             <p>
-              <strong>Missing tokens fall back silently.</strong>{" "}
+              <strong>Missing tokens fall back silently.</strong>
               If a variant or appearance is undefined, CSS variable fallbacks apply.
             </p>
             <p>
@@ -52,23 +49,23 @@ export default function Resources() {
           </li>
           <li className="flow-4">
             <p>
-              <strong>Interactive states are layered separately.</strong>{" "}
+              <strong>Interactive states are layered separately.</strong>
               This system defines meaning (<em>variant</em>) and mapping (<em>appearance</em>), not interaction timing.
             </p>
             <p>
-              Hover, focus, and active states are handled at the appearance or component layer.
+              Hover, focus, and active states live in the appearance or component layer.
             </p>
           </li>
           <li className="flow-4">
             <p>
-              <strong>Paint presets are exclusive.</strong>{" "}
-              Presets like <InlineCode codeString="surface" lang="html"/> and <InlineCode codeString="all" lang="html" /> should not be mixed with composable paint channels.
+              <strong>Paint presets are exclusive.</strong>
+              Presets like <InlineCode codeString="surface" lang="html" /> and <InlineCode codeString="all" lang="html" /> should not be mixed with composable paint channels.
             </p>
             <p>
               This is a deliberate constraint to avoid ambiguous styling outcomes.
             </p>
             <PostNote>
-              This constraint is intentional and documented rather than enforced by default.
+              This constraint is documented rather than enforced by default.
               Teams that need stricter guarantees can enforce it through typing, linting, or review conventions.
             </PostNote>
           </li>
@@ -77,7 +74,7 @@ export default function Resources() {
       <Stack>
         <AnchorHeading as="h3" headingSize={4} id="resources-color-accessibility-tools">Theme validation & color systems</AnchorHeading>
         <p>
-          Color accessibility is one of the easiest ways to accidentally exclude users — and one of the easiest to fix with the right tools.
+          Tools for validating contrast and accessibility:
         </p>
         <List spacing="loose" marker="circle" as="ul">
           <li><Link href="https://www.w3.org/WAI/WCAG21/quickref/">WCAG 2.1 Quick Reference guide</Link> — a concise overview of contrast requirements and success criteria</li>
@@ -89,7 +86,7 @@ export default function Resources() {
       <Stack>
         <Heading as={"h3"} headingSize={4}>Theming Pipeline (Reference)</Heading>
         <p>
-          The snippets below represent the core building blocks discussed in this post — <span className="no-wrap"><FunHighlight>tokens</FunHighlight>,</span> <span className="no-wrap"><FunHighlight>data attributes</FunHighlight>,</span> and <FunHighlight>CSS layering</FunHighlight> used to implement theming without coupling styles to components.
+          Reference implementation of the theming pipeline discussed in the post.
         </p>
         <TabList
           tabListName="theming_code_reference"
@@ -163,7 +160,7 @@ and applied via paint.
   --variant-bg: var(--color-primary-400);
   --variant-fg: var(--color-neutral-100);
   --variant-border: var(--color-primary-600);
-  --variant-text-on-surface: var(--color-primary-600);
+  --variant-fg-on-surface: var(--color-primary-600);
   --variant-surface: var(--color-primary-100);
 }
 /* 
@@ -201,7 +198,7 @@ paint → applies them
 /* Tonal surface application (callouts, notices, containers) */
 [data-appearance="tonal"] {
     --background-color: var(--variant-surface);
-    --foreground-color: var(--variant-text-on-surface);
+    --foreground-color: var(--variant-fg-on-surface);
     --border-color: var(--variant-border);
 }
 

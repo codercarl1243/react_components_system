@@ -11,9 +11,9 @@ export function generateMetadataForPost(postId: PostId): Metadata {
       description: "Post not found"
     };
 
-  const meta: NonNullable<PostType["meta"]> = post.meta ?? {};
-  const title = meta.title ?? post.title;
-  const description = meta.description ?? post.excerpt;
+  const meta: PostType["meta"] = post.meta;
+  const title = meta.title;
+  const description = meta.description;
   const rawImage = meta.ogImage ?? post.image.src;
   const ogImage =
     typeof rawImage === "string"

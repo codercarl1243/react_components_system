@@ -8,6 +8,7 @@ import {
   RiCodeSSlashFill,
   RiPaintBrushFill,
   RiCheckboxCircleFill,
+  RiContrastFill,
 } from "@remixicon/react";
 
 export default function TokenFlowDiagram() {
@@ -16,12 +17,12 @@ export default function TokenFlowDiagram() {
       as="figure"
       gap={6}
       align="stretch"
-      className="theming-diagram surface-frame"
+      className="theming-diagram surface-frame text-sm"
       variant="info"
       variantAppearance="tonal"
       paint="border"
     >
-      {/* Theme */}
+      {/* Global */}
       <Stack
         gap={4}
         className="theming-diagram-box surface-frame"
@@ -31,8 +32,8 @@ export default function TokenFlowDiagram() {
       >
         <Row as="strong" gap={2}>
           <Icon icon={RiPaletteFill} />
-          Theme Tokens
-          <Link href="https://github.com/codercarl1243/react_components_system/tree/main/styles/tokens">
+          Global Tokens
+          <Link href="https://github.com/codercarl1243/react_components_system/tree/main/app/styles/tokens">
             (tokens)
           </Link>
         </Row>
@@ -40,38 +41,89 @@ export default function TokenFlowDiagram() {
         <Code
           copyEnabled={false}
           lang="css"
-          codeString={`--surface: var(--color-neutral-100);
---text-on-surface: var(--color-neutral-900);
---link-color: var(--color-primary-400);`}
+          codeString={`:root {
+  /* Neutrals */
+  --color-neutral-100: hsl(0, 0%, 100%);
+  --color-neutral-400: hsl(0, 0%, 46%);
+  --color-neutral-900: hsl(0, 0%, 0%);
+
+  /* Semantic color scales */
+  --color-primary-100: hsl(203, 31%, 90%);
+  --color-primary-400: hsl(212, 75%, 40%);
+  --color-primary-600: hsl(212, 76%, 28%);
+
+  --color-danger-400: hsl(0, 87%, 49%);
+  --color-success-400: hsl(143, 56%, 34%);
+  
+  /* ...additional color scales follow same pattern */
+}`}
         />
       </Stack>
 
       <Icon icon={RiArrowDownLongFill} className="mx-auto" />
 
-      {/* Variant */}
-      <Stack
-        gap={4}
-        className="theming-diagram-box surface-frame"
-        variant="secondary"
-        variantAppearance="tonal"
-        paint="all"
-      >
-        <Row as="strong" gap={2}>
-          <Icon icon={RiCodeSSlashFill} />
-          Variant Tokens
-          <Link href="https://github.com/codercarl1243/react_components_system/blob/main/app/styles/design-system/variants.css">
-            (variants.css)
-          </Link>
-        </Row>
+      <Stack className="surface-frame p-8 frame-inset-8" variant="secondary" variantAppearance="tonal" paint={"all"} style={{ borderStyle: "dashed" }}>
+        <p className="center text-sm italic">
+          Parallel consumers of global tokens
+        </p>
+        {/* Theme */}
+        <Stack
+          gap={4}
+          className="theming-diagram-box surface-frame"
+          variant="neutral"
+          variantAppearance="tonal"
+          paint="all"
+        >
+          <Row as="strong" gap={2}>
+            <Icon icon={RiContrastFill} />
+            Theme Tokens
+            <Link href="https://github.com/codercarl1243/react_components_system/blob/main/app/styles/tokens/theme.css">
+              (theme.css)
+            </Link>
+          </Row>
 
-        <Code
-          copyEnabled={false}
-          lang="css"
-          codeString={`--variant-bg: var(--color-primary-400);
---variant-fg: var(--color-neutral-100);
---variant-border: var(--color-primary-600);
---variant-surface: var(--color-primary-100);`}
-        />
+          <Code
+            copyEnabled={false}
+            lang="css"
+            codeString={`/* Light theme */
+:root:has([data-theme="light"]) {
+  --surface: var(--color-neutral-100);
+  --text-on-surface: var(--color-neutral-900);
+}
+/* Repeat for dark theme */
+
+/* Global defaults */
+body {
+    background-color: var(--surface);
+    color: var(--text-on-surface);
+}`}
+          />
+        </Stack>
+        {/* Variant */}
+        <Stack
+          gap={4}
+          className="theming-diagram-box surface-frame"
+          variant="neutral"
+          variantAppearance="tonal"
+          paint="all"
+        >
+          <Row as="strong" gap={2}>
+            <Icon icon={RiCodeSSlashFill} />
+            Variant Tokens
+            <Link href="https://github.com/codercarl1243/react_components_system/blob/main/app/styles/design-system/variants.css">
+              (variants.css)
+            </Link>
+          </Row>
+          <Code
+            copyEnabled={false}
+            lang="css"
+            codeString={`[data-variant="primary"] {
+  --variant-bg: var(--color-primary-400);
+  --variant-fg: var(--color-neutral-100);
+  --variant-border: var(--color-primary-600);
+}`}
+          />
+        </Stack>
       </Stack>
 
       <Icon icon={RiArrowDownLongFill} className="mx-auto" />
@@ -95,9 +147,11 @@ export default function TokenFlowDiagram() {
         <Code
           copyEnabled={false}
           lang="css"
-          codeString={`--background-color: var(--variant-bg);
---foreground-color: var(--variant-fg);
---border-color: var(--variant-border);`}
+          codeString={`[data-appearance="filled"] {
+  --background-color: var(--variant-bg);
+  --foreground-color: var(--variant-fg);
+  --border-color: var(--variant-border);
+}`}
         />
       </Stack>
 
@@ -114,7 +168,7 @@ export default function TokenFlowDiagram() {
         <Row as="strong" gap={2}>
           <Icon icon={RiCheckboxCircleFill} />
           Paint (Application)
-                <Link href="https://github.com/codercarl1243/react_components_system/blob/main/app/styles/design-system/paint.css">
+          <Link href="https://github.com/codercarl1243/react_components_system/blob/main/app/styles/design-system/paint.css">
             (paint.css)
           </Link>
         </Row>
@@ -132,9 +186,9 @@ export default function TokenFlowDiagram() {
         />
       </Stack>
       <figcaption className="italic text-sm">
-        Tokens flow downward through the system. Theme defines the environment,
-        variants add meaning, appearances map treatment, paint applies styling,
-        and components simply consume the result.
+        Global tokens feed both Theme and Variant. 
+        Theme establishes the visual baseline.
+        Variants define meaning, appearances map treatment, and paint applies styling.
       </figcaption>
     </Stack>
   );

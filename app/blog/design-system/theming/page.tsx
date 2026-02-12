@@ -42,7 +42,7 @@ export const metadata: Metadata = generateMetadataForPost(postId);
 
 export default function ThemingPage() {
 
-    const { post, relatedPosts, author } = getBlogPostPageData(postId);
+    const { post, author } = getBlogPostPageData(postId);
 
     return (
         <>
@@ -64,7 +64,6 @@ export default function ThemingPage() {
             </Post>
             <PostSideBar
                 contents={TABLE_OF_CONTENTS}
-                relatedPosts={relatedPosts}
                 author={author}
             />
         </>

@@ -1,0 +1,19 @@
+.rule {
+    margin: var(--spacing-xxl) 0;
+    padding: var(--spacing-lg) var(--spacing-xl);
+    border-left: 4px solid var(--text-muted);
+    display: grid;
+    gap: var(--spacing);
+}
+
+.rule__heading {
+    font-size: var(--font-size-sm);
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+}
+
+.rule__content {
+    margin: 0;
+}
