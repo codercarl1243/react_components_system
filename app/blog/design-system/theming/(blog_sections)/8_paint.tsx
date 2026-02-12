@@ -2,6 +2,7 @@ import Code from "@/components/code";
 import AnchorHeading from "@/components/heading/anchorHeading";
 import PostSection from "@/components/post/post.section";
 import { Block, Inline, Row, Stack } from "@/components/primitives";
+import Rule from "@/components/rule";
 
 export default function Section8() {
     return (
@@ -18,32 +19,9 @@ export default function Section8() {
                 In this system, styling is never implicit. Tokens exist — inert — until explicitly applied.
             </p>
 
-            <aside
-                style={{
-                    margin: "2rem 0",
-                    padding: "1rem 1.25rem",
-                    borderLeft: "4px solid var(--text-muted)",
-                    display: "grid",
-                    gap: "0.5rem",
-                }}
-            >
-                <Row
-                    as="strong"
-                    className="font-accent"
-                    style={{
-                        fontSize: "0.75rem",
-                        fontWeight: 600,
-                        letterSpacing: "0.08em",
-                        textTransform: "uppercase",
-                        color: "var(--text-muted)",
-                    }}
-                >
-                    System rule
-                </Row>
-                <p className="m-0">
-                    Paint defines the styling boundary. Tokens become CSS properties only here.
-                </p>
-            </aside>
+            <Rule>
+                Paint defines the styling boundary. Tokens become CSS properties only here.
+            </Rule>
             <p>
                 Paint is the only layer permitted to touch actual CSS properties.
                 Everything above it prepares data. Only paint performs application.

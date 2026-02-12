@@ -5,6 +5,7 @@ import AnchorHeading from "@/components/heading/anchorHeading";
 import List from "@/components/list";
 import PostSection from "@/components/post/post.section";
 import { Row } from "@/components/primitives";
+import Rule from "@/components/rule";
 
 export default function Section6() {
     return (
@@ -23,28 +24,9 @@ export default function Section6() {
             }}>
                 <InlineCode codeString="primary" lang="css" /> communicates emphasis. <InlineCode codeString="danger" lang="css" /> communicates risk. <InlineCode codeString="success" lang="css" /> communicates confirmation.
             </p>
-            <aside
-                style={{
-                    margin: "2rem 0",
-                    padding: "1rem 1.25rem",
-                    borderLeft: "4px solid var(--text-muted)",
-                    display: "grid",
-                    gap: "0.5rem",
-                }}>
-                <Row as="strong"
-                    className="font-accent"
-                    style={{
-                        fontSize: "0.75rem",
-                        fontWeight: 600,
-                        letterSpacing: "0.08em",
-                        textTransform: "uppercase",
-                        color: "var(--text-muted)",
-                    }}
-                >System rule</Row>
-                <p className="m-0">
-                    A variant does not describe how something looks — it communicates intent.
-                </p>
-            </aside>
+            <Rule>
+                A variant does not describe how something looks — it communicates intent.
+            </Rule>
             <p>
                 When variants encode presentation, change becomes expensive. Visual adjustments require duplicated logic or increasing specificity, and components accumulate special cases.
             </p>

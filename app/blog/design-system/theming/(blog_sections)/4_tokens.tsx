@@ -6,6 +6,7 @@ import Link from "@/components/link";
 import PostNote from "@/components/post/post.note";
 import PostSection from "@/components/post/post.section";
 import { Block, Row } from "@/components/primitives";
+import Rule from "@/components/rule";
 
 export default function Section4() {
     return (
@@ -19,28 +20,9 @@ export default function Section4() {
                 }}>
                     Every robust theming system starts with a stable set of <span className="bold">global tokens</span>. These are the raw values your entire interface relies on: colors, spacing, typography, radii, shadows, and breakpoints.
                 </p>
-                <aside
-                    style={{
-                        margin: "2rem 0",
-                        padding: "1rem 1.25rem",
-                        borderLeft: "4px solid var(--text-muted)",
-                        display: "grid",
-                        gap: "0.5rem",
-                    }}>
-                    <Row as="strong"
-                        className="font-accent"
-                        style={{
-                            fontSize: "0.75rem",
-                            fontWeight: 600,
-                            letterSpacing: "0.08em",
-                            textTransform: "uppercase",
-                            color: "var(--text-muted)",
-                        }}
-                    >System rule</Row>
-                    <p className="m-0">
-                        Global tokens define raw values, not behavior nor meaning.
-                    </p>
-                </aside>
+                <Rule>
+                    Global tokens define raw values, not behavior nor meaning.
+                </Rule>
                 <p>
                     We'll focus on <span className="bold">color tokens</span> as they best demonstrate how values flow through the rest of the system.
                 </p>
@@ -97,28 +79,9 @@ export default function Section4() {
                     creates the environment all other layers operate within,
                     and acts as the visual reference frame for meaning and treatment.
                 </p>
-                <aside
-                    style={{
-                        margin: "2rem 0",
-                        padding: "1rem 1.25rem",
-                        borderLeft: "4px solid var(--text-muted)",
-                        display: "grid",
-                        gap: "0.5rem",
-                    }}>
-                    <Row as="strong"
-                        className="font-accent"
-                        style={{
-                            fontSize: "0.75rem",
-                            fontWeight: 600,
-                            letterSpacing: "0.08em",
-                            textTransform: "uppercase",
-                            color: "var(--text-muted)",
-                        }}
-                    >System rule</Row>
-                    <p className="m-0">
-                        Theme establishes the contrast baseline for all other styling decisions.
-                    </p>
-                </aside>
+                <Rule>
+                    Theme establishes the contrast baseline for all other styling decisions.
+                </Rule>
                 <Code
                     lang="css"
                     title="theme.css"
