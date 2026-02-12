@@ -57,7 +57,7 @@ export default function Section4() {
 }`}
                     />
                     <figcaption className="pt-4 pb-2 italic text-sm">
-                        Example color scale where the mid-range <InlineCode codeString="400" lang="css" /> values meets a 4.5:1 contrast ratio against both <InlineCode codeString="100" lang="css" /> and <InlineCode codeString="900" lang="css" />.
+                        Example color scale where the mid-range <InlineCode codeString="400" lang="css" /> values meet a 4.5:1 contrast ratio against both <InlineCode codeString="100" lang="css" /> and <InlineCode codeString="900" lang="css" />.
                     </figcaption>
                 </Block>
                 <p>
