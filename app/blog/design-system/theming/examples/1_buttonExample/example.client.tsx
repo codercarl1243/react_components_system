@@ -38,34 +38,34 @@ export default function ButtonExampleClient({
       paint="all"
       data-active={active}
     >
-        <Block
-            className={"toggle-group theming_buttonExample__buttons mx-auto"}
-            aria-label="Example of buttons with different theming">
-            {keys.map((key=> {
-              const {variant, variantAppearance, children} = constructToggle(key) 
-              return <button
-                    data-example-variant={variant || undefined}
-                    data-example-appearance={variantAppearance || undefined}
-                    data-example-paint={"all"}
-                    style={{ width: "fit-content" }}
-                    className="button example-component"
-                    aria-pressed={active === key}
-                    onClick={() => setActive(key)}
-                    key={key}
-                >
-                    <span>{children}</span>
-                </button>
-            }
-            ))}
-        </Block>
+      <figcaption className='text-sm italic'>
+        Click a button to see its code:
+      </figcaption>
+      <Block
+        className={"toggle-group theming_buttonExample__buttons mx-auto"}
+        aria-label="Example of buttons with different theming">
+        {keys.map((key => {
+          const { variant, variantAppearance, children } = constructToggle(key)
+          return <button
+            data-example-variant={variant || undefined}
+            data-example-appearance={variantAppearance || undefined}
+            data-example-paint={"all"}
+            style={{ width: "fit-content" }}
+            className="button example-component"
+            aria-pressed={active === key}
+            onClick={() => setActive(key)}
+            key={key}
+          >
+            <span>{children}</span>
+          </button>
+        }
+        ))}
+      </Block>
 
       {/* Code blocks */}
       <div className="code-example">
         {children}
       </div>
-      <figcaption className='text-sm italic'>
-        Click a button to see its code:
-      </figcaption>
     </Block>
   )
 }

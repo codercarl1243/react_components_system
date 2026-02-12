@@ -44,7 +44,7 @@ export default function Section4() {
                         codeString={`:root {
     /* Neutrals */
     --color-neutral-100: hsl(0, 0%, 100%);
-    --color-neutral-400: hsl(248, 0%, 46%);
+    --color-neutral-400: hsl(0, 0%, 46%);
     --color-neutral-900: hsl(0, 0%, 0%);
 
     /* Primary (Blue) */
