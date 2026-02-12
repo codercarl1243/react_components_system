@@ -2,7 +2,6 @@
 import { Children } from 'react'
 import clsx from 'clsx'
 import TableOfContents from './TableOfContents';
-import RelatedPosts from './RelatedPosts';
 import Author from './author';
 import { PostSideBarProps } from './sidebar.type';
 import { RiMenuFold3Line } from '@remixicon/react';
@@ -41,9 +40,9 @@ export default function PostSideBar({
 
     if (!hasContents && !hasExtras) return null;
     // todo: calc height from y:top of sidebar -> y: bottom of the window
-//  update height when scrolling down to max height of window
+    //  update height when scrolling down to max height of window
     return (
-        <Hamburger.Wrapper 
+        <Hamburger.Wrapper
             as="div"
             position="right"
             className='side-bar--wrapper'
@@ -63,7 +62,6 @@ export default function PostSideBar({
                 {...props}
             >
                 {hasContents && <TableOfContents contents={contents} />}
-                {/* {hasRelated && <RelatedPosts posts={relatedPosts} />} */}
                 {author && <Author author={author} />}
                 {children}
             </Hamburger.Menu>
