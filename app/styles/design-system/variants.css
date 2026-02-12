@@ -62,7 +62,7 @@ These tokens are:
   --variant-fg-on-surface: var(--color-neutral-600);
 }
 
-[data-variant="light"]{
+[data-variant="light"] {
   --variant-bg: var(--color-neutral-100);
   --variant-fg: var(--color-neutral-900);
   --variant-border: var(--color-neutral-700);
@@ -70,7 +70,7 @@ These tokens are:
   --variant-fg-on-surface: var(--color-neutral-600);
 }
 
-[data-variant="dark"]{
+[data-variant="dark"] {
   --variant-bg: var(--color-neutral-900);
   --variant-fg: var(--color-neutral-100);
   --variant-border: var(--color-neutral-200);
