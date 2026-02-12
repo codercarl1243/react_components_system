@@ -10,6 +10,6 @@ export type ListProps<T extends ValidListTag = "ul"> = BlockWrapperProps<
     T,
     {
         spacing?: ValidSpacing;
-        marker?: T extends 'ul' ? UlMarker : OlMarker;
+        marker?: T extends 'ul' ? UlMarker : T extends 'ol' ? OlMarker : never;
     }
 >;
