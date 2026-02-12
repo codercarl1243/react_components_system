@@ -1,4 +1,4 @@
-button[data-appearance="ghost"]:not(:disabled):not([aria-disabled="true"]) {
+button[data-appearance="ghost"]:not(:disabled, [aria-disabled="true"]) {
     &:hover {
         --background-color: color-mix(in srgb, currentColor 15%, var(--text-on-surface));
     }
