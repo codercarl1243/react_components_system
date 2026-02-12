@@ -15,11 +15,11 @@ export default function Section3() {
                 This system avoids that by making decisions once, in the right layer:
             </p>
             <List as="ol" variant="secondary" variantAppearance="outlined">
-                <li><strong>Global tokens</strong> define your visual language</li>
-                <li><strong>Variants</strong> define semantic color roles</li>
-                <li><strong>Appearances</strong> define visual treatments</li>
-                <li><strong>Paint</strong> defines what actually gets styled</li>
-
+                <li><strong>Global tokens</strong> define raw visual values.</li>
+                <li><strong>Theme</strong> establishes the contrast baseline.</li>
+                <li><strong>Variant</strong> defines semantic intent.</li>
+                <li><strong>Appearance</strong> maps intent to styling tokens.</li>
+                <li><strong>Paint</strong> applies styling explicitly.</li>
             </List>
             <p><strong>Components</strong> consume these layers without reimplementing them</p>
             <p>

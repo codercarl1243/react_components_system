@@ -10,13 +10,12 @@ export default function Section8() {
                 Paint — Making styling explicit
             </AnchorHeading>
             <p>
-                Even with variants and appearances defined, there's still a problem:
-                <strong>when do styles actually apply?</strong>
+                Variants define meaning. Appearances prepare tokens. The final question is simple:
+                <strong> when do tokens become actual styles?</strong>
             </p>
 
             <p style={{ marginBottom: "0" }}>
-                Most systems apply styling implicitly. Set a variant, and color appears
-                everywhere — sometimes in places you didn't intend.
+                In this system, styling is never implicit. Tokens exist — inert — until explicitly applied.
             </p>
 
             <aside
@@ -42,11 +41,12 @@ export default function Section8() {
                     System rule
                 </Row>
                 <p className="m-0">
-                    Paint applies styling tokens to CSS properties — styling occurs only when deliberately requested.
+                    Paint defines the styling boundary. Tokens become CSS properties only here.
                 </p>
             </aside>
             <p>
-                Paint is the final boundary layer. Variants provide meaning, appearances prepare tokens, and paint decides when those tokens become actual CSS properties.
+                Paint is the only layer permitted to touch actual CSS properties.
+                Everything above it prepares data. Only paint performs application.
             </p>
             <Code lang="css"
                 codeString={`/* Foreground channel */

@@ -10,12 +10,12 @@ export default function Section2() {
                 What we're building
             </AnchorHeading>
             <p>
-                Before diving into the details, it helps to see the shape of the system as a whole. 
+                Before diving into the details, it helps to see the shape of the system as a whole.
                 The diagram below shows how raw values move through the system and are progressively shaped before a component ever reads them.
             </p>
             <WhatWeAreBuildingDiagram />
             <p>
-                In practice, a layered styling model allows a single component to adapt its appearance using a small set of attributes. 
+                In practice, a layered styling model allows a single component to adapt its appearance using a small set of attributes.
             </p>
             <p>
                 This explicit opt-in design keeps styling decisions intentional and prevents accidental coupling. Here's what that looks like:
@@ -25,8 +25,11 @@ export default function Section2() {
                 The important detail here isn't the button itself — it's that the component remains unaware of <em>how</em> the styling is constructed. It simply consumes the result.
             </p>
             <p>
-                Everything we build here is <em>framework-agnostic</em> at the styling layer. 
+                Everything we build here is <em>framework-agnostic</em> at the styling layer.
                 React is used as a consumer, not as the owner of the design system.
+            </p>
+            <p>
+                This separation is not incidental — it's enforced by the contracts between each layer.
             </p>
         </PostSection>
     )

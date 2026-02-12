@@ -100,7 +100,7 @@ export default function Section5() {
                 With structural expectations in place, we can now introduce meaning.
             </p>
             <p>
-                In the next step, we'll introduce the variant layer, which translates raw theme tokens into semantic intent.
+                In the next step, we'll introduce the variant layer, which translates raw tokens into semantic intent.
             </p>
         </PostSection>
     );

@@ -16,7 +16,7 @@ export default function Section6() {
                 With structure in place, we can now introduce meaning.
             </p>
             <p>
-                Variants are the layer where raw theme tokens are translated into semantic intent.
+                Variants are the layer where raw tokens are translated into semantic intent.
             </p>
             <p style={{
                 marginBottom: "0"

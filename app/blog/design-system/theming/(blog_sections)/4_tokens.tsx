@@ -38,7 +38,7 @@ export default function Section4() {
                         }}
                     >System rule</Row>
                     <p className="m-0">
-                        Global tokens describe the environment, not behavior or meaning.
+                        Global tokens define raw values, not behavior nor meaning.
                     </p>
                 </aside>
                 <p>
@@ -90,11 +90,35 @@ export default function Section4() {
             <div className="flow-6">
                 <Heading as="h3" headingSize={4}>Theme</Heading>
                 <p>
-                    Up to this point, everything we've defined is global and context-free. Theme is the first place where those values are given meaning.
+                    Up to this point, everything we've defined is global and context-free. Theme is the layer that establishes visual context.
                 </p>
                 <p>
-                    Theme defines surface and text colors, establishing a predictable, contrast-safe environment.
+                    Theme defines surface and foreground relationships,
+                    creates the environment all other layers operate within,
+                    and acts as the visual reference frame for meaning and treatment.
                 </p>
+                <aside
+                    style={{
+                        margin: "2rem 0",
+                        padding: "1rem 1.25rem",
+                        borderLeft: "4px solid var(--text-muted)",
+                        display: "grid",
+                        gap: "0.5rem",
+                    }}>
+                    <Row as="strong"
+                        className="font-accent"
+                        style={{
+                            fontSize: "0.75rem",
+                            fontWeight: 600,
+                            letterSpacing: "0.08em",
+                            textTransform: "uppercase",
+                            color: "var(--text-muted)",
+                        }}
+                    >System rule</Row>
+                    <p className="m-0">
+                        Theme establishes the contrast baseline for all other styling decisions.
+                    </p>
+                </aside>
                 <Code
                     lang="css"
                     title="theme.css"

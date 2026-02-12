@@ -1,6 +1,4 @@
-import BlogLink from "@/components/post/post.blogLink";
 import AnchorHeading from "@/components/heading/anchorHeading";
-import List from "@/components/list";
 import PostSection from "@/components/post/post.section";
 import { Stack } from "@/components/primitives";
 
@@ -22,7 +20,7 @@ export default function Section1() {
 
                 <p>
                     <strong className="fun-underline">TL;DR</strong> — This is an <em>implementation-focused</em> look at building the foundation of a scalable theming system, with the decisions and trade-offs behind each layer explained —
-                    from raw values to a theming approach that stays maintainable as it scales.
+                    theming is no longer a convention — it is a set of contracts that your UI can rely on.
                 </p>
             </Stack>
         </PostSection>
