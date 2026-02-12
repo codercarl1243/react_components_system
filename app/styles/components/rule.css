@@ -5,6 +5,7 @@
     display: grid;
     gap: var(--spacing);
 }
+
 .rule__heading {
     font-size: var(--font-size-sm);
     font-weight: 600;
