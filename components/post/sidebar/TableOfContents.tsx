@@ -38,14 +38,18 @@ export default function TableOfContents({ contents }: { contents: PostSideBarPro
 
     const handleContentsClick = (e: MouseEvent<HTMLAnchorElement>, href: string) => {
         e.preventDefault();
-        const element = document.querySelector(href);
+        const element = document.querySelector<HTMLElement>(href);
         if (!element) return;
+
         const reduced = window.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches;
+
         element.scrollIntoView({
             behavior: reduced ? 'auto' : 'smooth',
             block: 'start',
             inline: 'nearest',
         });
+        element.focus({ preventScroll: true });
+
         // Update the URL hash without jumping 
         if (history.replaceState) {
             history.replaceState(null, '', href);

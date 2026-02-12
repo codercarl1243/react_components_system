@@ -25,7 +25,6 @@ export default function List<T extends ValidListTag = "ul">({
 
     return <Block
         className={listClasses}
-        role={"list"}
         {...props}
     />
 }
