@@ -297,6 +297,7 @@ export default function ButtonConfigurator() {
                         data-example-paint={toButtonPaint(paint)}
                         style={{ width: "fit-content" }}
                         className="button example-component"
+                        type='button'
                     >
                         <span>Example Button</span>
                     </button>

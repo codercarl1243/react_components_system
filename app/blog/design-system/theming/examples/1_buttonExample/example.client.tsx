@@ -50,6 +50,7 @@ export default function ButtonExampleClient({
             data-example-variant={variant || undefined}
             data-example-appearance={variantAppearance || undefined}
             data-example-paint={"all"}
+            type='button'
             style={{ width: "fit-content" }}
             className="button example-component"
             aria-pressed={active === key}
