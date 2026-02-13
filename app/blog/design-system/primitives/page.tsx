@@ -10,9 +10,9 @@ import PostBanner from "@/components/post/post.banner";
 import PostSideBar from "@/components/post/sidebar";
 
 /** Sections */
-// import Introduction from "./(blog_sections)/1_introduction";
-// import WhatWeAreBuilding from "./(blog_sections)/2_whatWeAreBuilding";
-// import Why from './(blog_sections)/3_why';
+import Introduction from "./(blog_sections)/1_introduction";
+import WhatWeAreBuilding from "./(blog_sections)/2_whatWeAreBuilding";
+import Why from './(blog_sections)/3_why';
 // import Tokens from './(blog_sections)/4_tokens';
 // import Structure from './(blog_sections)/5_structure';
 // import Variants from './(blog_sections)/6_variants';
@@ -24,9 +24,9 @@ import PostSideBar from "@/components/post/sidebar";
 
 
 const TABLE_OF_CONTENTS = [
-    // { id: 'introduction', href: '#introduction', label: "Introduction" },
-    // { id: 'what-we-are-building', href: '#what-we-are-building', label: "What we're building" },
-    // { id: 'why', href: '#why', label: 'Why this approach' },
+    { id: 'introduction', href: '#introduction', label: "Introduction" },
+    { id: 'what-we-are-building', href: '#what-we-are-building', label: "What we're building" },
+    { id: 'why', href: '#why', label: 'Why this approach' },
     // { id: 'global-tokens', href: '#global-tokens', label: 'Global Tokens' },
     // { id: 'structural-boundaries', href: '#structural-boundaries', label: 'Structural boundaries' },
     // { id: 'variants', href: '#variants', label: 'Variants' },
@@ -50,9 +50,10 @@ export default function ThemingPage() {
                 <PostBanner
                     post={post}
                 />
-                {/* <Introduction />
+                <Introduction />
                 <WhatWeAreBuilding />
                 <Why />
+                {/* 
                 <Tokens />
                 <Structure />
                 <Variants />

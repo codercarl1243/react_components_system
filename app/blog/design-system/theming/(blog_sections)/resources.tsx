@@ -31,7 +31,7 @@ export default function Resources() {
         <List as="ol" spacing="loose" marker="lower-roman">
           <li className="flow-4">
             <p>
-              <strong>Variants do not compose.</strong>
+              <strong>Variants do not compose.</strong>{" "}
               When multiple <InlineCode codeString="data-variant" lang="html" /> attributes exist in a subtree, the closest ancestor wins.
             </p>
             <p>
@@ -40,7 +40,7 @@ export default function Resources() {
           </li>
           <li className="flow-4">
             <p>
-              <strong>Missing tokens fall back silently.</strong>
+              <strong>Missing tokens fall back silently.</strong>{" "}
               If a variant or appearance is undefined, CSS variable fallbacks apply.
             </p>
             <p>
@@ -49,7 +49,7 @@ export default function Resources() {
           </li>
           <li className="flow-4">
             <p>
-              <strong>Interactive states are layered separately.</strong>
+              <strong>Interactive states are layered separately.</strong>{" "}
               This system defines meaning (<em>variant</em>) and mapping (<em>appearance</em>), not interaction timing.
             </p>
             <p>
@@ -58,7 +58,7 @@ export default function Resources() {
           </li>
           <li className="flow-4">
             <p>
-              <strong>Paint presets are exclusive.</strong>
+              <strong>Paint presets are exclusive.</strong>{" "}
               Presets like <InlineCode codeString="surface" lang="html" /> and <InlineCode codeString="all" lang="html" /> should not be mixed with composable paint channels.
             </p>
             <p>

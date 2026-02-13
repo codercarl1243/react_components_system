@@ -49,7 +49,10 @@
 
 main:has(.hamburger-menu--wrapper[data-mode="hamburger"]) {
     grid-template-columns: 1fr;
+}
 
+.hamburger-menu--wrapper[data-mode="hamburger"] + main {
+    padding-block-start: var(--spacing-3xl);
 }
 
 .hamburger-menu--wrapper[data-mode="hamburger"] {

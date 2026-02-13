@@ -7,11 +7,12 @@ import { TextArea, TextInput } from '@/components/form/inputs';
 import { Block, Stack } from '@/components/primitives';
 import { useServerValidatedForm } from '@/lib/hooks/useServerValidatedForm';
 import { handleContact } from '@/app/actions/contact';
+import Image from '@/components/image';
 
 const initialState = {
-  status: "idle" as const,
-  fieldErrors: {},
-  formErrors: [],
+    status: "idle" as const,
+    fieldErrors: {},
+    formErrors: [],
 };
 
 export default function ContactForm() {
@@ -65,8 +66,19 @@ export default function ContactForm() {
     }
 
     return (
-        <form ref={formRef} className="contact-form width-bleed" onSubmit={handleSubmit} noValidate>
-            <fieldset className="contact-form__fieldset">
+        <form
+            ref={formRef}
+            className="contact-form width-full mr-auto p-2"
+            onSubmit={handleSubmit}
+            noValidate
+        >
+            <Block
+                as="fieldset"
+                className="contact-form__fieldset surface-frame p-4"
+                variant='primary'
+                variantAppearance='outlined'
+                paint={"all"}
+            >
                 <legend className="contact-form__legend">Contact Me</legend>
 
                 <Block
@@ -74,7 +86,7 @@ export default function ContactForm() {
                     aria-live="polite"
                     aria-atomic="true"
                     data-status={derivedStatus}
-                    className="contact-form__status"
+                    className="contact-form__status p-8"
                     paint={statusPaint}
                     variant={statusVariant}
                     variantAppearance='tonal'
@@ -113,16 +125,15 @@ export default function ContactForm() {
                         onChange={deleteError}
                     />
                 </Stack>
-
-                <Button
-                    icon={RiMailLine}
-                    type="submit"
-                    variant="primary"
-                    variantAppearance={"filled"}
-                    isLoading={pending}>
-                    Send message
-                </Button>
-            </fieldset>
+                    <Button
+                        icon={RiMailLine}
+                        type="submit"
+                        variant="primary"
+                        variantAppearance={"filled"}
+                        isLoading={pending}>
+                        Send message
+                    </Button>
+            </Block>
         </form>
     )
 }
