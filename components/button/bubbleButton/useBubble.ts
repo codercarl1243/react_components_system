@@ -1,46 +1,26 @@
 'use client';
-import Button from "@/components/button";
-import { RiBubbleChartLine, RiWindyLine } from "@remixicon/react";
-import { type CSSProperties, type ReactNode, useEffect, useRef, useState } from "react";
+import { useState, useRef, useEffect } from "react";
+import type { TBubble, Timeout, TSplatter } from "./type";
+import { logWarning } from "@/lib/logging/log";
 
-type TBubble = {
-    id: string;
-    left: string;
-    top: string;
-    size: string;
-    cssColorVar: string;
-    floatAnimation: string;
-    animationLength: number;
-    isPopping: boolean;
-};
-
-type TSplatter = {
-    id: string;
-    x: number;
-    y: number;
-    size: string;
-    delay: string;
-    endX: number;
-    endY: number;
-    color: string;
-};
-
-type Timeout = ReturnType<typeof setTimeout>;
-
-const POP_ANIMATION_DURATION = 400;
+export const POP_ANIMATION_DURATION = 400;
 const SPLATTER_ANIMATION_DURATION = 800;
-const COOLDOWN_DURATION = 300;
+const COOLDOWN_DURATION = 200;
+const INFO_CARD_TIMEOUT_DURATION = 7000;
 const MIN_BUBBLE_LIFETIME = 3000;
 const MAX_BUBBLE_LIFETIME = 7000;
 
-export default function BaseButtonExample({ children }: { children?: ReactNode }) {
+export default function useBubbles() {
+
     const [bubbles, setBubbles] = useState<TBubble[]>([]);
     const [splatters, setSplatters] = useState<TSplatter[]>([]);
+    const [cardVisibility, setCardVisibility] = useState<"displayed" | "hidden" | "collapsed">("hidden");
     const timeoutsRef = useRef<Set<Timeout>>(new Set());
     const cooldownRef = useRef<boolean>(false);
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const bubbleIdCounter = useRef(0);
-    const splatterCounter = useRef(0)
+    const splatterCounter = useRef(0);
+    const cardHideTimeoutRef = useRef<Timeout | null>(null);
 
     const createTimeout = (callback: () => void, delay: number) => {
         const timeout = setTimeout(() => {
@@ -52,11 +32,29 @@ export default function BaseButtonExample({ children }: { children?: ReactNode }
     };
 
     const removeBubble = (bubbleId: string) => {
-        setBubbles(prev => prev.filter(b => b.id !== bubbleId));
+        setBubbles(prev => {
+            const next = prev.filter(b => b.id !== bubbleId);
+
+            if (next.length === 0) {
+                if (cardHideTimeoutRef.current) {
+                    clearTimeout(cardHideTimeoutRef.current);
+                }
+
+                cardHideTimeoutRef.current = createTimeout(() => {
+                    setCardVisibility('hidden');
+                    cardHideTimeoutRef.current = null;
+                }, INFO_CARD_TIMEOUT_DURATION);
+            }
+
+            return next;
+        })
     };
 
     const addBubble = () => {
         if (cooldownRef.current) return;
+        if (cardVisibility !== "collapsed") {
+            setCardVisibility("displayed");
+        }
 
         cooldownRef.current = true;
         setIsLoading(true);
@@ -86,6 +84,8 @@ export default function BaseButtonExample({ children }: { children?: ReactNode }
         createTimeout(() => {
             popBubble(bubbleId);
         }, lifetime - POP_ANIMATION_DURATION)
+        logWarning("addBubble ended")
+
     };
 
     const popBubble = (bubbleId: string) => {
@@ -103,7 +103,6 @@ export default function BaseButtonExample({ children }: { children?: ReactNode }
         createTimeout(() => {
             removeBubble(bubbleId);
         }, POP_ANIMATION_DURATION)
-
     }
 
     const createSplatter = (bubbleElement: HTMLElement, bubbleColor: string, bubbleSize: number, bubbleId: string) => {
@@ -126,7 +125,7 @@ export default function BaseButtonExample({ children }: { children?: ReactNode }
                 delay: `${Math.random() * 100}ms`,
                 endX: centerX + Math.cos(angle) * distance,
                 endY: centerY + Math.sin(angle) * distance,
-                color: bubbleColor
+                cssColorVar: bubbleColor
             });
         }
 
@@ -140,94 +139,40 @@ export default function BaseButtonExample({ children }: { children?: ReactNode }
         }, SPLATTER_ANIMATION_DURATION + maxDelayMs);
     };
 
-    const generateBubble = ({ id, left, top, size, cssColorVar, floatAnimation, animationLength, isPopping }: TBubble) => {
-        return (
-            <div
-                key={id}
-                data-bubble-id={id}
-                className="bubble"
-                style={{
-                    left,
-                    top,
-                    animation: `${floatAnimation} ${animationLength}ms linear forwards`,
-                }}
-            >
-                <Button
-                    className="bubble-inner"
-                    onClick={() => popBubble(id)}
-                    id={id}
-                    style={{
-                        width: size,
-                        height: size,
-                        backgroundColor: `color-mix(in srgb, var(${cssColorVar}) 40%, transparent)`,
-                        outlineColor: `var(${cssColorVar})`,
-                        borderColor: `var(${cssColorVar})`,
-                        animation: isPopping
-                            ? `rotate ${animationLength}ms cubic-bezier(0.25, 0.1, 0.25, 1) forwards, pop ${POP_ANIMATION_DURATION}ms cubic-bezier(0.25, -1, 0, 1) forwards`
-                            : `rotate ${animationLength}ms cubic-bezier(0.25, 0.1, 0.25, 1) forwards`
-                    }}
-                />
-            </div>
-        );
-    };
-
-    type CSSWithVars = CSSProperties & Record<'--end-x' | '--end-y', string>;
-    const generateSplatter = ({
-        x, y, size, delay, endX, endY, color, id
-    }: TSplatter) => {
-        const styleObject: CSSWithVars = {
-            left: `${x}px`,
-            top: `${y}px`,
-            width: size,
-            height: size,
-            animationDelay: delay,
-            background: `radial-gradient(circle, #ffffff 0%, var(${color}) 50%, transparent 70%)`,
-            ['--end-x']: `${endX - x}px`,
-            ['--end-y']: `${endY - y}px`,
+    const toggleCardVisibility = () => {
+        console.log("toggleCardVisibility toggled", cardVisibility)
+        if (cardVisibility === "displayed"){
+            console.log("toggleCardVisibility toggled 1")
+            setCardVisibility("collapsed");
+            if (cardHideTimeoutRef.current) {
+                clearTimeout(cardHideTimeoutRef.current);
+                cardHideTimeoutRef.current = null;
+            }
+        } else {
+            console.log("toggleCardVisibility toggled 2")
+            setCardVisibility("displayed");
         }
 
-        return (
-            <div
-                key={id}
-                className="splatter"
-                style={styleObject}
-            />
-        )
     }
 
     useEffect(() => {
         return () => {
             timeoutsRef.current.forEach(clearTimeout);
             timeoutsRef.current.clear();
+            if (cardHideTimeoutRef.current) {
+                clearTimeout(cardHideTimeoutRef.current);
+            }
         };
     }, []);
 
-    const loadingText = "Taking a breath";
-    const text = "Blow a Bubble";
-
-    return (
-        <div className="button-example--base">
-            <div id="bubble-description" className="flow-4">
-                <p>Creates a decorative bubble that floats upward and disappears with a 'Pop!'.</p>
-                <p>Click on a Bubble to <span className="italic">pop</span> it.</p>
-                <p>Current Number of Bubbles: <span style={{ color: 'var(--color-accent-400)' }}>{bubbles.length}</span></p>
-                <span className="sr-only" role="status">
-                    {isLoading ? loadingText : text}
-                </span>
-            </div>
-            <Button
-                onClick={addBubble}
-                isLoading={isLoading}
-                variantAppearance="outlined"
-                variant="accent"
-                aria-describedby="bubble-description"
-                icon={isLoading ? RiBubbleChartLine : RiWindyLine}
-            >
-                {text}
-            </Button>
-            {bubbles.map(generateBubble)}
-            {splatters.map(generateSplatter)}
-            {children}
-        </div>
-    )
+    return {
+        bubbles,
+        splatters,
+        addBubble,
+        popBubble,
+        isLoading,
+        cardVisibility,
+        toggleCardVisibility,
+        POP_ANIMATION_DURATION
+    };
 }
