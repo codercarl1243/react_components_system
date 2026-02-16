@@ -5,6 +5,7 @@ import './styles/globals.css'
 import Footer from '@/components/layout/footer'
 import Header from '@/components/layout/header'
 import { baseMetadata } from '@/lib/utils/generateMeta/default'
+import { cookies } from 'next/headers'
 
 const geistSans = Geist({
   variable: '--font-main',
@@ -18,21 +19,23 @@ const playfairDisplay = Playfair_Display({
 
 export const metadata: Metadata = baseMetadata;
 
-export default function RootLayout({
+export default async function RootLayout({
   children
 }: Readonly<{
   children: ReactNode;
 }>) {
+
+  const cookieStore = await cookies();
+  const theme = cookieStore.get('theme')?.value ?? 'light';
+
   return (
-    <html lang="en">
+    <html lang="en" data-theme={theme}>
       <body
-        data-theme={"light"}
-        // data-theme={"dark"}
         className={`${geistSans.variable} ${playfairDisplay.variable} antialiased main-wrapper font-main text-base`}
       >
         <div className="overlay-backdrop" aria-hidden="true" />
-        <Header />
-        <main id="main-content" tabIndex={-1} className="flow-8">
+        <Header userTheme={theme}/>
+        <main id="main-content" tabIndex={-1} className="flow-8 relative">
           {children}
         </main>
         <Footer />
