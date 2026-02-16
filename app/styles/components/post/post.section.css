@@ -23,7 +23,7 @@
     right: 0;
     margin-inline: auto;
     background-color: var(--text-muted);
-    box-shadow: 1px 4px 10px var(--text-on-surface);
+    box-shadow: 1px 4px 10px var(--foreground-on-surface);
     pointer-events: none;
 }
 

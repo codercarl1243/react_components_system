@@ -25,7 +25,7 @@ These tokens are:
   --background-color: var(--variant-bg);
   --foreground-color: var(--variant-fg);
   --foreground-muted: color-mix(in srgb,
-      var(--foreground-color, var(--text-on-surface)) 65%,
+      var(--foreground-color, var(--foreground-on-surface)) 65%,
       var(--variant-surface, var(--surface)));
   --border-color: var(--variant-border);
   --surface-color: var(--variant-surface);
@@ -33,7 +33,7 @@ These tokens are:
 
 [data-variant="inverse"] {
   --_surface: color-mix(in srgb,
-      var(--text-on-surface) 85%,
+      var(--foreground-on-surface) 85%,
       var(--surface) 15%);
   --_fg: var(--surface);
 
@@ -48,10 +48,10 @@ These tokens are:
 
 [data-variant="neutral"] {
   --variant-bg: var(--surface);
-  --variant-fg: var(--text-on-surface);
+  --variant-fg: var(--foreground-on-surface);
   --variant-border: var(--color-neutral-400);
   --variant-surface: var(--surface);
-  --variant-fg-on-surface: var(--text-on-surface);
+  --variant-fg-on-surface: var(--foreground-on-surface);
 }
 
 [data-variant="muted"] {

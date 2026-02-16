@@ -19,7 +19,7 @@
 
 .homepage__latest-posts__heading {
   text-transform: uppercase;
-  color: var(--text-on-surface);
+  color: var(--foreground-on-surface);
   letter-spacing: 0.12em;
   opacity: 0.6;
   margin-top: var(--spacing-2xl);
