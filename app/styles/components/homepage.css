@@ -1,3 +1,6 @@
+.hero {
+  min-height: 50dvh;
+}
 .homepage-banner {
   position: relative;
   background-color: transparent;
@@ -7,52 +10,14 @@
   z-index: 0;
   overflow: initial !important;
   display: block;
-&:hover {
-    &::before,
-  &::after {
-box-shadow: -4px 0 12px color-mix(in srgb, currentColor 75%, transparent);
-background-color: color-mix(in srgb, currentColor 25%, transparent);
-  }
-}
 
   img {
     object-fit: cover;
     margin-inline: auto;
   }
-
-  &::before,
-  &::after {
-
-    margin-block: var(--spacing-lg);
-    position: absolute;
-    z-index: -1;
-    content: '';
-    display: block;
-    width: max(220px, 60%);
-    height: 2px;
-    border: 2px solid currentColor;
-    padding-block: var(--spacing-3xl);
-  }
-
-  &::before {
-    --text-on-surface: var(--color-secondary-600);
-    color: var(--color-secondary-200);
-    left: 0;
-    top: -2rem;
-    border-right-width: 4px;
-    border-bottom-width: 4px;
-  }
-
-  &::after {
-    color: var(--color-accent-200);
-    right: 0;
-    bottom: -2rem;
-    border-left-width: 4px;
-    border-top-width: 4px;
-  }
 }
 
-.homepage--latest-posts__heading {
+.homepage__latest-posts__heading {
   text-transform: uppercase;
   color: var(--text-on-surface);
   letter-spacing: 0.12em;
