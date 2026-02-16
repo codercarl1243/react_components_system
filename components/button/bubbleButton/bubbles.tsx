@@ -22,6 +22,7 @@ export default function Bubbles({bubbles, splatters, popBubble }:TBubbleProps ) 
             >
                 <Button
                     className="bubble-inner"
+                    aria-label="Pop bubble"
                     onClick={() => popBubble(id)}
                     id={id}
                     style={{
