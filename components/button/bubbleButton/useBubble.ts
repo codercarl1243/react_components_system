@@ -1,7 +1,6 @@
 'use client';
 import { useState, useRef, useEffect } from "react";
 import type { TBubble, Timeout, TSplatter } from "./type";
-import { logWarning } from "@/lib/logging/log";
 
 export const POP_ANIMATION_DURATION = 400;
 const SPLATTER_ANIMATION_DURATION = 800;
@@ -84,7 +83,6 @@ export default function useBubbles() {
         createTimeout(() => {
             popBubble(bubbleId);
         }, lifetime - POP_ANIMATION_DURATION)
-        logWarning("addBubble ended")
 
     };
 
@@ -140,16 +138,13 @@ export default function useBubbles() {
     };
 
     const toggleCardVisibility = () => {
-        console.log("toggleCardVisibility toggled", cardVisibility)
         if (cardVisibility === "displayed"){
-            console.log("toggleCardVisibility toggled 1")
             setCardVisibility("collapsed");
             if (cardHideTimeoutRef.current) {
                 clearTimeout(cardHideTimeoutRef.current);
                 cardHideTimeoutRef.current = null;
             }
         } else {
-            console.log("toggleCardVisibility toggled 2")
             setCardVisibility("displayed");
         }
 
