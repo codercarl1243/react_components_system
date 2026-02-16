@@ -5,7 +5,7 @@ import Figure from "@/components/image/figure";
 import List from "@/components/list";
 import PostNote from "@/components/post/post.note";
 import PostSection from "@/components/post/post.section";
-import { BaseButtonExample } from "../examples/BaseButtonExample";
+// import { BaseButtonExample } from "../examples/BaseButtonExample";
 import InlineCode from "@/components/code/inlineCode";
 
 
@@ -22,7 +22,7 @@ export default function Section4() {
             </p>
             <p>Try it out below:</p>
 
-            <BaseButtonExample />
+            {/* <BaseButtonExample /> */}
             <PostNote>
                 <p>
                     This whimsical demo shows what's possible when buttons provide rich feedback. The bubbles are decorative, but the <span className="italic">principles</span> are production-ready:
