@@ -8,7 +8,6 @@
   aspect-ratio: 6/1;
   isolation: isolate;
   z-index: 0;
-  overflow: initial !important;
   display: block;
 
   img {
