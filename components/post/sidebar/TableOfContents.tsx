@@ -33,8 +33,7 @@ export default function TableOfContents({ contents }: { contents: PostSideBarPro
     const ids = useMemo(() => contentsArray.map((item) => item.id), [contentsArray]);
     const { activeId } = useScrollSpy({ ids });
 
-    if (contentsArray.length === 0 ) return null;
-
+    if (contentsArray.length === 0) return null;
 
     const handleContentsClick = (e: MouseEvent<HTMLAnchorElement>, href: string) => {
         e.preventDefault();

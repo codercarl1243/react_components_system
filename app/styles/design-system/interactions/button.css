@@ -1,16 +1,16 @@
 button[data-appearance="ghost"]:not(:disabled, [aria-disabled="true"]) {
     &:hover {
-        --background-color: color-mix(in srgb, currentColor 15%, var(--text-on-surface));
+        --background-color: color-mix(in srgb, currentColor 15%, var(--foreground-on-surface));
     }
 
     &:focus-visible {
-        --background-color: color-mix(in srgb, currentColor 40%, var(--text-on-surface));
+        --background-color: color-mix(in srgb, currentColor 40%, var(--foreground-on-surface));
         outline-offset: var(--spacing-sm);
     }
 
     &:active,
     &[data-pressed="true"] {
         outline-style: dashed;
-        --background-color: color-mix(in srgb, currentColor 20%, var(--text-on-surface));
+        --background-color: color-mix(in srgb, currentColor 20%, var(--foreground-on-surface));
     }
 }

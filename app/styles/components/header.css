@@ -8,7 +8,7 @@
 .header--wrapper {
     display: flex;
     min-height: 5rem;
-    width: clamp(var(--bp-xs),85%, var(--bp-xl));
+    width: clamp(var(--bp-xs), 100%, var(--bp-characters));
     margin-inline: auto;
     align-items: center;
     position: relative;
@@ -23,8 +23,8 @@
 /*  DESKTOP */
 @media screen and (min-width: 35rem) {
     .header--wrapper {
-        padding: var(--spacing) var(--spacing-lg);
-           padding-block: var(--spacing-xxl);
+        padding: var(--spacing) 0;
+        padding-block: var(--spacing-xxl);
     }
 
     .nav__primary {

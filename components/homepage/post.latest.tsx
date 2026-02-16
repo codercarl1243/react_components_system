@@ -9,10 +9,10 @@ export default function LatestPosts() {
 
   return (
     <Block
-      className="homepage--latest-posts width-bleed"
+      className="homepage__latest-posts width-full"
     >
-      <Heading as="h2" className="center mb-4" headingSize={4}>Latest posts</Heading>
-      <div className="post-card__grid-container">
+      <Heading as="h2" className="homepage__latest-posts__heading center mb-16" headingSize={2}>Latest posts</Heading>
+      <div className="homepage__latest-posts__posts post-card__grid-container">
         <List as="ul" marker="none" className="post-card__grid p-0 flow-6">
           {featuredPost && <li key={featuredPost.id} className="latest-post latest-posts__featured" data-layout="large">
             <PostCard post={featuredPost} layout="large" />

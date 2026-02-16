@@ -1,3 +1,29 @@
+.hero {
+  min-height: 50dvh;
+}
+.homepage-banner {
+  position: relative;
+  background-color: transparent;
+  height: 200px;
+  aspect-ratio: 6/1;
+  isolation: isolate;
+  z-index: 0;
+  display: block;
+
+  img {
+    object-fit: cover;
+    margin-inline: auto;
+  }
+}
+
+.homepage__latest-posts__heading {
+  text-transform: uppercase;
+  color: var(--foreground-on-surface);
+  letter-spacing: 0.12em;
+  opacity: 0.6;
+  margin-top: var(--spacing-2xl);
+}
+
 @media screen and (max-width: 35rem) {
   .homepage {
     padding-block-start: 4rem;

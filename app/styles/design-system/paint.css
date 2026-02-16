@@ -40,5 +40,5 @@ Examples:
 .block[data-paint="surface"] {
     border-width: var(--border-width-thin);
     border-style: var(--border-style-solid);
-    border-color: var(--border-color, var(--text-on-surface, currentColor));
+    border-color: var(--border-color, var(--foreground-on-surface, currentColor));
 }

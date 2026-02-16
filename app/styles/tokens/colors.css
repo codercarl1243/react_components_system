@@ -7,19 +7,19 @@
         /* Primary (Blue) */
         --color-primary-100: hsl(203, 31%, 90%);
         --color-primary-200: hsl(211, 38%, 78%);
-        --color-primary-400: hsl(212, 75%, 40%);
+        --color-primary-400: hsl(212, 75%, 48%);
         --color-primary-600: hsl(212, 76%, 28%);
 
         /* Secondary (Green) */
         --color-secondary-100: hsl(155, 33%, 93%);
         --color-secondary-200: hsl(153, 29%, 84%);
-        --color-secondary-400: hsl(155, 65%, 26%);
+        --color-secondary-400: hsl(155, 65%, 32%);
         --color-secondary-600: hsl(155, 67%, 18%);
 
         /* Accent (Pink) */
         --color-accent-100: hsl(327, 22%, 90%);
         --color-accent-200: hsl(316, 25%, 88%);
-        --color-accent-400: hsl(314, 71%, 41%);
+        --color-accent-400: hsl(314, 71%, 48%);
         --color-accent-600: hsl(314, 71%, 28%);
 
         /* Danger */
@@ -55,24 +55,18 @@
         --color-neutral-600: hsl(0, 0%, 30%);
         --color-neutral-700: hsl(0, 0%, 24%);
         --color-neutral-800: hsl(0, 0%, 15%);
-        --color-neutral-900: hsl(0, 0%, 5%);
+        --color-neutral-900: hsl(0, 0%, 0%);
 
         --color-code-dark: hsl(225, 13%, 13%);
         --color-code-light: hsl(214, 13%, 90%);
         --color-inline-bg: rgb(244, 244, 229);
 
         /* alpha values */
-        --color-neutral-a2-dark: color-mix(in srgb, var(--color-neutral-900) 20%, transparent);
-        --color-neutral-a4-dark: color-mix(in srgb, var(--color-neutral-900) 40%, transparent);
-        --color-neutral-a6-dark: color-mix(in srgb, var(--color-neutral-900) 60%, transparent);
-        --color-neutral-a7-dark: color-mix(in srgb, var(--color-neutral-900) 70%, transparent);
-        --color-neutral-a9-dark: color-mix(in srgb, var(--color-neutral-900) 90%, transparent);
-
-        --color-neutral-a2-light: color-mix(in srgb, var(--color-neutral-100) 20%, transparent);
-        --color-neutral-a4-light: color-mix(in srgb, var(--color-neutral-100) 40%, transparent);
-        --color-neutral-a6-light: color-mix(in srgb, var(--color-neutral-100) 60%, transparent);
-        --color-neutral-a7-light: color-mix(in srgb, var(--color-neutral-100) 70%, transparent);
-        --color-neutral-a9-light: color-mix(in srgb, var(--color-neutral-100) 90%, transparent);
+        --color-neutral-a2: color-mix(in srgb, var(--foreground-on-surface) 20%, transparent);
+        --color-neutral-a4: color-mix(in srgb, var(--foreground-on-surface) 40%, transparent);
+        --color-neutral-a6: color-mix(in srgb, var(--foreground-on-surface) 60%, transparent);
+        --color-neutral-a7: color-mix(in srgb, var(--foreground-on-surface) 70%, transparent);
+        --color-neutral-a9: color-mix(in srgb, var(--foreground-on-surface) 90%, transparent);
 
         /* Emphasis colors */
         --color-emphasis-100: #ef7143;
@@ -91,3 +85,12 @@
         --color-link-400: hsl(220, 70%, 45%);
         --color-link-600: hsl(220, 75%, 32%);
     }
+
+   :root:has([data-theme="dark"])
+     {
+        --color-neutral-a2: color-mix(in srgb, var(--color-neutral-100) 20%, transparent);
+        --color-neutral-a4: color-mix(in srgb, var(--color-neutral-100) 40%, transparent);
+        --color-neutral-a6: color-mix(in srgb, var(--color-neutral-100) 60%, transparent);
+        --color-neutral-a7: color-mix(in srgb, var(--color-neutral-100) 70%, transparent);
+        --color-neutral-a9: color-mix(in srgb, var(--color-neutral-100) 90%, transparent);
+     }

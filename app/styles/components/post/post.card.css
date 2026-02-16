@@ -2,7 +2,7 @@
     position: relative;
     height: max(150px, 100%);
     overflow: hidden;
-    outline: 1px solid var(--color-neutral-a2-dark);
+    outline: 1px solid var(--color-neutral-a2);
     transition: outline-offset 150ms ease-in-out,
         outline-color 150ms ease-in-out;
 }
@@ -20,10 +20,14 @@
     cursor: text;
 }
 
-.post-card__heading,
 .post-card__excerpt,
 .post-card__meta {
     z-index: 2;
+}
+
+.post-card__heading,
+.post-card__excerpt,
+.post-card__meta {
     pointer-events: none;
 }
 
@@ -81,7 +85,7 @@
 .post-card:focus-within {
     box-shadow: var(--shadow-sm);
     outline-offset: 4px;
-    outline-color: var(--color-neutral-a4-dark);
+    outline-color: var(--color-neutral-a4);
 
     .post-card__image {
         img {
@@ -141,7 +145,7 @@
 
     .post-card__grid>li[data-layout="large"] {
         grid-column: 1 / 4;
-        grid-row: span 3;
+        grid-row: span 2;
     }
 
     /* Right hand side */

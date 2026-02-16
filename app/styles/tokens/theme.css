@@ -16,9 +16,9 @@ Theme tokens are consumed by:
 */
 
 /* Light theme */
-:root:has([data-theme="light"]) {
+:root[data-theme="light"] {
     --surface: var(--color-neutral-100);
-    --text-on-surface: var(--color-neutral-900);
+    --foreground-on-surface: var(--color-neutral-900);
     --text-muted: var(--color-neutral-500);
     --link-on-surface: var(--color-link-400);
     --link-on-filled: var(--color-link-400);
@@ -26,17 +26,28 @@ Theme tokens are consumed by:
 }
 
 /* Dark theme */
-:root:has([data-theme="dark"]) {
+:root[data-theme="dark"] {
     --surface: var(--color-neutral-900);
-    --text-on-surface: var(--color-neutral-100);
+    --foreground-on-surface: var(--color-neutral-100);
     --text-muted: var(--color-neutral-300);
     --link-on-surface: var(--color-link-200);
     --link-on-filled: var(--color-link-400);
     --link-color: var(--link-on-surface);
 }
 
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme]) {
+        --surface: var(--color-neutral-900);
+        --foreground-on-surface: var(--color-neutral-100);
+        --text-muted: var(--color-neutral-300);
+        --link-on-surface: var(--color-link-200);
+        --link-on-filled: var(--color-link-400);
+        --link-color: var(--link-on-surface);
+    }
+}
+
 /* Global defaults */
 body {
     background-color: var(--surface);
-    color: var(--text-on-surface);
+    color: var(--foreground-on-surface);
 }

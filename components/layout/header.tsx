@@ -6,10 +6,12 @@ import Link from '@/components/link'
 import { usePathname } from 'next/navigation'
 import { RiBookReadFill, RiHomeHeartLine, RiMenuLine, RiUser3Fill } from '@remixicon/react'
 import { Hamburger } from '@/components/hamburger'
+import Switch from '../button/switch'
+import { useTheme } from '@/lib/hooks/useTheme'
 
-export default function Header({ className, ...props }: ComponentProps<'header'>) {
+export default function Header({ className, userTheme, ...props }: ComponentProps<'header'> & { userTheme: string }) {
   const pathname = usePathname()
-
+  const { theme, toggleTheme } = useTheme(userTheme);
   return (
     <Hamburger.Wrapper
       as="header"
@@ -49,6 +51,11 @@ export default function Header({ className, ...props }: ComponentProps<'header'>
         >
           About
         </Link>
+        <Switch
+          checked={theme === "dark"}
+          onClick={toggleTheme}
+          aria-label="Toggle dark mode"
+        />
       </Hamburger.Menu>
     </Hamburger.Wrapper>
   )

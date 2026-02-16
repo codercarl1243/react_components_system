@@ -18,12 +18,12 @@
     position: absolute;
     bottom: calc(var(--post-section-spacer) / -2);
     height: 1px;
-    width: min(80ch, 75%);
+    width: min(var(--bp-characters), 75%);
     left: 0;
     right: 0;
     margin-inline: auto;
     background-color: var(--text-muted);
-    box-shadow: 1px 4px 10px var(--text-on-surface);
+    box-shadow: 1px 4px 10px var(--foreground-on-surface);
     pointer-events: none;
 }
 
