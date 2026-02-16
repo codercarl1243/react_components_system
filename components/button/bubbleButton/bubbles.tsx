@@ -65,14 +65,6 @@ export default function Bubbles({bubbles, splatters, popBubble }:TBubbleProps ) 
 
     return (
         <>
-            {/* 
-            create a Card that bounces down while there are bubbles around.
-        it should dissapear after 15? seconds of no more bubbles. it should also allow someone to press x to close it
-        
-        <p>Click on a Bubble to <span className="italic">pop</span> it.</p>
-        <p>Current Number of Bubbles: <span style={{ color: 'var(--color-accent-400)' }}>{bubbles.length}</span></p>
-                */}
-
             {bubbles.map(generateBubble)}
             {splatters.map(generateSplatter)}
         </>
