@@ -19,5 +19,6 @@ export const BLOG_KEYWORDS = {
     THEMING: 'theming',
     LAYOUT: 'layout',
     STRUCTURE: 'structure',
-    PRIMITIVES: 'primitives'
+    PRIMITIVES: 'primitives',
+    REACT: 'react'
 } as const;
