@@ -39,43 +39,42 @@ const design_system__theming: readonly Readonly<PostType>[] = [
         categories: [BLOG_CATEGORIES.DESIGN_SYSTEM, BLOG_CATEGORIES.TOOLING],
     },
     {
-        id: asPostId('design__primitives_01'),
-        title: 'Primitives as Styling Boundaries',
-        subtitle: 'Structuring Layout Without Leaking Styles',
-        // TODO: come up with a better description
-        excerpt: 'Design layout primitives that enforce structure, spacing, and composition without owning visual styling.',
-        meta: {
-            title: 'Primitives as Styling Boundaries',
-            // TODO: come up with a better description
-            description:
-                'Design layout primitives that enforce structure, spacing, and composition without owning visual styling.',
-        },
-        relatedPostIds: asPostIds([
-            'design__theming_01',
-            'design__foundations_01',
-        ]),
-        pathFragment: 'primitives',
-        lastModified: new Date('2025-12-15'),
-        createdAt: new Date('2025-10-05'),
-        published: true,
-        featured: false,
-        image: {
-            src: '/images/blogs/design-system/primitives/main-image.webp',
-            alt: 'Abstract layout blocks representing structural primitives and styling boundaries'
-        },
-        authorId: CODER_CARL_ID,
-        subject: `${BLOG_SUBJECTS.DESIGN_SYSTEM}`,
-        keywords: [
-            BLOG_KEYWORDS.PRIMITIVES,
-            BLOG_KEYWORDS.LAYOUT,
-            BLOG_KEYWORDS.DESIGN_SYSTEM,
-            BLOG_KEYWORDS.STRUCTURE,
-        ],
-        categories: [
-            BLOG_CATEGORIES.DESIGN_SYSTEM,
-            BLOG_CATEGORIES.FOUNDATIONS,
-        ],
+    id: asPostId('design__primitives_01'),
+    title: 'Design System Primitives',
+    subtitle: 'What They Are, Why They Exist, and Why They Matter',
+    excerpt: 'An introduction to structural primitives in a design system — what they are, how they encode layout intent, and why they scale better than ad-hoc HTML composition.',
+    meta: {
+        title: 'Design System Primitives — What They Are and Why They Matter',
+        description:
+            'Learn what primitives are in a design system, how they encode structural intent, and why they create safer, more scalable layout patterns than ad-hoc HTML.',
     },
+    relatedPostIds: asPostIds([
+        'design__theming_01',
+        'design__foundations_01',
+    ]),
+    pathFragment: 'primitives',
+    lastModified: new Date('2026-02-17'),
+    createdAt: new Date('2025-10-05'),
+    published: true,
+    featured: false,
+    image: {
+        src: '/images/blogs/design-system/primitives/main-image.webp',
+        alt: 'Abstract structural layout blocks representing design system primitives'
+    },
+    authorId: CODER_CARL_ID,
+    subject: `${BLOG_SUBJECTS.DESIGN_SYSTEM}`,
+    keywords: [
+        BLOG_KEYWORDS.PRIMITIVES,
+        BLOG_KEYWORDS.LAYOUT,
+        BLOG_KEYWORDS.DESIGN_SYSTEM,
+        BLOG_KEYWORDS.STRUCTURE,
+        BLOG_KEYWORDS.REACT,
+    ],
+    categories: [
+        BLOG_CATEGORIES.DESIGN_SYSTEM,
+        BLOG_CATEGORIES.FOUNDATIONS,
+    ],
+},
 ];
 
 const ButtonPosts: readonly Readonly<PostType>[] = [

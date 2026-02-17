@@ -9,11 +9,12 @@ export default function AboutPage() {
     return (
         <div className="layout-wrapper flow-8 about-page">
             <Stack
-                as="section">
+                as="section"
+                >
                 <Heading as="h1" headingSize={2}>About Me</Heading>
-                <div className="about-page__intro">
+                <div className="about-page__intro pb-8">
                     <Image alt="" src="/images/carl_portrait.webp" height={250} width={200} variant="card" className="about-page__intro--portrait"/>
-                    <Stack className="about-page__intro--text">
+                    <Stack className="about-page__intro--text" gap={8}>
                         <p>
                             I am a Full stack developer with a strong focus on <span className="fun-underline">front-end architecture</span>, <span className="fun-underline">accessibility</span>, and just <span className="fun-underline">building enjoyable user experiences</span>.
                         </p>
@@ -27,8 +28,8 @@ export default function AboutPage() {
                 as="section"
                 variant="primary"
                 variantAppearance="tonal"
-                paint={"surface"}
-                className="surface-frame p-4"
+                paint="all"
+                className="surface-frame p-8 pb-16"
             >
                 <Heading as="h2" headingSize={4} variant="primary" className="mt-0">Professional focus</Heading>
 
@@ -48,8 +49,8 @@ export default function AboutPage() {
                 as="section"
                 variant="secondary"
                 variantAppearance="tonal"
-                paint={"surface"}
-                className="surface-frame p-4"
+                paint="all"
+                className="surface-frame p-8 pb-16"
             >
                 <Heading as="h2" headingSize={4} variant="secondary" className="mt-0">
                     Learning & personal projects
@@ -72,8 +73,8 @@ export default function AboutPage() {
                 as="section"
                 variant="accent"
                 variantAppearance="tonal"
-                paint={"surface"}
-                className="surface-frame p-4"
+                paint="all"
+                className="surface-frame p-8 pb-16"
             >
                 <Heading as="h2" headingSize={4} variant="accent" className="mt-0">
                     Technologies & tools
