@@ -9,7 +9,8 @@ export default function LatestPosts() {
 
   return (
     <Block
-      className="homepage__latest-posts width-full"
+      as="section"
+      className="homepage__latest-posts homepage__section width-full"
     >
       <Heading as="h2" className="homepage__latest-posts__heading center mb-16" headingSize={2}>Latest posts</Heading>
       <div className="homepage__latest-posts__posts post-card__grid-container">

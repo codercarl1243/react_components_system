@@ -35,7 +35,7 @@ export default async function RootLayout({
       >
         <div className="overlay-backdrop" aria-hidden="true" />
         <Header userTheme={theme}/>
-        <main id="main-content" tabIndex={-1} className="flow-8 relative">
+        <main id="main-content" tabIndex={-1} className="flow-8">
           {children}
         </main>
         <Footer />

@@ -15,6 +15,7 @@ export default function BubbleButton() {
             )}
             {cardVisibility === "displayed" && (
                 <BubbleCard
+                    data-state={cardVisibility}
                     bubbleCount={bubbles.length}
                     closeFunction={toggleCardVisibility}
                 />

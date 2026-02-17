@@ -1,3 +1,5 @@
+import type { BlockWrapperProps } from "@/components/primitives/types";
+
 export type TBubble = {
     id: string;
     left: string;
@@ -28,7 +30,7 @@ export type TBubbleProps = {
     popBubble: (bubbleId: string) => void;
 }
 
-export type TBubbleCardProps = {
+export type TBubbleCardProps = BlockWrapperProps<'div', {
     closeFunction: () => void;
     bubbleCount: number;
-}
+}>
