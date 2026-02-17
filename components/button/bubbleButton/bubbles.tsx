@@ -3,12 +3,10 @@ import Button from "@/components/button";
 import type { TBubble, TBubbleProps, TSplatter } from "./type";
 import { POP_ANIMATION_DURATION } from "./useBubble"
 import { CSSProperties } from "react";
-import { logWarning } from "@/lib/logging/log";
 
 export default function Bubbles({bubbles, splatters, popBubble }:TBubbleProps ) {
 
     const generateBubble = ({ id, left, top, size, cssColorVar, floatAnimation, animationLength, isPopping }: TBubble) => {
-        logWarning("generateBubble toggled")
         return (
             <div
                 key={id}

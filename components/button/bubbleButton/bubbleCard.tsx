@@ -5,11 +5,11 @@ import { RiCloseLargeLine } from "@remixicon/react";
 import { TBubbleCardProps } from "./type";
 
 
-export default function BubbleCard({closeFunction, bubbleCount}: TBubbleCardProps) {
+export default function BubbleCard({closeFunction, bubbleCount, ...props}: TBubbleCardProps) {
 
     return (
 
-        <Block variant="primary" variantAppearance="outlined" paint="all">
+        <Block variant="primary" variantAppearance="outlined" paint="all" className="bubbles__card" {...props}>
             <Button
                 className="bubble-card__close"
                 onClick={closeFunction}
