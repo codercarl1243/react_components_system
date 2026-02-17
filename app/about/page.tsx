@@ -28,7 +28,7 @@ export default function AboutPage() {
                 as="section"
                 variant="primary"
                 variantAppearance="tonal"
-                paint={"all"}
+                paint="all"
                 className="surface-frame p-8 pb-16"
             >
                 <Heading as="h2" headingSize={4} variant="primary" className="mt-0">Professional focus</Heading>
@@ -49,7 +49,7 @@ export default function AboutPage() {
                 as="section"
                 variant="secondary"
                 variantAppearance="tonal"
-                paint={"all"}
+                paint="all"
                 className="surface-frame p-8 pb-16"
             >
                 <Heading as="h2" headingSize={4} variant="secondary" className="mt-0">
@@ -73,7 +73,7 @@ export default function AboutPage() {
                 as="section"
                 variant="accent"
                 variantAppearance="tonal"
-                paint={"all"}
+                paint="all"
                 className="surface-frame p-8 pb-16"
             >
                 <Heading as="h2" headingSize={4} variant="accent" className="mt-0">
