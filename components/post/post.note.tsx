@@ -23,7 +23,7 @@ import type { PostNotePropsType } from './post.type';
  * @returns A styled note container with an information icon, or null if no children are provided.
  * 
  */
-export default function PostNote({ className, children, variant = 'info', showIcon = true, ...props }: PostNotePropsType) {
+export default function PostNote({ className, children, paint = "all", variant = 'info', showIcon = true, ...props }: PostNotePropsType) {
 
   if (!children) return null;
 
@@ -38,7 +38,7 @@ export default function PostNote({ className, children, variant = 'info', showIc
       role={'note'}
       variant={variant}
       variantAppearance='tonal'
-      paint="all"
+      paint={paint}
     >
       {showIcon ? <Icon icon={RiInformationLine} size={28} className="post-note__icon" /> : null}
       <Stack className="post-note__content">
