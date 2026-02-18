@@ -1,7 +1,11 @@
 import InlineCode from "@/components/code/inlineCode";
+import FunHighlight from "@/components/decorations/FunHighlight";
 import AnchorHeading from "@/components/heading/anchorHeading";
+import Icon from "@/components/icon";
+import BlogLink from "@/components/post/post.blogLink";
+import PostNote from "@/components/post/post.note";
 import PostSection from "@/components/post/post.section";
-import { Stack } from "@/components/primitives";
+import { RiArrowLeftRightLine, RiArrowUpDownLine, RiCheckboxBlankLine } from "@remixicon/react";
 
 export default function Section1() {
 
@@ -10,35 +14,43 @@ export default function Section1() {
             <AnchorHeading as="h2" id="introduction-heading">
                 Introduction
             </AnchorHeading>
-            <Stack>
-                <p>
-                    Not every component in a design system is meant to be visible.
-                </p>
 
-                <p>
-                    Some components don't render buttons, cards, or forms.
-                    They define structure.
-                </p>
+            <p>
+                Not every component in a design system is meant to be visible.
+            </p>
 
-                <p>
-                    These are called primitives.
-                </p>
+            <p>
+                Some components don't render buttons, cards, or forms. They define structure.
+            </p>
 
-                <p>
-                    A primitive is a minimal structural component that encodes layout intent
-                    without owning visual styling.
-                </p>
+            <p>
+                These are called <FunHighlight>primitives</FunHighlight>.
+            </p>
 
+            <p>
+                A primitive is a minimal component that represents a single structural
+                role — like vertical arrangement <Icon variant="primary" icon={RiArrowUpDownLine}/>, horizontal alignment <Icon variant="primary" icon={RiArrowLeftRightLine}/>, or containment <Icon variant="primary" icon={RiCheckboxBlankLine}/> —
+                without taking ownership of visual styling.
+            </p>
+            <PostNote variant="warning" showIcon={false} className="mt-8">
                 <p>
-                    Instead of scattering spacing, alignment, and flow decisions across arbitrary HTML,
-                    primitives make layout deliberate and repeatable.
+                    This article is part of a broader design system series. While it builds
+                    on ideas introduced in <BlogLink postId="design__theming_01">Theming Foundations</BlogLink>, it stands on its own. 
                 </p>
+            </PostNote>
+            <p>
+                In this post, we'll define the core structural primitives (
+                {" "}<InlineCode codeString="<Stack />" />,{" "}
+                <InlineCode codeString="<Inline />" />, and{" "}
+                <InlineCode codeString="<Block />" />), and implement minimal versions of
+                them. These components expose controlled structural properties like spacing,
+                alignment, and containment.
+            </p>
 
-                <p>
-                    <strong className="fun-underline">TL;DR</strong> — Primitives are structural building blocks.
-                    They make layout intent explicit, reduce duplication, and create consistent composition patterns as your UI grows.
-                </p>
-            </Stack>
+            <p>
+                In the next post, we'll connect those hooks to the theming system and show
+                how they form enforceable styling contracts.
+            </p>
         </PostSection>
     )
 }

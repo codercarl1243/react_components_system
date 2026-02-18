@@ -1,10 +1,10 @@
 import Code from "@/components/code";
 import InlineCode from "@/components/code/inlineCode";
-import Heading from "@/components/heading";
 import AnchorHeading from "@/components/heading/anchorHeading";
 import List from "@/components/list";
 import PostNote from "@/components/post/post.note";
 import PostSection from "@/components/post/post.section";
+import Rule from "@/components/rule";
 
 export default function Section2() {
     return (
@@ -12,11 +12,21 @@ export default function Section2() {
             <AnchorHeading as={"h2"} id="what-is-a-primitive-heading">
                 What is a Primitive?
             </AnchorHeading>
+            <p>A primitive is a minimal component that represents a single repeatable,
+                enforceable structural role — like vertical arrangement, horizontal
+                alignment, spacing rhythm, or containment — without taking ownership
+                of visual styling.
+            </p>
+            <Rule>
+                Primitives encode structural intent.
+            </Rule>
             <p>
-                A primitive is a minimal component that represents a single repeatable, enforceable structural role — like vertical arrangement, horizontal alignment, spacing rhythm, or containment — without taking ownership of visual styling.
+                Instead of scattering spacing, alignment, and containment across arbitrary
+                elements, primitives encode those structural decisions into reusable layout
+                components that define explicit structural contracts.
             </p>
             <p>
-                Think of primitives as the grammar of your UI:
+                Primitives operate at a different layer of responsibility:
             </p>
             <List>
                 <li>They don't describe what something is (Button, Card, Modal)</li>
@@ -46,7 +56,7 @@ export default function Section2() {
             <p>
                 In the first example, structure is expressed through utility classes.
                 Flex direction, alignment, and spacing are attached to generic elements
-                as <span className="fun-underline">styling instructions</span>.
+                as <span className="fun-underline">styling instructions</span> rather than structural roles.
             </p>
             <Code
                 title="After"
@@ -68,7 +78,7 @@ export default function Section2() {
                 through dedicated primitives. <InlineCode codeString="Stack" /> defines vertical rhythm. <InlineCode codeString="Inline" /> defines horizontal alignment.
             </p>
             <p>
-                If both approaches render the same result, why not just use HTML and utility classes?
+                If both approaches render the same result, the natural question is: <span className="italic">why not just use HTML and utility classes?</span>
             </p>
         </PostSection>
     )
