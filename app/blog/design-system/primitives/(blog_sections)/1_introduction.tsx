@@ -5,6 +5,7 @@ import Icon from "@/components/icon";
 import BlogLink from "@/components/post/post.blogLink";
 import PostNote from "@/components/post/post.note";
 import PostSection from "@/components/post/post.section";
+import { Row } from "@/components/primitives";
 import { RiArrowLeftRightLine, RiArrowUpDownLine, RiCheckboxBlankLine } from "@remixicon/react";
 
 export default function Section1() {
@@ -29,13 +30,16 @@ export default function Section1() {
 
             <p>
                 A primitive is a minimal component that represents a single structural
-                role — like vertical arrangement <Icon variant="primary" icon={RiArrowUpDownLine}/>, horizontal alignment <Icon variant="primary" icon={RiArrowLeftRightLine}/>, or containment <Icon variant="primary" icon={RiCheckboxBlankLine}/> —
+                role — like vertical arrangement <Icon variant="primary" icon={RiArrowUpDownLine} />, horizontal alignment <Icon variant="primary" icon={RiArrowLeftRightLine} />, or containment <Icon variant="primary" icon={RiCheckboxBlankLine} /> —
                 without taking ownership of visual styling.
             </p>
-            <PostNote variant="warning" showIcon={false} className="mt-8">
+            <PostNote variant="info" showIcon={false} className="mt-8" paint="border">
+                 <Row as="strong" className="callout__heading font-accent">
+                    Series Context
+                </Row>
                 <p>
                     This article is part of a broader design system series. While it builds
-                    on ideas introduced in <BlogLink postId="design__theming_01">Theming Foundations</BlogLink>, it stands on its own. 
+                    on ideas introduced in <BlogLink postId="design__theming_01">Theming Foundations</BlogLink>, it stands on its own.
                 </p>
             </PostNote>
             <p>
@@ -48,8 +52,8 @@ export default function Section1() {
             </p>
 
             <p>
-                In the next post, we'll connect those hooks to the theming system and show
-                how they form enforceable styling contracts.
+                In the next post, we'll connect these primitives to the theming system —
+                showing how structural contracts become enforceable styling boundaries.
             </p>
         </PostSection>
     )

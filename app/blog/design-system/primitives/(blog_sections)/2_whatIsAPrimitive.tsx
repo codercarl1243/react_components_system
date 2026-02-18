@@ -12,10 +12,9 @@ export default function Section2() {
             <AnchorHeading as={"h2"} id="what-is-a-primitive-heading">
                 What is a Primitive?
             </AnchorHeading>
-            <p>A primitive is a minimal component that represents a single repeatable,
-                enforceable structural role — like vertical arrangement, horizontal
-                alignment, spacing rhythm, or containment — without taking ownership
-                of visual styling.
+            <p>
+                At its core, a primitive exists to own a specific structural responsibility
+                within a layout.
             </p>
             <Rule>
                 Primitives encode structural intent.
@@ -29,7 +28,7 @@ export default function Section2() {
                 Primitives operate at a different layer of responsibility:
             </p>
             <List>
-                <li>They don't describe what something is (Button, Card, Modal)</li>
+                <li>They don't describe what something is (Button, Card, Modal etc.)</li>
                 <li>They describe how something is arranged in space (Stack, Inline, Block).</li>
             </List>
             <PostNote variant="neutral" className="mt-8">
@@ -60,13 +59,13 @@ export default function Section2() {
             </p>
             <Code
                 title="After"
-                codeString={`<Stack gap="lg">
+                codeString={`<Stack gap="large">
   <Inline align="center" justify="between">
     <h2>Account</h2>
     <button>Edit</button>
   </Inline>
 
-  <Stack gap="sm">
+  <Stack gap="small">
     <p>Manage your subscription.</p>
     <button>View billing history</button>
   </Stack>
