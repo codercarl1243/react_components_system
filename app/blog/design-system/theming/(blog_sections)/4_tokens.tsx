@@ -15,9 +15,7 @@ export default function Section4() {
                 Global tokens
             </AnchorHeading>
             <div className="flow-6">
-                <p style={{
-                    marginBottom: "0"
-                }}>
+                <p>
                     Every robust theming system starts with a stable set of <span className="bold">global tokens</span>. These are the raw values your entire interface relies on: colors, spacing, typography, radii, shadows, and breakpoints.
                 </p>
                 <Rule>

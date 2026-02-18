@@ -11,7 +11,7 @@ export default function Section7() {
             <AnchorHeading as={"h2"} prefix="Step 4 —" id="appearance-heading">
                 Appearance mappings
             </AnchorHeading>
-            <p style={{ marginBottom: "0" }}>
+            <p>
                 With semantic meaning defined, we can now decide how that meaning is expressed visually.
             </p>
             <Rule>

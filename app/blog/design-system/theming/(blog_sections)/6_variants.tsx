@@ -18,9 +18,7 @@ export default function Section6() {
             <p>
                 Variants are the layer where raw tokens are translated into semantic intent.
             </p>
-            <p style={{
-                marginBottom: "0"
-            }}>
+            <p>
                 <InlineCode codeString="primary" lang="css" /> communicates emphasis. <InlineCode codeString="danger" lang="css" /> communicates risk. <InlineCode codeString="success" lang="css" /> communicates confirmation.
             </p>
             <Rule>
