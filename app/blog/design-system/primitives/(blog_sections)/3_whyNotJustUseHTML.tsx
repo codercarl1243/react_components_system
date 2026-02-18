@@ -1,6 +1,8 @@
+import InlineCode from "@/components/code/inlineCode";
 import AnchorHeading from "@/components/heading/anchorHeading";
 import List from "@/components/list";
 import PostSection from "@/components/post/post.section";
+import Rule from "@/components/rule";
 
 export default function Section3() {
     return (
@@ -9,34 +11,35 @@ export default function Section3() {
                 Why Not Just Use HTML?
             </AnchorHeading>
             <p>
-                HTML already gives us structural elements — div, section, article, ul, li.
+                HTML gives us structural elements — <InlineCode codeString="div" />,{" "}
+                <InlineCode codeString="section" />,{" "}
+                <InlineCode codeString="article" />.
             </p>
             <p>
-                So why introduce another abstraction layer?
-            </p> 
+                HTML describes document semantics — not structural roles within a
+                layout system.
+            </p>
+
             <p>
-                Because HTML describes document semantics, not layout systems.
+                Through utility classes, we can apply spacing and structure — but we
+                cannot enforce ownership or guarantee that layout rhythm remains
+                consistent across a system.
+            </p>
+            <Rule>
+                Structural discipline cannot rely on convention alone.
+            </Rule>
+            <p>
+                Primitives solve this by defining explicit structural contracts.
+                <InlineCode codeString="Stack" /> owns vertical rhythm.
+                <InlineCode codeString="Inline" /> owns horizontal alignment.
+                <InlineCode codeString="Block" /> owns containment.
             </p>
             <p>
-                A div does not communicate intent. It does not tell you whether content is composed using a Stack, arranged with an Inline, or contained within a Block. That intent usually lives in class names, utility chains, or scattered CSS rules.
+                If primitives define structural contracts, what are those contracts in practice?
             </p>
             <p>
-                Over time, that creates three problems:
-            </p>
-            <p>
-                Layout decisions become invisible in markup
-            </p>
-            <p>
-                Spacing patterns drift across the codebase
-            </p>
-            <p>
-                Structural behaviour becomes duplicated instead of shared
-            </p>
-            <p>
-                You can build large systems with raw HTML. But without primitives, layout discipline depends entirely on developer restraint.
-            </p>
-            <p>
-                Primitives encode that discipline directly into the component model.
+                Most systems converge around a small, repeatable set of structural roles.
+                These roles form the vocabulary of composition.
             </p>
         </PostSection>
     );
