@@ -54,9 +54,6 @@ export default function PostBanner({ post }: {post: PostType}) {
         {subtitle && (
           <Block 
           as="p" 
-          // variant='neutral'
-          // variantAppearance='filled'
-          // paint={["background", "foreground"]}
           className="italic text-lg post__banner__text-subtitle px-2 mt-auto"
           >
             {subtitle}
