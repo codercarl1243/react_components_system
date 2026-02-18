@@ -12,28 +12,31 @@ export default function Section1() {
             </AnchorHeading>
             <Stack>
                 <p>
-                    As systems scale, styling becomes fragile. Components begin to accidentally depend on inherited typography, ambient color, or environmental spacing. What starts as convenience slowly turns into unpredictability.
+                    Not every component in a design system is meant to be visible.
                 </p>
+
                 <p>
-                    In the previously post in this series we created a system that ensured styling flows through a layered pipeline:
+                    Some components don't render buttons, cards, or forms.
+                    They define structure.
                 </p>
-                <InlineCode
-                    codeString={`tokens → theme → variant → appearance → paint → component`}
-                />
+
                 <p>
-                    But there is an important architectural question:
+                    These are called primitives.
                 </p>
-                <blockquote>
-                    Where does environmental styling stop, and component ownership begin?
-                </blockquote>
+
                 <p>
-                    That transition point is the <InlineCode codeString="<Block />" />
-                    primitive.
+                    A primitive is a minimal structural component that encodes layout intent
+                    without owning visual styling.
                 </p>
-{/* TODO: wrte a TLDR for the primitive block component and how this post is going to explain it */}
+
                 <p>
-                    <strong className="fun-underline">TL;DR</strong> — This is an <em>implementation-focused</em> look at building the foundation of a scalable theming system, with the decisions and trade-offs behind each layer explained —
-                    theming is no longer a convention — it is a set of contracts that your UI can rely on.
+                    Instead of scattering spacing, alignment, and flow decisions across arbitrary HTML,
+                    primitives make layout deliberate and repeatable.
+                </p>
+
+                <p>
+                    <strong className="fun-underline">TL;DR</strong> — Primitives are structural building blocks.
+                    They make layout intent explicit, reduce duplication, and create consistent composition patterns as your UI grows.
                 </p>
             </Stack>
         </PostSection>
