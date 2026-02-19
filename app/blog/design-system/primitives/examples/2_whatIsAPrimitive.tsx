@@ -11,9 +11,9 @@ function Html() {
             variantAppearance="tonal"
             paint="surface"
             className="surface-frame p-4 htmlVsPrimitives__example__box"
-            justify="center">
-            <Heading as="h3">Document Structure</Heading>
-            <p><strong>HTML</strong></p>
+            // justify="center"
+            gap={2}>
+            <Heading as="h3" variant="primary" headingSize={5} className="m-0">Document Structure</Heading>
             <List as="ul" marker="none" spacing="tight">
                 <li>Document hierarchy</li>
                 <li>Content meaning & relationships</li>
@@ -31,9 +31,9 @@ function Primitives() {
             variantAppearance="tonal"
             paint="surface"
             className="surface-frame p-4 htmlVsPrimitives__example__box"
-            justify="center">
-            <Heading as="h3">Layout Responsibility</Heading>
-            <p><strong>Primitives</strong></p>
+            // justify="center"
+            gap={2}>
+            <Heading as="h3" headingSize={5}>Layout Responsibility</Heading>
             <List as="ul" marker="none" spacing="tight">
                 <li>Who <strong>owns</strong> layout decisions</li>
                 <li>Where <strong>boundaries</strong> are enforced</li>
@@ -45,20 +45,22 @@ function Primitives() {
 
 export default function HTMLvsPrimitives() {
     return (
-        <Inline
+        <Stack
             as="figure"
-            wrap
-            justify="center"
-            className="htmlVsPrimitives__example surface-frame p-8 "
-            variant="neutral"
-            variantAppearance="tonal"
-            paint="all"
+             className="htmlVsPrimitives__example"
         >
-            <Html />
-            <Primitives />
-            <figcaption>
+            <Inline
+                wrap
+                justify="even"
+                gap={2}
+                className="htmlVsPrimitives__example__content"
+            >
+                <Html />
+                <Primitives />
+            </Inline>
+            <figcaption className="htmlVsPrimitives__example__caption italic text-sm px-8">
                 HTML defines document semantics. Primitives define layout responsibility.
             </figcaption>
-        </Inline>
+        </Stack>
     )
 }

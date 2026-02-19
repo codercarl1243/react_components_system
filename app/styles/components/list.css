@@ -7,7 +7,7 @@
   line-height: var(--line-height-relaxed);
   font-size: var(--font-size-base, inherit);
 }
-
+.list--none,
 .list--none li {
   padding: 0;
 }

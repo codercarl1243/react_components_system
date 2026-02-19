@@ -1,6 +1,7 @@
 import AnchorHeading from "@/components/heading/anchorHeading";
 import List from "@/components/list";
 import PostSection from "@/components/post/post.section";
+import Rule from "@/components/rule";
 
 export default function Section4() {
     return (
@@ -9,13 +10,16 @@ export default function Section4() {
                 Common Primitives
             </AnchorHeading>
             <p>
-                If primitives define structural contracts, what are those contracts in practice?
+                While implementations vary, most design systems converge around a small set of structural primitives.
             </p>
-
             <p>
-                Most systems converge around a small, repeatable set of structural roles.
-                These roles form the vocabulary of composition.
+                If you think in terms of software architecture, a primitive behaves like a
+                single-responsibility function. It owns one structural concern, exposes a
+                constrained API, and does not leak responsibilities it does not control.
             </p>
+            <Rule>
+                A primitive should do one structural job — and do it predictably.
+            </Rule>
             <List as="ul" marker="none">
                 <li>
                     <strong>Stack</strong>{" "}

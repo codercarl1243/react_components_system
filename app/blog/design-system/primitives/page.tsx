@@ -14,9 +14,9 @@ import Introduction from "./(blog_sections)/1_introduction";
 import WhatIsAPrimitive from "./(blog_sections)/2_whatIsAPrimitive";
 import WhyNotJustHTML from './(blog_sections)/3_whyNotJustUseHTML';
 import CommonPrimitives from './(blog_sections)/4_CommonPrimitives';
-import ProblemsThatPrimtivesSolve from './(blog_sections)/5_problemsThatPrimitivesSolve';
-import WhenNotToUseAPrimitive from './(blog_sections)/6_WhenToNotUseAPrimitive';
-import Summary from './(blog_sections)/7_summary';
+import ProblemsThatPrimtivesSolve from './(blog_sections)/6_problemsThatPrimitivesSolve';
+import WhenNotToUseAPrimitive from './(blog_sections)/7_WhenToNotUseAPrimitive';
+import Summary from './(blog_sections)/8_summary';
 // import Appearance from './(blog_sections)/7_appearance';
 // import Paint from './(blog_sections)/8_paint';
 // import PuttingItAllTogether from './(blog_sections)/9_puttingItAllTogether';
@@ -54,6 +54,7 @@ export default function ThemingPage() {
                 <WhatIsAPrimitive />
                 <WhyNotJustHTML />
                 <CommonPrimitives />
+                {/* <DesigningAPrimitive /> */}
                 <ProblemsThatPrimtivesSolve />
                 <WhenNotToUseAPrimitive />
                 <Summary />

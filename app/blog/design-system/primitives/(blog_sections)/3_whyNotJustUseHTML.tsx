@@ -15,7 +15,7 @@ export default function Section3() {
                 HTML and primitives operate at different layers of the system:
             </p>
             <p>
-                <strong>HTML defines document structure:</strong>
+                <strong>HTML defines document <span className="fun-underline">structure</span>:</strong>
             </p>
 
             <List as="ul" marker="circle">
@@ -25,7 +25,7 @@ export default function Section3() {
             </List>
 
             <p>
-                <strong>Primitives define responsibility:</strong>
+                <strong>Primitives define <span className="fun-underline">responsibility</span>:</strong>
             </p>
 
             <List as="ul" marker="circle">
