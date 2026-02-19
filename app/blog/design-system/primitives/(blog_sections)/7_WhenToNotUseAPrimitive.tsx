@@ -2,7 +2,7 @@ import AnchorHeading from "@/components/heading/anchorHeading";
 import List from "@/components/list";
 import PostSection from "@/components/post/post.section";
 
-export default function Section6() {
+export default function Section7() {
     return (
         <PostSection id="when-not-to-use-a-primitive">
             <AnchorHeading as={"h2"} id="when-not-to-use-a-primitive-heading">

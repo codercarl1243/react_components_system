@@ -9,11 +9,16 @@ export default function Section4() {
                 Common Primitives
             </AnchorHeading>
             <p>
-                While implementations vary, most design systems converge around a small set of structural primitives.
+                If primitives define structural contracts, what are those contracts in practice?
+            </p>
+
+            <p>
+                Most systems converge around a small, repeatable set of structural roles.
+                These roles form the vocabulary of composition.
             </p>
             <List as="ul" marker="none">
                 <li>
-                    Stack
+                    <strong>Stack</strong>{" "}
                     Represents vertical arrangement.
                     <List as="ul" marker="circle">
                         <li>Encodes vertical composition explicitly in JSX</li>
@@ -24,7 +29,7 @@ export default function Section4() {
 
                 </li>
                 <li>
-                    Inline
+                    <strong>Inline</strong>{" "}
                     Represents horizontal arrangement.
                     <List as="ul" marker="circle">
                         <li>Encodes row composition explicitly in JSX</li>
@@ -34,9 +39,9 @@ export default function Section4() {
                     </List>
                 </li>
                 <li>
-                    Block
+                    <strong>Block</strong>{" "}
                     Represents containment.
-                    <List>
+                    <List as="ul" marker="circle">
                         <li>Establishes a structural surface</li>
 
                         <li>Defines width constraints or padding rules</li>

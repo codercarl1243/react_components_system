@@ -3,6 +3,7 @@ import AnchorHeading from "@/components/heading/anchorHeading";
 import List from "@/components/list";
 import PostSection from "@/components/post/post.section";
 import Rule from "@/components/rule";
+import HTMLvsPrimitives from "../examples/2_whatIsAPrimitive";
 
 export default function Section3() {
     return (
@@ -11,35 +12,35 @@ export default function Section3() {
                 Why Not Just Use HTML?
             </AnchorHeading>
             <p>
-                HTML gives us structural elements — <InlineCode codeString="div" />,{" "}
-                <InlineCode codeString="section" />,{" "}
-                <InlineCode codeString="article" />.
+                HTML and primitives operate at different layers of the system:
             </p>
             <p>
-                HTML describes document semantics — not structural roles within a
-                layout system.
+                <strong>HTML defines document structure:</strong>
             </p>
 
+            <List as="ul" marker="circle">
+                <li>Document hierarchy</li>
+                <li>Content meaning and relationships</li>
+                <li>Landmarks</li>
+            </List>
+
             <p>
-                Through utility classes, we can apply spacing and structure — but we
-                cannot enforce ownership or guarantee that layout rhythm remains
-                consistent across a system.
+                <strong>Primitives define responsibility:</strong>
             </p>
+
+            <List as="ul" marker="circle">
+                <li>Who owns layout decisions</li>
+                <li>Where layout boundaries are enforced</li>
+            </List>
+            <p>
+                The distinction becomes clearer when viewed next to each other:
+            </p>
+            <HTMLvsPrimitives />
             <Rule>
                 Structural discipline cannot rely on convention alone.
             </Rule>
             <p>
-                Primitives solve this by defining explicit structural contracts.
-                <InlineCode codeString="Stack" /> owns vertical rhythm.
-                <InlineCode codeString="Inline" /> owns horizontal alignment.
-                <InlineCode codeString="Block" /> owns containment.
-            </p>
-            <p>
-                If primitives define structural contracts, what are those contracts in practice?
-            </p>
-            <p>
-                Most systems converge around a small, repeatable set of structural roles.
-                These roles form the vocabulary of composition.
+                Primitives make structural ownership explicit and enforceable.
             </p>
         </PostSection>
     );

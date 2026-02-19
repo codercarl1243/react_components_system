@@ -4,6 +4,7 @@ import AnchorHeading from "@/components/heading/anchorHeading";
 import List from "@/components/list";
 import PostNote from "@/components/post/post.note";
 import PostSection from "@/components/post/post.section";
+import { Row } from "@/components/primitives";
 import Rule from "@/components/rule";
 
 export default function Section2() {
@@ -19,6 +20,15 @@ export default function Section2() {
             <Rule>
                 Primitives encode structural intent.
             </Rule>
+                            {/* 
+                            <p>
+                    A primitive constrains its API to the decisions it owns.
+                    <InlineCode codeString="<Stack />" /> accepts <InlineCode codeString="gap" /> and <InlineCode codeString="align" /> — not class names decided on a per component basis.
+                    <Row as="em" className="fun-underline py-4">
+                        Constraint writes, signs, and documents the contract.
+                    </Row>
+                </p> 
+                */}
             <p>
                 Instead of scattering spacing, alignment, and containment across arbitrary
                 elements, primitives encode those structural decisions into reusable layout
@@ -33,7 +43,7 @@ export default function Section2() {
             </List>
             <PostNote variant="neutral" className="mt-8">
                 <p>
-                    Primitives are not <span className="italic">“better divs”</span>. If you build them as thin wrappers around HTML with no intent, you've just renamed markup.
+                    Primitives are not <span className="italic">“better divs”</span>. A thin wrapper that accepts arbitrary class name or style props and forwards them to a div has not encoded any intent — it has just renamed markup.
                 </p>
             </PostNote>
             <p>Compare how structural intent is expressed in the following examples:</p>

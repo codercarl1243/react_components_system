@@ -1,0 +1,4 @@
+.htmlVsPrimitives__example__box {
+    flex: 1 1 45%;
+    min-width: 25ch;
+}
