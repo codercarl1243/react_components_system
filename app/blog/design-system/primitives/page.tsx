@@ -13,7 +13,8 @@ import PostSideBar from "@/components/post/sidebar";
 import Introduction from "./(blog_sections)/1_introduction";
 import WhatIsAPrimitive from "./(blog_sections)/2_whatIsAPrimitive";
 import WhyNotJustHTML from './(blog_sections)/3_whyNotJustUseHTML';
-import CommonPrimitives from './(blog_sections)/4_CommonPrimitives';
+import MinimizingSurfaceArea from './(blog_sections)/4_MinimizingSurfaceArea';
+import DesigningAPrimitive from './(blog_sections)/5_designingAPrimitive';
 import ProblemsThatPrimtivesSolve from './(blog_sections)/6_problemsThatPrimitivesSolve';
 import WhenNotToUseAPrimitive from './(blog_sections)/7_WhenToNotUseAPrimitive';
 import Summary from './(blog_sections)/8_summary';
@@ -27,7 +28,7 @@ const TABLE_OF_CONTENTS = [
     { id: 'introduction', href: '#introduction', label: "Introduction" },
     { id: 'what-is-a-primitive', href: '#what-is-a-primitive', label: "What is a Primitive?" },
     { id: 'why-not-just-use-html', href: '#why-not-just-use-html', label: 'Why not just use HTML?' },
-    { id: 'common-primitives', href: '#common-primitives', label: 'Common Primitives' },
+    { id: 'minimizing-surface-area', href: '#minimizing-surface-area', label: 'Minimizing surface area' },
     { id: 'problems-that-primitives-solve', href: '#problems-that-primitives-solve', label: 'Problems that Primitives solve' },
     { id: 'when-not-to-use-a-primitive', href: '#when-not-to-use-a-primitive', label: ' When to not use a Primitive' },
     { id: 'summary', href: '#summary', label: "Summary" },
@@ -53,8 +54,8 @@ export default function ThemingPage() {
                 <Introduction />
                 <WhatIsAPrimitive />
                 <WhyNotJustHTML />
-                <CommonPrimitives />
-                {/* <DesigningAPrimitive /> */}
+                <MinimizingSurfaceArea />
+                <DesigningAPrimitive />
                 <ProblemsThatPrimtivesSolve />
                 <WhenNotToUseAPrimitive />
                 <Summary />

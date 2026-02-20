@@ -35,9 +35,9 @@ function Primitives() {
             gap={2}>
             <Heading as="h3" headingSize={5}>Layout Responsibility</Heading>
             <List as="ul" marker="none" spacing="tight">
-                <li>Who <strong>owns</strong> layout decisions</li>
-                <li>Where <strong>boundaries</strong> are enforced</li>
-                <li>How <strong>structure</strong> is composed</li>
+                <li>Who owns layout decisions</li>
+                <li>Where layout boundaries are enforced</li>
+                <li>How structure is composed</li>
             </List>
         </Stack>
     )
@@ -47,7 +47,7 @@ export default function HTMLvsPrimitives() {
     return (
         <Stack
             as="figure"
-             className="htmlVsPrimitives__example"
+            className="htmlVsPrimitives__example"
         >
             <Inline
                 wrap

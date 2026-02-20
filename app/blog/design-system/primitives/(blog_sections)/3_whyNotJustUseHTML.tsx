@@ -37,7 +37,7 @@ export default function Section3() {
             </p>
             <HTMLvsPrimitives />
             <Rule>
-                Structural discipline cannot rely on convention alone.
+                Every layout decision must have a clear owner.
             </Rule>
             <p>
                 Primitives make structural ownership explicit and enforceable.
