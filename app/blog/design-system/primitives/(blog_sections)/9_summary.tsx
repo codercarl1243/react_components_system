@@ -1,7 +1,7 @@
 import AnchorHeading from "@/components/heading/anchorHeading";
 import PostSection from "@/components/post/post.section";
 
-export default function Section8() {
+export default function Section9() {
     return (
         <PostSection id="summary">
             <AnchorHeading as={"h2"} id="summary-heading">

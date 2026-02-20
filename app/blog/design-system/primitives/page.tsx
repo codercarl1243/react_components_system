@@ -15,9 +15,10 @@ import WhatIsAPrimitive from "./(blog_sections)/2_whatIsAPrimitive";
 import WhyNotJustHTML from './(blog_sections)/3_whyNotJustUseHTML';
 import MinimizingSurfaceArea from './(blog_sections)/4_MinimizingSurfaceArea';
 import DesigningAPrimitive from './(blog_sections)/5_designingAPrimitive';
-import ProblemsThatPrimtivesSolve from './(blog_sections)/6_problemsThatPrimitivesSolve';
-import WhenNotToUseAPrimitive from './(blog_sections)/7_WhenToNotUseAPrimitive';
-import Summary from './(blog_sections)/8_summary';
+import Composing from './(blog_sections)/6_composing';
+import ProblemsThatPrimtivesSolve from './(blog_sections)/7_problemsThatPrimitivesSolve';
+import WhenNotToUseAPrimitive from './(blog_sections)/8_WhenToNotUseAPrimitive';
+import Summary from './(blog_sections)/9_summary';
 // import Appearance from './(blog_sections)/7_appearance';
 // import Paint from './(blog_sections)/8_paint';
 // import PuttingItAllTogether from './(blog_sections)/9_puttingItAllTogether';
@@ -29,6 +30,8 @@ const TABLE_OF_CONTENTS = [
     { id: 'what-is-a-primitive', href: '#what-is-a-primitive', label: "What is a Primitive?" },
     { id: 'why-not-just-use-html', href: '#why-not-just-use-html', label: 'Why not just use HTML?' },
     { id: 'minimizing-surface-area', href: '#minimizing-surface-area', label: 'Minimizing surface area' },
+    { id: 'designing-a-primitive', href: '#designing-a-primitive', label: 'Designing a Primitive' },
+    { id: 'composing', href: '#composing', label: 'Composing' },
     { id: 'problems-that-primitives-solve', href: '#problems-that-primitives-solve', label: 'Problems that Primitives solve' },
     { id: 'when-not-to-use-a-primitive', href: '#when-not-to-use-a-primitive', label: ' When to not use a Primitive' },
     { id: 'summary', href: '#summary', label: "Summary" },
@@ -56,6 +59,7 @@ export default function ThemingPage() {
                 <WhyNotJustHTML />
                 <MinimizingSurfaceArea />
                 <DesigningAPrimitive />
+                <Composing />
                 <ProblemsThatPrimtivesSolve />
                 <WhenNotToUseAPrimitive />
                 <Summary />
