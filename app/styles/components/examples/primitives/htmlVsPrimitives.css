@@ -1,0 +1,12 @@
+.htmlVsPrimitives__example {
+    width: 100%;
+    margin-inline: auto;
+}
+.htmlVsPrimitives__example__content {
+    width: 100%;
+}
+.htmlVsPrimitives__example__box {
+    flex: 1 1 28ch;
+    min-width: 25ch;
+    max-width: 30ch;
+}

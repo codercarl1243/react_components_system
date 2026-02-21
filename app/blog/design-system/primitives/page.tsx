@@ -11,29 +11,33 @@ import PostSideBar from "@/components/post/sidebar";
 
 /** Sections */
 import Introduction from "./(blog_sections)/1_introduction";
-import WhatWeAreBuilding from "./(blog_sections)/2_whatWeAreBuilding";
-import Why from './(blog_sections)/3_why';
-// import Tokens from './(blog_sections)/4_tokens';
-// import Structure from './(blog_sections)/5_structure';
-// import Variants from './(blog_sections)/6_variants';
+import WhatIsAPrimitive from "./(blog_sections)/2_whatIsAPrimitive";
+import WhyNotJustHTML from './(blog_sections)/3_whyNotJustUseHTML';
+import MinimizingSurfaceArea from './(blog_sections)/4_MinimizingSurfaceArea';
+import DesigningAPrimitive from './(blog_sections)/5_designingAPrimitive';
+import Composing from './(blog_sections)/6_composing';
+import ProblemsThatPrimtivesSolve from './(blog_sections)/7_problemsThatPrimitivesSolve';
+import WhenNotToUseAPrimitive from './(blog_sections)/8_WhenToNotUseAPrimitive';
+import Summary from './(blog_sections)/9_summary';
 // import Appearance from './(blog_sections)/7_appearance';
 // import Paint from './(blog_sections)/8_paint';
 // import PuttingItAllTogether from './(blog_sections)/9_puttingItAllTogether';
-// import Summary from './(blog_sections)/10_summary';
 // import Resources from './(blog_sections)/resources';
 
 
 const TABLE_OF_CONTENTS = [
     { id: 'introduction', href: '#introduction', label: "Introduction" },
-    { id: 'what-we-are-building', href: '#what-we-are-building', label: "What we're building" },
-    { id: 'why', href: '#why', label: 'Why this approach' },
-    // { id: 'global-tokens', href: '#global-tokens', label: 'Global Tokens' },
-    // { id: 'structural-boundaries', href: '#structural-boundaries', label: 'Structural boundaries' },
-    // { id: 'variants', href: '#variants', label: 'Variants' },
+    { id: 'what-is-a-primitive', href: '#what-is-a-primitive', label: "What is a Primitive?" },
+    { id: 'why-not-just-use-html', href: '#why-not-just-use-html', label: 'Why not just use HTML?' },
+    { id: 'minimizing-surface-area', href: '#minimizing-surface-area', label: 'Minimizing surface area' },
+    { id: 'designing-a-primitive', href: '#designing-a-primitive', label: 'Designing a Primitive' },
+    { id: 'composing', href: '#composing', label: 'Composing' },
+    { id: 'problems-that-primitives-solve', href: '#problems-that-primitives-solve', label: 'Problems that Primitives solve' },
+    { id: 'when-not-to-use-a-primitive', href: '#when-not-to-use-a-primitive', label: ' When to not use a Primitive' },
+    { id: 'summary', href: '#summary', label: "Summary" },
     // { id: 'appearance', href: '#appearance', label: 'Appearance mapping' },
     // { id: 'paint', href: '#paint', label: 'Paint — explicit styling' },
     // { id: 'putting-it-all-together', href: '#putting-it-all-together', label: 'Putting it all together' },
-    // { id: 'summary', href: '#summary', label: "Summary" },
     // { id: 'resources', href: '#resources', label: "Code & Resources" }
 ] as const;
 
@@ -51,8 +55,14 @@ export default function ThemingPage() {
                     post={post}
                 />
                 <Introduction />
-                <WhatWeAreBuilding />
-                <Why />
+                <WhatIsAPrimitive />
+                <WhyNotJustHTML />
+                <MinimizingSurfaceArea />
+                <DesigningAPrimitive />
+                <Composing />
+                <ProblemsThatPrimtivesSolve />
+                <WhenNotToUseAPrimitive />
+                <Summary />
                 {/* 
                 <Tokens />
                 <Structure />
@@ -60,7 +70,6 @@ export default function ThemingPage() {
                 <Appearance />
                 <Paint />
                 <PuttingItAllTogether />
-                <Summary />
                 <Resources /> */}
             </Post>
             <PostSideBar

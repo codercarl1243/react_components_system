@@ -15,10 +15,9 @@ export default function Section8() {
                 <strong> when do tokens become actual styles?</strong>
             </p>
 
-            <p style={{ marginBottom: "0" }}>
+            <p>
                 In this system, styling is never implicit. Tokens exist — inert — until explicitly applied.
             </p>
-
             <Rule>
                 Paint defines the styling boundary. Tokens become CSS properties only here.
             </Rule>

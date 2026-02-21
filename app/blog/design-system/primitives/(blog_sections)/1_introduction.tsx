@@ -1,7 +1,12 @@
 import InlineCode from "@/components/code/inlineCode";
+import FunHighlight from "@/components/decorations/FunHighlight";
 import AnchorHeading from "@/components/heading/anchorHeading";
+import Icon from "@/components/icon";
+import BlogLink from "@/components/post/post.blogLink";
+import PostNote from "@/components/post/post.note";
 import PostSection from "@/components/post/post.section";
-import { Stack } from "@/components/primitives";
+import { Row } from "@/components/primitives";
+import { RiArrowLeftRightLine, RiArrowUpDownLine, RiCheckboxBlankLine } from "@remixicon/react";
 
 export default function Section1() {
 
@@ -10,32 +15,46 @@ export default function Section1() {
             <AnchorHeading as="h2" id="introduction-heading">
                 Introduction
             </AnchorHeading>
-            <Stack>
+
+            <p>
+                Not every component in a design system is meant to be visible.
+            </p>
+
+            <p>
+                Some components don't render buttons, cards, or forms. They define structure.
+            </p>
+
+            <p>
+                These are called <FunHighlight>primitives</FunHighlight>.
+            </p>
+
+            <p>
+                A primitive is a minimal component that represents a single structural
+                role — like vertical arrangement <Icon variant="primary" icon={RiArrowUpDownLine} />, horizontal alignment <Icon variant="primary" icon={RiArrowLeftRightLine} />, or containment <Icon variant="primary" icon={RiCheckboxBlankLine} /> —
+                without taking ownership of visual styling.
+            </p>
+            <PostNote variant="info" showIcon={false} className="mt-8" paint="border">
+                 <Row as="strong" className="callout__heading font-accent">
+                    Series Context
+                </Row>
                 <p>
-                    As systems scale, styling becomes fragile. Components begin to accidentally depend on inherited typography, ambient color, or environmental spacing. What starts as convenience slowly turns into unpredictability.
+                    This article is part of a broader design system series. While it builds
+                    on ideas introduced in <BlogLink postId="design__theming_01">Theming Foundations</BlogLink>, it stands on its own.
                 </p>
-                <p>
-                    In the previously post in this series we created a system that ensured styling flows through a layered pipeline:
-                </p>
-                <InlineCode
-                    codeString={`tokens → theme → variant → appearance → paint → component`}
-                />
-                <p>
-                    But there is an important architectural question:
-                </p>
-                <blockquote>
-                    Where does environmental styling stop, and component ownership begin?
-                </blockquote>
-                <p>
-                    That transition point is the <InlineCode codeString="<Block />" />
-                    primitive.
-                </p>
-{/* TODO: wrte a TLDR for the primitive block component and how this post is going to explain it */}
-                <p>
-                    <strong className="fun-underline">TL;DR</strong> — This is an <em>implementation-focused</em> look at building the foundation of a scalable theming system, with the decisions and trade-offs behind each layer explained —
-                    theming is no longer a convention — it is a set of contracts that your UI can rely on.
-                </p>
-            </Stack>
+            </PostNote>
+            <p>
+                In this post, we'll define the core structural primitives (
+                {" "}<InlineCode codeString="<Stack />" />,{" "}
+                <InlineCode codeString="<Inline />" />, and{" "}
+                <InlineCode codeString="<Block />" />), and implement minimal versions of
+                them. These components expose controlled structural properties like spacing,
+                alignment, and containment.
+            </p>
+
+            <p>
+                In the next post, we'll connect these primitives to the theming system —
+                showing how structural contracts become enforceable styling boundaries.
+            </p>
         </PostSection>
     )
 }

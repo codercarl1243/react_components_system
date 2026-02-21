@@ -10,16 +10,20 @@ export default function AboutPage() {
         <div className="layout-wrapper flow-8 about-page">
             <Stack
                 as="section"
-                >
+            >
                 <Heading as="h1" headingSize={2}>About Me</Heading>
                 <div className="about-page__intro pb-8">
-                    <Image alt="" src="/images/carl_portrait.webp" height={250} width={200} variant="card" className="about-page__intro--portrait"/>
+                    <Image alt="" src="/images/carl_portrait.webp" height={250} width={200} variant="card" className="about-page__intro--portrait" />
                     <Stack className="about-page__intro--text" gap={8}>
                         <p>
-                            I am a Full stack developer with a strong focus on <span className="fun-underline">front-end architecture</span>, <span className="fun-underline">accessibility</span>, and just <span className="fun-underline">building enjoyable user experiences</span>.
+                            I'm a frontend-focused engineer with production experience in complex systems,
+                            specialising in <span className="fun-underline">system-driven UI architecture</span>,
+                            <span className="fun-underline">accessibility</span>, and building
+                            <span className="fun-underline">thoughtful user experiences</span>.
                         </p>
                         <p>
-                            I specialise in building systems that are easier to understand, maintain, and remain reliable over time. This often means defining clear boundaries and improving how UI and logic evolve together.
+                            Alongside building systems, I write about them — breaking down patterns,
+                            trade-offs, and implementation details so others can apply them in practice.
                         </p>
                     </Stack>
                 </div>
@@ -32,16 +36,13 @@ export default function AboutPage() {
                 className="surface-frame p-8 pb-16"
             >
                 <Heading as="h2" headingSize={4} variant="primary" className="mt-0">Professional focus</Heading>
-
                 <p>
-                    I work across both frontend and backend, contributing to features end-to-end
-                    — from user interface and accessibility through to APIs and data.
+                    I design and build frontend systems that are accessible, composable, and easy to reason about — while supporting them with well-structured APIs and data models.
                 </p>
-
                 <List as="ul" marker="circle">
-                    <li>Frontend: React, HTML, CSS/SCSS</li>
-                    <li>Backend: Node.js, AWS Lambda, DynamoDB, MySQL</li>
-                    <li>Quality & delivery: accessibility, testing, and maintainable systems</li>
+                    <li>Frontend: React, TypeScript, design systems, and accessible component architecture</li>
+                    <li>Supporting backend: Node.js (TypeScript), API design, and data modeling</li>
+                    <li>Approach: clear boundaries, strong typing, and maintainable abstractions</li>
                 </List>
             </Stack>
 
@@ -64,8 +65,8 @@ export default function AboutPage() {
                 <List as="ul" marker="circle">
                     <li>Accessibility best practices (WCAG, ARIA, and internal yelling at bad contrast ratios)</li>
                     <li>Design systems and component architecture</li>
-                    <li>React, Remix, Prisma</li>
-                    <li>Sourdough (because not everything has to be digital)</li>
+                    <li>Exploring React, Remix, and Prisma</li>
+                    <li>Sourdough (because not everything compiles the same way)</li>
                 </List>
             </Stack>
 
@@ -81,12 +82,12 @@ export default function AboutPage() {
                 </Heading>
 
                 <List as="ul" marker="circle">
-                    <li>Languages: JavaScript, TypeScript, HTML, CSS, SCSS</li>
-                    <li>Databases: MySQL, PostgreSQL, MongoDB, Prisma</li>
-                    <li>Frameworks: React, Node, Remix</li>
-                    <li>Content platforms: WordPress, Sanity.io, Google Sites</li>
-                    <li>Tools: Git, Linux, Figma, AWS, accessibility testing tools</li>
+                    <li>Languages: TypeScript, JavaScript, HTML, CSS/SCSS</li>
+                    <li>Frontend: React, design systems, component libraries</li>
+                    <li>Backend: Node.js, API design</li>
+                    <li>Data: MySQL, PostgreSQL, MongoDB, Prisma</li>
                     <li>Testing: Jest, Cypress, Storybook</li>
+                    <li>Tools: Git, Linux, Figma, accessibility testing tools</li>
                 </List>
             </Stack>
         </div>

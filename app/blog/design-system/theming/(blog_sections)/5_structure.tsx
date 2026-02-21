@@ -11,9 +11,7 @@ export default function Section5() {
             <AnchorHeading as={"h2"} prefix="Step 2 —" id="structural-boundaries-heading">
                 Establish structural boundaries
             </AnchorHeading>
-            <p style={{
-                marginBottom: "0"
-            }}>
+            <p>
                 This step intentionally pauses on structure to clarify system expectations and make architectural boundaries explicit — not to introduce variants or visual styles.
             </p>
             <Rule>

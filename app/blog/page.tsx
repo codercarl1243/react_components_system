@@ -55,13 +55,13 @@ export default function BlogPage() {
       <PostSection>
         <Heading as="h2">Choose your adventure</Heading>
         <List as="ul" marker='none' spacing='loose'>
-          <li><BlogLink id="design__theming_01">Theming & Extensible Design Systems</BlogLink></li>
-          <li><BlogLink id="design__primitives_01">Primitives & Styling Boundaries</BlogLink></li>
+          <li><BlogLink postId="design__theming_01">Theming & Extensible Design Systems</BlogLink></li>
+          <li><BlogLink postId="design__primitives_01">Primitives & Styling Boundaries</BlogLink></li>
           <li>Essential Components for everyday sites:
             <List as="ul" marker='circle' spacing='loose'>
-              <li><BlogLink id="">Button</BlogLink></li>
-              <li><BlogLink id="">Link</BlogLink></li>
-              <li><BlogLink id="">Image</BlogLink></li>
+              <li><BlogLink postId="">Button</BlogLink></li>
+              <li><BlogLink postId="">Link</BlogLink></li>
+              <li><BlogLink postId="">Image</BlogLink></li>
             </List>
           </li>
         </List>

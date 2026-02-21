@@ -60,6 +60,7 @@ export type BlockWrapperProps<
 export type InlineProps<T extends ElementType = "div"> = BlockWrapperProps<T, {
     gap?: Gap
     align?: "start" | "center" | "end" | "stretch" | "baseline";
+    justify?: "start" | "center" | "end" | "stretch" | "even" | "between" | "initial";
     wrap?: boolean; // true = wrap (default), false = nowrap
 }>
 

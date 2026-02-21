@@ -12,6 +12,7 @@ import Block from "./Block";
 export default function Inline<T extends ElementType = "div">({
     gap = 4,
     align = "baseline",
+    justify = "initial",
     wrap = true,
     className,
     ...blockProps
@@ -22,6 +23,7 @@ export default function Inline<T extends ElementType = "div">({
         wrap ? "inline-wrap" : "inline-nowrap",
         `gap-${gap}`,
         `inline-align-${align}`,
+        `inline-justify-${justify}`,
         className
     )
 
