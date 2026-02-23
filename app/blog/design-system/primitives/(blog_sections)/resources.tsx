@@ -38,9 +38,11 @@ type PrimitiveProps<T extends ElementType = "div"> = {
     as?: T;
 } & Omit<ComponentProps<T>, "as">;
  
+// Block defines the containment surface.
 type BlockProps<T extends ElementType = "div"> =
     PrimitiveProps<T>;
   
+// All higher-order Primitives compose from Block.
 type StackProps<T extends ElementType = "div"> =
 BlockProps<T> & {
     gap?: Gap;
