@@ -1,14 +1,14 @@
 'use client'
-import SkipLink from '@/components/skiplink'
 import clsx from 'clsx'
 import { type ComponentProps } from 'react'
-import Link from '@/components/link'
 import { usePathname } from 'next/navigation'
-import { RiBookReadFill, RiHomeHeartLine, RiMenuLine, RiMoonClearFill, RiSunLine, RiUser3Fill } from '@remixicon/react'
+import Switch from '@/components/button/switch'
+import SkipLink from '@/components/skiplink'
+import Link from '@/components/link'
 import { Hamburger } from '@/components/hamburger'
-import Switch from '../button/switch'
+import Icon from '@/components/icon'
 import { useTheme } from '@/lib/hooks/useTheme'
-import Icon from '../icon'
+import { RiBookReadFill, RiHomeHeartLine, RiMenuLine, RiMoonClearFill, RiSunLine, RiUser3Fill } from '@remixicon/react'
 
 export default function Header({ className, userTheme, ...props }: ComponentProps<'header'> & { userTheme: string }) {
   const pathname = usePathname()
