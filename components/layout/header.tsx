@@ -57,7 +57,7 @@ export default function Header({ className, userTheme, ...props }: ComponentProp
           onClick={toggleTheme}
           aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
           className='block darkmode__switch px-8 py-4 surface-frame'
-          variant={ "light"}
+          variant={"light"}
           variantAppearance='filled'
           paint="all"
         >{
