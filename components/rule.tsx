@@ -1,12 +1,10 @@
 import { ReactNode } from "react";
-import { Row } from "./primitives";
-
 
 export default function Rule({ children }: { children: ReactNode }) {
 
     return (
         <aside className="rule">
-            <Row as="strong" className="callout__heading font-accent">System rule</Row>
+            <strong className="callout__heading font-accent">System rule</strong>
             <p className="rule__content">
                 {children}
             </p>
