@@ -2,6 +2,8 @@
   display: grid;
   grid-auto-rows: auto;
   grid-template-columns: minmax(0, 1fr);
+  align-items: var(--stack-alignment, "baseline");
+  justify-items: var(--stack-justify, "initial");
   min-width: 0;
 }
 
@@ -10,37 +12,37 @@
 }
 
 .stack-align-start {
-  align-items: start;
+  --stack-alignment: start;
 }
 
 .stack-align-center {
-  align-items: center;
+  --stack-alignment: center;
 }
 
 .stack-align-end {
-  align-items: end;
+  --stack-alignment: end;
 }
 
 .stack-align-stretch {
-  align-items: stretch;
+  --stack-alignment: stretch;
 }
 
 .stack-align-baseline {
-  align-items: baseline;
+  --stack-alignment: baseline;
 }
 
 .stack-justify-start {
-  justify-items: start;
+  --stack-justify: start;
 }
 
 .stack-justify-center {
-  justify-items: center;
+  --stack-justify: center;
 }
 
 .stack-justify-end {
-  justify-items: end;
+  --stack-justify: end;
 }
 
 .stack-justify-stretch {
-  justify-items: stretch;
+  --stack-justify: stretch;
 }
