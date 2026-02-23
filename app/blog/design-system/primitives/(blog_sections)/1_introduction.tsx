@@ -33,8 +33,8 @@ export default function Section1() {
                 role — like vertical arrangement <Icon variant="primary" icon={RiArrowUpDownLine} />, horizontal alignment <Icon variant="primary" icon={RiArrowLeftRightLine} />, or containment <Icon variant="primary" icon={RiCheckboxBlankLine} /> —
                 without taking ownership of visual styling.
             </p>
-            <PostNote variant="info" showIcon={false} className="mt-8" paint="border">
-                 <Row as="strong" className="callout__heading font-accent">
+            <PostNote variant="info" showIcon={false} className="mt-8 mb-16" paint="border">
+                <Row as="strong" className="callout__heading font-accent">
                     Series Context
                 </Row>
                 <p>
@@ -46,11 +46,11 @@ export default function Section1() {
                 In this post, we'll define the core structural primitives (
                 {" "}<InlineCode codeString="<Stack />" />,{" "}
                 <InlineCode codeString="<Inline />" />, and{" "}
-                <InlineCode codeString="<Block />" />), and implement minimal versions of
+                <InlineCode codeString="<Block />" />{" "}), and implement minimal versions of
                 them. These components expose controlled structural properties like spacing,
                 alignment, and containment.
             </p>
-
+            {/*  TODO: add a link to the next post when the post exists */}
             <p>
                 In the next post, we'll connect these primitives to the theming system —
                 showing how structural contracts become enforceable styling boundaries.

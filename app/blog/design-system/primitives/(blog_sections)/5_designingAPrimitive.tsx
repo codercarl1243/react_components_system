@@ -39,7 +39,9 @@ export function Block<T extends ElementType = "div">({
   as,
   ...rest
 }: BlockProps<T>) {
+
   const Component = as || "div";
+
   return <Component {...rest} />;
 }`}
             />

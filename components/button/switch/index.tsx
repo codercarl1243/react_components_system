@@ -1,8 +1,7 @@
 import clsx from "clsx";
 import { TSwitchProps } from "./type";
-import Icon from "@/components/icon";
 
-export default function Switch({ checked, icon, className, ...props }: TSwitchProps) {
+export default function Switch({ checked, variant = "inverse", variantAppearance = "filled", paint = "all", children, className, ...props }: TSwitchProps) {
 
     return (
         <button
@@ -10,8 +9,11 @@ export default function Switch({ checked, icon, className, ...props }: TSwitchPr
             type="button"
             aria-checked={checked}
             role="switch"
+            data-variant={variant}
+            data-appearance={variantAppearance}
+            data-paint={paint}
             className={clsx(className, 'switch')}>
-            {icon ? <Icon icon={icon} /> : null}
+            {children}
         </button>
     )
 }
