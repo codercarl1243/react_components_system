@@ -15,7 +15,8 @@
 }
      .darkmode__switch {
         cursor: pointer;
-        &:hover ,:focus-visible {
+        &:hover ,
+        &:focus-visible {
             outline: 1px solid var(--foreground-on-surface);
             outline-offset: 4px;
         }
