@@ -123,7 +123,7 @@ BlockProps<T> & {
             </p>
 
             <p>
-                <strong>Row</strong> owns horizontal layout surfaces. It Declares a horizontal layout surface for toolbars, headers, and side-by-side panels.
+                <strong>Row</strong> owns horizontal layout surfaces. It declares a horizontal layout surface for toolbars, headers, and side-by-side panels.
             </p>
 
             <p>
