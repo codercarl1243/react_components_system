@@ -1,7 +1,10 @@
 import Code from "@/components/code";
+import InlineCode from "@/components/code/inlineCode";
+import Heading from "@/components/heading";
 import AnchorHeading from "@/components/heading/anchorHeading";
 import List from "@/components/list";
 import PostSection from "@/components/post/post.section";
+import Rule from "@/components/rule";
 import TabList from "@/components/tablist";
 
 export default function Section6() {
@@ -10,55 +13,130 @@ export default function Section6() {
             <AnchorHeading as={"h2"} id="composing-heading">
                 Composing
             </AnchorHeading>
+
+            <p>
+                As <InlineCode codeString="<Block />" /> provides containment, we can layer
+                focused structural responsibilities on top of it.
+            </p>
+
+            <p>
+                A common structural role in a layout system is vertical
+                composition — placing elements in a predictable vertical rhythm.
+                That responsibility belongs to <InlineCode codeString="<Stack />" />.
+            </p>
+            <p>
+                Stack extends <InlineCode codeString="BlockProps" />, adding only the props it owns.
+            </p>
+            <Code
+                codeString={`type StackProps<T extends ElementType = "div"> =
+BlockProps<T> & {
+    gap?: number;
+    align?: "start" | "center" | "end" | "stretch" | "baseline";
+};`} />
+
+
             <TabList
                 tabListName="composing_code_reference"
                 className="code__reference height-min"
-                variant="neutral"
+                variant="accent"
                 orientation="horizontal"
                 tabs={[
                     {
-                        id: "composing-inline-tsx",
-                        panelContent: (
-                        <Code
-                            codeString={`export default function Inline<T extends ElementType = "div">({
-    gap = 4,
-    align = "baseline",
-    justify = "initial",
-    wrap = true,
-    className,
-    ...blockProps
-}: InlineProps<T>) {
-
-    const classes = clsx(
-        "inline-flow",
-        wrap ? "inline-wrap" : "inline-nowrap",
-        \`gap-\${gap}\`,
-        \`inline-align-\${align}\`,
-        \`inline-justify-\${justify}\`,
-        className
-    )
-
-    return <Block
-        className={classes}
-        {...(blockProps as BlockProps<T>)}
-    />
-}`}
-                        />),
-                        tabLabel: "inline.jsx"
-                    },
-                    {
-                        id: "composing-inline-styles",
+                        id: "composing-stack-tsx",
                         panelContent: (
                             <Code
-                                codeString={`
-                
-`}
+                                codeString={`function Stack<T extends ElementType = "div">({
+    gap = 4,
+    align = "baseline",
+    className,
+    ...blockProps
+}: StackProps<T>) {
+
+    const classes = clsx(
+                'stack',
+                \`gap-row-\${gap}\`, 
+                \`stack-align-\${align}\`,
+                className);
+
+    return (
+        <Block
+            className={classes}
+            {...blockProps as BlockProps<T>}
+        />
+    )
+}`}
+                            />),
+                        tabLabel: "stack.tsx"
+                    },
+                    {
+                        id: "composing-stack-styles",
+                        panelContent: (
+                            <Code
+                                lang="css"
+                                codeString={`.stack {
+  display: grid;
+  grid-auto-rows: auto;
+  grid-template-columns: minmax(0, 1fr);
+  align-items: var(--stack-alignment);
+  min-width: 0;
+}
+
+.stack > * {
+  grid-column: 1;
+}
+
+.stack-align-start { --stack-alignment: start; }
+.stack-align-center { --stack-alignment: center; }
+.stack-align-end { --stack-alignment: end; }
+.stack-align-stretch { --stack-alignment: stretch; }
+.stack-align-baseline { --stack-alignment: baseline; }`}
                             />
                         ),
-                        tabLabel: "inline.css"
+                        tabLabel: "stack.css"
                     }
                 ]}
             />
+
+            <p>
+                The implementation is intentionally small.{" "}
+                <InlineCode codeString="Stack" /> does not redefine containment.
+                It does not introduce horizontal behavior.
+                It adds vertical composition — and nothing more.
+            </p>
+
+            <Rule>
+                Composition adds responsibility — it does not redefine foundations.
+            </Rule>
+
+            <p>
+                This layering keeps structural concerns isolated. Containment lives in{" "}
+                <InlineCode codeString="Block" />. Vertical rhythm lives in{" "}
+                <InlineCode codeString="Stack" />.
+            </p>
+
+            <Heading as="h3" headingSize={4}>
+                Additional Structural Roles
+            </Heading>
+
+            <p>
+                Other primitives follow the same pattern.
+            </p>
+
+            <p>
+                <strong>Row</strong> owns horizontal layout surfaces. It Declares a horizontal layout surface for toolbars, headers, and side-by-side panels.
+            </p>
+
+            <p>
+                <strong>Inline</strong> participates in content flow. It behaves as an
+                inline-level flex container, ideal for icon-text pairs, tags, and
+                metadata clusters.
+            </p>
+
+            <p>
+                Each primitive owns a distinct structural responsibility. None duplicate
+                containment. None collapse into a generic utility surface.
+            </p>
+
         </PostSection>
     );
 }
