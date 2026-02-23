@@ -8,15 +8,28 @@
 .header--wrapper {
     display: flex;
     min-height: 5rem;
-    width: clamp(var(--bp-xs), 100%, var(--bp-characters));
+    width: clamp(var(--bp-xs), 100%, 100ch);
     margin-inline: auto;
     align-items: center;
     position: relative;
 }
-
+     .darkmode__switch {
+        cursor: pointer;
+        &:hover ,:focus-visible {
+            outline: 1px solid var(--foreground-on-surface);
+            outline-offset: 4px;
+        }
+        &:active {
+            outline-style: dashed;
+        }
+    }
 @media screen and (max-width: 35rem) {
     .nav__primary a:first-child {
         padding-block-start: var(--spacing-xxl);
+    }
+     .darkmode__switch {
+        margin-block-start: auto;
+        margin-block-end: var(--spacing-md);
     }
 }
 
@@ -31,5 +44,14 @@
         padding-block: var(--spacing-sm);
         margin-right: auto;
         flex-direction: row;
+        width: 100%;
+    }
+
+}
+
+@media screen and (min-width: 48.01rem) {
+    
+    .darkmode__switch {
+        margin-inline-start: auto;
     }
 }

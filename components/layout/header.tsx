@@ -4,10 +4,11 @@ import clsx from 'clsx'
 import { type ComponentProps } from 'react'
 import Link from '@/components/link'
 import { usePathname } from 'next/navigation'
-import { RiBookReadFill, RiHomeHeartLine, RiMenuLine, RiUser3Fill } from '@remixicon/react'
+import { RiBookReadFill, RiHomeHeartLine, RiMenuLine, RiMoonClearFill, RiSunLine, RiUser3Fill } from '@remixicon/react'
 import { Hamburger } from '@/components/hamburger'
 import Switch from '../button/switch'
 import { useTheme } from '@/lib/hooks/useTheme'
+import Icon from '../icon'
 
 export default function Header({ className, userTheme, ...props }: ComponentProps<'header'> & { userTheme: string }) {
   const pathname = usePathname()
@@ -54,8 +55,17 @@ export default function Header({ className, userTheme, ...props }: ComponentProp
         <Switch
           checked={theme === "dark"}
           onClick={toggleTheme}
-          aria-label="Toggle dark mode"
-        />
+          aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
+          className='block darkmode__switch px-8 py-4 surface-frame'
+          variant={ "light"}
+          variantAppearance='filled'
+          paint="all"
+        >{
+            theme === "dark" ?
+              <Icon icon={RiSunLine} variant='warning' />
+              : <Icon icon={RiMoonClearFill} variant='light' />
+          }
+        </Switch>
       </Hamburger.Menu>
     </Hamburger.Wrapper>
   )
