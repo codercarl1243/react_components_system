@@ -81,10 +81,6 @@ BlockProps<T> & {
   min-width: 0;
 }
 
-.stack > * {
-  grid-column: 1;
-}
-
 .stack-align-start { --stack-alignment: start; }
 .stack-align-center { --stack-alignment: center; }
 .stack-align-end { --stack-alignment: end; }
@@ -139,14 +135,11 @@ BlockProps<T> & {
                 inline-level flex container, ideal for icon-text pairs, tags, and
                 metadata clusters.
             </p>
-
+            <PrimitiveOwnershipDiagram />
             <p>
                 Each primitive owns a distinct structural responsibility. None duplicate
                 containment. None collapse into a generic utility surface.
             </p>
-
-            <PrimitiveOwnershipDiagram />
-
         </PostSection>
     );
 }
