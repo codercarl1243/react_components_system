@@ -3,11 +3,6 @@
   flex-direction: row;
 }
 
-.row > * {
-  flex: 0 1 auto;
-  min-width: 0;
-}
-
 .row-align-start   { align-items: flex-start; }
 .row-align-center  { align-items: center; }
 .row-align-end     { align-items: flex-end; }
