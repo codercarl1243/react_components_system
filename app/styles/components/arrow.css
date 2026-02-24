@@ -40,7 +40,6 @@
 }
 .arrow__double[data-orientation="vertical"] {
     grid-template-rows: 1fr 1fr;
-
     width: 2px;
     height: 100%;
 
