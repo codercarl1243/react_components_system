@@ -4,7 +4,7 @@ import AnchorHeading from "@/components/heading/anchorHeading";
 import List from "@/components/list";
 import PostNote from "@/components/post/post.note";
 import PostSection from "@/components/post/post.section";
-import { Row } from "@/components/primitives";
+// import { Row } from "@/components/primitives";
 import Rule from "@/components/rule";
 
 export default function Section2() {

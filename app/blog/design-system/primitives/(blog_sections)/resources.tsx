@@ -34,35 +34,41 @@ export default function Resources() {
                 <Code
                     codeString={`import { ElementType, ComponentProps } from "react";
                     
+/*
+    Block defines the containment surface.
+    All higher-order Primitives compose from Block.
+
+    Each primitive exposes alignment and distribution
+    values appropriate to its layout mode.
+*/
+
 type PrimitiveProps<T extends ElementType = "div"> = {
     as?: T;
 } & Omit<ComponentProps<T>, "as">;
  
-// Block defines the containment surface.
 type BlockProps<T extends ElementType = "div"> =
     PrimitiveProps<T>;
   
-// All higher-order Primitives compose from Block.
 type StackProps<T extends ElementType = "div"> =
 BlockProps<T> & {
     gap?: Gap;
-    align?: "start" | "center" | "end" | "stretch" | "baseline";
-    justify?: "start" | "center" | "end" | "stretch";
+    align?: GridAlignment;
+    justify?: GridJustify;
 };
 
 type InlineProps<T extends ElementType = "div"> =
 BlockProps<T> & {
     gap?: Gap
-    align?: "start" | "center" | "end" | "stretch" | "baseline";
-    justify?: "start" | "center" | "end" | "stretch" | "even" | "between" | "initial";
+    align?: FlexAlignment;
+    justify?: FlexJustify;
     wrap?: boolean; // true = wrap (default), false = nowrap
 }
 
 type RowProps<T extends ElementType = "div"> =
 BlockProps<T> & {
     gap?: Gap;
-    align?: "start" | "center" | "end" | "stretch";
-    justify?: "start" | "center" | "end" | "between";
+    align?: GridAlignment;
+    justify?: GridJustify;
 };`}
                 />
                 <Heading as="h4" headingSize={6}>Components</Heading>
