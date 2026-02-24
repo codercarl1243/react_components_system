@@ -1,0 +1,23 @@
+.primitive-diagram-box {
+    --border-style: dashed;
+    padding: var(--spacing-sm);
+}
+
+.primitive-diagram-box__child {
+    --border-style: solid;
+    padding: var(--spacing) var(--spacing-md);
+    text-align: center;
+}
+
+.primitive-diagram-box.inline-example {
+    .primitive-diagram-box {
+        position: relative;
+    }
+    
+    .arrow__double {
+        position: absolute;
+        left: 0;
+        top: calc(var(--spacing-md) + 100%);
+        width: 100%;
+    }
+}

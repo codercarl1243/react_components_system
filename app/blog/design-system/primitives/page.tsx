@@ -22,7 +22,7 @@ import Summary from './(blog_sections)/9_summary';
 // import Appearance from './(blog_sections)/7_appearance';
 // import Paint from './(blog_sections)/8_paint';
 // import PuttingItAllTogether from './(blog_sections)/9_puttingItAllTogether';
-// import Resources from './(blog_sections)/resources';
+import Resources from './(blog_sections)/resources';
 
 
 const TABLE_OF_CONTENTS = [
@@ -38,7 +38,7 @@ const TABLE_OF_CONTENTS = [
     // { id: 'appearance', href: '#appearance', label: 'Appearance mapping' },
     // { id: 'paint', href: '#paint', label: 'Paint — explicit styling' },
     // { id: 'putting-it-all-together', href: '#putting-it-all-together', label: 'Putting it all together' },
-    // { id: 'resources', href: '#resources', label: "Code & Resources" }
+    { id: 'resources', href: '#resources', label: "Code & Resources" }
 ] as const;
 
 const postId = asPostId('design__primitives_01');
@@ -63,6 +63,7 @@ export default function ThemingPage() {
                 <ProblemsThatPrimtivesSolve />
                 <WhenNotToUseAPrimitive />
                 <Summary />
+                <Resources /> 
                 {/* 
                 <Tokens />
                 <Structure />
@@ -70,7 +71,7 @@ export default function ThemingPage() {
                 <Appearance />
                 <Paint />
                 <PuttingItAllTogether />
-                <Resources /> */}
+                */}
             </Post>
             <PostSideBar
                 contents={TABLE_OF_CONTENTS}

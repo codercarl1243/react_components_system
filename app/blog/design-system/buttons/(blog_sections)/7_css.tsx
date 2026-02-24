@@ -44,7 +44,7 @@ export default function Section7() {
     -webkit-appearance: none;
     appearance: none;
     background: none;
-    border: 1px solid currentColor;
+    border: 1px solid currentcolor;
     border-radius: 4px;
     outline: 0;
     box-shadow: none;
@@ -110,10 +110,10 @@ export default function Section7() {
                 title="CSS Hooks"
                 codeString={`.button {
     background-color: var(--button-bg-color, transparent);
-    color: var(--button-color, currentColor);
-    border-color: var(--button-border-color, currentColor);
+    color: var(--button-color, currentcolor);
+    border-color: var(--button-border-color, currentcolor);
     box-shadow: var(--button-shadow, none);
-    outline-color: var(--button-outline-color, currentColor);
+    outline-color: var(--button-outline-color, currentcolor);
     outline-offset: var(--button-outline-offset);
 }`}
             />

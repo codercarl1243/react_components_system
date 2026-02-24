@@ -253,7 +253,7 @@ Examples:
 .block[data-paint~="border"],
 .block[data-paint="all"],
 .block[data-paint="surface"] {
-    border: 1px solid var(--border-color, var(--text-on-surface, currentColor));
+    border: 1px solid var(--border-color, var(--text-on-surface, currentcolor));
 }`} />)
             },
             {

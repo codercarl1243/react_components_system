@@ -1,6 +1,6 @@
 import Heading from "@/components/heading";
 import List from "@/components/list";
-import { Inline, Row, Stack } from "@/components/primitives";
+import { Stack } from "@/components/primitives";
 import Image from '@/components/image'
 
 export default function AboutPage() {

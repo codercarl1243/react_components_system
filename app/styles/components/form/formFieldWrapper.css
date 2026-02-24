@@ -3,7 +3,7 @@
 .input-group:has(.input-group__input:disabled)
 */
 .input-group {
-    --input-group-accent-color: currentColor;
+    --input-group-accent-color: currentcolor;
 
     position: relative;
     display: grid;

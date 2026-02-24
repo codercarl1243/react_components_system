@@ -54,8 +54,8 @@
 }
 
 .list--disc li::before {
-    --list-marker-bg-color: currentColor;
-  background: conic-gradient(currentColor, var(--surface));
+    --list-marker-bg-color: currentcolor;
+  background: conic-gradient(currentcolor, var(--surface));
   width: 0.75rem;
   left: 0;
   top: 0.35em;
@@ -69,7 +69,7 @@
 
 .list--circle li::before {
   --list-marker-bg-color: var(--surface-color);
-  --list-border: var(--border-width-thin) solid currentColor;
+  --list-border: var(--border-width-thin) solid currentcolor;
 }
 
 /* Ordered list variants */
