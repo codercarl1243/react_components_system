@@ -17,7 +17,7 @@
     .arrow__double {
         position: absolute;
         left: 0;
-        top: calc(var( --spacing-md) + 100%);
+        top: calc(var(--spacing-md) + 100%);
         width: 100%;
     }
 }
