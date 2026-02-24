@@ -176,10 +176,10 @@ export type BaseButtonProps = {
 
     /* Apply color properties (All Colors and variants defined below) */
     background-color: var(--button-bg-color, transparent);
-    color: var(--button-color, currentColor);
-    border-color: var(--button-border-color, currentColor);
+    color: var(--button-color, currentcolor);
+    border-color: var(--button-border-color, currentcolor);
     box-shadow: var(--button-shadow, none);
-    outline-color: var(--button-outline-color, currentColor);
+    outline-color: var(--button-outline-color, currentcolor);
     outline-offset: var(--button-outline-offset);
 
     /* Typography */
@@ -198,18 +198,18 @@ export type BaseButtonProps = {
 
     /* Interactive states - UX communication through outlines and transforms */
     &:hover {
-        outline: 1px solid var(--button-outline-color, currentColor);
+        outline: 1px solid var(--button-outline-color, currentcolor);
         box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2);
     }
 
     &:focus-visible {
-        outline: 2px solid var(--button-outline-color, currentColor);
+        outline: 2px solid var(--button-outline-color, currentcolor);
         outline-offset: var(--button-outline-offset);
         box-shadow: none;
     }
 
     &:active {
-        outline: 1px dotted var(--button-outline-color, currentColor);
+        outline: 1px dotted var(--button-outline-color, currentcolor);
         transform: translateY(1px);
     }
 

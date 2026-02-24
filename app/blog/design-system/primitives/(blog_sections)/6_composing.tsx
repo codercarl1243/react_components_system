@@ -2,12 +2,12 @@ import Code from "@/components/code";
 import InlineCode from "@/components/code/inlineCode";
 import Heading from "@/components/heading";
 import AnchorHeading from "@/components/heading/anchorHeading";
-import List from "@/components/list";
 import PostNote from "@/components/post/post.note";
 import PostSection from "@/components/post/post.section";
 import Rule from "@/components/rule";
 import TabList from "@/components/tablist";
-import PrimitiveOwnershipDiagram from '../examples/primitiveOwnershipDiagram'
+import PrimitiveOwnershipDiagram from "../examples/primitiveOwnershipDiagram";
+
 export default function Section6() {
     return (
         <PostSection id="composing">

@@ -19,7 +19,7 @@
     pointer-events: none;
     background-color: inherit;
     color: inherit;
-    fill: currentColor;
+    fill: currentcolor;
 
     border: var(--border-width-thin) solid;
     border-color: inherit;

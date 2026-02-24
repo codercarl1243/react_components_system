@@ -1,6 +1,6 @@
 
 .heading {
-    --heading-color: var(--foreground-color, currentColor);
+    --heading-color: var(--foreground-color, currentcolor);
     a {
         --link-color-override: var(--heading-color);
     }

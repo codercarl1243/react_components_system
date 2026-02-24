@@ -35,7 +35,7 @@
 }
 
 .post__banner__text-heading {
-  --outline-color: color-mix(in srgb, currentColor 75%, var(--color-neutral-900));
+  --outline-color: color-mix(in srgb, currentcolor 75%, var(--color-neutral-900));
   grid-column: 1 / -1;
   grid-row: 1;
   text-align: center;

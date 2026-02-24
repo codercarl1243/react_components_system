@@ -3,7 +3,7 @@ import { IconProps, sizeMap } from './icon.type'
 export default function Icon({
   icon: IconComponent,
   size = 'md',
-  color = 'currentColor',
+  color = 'currentcolor',
   variant,
   ...props
 }: IconProps) {

@@ -7,7 +7,7 @@
 .arrow__line {
     height: 2px;
     flex: 1;
-    background-color: currentColor;
+    background-color: currentcolor;
 }
 
 .arrow__head {
@@ -15,7 +15,7 @@
     height: 0;
     border-top: 5px solid transparent;
     border-bottom: 5px solid transparent;
-    border-left: 8px solid currentColor;
+    border-left: 8px solid currentcolor;
 }
 
 .arrow[data-direction="left"] {
@@ -59,7 +59,7 @@
     .arrow__head {
         border-left: 5px solid transparent;
         border-right: 5px solid transparent;
-        border-top: 8px solid currentColor;
+        border-top: 8px solid currentcolor;
         border-bottom: none;
     }
 }
