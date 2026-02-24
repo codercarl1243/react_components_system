@@ -1,6 +1,3 @@
-
-
-/* .primitive-diagram */
 .primitive-diagram-box {
     --border-style: dashed;
     padding: var(--spacing-sm);
