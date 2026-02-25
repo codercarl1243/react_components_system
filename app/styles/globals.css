@@ -13,3 +13,4 @@
 @import url('./animations/index.css') layer(utilities);
 @import url('./design-system/index.css') layer(design-system);
 @import url('./pages/about.css') layer(components);
+@import url('./pages/bubbles.css') layer(components);

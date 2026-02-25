@@ -8,8 +8,10 @@ const COOLDOWN_DURATION = 200;
 const INFO_CARD_TIMEOUT_DURATION = 7000;
 const MIN_BUBBLE_LIFETIME = 3000;
 const MAX_BUBBLE_LIFETIME = 7000;
+const MIN_BUBBLE_SIZE = 44; // AAA target size
+const MAX_BUBBLE_SIZE = 80;
 
-export default function useBubbles() {
+export default function useBubbles(cooldown = COOLDOWN_DURATION) {
 
     const [bubbles, setBubbles] = useState<TBubble[]>([]);
     const [splatters, setSplatters] = useState<TSplatter[]>([]);
@@ -48,41 +50,51 @@ export default function useBubbles() {
             return next;
         })
     };
+    const createBubble = () => {
+        const lifetime = MIN_BUBBLE_LIFETIME + Math.random() * (MAX_BUBBLE_LIFETIME - MIN_BUBBLE_LIFETIME);
+        const bubbleId = `bubble-${bubbleIdCounter.current++}`;
+        const bubbleColor = `--color-emphasis-${(Math.floor(Math.random() * 9) + 1) * 100}`
+        const bubbleSize =
+            MIN_BUBBLE_SIZE +
+            Math.random() * (MAX_BUBBLE_SIZE - MIN_BUBBLE_SIZE);
+        const bubble: TBubble = {
+            id: bubbleId,
+            left: `${10 + Math.random() * 80}%`,
+            top: `${10 + Math.random() * 80}%`,
+            size: `${bubbleSize}px`,
+            cssColorVar: bubbleColor,
+            floatAnimation: `float${Math.floor(Math.random() * 3) + 1}`,
+            animationLength: lifetime,
+            // animationLength: 1200000,
 
+            isPopping: false
+        };
+        return bubble;
+    }
+    const queuePop = (bubbleId: string, animationLenth: number) => {
+        createTimeout(() => {
+            popBubble(bubbleId);
+        }, animationLenth - POP_ANIMATION_DURATION);
+    }
     const addBubble = () => {
         if (cooldownRef.current) return;
         if (cardVisibility !== "collapsed") {
             setCardVisibility("displayed");
         }
 
-        cooldownRef.current = true;
-        setIsLoading(true);
+        if (cooldown > 0) {
+            cooldownRef.current = true;
+            setIsLoading(true);
+            createTimeout(() => {
+                cooldownRef.current = false;
+                setIsLoading(false);
+            }, cooldown)
+        }
 
-        createTimeout(() => {
-            cooldownRef.current = false;
-            setIsLoading(false);
-        }, COOLDOWN_DURATION)
-
-        const lifetime = MIN_BUBBLE_LIFETIME + Math.random() * (MAX_BUBBLE_LIFETIME - MIN_BUBBLE_LIFETIME);
-        const bubbleId = `bubble-${bubbleIdCounter.current++}`;
-        const bubbleColor = `--color-emphasis-${(Math.floor(Math.random() * 9) + 1) * 100}`
-        const bubbleSize = 20 + Math.random() * 40;
-
-        const bubble: TBubble = {
-            id: bubbleId,
-            left: `${10 + Math.random() * 80}vw`,
-            top: `${10 + Math.random() * 80}vh`,
-            size: `${bubbleSize}px`,
-            cssColorVar: bubbleColor,
-            floatAnimation: `float${Math.floor(Math.random() * 3) + 1}`,
-            animationLength: lifetime,
-            isPopping: false
-        };
+        const bubble = createBubble();
 
         setBubbles((prev) => [...prev, bubble]);
-        createTimeout(() => {
-            popBubble(bubbleId);
-        }, lifetime - POP_ANIMATION_DURATION)
+        queuePop(bubble.id, bubble.animationLength);
 
     };
 
@@ -98,9 +110,7 @@ export default function useBubbles() {
 
             return prev.map((b) => (b.id === bubbleId ? { ...b, isPopping: true } : b));
         });
-        createTimeout(() => {
-            removeBubble(bubbleId);
-        }, POP_ANIMATION_DURATION)
+        removeBubble(bubbleId);
     }
 
     const createSplatter = (bubbleElement: HTMLElement, bubbleColor: string, bubbleSize: number, bubbleId: string) => {
@@ -135,10 +145,12 @@ export default function useBubbles() {
                 prev.filter(splatter => !splatter.id.startsWith(`splatter-${bubbleId}`))
             );
         }, SPLATTER_ANIMATION_DURATION + maxDelayMs);
+        // }, 100000);
+
     };
 
     const toggleCardVisibility = () => {
-        if (cardVisibility === "displayed"){
+        if (cardVisibility === "displayed") {
             setCardVisibility("collapsed");
             if (cardHideTimeoutRef.current) {
                 clearTimeout(cardHideTimeoutRef.current);
