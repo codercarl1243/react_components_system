@@ -26,7 +26,6 @@
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: auto auto;
   row-gap: var(--spacing-sm);
-  
   align-items: center;
   justify-items: center;
 }
