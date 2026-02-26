@@ -17,15 +17,17 @@ export type ArcadeCoreState = {
 export type ArcadeEffects = {
   triggerShake: () => void;
   isShaking: boolean;
+  triggerTurbo: () => void;
+  isTurbo: boolean;
 }
 
 export type ArcadeShellAPI = {
   handleStartGame: () => void;
   handleFinishGame: () => void;
-  gameState: ArcadeCoreState;
   setGameState: Dispatch<SetStateAction<ArcadeCoreState>>;
-  effectsEnabled: boolean;
+  gameState: ArcadeCoreState;
   setEffectsEnabled: Dispatch<SetStateAction<boolean>>;
+  effectsEnabled: boolean;
 } & ArcadeEffects;
 
 

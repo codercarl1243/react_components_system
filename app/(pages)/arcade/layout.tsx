@@ -9,11 +9,8 @@ export default async function ArcadeLayout({
 }>) {
 
     return (
-        <Stack>
-            <Stack>
+        <Stack justify="center">
                 <Heading as="h1">Arcade</Heading>
-                <p>More stuff here</p>
-            </Stack>
             <div className="arcade--page layout-wrapper">
                 {children}
             </div>

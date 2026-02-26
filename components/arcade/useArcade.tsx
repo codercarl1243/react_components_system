@@ -4,6 +4,8 @@ import type { ArcadeCoreState } from "./type";
 export default function UseArcade(initialTime = 30) {
 
     const [isShaking, setIsShaking] = useState(false);
+    const [isTurbo, setIsTurbo] = useState(false);
+
     const [effectsEnabled, setEffectsEnabled] = useState(true);
 
     const [gameState, setGameState] = useState<ArcadeCoreState>({
@@ -17,6 +19,11 @@ export default function UseArcade(initialTime = 30) {
 
         setIsShaking(true);
         setTimeout(() => setIsShaking(false), 300);
+    }
+
+    function triggerTurbo() {
+        setIsTurbo(true);
+        setTimeout(() => setIsTurbo(false), 5000)
     }
 
     useEffect(() => {
@@ -88,13 +95,15 @@ function handleStartGame() {
         handleStartGame,
         handleFinishGame,
 
-        gameState,
         setGameState,
+        gameState,
 
-        isShaking,
         triggerShake,
+        isShaking,
+        triggerTurbo,
+        isTurbo,
 
-        effectsEnabled,
-        setEffectsEnabled
+        setEffectsEnabled,
+        effectsEnabled
     }
 }

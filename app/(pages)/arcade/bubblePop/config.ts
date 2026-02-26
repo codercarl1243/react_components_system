@@ -4,7 +4,7 @@ import { ArcadeGameDefinition } from "@/components/arcade/type";
 
 export const bubblepop: ArcadeGameDefinition = {
   config: {
-    id: "bubbles",
+    id: "bubblepop",
     label: "Bubble Pop",
     initialTime: 30,
   },
