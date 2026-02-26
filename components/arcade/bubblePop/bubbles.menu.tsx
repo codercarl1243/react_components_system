@@ -1,0 +1,30 @@
+import Button from "@/components/button";
+import { Inline, Stack } from "@/components/primitives";
+import type { ArcadeShellAPI } from "../type";
+import { Toggle } from "@/components/button/toggle";
+
+type BubblesMenuProps = {
+    arcade: ArcadeShellAPI;
+};
+
+export default function BubblesMenu({ arcade }: BubblesMenuProps) {
+
+    const {effectsEnabled, setEffectsEnabled} = arcade;
+    
+    return (
+        <Inline>
+
+            <Stack justify="center">
+                Effects <Toggle
+                    pressed={!effectsEnabled}
+                    onClick={() => setEffectsEnabled(prev => !prev)}
+                    variant={effectsEnabled ? "neutral" : "inverse"}
+                    variantAppearance="filled"
+                    paint="all"
+                >
+                    {effectsEnabled ? "On" : "Off"}
+                </Toggle>
+            </Stack>
+        </Inline>
+    );
+}
