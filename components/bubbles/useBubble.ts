@@ -65,8 +65,6 @@ export default function useBubbles(cooldown = COOLDOWN_DURATION) {
             cssColorVar: bubbleColor,
             floatAnimation: `float${Math.floor(Math.random() * 3) + 1}`,
             animationLength: lifetime,
-            // animationLength: 1200000,
-
             isPopping: false
         };
         return bubble;
@@ -110,10 +108,7 @@ export default function useBubbles(cooldown = COOLDOWN_DURATION) {
 
             return prev.map((b) => (b.id === bubbleId ? { ...b, isPopping: true } : b));
         });
-        createTimeout(() => {
             removeBubble(bubbleId);
-        }, POP_ANIMATION_DURATION);
-
     }
 
     const createSplatter = (bubbleElement: HTMLElement, bubbleColor: string, bubbleSize: number, bubbleId: string) => {
@@ -148,7 +143,6 @@ export default function useBubbles(cooldown = COOLDOWN_DURATION) {
                 prev.filter(splatter => !splatter.id.startsWith(`splatter-${bubbleId}`))
             );
         }, SPLATTER_ANIMATION_DURATION + maxDelayMs);
-        // }, 100000);
 
     };
 
