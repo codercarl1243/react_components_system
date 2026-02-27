@@ -59,11 +59,12 @@ export default function Header({ className, userTheme, ...props }: ComponentProp
             About
           </Link>
           <Inline className='header__toggles' align='center' justify='between'>
-            <button 
-            className="bubble-button bubble"
-            onClick={addBubble}
+            <button
+              className="bubble-button bubble"
+              type="button"
+              onClick={addBubble}
             >
-              <span className="sr-only">Bubbles</span>
+              <span className="sr-only">Blow a decorative bubble</span>
             </button>
             <Switch
               checked={theme === "dark"}
