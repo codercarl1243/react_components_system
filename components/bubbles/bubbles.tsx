@@ -1,13 +1,11 @@
 'use client';
 import Button from "@/components/button";
 import type { TBubble, TBubbleProps, TSplatter } from "./type";
-import { POP_ANIMATION_DURATION } from "./useBubble"
 import { CSSProperties } from "react";
 
 export default function Bubbles({ bubbles, splatters, popBubble }: TBubbleProps) {
 
     const generateBubble = ({ id, left, top, size, cssColorVar, animationLength, isPopping }: TBubble) => {
-        console.log("generateBubble invoked")
         return (
             <div
                 key={id}
@@ -36,7 +34,6 @@ export default function Bubbles({ bubbles, splatters, popBubble }: TBubbleProps)
     const generateSplatter = ({
         x, y, size, delay, endX, endY, cssColorVar, id
     }: TSplatter) => {
-        console.log("generateSplatter invoked")
         const styleObject: CSSWithVars = {
             left: `${x}px`,
             top: `${y}px`,
