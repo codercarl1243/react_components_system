@@ -122,6 +122,7 @@
 }
 
 .bubble[data-popping="true"] .bubble-inner {
+    pointer-events: none;
     animation:
         rotate var(--float-duration) cubic-bezier(0.25, 0.1, 0.25, 1) forwards,
         pop 200ms cubic-bezier(0.25, -1, 0, 1) forwards;
