@@ -110,7 +110,10 @@ export default function useBubbles(cooldown = COOLDOWN_DURATION) {
 
             return prev.map((b) => (b.id === bubbleId ? { ...b, isPopping: true } : b));
         });
-        removeBubble(bubbleId);
+        createTimeout(() => {
+            removeBubble(bubbleId);
+        }, POP_ANIMATION_DURATION);
+
     }
 
     const createSplatter = (bubbleElement: HTMLElement, bubbleColor: string, bubbleSize: number, bubbleId: string) => {
