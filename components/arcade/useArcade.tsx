@@ -15,8 +15,6 @@ export default function UseArcade(initialTime = 30) {
     })
 
     function triggerShake() {
-        if (!effectsEnabled) return;
-
         setIsShaking(true);
         setTimeout(() => setIsShaking(false), 300);
     }
@@ -49,40 +47,40 @@ export default function UseArcade(initialTime = 30) {
         };
     }, [gameState.status]);
 
-function handleStartGame() {
-    let count = 3;
-    setGameState({
-        timeLeft: initialTime,
-        status: "starting",
-        countdown: count
-    });
+    function handleStartGame() {
+        let count = 3;
+        setGameState({
+            timeLeft: initialTime,
+            status: "starting",
+            countdown: count
+        });
 
-    const countdownInterval = setInterval(() => {
-        count -= 1;
+        const countdownInterval = setInterval(() => {
+            count -= 1;
 
-        if (count <= 0) {
-            clearInterval(countdownInterval);
-            // show "Go!" first
-            setGameState(prev => ({
-                ...prev,
-                countdown: 0
-            }));
-            // then transition to running after a beat
-            setTimeout(() => {
+            if (count <= 0) {
+                clearInterval(countdownInterval);
+                // show "Go!" first
                 setGameState(prev => ({
                     ...prev,
-                    countdown: null,
-                    status: "running"
+                    countdown: 0
                 }));
-            }, 800);
-        } else {
-            setGameState(prev => ({
-                ...prev,
-                countdown: count
-            }));
-        }
-    }, 1000);
-}
+                // then transition to running after a beat
+                setTimeout(() => {
+                    setGameState(prev => ({
+                        ...prev,
+                        countdown: null,
+                        status: "running"
+                    }));
+                }, 800);
+            } else {
+                setGameState(prev => ({
+                    ...prev,
+                    countdown: count
+                }));
+            }
+        }, 1000);
+    }
 
     function handleFinishGame() {
         setGameState(prev => ({
