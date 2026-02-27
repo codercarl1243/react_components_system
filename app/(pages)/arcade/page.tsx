@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Link from "@/components/link";
 import { gamesRegistry } from "./gamesRegistry";
 import List from "@/components/list";
 import { Stack } from "@/components/primitives";
