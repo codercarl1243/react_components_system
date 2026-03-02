@@ -1,6 +1,4 @@
-import type { Dispatch, ReactNode, SetStateAction } from "react";
-
-
+import type { ComponentType, Dispatch, SetStateAction } from "react";
 
 export type ArcadeStatus =
   | 'idle'
@@ -31,8 +29,8 @@ export type ArcadeShellAPI = {
 } & ArcadeEffects;
 
 
-type ArcadeGame = React.ComponentType<{ arcade: ArcadeShellAPI }>;
-type ArcadeMenu = React.ComponentType<{ arcade: ArcadeShellAPI }>;
+type ArcadeGame = ComponentType<{ arcade: ArcadeShellAPI }>;
+type ArcadeMenu = ComponentType<{ arcade: ArcadeShellAPI }>;
 
 export type ArcadeGameDefinition = {
   config: ArcadeGameConfig;
