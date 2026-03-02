@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import type { BubbleGameState } from "./type";
 import useBubbles from "@/components/bubbles/useBubble";
 import type { ArcadeShellAPI } from "../type";
+import { isNotNullish } from "@/lib/utils/guards";
 
 const default_game_state: BubbleGameState = {
     score: 0,
@@ -28,9 +29,9 @@ export default function bubblesController(arcade: ArcadeShellAPI) {
         setBubbleGameState(prev => {
             if (gameState.status !== "running") return prev;
 
-            const newCombo = bubbleGameState.lastPopTime &&
-                now - bubbleGameState.lastPopTime <= COMBO_WINDOW
-                ? bubbleGameState.combo + 1
+            const newCombo = isNotNullish(prev.lastPopTime) &&
+                now - prev.lastPopTime <= COMBO_WINDOW
+                ? prev.combo + 1
                 : 1;
 
             const shouldTurboBoost = newCombo % 20 === 0;
