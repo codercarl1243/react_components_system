@@ -75,9 +75,7 @@ export default function useBubbles(cooldown = COOLDOWN_DURATION) {
     }
     const addBubble = () => {
         if (cooldownRef.current) return;
-        if (cardVisibility !== "collapsed") {
-            setCardVisibility("displayed");
-        }
+        setCardVisibility((prev) => (prev === "collapsed" ? prev : "displayed"));
 
         if (cooldown > 0) {
             cooldownRef.current = true;
@@ -107,7 +105,7 @@ export default function useBubbles(cooldown = COOLDOWN_DURATION) {
 
             return prev.map((b) => (b.id === bubbleId ? { ...b, isPopping: true } : b));
         });
-            removeBubble(bubbleId);
+        removeBubble(bubbleId);
     }
 
     const createSplatter = (bubbleElement: HTMLElement, bubbleColor: string, bubbleSize: number, bubbleId: string) => {
