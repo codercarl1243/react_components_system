@@ -50,6 +50,8 @@ export default function useArcade(initialTime = 30) {
     }, [gameState.status]);
 
     function handleStartGame() {
+        if (gameState.status === "starting" || gameState.status === "running") return;
+
         let count = 3;
         setGameState({
             timeLeft: initialTime,
