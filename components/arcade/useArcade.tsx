@@ -15,11 +15,13 @@ export default function useArcade(initialTime = 30) {
     })
 
     function triggerShake() {
+        if (isShaking) return;
         setIsShaking(true);
         setTimeout(() => setIsShaking(false), 300);
     }
 
     function triggerTurbo() {
+        if (isTurbo) return;
         setIsTurbo(true);
         setTimeout(() => setIsTurbo(false), 5000)
     }
