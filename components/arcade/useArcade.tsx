@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import type { ArcadeCoreState } from "./type";
 
-export default function UseArcade(initialTime = 30) {
+export default function useArcade(initialTime = 30) {
 
     const [isShaking, setIsShaking] = useState(false);
     const [isTurbo, setIsTurbo] = useState(false);
