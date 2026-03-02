@@ -278,5 +278,5 @@
 .bubble-button:active {
     outline-color: var(--color-accent-200);
     outline-offset: 2px;
-    scale: 1.02
+    scale: 1.02;
 }
