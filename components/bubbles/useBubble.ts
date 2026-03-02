@@ -63,16 +63,15 @@ export default function useBubbles(cooldown = COOLDOWN_DURATION) {
             top: `${10 + Math.random() * 80}%`,
             size: `${bubbleSize}px`,
             cssColorVar: bubbleColor,
-            floatAnimation: `float${Math.floor(Math.random() * 3) + 1}`,
             animationLength: lifetime,
             isPopping: false
         };
         return bubble;
     }
-    const queuePop = (bubbleId: string, animationLenth: number) => {
+    const queuePop = (bubbleId: string, animationLength: number) => {
         createTimeout(() => {
             popBubble(bubbleId);
-        }, animationLenth - POP_ANIMATION_DURATION);
+        }, animationLength - POP_ANIMATION_DURATION);
     }
     const addBubble = () => {
         if (cooldownRef.current) return;
