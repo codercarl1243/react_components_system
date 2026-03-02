@@ -6,19 +6,8 @@ import useBubbles from "@/components/bubbles/useBubble";
 import { Inline } from "@/components/primitives";
 
 import type { ArcadeShellAPI } from "@/components/arcade/type";
-import type { BubbleGameState } from "./type";
+import bubblesController from "./controller";
 
-const default_game_state: BubbleGameState = {
-    score: 0,
-    maxBubbles: 60,
-    bubblesSpawned: 0,
-    combo: 0,
-    lastPopTime: null
-}
-const BUBBLE_SPAWN_RATE = 495;
-const TURBO_SPAWN_RATE = 200;
-
-const COMBO_WINDOW = 1200;
 
 type BubblesGameProps = {
     arcade: ArcadeShellAPI;
@@ -26,123 +15,7 @@ type BubblesGameProps = {
 
 export default function BubblesGame({ arcade }: BubblesGameProps) {
 
-    const { bubbles, splatters, popBubble, addBubble } = useBubbles(0);
-    const [bubbleGameState, setBubbleGameState] = useState<BubbleGameState>(default_game_state)
-    const { gameState, triggerShake, triggerTurbo } = arcade;
-    const lastEffectComboRef = useRef<number | null>(null);
-
-    function handleClickBubble(bubbleId: string) {
-        const now = Date.now();
-
-        setBubbleGameState(prev => {
-            if (gameState.status !== "running") return prev;
-
-            const newCombo = bubbleGameState.lastPopTime &&
-                now - bubbleGameState.lastPopTime <= COMBO_WINDOW
-                ? bubbleGameState.combo + 1
-                : 1;
-
-            const shouldTurboBoost = newCombo % 20 === 0;
-
-            const adjustedMaxBubbles = (shouldTurboBoost && !arcade.isTurbo) ? prev.maxBubbles + 20 : prev.maxBubbles;
-
-            return {
-                ...prev,
-                score: prev.score + newCombo,
-                combo: newCombo,
-                lastPopTime: now,
-                maxBubbles: adjustedMaxBubbles
-            };
-        });
-
-        popBubble(bubbleId);
-    }
-
-    function queueBubbles() {
-        const spawnRate = arcade.isTurbo ? TURBO_SPAWN_RATE : BUBBLE_SPAWN_RATE;
-        const bubblesPerTick = arcade.isTurbo ? 2 : 1;
-
-        const interval = setInterval(() => {
-            setBubbleGameState(prev => {
-                if (prev.bubblesSpawned >= prev.maxBubbles) {
-                    return prev;
-                }
-
-                const toAdd = Math.min(
-                    bubblesPerTick,
-                    prev.maxBubbles - prev.bubblesSpawned
-                );
-
-                for (let i = 0; i < toAdd; i++) {
-                    addBubble();
-                }
-
-                return {
-                    ...prev,
-                    bubblesSpawned: prev.bubblesSpawned + toAdd,
-                };
-            });
-        }, spawnRate);
-
-        return interval;
-    }
-
-    useEffect(() => {
-        if (gameState.status !== "running") {
-            return;
-        }
-        const bubbleInterval = queueBubbles();
-
-        return () => {
-            clearInterval(bubbleInterval);
-        };
-
-    }, [gameState.status, arcade.isTurbo]);
-
-    // Cleanup the DOM when game ends
-
-    useEffect(() => {
-        if (gameState.status !== "finished") return;
-
-        const timeout = setTimeout(() => {
-            bubbles.forEach(bubble => {
-                popBubble(bubble.id);
-            });
-        }, 300);
-
-        return () => clearTimeout(timeout);
-    }, [gameState.status]);
-
-    // Trigger Effects
-    useEffect(() => {
-        const combo = bubbleGameState.combo;
-        if (combo === 0) {
-            lastEffectComboRef.current = null;
-            return;
-        }
-        if (combo <= 0) return;
-        if (lastEffectComboRef.current === combo) return;
-
-        lastEffectComboRef.current = combo;
-
-        if (combo % 10 === 0) triggerShake();
-        if (combo % 20 === 0) triggerTurbo();
-    }, [bubbleGameState.combo]);
-
-
-    // Combo Reset Timer
-    useEffect(() => {
-        if (!bubbleGameState.lastPopTime) return;
-
-        const timeout = setTimeout(() => {
-            setBubbleGameState(prev => ({
-                ...prev,
-                combo: 0
-            }));
-        }, COMBO_WINDOW);
-
-        return () => clearTimeout(timeout);
-    }, [bubbleGameState.lastPopTime]);
+    const {bubbles, splatters, handleClickBubble, score, combo} = bubblesController(arcade);
 
     return (
         <>
@@ -153,9 +26,9 @@ export default function BubblesGame({ arcade }: BubblesGameProps) {
             />
 
             <Inline className="mt-auto">
-                <p aria-live="polite">Score: {bubbleGameState.score}</p>
-                <p className={bubbleGameState.combo > 1 ? "combo-active" : ""}>
-                    Combo x{bubbleGameState.combo}
+                <p aria-live="polite">Score: {score}</p>
+                <p className={combo > 1 ? "combo-active" : ""}>
+                    Combo x{combo}
                 </p>
                 {arcade.isTurbo ? <p>turbo boost active</p> : null}
             </Inline>
