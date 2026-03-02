@@ -18,6 +18,7 @@ export default function Header({ className, userTheme, ...props }: ComponentProp
   const { theme, toggleTheme } = useTheme(userTheme);
   const { bubbles, splatters, popBubble, addBubble } = useBubbles();
 
+  // TODO: restructure this to wrap a nav element inside of the hamburger wrapper. this way we can isolate the nav elements from the Toggles
   return (
     <>
       <Hamburger.Wrapper
