@@ -1,4 +1,8 @@
-import clsx from "clsx";
+/**
+ This is code to check that the examples discussed in the blog posts work and dont introduce type bugs
+ Not to be used for production
+
+ import clsx from "clsx";
 import { ElementType, ComponentProps } from "react";
 
 export type PrimitiveProps<T extends ElementType = "div"> = {
@@ -44,3 +48,4 @@ export default function Stack<T extends ElementType = "div">({
         />
     )
 }
+ */
