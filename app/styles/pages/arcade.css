@@ -30,6 +30,7 @@
 
 .arcade--game {
   --border-color: var(--color-accent-600);
+  
   background-color: var(--surface);
   height: 100%;
   width: 100%;
