@@ -16,7 +16,7 @@ const TURBO_SPAWN_RATE = 200;
 
 const COMBO_WINDOW = 1200;
 
-export default function bubblesController(arcade: ArcadeShellAPI) {
+export default function useBubblePopController(arcade: ArcadeShellAPI) {
 
     const { bubbles, splatters, popBubble, addBubble } = useBubbles(0);
     const [bubbleGameState, setBubbleGameState] = useState<BubbleGameState>(default_game_state)
