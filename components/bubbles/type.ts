@@ -6,7 +6,6 @@ export type TBubble = {
     top: string;
     size: string;
     cssColorVar: string;
-    floatAnimation: string;
     animationLength: number;
     isPopping: boolean;
 };
