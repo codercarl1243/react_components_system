@@ -11,7 +11,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 750px;
+  height: min(750px, 85dvh);
   width: min(500px, 100%);
   border-radius: var(--spacing-md);
   background-color: transparent;
