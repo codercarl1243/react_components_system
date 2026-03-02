@@ -15,10 +15,10 @@ export default function BubblesMenu({ arcade }: BubblesMenuProps) {
 
             <Stack justify="center" gap={0}>
                 Effects <Toggle
-                    pressed={!effectsEnabled}
+                    pressed={effectsEnabled}
                     onClick={() => setEffectsEnabled(prev => !prev)}
-                    variant={effectsEnabled ? "neutral" : "inverse"}
-                    variantAppearance="filled"
+                    variant={"accent"}
+                    variantAppearance={effectsEnabled ? "filled": "ghost"}
                     paint="all"
                 >
                     {effectsEnabled ? "On" : "Off"}
