@@ -18,6 +18,7 @@ export default function Header({ className, userTheme, ...props }: ComponentProp
   const { theme, toggleTheme } = useTheme(userTheme);
   const { bubbles, splatters, popBubble, addBubble } = useBubbles();
 
+  const isBlogPath = pathname === '/blog' || pathname.startsWith('/blog/');
   // TODO: restructure this to wrap a nav element inside of the hamburger wrapper. this way we can isolate the nav elements from the Toggles
   return (
     <>
@@ -45,8 +46,8 @@ export default function Header({ className, userTheme, ...props }: ComponentProp
           {pathname !== '/' && <Link href="/" icon={RiHomeHeartLine}>Home</Link>}
           <Link
             href="/blog"
-            className={clsx({ 'active': pathname.startsWith('/blog') })}
-            aria-current={pathname.startsWith('/blog') ? 'page' : undefined}
+            className={clsx({ 'active': isBlogPath })}
+            aria-current={isBlogPath ? 'page' : undefined}
             icon={RiBookReadFill}
           >
             Blog
