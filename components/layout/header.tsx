@@ -45,7 +45,7 @@ export default function Header({ className, userTheme, ...props }: ComponentProp
           <Link
             href="/blog"
             className={clsx({ 'active': pathname.startsWith('/blog') })}
-            aria-current={pathname === '/blog' ? 'page' : undefined}
+            aria-current={pathname.startsWith('/blog') ? 'page' : undefined}
             icon={RiBookReadFill}
           >
             Blog
