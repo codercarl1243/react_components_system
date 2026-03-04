@@ -1,10 +1,12 @@
 import Heading from "@/components/heading";
 import List from "@/components/list";
-import { Stack } from "@/components/primitives";
+import { Block, Stack } from "@/components/primitives";
 import Image from '@/components/image'
+import Link from "@/components/link";
+import Icon from "@/components/icon";
+import { RiJavaFill } from "@remixicon/react";
 
 export default function AboutPage() {
-
 
     return (
         <div className="layout-wrapper flow-8 about-page">
@@ -24,6 +26,7 @@ export default function AboutPage() {
                         <p>
                             Alongside building systems, I write about them — breaking down patterns,
                             trade-offs, and implementation details so others can apply them in practice.
+                            Some of the experiments and tools I build are also shared openly on this site.
                         </p>
                     </Stack>
                 </div>
@@ -69,7 +72,33 @@ export default function AboutPage() {
                     <li>Sourdough (because not everything compiles the same way)</li>
                 </List>
             </Stack>
+            <Stack
+                as="section"
+                variant="warning"
+                variantAppearance="tonal"
+                paint="all"
+                className="surface-frame p-8 pb-16"
+            >
+                <Heading as="h2" headingSize={4} variant="warning" className="mt-0">
+                    Support my work
+                </Heading>
 
+                <p>
+                    If something I've built or written has been useful to you, you can support
+                    further development by buying me a coffee. Every contribution helps me
+                    carve out more time for open source projects and writing.
+                </p>
+                <div>
+                    <Icon icon={RiJavaFill} />
+                    <Link
+                        href="https://buymeacoffee.com/codercarl"
+                        rel="noopener noreferrer"
+                        data-variant="accent"
+                        data-Appearance="ghost"
+                        data-paint={"all"}
+                        className="">buymeacoffee.com/codercarl</Link>
+                </div>
+            </Stack>
             <Stack
                 as="section"
                 variant="accent"
