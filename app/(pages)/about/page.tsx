@@ -20,7 +20,7 @@ export default function AboutPage() {
                         <p>
                             I'm a frontend-focused engineer with production experience in complex systems,
                             specialising in <span className="fun-underline">system-driven UI architecture</span>,
-                            <span className="fun-underline">accessibility</span>, and building
+                            <span className="fun-underline">accessibility</span>, and building{" "}
                             <span className="fun-underline">thoughtful user experiences</span>.
                         </p>
                         <p>
