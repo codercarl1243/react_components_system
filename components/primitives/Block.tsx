@@ -83,13 +83,13 @@ export default function Block<T extends ElementType = "div">({
     validatePaint(paint);
     const paintAttr = toPaintAttribute(paint);
 
-    const SafeChildren = wrapChildrenTextWithSiblings(children);
+    // const SafeChildren = wrapChildrenTextWithSiblings(children);
 
     return <Component
         className={clsx("block", className)}
         {...applyDataAttributes({ variant, appearance: variantAppearance, paint: paintAttr })}
         {...props}
     >
-        {SafeChildren}
+        {children}
     </Component>
 }
