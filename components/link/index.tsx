@@ -20,7 +20,7 @@ import type { LinkProps } from '@/components/link/link.type'
  *   - otherwise: render Next.js client-side link.
  * @returns A React element representing the appropriate link (or plain children).
  */
-export default function Link({ icon, children, className, href, ...props }: LinkProps) {
+export default function Link({ icon, showExternalIcon = true, children, className, href, ...props }: LinkProps) {
   if (!href) return <>{children}</>
 
   const schemeMatch = href.match(/^([a-zA-Z][a-zA-Z+.-]*):/)
@@ -40,7 +40,7 @@ export default function Link({ icon, children, className, href, ...props }: Link
       <a href={href} rel="noopener noreferrer" className={clsx(className, {'link-w-icon': icon}, 'link external')} {...props}>
         {icon && <Icon icon={icon} />}
         {children}
-        <Icon color={'currentcolor'} icon={RiExternalLinkLine} size={'sm'} className='icon' />
+        {showExternalIcon && <Icon color={'currentcolor'} icon={RiExternalLinkLine} size={'sm'} className="external__icon link__icon" />}
       </a>
     )
   }

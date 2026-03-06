@@ -1,19 +1,5 @@
 .homepage__section {
-  min-height: 50dvh;
-}
-.homepage-banner {
-  position: relative;
-  background-color: transparent;
-  height: 200px;
-  aspect-ratio: 6/1;
-  isolation: isolate;
-  z-index: 0;
-  display: block;
-
-  img {
-    object-fit: cover;
-    margin-inline: auto;
-  }
+  padding-block: var(--spacing-3xl);
 }
 
 .homepage__latest-posts__heading {

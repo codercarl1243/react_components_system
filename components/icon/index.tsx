@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import { IconProps, sizeMap } from './icon.type'
 
 export default function Icon({
@@ -5,6 +6,7 @@ export default function Icon({
   size = 'md',
   color = 'currentcolor',
   variant,
+  className,
   ...props
 }: IconProps) {
 
@@ -18,7 +20,7 @@ export default function Icon({
 
   return (
     <IconComponent
-      className="icon"
+      className={clsx("icon", className)}
       width={resolvedSize}
       height={resolvedSize}
       color={resolvedColor}

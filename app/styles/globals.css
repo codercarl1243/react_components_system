@@ -4,12 +4,13 @@
 @layer design-system;   /* contextual semantics (paint, variants, surfaces, theme) */
 @layer utilities;       /* Helper classes like, .sr-only, grid utilities, typography, margin/padding helpers, etc. */
 
-@import url('./tokens/index.css') layer(tokens);
-@import url('./base/index.css') layer(base);
-@import url('./layout/index.css') layer(base);
-@import url('./components/index.css') layer(components);
-@import url('./utils/index.css') layer(utilities);
-@import url('./typography/index.css') layer(utilities);
-@import url('./animations/index.css') layer(utilities);
-@import url('./design-system/index.css') layer(design-system);
-@import url('./pages/about.css') layer(components);
+@import './tokens/index.css' layer(tokens);
+@import './base/index.css' layer(base);
+@import './layout/index.css' layer(base);
+@import './components/index.css' layer(components);
+@import './utils/index.css' layer(utilities);
+@import './typography/index.css' layer(utilities);
+@import './animations/index.css' layer(utilities);
+@import './design-system/index.css' layer(design-system);
+@import './pages/about.css' layer(components);
+@import './pages/arcade.css' layer(components);

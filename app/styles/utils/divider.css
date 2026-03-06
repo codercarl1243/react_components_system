@@ -1,0 +1,65 @@
+.divider,
+.divider-w-text {
+    --divider-color: var(--color-neutral-a6);
+    --content-color: var(--foreground-on-surface);
+    --divider-inset: var(--frame-inset, var(--spacing-xl));
+}
+
+.divider[data-subtle="true"],
+.divider-w-text[data-subtle="true"] {
+    --divider-color: var(--color-neutral-a2);
+    --content-color: var(--color-neutral-a6);
+}
+
+/*
+    Simple divider
+*/
+.divider {
+    height: 1px;
+    background: var(--divider-color);
+    inset-inline: var(--divider-inset);
+}
+
+/*
+    Divider with text
+*/
+.divider-w-text {
+    position: relative;
+    text-align: center;
+}
+
+
+
+.divider-w-text::before {
+    content: "";
+    position: absolute;
+    inset-inline: var(--divider-inset);
+    top: 50%;
+    transform: translateY(-50%) scaleX(0.85);
+    height: 1px;
+    background: linear-gradient(to right,
+            transparent,
+            var(--divider-color) 20%,
+            var(--divider-color) 80%,
+            transparent);
+    transition: transform 500ms ease-in-out, background 500ms ease;
+    pointer-events: none;
+}
+
+/* 
+    Animate the divider and grow it if the section wrapping it receives focus 
+*/
+.divider-wrapper:focus-within .divider-w-text::before {
+    transform: translateY(-50%) scaleX(1);
+    background: var(--color-neutral-a4);
+}
+
+.divider-w-text .divider__content {
+    position: relative;
+    display: inline-block;
+    line-height: 1;
+    background: var(--surface);
+    padding-inline: var(--spacing-md);
+    white-space: nowrap;
+    color: var(--content-color);
+}

@@ -5,7 +5,6 @@ import Figure from "@/components/image/figure";
 import List from "@/components/list";
 import PostNote from "@/components/post/post.note";
 import PostSection from "@/components/post/post.section";
-// import { BaseButtonExample } from "../examples/BaseButtonExample";
 import InlineCode from "@/components/code/inlineCode";
 
 
@@ -20,9 +19,6 @@ export default function Section4() {
             <p>
                 Good buttons don't just execute code—they <FunHighlight>communicate</FunHighlight>. Users should always know their action was received.
             </p>
-            <p>Try it out below:</p>
-
-            {/* <BaseButtonExample /> */}
             <PostNote>
                 <p>
                     This whimsical demo shows what's possible when buttons provide rich feedback. The bubbles are decorative, but the <span className="italic">principles</span> are production-ready:

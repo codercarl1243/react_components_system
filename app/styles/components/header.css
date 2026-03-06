@@ -24,13 +24,16 @@
             outline-style: dashed;
         }
     }
+    
 @media screen and (max-width: 35rem) {
     .nav__primary a:first-child {
         padding-block-start: var(--spacing-xxl);
     }
-     .darkmode__switch {
+     .header__toggles {
         margin-block-start: auto;
         margin-block-end: var(--spacing-md);
+        padding-inline: var(--spacing-lg);
+        width: 100%;
     }
 }
 
@@ -51,8 +54,7 @@
 }
 
 @media screen and (min-width: 48.01rem) {
-    
-    .darkmode__switch {
+    .header__toggles{
         margin-inline-start: auto;
     }
 }
