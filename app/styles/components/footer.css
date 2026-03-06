@@ -13,3 +13,10 @@
 .footer p span {
     margin-inline: 0.5em;
 }
+
+.footer__socials {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+}

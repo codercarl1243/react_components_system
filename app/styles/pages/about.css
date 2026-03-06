@@ -37,7 +37,7 @@
         grid-template-columns: 1fr;
     }
 
-    .contact-link {
+    .about-contact__contact-links .contact-link {
         width: 90%;
         display: grid;
         grid-template-columns: 1fr;
@@ -45,11 +45,14 @@
     }
 }
 
+.about-contact__contact-links .contact-link {
+    min-width: 15ch;
+}
+
 .contact-link {
     display: grid;
-    place-content: start;
-
     grid-template-columns: 1.5rem auto;
+    place-items: start;
     align-items: center;
     column-gap: var(--spacing-md);
     padding: var(--spacing-sm) var(--spacing-md);
@@ -59,17 +62,21 @@
     border-color: transparent;
     outline: 1px solid transparent;
     outline-offset: 2px;
-    min-width: 15ch;
     transition:
-        background 160ms ease,
+        background-color 160ms ease,
         outline-color 160ms ease,
         transform 160ms ease;
+}
+.contact-link.contact-link--external {
+  grid-template-columns: 1.5rem auto 1rem;
+}
+.contact-link.contact-link--external .icon {
+color: var(--color-neutral-a4);
 }
 
 .contact-link[type="button"] {
     position: relative;
 }
-
 
 .contact-link__state-message {
     opacity: 0;
@@ -83,14 +90,13 @@
     position: absolute;
     top: -0.75rem;
     right: 0;
-    opacity: 0;
     transform: translateY(-120%) scale(0.9);
     transition: opacity 150ms ease-in-out, transform 150ms ease-in-out;
 }
 
 .contact-link__state-message[data-display="true"] {
     opacity: 1;
-    transform: translateY(-140%);
+    transform: translateY(-140%) scale(1);
 }
 
 .contact-link__state-message::after {
