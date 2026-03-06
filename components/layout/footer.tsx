@@ -3,6 +3,7 @@ import type { ComponentProps } from 'react'
 import Link from '@/components/link'
 import { Inline } from '@/components/primitives'
 
+// TODO: add links to linkedin and github
 export default function Footer ({ className, ...props }: ComponentProps<'footer'>) {
   const year = new Date().getFullYear()
   return (

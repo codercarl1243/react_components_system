@@ -28,15 +28,30 @@
     text-align: center;
 }
 
+
+
 .divider-w-text::before {
     content: "";
     position: absolute;
     inset-inline: var(--divider-inset);
     top: 50%;
-    transform: translateY(-50%);
+    transform: translateY(-50%) scaleX(0.85);
     height: 1px;
-    background: var(--divider-color);
+    background: linear-gradient(to right,
+            transparent,
+            var(--divider-color) 20%,
+            var(--divider-color) 80%,
+            transparent);
+    transition: transform 500ms ease-in-out, background 500ms ease;
     pointer-events: none;
+}
+
+/* 
+    Animate the divider and grow it if the section wrapping it receives focus 
+*/
+.divider-wrapper:focus-within .divider-w-text::before {
+    transform: translateY(-50%) scaleX(1);
+    background: var(--color-neutral-a4);
 }
 
 .divider-w-text .divider__content {

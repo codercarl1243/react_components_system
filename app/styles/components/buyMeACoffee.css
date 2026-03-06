@@ -1,0 +1,34 @@
+.buyMeACoffee__Link {
+    background-color: var(--surface);
+    --border-color: transparent;
+    outline: 1px solid transparent;
+    border-radius: var(--radius-md);
+    outline-offset: 2px;
+    box-shadow:
+        0 0 0 1px var(--color-neutral-a2),
+        0 4px 12px -6px var(--color-neutral-a2);
+    text-decoration: none !important;
+    transition:
+        box-shadow 160ms ease,
+        transform 160ms ease,
+        outline-color 160ms ease;
+}
+
+.buyMeACoffee__Link:hover,
+.buyMeACoffee__Link:focus-visible {
+    box-shadow:
+        0 0 0 1px var(--color-neutral-a2),
+        0 6px 18px -8px var(--color-neutral-a2);
+    outline-color: var(--color-neutral-a2);
+    transform: translateY(-1px);
+}
+
+.buyMeACoffee__Link .icon {
+    color: var(--color-neutral-a6);
+    transition: transform 160ms ease;
+}
+
+.buyMeACoffee__Link:hover .icon,
+.buyMeACoffee__Link:focus-visible .icon {
+    transform: scale(1.05);
+}

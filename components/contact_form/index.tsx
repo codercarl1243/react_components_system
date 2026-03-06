@@ -67,14 +67,14 @@ export default function ContactForm() {
     return (
         <form
             ref={formRef}
-            className="contact-form width-full mr-auto p-2"
+            className="contact-form w-full mr-auto p-2"
             onSubmit={handleSubmit}
             noValidate
         >
             <Block
                 as="fieldset"
                 className="contact-form__fieldset surface-frame p-4"
-                variant='primary'
+                variant='inverse'
                 variantAppearance='outlined'
                 paint={"all"}
             >

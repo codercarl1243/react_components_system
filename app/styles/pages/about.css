@@ -14,9 +14,113 @@
     background-color: transparent;
     margin-inline: auto;
     flex-basis: 100%;
+
     img {
         margin-inline: auto;
     }
+}
+
+.about-contact__contact-links {
+    display: grid;
+    grid-template-columns: repeat(2, max-content);
+    gap: var(--spacing-lg) var(--spacing-xl);
+    justify-content: center;
+}
+
+.about-contact__contact-links li {
+    width: 100%;
+    list-style-type: none;
+}
+
+@media (max-width: 32rem) {
+    .about-contact__contact-links {
+        grid-template-columns: 1fr;
+    }
+
+    .contact-link {
+        width: 90%;
+        display: grid;
+        grid-template-columns: 1fr;
+        place-content: center;
+    }
+}
+
+.contact-link {
+    display: grid;
+    place-content: start;
+
+    grid-template-columns: 1.5rem auto;
+    align-items: center;
+    column-gap: var(--spacing-md);
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-radius: var(--radius-sm);
+    background: none;
+    cursor: pointer;
+    border-color: transparent;
+    outline: 1px solid transparent;
+    outline-offset: 2px;
+    min-width: 15ch;
+    transition:
+        background 160ms ease,
+        outline-color 160ms ease,
+        transform 160ms ease;
+}
+
+.contact-link[type="button"] {
+    position: relative;
+}
+
+
+.contact-link__state-message {
+    opacity: 0;
+    background: var(--surface);
+    padding: var(--spacing-sm) var(--spacing-md);
+    box-shadow:
+        0 0 0 1px var(--color-neutral-a2),
+        0 6px 18px -8px var(--color-neutral-a2);
+    outline-color: var(--color-neutral-a2);
+    border-radius: var(--radius-sm);
+    position: absolute;
+    top: -0.75rem;
+    right: 0;
+    opacity: 0;
+    transform: translateY(-120%) scale(0.9);
+    transition: opacity 150ms ease-in-out, transform 150ms ease-in-out;
+}
+
+.contact-link__state-message[data-display="true"] {
+    opacity: 1;
+    transform: translateY(-140%);
+}
+
+.contact-link__state-message::after {
+  content: "";
+  position: absolute;
+  bottom: -4px;
+  right: 10px;
+  width: 8px;
+  height: 8px;
+  background: var(--surface);
+  transform: rotate(45deg) scale(1);
+  box-shadow: 1px 1px 0 var(--color-neutral-a2);
+}
+
+.contact-link:hover,
+.contact-link:focus-visible {
+    box-shadow:
+        0 0 0 1px var(--color-neutral-a2),
+        0 6px 18px -8px var(--color-neutral-a2);
+    outline-color: var(--color-neutral-a2);
+    transform: translateY(-1px);
+}
+
+.contact-link .contact-link__icon {
+    color: var(--color-neutral-a6);
+    transition: transform 160ms ease;
+}
+
+.contact-link:hover .contact-link__icon {
+    transform: scale(1.05);
 }
 
 @container about-container (min-width: 35rem) {

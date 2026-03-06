@@ -75,6 +75,6 @@ export type RowProps<T extends ElementType = "div"> = BlockWrapperProps<T,
     {
         gap?: Gap;
         align?: "start" | "center" | "end" | "stretch";
-        justify?: "start" | "center" | "end" | "between";
+        justify?: "start" | "center" | "end" | "between" | "even";
     }
 >;

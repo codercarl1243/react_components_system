@@ -1,10 +1,13 @@
 import Heading from "@/components/heading";
 import List from "@/components/list";
-import { Block, Row, Stack } from "@/components/primitives";
+import { Stack } from "@/components/primitives";
 import Image from '@/components/image'
 import Link from "@/components/link";
 import Icon from "@/components/icon";
 import { RiJavaFill } from "@remixicon/react";
+import ContactForm from "@/components/contact_form";
+import ContactLinks from "./contactLinks";
+import BuyMeACoffeeCTA from "@/components/buyMeACoffeeCTA";
 
 export default function AboutPage() {
 
@@ -19,7 +22,7 @@ export default function AboutPage() {
                     <Stack className="about-page__intro--text" gap={8}>
                         <p>
                             I'm a frontend-focused engineer with production experience in complex systems,
-                            specialising in <span className="fun-underline">system-driven UI architecture</span>,
+                            specialising in <span className="fun-underline">system-driven</span> UI architecture,{" "}
                             <span className="fun-underline">accessibility</span>, and building{" "}
                             <span className="fun-underline">thoughtful user experiences</span>.
                         </p>
@@ -32,7 +35,7 @@ export default function AboutPage() {
                 </div>
             </Stack>
 
-            <Stack>
+            {/* <Stack>
                 <Heading as="h2" headingSize={4} >Projects</Heading>
 
                 <List marker="none">
@@ -56,7 +59,7 @@ export default function AboutPage() {
                         </Stack>
                     </li>
                 </List>
-            </Stack>
+            </Stack> */}
             <Stack
                 as="section"
                 variant="primary"
@@ -100,10 +103,11 @@ export default function AboutPage() {
             </Stack>
             <Stack
                 as="section"
-                variant="warning"
-                variantAppearance="tonal"
-                paint="all"
-                className="surface-frame p-8 pb-16"
+                variant="inverse"
+                variantAppearance="outlined"
+                paint="border"
+                className="surface-frame p-8"
+                gap={16}
             >
                 <Heading as="h2" headingSize={4} variant="warning" className="mt-0">
                     Support my work
@@ -114,12 +118,8 @@ export default function AboutPage() {
                     further development by buying me a coffee. Every contribution helps me
                     carve out more time for open source projects and writing.
                 </p>
+                <BuyMeACoffeeCTA className="mx-auto" />
 
-                <Link
-                    className="surface-frame w-fit px-8 py-2 mx-auto"
-                    href="https://buymeacoffee.com/codercarl"
-                    rel="noopener noreferrer"
-                ><Icon icon={RiJavaFill} /><span>buymeacoffee.com/codercarl</span></Link>
             </Stack>
             <Stack
                 as="section"
@@ -140,6 +140,23 @@ export default function AboutPage() {
                     <li>Testing: Jest, Cypress, Storybook</li>
                     <li>Tools: Git, Linux, Figma, accessibility testing tools</li>
                 </List>
+            </Stack>
+            <Stack
+                as="section"
+                variant="muted"
+                variantAppearance="outlined"
+                paint="all"
+                className="about-contact surface-frame p-8 frame-inset-8 divider-wrapper"
+                gap={16}
+            >
+                <Heading as="h2" headingSize={4} variant="inverse" className="center">
+                    Get in touch
+                </Heading>
+                <ContactLinks />
+                <p className="divider-w-text" data-subtle="true">
+                    <span className="divider__content">or send a message</span>
+                </p>
+                <ContactForm />
             </Stack>
         </div>
     )

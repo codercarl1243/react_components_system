@@ -1,4 +1,3 @@
-
 .link {
     color: var(--link-color-override, var(--link-color));
     text-decoration-color: currentcolor;
@@ -15,15 +14,15 @@
 
 .link--surface {
     --link-color-override: currentcolor;
-    
-     text-decoration: none;
-     display: inline-block;
+
+    text-decoration: none;
+    display: inline-block;
 }
 
 .link--surface:focus-visible,
 .link--surface:hover {
-  outline: 2px solid currentcolor;
-  outline-offset: 0.25em;
+    outline: 2px solid currentcolor;
+    outline-offset: 0.25em;
 }
 
 a:not([class]):hover,
@@ -68,10 +67,10 @@ a:not([class]):focus-visible,
 .external {
     align-items: baseline;
 }
-.external .icon {
-    margin-left: var(--spacing-sm);
-}
 
-.external .icon {
+.link__icon {
+    margin-left: var(--spacing-sm);
+    color: currentcolor;
+    vertical-align: middle;
     flex-shrink: 0;
 }
