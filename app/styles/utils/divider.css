@@ -1,0 +1,50 @@
+.divider,
+.divider-w-text {
+    --divider-color: var(--color-neutral-a6);
+    --content-color: var(--foreground-on-surface);
+    --divider-inset: var(--frame-inset, var(--spacing-xl));
+}
+
+.divider[data-subtle="true"],
+.divider-w-text[data-subtle="true"] {
+    --divider-color: var(--color-neutral-a2);
+    --content-color: var(--color-neutral-a6);
+}
+
+/*
+    Simple divider
+*/
+.divider {
+    height: 1px;
+    background: var(--divider-color);
+    inset-inline: var(--divider-inset);
+}
+
+/*
+    Divider with text
+*/
+.divider-w-text {
+    position: relative;
+    text-align: center;
+}
+
+.divider-w-text::before {
+    content: "";
+    position: absolute;
+    inset-inline: var(--divider-inset);
+    top: 50%;
+    transform: translateY(-50%);
+    height: 1px;
+    background: var(--divider-color);
+    pointer-events: none;
+}
+
+.divider-w-text .divider__content {
+    position: relative;
+    display: inline-block;
+    line-height: 1;
+    background: var(--surface);
+    padding-inline: var(--spacing-md);
+    white-space: nowrap;
+    color: var(--content-color);
+}
