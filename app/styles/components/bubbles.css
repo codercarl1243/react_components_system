@@ -118,13 +118,13 @@
         scale 300ms cubic-bezier(0.34, 1.56, 0.64, 1),
         rotate 300ms cubic-bezier(0.34, 1.56, 0.64, 1),
         box-shadow 300ms ease;
-    animation: rotate var(--float-duration) cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
+    animation: rotate var(--float-duration, 6000ms) cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
 }
 
 .bubble[data-popping="true"] .bubble-inner {
     pointer-events: none;
     animation:
-        rotate var(--float-duration) cubic-bezier(0.25, 0.1, 0.25, 1) forwards,
+        rotate var(--float-duration, 6000ms) cubic-bezier(0.25, 0.1, 0.25, 1) forwards,
         pop 200ms cubic-bezier(0.25, -1, 0, 1) forwards;
 }
 
