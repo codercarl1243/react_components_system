@@ -7,7 +7,6 @@ import Link from '@/components/link'
 import { Hamburger } from '@/components/hamburger'
 import Icon from '@/components/icon'
 import Switch from '@/components/button/switch'
-import { Inline } from '@/components/primitives'
 import { useTheme } from '@/lib/hooks/useTheme'
 import { RiBookReadFill, RiHomeHeartLine, RiMenuLine, RiMoonClearFill, RiSunLine, RiUser3Fill } from '@remixicon/react'
 import Bubbles from '@/components/bubbles/bubbles'
@@ -39,28 +38,32 @@ export default function Header({ className, userTheme, ...props }: ComponentProp
           Menu
         </Hamburger.Toggle>
         <Hamburger.Menu
-          as="nav"
-          className='nav__primary'
-          aria-label="Primary"
+          as="div"
         >
-          {pathname !== '/' && <Link href="/" icon={RiHomeHeartLine}>Home</Link>}
-          <Link
-            href="/blog"
-            className={clsx({ 'active': isBlogPath })}
-            aria-current={isBlogPath ? 'page' : undefined}
-            icon={RiBookReadFill}
-          >
-            Blog
-          </Link>
-          <Link
-            href="/about"
-            className={clsx({ 'active': pathname === '/about' })}
-            aria-current={pathname === '/about' ? 'page' : undefined}
-            icon={RiUser3Fill}
-          >
-            About
-          </Link>
-          <Inline className='header__toggles' align='center' justify='between'>
+          <div className='nav__wrapper'>
+            <nav
+            className='nav__primary'
+            aria-label="Primary">
+            {pathname !== '/' && <Link href="/" icon={RiHomeHeartLine}>Home</Link>}
+            <Link
+              href="/blog"
+              className={clsx({ 'active': isBlogPath })}
+              aria-current={isBlogPath ? 'page' : undefined}
+              icon={RiBookReadFill}
+            >
+              Blog
+            </Link>
+            <Link
+              href="/about"
+              className={clsx({ 'active': pathname === '/about' })}
+              aria-current={pathname === '/about' ? 'page' : undefined}
+              icon={RiUser3Fill}
+            >
+              About
+            </Link>
+          </nav>
+
+          <div className='header__toggles'>
             <button
               className="bubble-button bubble"
               type="button"
@@ -72,7 +75,7 @@ export default function Header({ className, userTheme, ...props }: ComponentProp
               checked={theme === "dark"}
               onClick={toggleTheme}
               aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
-              className='block darkmode__switch px-8 py-4 surface-frame'
+              className='block darkmode__switch surface-frame'
               variant={"light"}
               variantAppearance='filled'
               paint="all"
@@ -82,7 +85,8 @@ export default function Header({ className, userTheme, ...props }: ComponentProp
                   : <Icon icon={RiMoonClearFill} variant='light' />
               }
             </Switch>
-          </Inline>
+          </div>
+          </div>
         </Hamburger.Menu>
       </Hamburger.Wrapper>
       <Bubbles

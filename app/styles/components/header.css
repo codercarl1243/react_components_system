@@ -1,60 +1,86 @@
-.nav__primary {
+.header--wrapper {
+    --gap: clamp(var(--spacing), 2vw, var(--spacing-xl));
+}
+
+.nav__wrapper {
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
-    padding-inline: 1rem;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding-inline-start: var(--spacing);
+    gap: var(--gap);
+    height: 100%;
+    width: 100%;
+    padding-block: var(--spacing-xxl);
 }
 
-.header--wrapper {
+.nav__primary {
+    flex-direction: column;
+}
+
+.header__toggles,
+.nav__primary {
     display: flex;
-    min-height: 5rem;
-    width: clamp(var(--bp-xs), 100%, 100ch);
-    margin-inline: auto;
-    align-items: center;
-    position: relative;
-}
-     .darkmode__switch {
-        cursor: pointer;
-        &:hover ,
-        &:focus-visible {
-            outline: 1px solid var(--foreground-on-surface);
-            outline-offset: 4px;
-        }
-        &:active {
-            outline-style: dashed;
-        }
-    }
-    
-@media screen and (max-width: 35rem) {
-    .nav__primary a:first-child {
-        padding-block-start: var(--spacing-xxl);
-    }
-     .header__toggles {
-        margin-block-start: auto;
-        margin-block-end: var(--spacing-md);
-        padding-inline: var(--spacing-lg);
-        width: 100%;
-    }
+    width: 100%;
+    padding-inline: var(--spacing-lg);
+    gap: var(--gap);
 }
 
-/*  DESKTOP */
-@media screen and (min-width: 35rem) {
-    .header--wrapper {
-        padding: var(--spacing) 0;
-        padding-block: var(--spacing-xxl);
+.header__toggles {
+    margin-block-start: auto;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+}
+
+/*  > mobile 560px+ */
+@media screen and (min-width: 35.01rem) {
+    .header__toggles {
+        justify-content: flex-start;
+        padding-inline-start: 0;
+    }
+
+    .nav__wrapper {
+        flex-direction: row;
+        min-height: 5rem;
+        width: clamp(var(--bp-xs), 100%, 100ch);
+        padding-block-start: var(--spacing-lg);
     }
 
     .nav__primary {
         padding-block: var(--spacing-sm);
+        padding-inline-end: 0;
         margin-right: auto;
         flex-direction: row;
+        width: fit-content;
+    }
+}
+
+/*  Desktop */
+@media screen and (min-width: 48.01rem) {
+    .header__toggles {
+        justify-content: flex-end;
+    }
+
+    .nav__primary {
         width: 100%;
     }
-
 }
 
-@media screen and (min-width: 48.01rem) {
-    .header__toggles{
-        margin-inline-start: auto;
+/*  Move somewhere else  */
+.darkmode__switch {
+    cursor: pointer;
+    min-width: 44px;
+    aspect-ratio: 1;
+
+    &:hover,
+    &:focus-visible {
+        outline: 1px solid var(--foreground-on-surface);
+        outline-offset: 4px;
+    }
+
+    &:active {
+        outline-style: dashed;
     }
 }
+
+/*  Move somewhere else  */
