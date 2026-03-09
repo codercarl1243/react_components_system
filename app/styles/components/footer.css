@@ -1,4 +1,7 @@
 .footer {
+    container-type: inline-size;
+    container-name: footer-container;
+
     justify-content: center;
     width: 100%;
     text-align: center;
@@ -13,10 +16,25 @@
 .footer p span {
     margin-inline: 0.5em;
 }
-
+.footer__copyright {
+    color: var(--color-neutral-500);
+    height: 100%;
+    
+}
 .footer__socials {
     list-style: none;
     display: flex;
     align-items: center;
     gap: var(--spacing-md);
+}
+@container footer-container (max-width: 400px){
+    .footer__socials {
+    }
+    .footer__socials li  {
+        width: 100%;
+    }
+    .footer__socials li .contact-link {
+        /* border: 1px solid red; */
+        width: fit-content;
+    }
 }

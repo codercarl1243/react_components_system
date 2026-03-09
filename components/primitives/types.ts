@@ -29,6 +29,8 @@ export type BaseStyleProps = {
      * Channels may be combined.
      */
     paint?: Paint;
+    
+    container?: boolean;
 } & {
     'data-style'?: never;
     'data-appearance'?: never;

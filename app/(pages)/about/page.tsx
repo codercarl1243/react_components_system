@@ -153,7 +153,7 @@ export default function AboutPage() {
                     Get in touch
                 </Heading>
                 <ContactLinks />
-                <p className="divider-w-text" data-subtle="true">
+                <p className="divider" data-subtle="true">
                     <span className="divider__content">or send a message</span>
                 </p>
                 <ContactForm />

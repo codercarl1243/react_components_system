@@ -7,6 +7,7 @@
   line-height: var(--line-height-relaxed);
   font-size: var(--font-size-base, inherit);
 }
+
 .list--none,
 .list--none li {
   padding: 0;
@@ -17,7 +18,7 @@
   padding-inline-start: 1.25em;
 }
 
-.list li::before {
+.list:not(.list--none) li::before {
   --list-marker-bg-color: var(--background-color, transparent);
   --list-color: var(--foreground-color, var(--color-secondary-400));
   --list-border: none;

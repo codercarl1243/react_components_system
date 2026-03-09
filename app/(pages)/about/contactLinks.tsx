@@ -2,7 +2,7 @@
 
 import Icon from "@/components/icon";
 import { Block } from "@/components/primitives";
-import { RiMailSendLine, RiGithubFill, RiLinkedinLine, RiDiscordLine, RiCheckFill } from "@remixicon/react";
+import { RiMailSendLine, RiGithubFill, RiLinkedinLine, RiDiscordLine } from "@remixicon/react";
 import Link from "@/components/link";
 import { useEffect, useState } from "react";
 import { logError } from "@/lib/logging/log";
@@ -32,7 +32,7 @@ export default function ContactLinks() {
             variant="neutral"
             variantAppearance="filled"
             paint="all"
-            className="about-contact__contact-links surface-frame p-8">
+            className="contact-links__grid surface-frame p-8">
             <li>
                 <Link className="contact-link" href="mailto:codercarl1243@gmail.com" showExternalIcon={false}>
                     <Icon className="contact-link__icon" icon={RiMailSendLine} /><span>Email</span>

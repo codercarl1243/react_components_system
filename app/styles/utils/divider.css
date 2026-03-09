@@ -1,36 +1,20 @@
-.divider,
-.divider-w-text {
+.divider {
     --divider-color: var(--color-neutral-a6);
     --content-color: var(--foreground-on-surface);
     --divider-inset: var(--frame-inset, var(--spacing-xl));
 }
 
-.divider[data-subtle="true"],
-.divider-w-text[data-subtle="true"] {
+.divider[data-subtle="true"] {
     --divider-color: var(--color-neutral-a2);
     --content-color: var(--color-neutral-a6);
 }
 
-/*
-    Simple divider
-*/
 .divider {
-    height: 1px;
-    background: var(--divider-color);
-    inset-inline: var(--divider-inset);
-}
-
-/*
-    Divider with text
-*/
-.divider-w-text {
     position: relative;
     text-align: center;
 }
 
-
-
-.divider-w-text::before {
+.divider::before {
     content: "";
     position: absolute;
     inset-inline: var(--divider-inset);
@@ -45,16 +29,15 @@
     transition: transform 500ms ease-in-out, background 500ms ease;
     pointer-events: none;
 }
-
 /* 
     Animate the divider and grow it if the section wrapping it receives focus 
 */
-.divider-wrapper:focus-within .divider-w-text::before {
+.divider-wrapper:focus-within .divider::before {
     transform: translateY(-50%) scaleX(1);
     background: var(--color-neutral-a4);
 }
 
-.divider-w-text .divider__content {
+.divider .divider__content {
     position: relative;
     display: inline-block;
     line-height: 1;
