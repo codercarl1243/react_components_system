@@ -33,3 +33,8 @@
     margin-inline: var(--spacing-sm);
     padding: var(--spacing-lg);
 }
+
+.contact-form .input-group__input {
+    background-color: var(--color-neutral-100);
+    color: var(--color-neutral-900);
+}

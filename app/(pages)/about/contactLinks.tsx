@@ -30,7 +30,7 @@ export default function ContactLinks() {
         <Block
             as="ul"
             variant="neutral"
-            variantAppearance="filled"
+            variantAppearance="outlined"
             paint="all"
             className="contact-links__grid surface-frame p-8">
             <li>
