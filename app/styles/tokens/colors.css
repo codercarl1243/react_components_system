@@ -24,7 +24,7 @@
 
         /* Danger */
         --color-danger-100: hsl(0, 32%, 95%);
-        --color-danger-200: hsl(0, 32%, 86%);
+        --color-danger-200: hsl(0, 32%, 75%);
         --color-danger-400: hsl(0, 87%, 35%);
         --color-danger-600: hsl(0, 86%, 29%);
 
@@ -81,7 +81,8 @@
 
         /* Interactive element colors */
         --color-link-100: hsl(218, 61%, 92%);
-        --color-link-200: hsl(220, 65%, 82%);
+        --color-link-200: #b3c7ef;
+        color: hsl(220, 70%, 55%);
         --color-link-400: hsl(220, 70%, 45%);
         --color-link-600: hsl(220, 75%, 32%);
     }
