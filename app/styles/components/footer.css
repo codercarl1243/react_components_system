@@ -19,7 +19,7 @@
     gap: var(--gap)
 }
 
-.footer__socials svg,
+.footer__socials .socials__item:not(.buyMeACoffee__Link) svg,
 .nav__secondary .nav__list svg {
     display: none;
 }
