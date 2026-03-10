@@ -19,7 +19,7 @@
     gap: var(--gap)
 }
 
-.footer__socials .socials__item:not(.buyMeACoffee__Link) svg,
+.footer__socials svg:not(.handWithHeartIcon),
 .nav__secondary .nav__list svg {
     display: none;
 }
@@ -40,9 +40,6 @@
 
 .footer__copyright {
     color: var(--color-neutral-400);
-    height: 100%;
-    width: 100%;
-    display: block;
     text-align: center;
 }
 
