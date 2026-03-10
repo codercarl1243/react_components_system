@@ -49,20 +49,24 @@ export default function ContactLinks() {
                 </Link>
             </li>
             <li>
-                <button
+                <Block
+                    as="button"
                     type="button"
+                    variant="neutral"
+                    variantAppearance="filled"
+                    paint={['background', 'foreground']}
                     className="contact-link"
                     onClick={copyToClipboard}
                     aria-label="Copy Discord username"
                 >
                     <Icon className="contact-link__icon" icon={RiDiscordLine} />
                     <span>coder_carl</span>
-                    <span 
-                    className="contact-link__state-message" 
-                    aria-live="polite"
-                    data-display={copied}
+                    <span
+                        className="contact-link__state-message"
+                        aria-live="polite"
+                        data-display={copied}
                     >{copied ? "Copied!" : ""}</span>
-                </button>
+                </Block>
             </li>
         </Block>
     )
