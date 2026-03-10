@@ -1,59 +1,53 @@
 import clsx from 'clsx'
 import type { ComponentProps } from 'react'
 import Link from '@/components/link'
-import { Block, Inline, Stack } from '@/components/primitives'
+import { Block } from '@/components/primitives'
 import BuyMeACoffeeCTA from '../buyMeACoffeeCTA'
 import { RiMailSendLine, RiGithubFill, RiLinkedinLine } from '@remixicon/react'
 import Icon from '@/components/icon'
-import NavLinks from './navLinks'
+import NavLinks from '@/components/navLinks'
+import List from '@/components/list'
 
 export default function Footer({ className, ...props }: ComponentProps<'footer'>) {
   const year = new Date().getFullYear()
 
   return (
-    <Stack as="footer" gap={8} className={clsx('footer mt-16', className)} {...props} >
+    <footer className={clsx('footer footer-container flow-8 mt-16', className)} {...props} >
       <div className='divider' />
-      <Stack align="center" gap={8}>
-        <Inline
-          as="nav"
-          aria-label="Footer navigation"
-          justify="center"
-          gap={16}
-          className="footer__nav mx-auto"
-        >
-        </Inline>
+      <Block className='footer__content flow-8'>
         <NavLinks
           className='nav__secondary'
           aria-label="Secondary"
           showHome={true}
         />
-        <Block
+        <List
           as="ul"
-          variant="neutral"
-          variantAppearance="filled"
-          paint="all"
-          className='footer__socials contact-links__grid surface-frame mx-auto px-2'>
-          <li><BuyMeACoffeeCTA /></li>
+          marker='none'
+          className='footer__socials'>
           <li>
-            <Link className="contact-link contact-link--external" href="mailto:codercarl1243@gmail.com">
-              <Icon className="contact-link__icon" icon={RiMailSendLine} /><span>Email</span>
+            <Link className="socials__item" showExternalIcon={false} href="mailto:codercarl1243@gmail.com">
+              <Icon icon={RiMailSendLine} color='currentcolor' />
+              <span>Email</span>
             </Link>
           </li>
           <li>
-            <Link className="contact-link contact-link--external" href="https://github.com/codercarl1243">
-              <Icon className="contact-link__icon" icon={RiGithubFill} /><span>Github</span>
+            <Link className="socials__item" showExternalIcon={false} href="https://github.com/codercarl1243">
+              <Icon icon={RiGithubFill} color='currentcolor' />
+              <span>Github</span>
             </Link>
           </li>
           <li>
-            <Link className="contact-link contact-link--external" href="https://www.linkedin.com/in/carl-davidson/">
-              <Icon className="contact-link__icon" icon={RiLinkedinLine} /><span>LinkedIn</span>
+            <Link className="socials__item" showExternalIcon={false} href="https://www.linkedin.com/in/carl-davidson/">
+              <Icon icon={RiLinkedinLine} color='currentcolor' />
+              <span>LinkedIn</span>
             </Link>
           </li>
-        </Block>
-      </Stack>
-      <p className="footer__copyright">
+          <li><BuyMeACoffeeCTA className='socials__item' showExternalIcon={false} /></li>
+        </List>
+      </Block>
+      <p className="footer__copyright mx-auto">
         &copy; {year} Carl Davidson. All rights reserved.
       </p>
-    </Stack>
+    </footer>
   )
 }
