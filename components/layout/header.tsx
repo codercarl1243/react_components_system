@@ -4,7 +4,7 @@ import { type ComponentProps } from 'react'
 import SkipLink from '@/components/skiplink'
 import { Hamburger } from '@/components/hamburger'
 import { RiMenuLine } from '@remixicon/react'
-import NavLinks from './navLinks'
+import NavLinks from '@/components/navLinks'
 import DarkModeSwitch from '../darkModeSwitch'
 import BubbleButton from '../bubbles/bubbleButton'
 
