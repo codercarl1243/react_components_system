@@ -9,7 +9,7 @@
 }
 
 .list--none,
-.list--none li {
+.list--none > li {
   padding: 0;
 }
 
