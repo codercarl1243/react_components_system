@@ -1,4 +1,5 @@
-'use client'
+'use client';
+
 import { logWarning } from '@/lib/logging/log'
 import { handleKeyPress } from '@/lib/utils/keyboardHandlers'
 import type { KeyPressCallbackMap } from '@/lib/utils/keyboardHandlers.type'
@@ -18,45 +19,45 @@ export default function useTablist(defaultTabId?: string) {
         tab.getAttribute('disabled') !== 'true'
       )
       .map(tab => ({
-        id: tab.id.replace('tab-', ''),
+        id: tab.getAttribute('data-tab-id') ?? tab.id.replace('tab-', ''),
         element: tab as HTMLElement
       }))
   }, [])
 
   // Initialize active tab
   useEffect(() => {
-    const tabs = getTabs()
-    if (tabs.length === 0) return // No tabs to work with
+    const tabs = getTabs();
+    if (tabs.length === 0) return; // No tabs to work with
 
     if (activeId) {
       const activeTabExists = tabs.some(tab => tab.id === activeId)
       if (activeTabExists) {
-        return
+        return;
       }
 
-      logWarning(`Tab with id "${activeId}" not found, falling back to first tab`)
+      logWarning(`Tab with id "${activeId}" not found, falling back to first tab`);
     }
 
-    setActiveId(tabs[0].id)
-  }, [activeId])
+    setActiveId(tabs[0].id);
+  }, [activeId, getTabs])
 
   const focusTab = useCallback((id: string) => {
-    if (!id) return
-    const tabs = getTabs()
-    const tab = tabs.find(t => t.id === id)
+    if (!id) return;
+    const tabs = getTabs();
+    const tab = tabs.find(t => t.id === id);
     if (!tab ||
       tab.element.getAttribute('aria-disabled') === 'true' ||
       tab.element.getAttribute('disabled') === 'true'
-    ) return
+    ) return;
 
-    tab.element.focus()
-    setActiveId(id)
-  }, [])
+    tab.element.focus();
+    setActiveId(id);
+  }, [getTabs])
 
   const focusPanel = useCallback((id: string | undefined) => {
     if (!id) return
-    const panel = document.getElementById(`panel-${id}`)
-    panel?.focus()
+    const panel = document.querySelector<HTMLElement>(`[role="tabpanel"][data-panel-id="${id}"]`);
+    panel?.focus();
   }, [])
 
   const handleKeyDown = useCallback((e: KeyboardEvent<HTMLDivElement>) => {
