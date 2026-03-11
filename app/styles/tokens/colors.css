@@ -81,8 +81,7 @@
 
         /* Interactive element colors */
         --color-link-100: hsl(218, 61%, 92%);
-        --color-link-200: #b3c7ef;
-        color: hsl(220, 70%, 55%);
+        --color-link-200: hsl(220, 65%, 82%);
         --color-link-400: hsl(220, 70%, 45%);
         --color-link-600: hsl(220, 75%, 32%);
     }
