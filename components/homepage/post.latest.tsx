@@ -23,7 +23,6 @@ export default function LatestPosts() {
             </li>
           )}
 
-          {/* {[...posts,...posts,...posts].map(post => ( */}
           {posts.map(post => (
             <li key={post.id} className="content-grid__item latest-post latest-posts__item">
               <PostCard post={post} layout="default" />
