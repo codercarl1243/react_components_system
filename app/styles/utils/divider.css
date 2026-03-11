@@ -2,11 +2,13 @@
     --divider-color: var(--color-neutral-a6);
     --content-color: var(--foreground-on-surface);
     --divider-inset: var(--frame-inset, var(--spacing-xl));
+    --divider-focus-background: var(--color-neutral-a4);
 }
 
 .divider[data-subtle="true"] {
     --divider-color: var(--color-neutral-a2);
     --content-color: var(--color-neutral-a6);
+    --divider-focus-background: var(--color-neutral-a3);
 }
 
 .divider {
@@ -29,12 +31,13 @@
     transition: transform 500ms ease-in-out, background 500ms ease;
     pointer-events: none;
 }
+
 /* 
     Animate the divider and grow it if the section wrapping it receives focus 
 */
 .divider-wrapper:focus-within .divider::before {
     transform: translateY(-50%) scaleX(1);
-    background: var(--color-neutral-a4);
+    background: var(--divider-focus-background);
 }
 
 .divider .divider__content {
