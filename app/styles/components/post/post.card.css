@@ -101,6 +101,7 @@
 
 .post-card .post-card__link {
     --link-color-override: transparent;
+    
     outline: 0;
 }
 
@@ -108,54 +109,5 @@
     .post-card__image img {
         transform: none;
         transition: none;
-    }
-}
-
-/* grid layout */
-.post-card__grid-container {
-    container-type: inline-size;
-    container-name: posts-grid;
-}
-
-.post-card__grid {
-    --card-grid-col-template: 1fr;
-    display: grid;
-    padding: 0;
-    grid-template-columns: var(--card-grid-col-template);
-    grid-auto-rows: minmax(200px, auto);
-    grid-auto-flow: dense;
-    gap: var(--spacing);
-}
-
-.post-card__grid li {
-    grid-row: auto;
-    grid-column: auto;
-}
-
-@container posts-grid (min-width: 40rem) {
-    .post-card__grid {
-        --card-grid-col-template: repeat(5, 1fr);
-        gap: var(--spacing-lg);
-    }
-
-    /* left hand side */
-    .post-card__grid>li {
-        grid-column: 4/6;
-    }
-
-    .post-card__grid>li[data-layout="large"] {
-        grid-column: 1 / 4;
-        grid-row: span 2;
-    }
-
-    /* Right hand side */
-    .post-card__grid[data-side="right"] {
-        li[data-layout="large"] {
-            grid-column: 3 / 6;
-        }
-
-        li {
-            grid-column: 1 / 3;
-        }
     }
 }

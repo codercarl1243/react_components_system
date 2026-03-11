@@ -1,0 +1,282 @@
+@keyframes float1 {
+    0% {
+        transform: translate(0, 0) rotate(0deg);
+        opacity: 0.8;
+    }
+
+    25% {
+        transform: translate(10px, -40px) rotate(15deg);
+        opacity: 0.75;
+    }
+
+    50% {
+        transform: translate(-5px, -80px) rotate(-10deg);
+        opacity: 0.7;
+    }
+
+    75% {
+        transform: translate(5px, -120px) rotate(8deg);
+        opacity: 0.65;
+    }
+
+    100% {
+        transform: translate(0, -160px) rotate(0deg);
+        opacity: 0.6;
+    }
+}
+
+@keyframes pop {
+    0% {
+        transform: rotate(4deg) scale(1);
+        opacity: inherit;
+        border-width: 1px;
+    }
+
+    50% {
+        transform: rotate(2deg) scale(1.8);
+        opacity: 0.3;
+        border-width: 1px;
+    }
+
+    100% {
+        transform: rotate(0deg) scale(0);
+        opacity: 0;
+        border-width: 1px;
+    }
+}
+
+@keyframes rotate {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    25% {
+        transform: rotate(15deg);
+    }
+
+    50% {
+        transform: rotate(-10deg);
+    }
+
+    75% {
+        transform: rotate(8deg);
+    }
+
+    100% {
+        transform: rotate(0deg);
+    }
+}
+
+@keyframes splatter-out {
+    0% {
+        transform: translate(0, 0) scale(0) rotate(0deg);
+        opacity: 1;
+    }
+
+    20% {
+        transform: translate(calc(var(--end-x) * 0.2), calc(var(--end-y) * 0.2)) scale(1) rotate(90deg);
+        opacity: 0.9;
+    }
+
+    60% {
+        transform: translate(calc(var(--end-x) * 0.8), calc(var(--end-y) * 0.8)) scale(0.8) rotate(270deg);
+        opacity: 0.6;
+    }
+
+    100% {
+        transform: translate(var(--end-x), var(--end-y)) scale(0) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+.bubble {
+    position: fixed;
+    min-width: 44px;
+    min-height: 44px;
+    border-radius: 50%;
+    z-index: 1000;
+    overflow: hidden;
+    border: 1px solid transparent;
+    outline-color: transparent;
+    background: transparent;
+    cursor: pointer;
+    animation: float1 var(--float-duration, 6000ms) ease-in-out infinite;
+    transition: outline-color 100ms ease-in-out, outline-offset 100ms ease-in-out;
+}
+
+.bubble-inner {
+    width: var(--bubble-size);
+    height: var(--bubble-size);
+    border-radius: 50%;
+    border: 2px solid;
+    box-shadow:
+        inset 0 0 20px rgba(255, 255, 255, 0.3),
+        0 0 20px rgba(0, 0, 0, 0.1);
+    background: inherit;
+    border-color: inherit;
+    transition:
+        scale 300ms cubic-bezier(0.34, 1.56, 0.64, 1),
+        rotate 300ms cubic-bezier(0.34, 1.56, 0.64, 1),
+        box-shadow 300ms ease;
+    animation: rotate var(--float-duration, 6000ms) cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
+}
+
+.bubble[data-popping="true"] .bubble-inner {
+    pointer-events: none;
+    animation:
+        rotate var(--float-duration, 6000ms) cubic-bezier(0.25, 0.1, 0.25, 1) forwards,
+        pop 200ms cubic-bezier(0.25, -1, 0, 1) forwards;
+}
+
+
+.bubble::after,
+.bubble::before {
+    pointer-events: none;
+}
+
+/* jiggle on hover and focus-visible */
+.bubble:hover,
+.bubble:focus-visible {
+    outline: 2px solid var(--color-accent-100);
+    outline-offset: 4px;
+
+    &::before {
+        animation: bubble-jiggle 0.5s ease-in-out;
+    }
+}
+
+
+
+/* animated background */
+.bubble::after {
+    content: '';
+    position: absolute;
+    inset: -100%;
+    width: 300%;
+    height: 300%;
+    background: radial-gradient(circle at 30% 30%,
+            var(--color-primary-100),
+            var(--bubble-color, var(--color-secondary-100)),
+            var(--color-accent-200));
+    animation: bubble-drift 5s ease-in-out infinite alternate;
+    z-index: 0;
+}
+
+/* speed up background drift on hover/focus */
+.bubble:hover::after,
+.bubble:focus-visible::after {
+    animation: bubble-drift 3s ease-in-out infinite alternate;
+}
+
+/* highlight crescent */
+.bubble::before {
+    content: '';
+    position: absolute;
+    top: 18%;
+    left: 12%;
+    width: 28%;
+    height: 45%;
+    background: var(--color-neutral-100);
+    border-radius: 50%;
+    opacity: 0.3;
+    filter: blur(2px);
+    transform: rotate(-35deg);
+    z-index: 1;
+}
+
+.splatter {
+    position: fixed;
+    width: var(--splatter-size, 32px);
+    height: var(--splatter-size, 32px);
+    background: radial-gradient(circle, var(--color-neutral-100) 0%, var(--splatter-color) 80%, transparent);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 999;
+    animation: splatter-out 800ms ease-out var(--splatter-animation-delay) forwards;
+    box-shadow: 0 0 6px rgba(53, 148, 155, 0.5);
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    .bubble,
+    .bubble-inner,
+    .splatter {
+        animation: none !important;
+        transition: none !important;
+    }
+}
+
+@keyframes bubble-drift {
+    from {
+        translate: 0% 0%;
+    }
+
+    to {
+        translate: -33% -33%;
+    }
+}
+
+@keyframes bubble-jiggle {
+    0% {
+        transform: rotate(-35deg) scale(1);
+    }
+
+    20% {
+        transform: rotate(-20deg) scale(1.15);
+    }
+
+    40% {
+        transform: rotate(-45deg) scale(0.95);
+    }
+
+    60% {
+        transform: rotate(-25deg) scale(1.1);
+    }
+
+    80% {
+        transform: rotate(-40deg) scale(0.98);
+    }
+
+    100% {
+        transform: rotate(-35deg) scale(1);
+    }
+}
+
+/* bubble card */
+
+
+.bubbles__card {
+    position: fixed;
+    right: 0;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: min(28rem, 90vw);
+    transform: translateX(100%);
+    opacity: 0;
+    transition:
+        transform 280ms cubic-bezier(0.16, 1, 0.3, 1),
+        opacity 200ms ease-out;
+}
+
+.bubbles__card[data-state="open"] {
+    transform: translateX(0);
+    opacity: 1;
+}
+
+/* button present in header */
+.bubble-button {
+    position: relative;
+}
+
+.bubble-button,
+.bubble-button::after,
+.bubble-button::before {
+    animation: none;
+}
+
+.bubble-button:active {
+    outline-color: var(--color-accent-200);
+    outline-offset: 2px;
+    scale: 1.02;
+}

@@ -11,3 +11,4 @@
 .row-justify-center  { justify-content: center; }
 .row-justify-end     { justify-content: flex-end; }
 .row-justify-between { justify-content: space-between; } 
+.row-justify-even    { justify-content: space-evenly; } 

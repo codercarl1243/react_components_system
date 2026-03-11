@@ -1,0 +1,79 @@
+.handWithHeartIcon {
+    overflow: visible;
+    transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+.buyMeACoffee__Link .link__icon {
+   fill: var(--link-color);
+}
+.buyMeACoffee__Link:hover .handWithHeartIcon,
+.buyMeACoffee__Link:focus-visible .handWithHeartIcon {
+    transform: translateY(-2px) scale(0.95);
+    transition-delay: 80ms;
+}
+/* heart baseline */
+.buyMeACoffee__Link #coffee-heart {
+    transform-origin: 50% 60%;
+    transition:
+        transform 120ms ease,
+        fill 120ms ease,
+        filter 120ms ease;
+}
+
+.buyMeACoffee__Link:hover #coffee-heart,
+.buyMeACoffee__Link:focus-visible #coffee-heart {
+    transform: translateY(-1px) scale(1.15);
+    animation: heart-pop 500ms ease forwards;
+}
+
+/* floating heart for pizaz */
+#coffee-heart-float {
+    transform: translateX(-6px);
+    transform-origin: 50% 60%;
+    opacity: 0;
+    fill: var(--color-danger-400);
+}
+
+.buyMeACoffee__Link:hover #coffee-heart-float,
+.buyMeACoffee__Link:focus-visible #coffee-heart-float {
+    animation: heart-float 450ms ease 80ms forwards;
+}
+
+@keyframes heart-pop {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.35);
+    }
+
+    100% {
+        transform: scale(1.2);
+    }
+}
+
+@keyframes heart-float {
+    0% {
+        opacity: 0;
+        transform: translateY(0) scale(0.7);
+    }
+
+    30% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateY(-8px) scale(1.15);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .handWithHeartIcon,
+    #coffee-heart-float,
+   #coffee-heart {
+    animation: none !important;
+    transform: none !important;
+  }
+}

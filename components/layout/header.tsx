@@ -1,72 +1,48 @@
 'use client'
 import clsx from 'clsx'
 import { type ComponentProps } from 'react'
-import { usePathname } from 'next/navigation'
-import Switch from '@/components/button/switch'
 import SkipLink from '@/components/skiplink'
-import Link from '@/components/link'
 import { Hamburger } from '@/components/hamburger'
-import Icon from '@/components/icon'
-import { useTheme } from '@/lib/hooks/useTheme'
-import { RiBookReadFill, RiHomeHeartLine, RiMenuLine, RiMoonClearFill, RiSunLine, RiUser3Fill } from '@remixicon/react'
+import { RiMenuLine } from '@remixicon/react'
+import NavLinks from '@/components/navLinks'
+import DarkModeSwitch from '../darkModeSwitch'
+import BubbleButton from '../bubbles/bubbleButton'
 
 export default function Header({ className, userTheme, ...props }: ComponentProps<'header'> & { userTheme: string }) {
-  const pathname = usePathname()
-  const { theme, toggleTheme } = useTheme(userTheme);
+
   return (
-    <Hamburger.Wrapper
-      as="header"
-      position="left"
-      className={clsx("header--wrapper", className)}
-      breakpoint="mobile"
-      menuId="Primary-Nav"
-      {...props}
-    >
-      <SkipLink />
-      <Hamburger.Toggle
-        variantAppearance='filled'
-        variant='primary'
-        openIcon={RiMenuLine}
+    <>
+      <Hamburger.Wrapper
+        as="header"
+        position="left"
+        className={clsx("header--wrapper", className)}
+        breakpoint="mobile"
+        menuId="Primary-Nav"
+        {...props}
       >
-        Menu
-      </Hamburger.Toggle>
-      <Hamburger.Menu
-        as="nav"
-        className='nav__primary'
-        aria-label="Primary"
-      >
-        {pathname !== '/' && <Link href="/" icon={RiHomeHeartLine}>Home</Link>}
-        <Link
-          href="/blog"
-          className={clsx({ 'active': pathname.startsWith('/blog') })}
-          aria-current={pathname === '/blog' ? 'page' : undefined}
-          icon={RiBookReadFill}
-        >
-          Blog
-        </Link>
-        <Link
-          href="/about"
-          className={clsx({ 'active': pathname === '/about' })}
-          aria-current={pathname === '/about' ? 'page' : undefined}
-          icon={RiUser3Fill}
-        >
-          About
-        </Link>
-        <Switch
-          checked={theme === "dark"}
-          onClick={toggleTheme}
-          aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
-          className='block darkmode__switch px-8 py-4 surface-frame'
-          variant={"light"}
+        <SkipLink />
+        <Hamburger.Toggle
           variantAppearance='filled'
-          paint="all"
-        >{
-            theme === "dark" ?
-              <Icon icon={RiSunLine} variant='warning' />
-              : <Icon icon={RiMoonClearFill} variant='light' />
-          }
-        </Switch>
-      </Hamburger.Menu>
-    </Hamburger.Wrapper>
+          variant='primary'
+          openIcon={RiMenuLine}
+        >
+          Menu
+        </Hamburger.Toggle>
+        <Hamburger.Menu
+          as="div"
+        >
+          <div className='nav__wrapper'>
+            <NavLinks
+              className='nav__primary'
+              aria-label="Primary"
+            />
+            <div className='header__toggles'>
+              <BubbleButton />
+              <DarkModeSwitch userTheme={userTheme} />
+            </div>
+          </div>
+        </Hamburger.Menu>
+      </Hamburger.Wrapper>
+    </>
   )
 }

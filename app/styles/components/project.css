@@ -1,0 +1,39 @@
+.project-card {
+  position: relative;
+  overflow: hidden;
+  outline: 1px solid var(--color-neutral-a2);
+  padding: var(--spacing-lg);
+  background: var(--surface);
+}
+
+.project-card__image {
+  margin-bottom: var(--spacing);
+}
+
+/* .project-card__image {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+} */
+
+.project-card__title {
+  margin: 0;
+}
+
+.project-card__description {
+  opacity: 0.8;
+}
+
+.project-card__tech {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-xs);
+  font-size: 0.85rem;
+  opacity: 0.7;
+}
+
+.project-card__links {
+  margin-top: var(--spacing);
+  display: flex;
+  gap: var(--spacing);
+}

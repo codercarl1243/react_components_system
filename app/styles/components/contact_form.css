@@ -1,3 +1,20 @@
+.contact-form {
+    transition:
+        box-shadow 100ms ease-in-out,
+        outline-color 250ms ease-in-out,
+        transform 250ms ease-in-out,
+        opacity 250ms ease-in-out;
+    border-radius: var(--radius-md);
+}
+
+.contact-form:focus-within {
+    outline-color: var(--color-primary-a4);
+    box-shadow:
+        0 0 0 1px var(--color-neutral-a2),
+        0 8px 24px -8px var(--color-neutral-a2);
+    transform: translateY(-1px);
+}
+
 .contact-form__status {
     --border-color: transparent;
 
@@ -15,4 +32,9 @@
     margin-block: var(--spacing-lg);
     margin-inline: var(--spacing-sm);
     padding: var(--spacing-lg);
+}
+
+.contact-form .input-group__input {
+    background-color: var(--color-neutral-100);
+    color: var(--color-neutral-900);
 }

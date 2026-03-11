@@ -1,0 +1,15 @@
+.darkmode__switch {
+    cursor: pointer;
+    min-width: 44px;
+    aspect-ratio: 1;
+
+    &:hover,
+    &:focus-visible {
+        outline: 1px solid var(--foreground-on-surface);
+        outline-offset: 4px;
+    }
+
+    &:active {
+        outline-style: dashed;
+    }
+}
