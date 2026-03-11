@@ -22,19 +22,16 @@
 .nav__primary ul {
     display: flex;
     width: 100%;
-    padding-inline: var(--spacing-lg);
     gap: var(--gap);
-}
-
-.nav__list__item .icon {
     transition: transform 150ms ease;
 }
 
 .nav__list__item[aria-current="page"] {
     font-weight: 700;
-    opacity: 0.9;
-    text-decoration: underline 2px;
-    text-underline-offset: 0.25em;
+    & .icon {
+        fill: none;
+        stroke: currentColor;
+    }
 }
 
 .nav__list__item:hover .icon,
@@ -83,22 +80,3 @@
         width: 100%;
     }
 }
-
-/*  Move somewhere else  */
-.darkmode__switch {
-    cursor: pointer;
-    min-width: 44px;
-    aspect-ratio: 1;
-
-    &:hover,
-    &:focus-visible {
-        outline: 1px solid var(--foreground-on-surface);
-        outline-offset: 4px;
-    }
-
-    &:active {
-        outline-style: dashed;
-    }
-}
-
-/*  Move somewhere else  */
