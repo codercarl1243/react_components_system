@@ -33,7 +33,7 @@
 .nav__secondary .nav__list,
 .footer .footer__socials {
     display: flex;
-    gap: var(--gap)
+    gap: var(--gap);
 }
 
 .socials__item svg {
