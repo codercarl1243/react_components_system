@@ -1,6 +1,7 @@
-import Heading from '@/components/heading'
-import Octagons from '@/components/octagons'
-import Link from '../link'
+import Heading from '@/components/heading';
+import Octagons from '@/components/octagons';
+import Link from '@/components/link';
+import { Inline } from '@/components/primitives';
 
 export default function Hero() {
 
@@ -13,11 +14,11 @@ export default function Hero() {
       <p className='mb-16'>
         On this site I share my <span className="fun-underline">process</span>, <span className="fun-underline">tools</span>, <span className="fun-underline">lessons</span>, and the occasional bit of <span className="fun-underline">creative chaos</span> from working with the web.
       </p>
-      {/* 
-      add these and style up as CTA's 
-      <Link href="/blog">Read the blog</Link>
-      <Link href="/about">About me</Link>
-*/}
+
+      <Inline>
+        <Link href="/blog">Read the blog</Link>
+        <Link href="/about">About me</Link>
+      </Inline>
     </section>
   )
 }
