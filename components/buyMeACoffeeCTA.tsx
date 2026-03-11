@@ -9,7 +9,6 @@ export default function BuyMeACoffeeCTA({ className, ...props }: LinkProps) {
         <Link
             className={clsx("buyMeACoffee__Link", className)}
             href="https://buymeacoffee.com/codercarl"
-            rel="noopener noreferrer"
             {...props}
         >
             <Icon className="contact-link__icon" icon={handWithHeartIcon} variant="warning" />
