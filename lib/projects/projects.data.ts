@@ -4,15 +4,20 @@ export function getLatestProjects(limit = 3) {
     const sorted = [...projects].sort(
         (a, b) => b.createdAt.getTime() - a.createdAt.getTime()
     )
-
-    const featuredProject = sorted.find(p => p.featured)
-
-    const remaining = sorted
-        .filter(p => p.id !== featuredProject?.id)
-        .slice(0, limit)
-
-    return {
-        featuredProject,
-        projects: remaining
+    if (!sorted.length) {
+        return [];
     }
+
+    const featured: typeof projects = [];
+    const others: typeof projects = [];
+
+    for (const project of sorted) {
+        if (project.featured) {
+            featured.push(project);
+        } else {
+            others.push(project);
+        }
+    }
+
+    return [...featured, ...others].slice(0, Math.max(limit, 1));
 }
