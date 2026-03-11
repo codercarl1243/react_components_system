@@ -4,7 +4,6 @@ import Heading from "@/components/heading";
 import Link from "@/components/link";
 import { Project } from "@/lib/projects/projects.type";
 import List from "@/components/list";
-// import { Project } from "@/lib/projects/projects.data";
 
 type ProjectCardProps = {
     project: Project;
@@ -23,7 +22,6 @@ export default function ProjectCard({
             className={clsx("project-card surface-frame", className)}
             data-layout={layout}
         >
-            {/* <div className="project-card__image"> */}
             <Image
                 className="project-card__image mx-auto"
                 src={project.image.src}
@@ -31,7 +29,6 @@ export default function ProjectCard({
                 width={1000}
                 height={500}
             />
-            {/* </div> */}
             <div className="project-card__content flow-4">
                 <Heading as="h3" className="project-card__title" headingSize={4}>
                     {project.title}

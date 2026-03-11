@@ -5,11 +5,11 @@ import Link from "@/components/link";
 import { getLatestProjects } from "@/lib/projects/projects.data";
 
 export default function LatestProjects() {
-    const { featuredProject, projects } = getLatestProjects()
-    
-    if(!featuredProject) {
-      return null;
-    }
+  const projects = getLatestProjects()
+
+  if (!projects || projects.length === 0) {
+    return null;
+  }
   return (
     <Block
       as="section"
@@ -22,8 +22,8 @@ export default function LatestProjects() {
       >
         Featured Project
       </Heading>
+      {projects.map((project) => <ProjectCard key={project.id} project={project} layout={project.featured ? "large" : "default"} />)}
 
-      <ProjectCard project={featuredProject} layout="large" />
 
       <div className="center mt-16">
         <Link href="/projects">View project details →</Link>
