@@ -75,6 +75,7 @@ export default function Block<T extends ElementType = "div">({
     paint,
     className,
     children,
+    container,
     ...props
 }: BlockProps<T>) {
 
@@ -84,7 +85,7 @@ export default function Block<T extends ElementType = "div">({
     const paintAttr = toPaintAttribute(paint);
 
     return <Component
-        className={clsx("block", className)}
+        className={clsx("block", { "container": container }, className)}
         {...applyDataAttributes({ variant, appearance: variantAppearance, paint: paintAttr })}
         {...props}
     >
