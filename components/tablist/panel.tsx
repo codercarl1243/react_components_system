@@ -1,3 +1,5 @@
+"use client";
+
 import { TabPanelProps } from '@/components/tablist/tablist.type'
 import clsx from 'clsx'
 

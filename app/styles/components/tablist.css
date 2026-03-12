@@ -1,8 +1,5 @@
 .tablist {
-
     min-width: 0;
-    /* outline: 1px solid red; 
-    outline-offset: 2px; */
     height: max(10rem, 100%);
 }
 
@@ -16,7 +13,6 @@
     gap: var(--spacing);
 
     &::-webkit-scrollbar {
-        /* height: 6px; */
         cursor: pointer;
     }
 
@@ -95,7 +91,6 @@
 }
 
 .code__reference {
-    /* background-color: var(--color-code-dark); */
     padding-inline: 1em;
     padding-block-end: 1em;
 
@@ -104,11 +99,6 @@
     }
 
     &.height-min .tablist__content {
-
-        /* &::-webkit-scrollbar-track {
-        background: transparent;
-    } */
-
         max-height: 30.2rem;
         overflow-y: scroll;
     }
