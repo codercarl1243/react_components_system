@@ -1,6 +1,8 @@
+"use client";
+
 import Heading from "@/components/heading";
-import Tablist from "@/components/tablist";
 import { getLatestProjects } from "@/lib/projects/projects.data";
+import ProjectsTablist from "./content/projectsTablist";
 
 // WIP
 export default function ProjectsPage() {
@@ -20,22 +22,7 @@ export default function ProjectsPage() {
     return (
         <div className="layout-wrapper flow-8 projects-page">
             <Heading as="h1" headingSize={2}>Projects</Heading>
-
-            <Tablist
-                defaultActiveTabId="televi"
-                tabListName={"projects"}
-                orientation="vertical"
-                tabs={
-                    projects.map(project => {
-                        return {
-                            id: project.id,
-                            tabLabel: project.title,
-                            panelContent: project.content()
-                        }
-                    })
-                }
-                variant={"neutral"}
-            />
+            <ProjectsTablist projects={projects} />
         </div>
     )
 }

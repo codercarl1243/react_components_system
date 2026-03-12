@@ -1,9 +1,8 @@
 import Link from "@/components/link";
-import { Block } from "@/components/primitives";
 
 export default function TeleviContent() {
   return (
-    <Block paint="all" variant="neutral" variantAppearance="filled">
+    <div>
       <p>
         <strong>Televi (テレビ)</strong> — a lightweight Japanese IPTV viewer
         combining live streams with an automatically generated programme guide.
@@ -26,6 +25,6 @@ export default function TeleviContent() {
       <Link href="https://github.com/codercarl1243/japanTelevi">
         View code on GitHub
       </Link>
-    </Block>
+    </div>
   )
 }
