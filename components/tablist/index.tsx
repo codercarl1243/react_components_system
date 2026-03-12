@@ -13,7 +13,7 @@ export default function TabList({
     tabs,
     orientation = 'horizontal',
     className,
-    variant,
+    variant = "accent",
     ...props }: TabListProps) {
 
     const {
@@ -28,12 +28,11 @@ export default function TabList({
     return (
         <Block
             className={clsx(`tablist surface-frame tablist--${orientation}`, className)}
-            variant='muted'
-            variantAppearance='filled'
-            paint="all"
             data-orientation={orientation}
             {...props}
-
+            variant='light'
+            variantAppearance='filled'
+            paint="all"
         >
             <div
                 className="tablist__header"
@@ -54,8 +53,8 @@ export default function TabList({
                             panelId={panelId}
                             isSelected={activeId === item.id}
                             onClick={() => setActiveTab(item.id)}
-                            variantAppearance={"tonal"}
-                            variant={activeId === item.id ? "neutral" : variant}
+                            variantAppearance={activeId === item.id ? "tonal" : "filled"}
+                            variant={activeId === item.id ? variant : "light"}
                         >
                             {item.tabLabel}
                         </Tab>
