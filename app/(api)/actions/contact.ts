@@ -31,11 +31,30 @@ export async function handleContact(prevState: ContactActionState, formData: For
     let formErrors: ContactActionState['formErrors'] = [];
     let fieldErrors: ContactActionState['fieldErrors'] = {};
 
+    const onlyBotsubmitThis = formData.get("company");
+
+    if (typeof onlyBotsubmitThis === "string" && onlyBotsubmitThis.trim() !== "") {
+        logInfo("Bot submission blocked", {
+            context: "contact form",
+            data: {
+                type: "honeypot_triggered",
+                timestamp: new Date().toISOString()
+            }
+        });
+        // bot detected — pretend success but ignore
+        return {
+            status: "success",
+            message: "Your message has been sent successfully!",
+            fieldErrors: {},
+            formErrors: [],
+        };
+    }
     const result = ContactSchema.safeParse({
         name: formData.get("name"),
         email: formData.get("email"),
         message: formData.get("message"),
     });
+
 
     if (!result.success) {
         fieldErrors = result.error.issues.reduce<Partial<Record<ContactFields, string>>>(
