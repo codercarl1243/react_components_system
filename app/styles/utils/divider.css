@@ -2,13 +2,13 @@
     --divider-color: var(--color-neutral-a6);
     --content-color: var(--foreground-on-surface);
     --divider-inset: var(--frame-inset, var(--spacing-xl));
-    --divider-focus-background: var(--color-neutral-a4);
+    --divider-focus-background: var(--color-neutral-a6);
 }
 
 .divider[data-subtle="true"] {
     --divider-color: var(--color-neutral-a2);
     --content-color: var(--color-neutral-a6);
-    --divider-focus-background: var(--color-neutral-a3);
+    --divider-focus-background: var(--color-neutral-a4);
 }
 
 .divider {
@@ -37,7 +37,7 @@
 */
 .divider-wrapper:focus-within .divider::before {
     transform: translateY(-50%) scaleX(1);
-    background: var(--divider-focus-background);
+    --divider-color: var(--divider-focus-background);
 }
 
 .divider .divider__content {

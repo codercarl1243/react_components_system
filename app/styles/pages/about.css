@@ -69,11 +69,13 @@
         outline-color 160ms ease,
         transform 160ms ease;
 }
+
 .contact-link.contact-link--external {
-  grid-template-columns: 1.5rem auto 1rem;
+    grid-template-columns: 1.5rem auto 1rem;
 }
+
 .contact-link.contact-link--external .icon {
-color: var(--color-neutral-a4);
+    color: var(--color-neutral-a4);
 }
 
 .contact-link[type="button"] {
@@ -102,15 +104,15 @@ color: var(--color-neutral-a4);
 }
 
 .contact-link__state-message::after {
-  content: "";
-  position: absolute;
-  bottom: -4px;
-  right: 10px;
-  width: 8px;
-  height: 8px;
-  background: var(--surface);
-  transform: rotate(45deg) scale(1);
-  box-shadow: 1px 1px 0 var(--color-neutral-a2);
+    content: "";
+    position: absolute;
+    bottom: -4px;
+    right: 10px;
+    width: 8px;
+    height: 8px;
+    background: var(--surface);
+    transform: rotate(45deg) scale(1);
+    box-shadow: 1px 1px 0 var(--color-neutral-a2);
 }
 
 .contact-link:hover,

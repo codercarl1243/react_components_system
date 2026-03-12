@@ -67,12 +67,6 @@ export default function useTablist(defaultTabId?: string) {
     setActiveId(id);
   }, [getTabs])
 
-  const focusPanel = useCallback((panelId: string | undefined) => {
-    if (!panelId) return
-    const panel = document.getElementById(panelId) as HTMLElement | null;
-    panel?.focus();
-  }, [])
-
   const handleKeyDown = useCallback((e: KeyboardEvent<HTMLDivElement>) => {
     const activeElement = document.activeElement as HTMLElement;
 
@@ -117,7 +111,7 @@ export default function useTablist(defaultTabId?: string) {
     }
 
     handleKeyPress(e, keyMap);
-  }, [activeId, getTabs, focusTab, focusPanel])
+  }, [activeId, getTabs, focusTab])
 
   return {
     activeId,

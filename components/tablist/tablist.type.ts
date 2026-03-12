@@ -1,5 +1,6 @@
 import type { ComponentProps, ReactNode } from 'react'
 import type { ButtonProps } from '@/components/button/button.type'
+import type { Variant } from '@/types/variant';
 
 type commonProps = {
   itemId: string;
@@ -30,6 +31,6 @@ export type TabListProps = Readonly<{
   tabs: TabItem[];
   orientation?: 'vertical' | 'horizontal';
   defaultActiveTabId?: string;
-  variant: ButtonProps['variant'];
+  variant?: Variant;
   // TODO: figure out what I want to do re: heading for the tablist which can be used as an aria label or a Heading element
 } & Omit<ComponentProps<'div'>, 'children' | 'role' | 'onKeyDown' | 'aria-orientation' | 'aria-label'>>;

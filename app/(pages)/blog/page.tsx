@@ -59,9 +59,10 @@ export default function BlogPage() {
           <li><BlogLink postId="design__primitives_01">Primitives & Styling Boundaries</BlogLink></li>
           <li>Essential Components for everyday sites:
             <List as="ul" marker='circle' spacing='loose' className='mt-8'>
-              <li><BlogLink postId="">Button <span className="text-muted">(coming soon)</span></BlogLink></li>
-              <li><BlogLink postId="">Link <span className="text-muted">(coming soon)</span></BlogLink></li>
-              <li><BlogLink postId="">Image <span className="text-muted">(coming soon)</span></BlogLink></li>
+              <li>Button <span className="italic text-sm">(coming soon)</span></li>
+              <li>Link <span className="italic text-sm">(coming soon)</span></li>
+              <li>Image <span className="italic text-sm">(coming soon)</span></li>
+
             </List>
           </li>
         </List>
@@ -74,10 +75,12 @@ export default function BlogPage() {
         <List as="ul" marker="none" className='post-card__grid-container p-0 flow-6'>
           {groups.map((group, index) => {
             return (<li key={"post-card__grid-group" + index}>
-            <List as="ul" marker="none" className='post-card__grid p-0' data-side={index % 2 ? "right" : "left"}>
-              {group}
-            </List>
-          </li>)
+              <List as="ul" marker="none" className='post-card__grid p-0' 
+              // data-side={index % 2 ? "right" : "left"}
+              >
+                {group}
+              </List>
+            </li>)
           })}
         </List>
       </PostSection>
