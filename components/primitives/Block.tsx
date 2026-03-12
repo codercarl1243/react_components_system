@@ -2,7 +2,6 @@ import type { ElementType } from "react";
 import type { BlockProps } from "@/components/primitives/types";
 import { applyDataAttributes } from "@/lib/utils/applyDataAttributes";
 import clsx from "clsx";
-import { wrapChildrenTextWithSiblings } from "@/lib/utils/react/wrapChildrenTextWithSiblings";
 import validatePaint from "@/lib/utils/design-system/validatePaint";
 import toPaintAttribute from "@/lib/utils/design-system/toPaintAttribute";
 
