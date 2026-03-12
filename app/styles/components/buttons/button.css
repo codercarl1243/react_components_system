@@ -6,34 +6,50 @@
     --button-padding-x: var(--spacing-sm);
     --button-icon-width: 24px;
     --button-spinner-width: 24px;
+
     /* WCAG Target Size Requirements */
     /* AA: 24px x 24px minimum, AAA: 44px x 44px minimum */
     min-width: 44px;
     min-height: 44px;
-
-    /* Layout - reserve space for icon and spinner to prevent layout shift*/
     display: grid;
-    grid-template-areas: "content spinner";
-    grid-template-columns: fit-content(100%) var(--button-spinner-width);
-    gap: var(--spacing);
-    align-items: center;
-    white-space: nowrap;
 
-    /* icon | text | spinner */
-
-    &>* {
-        grid-area: content;
-    }
-
-    & .spinner {
-        grid-area: spinner;
-        justify-self: center;
-    }
-
+    /* Layout - reserve space for icon and spinner to prevent layout shift */
     &.button-w-icon {
+        grid-template-areas: "icon content";
+        grid-template-columns: var(--button-icon-width) fit-content(100%);
+
+        .icon {
+            grid-area: icon;
+            justify-self: center;
+        }
+
+        &>* {
+            grid-area: content;
+        }
+    }
+
+    &.button-w-spinner {
+        grid-template-areas: "content spinner";
+        grid-template-columns: fit-content(100%) var(--button-spinner-width);
+
+        .spinner {
+            grid-area: spinner;
+            justify-self: center;
+        }
+
+        &>* {
+            grid-area: content;
+        }
+    }
+
+    &.button-w-icon.button-w-spinner {
         grid-template-areas: "icon content spinner";
         grid-template-columns: var(--button-icon-width) fit-content(100%) var(--button-spinner-width);
     }
+
+    gap: var(--spacing);
+    align-items: center;
+    white-space: nowrap;
 
     &.button-w-icon .icon {
         grid-area: icon;
@@ -63,11 +79,7 @@
     vertical-align: middle;
 
     /* Smooth transitions */
-    transition: background-color 0.2s ease,
-    color 0.2s ease,
-    border-color 0.2s ease,
-    outline 0.2s ease,
-    box-shadow 0.2s ease;
+    transition: all 0.2s ease;
 
     /* Interactive states - UX communication through outlines and transforms */
     &:hover {

@@ -46,6 +46,7 @@ export default function Button({
   type = 'button',
   disabled = false,
   isLoading = false,
+  showSpinner = false,
   ref,
   icon,
   ...props
@@ -86,7 +87,7 @@ export default function Button({
   return (
     <Block
       as="button"
-      className={clsx(className, { 'button-w-icon': icon }, 'button')}
+      className={clsx(className, { 'button-w-icon': icon }, { 'button-w-spinner': showSpinner }, 'button')}
       onClick={onClickHandler}
       aria-disabled={isLoading || disabled}
       data-loading={isLoading}
@@ -100,7 +101,7 @@ export default function Button({
     >
       {icon && <Icon icon={icon} />}
       <span className='button__content'>{children}</span>
-      {isLoading && <Spinner />}
+      {(showSpinner && isLoading) && <Spinner />}
     </Block>
   )
 }

@@ -15,6 +15,7 @@ type BaseButtonProps = {
   onClick?: ButtonClickHandler;
   variant?: Variant;
   appearance?: VariantAppearance;
+  showSpinner?: boolean;
 };
 
 export type ButtonProps = Omit<BlockWrapperProps<"button", BaseButtonProps>, 'as'>

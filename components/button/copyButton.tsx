@@ -48,8 +48,8 @@ export function CopyButton({ text }: CopyButtonProps) {
   return (
     <Button
       onClick={copyToClipboard}
-      variantAppearance={copied ? 'outlined' : 'filled'}
-      variant={error ? 'inverse' : 'accent'}
+      variantAppearance={'tonal'}
+      variant={error ? 'light' : 'accent'}
       aria-label="Copy to clipboard"
       title={error ? 'Copy failed' : copied ? 'Copied!' : 'Copy to clipboard'}
       className='button--copy'
@@ -61,7 +61,7 @@ export function CopyButton({ text }: CopyButtonProps) {
         )
         : copied
           ? (
-            <Icon icon={RiCheckFill} variant='accent' />
+            <Icon icon={RiCheckFill} />
           )
           : (
             <Icon icon={RiFileCopyLine} />
