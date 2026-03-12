@@ -19,7 +19,7 @@ export default function Panel({
       className={clsx('tablist__content-panel', className)}
       role="tabpanel"
       aria-labelledby={tabId}
-      tabIndex={-1}
+      tabIndex={0}
       hidden={hidden}
     />
   )
