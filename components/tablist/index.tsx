@@ -1,4 +1,5 @@
-'use client'
+'use client';
+
 import type { TabListProps } from '@/components/tablist/tablist.type'
 import Tab from '@/components/tablist/tab'
 import useTablist from '@/components/tablist/useTablist'
@@ -25,13 +26,14 @@ export default function TabList({
     if (!tabs?.length) return null
 
     return (
-        <Block 
-        className={clsx('tablist surface-frame', className)} 
-        variant='muted'
-        variantAppearance='filled'
-        paint="all"
-        {...props}
-        
+        <Block
+            className={clsx(`tablist surface-frame tablist--${orientation}`, className)}
+            variant='muted'
+            variantAppearance='filled'
+            paint="all"
+            data-orientation={orientation}
+            {...props}
+
         >
             <div
                 className="tablist__header"
@@ -42,11 +44,14 @@ export default function TabList({
             >
                 {tabs.map(item => {
                     const tabId = `${tabListName}-tab-${item.id}`;
+                    const panelId = `${tabListName}-panel-${item.id}`;
 
                     return (
                         <Tab
                             key={tabId}
-                            id={item.id}
+                            itemId={item.id}
+                            tabId={tabId}
+                            panelId={panelId}
                             isSelected={activeId === item.id}
                             onClick={() => setActiveTab(item.id)}
                             variantAppearance={"tonal"}
@@ -58,15 +63,22 @@ export default function TabList({
                 })}
             </div>
             <div className="tablist__content">
-                {tabs.map(item => (
-                    <Panel
-                        key={`${tabListName}-panel-${item.id}`}
-                        id={item.id}
-                        hidden={activeId !== item.id}
-                    >
-                        {item.panelContent}
-                    </Panel>
-                ))}
+                {tabs.map(item => {
+                    const tabId = `${tabListName}-tab-${item.id}`;
+                    const panelId = `${tabListName}-panel-${item.id}`;
+                    return (
+                        <Panel
+                            key={`${tabListName}-panel-${item.id}`}
+                            itemId={item.id}
+                            tabId={tabId}
+                            panelId={panelId}
+                            hidden={activeId !== item.id}
+                        >
+                            {item.panelContent}
+                        </Panel>
+                    )
+                })
+                }
             </div>
         </Block>
     )
