@@ -1,6 +1,14 @@
-.button--copy {
-    display: inline-block;
+.button.button--copy {
     --button-margin: 6px;
     --button-padding-x: 12px;
     --button-padding-y: 12px;
+    --button-outline-offset: 2px;
+
+    outline-width: 2px;
+
+    &:focus-visible,
+    &:active,
+    &[data-pressed="true"] {
+        box-shadow: 0 0 4px 4px var(--color-neutral-100);
+    }
 }
