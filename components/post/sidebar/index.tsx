@@ -1,11 +1,11 @@
-'use client';
-import { Children } from 'react'
-import clsx from 'clsx'
-import TableOfContents from './TableOfContents';
-import Author from './author';
-import { PostSideBarProps } from './sidebar.type';
-import { RiMenuFold3Line } from '@remixicon/react';
-import { Hamburger } from '@/components/hamburger';
+"use client";
+import { Children } from "react"
+import clsx from "clsx"
+import TableOfContents from "./TableOfContents";
+import Author from "./author";
+import { PostSideBarProps } from "./sidebar.type";
+import { RiMenuFold3Line } from "@remixicon/react";
+import { Hamburger } from "@/components/hamburger";
 
 /**
  * Render a post sidebar containing an optional table of contents, related posts and an author box.
@@ -44,13 +44,14 @@ export default function PostSideBar({
     return (
         <Hamburger.Wrapper
             as="div"
-            position="right"
-            className='side-bar--wrapper'
+            horizontal="left"
+            vertical="bottom"
+            className="side-bar--wrapper"
             breakpoint="tablet"
         >
             <Hamburger.Toggle
                 className="sidebar-toggle-button"
-                variant='neutral'
+                variant="neutral"
                 ariaLabelWhenClosed="Open table of contents"
                 ariaLabelWhenOpen="Close table of contents"
                 openIcon={RiMenuFold3Line}
@@ -58,7 +59,7 @@ export default function PostSideBar({
                 <span aria-hidden="true">Contents</span>
             </Hamburger.Toggle>
             <Hamburger.Menu
-                className={clsx('post-sidebar flow-8', className)}
+                className={clsx("post-sidebar flow-8", className)}
                 {...props}
             >
                 {hasContents && <TableOfContents contents={contents} />}

@@ -8,7 +8,8 @@ import type { HamburgerState, useHamburgerProps } from '@/components/hamburger/h
 
 export default function useHamburger({
   id,
-  position = "left",
+  horizontal = "left",
+  vertical = "top",
   breakpoint = "mobile",
   wrapperRef
   }: useHamburgerProps) {
@@ -90,6 +91,7 @@ export default function useHamburger({
     menuId,
     menuRef,
     buttonRef,
-    position
+    horizontal,
+    vertical
   };
 }

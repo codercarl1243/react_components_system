@@ -28,6 +28,7 @@
 
 .nav__list__item[aria-current="page"] {
     font-weight: 700;
+
     & .icon {
         fill: none;
         stroke: currentColor;
@@ -43,13 +44,13 @@
     margin-block-start: auto;
     flex-wrap: nowrap;
     justify-content: space-between;
+    padding-inline: var(--spacing-lg);
 }
 
 /*  > mobile 560px+ */
 @media screen and (min-width: 35.01rem) {
     .nav__wrapper {
         flex-direction: row;
-        /* min-height: 5rem; */
         width: clamp(var(--bp-xs), 100%, 100ch);
         padding-block-start: var(--spacing-lg);
     }
@@ -64,7 +65,7 @@
     }
 
     .header__toggles {
-        justify-content: flex-start;
+        justify-content: flex-end;
         padding-inline-start: 0;
     }
 
@@ -72,10 +73,6 @@
 
 /*  Desktop */
 @media screen and (min-width: 48.01rem) {
-    .header__toggles {
-        justify-content: flex-end;
-    }
-
     .nav__primary ul {
         width: 100%;
     }

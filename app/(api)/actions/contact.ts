@@ -1,5 +1,6 @@
 "use server";
 
+import { headers } from "next/headers";
 import { AppErrorCode } from "@/lib/logging/errorCodes";
 import { logInfo } from "@/lib/logging/log";
 import { logAppError } from "@/lib/logging/logAppError";
@@ -28,6 +29,66 @@ const ContactSchema = z.object({
 });
 
 export async function handleContact(prevState: ContactActionState, formData: FormData): Promise<ContactActionState> {
+
+    if (process.env.NODE_ENV === 'production') {
+
+        const headerData = await headers();
+        const origin = headerData.get("origin");
+        const referer = headerData.get("referer");
+        const allowedHost = "codercarl.dev";
+
+        const toHostname = (value: string | null): string | null => {
+            if (!value) return null;
+            try {
+                return new URL(value).hostname.toLowerCase();
+            } catch {
+                return null;
+            }
+        };
+
+        const isAllowedHost = (host: string | null) =>
+            host === allowedHost || !!host?.endsWith(`.${allowedHost}`);
+
+
+        const originHost = toHostname(origin);
+        const refererHost = toHostname(referer);
+        const validOrigin = isAllowedHost(originHost) || isAllowedHost(refererHost);
+
+        if (!validOrigin) {
+            logInfo("Blocked contact submission: invalid origin", {
+                context: "contact form",
+                data: { origin, referer }
+            });
+
+            return {
+                status: "error",
+                message: "Invalid request.",
+                fieldErrors: {},
+                formErrors: []
+            };
+        }
+
+        const onlyBotsubmitThis = formData.get("company");
+
+        if (typeof onlyBotsubmitThis === "string" && onlyBotsubmitThis.trim() !== "") {
+            logInfo("Bot submission blocked", {
+                context: "contact form",
+                data: {
+                    type: "honeypot_triggered",
+                    origin,
+                    timestamp: new Date().toISOString()
+                }
+            });
+            // bot detected — pretend success but ignore
+            return {
+                status: "success",
+                message: "Your message has been sent successfully!",
+                fieldErrors: {},
+                formErrors: [],
+            };
+        }
+    }
+
     let formErrors: ContactActionState['formErrors'] = [];
     let fieldErrors: ContactActionState['fieldErrors'] = {};
 
@@ -36,6 +97,7 @@ export async function handleContact(prevState: ContactActionState, formData: For
         email: formData.get("email"),
         message: formData.get("message"),
     });
+
 
     if (!result.success) {
         fieldErrors = result.error.issues.reduce<Partial<Record<ContactFields, string>>>(
@@ -59,14 +121,20 @@ export async function handleContact(prevState: ContactActionState, formData: For
     const { name, email, message } = result.data;
 
     try {
-        logInfo("📩 Contact submission:", {
-            context: "contact form",
-            data: { name, email, message }
-        });
+
+        logInfo("📩 Contact submission received",
+            {
+                context: "contact form",
+                data: {
+                    emailDomain: email.split("@")[1] ?? "unknown",
+                    messageLength: message.length
+                }
+            });
+
         const accessKey = process.env.RESEND_ACCESS_KEY;
 
         if (!accessKey) {
-            throw new Error("WEB3FORMS_ACCESS_KEY is not set in environment variables.");
+            throw new Error("RESEND_ACCESS_KEY is not set in environment variables.");
         }
 
         formData.append("subject", "New contact form submission");
@@ -124,7 +192,7 @@ export async function handleContact(prevState: ContactActionState, formData: For
         };
 
     } catch (err) {
-        logAppError(AppErrorCode.EXTERNAL_SERVICE_ERROR, "web3forms error", { context: "contact form", data: { error: err }, trace: true })
+        logAppError(AppErrorCode.EXTERNAL_SERVICE_ERROR, "Resend error", { context: "contact form", data: { error: err }, trace: true })
 
         return {
             status: "unknown_error",

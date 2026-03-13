@@ -92,7 +92,14 @@ export default function ContactForm() {
                 >
                     {renderStatus()}
                 </Block>
-
+                <input
+                    type="text"
+                    name="company"
+                    className='sr-only'
+                    tabIndex={-1}
+                    autoComplete="off"
+                    aria-hidden="true"
+                />
                 <Stack gap={2}>
                     <TextInput
                         id="contact-name"
@@ -124,14 +131,14 @@ export default function ContactForm() {
                         onChange={deleteError}
                     />
                 </Stack>
-                    <Button
-                        icon={RiMailLine}
-                        type="submit"
-                        variant="primary"
-                        variantAppearance={"filled"}
-                        isLoading={pending}>
-                        Send message
-                    </Button>
+                <Button
+                    icon={RiMailLine}
+                    type="submit"
+                    variant="primary"
+                    variantAppearance={"filled"}
+                    isLoading={pending}>
+                    Send message
+                </Button>
             </Block>
         </form>
     )
