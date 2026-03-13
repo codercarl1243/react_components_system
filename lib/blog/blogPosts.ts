@@ -78,36 +78,36 @@ const design_system__theming: readonly Readonly<PostType>[] = [
 ];
 
 const ButtonPosts: readonly Readonly<PostType>[] = [
-    {
-        id: asPostId('design__button__01'),
-        title: 'Buttons',
-        subtitle: 'Foundations of an Accessible Button System',
-        excerpt: 'Build a robust, accessible button foundation for your design system.',
-        meta: {
-            // TODO: xcome up with a better title
-            title: 'Buttons',
-            // TODO: come up with a better description
-            description:
-                'Build a robust, accessible button foundation for your design system.',
-        },
-        relatedPostIds: asPostIds([
-            'design__button__slider__01',
-            'design__button__toggle__01'
-        ]),
-        pathFragment: '/buttons',
-        lastModified: new Date('2025-10-10'),
-        createdAt: new Date('2025-09-30'),
-        published: false,
-        featured: false,
-        image: {
-            src: '/images/blogs/button-base/main-image.webp',
-            alt: 'Accessible button components with variants and states'
-        },
-        authorId: CODER_CARL_ID,
-        subject: `${BLOG_SUBJECTS.DESIGN_SYSTEM}`,
-        keywords: [BLOG_KEYWORDS.BUTTONS, BLOG_KEYWORDS.FOUNDATIONS, BLOG_KEYWORDS.ACCESSIBILITY, BLOG_KEYWORDS.DESIGN_SYSTEM],
-        categories: [BLOG_CATEGORIES.DESIGN_SYSTEM, BLOG_CATEGORIES.ACCESSIBILITY],
-    },
+    // {
+    //     id: asPostId('design__button__01'),
+    //     title: 'Buttons',
+    //     subtitle: 'Foundations of an Accessible Button System',
+    //     excerpt: 'Build a robust, accessible button foundation for your design system.',
+    //     meta: {
+    //         // TODO: xcome up with a better title
+    //         title: 'Buttons',
+    //         // TODO: come up with a better description
+    //         description:
+    //             'Build a robust, accessible button foundation for your design system.',
+    //     },
+    //     relatedPostIds: asPostIds([
+    //         'design__button__slider__01',
+    //         'design__button__toggle__01'
+    //     ]),
+    //     pathFragment: '/buttons',
+    //     lastModified: new Date('2025-10-10'),
+    //     createdAt: new Date('2025-09-30'),
+    //     published: false,
+    //     featured: false,
+    //     image: {
+    //         src: '/images/blogs/button-base/main-image.webp',
+    //         alt: 'Accessible button components with variants and states'
+    //     },
+    //     authorId: CODER_CARL_ID,
+    //     subject: `${BLOG_SUBJECTS.DESIGN_SYSTEM}`,
+    //     keywords: [BLOG_KEYWORDS.BUTTONS, BLOG_KEYWORDS.FOUNDATIONS, BLOG_KEYWORDS.ACCESSIBILITY, BLOG_KEYWORDS.DESIGN_SYSTEM],
+    //     categories: [BLOG_CATEGORIES.DESIGN_SYSTEM, BLOG_CATEGORIES.ACCESSIBILITY],
+    // },
     // {
     //     id: asPostId('design__button__theming__01'),
     //     title: 'Buttons - Theming & Variants',
