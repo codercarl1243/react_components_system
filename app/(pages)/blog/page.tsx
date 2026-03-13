@@ -37,7 +37,6 @@ export default function BlogPage() {
 
   const groups = chunk(formattedPosts, 4);
 
-  logInfo("data", { data: { groups } })
   return (
     <Post>
       <PostSection>
