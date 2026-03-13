@@ -1,20 +1,35 @@
 .hamburger-menu--toggle {
+    --right: initial;
+    --left: initial;
+    --top: initial;
+    --bottom: initial;
+
     display: none;
     /* Hidden by default */
+
     align-items: center;
     gap: var(--spacing);
     position: fixed;
     transition: border-radius 250ms ease-in-out;
-    top: 0;
+    right: var(--right);
+    left: var(--left);
+    top: var(--top);
+    bottom: var(--bottom);
 
-    &[data-position="right"] {
-        right: 0;
-        left: initial;
+    &[data-horizontal="right"] {
+        --right: 0;
     }
 
-    &[data-position="left"] {
-        left: 0;
-        right: initial;
+    &[data-horizontal="left"] {
+        --left: 0;
+    }
+
+    &[data-vertical="top"] {
+        --top: 0;
+    }
+
+    &[data-vertical="bottom"] {
+        --bottom: 0;
     }
 
     &[data-state="open"] {
@@ -51,7 +66,7 @@ main:has(.hamburger-menu--wrapper[data-mode="hamburger"]) {
     grid-template-columns: 1fr;
 }
 
-.hamburger-menu--wrapper[data-mode="hamburger"] + main {
+.hamburger-menu--wrapper[data-mode="hamburger"]+main {
     padding-block-start: var(--spacing-3xl);
 }
 
@@ -74,7 +89,6 @@ main:has(.hamburger-menu--wrapper[data-mode="hamburger"]) {
         --translation: 0%;
 
         background-color: var(--surface);
-        padding-block-start: var(--spacing-xxl);
 
         position: fixed;
         top: 0;
@@ -83,15 +97,19 @@ main:has(.hamburger-menu--wrapper[data-mode="hamburger"]) {
         transform: translateX(var(--translation));
         height: 100%;
         width: var(--expanded-burger-menu-width);
-        padding-block-start: var(--spacing-3xl);
         overflow-y: auto;
         transition: transform var(--overlay-transition-duration) ease-in-out;
 
         &[data-state="inactive"] {
             transition-duration: 0ms;
         }
-
-        &[data-position="right"] {
+        &[data-vertical="top"]{
+            padding-block-start: var(--spacing-3xl);
+        }
+        &[data-vertical="bottom"]{
+            padding-block-end: var(--spacing-3xl);
+        }
+        &[data-horizontal="right"] {
             --right: 0;
 
             &[data-state="inactive"],
@@ -100,7 +118,7 @@ main:has(.hamburger-menu--wrapper[data-mode="hamburger"]) {
             }
         }
 
-        &[data-position="left"] {
+        &[data-horizontal="left"] {
             --left: 0;
 
             &[data-state="inactive"],

@@ -9,19 +9,20 @@ export default function HamburgerMenu<T extends React.ElementType = "aside">({
     ...props
 }: HamburgerMenuProps<T>) {
     const Component = as || "aside";
-    const { menuState, isActive, menuRef, menuId, position } = useHamburgerContext();
-    const dialogProps = (isActive && menuState === "open") ? {role: "dialog","aria-modal": true} : {}
+    const { menuState, isActive, menuRef, menuId, horizontal, vertical } = useHamburgerContext();
+    const dialogProps = (isActive && menuState === "open") ? { role: "dialog", "aria-modal": true } : {}
 
     return (
         <Component
             ref={menuRef}
             className={clsx(
-                {'hamburger-menu': isActive},
+                { 'hamburger-menu': isActive },
                 className
             )}
             id={menuId}
             data-state={menuState}
-            data-position={position}
+            data-horizontal={horizontal}
+            data-vertical={vertical}
             data-mode={isActive ? "hamburger" : "static"}
             {...dialogProps}
             {...props}

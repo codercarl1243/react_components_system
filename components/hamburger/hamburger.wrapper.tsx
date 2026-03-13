@@ -11,7 +11,8 @@ export default function HamburgerWrapper<T extends ElementType = "div">({
     children,
     className,
     menuId,
-    position,
+    vertical, 
+    horizontal,
     breakpoint,
     ref: userRef,
     ...props
@@ -21,7 +22,7 @@ export default function HamburgerWrapper<T extends ElementType = "div">({
 
     const internalRef = useRef<HTMLElement | null>(null);
     
-    const state = useHamburger({ id: menuId, position, breakpoint, wrapperRef: internalRef   });
+    const state = useHamburger({ id: menuId, vertical, horizontal, breakpoint, wrapperRef: internalRef });
     const mergedRef = useMergedRef(userRef, internalRef);
 
     return (

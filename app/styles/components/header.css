@@ -43,6 +43,7 @@
     margin-block-start: auto;
     flex-wrap: nowrap;
     justify-content: space-between;
+    padding-inline: var(--spacing-lg);
 }
 
 /*  > mobile 560px+ */

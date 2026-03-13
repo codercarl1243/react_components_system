@@ -44,7 +44,8 @@ export default function PostSideBar({
     return (
         <Hamburger.Wrapper
             as="div"
-            position="right"
+            horizontal="left"
+            vertical='bottom'
             className='side-bar--wrapper'
             breakpoint="tablet"
         >

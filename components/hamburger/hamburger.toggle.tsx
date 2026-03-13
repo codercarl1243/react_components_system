@@ -15,7 +15,7 @@ export default function HamburgerToggle({
     children,
     ...props
 }: HamburgerButtonProps) {
-    const { menuState, menuId, isActive, toggleMenuOpenState, buttonRef, position } = useHamburgerContext();
+    const { menuState, menuId, isActive, toggleMenuOpenState, buttonRef, horizontal, vertical } = useHamburgerContext();
 
     const IconToRender = menuState === "open" ? (closeIcon ?? RiCloseLargeLine) : (openIcon ?? RiMenuLine);
     const ariaLabelValue = menuState === "open" ? (ariaLabelWhenOpen ?? "Close menu") : (ariaLabelWhenClosed ?? "Open menu")
@@ -27,7 +27,8 @@ export default function HamburgerToggle({
             aria-controls={menuId}
             aria-expanded={menuState === "open"}
             data-state={menuState}
-            data-position={position}
+            data-horizontal={horizontal}
+            data-vertical={vertical}
             onClick={toggleMenuOpenState}
             ref={buttonRef}
             icon={IconToRender}

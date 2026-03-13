@@ -2,7 +2,8 @@ import type { ElementType, PolymorphicProps, RefObject } from "react";
 import type { ButtonProps } from "@/components/button/button.type";
 import type { IconProps } from "@/components/icon/icon.type";
 
-type Position = "left" | "right";
+type Horizontal = "left" | "right";
+type Vertical = "top" | "bottom";
 type Breakpoint = "mobile" | "tablet" | "desktop";
 type MenuState = "inactive" | "open" | "closed";
 
@@ -13,7 +14,8 @@ export type HamburgerState = {
     buttonRef: RefObject<HTMLButtonElement | null>;
     menuRef: RefObject<HTMLElement | null>;
     isActive: boolean;
-    position?: Position;
+    horizontal?: Horizontal;
+    vertical?: Vertical;
     breakpoint?: Breakpoint;
 }
 
@@ -33,14 +35,16 @@ export type HamburgerWrapperProps<T extends ElementType = "div"> = PolymorphicPr
     T,
     {
         menuId?: string;
-        position?: HamburgerState['position'];
+        horizontal?: HamburgerState['horizontal'];
+        vertical?: HamburgerState['vertical'];
         breakpoint?: HamburgerState['breakpoint'];
     }
 >;
 
 export type useHamburgerProps = {
     id?: string;
-    position: HamburgerWrapperProps["position"];
+    horizontal?: HamburgerState['horizontal'];
+    vertical?: HamburgerState['vertical'];
     breakpoint: HamburgerWrapperProps["breakpoint"];
     wrapperRef: RefObject<HTMLElement | null>;
 }
