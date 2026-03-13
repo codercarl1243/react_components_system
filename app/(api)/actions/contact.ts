@@ -31,7 +31,7 @@ const ContactSchema = z.object({
 export async function handleContact(prevState: ContactActionState, formData: FormData): Promise<ContactActionState> {
 
     if (process.env.NODE_ENV === 'production') {
-        
+
         const headerData = await headers();
         const origin = headerData.get("origin");
         const referer = headerData.get("referer");
@@ -174,7 +174,7 @@ export async function handleContact(prevState: ContactActionState, formData: For
         };
 
     } catch (err) {
-        logAppError(AppErrorCode.EXTERNAL_SERVICE_ERROR, "web3forms error", { context: "contact form", data: { error: err }, trace: true })
+        logAppError(AppErrorCode.EXTERNAL_SERVICE_ERROR, "Resend error", { context: "contact form", data: { error: err }, trace: true })
 
         return {
             status: "unknown_error",
