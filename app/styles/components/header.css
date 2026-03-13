@@ -52,6 +52,7 @@
     .nav__wrapper {
         flex-direction: row;
         width: clamp(var(--bp-xs), 100%, 100ch);
+        margin-inline: auto;
         padding-block-start: var(--spacing-lg);
     }
 
