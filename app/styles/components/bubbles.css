@@ -102,6 +102,7 @@
     cursor: pointer;
     animation: float1 var(--float-duration, 6000ms) ease-in-out infinite;
     transition: outline-color 100ms ease-in-out, outline-offset 100ms ease-in-out;
+    outline: 2px solid var(--color-neutral-a2);
 }
 
 .bubble-inner {
@@ -154,10 +155,11 @@
     inset: -100%;
     width: 300%;
     height: 300%;
-    background: radial-gradient(circle at 30% 30%,
+    background: radial-gradient(circle at 15% 60%,
             var(--color-primary-100),
-            var(--bubble-color, var(--color-secondary-100)),
-            var(--color-accent-200));
+            var(--bubble-color, var(--color-secondary-200)),
+            var(--bubble-color, var(--color-primary-400)),
+            var(--color-accent-400));
     animation: bubble-drift 5s ease-in-out infinite alternate;
     z-index: 0;
 }
@@ -178,7 +180,7 @@
     height: 45%;
     background: var(--color-neutral-100);
     border-radius: 50%;
-    opacity: 0.3;
+    opacity: 0.7;
     filter: blur(2px);
     transform: rotate(-35deg);
     z-index: 1;
