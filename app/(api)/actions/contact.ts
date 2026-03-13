@@ -35,15 +35,29 @@ export async function handleContact(prevState: ContactActionState, formData: For
         const headerData = await headers();
         const origin = headerData.get("origin");
         const referer = headerData.get("referer");
+        const allowedHost = "codercarl.dev";
 
-        const validOrigin =
-            origin?.endsWith("codercarl.dev") ||
-            referer?.includes("codercarl.dev");
+        const toHostname = (value: string | null): string | null => {
+            if (!value) return null;
+            try {
+                return new URL(value).hostname.toLowerCase();
+            } catch {
+                return null;
+            }
+        };
+
+        const isAllowedHost = (host: string | null) =>
+            host === allowedHost || !!host?.endsWith(`.${allowedHost}`);
+
+
+        const originHost = toHostname(origin);
+        const refererHost = toHostname(referer);
+        const validOrigin = isAllowedHost(originHost) || isAllowedHost(refererHost);
 
         if (!validOrigin) {
             logInfo("Blocked contact submission: invalid origin", {
                 context: "contact form",
-                data: { origin }
+                data: { origin, referer }
             });
 
             return {
@@ -108,10 +122,14 @@ export async function handleContact(prevState: ContactActionState, formData: For
 
     try {
 
-        logInfo("📩 Contact submission:", {
-            context: "contact form",
-            data: { name, email, message }
-        });
+        logInfo("📩 Contact submission received",
+            {
+                context: "contact form",
+                data: {
+                    emailDomain: email.split("@")[1] ?? "unknown",
+                    messageLength: message.length
+                }
+            });
 
         const accessKey = process.env.RESEND_ACCESS_KEY;
 
