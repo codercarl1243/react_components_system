@@ -1,5 +1,6 @@
 "use server";
 
+import { headers } from "next/headers";
 import { AppErrorCode } from "@/lib/logging/errorCodes";
 import { logInfo } from "@/lib/logging/log";
 import { logAppError } from "@/lib/logging/logAppError";
@@ -28,27 +29,55 @@ const ContactSchema = z.object({
 });
 
 export async function handleContact(prevState: ContactActionState, formData: FormData): Promise<ContactActionState> {
+
+    if (process.env.NODE_ENV === 'production') {
+        
+        const headerData = await headers();
+        const origin = headerData.get("origin");
+        const referer = headerData.get("referer");
+
+        const validOrigin =
+            origin?.endsWith("codercarl.dev") ||
+            referer?.includes("codercarl.dev");
+
+        if (!validOrigin) {
+            logInfo("Blocked contact submission: invalid origin", {
+                context: "contact form",
+                data: { origin }
+            });
+
+            return {
+                status: "error",
+                message: "Invalid request.",
+                fieldErrors: {},
+                formErrors: []
+            };
+        }
+
+        const onlyBotsubmitThis = formData.get("company");
+
+        if (typeof onlyBotsubmitThis === "string" && onlyBotsubmitThis.trim() !== "") {
+            logInfo("Bot submission blocked", {
+                context: "contact form",
+                data: {
+                    type: "honeypot_triggered",
+                    origin,
+                    timestamp: new Date().toISOString()
+                }
+            });
+            // bot detected — pretend success but ignore
+            return {
+                status: "success",
+                message: "Your message has been sent successfully!",
+                fieldErrors: {},
+                formErrors: [],
+            };
+        }
+    }
+
     let formErrors: ContactActionState['formErrors'] = [];
     let fieldErrors: ContactActionState['fieldErrors'] = {};
 
-    const onlyBotsubmitThis = formData.get("company");
-
-    if (typeof onlyBotsubmitThis === "string" && onlyBotsubmitThis.trim() !== "") {
-        logInfo("Bot submission blocked", {
-            context: "contact form",
-            data: {
-                type: "honeypot_triggered",
-                timestamp: new Date().toISOString()
-            }
-        });
-        // bot detected — pretend success but ignore
-        return {
-            status: "success",
-            message: "Your message has been sent successfully!",
-            fieldErrors: {},
-            formErrors: [],
-        };
-    }
     const result = ContactSchema.safeParse({
         name: formData.get("name"),
         email: formData.get("email"),
@@ -78,14 +107,16 @@ export async function handleContact(prevState: ContactActionState, formData: For
     const { name, email, message } = result.data;
 
     try {
+
         logInfo("📩 Contact submission:", {
             context: "contact form",
             data: { name, email, message }
         });
+
         const accessKey = process.env.RESEND_ACCESS_KEY;
 
         if (!accessKey) {
-            throw new Error("WEB3FORMS_ACCESS_KEY is not set in environment variables.");
+            throw new Error("RESEND_ACCESS_KEY is not set in environment variables.");
         }
 
         formData.append("subject", "New contact form submission");
