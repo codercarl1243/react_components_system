@@ -119,13 +119,13 @@ Theme tokens are consumed by:
 */
 
 /* Light theme */
-[data-theme="light"] {
+:root:has([data-theme="light"]) {
     --surface: var(--color-neutral-100);
     --text-on-surface: var(--color-neutral-900);
 }
 
 /* Dark theme */
-[data-theme="dark"] {
+:root:has([data-theme="dark"]) {
     --surface: var(--color-neutral-900);
     --text-on-surface: var(--color-neutral-100);
 }
