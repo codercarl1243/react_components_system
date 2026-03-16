@@ -7,7 +7,6 @@ import BlogLink from '@/components/post/post.blogLink';
 import Post from '@/components/post';
 import PostSection from '@/components/post/post.section';
 import Image from '@/components/image';
-import { logInfo } from '@/lib/logging/log';
 
 function chunk<T>(arr: T[], size: number) {
   const result: T[][] = [];
@@ -43,11 +42,8 @@ export default function BlogPage() {
         <Image className="width-full" alt={''} src={'/images/blogs/main-image.webp'} variant='hero' height={400} />
         <Heading as={"h1"}>Blogs</Heading>
         <p>Design systems don't usually break all at once. They decay.</p>
-
         <p>Over time, styling stops feeling intentional and starts feeling fragile.</p>
-
         <p>If this sounds familiar, the problem is rarely tooling. It's architecture.</p>
-
         <p>On this site, I explore how <FunHighlight>design tokens</FunHighlight>, <FunHighlight>primitives</FunHighlight> and a small set of definitive <span className="fun-underline">boundaries</span> come together to form a composable styling system.</p>
       </PostSection>
 
@@ -74,7 +70,7 @@ export default function BlogPage() {
         <List as="ul" marker="none" className='post-card__grid-container p-0 flow-6'>
           {groups.map((group, index) => {
             return (<li key={"post-card__grid-group" + index}>
-              <List as="ul" marker="none" className='post-card__grid p-0' 
+              <List as="ul" marker="none" className='post-card__grid p-0'
               // data-side={index % 2 ? "right" : "left"}
               >
                 {group}
