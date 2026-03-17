@@ -19,15 +19,12 @@ export default function Section1() {
             <p>
                 Not every component in a design system is meant to be visible.
             </p>
-
             <p>
                 Some components don't render buttons, cards, or forms. They define structure.
             </p>
-
             <p>
                 These are called <FunHighlight>primitives</FunHighlight>.
             </p>
-
             <p>
                 A primitive is a minimal component that represents a single structural
                 role — like vertical arrangement <Icon variant="primary" icon={RiArrowUpDownLine} />, horizontal alignment <Icon variant="primary" icon={RiArrowLeftRightLine} />, or containment <Icon variant="primary" icon={RiCheckboxBlankLine} /> —
