@@ -67,9 +67,12 @@ console.log("groups", groups)
         <Heading as="h2">All Posts</Heading>
         {/* <p>Below you'll find all posts in this series.
         Filter or sort them by topic depending on what you're looking for:</p> */}
-        <List as="ul" marker="none" className='content-grid__container content-grid p-0 flow-6'>
+        <div className='content-grid__container'>
+
+        <List as="ul" marker="none" className='content-grid'>
           {formattedPosts}
         </List>
+        </div>
       </PostSection>
     </Post>
   )
