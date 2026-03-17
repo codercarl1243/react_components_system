@@ -39,7 +39,7 @@ export type PostType = {
     pathFragment: string;
     /** The canonical URL - This is generated automatically and should not be hardcoded. */
     href?: string;
-    relatedPostIds: PostId[];
+    relatedPostIds?: PostId[];
     lastModified: Date;
     createdAt: Date;
     published: boolean;

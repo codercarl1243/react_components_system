@@ -1,4 +1,4 @@
-import type { ButtonClickHandler, MouseEventType } from '@/components/button/button.type';
+import type { ButtonClickHandler, ButtonMouseEvent } from '@/components/button/button.type';
 import {isThenable} from '@/lib/utils/guards';
 import { logError, logInfo } from '@/lib/logging/log';
 
@@ -22,7 +22,7 @@ export default function useButton() {
  * <button onClick={handleClick(myAsyncHandler)}>Click me</button>
  */
   const handleClick = (userHandler?: ButtonClickHandler) =>
-    (event: MouseEventType) => {
+    (event: ButtonMouseEvent) => {
       if (!userHandler) return
 
       try {

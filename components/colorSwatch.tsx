@@ -16,7 +16,7 @@ export default function ColorSwatch({ color = "transparent", shape = "square", s
 
     const styles: CSSProperties = {
         '--background-color': color,
-        '--border-color': 'var(--text-on-surface)',
+        '--border-color': 'var(--foreground-on-surface)',
         '--border-radius': shape === 'circle'
             ? 'var(--radius-circle)'
             : 'var(--radius-sm)',

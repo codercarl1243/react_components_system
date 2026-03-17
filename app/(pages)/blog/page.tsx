@@ -24,7 +24,7 @@ export default function BlogPage() {
       const layout = index % 4 === 0 ? "large" : "default";
 
       return (
-        <li key={post.id + index} data-layout={layout}>
+        <li key={post.id + index} data-layout={layout} className='content-grid__item'>
           <PostCard
             post={post}
             layout={layout}
@@ -35,7 +35,7 @@ export default function BlogPage() {
   );
 
   const groups = chunk(formattedPosts, 4);
-
+console.log("groups", groups)
   return (
     <Post>
       <PostSection>
@@ -67,16 +67,8 @@ export default function BlogPage() {
         <Heading as="h2">All Posts</Heading>
         {/* <p>Below you'll find all posts in this series.
         Filter or sort them by topic depending on what you're looking for:</p> */}
-        <List as="ul" marker="none" className='post-card__grid-container p-0 flow-6'>
-          {groups.map((group, index) => {
-            return (<li key={"post-card__grid-group" + index}>
-              <List as="ul" marker="none" className='post-card__grid p-0'
-              // data-side={index % 2 ? "right" : "left"}
-              >
-                {group}
-              </List>
-            </li>)
-          })}
+        <List as="ul" marker="none" className='content-grid__container content-grid p-0 flow-6'>
+          {formattedPosts}
         </List>
       </PostSection>
     </Post>

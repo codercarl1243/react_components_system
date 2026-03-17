@@ -1,7 +1,7 @@
 'use client'
 
 import clsx from 'clsx'
-import type { ButtonProps, MouseEventType } from '@/components/button/button.type'
+import type { ButtonProps, ButtonMouseEvent } from '@/components/button/button.type'
 import useButton from '@/components/button/useButton'
 import Spinner from '@/components/spinner'
 import Icon from '@/components/icon'
@@ -24,7 +24,6 @@ import { Block } from '../primitives'
  * @param {'button' | 'submit' | 'reset'} [props.type='button'] - The button type.
  * @param {boolean} [props.disabled=false] - Whether the button is disabled.
  * @param {boolean} [props.isLoading=false] - Whether the button is in a loading state.
- * @param {React.Ref<HTMLButtonElement>} [props.ref] - Optional ref to the button element.
  * @returns {JSX.Element} The rendered Button component.
  *
  * @example
@@ -47,7 +46,6 @@ export default function Button({
   disabled = false,
   isLoading = false,
   showSpinner = false,
-  ref,
   icon,
   ...props
 }: ButtonProps) {
@@ -60,7 +58,7 @@ export default function Button({
    * - Stops propagation to avoid parent click triggers.
    * - Delegates to useButton's click handler otherwise.
    */
-  function onClickHandler(event: MouseEventType) {
+  function onClickHandler(event: ButtonMouseEvent) {
     if (isLoading || disabled) {
       /**  
        * Using both is correct here since a disabled/loading button should do nothing and 
@@ -91,7 +89,6 @@ export default function Button({
       onClick={onClickHandler}
       aria-disabled={isLoading || disabled}
       data-loading={isLoading}
-      ref={ref}
       type={type}
       onKeyDown={onKeyDown}
       onKeyUp={onKeyUp}

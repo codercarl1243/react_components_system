@@ -4,9 +4,9 @@ import type { BlockWrapperProps } from '../primitives/types';
 import type { AccessibleLabel } from '@/types/accessibility';
 import type { Variant, VariantAppearance } from '@/types/variant';
 
-export type MouseEventType = MouseEvent<HTMLButtonElement>;
+export type ButtonMouseEvent = MouseEvent<HTMLButtonElement>;
 
-export type ButtonClickHandler = (event: MouseEventType) => void | Promise<void>;
+export type ButtonClickHandler = (event: ButtonMouseEvent) => void | Promise<void>;
 
 type BaseButtonProps = {
   disabled?: boolean;

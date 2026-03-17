@@ -1,15 +1,11 @@
 import { CODER_CARL_ID } from "@/lib/blog/authors/authors";
 import { BLOG_CATEGORIES } from "@/lib/blog/blog.categories";
 import { PostType } from "@/lib/blog/blog.types";
-import { asPostId, asPostIds } from "@/lib/blog/blog.utils";
+import { asPostId } from "@/lib/blog/blog.utils";
 import { BLOG_SUBJECTS } from "./blog.subjects";
 import { BLOG_KEYWORDS } from "./blog.keywords";
 
-export const BLOG_BASE_PATH = '/blog';
-export const BLOG_DESIGN_SYSTEM_PATH = `${BLOG_BASE_PATH}/design-system`;
-export const BLOG_ACCESSIBILITY_PATH = `${BLOG_BASE_PATH}/accessibility`;
-
-const design_system__theming: readonly Readonly<PostType>[] = [
+const design_system: readonly Readonly<PostType>[] = [
     {
         id: asPostId('design__theming_01'),
         title: 'Building a Theming System',
@@ -20,10 +16,10 @@ const design_system__theming: readonly Readonly<PostType>[] = [
             description:
                 'Build a scalable, maintainable theming system using clear layers, explicit opt-in styling, and framework-agnostic CSS.',
         },
-        relatedPostIds: asPostIds([
-            'design__primitives_01',
-            'design__foundations_01',
-        ]),
+        // relatedPostIds: asPostIds([
+        //     'design__primitives_01',
+        //     'design__foundations_01',
+        // ]),
         pathFragment: 'theming',
         lastModified: new Date('2025-12-10'),
         createdAt: new Date('2025-09-30'),
@@ -31,7 +27,7 @@ const design_system__theming: readonly Readonly<PostType>[] = [
         featured: true,
         image: {
             src: '/images/blogs/design-system/theming/main-image.webp',
-            alt: 'TBA'
+            alt: "A designer's desk with UI panels showing appearance options, variant styles, and style controls, alongside four button variants and design tools scattered around"
         },
         authorId: CODER_CARL_ID,
         subject: `${BLOG_SUBJECTS.DESIGN_SYSTEM}`,
@@ -48,10 +44,10 @@ const design_system__theming: readonly Readonly<PostType>[] = [
             description:
                 'Learn what primitives are in a design system, how they encode structural intent, and why they create safer, more scalable layout patterns than ad-hoc HTML.',
         },
-        relatedPostIds: asPostIds([
-            'design__theming_01',
-            'design__foundations_01',
-        ]),
+        // relatedPostIds: asPostIds([
+        //     'design__theming_01',
+        //     'design__foundations_01',
+        // ]),
         pathFragment: 'primitives',
         lastModified: new Date('2026-02-17'),
         createdAt: new Date('2025-10-05'),
@@ -59,7 +55,7 @@ const design_system__theming: readonly Readonly<PostType>[] = [
         featured: false,
         image: {
             src: '/images/blogs/design-system/primitives/main-image.webp',
-            alt: 'Abstract structural layout blocks representing design system primitives'
+            alt: `Four stone blocks in ascending size, each engraved with progressively more specific HTML — from the raw </> through <input type="button"> and <a role="button"> to a fully realised <button> — illustrating the evolution from a basic primitive to a complete interactive element`
         },
         authorId: CODER_CARL_ID,
         subject: `${BLOG_SUBJECTS.DESIGN_SYSTEM}`,
@@ -77,96 +73,37 @@ const design_system__theming: readonly Readonly<PostType>[] = [
     },
 ];
 
-const ButtonPosts: readonly Readonly<PostType>[] = [
-    // {
-    //     id: asPostId('design__button__01'),
-    //     title: 'Buttons',
-    //     subtitle: 'Foundations of an Accessible Button System',
-    //     excerpt: 'Build a robust, accessible button foundation for your design system.',
-    //     meta: {
-    //         // TODO: xcome up with a better title
-    //         title: 'Buttons',
-    //         // TODO: come up with a better description
-    //         description:
-    //             'Build a robust, accessible button foundation for your design system.',
-    //     },
-    //     relatedPostIds: asPostIds([
-    //         'design__button__slider__01',
-    //         'design__button__toggle__01'
-    //     ]),
-    //     pathFragment: '/buttons',
-    //     lastModified: new Date('2025-10-10'),
-    //     createdAt: new Date('2025-09-30'),
-    //     published: false,
-    //     featured: false,
-    //     image: {
-    //         src: '/images/blogs/button-base/main-image.webp',
-    //         alt: 'Accessible button components with variants and states'
-    //     },
-    //     authorId: CODER_CARL_ID,
-    //     subject: `${BLOG_SUBJECTS.DESIGN_SYSTEM}`,
-    //     keywords: [BLOG_KEYWORDS.BUTTONS, BLOG_KEYWORDS.FOUNDATIONS, BLOG_KEYWORDS.ACCESSIBILITY, BLOG_KEYWORDS.DESIGN_SYSTEM],
-    //     categories: [BLOG_CATEGORIES.DESIGN_SYSTEM, BLOG_CATEGORIES.ACCESSIBILITY],
-    // },
-    // {
-    //     id: asPostId('design__button__theming__01'),
-    //     title: 'Buttons - Theming & Variants',
-    //     subtitle: 'Building a flexible color system for scalable, accessible design',
-    //     excerpt: 'Transform your button into a themeable component with multiple variants and styles.',
-    //     relatedPostIds: asPostIds(['design__button__01']),
-    //     pathFragment: 'buttons/theming',
-    //     lastModified: new Date('2025-10-15'),
-    //     createdAt: new Date('2025-10-05'),
-    //     published: true,
-    //     featured: false,
-    //     image: {
-    //         src: '/og-image.png',
-    //         alt: 'Grid of buttons in different colors and styles representing design system variants'
-    //     },
-    //     authorId: CODER_CARL_ID,
-    //     subject: `${BLOG_SUBJECTS.DESIGN_SYSTEM}`,
-    //     keywords: [BLOG_KEYWORDS.BUTTONS, BLOG_KEYWORDS.THEMING, BLOG_KEYWORDS.DESIGN_SYSTEM],
-    //     categories: [BLOG_CATEGORIES.DESIGN_SYSTEM],
-    // }
-    // {
-    //     id: asPostId('design__button__slider__01'),
-    //     title: 'Slider Buttons',
-    //     excerpt: 'Explore slider-based button interactions for dynamic UI controls.',
-    //     relatedPostIds: asPostIds(['design__button__01', 'design__button__toggle__01']),
-    //     href: '/blog/design-system/buttons/sliders',
-    //     lastModified: new Date('2025-10-10'),
-    //     createdAt: new Date('2025-09-30'),
-    //     published: true,
-    //     image: {
-    //         src: '/images/blog/button-slider-banner.jpg',
-    //         alt: 'Slider-style button interactions with dynamic visuals'
-    //     },
-    //     authorId: CODER_CARL_ID,
-    //     subject: `${BLOG_SUBJECTS.DESIGN_SYSTEM}`,
-    //     keywords: [BLOG_KEYWORDS.BUTTONS, BLOG_KEYWORDS.FOUNDATIONS, BLOG_KEYWORDS.DESIGN_SYSTEM],
-    //     categories: []
-    // },
-    // {
-    //     id: asPostId('design__button__toggle__01'),
-    //     title: 'Toggle Buttons',
-    //     excerpt: 'Design accessible toggle buttons with proper ARIA and keyboard support.',
-    //     relatedPostIds: asPostIds(['design__button__01', 'design__button__slider__01']),
-    //     href: '/blog/design-system/buttons/toggle',
-    //     lastModified: new Date('2025-10-10'),
-    //     createdAt: new Date('2025-09-30'),
-    //     published: true,
-    //     image: {
-    //         src: '/images/blog/button-toggle-banner.jpg',
-    //         alt: 'Toggle button states and accessibility icons'
-    //     },
-    //     authorId: CODER_CARL_ID,
-    //     subject: `${BLOG_SUBJECTS.DESIGN_SYSTEM}`,
-    //     keywords: [BLOG_KEYWORDS.BUTTONS, BLOG_KEYWORDS.FOUNDATIONS, BLOG_KEYWORDS.DESIGN_SYSTEM],
-    //     categories: []
-    // }
+const react_components: readonly Readonly<PostType>[] = [
+    {
+        id: asPostId('components__button__01'),
+        title: 'Buttons',
+        subtitle: 'Foundations of an Accessible Button System',
+        excerpt: 'A Practical React Component Guide',
+        meta: {
+            title: 'Buttons in React - Building an Accessible Button Component',
+            description: 'A practical guide to building a type-safe, accessible React button component with async support, keyboard interactions, and design system integration.'
+        },
+        // relatedPostIds: asPostIds([
+        //     'design__button__slider__01',
+        //     'design__button__toggle__01'
+        // ]),
+        pathFragment: 'buttons',
+        lastModified: new Date('2026-03-17'),
+        createdAt: new Date('2026-03-17'),
+        published: true,
+        featured: false,
+        image: {
+            src: '/images/blogs/react-components/button/main-image.webp',
+            alt: 'Button component code arranged as interlocking puzzle pieces on a dark blue background'
+        },
+        authorId: CODER_CARL_ID,
+        subject: `${BLOG_SUBJECTS.REACT_COMPONENTS}`,
+        keywords: [BLOG_KEYWORDS.BUTTONS, BLOG_KEYWORDS.REACT_COMPONENTS, BLOG_KEYWORDS.FOUNDATIONS, BLOG_KEYWORDS.ACCESSIBILITY],
+        categories: [BLOG_CATEGORIES.REACT_COMPONENTS, BLOG_CATEGORIES.ACCESSIBILITY],
+    }
 ];
 
 export const BLOG_POSTS: PostType[] = [
-    ...design_system__theming,
-    ...ButtonPosts
+    ...design_system,
+    ...react_components
 ];

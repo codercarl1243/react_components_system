@@ -6,7 +6,7 @@ export default function Section8() {
     return (
         <PostSection id="when-not-to-use-a-primitive">
             <AnchorHeading as={"h2"} id="when-not-to-use-a-primitive-heading">
-                When you shoud <em className="italic">not</em> use a Primitive
+                When you should <em className="italic">not</em> use a Primitive
             </AnchorHeading>
             <p>
                 Primitives are powerful, but they are not mandatory everywhere.

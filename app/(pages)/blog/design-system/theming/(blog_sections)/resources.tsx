@@ -121,19 +121,19 @@ Theme tokens are consumed by:
 /* Light theme */
 :root:has([data-theme="light"]) {
     --surface: var(--color-neutral-100);
-    --text-on-surface: var(--color-neutral-900);
+    ----foreground-on-surface: var(--color-neutral-900);
 }
 
 /* Dark theme */
 :root:has([data-theme="dark"]) {
     --surface: var(--color-neutral-900);
-    --text-on-surface: var(--color-neutral-100);
+    ----foreground-on-surface: var(--color-neutral-100);
 }
 
 /* Global defaults */
 body {
     background-color: var(--surface);
-    color: var(--text-on-surface);
+    color: var(----foreground-on-surface);
 }
 `} />)
             },
@@ -253,7 +253,7 @@ Examples:
 .block[data-paint~="border"],
 .block[data-paint="all"],
 .block[data-paint="surface"] {
-    border: 1px solid var(--border-color, var(--text-on-surface, currentcolor));
+    border: 1px solid var(--border-color, var(----foreground-on-surface, currentcolor));
 }`} />)
             },
             {
