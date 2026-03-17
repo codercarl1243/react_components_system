@@ -32,11 +32,6 @@ At its core, a primitive exists to own a specific structural responsibility with
 
 Instead of scattering spacing, alignment, and containment across arbitrary elements, primitives encode those structural decisions into reusable layout components that define explicit structural contracts.
 
-Primitives operate at a different layer of responsibility:
-
-- They don't describe what something *is* (Button, Card, Modal etc.)
-- They describe how something is *arranged in space* (Stack, Inline, Block).
-
 Primitives are not "better divs". A thin wrapper that accepts arbitrary `className` or `style` props and forwards them to a `div` has not encoded any intent — it has just renamed markup.
 
 Compare how structural intent is expressed in the following examples:
@@ -261,9 +256,11 @@ Full implementation is available in the resources section below.
 
 ## Where I Draw the Line
 
-Not every candidate primitive earns a place in the system.
+Not every structural role deserves to become a primitive.
 
-`Row` is the clearest example. On paper it makes sense — a horizontal counterpart to `Stack`, owning toolbars, headers, and side-by-side layouts. In practice, it never held up.
+`Row` seems like it should exist — a horizontal counterpart to `Stack`.
+
+In practice, it breaks down immediately.
 
 The problem is that horizontal layouts are almost never static. A toolbar becomes a column on mobile. A header reflows at smaller widths. The moment responsive behaviour enters the picture, `Row` stops owning its structural responsibility — it just becomes a starting point that every consumer immediately works around with custom CSS or utility classes.
 
@@ -273,7 +270,7 @@ A primitive that developers consistently override is not encoding intent. It is 
 >
 > If a primitive cannot own its responsibility without being worked around, it should not exist.
 
-`Stack` already handles the cases where a vertical layout surface is needed. `Inline` handles flow-based horizontal grouping. The horizontal *surface* case — toolbars, headers, split layouts — consistently needs enough context-specific behaviour that a generic primitive would either be too rigid or too leaky to be useful.
+`Stack` already handles the cases where a vertical layout surface is needed. `Inline` handles flow-based horizontal grouping. The horizontal *layout surface* case — toolbars, headers, split layouts — consistently needs enough context-specific behaviour that a generic primitive would either be too rigid or too leaky to be useful.
 
 Dropping `Row` left the system with three primitives instead of four. That is not a gap — it is the system working correctly.
 
