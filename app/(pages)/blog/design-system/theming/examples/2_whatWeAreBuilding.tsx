@@ -88,14 +88,14 @@ export default function TokenFlowDiagram() {
             codeString={`/* Light theme */
 :root:has([data-theme="light"]) {
   --surface: var(--color-neutral-100);
-  ----foreground-on-surface: var(--color-neutral-900);
+  --foreground-on-surface: var(--color-neutral-900);
 }
 /* Repeat for dark theme */
 
 /* Global defaults */
 body {
     background-color: var(--surface);
-    color: var(----foreground-on-surface);
+    color: var(--foreground-on-surface);
 }`}
           />
         </Stack>

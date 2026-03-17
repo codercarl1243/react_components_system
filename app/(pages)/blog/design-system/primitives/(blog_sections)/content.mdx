@@ -1,1096 +1,517 @@
-# Building a Button Component
-
-![Button component code arranged as interlocking puzzle pieces on a dark blue background](/images/blogs/react-components/button/main-image.webp)
+# Design System Primitives
 
 A Practical Implementation Guide
 
 ## Introduction
 
-Buttons are the most reused interactive element in any interface — and the easiest to get wrong.
+Not every component in a design system is meant to be visible.
 
-Most button implementations scatter responsibilities: styling logic lives inside the component, disabled state is handled inconsistently, async errors disappear silently. By the time a system grows, buttons have become a source of drift rather than a foundation of trust.
+Some components don't render buttons, cards, or forms. They define structure.
 
-This post builds a button that does one job and does it predictably. It is type-safe, accessible by default, and backed by a reusable hook for interaction logic. It produces no visual output of its own — that responsibility belongs to the design system.
+These are called primitives.
 
-> **Context**
+A primitive is a minimal component that represents a single structural role — like vertical arrangement, horizontal alignment, or containment — without taking ownership of visual styling.
+
+> **Series Context**
 >
-> This post uses the design system built across [Theming Foundations](/blog/design-system/theming) and [Primitives](/blog/design-system/primitives). Familiarity with those posts will help, but the button stands on its own.
+> This article is part of a broader design system series. While it builds on ideas introduced in [Theming Foundations](/blog/design-system/theming), it stands on its own.
 >
-> The implementation is deliberately minimal — the goal is a reliable, testable contract that teams can extend with confidence. Icons, spinners, and other additions should build on this foundation without breaking it.
+> In this post, we'll define the core structural primitives (`<Stack />`, `<Inline />`, and `<Block />`), and implement minimal versions of them. These components expose controlled structural properties like spacing, alignment, and containment.
+>
+> In the next post, we'll cover the remaining token layer — spacing, typography scale, radius, and other raw values that the system relies on but haven't been defined yet.
 
 ---
 
-## Project Setup
+## What is a Primitive?
 
-### File Structure
-
-```
-components/
-  └── button/
-      ├── button.tsx
-      ├── useButton.ts
-      └── button.type.ts
-
-tests/
-  └── components/
-      ├── useButton.test.tsx
-      └── Button.test.tsx
-
-styles/
-  ├── components/
-  │   └── button.css
-  └── design-system/
-      └── appearances/
-          └── button.css
-```
-
-This structure keeps logic, types, and styles clearly separated while maintaining a clean boundary between presentation and behavior.
-
-### Dependencies
-
-We'll use two small packages:
-
-- [CLSX](https://www.npmjs.com/package/clsx) — for clean, conditional class name handling
-- [Jest](https://jestjs.io/docs/getting-started) — for testing (covered in the Testing section)
-
-```bash
-npm install clsx
-```
-
----
-
-## Component & Types
-
-### Starting Simple
-
-Before writing any code, it helps to be clear about what the button is responsible for:
-
-- Managing synchronous and asynchronous click events
-- Communicating loading and disabled states
-- Preserving accessibility and focus behavior
-- Preventing unintended interaction during inactive states
-
-What the button is **not** responsible for:
-
-- Deciding its own colors
-- Defining its own spacing
-- Applying visual variants
-
-Those decisions belong to the design system layers established in the previous posts.
+At its core, a primitive exists to own a specific structural responsibility within a layout.
 
 > **System rule**
 >
-> A component should own its behavior. The design system owns its appearance.
+> Primitives encode structural intent.
 
-### The Component
+Instead of scattering spacing, alignment, and containment across arbitrary elements, primitives encode those structural decisions into reusable layout components that define explicit structural contracts.
 
-The button composes from `Block` — the containment primitive introduced in the last post. By using `Block as="button"`, the component opts into the paint system without reimplementing it.
+Primitives operate at a different layer of responsibility:
+
+- They don't describe what something *is* (Button, Card, Modal etc.)
+- They describe how something is *arranged in space* (Stack, Inline, Block).
+
+Primitives are not "better divs". A thin wrapper that accepts arbitrary `className` or `style` props and forwards them to a `div` has not encoded any intent — it has just renamed markup.
+
+Compare how structural intent is expressed in the following examples:
+
+**Before**
+
+```jsx
+<div className="flex flex-col gap-4">
+  <div className="flex items-center justify-between">
+    <h2>Account</h2>
+    <button>Edit</button>
+  </div>
+
+  <div className="flex flex-col gap-2">
+    <p>Manage your subscription.</p>
+    <button>View billing history</button>
+  </div>
+</div>
+```
+
+In the first example, structure is expressed through utility classes. Flex direction, alignment, and spacing are attached to generic elements as styling instructions rather than structural roles.
+
+**After**
+
+```jsx
+<Stack gap="large">
+  <Inline align="center" justify="between">
+    <h2>Account</h2>
+    <button>Edit</button>
+  </Inline>
+
+  <Stack gap="small">
+    <p>Manage your subscription.</p>
+    <button>View billing history</button>
+  </Stack>
+</Stack>
+```
+
+In the second example, those same structural decisions are expressed through dedicated primitives. `Stack` defines vertical rhythm. `Inline` defines horizontal alignment.
+
+If both approaches render the same result, the natural question is: why not just use HTML and utility classes?
+
+---
+
+## Why Not Just Use HTML?
+
+HTML and primitives operate at different layers of the system:
+
+**HTML defines document structure:**
+
+- Document hierarchy
+- Content meaning and relationships
+- Landmarks
+
+**Primitives define responsibility:**
+
+- Who owns layout decisions
+- Where layout boundaries are enforced
+
+The distinction becomes clearer when viewed next to each other:
+
+| Document Structure | Layout Responsibility |
+|---|---|
+| Document hierarchy | Who owns layout decisions |
+| Content meaning & relationships | Where layout boundaries are enforced |
+| Landmarks | How structure is composed |
+
+HTML defines document semantics. Primitives define layout responsibility.
+
+> **System rule**
+>
+> Every layout decision must have a clear owner.
+
+Primitives make structural ownership explicit and enforceable.
+
+---
+
+## Minimizing Surface Area
+
+While implementations vary, most design systems converge around a small set of structural primitives.
+
+If you think in terms of software architecture, a primitive behaves like a single-responsibility `function`. It owns one structural concern, exposes a constrained API, and does not leak responsibilities it does not control.
+
+> **System rule**
+>
+> A primitive should do one structural job — and do it predictably.
+
+In practice, that vocabulary usually converges around:
+
+- **Vertical composition** — stacking elements with controlled rhythm
+- **Horizontal composition** — aligning and distributing elements in a row
+- **Containment** — defining layout boundaries and spacing surfaces
+
+Three roles. That is the structural vocabulary. Everything else is composition.
+
+---
+
+## Designing a Primitive
+
+Before implementing any *Primitive*, we need a shared foundation for all primitives. In this system, every primitive composes from `Block` rather than reinventing the basics.
+
+Primitives define structural responsibility — not semantics. For that reason, all primitives are polymorphic, accepting an `as` prop that declares the rendered element while preserving correct prop types.
+
+```ts
+import { ElementType, ComponentProps } from "react";
+
+export type PrimitiveProps<T extends ElementType = "div"> = {
+  as?: T;
+} & Omit<ComponentProps<T>, "as">;
+```
+
+> **System rule**
+>
+> Structure should layer upward from a single foundation.
+
+With that base contract in place, we can implement the simplest possible primitive: `<Block />`.
 
 ```tsx
-'use client'
+type BlockProps<T extends ElementType = "div"> =
+  PrimitiveProps<T>;
 
-import clsx from 'clsx'
-import type { ButtonProps, ButtonMouseEvent } from '@/components/button/button.type'
-import useButton from '@/components/button/useButton'
-import { Block } from '@/components/primitives'
+export function Block<T extends ElementType = "div">({
+  as,
+  ...rest
+}: BlockProps<T>) {
 
-export default function Button({
+  const Component = as || "div";
+
+  return <Component {...rest} />;
+}
+```
+
+The implementation is intentionally minimal. `Block` doesn't introduce layout behavior — it simply provides a predictable containment surface that other primitives can build on.
+
+From here, `Inline` and `Stack` compose `Block`, adding focused structural responsibilities without duplicating the base surface.
+
+Other systems may call this a *Box*, *Container*, or *Wrapper*. The name is less important than the role: `Block` is the containment surface everything else composes from.
+
+---
+
+## Composing
+
+With `<Block />` providing containment, we can layer focused structural responsibilities on top of it.
+
+A common structural role in a layout system is vertical composition — placing elements in a predictable vertical rhythm. That responsibility belongs to `<Stack />`.
+
+`<Stack />` extends `BlockProps`, adding only the structural properties it owns.
+
+```ts
+type StackProps<T extends ElementType = "div"> =
+  BlockProps<T> & {
+    gap?: number;
+    align?: "start" | "center" | "end" | "stretch" | "baseline";
+  };
+```
+
+**stack.tsx**
+
+```tsx
+function Stack<T extends ElementType = "div">({
+  gap = 4,
+  align = "baseline",
   className,
-  children,
-  onClick,
-  onKeyDown,
-  onKeyUp,
-  type = 'button',
-  disabled = false,
-  isLoading = false,
-  ...props
-}: ButtonProps) {
-  const { handleClick } = useButton()
+  ...blockProps
+}: StackProps<T>) {
 
-  function onClickHandler(event: ButtonMouseEvent) {
-    if (isLoading || disabled) {
-      event.stopPropagation()
-      event.preventDefault()
-      return;
-    }
-    void handleClick(onClick)(event)
-  }
-
-  function onKeyDownHandler(event: React.KeyboardEvent<HTMLButtonElement>) {
-    if (event.key === ' ') {
-      event.currentTarget.dataset.pressed = 'true'
-    }
-    onKeyDown?.(event)
-  }
-
-  function onKeyUpHandler(event: React.KeyboardEvent<HTMLButtonElement>) {
-    if (event.key === ' ') {
-      delete event.currentTarget.dataset.pressed
-    }
-    onKeyUp?.(event)
-  }
+  const classes = clsx(
+    'stack',
+    // Gap utilities are defined globally (gap.css)
+    // rather than scoped to Stack
+    `gap-row-${gap}`,
+    `stack-align-${align}`,
+    className
+  );
 
   return (
     <Block
-      as="button"
-      className={clsx(className, 'button')}
-      aria-disabled={isLoading || disabled}
-      type={type}
-      data-testid="base-button"
-      paint="all"
-      {...props}
-      data-loading={isLoading}
-      onKeyDown={onKeyDownHandler}
-      onKeyUp={onKeyUpHandler}
-      onClick={onClickHandler}
-    >
-      {children}
-    </Block>
-  )
+      className={classes}
+      {...blockProps as BlockProps<T>}
+    />
+  );
 }
 ```
 
-**Key decisions:**
+**stack.css**
 
-- `Block as="button"` — the component inherits the paint system. `variant`, `variantAppearance`, and `paint` are available to consumers without any extra wiring. See [Primitives](/blog/design-system/primitives) for how `Block` works.
-- `paint="all"` — the button always opts into full paint. Background, foreground, and border are all applied via the design system layer. See [Theming Foundations](/blog/design-system/theming) for how the paint layer is constructed.
-- `aria-disabled` instead of `disabled` — keeps the button in the accessibility tree and maintains keyboard discoverability. More on this in the Accessibility section.
-- `data-loading` — provides a CSS hook for cursor and interaction state styling without coupling to JavaScript.
-- `data-pressed` via `onKeyDown`/`onKeyUp` — exposes keyboard press state as a data attribute so CSS can apply `:active`-equivalent styles when a user activates the button with Space.
-- `type="button"` default — prevents accidental form submissions when multiple buttons exist in a form.
+```css
+.stack {
+  display: grid;
+  grid-auto-rows: auto;
+  grid-template-columns: minmax(0, 1fr);
+  align-items: var(--stack-alignment);
+  min-width: 0;
+}
+
+.stack-align-start    { --stack-alignment: start; }
+.stack-align-center   { --stack-alignment: center; }
+.stack-align-end      { --stack-alignment: end; }
+.stack-align-stretch  { --stack-alignment: stretch; }
+.stack-align-baseline { --stack-alignment: baseline; }
+```
+
+The implementation is intentionally small. `Stack` does not redefine containment. It does not introduce horizontal behavior. It adds vertical composition — and nothing more.
 
 > **System rule**
 >
-> Critical behavioral props must not be overridable by consumers.
+> Composition adds responsibility — it does not redefine foundations.
 
-### TypeScript Support
+This layering keeps structural concerns isolated. Containment lives in `Block`. Vertical rhythm lives in `Stack`.
 
-```typescript
-import type { MouseEvent } from 'react'
-import type { BlockWrapperProps } from '@/components/primitives/types'
+### Additional Structural Roles
 
-export type ButtonMouseEvent = MouseEvent<HTMLButtonElement>
+`Inline` follows the same pattern, adding a distinct structural responsibility without duplicating the base surface.
 
-export type ButtonClickHandler = (event: ButtonMouseEvent) => void | Promise<void>
+**Inline** participates in content flow. It behaves as an inline-level flex container, ideal for icon-text pairs, tags, and metadata clusters. Unlike `Stack`, it does not own its width — it takes up only as much space as its children need.
 
-type BaseButtonProps = {
-  disabled?: boolean
-  isLoading?: boolean
-  onClick?: ButtonClickHandler
-}
+Each primitive owns a distinct structural surface: vertical rhythm (`Stack`) or flow-based horizontal grouping (`Inline`). Neither duplicates containment. Neither collapses into a generic utility surface.
 
-export type ButtonProps = Omit<BlockWrapperProps<'button', BaseButtonProps>, 'as'>
-```
-
-**Types breakdown:**
-
-- `ButtonMouseEvent` — an alias that keeps the rest of the codebase clean.
-- `ButtonClickHandler` — explicitly typed as returning `void | Promise<void>`, which communicates that we are not returning any value. This is consistent with React event handler patterns.
-- `BaseButtonProps` — the button's own contract. Only the props the button itself owns: disabled state, loading state, and click handling.
-- `BlockWrapperProps<'button', BaseButtonProps>` — inherits all native button props while merging the button's own contract. `variant`, `variantAppearance`, and `paint` come through from `Block` automatically. `as` is omitted because the button always renders as a `<button>` element.
+Full implementation is available in the resources section below.
 
 ---
 
-## Interaction Logic
+## Where I Draw the Line
 
-Every button interaction should feel complete — *"I acted. Something responded."*
+Not every candidate primitive earns a place in the system.
 
-Good buttons communicate. Users should always know their action was received, even if nothing has happened yet.
+`Row` is the clearest example. On paper it makes sense — a horizontal counterpart to `Stack`, owning toolbars, headers, and side-by-side layouts. In practice, it never held up.
 
-Behind the scenes, a custom hook handles interaction logic. The component stays thin while the hook ensures consistency across every button in the system.
+The problem is that horizontal layouts are almost never static. A toolbar becomes a column on mobile. A header reflows at smaller widths. The moment responsive behaviour enters the picture, `Row` stops owning its structural responsibility — it just becomes a starting point that every consumer immediately works around with custom CSS or utility classes.
 
-The hook:
-
-- Logs clicks in development
-- Logs synchronous errors and re-throws them
-- Attaches logging to unhandled Promise rejections
-- Does not interfere with return values or error handling
-
-```typescript
-import type { ButtonClickHandler, ButtonMouseEvent } from '@/components/button/button.type'
-import log from '@/lib/logging/log'
-
-export default function useButton() {
-  const handleClick = (userHandler?: ButtonClickHandler) =>
-    (event: ButtonMouseEvent) => {
-      if (!userHandler) return
-
-      try {
-        const result = userHandler(event)
-
-        if (process.env.NODE_ENV !== 'production') {
-          log()
-        }
-
-        /**
-         * Note: this only catches rejections the user handler did NOT catch.
-         * If the handler has its own try/catch, this won't run.
-         */
-        if (
-          result !== null &&
-          typeof result === 'object' &&
-          typeof (result as PromiseLike<unknown>).then === 'function'
-        ) {
-          void Promise.resolve(result).catch((err) => {
-            log()
-          })
-        }
-      } catch (err) {
-        log()
-        throw err
-      }
-    }
-
-  return { handleClick }
-}
-```
-
-**Why these choices matter:**
-
-- **Curried function** — `handleClick(onClick)(event)` lets the handler be configured once and reused predictably.
-- **Duck typing for Promises** — checking for a `.then` method rather than `instanceof Promise` handles Promise-like objects correctly.
-- **`void` operator** — signals intentionally that we do not await the Promise, preventing ESLint floating promise warnings.
-- **Re-throw synchronous errors** — errors are logged, then propagate to React error boundaries as normal. The hook observes errors without suppressing them.
-
----
-
-## Loading & States
-
-![Three buttons showing default, loading, and disabled states](TODO: add image showing button states)
-
-### Loading State
-
-Buttons often trigger asynchronous actions. The system communicates this through `data-loading`, which CSS reads directly:
-
-```css
-&[data-loading="true"] {
-  cursor: wait;
-}
-```
-
-This keeps state communication out of JavaScript and in the layer that owns visual presentation.
-
-### Preventing Duplicate Actions
-
-When a button is loading or disabled, all interaction is blocked:
-
-1. `isLoading || disabled` is checked before executing the handler
-2. `event.preventDefault()` and `event.stopPropagation()` block the event entirely
-3. `cursor: wait` or `cursor: not-allowed` communicates the state visually
-4. `aria-disabled` communicates the state to assistive technology
-
-### Form Integration
-
-`type="button"` is set by default. This prevents unintentional form submissions and forces consumers to explicitly opt in to submit behavior:
-
-```tsx
-<Button type="submit" onClick={handleSubmit}>
-  Save Changes
-</Button>
-```
-
----
-
-## Accessibility
-
-### WCAG Principles in Practice
-
-![The four WCAG principles: Perceivable, Operable, Understandable, and Robust, each represented by an icon in a blue circle](/images/blogs/buttons/pour_circles.webp)
-
-The button addresses key accessibility requirements across all four WCAG principles:
-
-- **Perceivable** — sufficient contrast (4.5:1) and readable text at 200% zoom. *(WCAG: 1.4.3, 1.4.11, 1.4.4)*
-- **Operable** — fully keyboard accessible with clear focus states and appropriate target sizes. *(WCAG: 2.1.1, 2.4.7, 2.5.5)*
-- **Understandable** — predictable behavior and clear state communication. *(WCAG: 3.3.2, 3.2.2)*
-- **Robust** — proper semantic HTML and ARIA support for assistive technologies. *(WCAG: 4.1.2, 4.1.3)*
-
-### The `aria-disabled` Decision
-
-We use `aria-disabled` instead of the native `disabled` attribute.
-
-`disabled` removes the element from the accessibility tree and tab order entirely. `aria-disabled` keeps the button focusable, ensuring it remains discoverable by keyboard users and screen readers.
-
-We pair this with JavaScript click prevention — stopping propagation and default behavior to simulate a true disabled state while staying accessible.
+A primitive that developers consistently override is not encoding intent. It is just renaming a div.
 
 > **System rule**
 >
-> Elements that are tabbable should remain tabbable regardless of their state.
+> If a primitive cannot own its responsibility without being worked around, it should not exist.
 
-> The button remains in the tab order when disabled. A user navigating by keyboard can still find it and understand that it exists but is currently unavailable. This is especially important for loading states, where the button will become active again shortly.
+`Stack` already handles the cases where a vertical layout surface is needed. `Inline` handles flow-based horizontal grouping. The horizontal *surface* case — toolbars, headers, split layouts — consistently needs enough context-specific behaviour that a generic primitive would either be too rigid or too leaky to be useful.
 
-### Stable Sizing
+Dropping `Row` left the system with three primitives instead of four. That is not a gap — it is the system working correctly.
 
-![Button with minimum touch target dimensions highlighted](TODO: add image showing 44x44px target size)
+`Text` is another candidate that didn't make the cut, for a different reason.
 
-Minimum dimensions enforce WCAG AAA compliance:
+The argument for it is reasonable — a `Text` primitive could own typography decisions, consuming from a type scale and ensuring font size, weight, and line height are always set consistently. In practice though, the global baseline does most of that work already.
 
-```css
-min-width: 44px;
-min-height: 44px;
-```
+Setting a single `font-size` on `body` means the vast majority of text just inherits the right value without anyone having to think about it. The type scale tokens exist for the exceptions — headings, labels, badges, helper text — and those are consumed directly by the components that need them.
 
-Buttons that are too small are a problem not just for motor impairment — they are frustrating on touch devices for anyone, especially in motion (public transport, walking).
+A `Text` primitive in this context would mostly be wrapping `<p>` tags that already behave correctly. More importantly, it would put a component between the developer and a semantic HTML element that already communicates meaning clearly.
 
-### Designing Beyond WCAG
-
-WCAG gives us the floor, not the ceiling. A few considerations that go further:
-
-- **Disabled contrast** — WCAG has an exception for disabled elements, but a disabled button should still be visually coherent. A completely invisible disabled button gives no signal that the action exists.
-- **Stable layout** — the button's dimensions should not shift when its state changes. Layout shifts disorient users with cognitive disabilities and can cause accidental clicks on moving targets.
-- **Predictable focus** — `cursor: pointer` on the base element, `cursor: not-allowed` when disabled, `cursor: wait` when loading. Each state communicates clearly without relying on color alone.
-
-> **Note**
->
-> Spacing between buttons is not enforced by the button itself — that responsibility belongs to the layout primitive. `Inline` or `Stack` controls the gap between interactive elements. See [Primitives](/blog/design-system/primitives) for how layout ownership works.
->
-> ![Two dialog boxes side by side — the left shows Cancel and Delete buttons cramped together with no spacing, the right shows the same buttons with comfortable spacing between them](/images/blogs/buttons/button_margin_spacing_example.webp)
+The type scale tokens are still part of the system. They just don't need a primitive to distribute them.
 
 ---
 
-## CSS & Theming
+## Primitives — When and When Not To
 
-The button's CSS owns structure and interaction affordances. It does not own color.
+![TODO: add image](TODO)
 
-Color arrives through the design system layers: `variant` provides semantic tokens, `variantAppearance` maps those tokens, and `paint="all"` applies them. The button simply consumes the result.
+Primitives solve structural problems that appear as systems scale.
 
-### Reset & Base Styles
+- **Layout Drift** — When spacing lives inside feature components, rhythm becomes inconsistent. Primitives centralise spacing rules.
+- **Hidden Intent** — Utility chains and deeply nested divs obscure layout meaning. Primitives make arrangement explicit.
+- **Duplication of Structural Logic** — Without primitives, similar flex/grid patterns get rewritten repeatedly. Primitives consolidate them.
+- **Fragile Refactoring** — Changing spacing rules across dozens of components is risky. Changing a primitive is predictable.
 
-```css
-.button {
-  --button-font-size: 1rem;
-  --button-padding-y: var(--spacing);
-  --button-padding-x: var(--spacing-sm);
-
-  /* WCAG Target Size: AA 24x24px minimum, AAA 44x44px minimum */
-  min-width: 44px;
-  min-height: 44px;
-  white-space: nowrap;
-
-  padding: var(--button-padding-y) var(--button-padding-x);
-
-  -webkit-appearance: none;
-  appearance: none;
-  background: none;
-  border-radius: var(--radius-md);
-  outline: 0;
-
-  box-shadow: var(--button-shadow, none);
-  outline-offset: var(--button-outline-offset);
-
-  font: inherit;
-  font-size: var(--button-font-size);
-  line-height: 1.25;
-  text-align: center;
-  vertical-align: middle;
-
-  transition: all 0.2s ease;
-}
-```
-
-### Interaction States
-
-![Button showing hover, focus, active, and default states](TODO: add image showing button interaction states)
-
-Interaction states use `--border-color` from the paint layer rather than hardcoded values. This means hover, focus, and active states adapt automatically to whatever variant the button is using.
-
-```css
-  &:hover {
-    --button-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2);
-
-    outline: 1px solid var(--border-color, currentcolor);
-  }
-
-  &:focus-visible {
-    --button-shadow: none;
-
-    outline: 2px solid var(--border-color);
-  }
-
-  &:active,
-  &[data-pressed="true"] {
-    outline: 1px dotted var(--border-color, currentcolor);
-    transform: translateY(1px);
-  }
-```
-
-`data-pressed` mirrors `:active` for keyboard interactions. Space is the correct activation key for buttons per the ARIA button pattern — the browser fires the click on `keyup`, so `data-pressed` is set on `keydown` and cleared on `keyup`, giving the same visual pressed state that pointer users see from `:active`.
-
-### Disabled & Loading States
-
-```css
-  &:is(:disabled, [aria-disabled="true"]) {
-    --background-color: var(--color-neutral-200);
-    --foreground-color: var(--color-neutral-800);
-    --border-color: var(--color-neutral-400);
-
-    cursor: not-allowed;
-
-    &:hover,
-    &:active {
-      outline: none;
-      box-shadow: none;
-      transform: none;
-    }
-
-    &:focus-visible {
-      --button-outline-color: var(--color-neutral-600);
-    }
-  }
-
-  &[data-loading="true"] {
-    cursor: wait;
-
-    &:hover:not(:focus-visible) {
-      outline: none;
-      box-shadow: none;
-      transform: none;
-    }
-  }
-```
-
-Disabled states override the paint layer's color tokens directly. This ensures disabled buttons remain visually coherent regardless of which variant is active.
-
-### Ghost Appearance
-
-![Ghost button showing hover and focus interaction feedback](TODO: add image showing ghost button states)
-
-Most appearances (`filled`, `outlined`, `tonal`) are shared across the system and defined in the global appearance layer. Ghost is specific to interactive elements — it has no background by default but responds to interaction with subtle color mixing.
-
-Because it is button-specific, it lives in a separate file:
-
-**styles/design-system/appearances/button.css**
-
-```css
-.button[data-appearance="ghost"]:not(:disabled, [aria-disabled="true"]) {
-
-  &:hover {
-    --background-color: color-mix(
-      in srgb,
-      currentcolor 15%,
-      var(--foreground-on-surface)
-    );
-  }
-
-  &:focus-visible {
-    --background-color: color-mix(
-      in srgb,
-      currentcolor 40%,
-      var(--foreground-on-surface)
-    );
-    outline-offset: var(--spacing-sm);
-  }
-
-  &:active,
-  &[data-pressed="true"] {
-    --background-color: color-mix(
-      in srgb,
-      currentcolor 20%,
-      var(--foreground-on-surface)
-    );
-    outline-style: dashed;
-  }
-}
-```
-
-Ghost uses `color-mix()` to derive hover and active backgrounds from `currentcolor` — meaning the interactive feedback is always relative to the button's foreground color, which is itself relative to the active variant. The appearance adapts correctly to any variant without any additional rules.
-
-The `:not(:disabled, [aria-disabled="true"])` guard ensures ghost interaction styles do not apply when the button is inactive.
-
-### Responsive & Motion
-
-```css
-
-@media (prefers-reduced-motion: reduce) {
-  .button {
-    transition: none !important;
-    animation: none !important;
-  }
-}
-```
-
-Motion is disabled entirely when the user has indicated a preference — accessibility is applied at the system level, not as an afterthought.
-
----
-
-## Testing
+Primitives reduce entropy by limiting where structural decisions can live.
 
 > **System rule**
 >
-> Testability is a design constraint, not an afterthought.
+> A primitive should solve a structural problem — not just name a div.
 
-Testing ensures the button behaves predictably and remains accessible as the codebase evolves.
+That said, primitives are not mandatory everywhere. Avoid them when you're prototyping quickly, when the layout is truly one-off, or when semantic HTML alone communicates both structure and meaning clearly.
 
-> Full test suite is available in the resources section.
-
-### Setup
-
-```bash
-npm install -D jest jest-environment-jsdom @testing-library/react @testing-library/dom @testing-library/jest-dom ts-node @types/jest
-```
-
-See the [Next.js Jest setup guide](https://nextjs.org/docs/app/guides/testing/jest) for full configuration.
-
-### useButton Hook
-
-The hook handles interaction logic independently of any UI. These tests validate it in isolation:
-
-- **Event handling** — synchronous and asynchronous handlers run correctly
-- **Error logging** — unhandled Promise rejections and synchronous errors are logged without interfering with execution
-- **Return value** — the hook returns a stable curried function signature
-- **Environment** — logging only runs outside production
-
-### Button Component
-
-The component tests focus on markup, accessibility, and behavioral correctness:
-
-- **Rendering** — correct text, role, and prop application
-- **Accessibility** — `aria-disabled`, keyboard focus, minimum touch target sizes
-- **Loading state** — interaction is blocked, `data-loading` is set correctly
-- **Interaction** — mouse and keyboard events behave predictably
-- **Form integration** — `type="button"` default, submit override, disabled form prevention
+Over-abstraction is just as harmful as under-structure. The goal is clarity — not purity.
 
 ---
 
 ## Summary
 
-This post builds the base button as a thin behavioral layer on top of the design system. The component owns interaction logic and accessibility — nothing more.
+This post introduces primitives as structural building blocks.
 
-- Structure comes from `Block`
-- Color comes from `variant` and `variantAppearance`
-- Paint is applied by the system, not the component
-- Behavior is isolated in `useButton`
-- Accessibility is built in, not bolted on
+In the next post, we'll cover the remaining token layer — spacing, typography scale, radius, and other raw values that the system relies on but haven't been defined yet.
 
-The result is a button that can be dropped into any context, given any variant, and trusted to behave correctly.
+But first, it's important to understand them simply as what they are:
+
+A small vocabulary of components that make layout intentional.
 
 ---
 
 ## Code & Resources
 
-### Class Naming
+This section documents constraints, tradeoffs, and reference material — it does not introduce new concepts.
 
-Class names used in this post (`.button`) follow the same conventions as the rest of the system. If your project uses a utility system like Tailwind or a home-grown CSS library, consider a namespace prefix to avoid conflicts — see the note in the [Primitives post](/blog/design-system/primitives#resources).
+### Class Naming & Utility Class Conflicts
 
-### Complete Code Reference
+Class names used in this post (e.g. `stack-align-center`, `inline-justify-between`) are chosen for readability. In projects that use Tailwind, Bootstrap, or a home-grown utility system, these may clash. A namespace prefix such as `ds-` or your system's name is worth considering to keep design system classes isolated.
 
-**button.tsx**
+---
+
+### TypeScript Notes
+
+The shared `PrimitiveProps` type uses `Omit` to remove any existing `as` prop from `ComponentProps<T>`. This prevents duplicate or conflicting polymorphic definitions when composing custom element types.
+
+### Primitives (Reference)
+
+Reference implementation of the primitives discussed in the post.
+
+#### Types
+
+```ts
+import { ElementType, ComponentProps } from "react";
+
+/*
+  Block defines the containment surface.
+  All higher-order Primitives compose from Block.
+
+  Each primitive exposes alignment and distribution
+  values appropriate to its layout mode.
+*/
+
+type PrimitiveProps<T extends ElementType = "div"> = {
+  as?: T;
+} & Omit<ComponentProps<T>, "as">;
+
+type BlockProps<T extends ElementType = "div"> =
+  PrimitiveProps<T>;
+
+type StackProps<T extends ElementType = "div"> =
+  BlockProps<T> & {
+    gap?: Gap;
+    align?: GridAlignment;
+    justify?: GridJustify;
+  };
+
+type InlineProps<T extends ElementType = "div"> =
+  BlockProps<T> & {
+    gap?: Gap;
+    align?: FlexAlignment;
+    justify?: FlexJustify;
+    wrap?: boolean; // true = wrap (default), false = nowrap
+  };
+```
+
+#### Components
+
+**block.tsx**
 
 ```tsx
-'use client'
+import type { BlockProps } from "@/components/primitives/types";
 
-import clsx from 'clsx'
-import type { ButtonProps, ButtonMouseEvent } from '@/components/button/button.type'
-import useButton from '@/components/button/useButton'
-import { Block } from '@/components/primitives'
+function Block<T extends ElementType = "div">({
+  as,
+  ...rest
+}: BlockProps<T>) {
+  const Component = as || "div";
 
-export default function Button({
+  return <Component {...rest} />;
+}
+```
+
+**stack.tsx**
+
+```tsx
+import { clsx } from "clsx";
+import { Block } from "@/components/primitives/block";
+import type { StackProps, BlockProps } from "@/components/primitives/types";
+
+export function Stack<T extends ElementType = "div">({
+  gap = 4,
+  align = "baseline",
   className,
-  children,
-  onClick,
-  onKeyDown,
-  onKeyUp,
-  type = 'button',
-  disabled = false,
-  isLoading = false,
-  ...props
-}: ButtonProps) {
-  const { handleClick } = useButton()
+  ...blockProps
+}: StackProps<T>) {
 
-  function onClickHandler(event: ButtonMouseEvent) {
-    if (isLoading || disabled) {
-      event.stopPropagation()
-      event.preventDefault()
-      return;
-    }
-    void handleClick(onClick)(event)
-  }
-
-  function onKeyDownHandler(event: React.KeyboardEvent<HTMLButtonElement>) {
-    if (event.key === ' ') {
-      event.currentTarget.dataset.pressed = 'true'
-    }
-    onKeyDown?.(event)
-  }
-
-  function onKeyUpHandler(event: React.KeyboardEvent<HTMLButtonElement>) {
-    if (event.key === ' ') {
-      delete event.currentTarget.dataset.pressed
-    }
-    onKeyUp?.(event)
-  }
+  const classes = clsx(
+    "stack",
+    `gap-row-${gap}`,
+    `stack-align-${align}`,
+    className
+  );
 
   return (
     <Block
-      as="button"
-      className={clsx(className, 'button')}
-      aria-disabled={isLoading || disabled}
-      type={type}
-      data-testid="base-button"
-      paint="all"
-      {...props}
-      data-loading={isLoading}
-      onKeyDown={onKeyDownHandler}
-      onKeyUp={onKeyUpHandler}
-      onClick={onClickHandler}
-    >
-      {children}
-    </Block>
-  )
+      className={classes}
+      {...blockProps as BlockProps<T>}
+    />
+  );
 }
 ```
 
-**useButton.ts**
-
-```typescript
-import type { ButtonClickHandler, ButtonMouseEvent } from '@/components/button/button.type'
-import log from '@/lib/logging/log'
-
-export default function useButton() {
-  const handleClick = (userHandler?: ButtonClickHandler) =>
-    (event: ButtonMouseEvent) => {
-      if (!userHandler) return
-
-      try {
-        const result = userHandler(event)
-
-        if (process.env.NODE_ENV !== 'production') {
-          log()
-        }
-
-        if (
-          result !== null &&
-          typeof result === 'object' &&
-          typeof (result as PromiseLike<unknown>).then === 'function'
-        ) {
-          void Promise.resolve(result).catch((err) => {
-            log()
-          })
-        }
-      } catch (err) {
-        log()
-        throw err
-      }
-    }
-
-  return { handleClick }
-}
-```
-
-**button.type.ts**
-
-```typescript
-import type { MouseEvent } from 'react'
-import type { BlockWrapperProps } from '@/components/primitives/types'
-
-export type ButtonMouseEvent = MouseEvent<HTMLButtonElement>
-
-export type ButtonClickHandler = (event: ButtonMouseEvent) => void | Promise<void>
-
-type BaseButtonProps = {
-  disabled?: boolean
-  isLoading?: boolean
-  onClick?: ButtonClickHandler
-}
-
-export type ButtonProps = Omit<BlockWrapperProps<'button', BaseButtonProps>, 'as'>
-```
-
-**button.css**
+**stack.css**
 
 ```css
-.button {
-  --button-font-size: 1rem;
-  --button-padding-y: var(--spacing);
-  --button-padding-x: var(--spacing-sm);
-
-  min-width: 44px;
-  min-height: 44px;
-  white-space: nowrap;
-
-  padding: var(--button-padding-y) var(--button-padding-x);
-
-  -webkit-appearance: none;
-  appearance: none;
-  background: none;
-  border-radius: var(--radius-md);
-  outline: 0;
-
-  box-shadow: var(--button-shadow, none);
-  outline-offset: var(--button-outline-offset);
-
-  font: inherit;
-  font-size: var(--button-font-size);
-  line-height: 1.25;
-  text-align: center;
-  vertical-align: middle;
-
-  transition: all 0.2s ease;
-
-  &:hover {
-    --button-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2);
-
-    outline: 1px solid var(--border-color, currentcolor);
-  }
-
-  &:focus-visible {
-    --button-shadow: none;
-
-    outline: 2px solid var(--border-color);
-  }
-
-  &:active,
-  &[data-pressed="true"] {
-    outline: 1px dotted var(--border-color, currentcolor);
-    transform: translateY(1px);
-  }
-
-  &:is(:disabled, [aria-disabled="true"]) {
-    --background-color: var(--color-neutral-200);
-    --foreground-color: var(--color-neutral-800);
-    --border-color: var(--color-neutral-400);
-
-    cursor: not-allowed;
-
-    &:hover,
-    &:active {
-      outline: none;
-      box-shadow: none;
-      transform: none;
-    }
-
-    &:focus-visible {
-      --button-outline-color: var(--color-neutral-600);
-    }
-  }
-
-  &[data-loading="true"] {
-    cursor: wait;
-
-    &:hover:not(:focus-visible) {
-      outline: none;
-      box-shadow: none;
-      transform: none;
-    }
-  }
+.stack {
+  display: grid;
+  grid-auto-rows: auto;
+  grid-template-columns: minmax(0, 1fr);
+  align-items: var(--stack-alignment);
+  min-width: 0;
 }
 
-button.button {
-  cursor: pointer;
-}
+.stack-align-start    { --stack-alignment: start; }
+.stack-align-center   { --stack-alignment: center; }
+.stack-align-end      { --stack-alignment: end; }
+.stack-align-stretch  { --stack-alignment: stretch; }
+.stack-align-baseline { --stack-alignment: baseline; }
+```
 
+**inline.tsx**
 
-@media (prefers-reduced-motion: reduce) {
-  .button {
-    transition: none !important;
-    animation: none !important;
-  }
+```tsx
+import { clsx } from "clsx";
+import { Block } from "@/components/primitives/block";
+import type { InlineProps, BlockProps } from "@/components/primitives/types";
+
+export function Inline<T extends ElementType = "div">({
+  gap = 4,
+  align = "center",
+  justify = "start",
+  wrap = true,
+  className,
+  ...blockProps
+}: InlineProps<T>) {
+
+  const classes = clsx(
+    "inline",
+    `gap-${gap}`,
+    `inline-align-${align}`,
+    `inline-justify-${justify}`,
+    wrap ? "inline-wrap" : "inline-nowrap",
+    className
+  );
+
+  return (
+    <Block
+      className={classes}
+      {...blockProps as BlockProps<T>}
+    />
+  );
 }
 ```
 
-**appearances/button.css**
+**inline.css**
 
 ```css
-.button[data-appearance="ghost"]:not(:disabled, [aria-disabled="true"]) {
-
-  &:hover {
-    --background-color: color-mix(
-      in srgb,
-      currentcolor 15%,
-      var(--foreground-on-surface)
-    );
-  }
-
-  &:focus-visible {
-    --background-color: color-mix(
-      in srgb,
-      currentcolor 40%,
-      var(--foreground-on-surface)
-    );
-    outline-offset: var(--spacing-sm);
-  }
-
-  &:active,
-  &[data-pressed="true"] {
-    --background-color: color-mix(
-      in srgb,
-      currentcolor 20%,
-      var(--foreground-on-surface)
-    );
-    outline-style: dashed;
-  }
-}
-```
-
-### Testing Resources
-
-**Button.test.tsx**
-
-```tsx
-import Button from '@/components/button'
-import { fireEvent, render, screen } from '@testing-library/react'
-import React from 'react'
-
-describe('Button', () => {
-  test('renders with children', () => {
-    render(<Button>click me</Button>)
-    expect(screen.getByTestId('base-button')).toHaveTextContent('click me')
-  })
-
-  test('calls onClick handler when clicked', () => {
-    const handleClick = jest.fn()
-    render(<Button onClick={handleClick}>click me</Button>)
-    fireEvent.click(screen.getByTestId('base-button'))
-    expect(handleClick).toHaveBeenCalledTimes(1)
-  })
-
-  test('prevents click handler when disabled', () => {
-    const handleClick = jest.fn()
-    render(<Button disabled onClick={handleClick}>click me</Button>)
-    fireEvent.click(screen.getByTestId('base-button'))
-    expect(handleClick).not.toHaveBeenCalled()
-  })
-
-  test('prevents click handler when isLoading is true', () => {
-    const handleClick = jest.fn()
-    render(<Button isLoading onClick={handleClick}>click me</Button>)
-    fireEvent.click(screen.getByTestId('base-button'))
-    expect(handleClick).not.toHaveBeenCalled()
-  })
-
-  test('stops propagation when disabled', () => {
-    const handleParentClick = jest.fn()
-    render(
-      <div onClick={handleParentClick}>
-        <Button disabled onClick={jest.fn()}>click me</Button>
-      </div>
-    )
-    fireEvent.click(screen.getByTestId('base-button'))
-    expect(handleParentClick).not.toHaveBeenCalled()
-  })
-
-  test('stops propagation when loading', () => {
-    const handleParentClick = jest.fn()
-    render(
-      <div onClick={handleParentClick}>
-        <Button isLoading onClick={jest.fn()}>click me</Button>
-      </div>
-    )
-    fireEvent.click(screen.getByTestId('base-button'))
-    expect(handleParentClick).not.toHaveBeenCalled()
-  })
-
-  test('sets type to button by default', () => {
-    render(<Button>click me</Button>)
-    expect(screen.getByTestId('base-button')).toHaveAttribute('type', 'button')
-  })
-
-  test('allows type to be overridden to submit', () => {
-    const handleSubmit = jest.fn((e) => e.preventDefault())
-    render(
-      <form onSubmit={handleSubmit}>
-        <Button type="submit">submit</Button>
-      </form>
-    )
-    fireEvent.click(screen.getByTestId('base-button'))
-    expect(handleSubmit).toHaveBeenCalledTimes(1)
-  })
-
-  test('prevents form submission when disabled', () => {
-    const handleSubmit = jest.fn()
-    render(
-      <form onSubmit={handleSubmit}>
-        <Button type="submit" disabled>submit</Button>
-      </form>
-    )
-    fireEvent.click(screen.getByTestId('base-button'))
-    expect(handleSubmit).not.toHaveBeenCalled()
-  })
-
-  test('sets aria-disabled when disabled', () => {
-    render(<Button disabled>click me</Button>)
-    expect(screen.getByTestId('base-button')).toHaveAttribute('aria-disabled', 'true')
-  })
-
-  test('sets aria-disabled when loading', () => {
-    render(<Button isLoading>click me</Button>)
-    expect(screen.getByTestId('base-button')).toHaveAttribute('aria-disabled', 'true')
-  })
-
-  test('sets data-loading when loading', () => {
-    render(<Button isLoading>click me</Button>)
-    expect(screen.getByTestId('base-button')).toHaveAttribute('data-loading', 'true')
-  })
-
-  test('activates button with Space key', () => {
-    const handleClick = jest.fn()
-    render(<Button onClick={handleClick}>click me</Button>)
-    const button = screen.getByTestId('base-button')
-    button.focus()
-    expect(button).toHaveFocus()
-    fireEvent.keyDown(button, { key: ' ', code: 'Space' })
-    fireEvent.keyUp(button, { key: ' ', code: 'Space' })
-    expect(handleClick).toHaveBeenCalled()
-  })
-
-  test('handles async click handlers', async () => {
-    const handleClick = jest.fn().mockResolvedValue(undefined)
-    render(<Button onClick={handleClick}>click me</Button>)
-    fireEvent.click(screen.getByTestId('base-button'))
-    expect(handleClick).toHaveBeenCalledTimes(1)
-    await expect(handleClick.mock.results[0].value).resolves.toBeUndefined()
-  })
-
-  test('applies custom className', () => {
-    render(<Button className="custom-class">click me</Button>)
-    expect(screen.getByTestId('base-button')).toHaveClass('custom-class', 'button')
-  })
-})
-```
-
-**useButton.test.tsx**
-
-```tsx
-import useButton from '@/components/button/useButton'
-import { renderHook } from '@testing-library/react'
-import { MouseEvent as ReactMouseEvent } from 'react'
-import log from '@/lib/logging/log'
-import withNodeEnv from '@/tests/helpers/withNodeEnv'
-
-jest.mock('@/lib/logging/log.ts')
-
-const mockLog = log as jest.MockedFunction<typeof log>
-
-let handleClick: ReturnType<typeof useButton>['handleClick']
-
-describe('useButton', () => {
-  beforeEach(() => {
-    jest.clearAllMocks()
-    const { result } = renderHook(() => useButton())
-    handleClick = result.current.handleClick
-  })
-
-  describe('handleClick', () => {
-    test('accepts a curried function with the Event as the prop', () => {
-      const mockUserHandler = jest.fn()
-      const mockEvent = {} as ReactMouseEvent<HTMLButtonElement>
-      handleClick(mockUserHandler)(mockEvent)
-      expect(mockUserHandler).toHaveBeenCalledWith(mockEvent)
-    })
-
-    test('returns early when no handler is provided', () => {
-      const clickHandler = handleClick(undefined)
-      const result = clickHandler({} as ReactMouseEvent<HTMLButtonElement>)
-      expect(result).toBeUndefined()
-      expect(mockLog).not.toHaveBeenCalled()
-    })
-
-    test('does not return a value for sync functions', () => {
-      const mockHandler = jest.fn()
-      const clickHandler = handleClick(mockHandler)
-      const result = clickHandler({} as ReactMouseEvent<HTMLButtonElement>)
-      expect(mockHandler).toHaveBeenCalledTimes(1)
-      expect(result).toBeUndefined()
-    })
-
-    test('logs and rethrows sync handler errors', () => {
-      const error = new Error('Sync Error')
-      const mockHandler = jest.fn().mockImplementation(() => { throw error })
-      const clickHandler = handleClick(mockHandler)
-      expect(() => {
-        clickHandler({} as ReactMouseEvent<HTMLButtonElement>)
-      }).toThrow(error)
-      expect(mockLog).toHaveBeenCalled()
-    })
-
-    test('attaches logging to unhandled async errors', async () => {
-      const error = new Error('Async Error')
-      const mockHandler = jest.fn<Promise<void>, [ReactMouseEvent<HTMLButtonElement>]>()
-        .mockRejectedValue(error)
-      const clickHandler = handleClick(mockHandler)
-      clickHandler({} as ReactMouseEvent<HTMLButtonElement>)
-      await new Promise<void>(resolve => { global.setTimeout(resolve, 0) })
-      expect(mockLog).toHaveBeenCalled()
-    })
-
-    test('does not log caught async errors', async () => {
-      await withNodeEnv('production', async () => {
-        const error = new Error('Caught Async Error')
-        const mockHandler = jest.fn<Promise<void>, [ReactMouseEvent<HTMLButtonElement>]>()
-          .mockImplementation(() => Promise.reject(error).catch(() => {}))
-        const clickHandler = handleClick(mockHandler)
-        clickHandler({} as ReactMouseEvent<HTMLButtonElement>)
-        await new Promise<void>(resolve => { global.setTimeout(resolve, 0) })
-        expect(mockLog).not.toHaveBeenCalled()
-      })
-    })
-
-    test('logs clicks in non-production environments', () => {
-      withNodeEnv('development', () => {
-        const mockHandler = jest.fn()
-        const clickHandler = handleClick(mockHandler)
-        clickHandler({} as ReactMouseEvent<HTMLButtonElement>)
-        expect(mockLog).toHaveBeenCalled()
-      })
-    })
-
-    test('does not log clicks in production', () => {
-      withNodeEnv('production', () => {
-        const mockHandler = jest.fn()
-        const clickHandler = handleClick(mockHandler)
-        clickHandler({} as ReactMouseEvent<HTMLButtonElement>)
-        expect(mockLog).not.toHaveBeenCalled()
-      })
-    })
-  })
-})
-```
-
-**jest.config.ts**
-
-```typescript
-import type { Config } from 'jest'
-import nextJest from 'next/jest.js'
-
-const createJestConfig = nextJest({ dir: './' })
-
-const config: Config = {
-  clearMocks: true,
-  collectCoverage: true,
-  coverageProvider: 'v8',
-  coverageDirectory: 'coverage',
-  testEnvironment: 'jsdom',
-  silent: true,
-  moduleNameMapper: {
-    '^@/(.*)$': '<rootDir>/$1'
-  },
-  setupFilesAfterFramework: ['<rootDir>/jest.setup.ts']
+.inline {
+  display: inline-flex;
+  align-items: var(--inline-alignment);
+  justify-content: var(--inline-justify);
+  min-width: 0;
 }
 
-export default createJestConfig(config)
-```
+.inline-wrap   { flex-wrap: wrap; }
+.inline-nowrap { flex-wrap: nowrap; }
 
-**jest.setup.ts**
+.inline-align-start    { --inline-alignment: flex-start; }
+.inline-align-center   { --inline-alignment: center; }
+.inline-align-end      { --inline-alignment: flex-end; }
+.inline-align-stretch  { --inline-alignment: stretch; }
+.inline-align-baseline { --inline-alignment: baseline; }
 
-```typescript
-import '@testing-library/jest-dom'
+.inline-justify-start   { --inline-justify: flex-start; }
+.inline-justify-center  { --inline-justify: center; }
+.inline-justify-end     { --inline-justify: flex-end; }
+.inline-justify-between { --inline-justify: space-between; }
+.inline-justify-around  { --inline-justify: space-around; }
 ```
 
 ### Further Reading
 
-**Accessibility**
+**Layout & Primitives**
 
-- [MDN: Button Accessibility](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Roles/button_role)
-- [W3C ARIA Authoring Practices: Button](https://www.w3.org/WAI/ARIA/apg/patterns/button/)
-- [Kitty Giraudel: aria-disabled vs disabled](https://kittygiraudel.com/2024/03/29/on-disabled-and-aria-disabled-attributes/)
-- [Adrian Roselli: Multi-Function Button](https://adrianroselli.com/2021/01/multi-function-button.html)
+- [Every Layout](https://every-layout.dev/) — the Stack and Inline patterns in this post are directly inspired by this work
+- [MDN: CSS Grid Layout](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_grid_layout)
+- [MDN: CSS Flexible Box Layout](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_flexible_box_layout)
 
-**CSS Reset**
+**Design Systems**
 
-- [Andy Bell's modern reset](https://piccalil.li/blog/a-more-modern-css-reset/)
-- [Josh Comeau's CSS reset](https://www.joshwcomeau.com/css/custom-css-reset/)
-
-**Design Systems: Buttons**
-
-- [Material Design](https://m3.material.io/components/buttons/overview)
-- [Apple Human Interface Guidelines](https://developer.apple.com/design/human-interface-guidelines/buttons)
-- [Atlassian](https://atlassian.design/components/button/examples)
+- [Radix Primitives](https://www.radix-ui.com/primitives) — a well-known example of a primitive-based component system
+- [Paste by Twilio](https://paste.twilio.design/) — another system with a strong primitive layer

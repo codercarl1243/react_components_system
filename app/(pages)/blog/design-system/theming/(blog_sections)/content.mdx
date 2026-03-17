@@ -135,7 +135,7 @@ This explicit opt-in design keeps styling decisions intentional and prevents acc
 
 The important detail here isn't the button itself — it's that the component remains unaware of *how* the styling is constructed. It simply consumes the result.
 
-Everything we build here is *framework-agnostic* at the styling layer. React is used as a consumer, not as the owner of the design system.
+Everything we build here is *framework-agnostic* at the styling layer. React (in the case of this website) is used as a consumer, not as the owner of the design system.
 
 This separation is not incidental — it's enforced by the contracts between each layer.
 
@@ -499,6 +499,13 @@ Tools for validating contrast and accessibility:
 - [WebAIM Contrast Checker](https://webaim.org/resources/contrastchecker/) — the gold standard for checking contrast ratios
 - [Contrast Grid](https://contrast-grid.eightshapes.com/) — compare entire color palettes at once
 - [Color.review](https://color.review/) — preview colors with vision-deficiency simulations
+
+### CSS Reset
+
+The global baseline defined in this post assumes browser defaults have already been normalised. Without a reset, default browser styles for margins, padding, and font rendering will interfere with the token layer.
+
+- [Andy Bell's modern reset](https://piccalil.li/blog/a-more-modern-css-reset/) — a great starting point for any app
+- [Josh Comeau's CSS reset](https://www.joshwcomeau.com/css/custom-css-reset/) — goes in depth with clear explanations for each rule
 
 ### Theming Pipeline (Reference)
 

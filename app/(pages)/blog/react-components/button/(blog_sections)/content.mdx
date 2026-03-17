@@ -1,5 +1,7 @@
 # Building a Button Component
 
+![Button component code arranged as interlocking puzzle pieces on a dark blue background](/images/blogs/react-components/button/main-image.webp)
+
 A Practical Implementation Guide
 
 ## Introduction
@@ -293,6 +295,8 @@ When a button is loading or disabled, all interaction is blocked:
 
 ### WCAG Principles in Practice
 
+![The four WCAG principles: Perceivable, Operable, Understandable, and Robust, each represented by an icon in a blue circle](/images/blogs/buttons/pour_circles.webp)
+
 The button addresses key accessibility requirements across all four WCAG principles:
 
 - **Perceivable** — sufficient contrast (4.5:1) and readable text at 200% zoom. *(WCAG: 1.4.3, 1.4.11, 1.4.4)*
@@ -339,7 +343,7 @@ WCAG gives us the floor, not the ceiling. A few considerations that go further:
 >
 > Spacing between buttons is not enforced by the button itself — that responsibility belongs to the layout primitive. `Inline` or `Stack` controls the gap between interactive elements. See [Primitives](/blog/design-system/primitives) for how layout ownership works.
 >
-> ![Comparison of cramped buttons versus buttons with adequate spacing between them](TODO: add image showing cramped vs spaced buttons)
+> ![Two dialog boxes side by side — the left shows Cancel and Delete buttons cramped together with no spacing, the right shows the same buttons with comfortable spacing between them](/images/blogs/buttons/button_margin_spacing_example.webp)
 
 ---
 
@@ -1079,11 +1083,6 @@ import '@testing-library/jest-dom'
 - [W3C ARIA Authoring Practices: Button](https://www.w3.org/WAI/ARIA/apg/patterns/button/)
 - [Kitty Giraudel: aria-disabled vs disabled](https://kittygiraudel.com/2024/03/29/on-disabled-and-aria-disabled-attributes/)
 - [Adrian Roselli: Multi-Function Button](https://adrianroselli.com/2021/01/multi-function-button.html)
-
-**CSS Reset**
-
-- [Andy Bell's modern reset](https://piccalil.li/blog/a-more-modern-css-reset/)
-- [Josh Comeau's CSS reset](https://www.joshwcomeau.com/css/custom-css-reset/)
 
 **Design Systems: Buttons**
 
