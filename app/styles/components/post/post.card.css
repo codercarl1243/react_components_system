@@ -33,8 +33,11 @@
 }
 
 .post-card__excerpt {
-    background-color: var(--color-neutral-a6);
+    background: linear-gradient(to bottom,
+            color-mix(in srgb, var(--color-neutral-900) 40%, transparent),
+            color-mix(in srgb, var(--color-neutral-900) 70%, transparent));
     color: white;
+    padding-block: var(--spacing-md);
 }
 
 .post-card__overlay {
