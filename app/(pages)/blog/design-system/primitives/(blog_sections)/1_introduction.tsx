@@ -5,7 +5,7 @@ import Icon from "@/components/icon";
 import BlogLink from "@/components/post/post.blogLink";
 import PostNote from "@/components/post/post.note";
 import PostSection from "@/components/post/post.section";
-import { Row } from "@/components/primitives";
+import { Block } from "@/components/primitives";
 import { RiArrowLeftRightLine, RiArrowUpDownLine, RiCheckboxBlankLine } from "@remixicon/react";
 
 export default function Section1() {
@@ -31,16 +31,16 @@ export default function Section1() {
                 without taking ownership of visual styling.
             </p>
             <PostNote variant="info" showIcon={false} className="mt-8 mb-16" paint="border">
-                <Row as="strong" className="callout__heading font-accent">
+               <Block as="strong" className="callout__heading font-accent">
                     Series Context
-                </Row>
+                </Block>
                 <p>
                     This article is part of a broader design system series. While it builds
                     on ideas introduced in <BlogLink postId="design__theming_01">Theming Foundations</BlogLink>, it stands on its own.
                 </p>
             </PostNote>
             <p>
-                In this post, we'll define the core structural primitives (
+                In this post, we'll define the structural primitives I use (
                 {" "}<InlineCode codeString="<Stack />" />,{" "}
                 <InlineCode codeString="<Inline />" />, and{" "}
                 <InlineCode codeString="<Block />" />{" "}), and implement minimal versions of
@@ -49,8 +49,7 @@ export default function Section1() {
             </p>
             {/*  TODO: add a link to the next post when the post exists */}
             <p>
-                In the next post, we'll connect these primitives to the theming system —
-                showing how structural contracts become enforceable styling boundaries.
+                In the next post, we'll cover the remaining token layer — spacing, typography scale, radius, and other raw values that the system relies on but haven't been defined yet.
             </p>
         </PostSection>
     )

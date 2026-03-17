@@ -20,27 +20,18 @@ export default function Section2() {
             <Rule>
                 Primitives encode structural intent.
             </Rule>
-                            {/* 
-                            <p>
-                    A primitive constrains its API to the decisions it owns.
-                    <InlineCode codeString="<Stack />" /> accepts <InlineCode codeString="gap" /> and <InlineCode codeString="align" /> — not class names decided on a per component basis.
-                    <Row as="em" className="fun-underline py-4">
-                        Constraint writes, signs, and documents the contract.
-                    </Row>
-                </p> 
-                */}
             <p>
                 Instead of scattering spacing, alignment, and containment across arbitrary
                 elements, primitives encode those structural decisions into reusable layout
                 components that define explicit structural contracts.
             </p>
-            <p>
+            {/* <p>
                 Primitives operate at a different layer of responsibility:
             </p>
             <List>
                 <li>They don't describe what something is (Button, Card, Modal etc.)</li>
                 <li>They describe how something is arranged in space (Stack, Inline, Block).</li>
-            </List>
+            </List> */}
             <PostNote variant="neutral" className="mt-8">
                 <p>
                     Primitives are not <span className="italic">“better divs”</span>. A thin wrapper that accepts arbitrary class name or style props and forwards them to a div has not encoded any intent — it has just renamed markup.

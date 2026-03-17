@@ -24,8 +24,7 @@ export default function Section6() {
                 That responsibility belongs to <InlineCode codeString="<Stack />" />.
             </p>
             <p>
-                <InlineCode codeString="<Stack />" /> extends <InlineCode codeString="BlockProps" />, adding only the structural
-                properties it owns.
+                <InlineCode codeString="<Stack />" /> extends <InlineCode codeString="BlockProps" />, adding only the structural properties it owns.
             </p>
             <Code
                 codeString={`type StackProps<T extends ElementType = "div"> =
@@ -81,11 +80,11 @@ BlockProps<T> & {
   min-width: 0;
 }
 
-.stack-align-start { --stack-alignment: start; }
-.stack-align-center { --stack-alignment: center; }
-.stack-align-end { --stack-alignment: end; }
-.stack-align-stretch { --stack-alignment: stretch; }
-.stack-align-baseline { --stack-alignment: baseline; }`}
+.stack-align-start      { --stack-alignment: start; }
+.stack-align-center     { --stack-alignment: center; }
+.stack-align-end        { --stack-alignment: end; }
+.stack-align-stretch    { --stack-alignment: stretch; }
+.stack-align-baseline   { --stack-alignment: baseline; }`}
                             />
                         ),
                         tabLabel: "stack.css"
@@ -94,10 +93,7 @@ BlockProps<T> & {
             />
 
             <p>
-                The implementation is intentionally small.{" "}
-                <InlineCode codeString="Stack" /> does not redefine containment.
-                It does not introduce horizontal behavior.
-                It adds vertical composition — and nothing more.
+                The implementation is intentionally small. <InlineCode codeString="Stack" /> does not redefine containment. It does not introduce horizontal behavior. It adds vertical composition — and nothing more.
             </p>
 
             <Rule>
@@ -111,30 +107,27 @@ BlockProps<T> & {
             </p>
 
             <Heading as="h3" headingSize={4}>
-                Additional Structural Roles
+                Inline
             </Heading>
 
             <p>
-                Other primitives follow the same pattern.
+                <InlineCode codeString="Inline" /> follows the same pattern, ading a distinct structural responsibility without duplicating the base surface.
             </p>
+            <p>
+                <InlineCode codeString="Inline" /> participates in content flow. It behaves as an inline-level flex container, ideal for icon-text pairs, tags, and metadata clusters. Unlike `Stack`, it does not own its width — it takes up only as much space as its children need.
+            </p>
+            <p>
+                Each primitive owns a distinct structural surface: vertical rhythm (<InlineCode codeString="Stack" /> ) or flow-based horizontal grouping (<InlineCode codeString="Inline" />). Neither duplicates containment. Neither collapses into a generic utility surface.
+            </p>
+            <Rule>
+                A primitive constrains its API to the decisions it owns. <InlineCode codeString="Stack" /> accepts  <InlineCode codeString="gap" /> and  <InlineCode codeString="align" /> — nothing more. That constraint writes, signs, and documents the contract.
+            </Rule>
             <PostNote>
                 <p>
-                    The following primitives are described without implementation detail — the goal is to establish structural responsibility, not provide a component library.
-                </p>
-                <p>
-                    Full code is available in the resources section below.
+                    Full implementation is available in the resources section below.
                 </p>
             </PostNote>
-            <p>
-                <strong>Row</strong> owns horizontal layout surfaces.
-                It establishes structure for toolbars, headers, and side-by-side panels.
-            </p>
-
-            <p>
-                <strong>Inline</strong> participates in content flow. It behaves as an
-                inline-level flex container, ideal for icon-text pairs, tags, and
-                metadata clusters.
-            </p>
+            
             <PrimitiveOwnershipDiagram />
             <p>
                 Each primitive owns a distinct structural responsibility. None duplicate

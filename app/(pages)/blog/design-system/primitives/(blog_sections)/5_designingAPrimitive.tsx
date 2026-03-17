@@ -46,8 +46,7 @@ export function Block<T extends ElementType = "div">({
 }`}
             />
             <p>
-                The implementation is intentionally minimal. <InlineCode codeString="Block" /> doesn't introduce layout behavior — it
-                simply provides a predictable containment surface that other primitives can build on.
+                The implementation is intentionally minimal. <InlineCode codeString="Block" /> doesn't introduce layout behavior — it simply provides a predictable containment surface that other primitives can build on.
             </p>
             <p>
                 From here, <InlineCode codeString="Inline" /> and <InlineCode codeString="Stack" /> compose <InlineCode codeString="Block" />, adding focused structural responsibilities without duplicating the base surface.

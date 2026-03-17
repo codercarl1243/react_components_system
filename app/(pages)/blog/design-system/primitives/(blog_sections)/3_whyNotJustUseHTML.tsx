@@ -17,17 +17,14 @@ export default function Section3() {
             <p>
                 <strong>HTML defines document <span className="fun-underline">structure</span>:</strong>
             </p>
-
             <List as="ul" marker="circle">
                 <li>Document hierarchy</li>
                 <li>Content meaning and relationships</li>
                 <li>Landmarks</li>
             </List>
-
             <p>
                 <strong>Primitives define <span className="fun-underline">responsibility</span>:</strong>
             </p>
-
             <List as="ul" marker="circle">
                 <li>Who owns layout decisions</li>
                 <li>Where layout boundaries are enforced</li>

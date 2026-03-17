@@ -15,8 +15,7 @@ export default function Section4() {
             </p>
             <p>
                 If you think in terms of software architecture, a primitive behaves like a
-                single-responsibility <InlineCode codeString={"function"} />. It owns one structural concern, exposes a
-                constrained API, and does not leak responsibilities it does not control.
+                single-responsibility <InlineCode codeString={"function"} />. It owns one structural concern, exposes a constrained API, and does not leak responsibilities it does not control.
             </p>
             <Rule>
                 A primitive should do one structural job — and do it predictably.
@@ -25,9 +24,15 @@ export default function Section4() {
                 In practice, that vocabulary usually converges around:
             </p>
             <List as="ul" marker="none">
-                <li><strong>Vertical composition</strong> — stacking elements with controlled rhythm</li>
-                <li><strong>Horizontal composition</strong> — aligning and distributing elements in a row</li>
-                <li><strong>Containment</strong> — defining layout boundaries and spacing surfaces</li>
+                <li>
+                    <strong>Vertical composition</strong> — stacking elements with controlled rhythm
+                </li>
+                <li>
+                    <strong>Content flow</strong> — inline grouping that participates in document flow
+                </li>
+                <li>
+                    <strong>Containment</strong> — defining layout boundaries and spacing surfaces
+                </li>
             </List>
             <p>
                 Three roles. That is the structural vocabulary. Everything else is composition.
