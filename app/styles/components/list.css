@@ -18,7 +18,7 @@
   padding-inline-start: 1.25em;
 }
 
-.list:not(.list--none) li::before {
+:where(.list:not(.list--none)) li::before {
   --list-marker-bg-color: var(--background-color, transparent);
   --list-color: var(--foreground-color, var(--color-secondary-400));
   --list-border: none;
@@ -31,7 +31,6 @@
   width: 0.6rem;
   aspect-ratio: 1;
   border: var(--list-border);
-  border-color: var(--border-color);
   border-radius: var(--list-border-radius);
   background-color: var(--list-marker-bg-color);
   color: var(--list-color);
