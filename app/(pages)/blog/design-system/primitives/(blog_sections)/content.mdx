@@ -16,7 +16,7 @@ A primitive is a minimal component that represents a single structural role — 
 >
 > This article is part of a broader design system series. While it builds on ideas introduced in [Theming Foundations](/blog/design-system/theming), it stands on its own.
 >
-> In this post, we'll define the structural primitives I use (`<Stack />`, `<Inline />`, and `<Block />`), and implement minimal versions of them. These components expose controlled structural properties like spacing, alignment, and containment.
+> In this post, we'll define the structural primitives I use — `<Stack />`, `<Inline />`, and `<Block />` — and implement minimal versions of them. These components expose controlled structural properties like spacing, alignment, and containment.
 >
 > In the next post, we'll cover the remaining token layer — spacing, typography scale, radius, and other raw values that the system relies on but haven't been defined yet.
 
@@ -34,7 +34,7 @@ Instead of scattering spacing, alignment, and containment across arbitrary eleme
 
 Primitives are not "better divs". A thin wrapper that accepts arbitrary `className` or `style` props and forwards them to a `div` has not encoded any intent — it has just renamed markup.
 
-Compare how structural intent is expressed in the following example:
+Compare how structural intent is expressed in the following examples:
 
 **Before**
 
@@ -244,17 +244,15 @@ This layering keeps structural concerns isolated. Containment lives in `Block`. 
 
 ### Inline
 
+> Full implementation is available in the resources section below.
+
 `Inline` follows the same pattern, adding a distinct structural responsibility without duplicating the base surface.
 
 **Inline** participates in content flow. It behaves as an inline-level flex container, ideal for icon-text pairs, tags, and metadata clusters. Unlike `Stack`, it does not own its width — it takes up only as much space as its children need.
 
-Each primitive owns a distinct structural surface: vertical rhythm (`Stack`) or flow-based horizontal grouping (`Inline`). Neither duplicates containment. Neither collapses into a generic utility surface.
- 
 > **System rule**
 >
 > A primitive constrains its API to the decisions it owns. `<Stack />` accepts `gap` and `align` — nothing more. That constraint writes, signs, and documents the contract.
-
-Full implementation is available in the resources section below.
 
 ---
 
@@ -262,31 +260,40 @@ Full implementation is available in the resources section below.
 
 Not every structural role deserves to become a primitive.
 
-`Row` seems like it should exist — a horizontal counterpart to `Stack`.
-
-In practice, it breaks down immediately.
-
-The problem is that horizontal layouts are almost never static. A toolbar becomes a column on mobile. A header reflows at smaller widths. The moment responsive behaviour enters the picture, `Row` stops owning its structural responsibility — it just becomes a starting point that every consumer immediately works around with custom CSS or utility classes.
-
-A primitive that developers consistently override is not encoding intent. It is just renaming a div.
-
 > **System rule**
 >
 > If a primitive cannot own its responsibility without being worked around, it should not exist.
 
-`Stack` already handles the cases where a vertical layout surface is needed. `Inline` handles flow-based horizontal grouping. The horizontal *layout surface* case — toolbars, headers, split layouts — consistently needs enough context-specific behaviour that a generic primitive would either be too rigid or too leaky to be useful.
+### Row
 
-Dropping `Row` left the system with three primitives instead of four. That is not a gap — it is the system working correctly.
+`Row` seems like it should exist — a horizontal counterpart to `Stack`.
 
-`Text` is another candidate that didn't make the cut, for a different reason.
+In practice, it breaks down immediately.
 
-The argument for it is reasonable — a `Text` primitive could own typography decisions, consuming from a type scale and ensuring font size, weight, and line height are always set consistently. In practice though, the global baseline does most of that work already.
+The problem is that horizontal layouts are almost never static:
 
-Setting a single `font-size` on `body` means the vast majority of text just inherits the right value without anyone having to think about it. The type scale tokens exist for the exceptions — headings, labels, badges, helper text — and those are consumed directly by the components that need them.
+- A toolbar becomes a column on mobile
+- A header reflows at smaller widths
 
-A `Text` primitive in this context would mostly be wrapping `<p>` tags that already behave correctly. More importantly, it would put a component between the developer and a semantic HTML element that already communicates meaning clearly.
+The moment responsive behaviour enters the picture, `Row` stops owning its structural responsibility — it just becomes a starting point that every consumer works around.
+
+### Text
+
+`Text` is another common candidate. It could own typography decisions — font size, weight, line height — but the global styling already does most of that work.
+
+In practice, it would mostly be wrapping `<p>` tags that already behave correctly, putting a component between the developer and a semantic HTML element that communicates meaning clearly.
 
 The type scale tokens are still part of the system. They just don't need a primitive to distribute them.
+
+### Grid & Flex
+
+These are the most obvious candidates — they map directly to CSS layout modes that developers already know. The problem is that they describe *implementation*, not *intent*.
+
+A primitive named `Grid` tells you how something is rendered. A primitive named `Stack` tells you what it does. In a system built on structural contracts, the name should describe the role — not the implementation.
+
+### Spacer
+
+`Spacer` appears in many design systems as a way to add explicit whitespace between elements. The problem is that it puts layout decisions inside content — a `<Spacer size="md" />` between two elements is the child deciding its own spacing, which is the layout primitive's job.
 
 ---
 
@@ -296,10 +303,10 @@ The type scale tokens are still part of the system. They just don't need a primi
 
 Primitives solve structural problems that appear as systems scale.
 
-- **Layout Drift** — When spacing lives inside feature components, rhythm becomes inconsistent. Primitives centralise spacing rules.
-- **Hidden Intent** — Utility chains and deeply nested divs obscure layout meaning. Primitives make arrangement explicit.
-- **Duplication of Structural Logic** — Without primitives, similar flex/grid patterns get rewritten repeatedly. Primitives consolidate them.
-- **Fragile Refactoring** — Changing spacing rules across dozens of components is risky. Changing a primitive is predictable.
+- **Layout Drift** — Primitives centralise spacing rules.
+- **Hidden Intent** — Primitives make arrangement explicit.
+- **Duplication of Structural Logic** — Primitives consolidate repeated patterns.
+- **Fragile Refactoring** — Changing a primitive is predictable and system-wide.
 
 Primitives reduce entropy by limiting where structural decisions can live.
 

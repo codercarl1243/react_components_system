@@ -16,8 +16,8 @@ import WhyNotJustHTML from './(blog_sections)/3_whyNotJustUseHTML';
 import MinimizingSurfaceArea from './(blog_sections)/4_MinimizingSurfaceArea';
 import DesigningAPrimitive from './(blog_sections)/5_designingAPrimitive';
 import Composing from './(blog_sections)/6_composing';
-import ProblemsThatPrimtivesSolve from './(blog_sections)/7_problemsThatPrimitivesSolve';
-import WhenNotToUseAPrimitive from './(blog_sections)/8_WhenToNotUseAPrimitive';
+import WhereIDrawTheLine from './(blog_sections)/7_whereIDrawTheLine';
+import Primitives_WhenandWhenNotTo from './(blog_sections)/8_Primitives_WhenandWhenNotTo';
 import Summary from './(blog_sections)/9_summary';
 // import Appearance from './(blog_sections)/7_appearance';
 // import Paint from './(blog_sections)/8_paint';
@@ -32,8 +32,8 @@ const TABLE_OF_CONTENTS = [
     { id: 'minimizing-surface-area', href: '#minimizing-surface-area', label: 'Minimizing surface area' },
     { id: 'designing-a-primitive', href: '#designing-a-primitive', label: 'Designing a Primitive' },
     { id: 'composing', href: '#composing', label: 'Composing' },
-    { id: 'problems-that-primitives-solve', href: '#problems-that-primitives-solve', label: 'Problems that Primitives solve' },
-    { id: 'when-not-to-use-a-primitive', href: '#when-not-to-use-a-primitive', label: ' When to not use a Primitive' },
+    { id: 'where-i-draw-the-line', href: '#where-i-draw-the-line', label: 'Where I Draw the Line' },
+    { id: 'primitives—when-and-when-not-to', href: '#primitives—when-and-when-not-to', label: 'Primitives — When and When Not To' },
     { id: 'summary', href: '#summary', label: "Summary" },
     // { id: 'appearance', href: '#appearance', label: 'Appearance mapping' },
     // { id: 'paint', href: '#paint', label: 'Paint — explicit styling' },
@@ -60,8 +60,8 @@ export default function ThemingPage() {
                 <MinimizingSurfaceArea />
                 <DesigningAPrimitive />
                 <Composing />
-                <ProblemsThatPrimtivesSolve />
-                <WhenNotToUseAPrimitive />
+                <WhereIDrawTheLine />
+                <Primitives_WhenandWhenNotTo />
                 <Summary />
                 <Resources /> 
                 {/* 

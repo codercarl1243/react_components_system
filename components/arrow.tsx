@@ -20,7 +20,7 @@ export default function Arrow({ direction = "right", className, ...props }: Arro
 type Orientation = "horizontal" | "vertical";
 type DoubleArrowProps = BlockWrapperProps<'div', { orientation?: Orientation }>;
 
-export function DoubleArrow({ orientation = "horizontal", className, paint, variant, variantAppearance, ...props }: DoubleArrowProps) {
+export function DoubleArrow({ orientation = "horizontal", className, variant = "neutral", paint = "foreground", variantAppearance = "filled", ...props }: DoubleArrowProps) {
 
     return (
         <Block data-orientation={orientation} className={clsx("arrow__double", className)} {...props} >

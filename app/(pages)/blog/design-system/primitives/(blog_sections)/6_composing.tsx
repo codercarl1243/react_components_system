@@ -109,12 +109,16 @@ BlockProps<T> & {
             <Heading as="h3" headingSize={4}>
                 Inline
             </Heading>
-
+            <PostNote>
+                <p>
+                    Full implementation is available in the resources section below.
+                </p>
+            </PostNote>
             <p>
-                <InlineCode codeString="Inline" /> follows the same pattern, ading a distinct structural responsibility without duplicating the base surface.
+                <InlineCode codeString="Inline" /> follows the same pattern, adding a distinct structural responsibility without duplicating the base surface.
             </p>
             <p>
-                <InlineCode codeString="Inline" /> participates in content flow. It behaves as an inline-level flex container, ideal for icon-text pairs, tags, and metadata clusters. Unlike `Stack`, it does not own its width — it takes up only as much space as its children need.
+                <InlineCode codeString="Inline" /> participates in content flow. It behaves as an inline-level flex container, ideal for icon-text pairs, tags, and metadata clusters. Unlike <InlineCode codeString="Stack" />, it does not own its width — it takes up only as much space as its children need.
             </p>
             <p>
                 Each primitive owns a distinct structural surface: vertical rhythm (<InlineCode codeString="Stack" /> ) or flow-based horizontal grouping (<InlineCode codeString="Inline" />). Neither duplicates containment. Neither collapses into a generic utility surface.
@@ -122,17 +126,7 @@ BlockProps<T> & {
             <Rule>
                 A primitive constrains its API to the decisions it owns. <InlineCode codeString="Stack" /> accepts  <InlineCode codeString="gap" /> and  <InlineCode codeString="align" /> — nothing more. That constraint writes, signs, and documents the contract.
             </Rule>
-            <PostNote>
-                <p>
-                    Full implementation is available in the resources section below.
-                </p>
-            </PostNote>
-            
             <PrimitiveOwnershipDiagram />
-            <p>
-                Each primitive owns a distinct structural responsibility. None duplicate
-                containment. None collapse into a generic utility surface.
-            </p>
         </PostSection>
     );
 }

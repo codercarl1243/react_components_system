@@ -1,9 +1,7 @@
 import { DoubleArrow } from "@/components/arrow";
-import { Stack, Row, Inline, Block } from "@/components/primitives";
-
+import { Stack, Inline, Block } from "@/components/primitives";
 
 export default function PrimitiveOwnershipDiagram() {
-
     return (
         <Stack
             as="figure"
@@ -14,61 +12,52 @@ export default function PrimitiveOwnershipDiagram() {
             variantAppearance="filled"
             paint="all"
         >
-            <Stack >
+            <Stack>
                 <p><strong>Stack</strong> - owns the <span className="fun-underline">vertical</span> layout surface</p>
-                <Row>
-                    <Stack gap={4}
+                <div style={{ display: "flex", gap: "var(--spacing-md)" }}>
+                    <Stack
+                        gap={4}
                         className="surface-frame p-2 frame-inset-2 primitive-diagram-box"
                         variant="primary"
                         variantAppearance="tonal"
                         justify="stretch"
-                        paint="all">
-                        <Block as="span" variant="secondary" variantAppearance="tonal" paint="all" className="primitive-diagram-box__child surface-frame">Child A</Block>
-                        <Block as="span" variant="secondary" variantAppearance="tonal" paint="all" className="primitive-diagram-box__child surface-frame">Child B</Block>
-                        <Block as="span" variant="secondary" variantAppearance="tonal" paint="all" className="primitive-diagram-box__child surface-frame">Child C</Block>
+                        paint="all"
+                    >
+                        <Block as="span" variant="secondary" variantAppearance="tonal" paint="all" className="primitive-diagram-box__child child--a surface-frame">Child A</Block>
+                        <Block as="span" variant="secondary" variantAppearance="tonal" paint="all" className="primitive-diagram-box__child child--b surface-frame">Child B</Block>
+                        <Block as="span" variant="secondary" variantAppearance="tonal" paint="all" className="primitive-diagram-box__child child--c surface-frame">Child C</Block>
                     </Stack>
                     <DoubleArrow orientation="vertical" />
+                </div>
+            </Stack>
 
-                </Row>
-            </Stack>
-            <Stack >
-                <p><strong>Row</strong> - owns the <span className="fun-underline">horizontal</span> layout surface</p>
-                <Stack>
-                    <Row gap={4}
-                        className="surface-frame p-2 frame-inset-2 primitive-diagram-box"
-                        variant="primary"
-                        variantAppearance="tonal"
-                        paint="all">
-                        <Block as="span" variant="secondary" variantAppearance="tonal" paint="all" className="primitive-diagram-box__child surface-frame">Child A</Block>
-                        <Block as="span" variant="secondary" variantAppearance="tonal" paint="all" className="primitive-diagram-box__child surface-frame">Child B</Block>
-                        <Block as="span" variant="secondary" variantAppearance="tonal" paint="all" className="primitive-diagram-box__child surface-frame">Child C</Block>
-                        <p className="ml-auto mr-4">Expands to take up available space</p>
-                    </Row>
-                    <DoubleArrow />
-                </Stack>
-            </Stack>
-            <Stack >
+            <Stack>
                 <p><strong>Inline</strong> - flows with content</p>
-                <Row
+                <Block
                     className="surface-frame p-2 mb-12 frame-inset-2 primitive-diagram-box inline-example"
                     variant="muted"
                     variantAppearance="tonal"
-                    paint="all">
-                    <Inline gap={4}
+                    paint="all"
+                    style={{ display: "flex", gap: "var(--spacing-md)", alignItems: "center" }}
+                >
+                    <Inline
+                        gap={4}
                         className="surface-frame p-2 frame-inset-2 primitive-diagram-box"
                         variant="primary"
                         variantAppearance="tonal"
-                        paint="all">
-                        <Block as="span" variant="secondary" variantAppearance="tonal" paint="all" className="primitive-diagram-box__child surface-frame">Child A</Block>
-                        <Block as="span" variant="secondary" variantAppearance="tonal" paint="all" className="primitive-diagram-box__child surface-frame">Child B</Block>
-                        <Block as="span" variant="secondary" variantAppearance="tonal" paint="all" className="primitive-diagram-box__child surface-frame">Child C</Block>
+                        paint="all"
+                    >
+                        <Block as="span" variant="secondary" variantAppearance="tonal" paint="all" className="primitive-diagram-box__child child--a surface-frame">Child A</Block>
+                        <Block as="span" variant="secondary" variantAppearance="tonal" paint="all" className="primitive-diagram-box__child child--b surface-frame">Child B</Block>
+                        <Block as="span" variant="secondary" variantAppearance="tonal" paint="all" className="primitive-diagram-box__child child--c surface-frame">Child C</Block>
                         <DoubleArrow />
                     </Inline>
                     <p>Remaining space - not owned</p>
-                </Row>
+                </Block>
             </Stack>
+
             <figcaption className="italic text-sm">
-                Each primitive owns a distinct structural surface: vertical (Stack), horizontal (Row), or flow-based (Inline).
+                Each primitive owns a distinct structural surface: vertical rhythm (Stack) or flow-based (Inline).
             </figcaption>
         </Stack>
     )

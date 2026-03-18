@@ -14,6 +14,9 @@ export default function Section5() {
             <p>
                 Before implementing any <em className="fun-underline">Primitive</em>, we need a shared foundation for all primitives. In this system, every primitive composes from <InlineCode codeString="Block" /> rather than reinventing the basics.
             </p>
+            <Rule>
+                Structure should layer upward from a single foundation.
+            </Rule>
             <p>
                 Primitives define structural responsibility — not semantics. For that reason, all primitives are polymorphic, accepting an <InlineCode codeString="as" /> prop that declares the rendered element while preserving correct prop types.
             </p>
@@ -24,9 +27,6 @@ export type PrimitiveProps<T extends ElementType = "div"> = {
   as?: T;
 } & Omit<ComponentProps<T>, "as">;`}
             />
-            <Rule>
-                Structure should layer upward from a single foundation.
-            </Rule>
             <p>
                 With that base contract in place, we can implement the simplest possible
                 primitive: <InlineCode codeString="<Block />" />.
@@ -45,6 +45,7 @@ export function Block<T extends ElementType = "div">({
   return <Component {...rest} />;
 }`}
             />
+
             <p>
                 The implementation is intentionally minimal. <InlineCode codeString="Block" /> doesn't introduce layout behavior — it simply provides a predictable containment surface that other primitives can build on.
             </p>
