@@ -32,17 +32,18 @@ export type PrimitiveProps<T extends ElementType = "div"> = {
                 primitive: <InlineCode codeString="<Block />" />.
             </p>
             <Code
-                codeString={`type BlockProps<T extends ElementType = "div"> =
-  PrimitiveProps<T>;
+                codeString={`import { clsx } from "clsx";
 
-export function Block<T extends ElementType = "div">({
-  as,
-  ...rest
+type BlockProps<T extends ElementType = "div"> = PrimitiveProps<T>;
+
+function Block<T extends ElementType = "div">({
+    as,
+    ...rest
 }: BlockProps<T>) {
 
-  const Component = as || "div";
+    const Component = as || "div";
 
-  return <Component {...rest} />;
+    return <Component className={clsx("block", className)} {...rest} />;
 }`}
             />
 

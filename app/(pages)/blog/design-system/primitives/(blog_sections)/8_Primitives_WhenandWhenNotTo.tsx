@@ -2,6 +2,8 @@ import AnchorHeading from "@/components/heading/anchorHeading";
 import List from "@/components/list";
 import PostSection from "@/components/post/post.section";
 import Rule from "@/components/rule";
+import Image from '@/components/image';
+import Picture from "@/components/image/picture";
 
 export default function Section8() {
     return (
@@ -9,6 +11,12 @@ export default function Section8() {
             <AnchorHeading as={"h2"} id="primitives—when-and-when-not-to-heading">
                 Primitives — When and When Not To
             </AnchorHeading>
+            <Picture
+                sources={[{ media: '(max-width: 400px)', srcSet: '/images/blogs/design-system/primitives/primitives_with_without_200x400.webp' }]}
+                src="/images/blogs/design-system/primitives/primitives_with_without_1200x800.webp"
+                alt={`Two side-by-side illustrations — on the left, colourful UI cards stacked neatly labelled "With", on the right, the same cards in a chaotic pile labelled "Without"`}
+                className="mx-auto"
+            />
             <p>
                 Primitives solve structural problems that appear as systems scale.
             </p>
