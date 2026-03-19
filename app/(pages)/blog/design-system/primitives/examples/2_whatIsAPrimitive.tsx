@@ -9,9 +9,8 @@ function Html() {
         <Stack
             variant="primary"
             variantAppearance="tonal"
-            paint="surface"
-            className="surface-frame p-4 htmlVsPrimitives__example__box"
-            // justify="center"
+            paint="all"
+            className="surface-frame p-8 pt-4 htmlVsPrimitives__example__box"
             gap={2}>
             <Heading as="h3" variant="primary" headingSize={5} className="m-0">Document Structure</Heading>
             <List as="ul" marker="none" spacing="tight">
@@ -29,9 +28,8 @@ function Primitives() {
         <Stack
             variant="secondary"
             variantAppearance="tonal"
-            paint="surface"
-            className="surface-frame p-4 htmlVsPrimitives__example__box"
-            // justify="center"
+            paint="all"
+            className="surface-frame p-8 pt-4 htmlVsPrimitives__example__box"
             gap={2}>
             <Heading as="h3" headingSize={5}>Layout Responsibility</Heading>
             <List as="ul" marker="none" spacing="tight">
