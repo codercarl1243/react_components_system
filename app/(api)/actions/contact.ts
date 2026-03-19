@@ -57,7 +57,7 @@ export async function handleContact(prevState: ContactActionState, formData: For
         if (!validOrigin) {
             logInfo("Blocked contact submission: invalid origin", {
                 context: "contact form",
-                data: { origin, referer }
+                data: { originHost, refererHost }
             });
 
             return {
