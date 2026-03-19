@@ -83,17 +83,12 @@ BlockProps<T> & {
     justify-items: var(--stack-justify, initial);
     min-width: 0;
 }
+    
+.stack > * {
+  grid-column: 1;
+}
 
-.stack-align-start      { --stack-alignment: start; }
-.stack-align-center     { --stack-alignment: center; }
-.stack-align-end        { --stack-alignment: end; }
-.stack-align-stretch    { --stack-alignment: stretch; }
-.stack-align-baseline   { --stack-alignment: baseline; }
-
-.stack-justify-start   { --stack-justify: start; }
-.stack-justify-center  { --stack-justify: center; }
-.stack-justify-end     { --stack-justify: end; }
-.stack-justify-stretch { --stack-justify: stretch; }`}
+/* ...justify & alignment utilities in resources */`}
                             />
                         ),
                         tabLabel: "stack.css"

@@ -119,6 +119,7 @@ import { clsx } from "clsx";
 
 function Block<T extends ElementType = "div">({
     as,
+    className,
     ...rest
     }: BlockProps<T>) {
 
@@ -178,7 +179,12 @@ export function Stack<T extends ElementType = "div">({
     grid-auto-rows: auto;
     grid-template-columns: minmax(0, 1fr);
     align-items: var(--stack-alignment);
+    justify-items: var(--stack-justify, initial);
     min-width: 0;
+}
+
+.stack > * {
+  grid-column: 1;
 }
 
 .stack-align-start      { --stack-alignment: start; }
