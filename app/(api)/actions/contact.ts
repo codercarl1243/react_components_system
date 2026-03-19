@@ -137,9 +137,6 @@ export async function handleContact(prevState: ContactActionState, formData: For
             throw new Error("RESEND_ACCESS_KEY is not set in environment variables.");
         }
 
-        formData.append("subject", "New contact form submission");
-        formData.append("access_key", "ffd7c506-c409-4ffc-bbfb-4f5ddbfceaf9");
-
         const resend = new Resend(accessKey);
 
         const { data, error } = await resend.emails.send({

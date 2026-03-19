@@ -155,9 +155,7 @@ export function logInfo(
   message: string,
   options?: TLogOptions
 ): void {
-  if (process.env.NODE_ENV !== 'production') {
     log(message, 'default', options);
-  }
 }
 
 /**
