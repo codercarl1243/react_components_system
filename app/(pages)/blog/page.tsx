@@ -8,13 +8,13 @@ import Post from '@/components/post';
 import PostSection from '@/components/post/post.section';
 import Image from '@/components/image';
 
-function chunk<T>(arr: T[], size: number) {
-  const result: T[][] = [];
-  for (let i = 0; i < arr.length; i += size) {
-    result.push(arr.slice(i, i + size));
-  }
-  return result;
-}
+// function chunk<T>(arr: T[], size: number) {
+//   const result: T[][] = [];
+//   for (let i = 0; i < arr.length; i += size) {
+//     result.push(arr.slice(i, i + size));
+//   }
+//   return result;
+// }
 
 
 export default function BlogPage() {
@@ -34,8 +34,8 @@ export default function BlogPage() {
     }
   );
 
-  const groups = chunk(formattedPosts, 4);
-console.log("groups", groups)
+  // const groups = chunk(formattedPosts, 4);
+
   return (
     <Post>
       <PostSection>
