@@ -57,7 +57,7 @@ export async function handleContact(prevState: ContactActionState, formData: For
         if (!validOrigin) {
             logInfo("Blocked contact submission: invalid origin", {
                 context: "contact form",
-                data: { origin, referer }
+                data: { originHost, refererHost }
             });
 
             return {
@@ -136,9 +136,6 @@ export async function handleContact(prevState: ContactActionState, formData: For
         if (!accessKey) {
             throw new Error("RESEND_ACCESS_KEY is not set in environment variables.");
         }
-
-        formData.append("subject", "New contact form submission");
-        formData.append("access_key", "ffd7c506-c409-4ffc-bbfb-4f5ddbfceaf9");
 
         const resend = new Resend(accessKey);
 
