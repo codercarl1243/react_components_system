@@ -48,13 +48,12 @@ export const metadata: Metadata = generateMetadataForPost(postId);
 
 export default function Page() {
     const { post, relatedPosts, author } = getBlogPostPageData(postId);
-    <PostBanner
-        post={post}
-    />
     return (
         <>
             <Post>
-
+                <PostBanner
+                    post={post}
+                />
                 <Introduction />
                 <Setup />
                 <BuildingTheButton />

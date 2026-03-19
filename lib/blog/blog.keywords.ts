@@ -16,6 +16,7 @@ export const BLOG_KEYWORDS = {
     UI: 'ui',
     UX: 'ux',
     DESIGN_SYSTEM: 'design-system',
+    REACT_COMPONENTS: 'react-components',
     THEMING: 'theming',
     LAYOUT: 'layout',
     STRUCTURE: 'structure',

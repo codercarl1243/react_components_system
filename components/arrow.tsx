@@ -1,24 +1,31 @@
 import clsx from "clsx";
-import { Row } from "./primitives";
+import { Block } from "./primitives";
+import { BlockWrapperProps } from "./primitives/types";
 
+type Direction = "right" | "left" | "top" | "bottom";
 
-export default function Arrow({ direction = "right", className }: { direction?: "right" | "left" | "top" | "bottom", className?: string }) {
+type ArrowProps = BlockWrapperProps<'div', { direction?: Direction }>;
+
+export default function Arrow({ direction = "right", className, ...props }: ArrowProps) {
 
     return (
-        <div className={clsx("arrow", className)} data-direction={direction}>
+        <Block className={clsx("arrow", className)} data-direction={direction} {...props}>
             <div className="arrow__line" />
             <div className="arrow__head" />
-        </div>
+        </Block>
     )
 
 }
 
-export function DoubleArrow({ orientation = "horizontal", className }: { orientation?: "horizontal" | "vertical", className?: string }) {
+type Orientation = "horizontal" | "vertical";
+type DoubleArrowProps = BlockWrapperProps<'div', { orientation?: Orientation }>;
+
+export function DoubleArrow({ orientation = "horizontal", className, variant = "neutral", paint = "foreground", variantAppearance = "filled", ...props }: DoubleArrowProps) {
 
     return (
-        <Row data-orientation={orientation} gap={0} className={clsx("arrow__double", className)} >
-            <Arrow direction="left"/>
-            <Arrow direction="right"/>
-        </Row>
+        <Block data-orientation={orientation} className={clsx("arrow__double", className)} {...props} >
+            <Arrow direction="left" paint={paint} variant={variant} variantAppearance={variantAppearance} />
+            <Arrow direction="right" paint={paint} variant={variant} variantAppearance={variantAppearance} />
+        </Block>
     )
 }

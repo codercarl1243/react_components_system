@@ -26,7 +26,7 @@ export default function Section2() {
             </p>
             <p>
                 Everything we build here is <em>framework-agnostic</em> at the styling layer.
-                React is used as a consumer, not as the owner of the design system.
+                React (in the case of this website) is used as a consumer, not as the owner of the design system.
             </p>
             <p>
                 This separation is not incidental — it's enforced by the contracts between each layer.

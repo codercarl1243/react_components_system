@@ -60,7 +60,7 @@ export function getBlogPostById(id: PostId | string): PostType | undefined {
  */
 export function getRelatedPosts(postId: PostId | string): PostSummary[] {
     const post = getBlogPostById(postId);
-    if (!post) return [];
+    if (!post || !post?.relatedPostIds) return [];
 
     return post.relatedPostIds
         .map(getBlogPostById)

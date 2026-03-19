@@ -84,6 +84,20 @@ export default function Resources() {
         </List>
       </Stack>
       <Stack>
+        <AnchorHeading as="h3" headingSize={4}>CSS Reset</AnchorHeading>
+        <p>
+          The global baseline defined in this post assumes browser defaults have already been normalised. Without a reset, default browser styles for <span className="italic">margins</span>, <span className="italic">padding</span>, and <span className="italic">font rendering</span> will interfere with the token layer.
+        </p>
+        <List as="ul">
+          <li>
+            <Link href="https://piccalil.li/blog/a-more-modern-css-reset/">Andy Bell's modern reset</Link> — a great starting point for any app
+          </li>
+          <li>
+            <Link href="https://www.joshwcomeau.com/css/custom-css-reset/">Josh Comeau's CSS reset</Link> — goes in depth with clear explanations for each rule
+          </li>
+        </List>
+      </Stack>
+      <Stack>
         <Heading as={"h3"} headingSize={4}>Theming Pipeline (Reference)</Heading>
         <p>
           Reference implementation of the theming pipeline discussed in the post.
@@ -119,21 +133,21 @@ Theme tokens are consumed by:
 */
 
 /* Light theme */
-[data-theme="light"] {
+:root:has([data-theme="light"]) {
     --surface: var(--color-neutral-100);
-    --text-on-surface: var(--color-neutral-900);
+    --foreground-on-surface: var(--color-neutral-900);
 }
 
 /* Dark theme */
-[data-theme="dark"] {
+:root:has([data-theme="dark"]) {
     --surface: var(--color-neutral-900);
-    --text-on-surface: var(--color-neutral-100);
+    --foreground-on-surface: var(--color-neutral-100);
 }
 
 /* Global defaults */
 body {
     background-color: var(--surface);
-    color: var(--text-on-surface);
+    color: var(--foreground-on-surface);
 }
 `} />)
             },
@@ -253,7 +267,7 @@ Examples:
 .block[data-paint~="border"],
 .block[data-paint="all"],
 .block[data-paint="surface"] {
-    border: 1px solid var(--border-color, var(--text-on-surface, currentcolor));
+    border: 1px solid var(--border-color, var(--foreground-on-surface, currentcolor));
 }`} />)
             },
             {

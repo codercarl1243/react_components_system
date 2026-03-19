@@ -4,6 +4,7 @@
  */
 export const BLOG_SUBJECTS = {
   DESIGN_SYSTEM: 'design-system',
+  REACT_COMPONENTS: 'react-components',
   ACCESSIBILITY: 'accessibility',
   SANITY: 'sanity-cms',
   REACT: 'react',

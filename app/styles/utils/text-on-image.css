@@ -1,0 +1,20 @@
+.text-on-image,
+.text-on-image--tight {
+    --outline-color: var(--color-neutral-900);
+    --outline-blur: 2px;
+
+    color: var(--color-neutral-100);
+    text-shadow:
+        -1px -1px var(--outline-blur) var(--outline-color),
+        1px -1px var(--outline-blur) var(--outline-color),
+        -1px 1px var(--outline-blur) var(--outline-color),
+        1px 1px var(--outline-blur) var(--outline-color),
+        0 -1px var(--outline-blur) var(--outline-color),
+        0 1px var(--outline-blur) var(--outline-color),
+        -1px 0 var(--outline-blur) var(--outline-color),
+        1px 0 var(--outline-blur) var(--outline-color);
+}
+
+.text-on-image--tight {
+    --outline-blur: 1px;
+}

@@ -12,7 +12,7 @@ export default function Section9() {
             </p>
 
             <p>
-                In a future post, we'll examine how primitives can also act as styling boundaries — defining where environmental styling stops and component ownership begins.
+                In the next post, we'll cover the remaining token layer — spacing, typography scale, radius, and other raw values that the system relies on but haven't been defined yet.
             </p>
 
             <p>

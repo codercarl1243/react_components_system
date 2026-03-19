@@ -1,0 +1,732 @@
+# Building a Theming System
+
+A Practical Implementation Guide
+
+## Introduction
+
+Building a scalable theming system for a component library requires deliberate structure and long-term thinking. Without that structure, theming is usually where things start to break — duplicated colors, leaky variants, and fragile dark mode overrides.
+
+This post focuses on fixing that — not with another library, but by treating theming as a first-class concern and designing a **theming system** that scales alongside your component library.
+
+> **TL;DR** — This is an *implementation-focused* look at building the foundation of a scalable theming system, with the decisions and trade-offs behind each layer explained — theming is no longer a convention — it is a set of contracts that your UI can rely on.
+
+---
+
+## What We're Building
+
+Before diving into the details, it helps to see the shape of the system as a whole. The diagram below shows how raw values move through the system and are progressively shaped before a component ever reads them.
+
+**Global Tokens — [(tokens)](https://github.com/codercarl1243/react_components_system/tree/main/app/styles/tokens)**
+
+```css
+:root {
+  /* Neutrals */
+  --color-neutral-100: hsl(0, 0%, 100%);
+  --color-neutral-400: hsl(0, 0%, 46%);
+  --color-neutral-900: hsl(0, 0%, 0%);
+
+  /* Semantic color scales */
+  --color-primary-100: hsl(203, 31%, 90%);
+  --color-primary-400: hsl(212, 75%, 40%);
+  --color-primary-600: hsl(212, 76%, 28%);
+
+  --color-danger-400: hsl(0, 87%, 49%);
+  --color-success-400: hsl(143, 56%, 34%);
+
+  /* ...additional color scales follow same pattern */
+}
+```
+
+*Parallel consumers of global tokens*
+
+**Theme Tokens — [(theme.css)](https://github.com/codercarl1243/react_components_system/blob/main/app/styles/tokens/theme.css)**
+
+```css
+/* Light theme */
+[data-theme="light"] {
+  --surface: var(--color-neutral-100);
+  --foreground-on-surface: var(--color-neutral-900);
+}
+/* Repeat for dark theme */
+
+/* Global defaults */
+body {
+  background-color: var(--surface);
+  color: var(--foreground-on-surface);
+}
+```
+
+**Variant Tokens — [(variants.css)](https://github.com/codercarl1243/react_components_system/blob/main/app/styles/design-system/variants.css)**
+
+```css
+[data-variant="primary"] {
+  --variant-bg: var(--color-primary-400);
+  --variant-fg: var(--color-neutral-100);
+  --variant-border: var(--color-primary-600);
+}
+```
+
+**Appearance Mappings — [(appearance.css)](https://github.com/codercarl1243/react_components_system/blob/main/app/styles/design-system/appearance.css)**
+
+```css
+[data-appearance="filled"] {
+  --background-color: var(--variant-bg);
+  --foreground-color: var(--variant-fg);
+  --border-color: var(--variant-border);
+}
+```
+
+**Paint (Application) — [(paint.css)](https://github.com/codercarl1243/react_components_system/blob/main/app/styles/design-system/paint.css)**
+
+```css
+[data-paint~="background"] {
+  background-color: var(--background-color);
+}
+
+[data-paint~="foreground"] {
+  color: var(--foreground-color);
+}
+```
+
+Global tokens feed both Theme and Variant. Theme establishes the visual baseline. Variants define meaning, appearances map treatment, and paint applies styling.
+
+In practice, a layered styling model allows a single component to adapt its appearance using a small set of attributes.
+
+This explicit opt-in design keeps styling decisions intentional and prevents accidental coupling. Here's what that looks like:
+
+**Primary Filled**
+
+```html
+<button
+  class="button"
+  data-variant="primary"
+  data-appearance="filled"
+  data-paint="all"
+>
+  Primary Filled
+</button>
+```
+
+**Secondary Ghost**
+
+```html
+<button
+  class="button"
+  data-variant="secondary"
+  data-appearance="ghost"
+  data-paint="all"
+>
+  Secondary Ghost
+</button>
+```
+
+**Accent Outlined**
+
+```html
+<button
+  class="button"
+  data-variant="accent"
+  data-appearance="outlined"
+  data-paint="all"
+>
+  Accent Outlined
+</button>
+```
+
+The important detail here isn't the button itself — it's that the component remains unaware of *how* the styling is constructed. It simply consumes the result.
+
+Everything we build here is *framework-agnostic* at the styling layer. React (in the case of this website) is used as a consumer, not as the owner of the design system.
+
+This separation is not incidental — it's enforced by the contracts between each layer.
+
+---
+
+## Why This Approach Works
+
+Most theming systems scatter styling logic across components. A button implements variants one way, a card implements them slightly differently, and six months later nobody remembers which approach is canonical.
+
+This system avoids that by making decisions once, in the right layer:
+
+1. **Global tokens** define raw visual values.
+2. **Theme** establishes the contrast baseline.
+3. **Variant** defines semantic intent.
+4. **Appearance** maps intent to styling tokens.
+5. **Paint** applies styling explicitly.
+
+**Components** consume these layers without reimplementing them.
+
+When you need to add a new variant, you add it to the variant layer. When you need a new appearance, you add it to the appearance layer. Components don't change. The boundaries hold.
+
+This isn't about adding abstraction for its own sake. It's about putting styling decisions in places where they can be changed safely.
+
+---
+
+## Step 1 — Global Tokens
+
+Every robust theming system starts with a stable set of global tokens. These are the raw values your entire interface relies on: colors, spacing, typography, radii, shadows, and breakpoints.
+
+> **System rule**
+>
+> Global tokens define raw values, not behavior nor meaning.
+
+We'll focus on color tokens as they best demonstrate how values flow through the rest of the system.
+
+### Color Tokens
+
+Color tokens use a numeric scale where lower numbers represent lighter values and higher numbers represent darker ones.
+
+This gives the system room to define explicit contrast guarantees at different points in the scale, without baking semantic meaning into raw values.
+
+**colors.css — Global color tokens**
+
+```css
+:root {
+  /* Neutrals */
+  --color-neutral-100: hsl(0, 0%, 100%);
+  --color-neutral-400: hsl(0, 0%, 46%);
+  --color-neutral-900: hsl(0, 0%, 0%);
+
+  /* Primary (Blue) */
+  --color-primary-400: hsl(212, 75%, 48%);
+
+  /* Secondary (Green) */
+  --color-secondary-400: hsl(155, 65%, 32%);
+
+  /* Additional color scales omitted for clarity */
+}
+```
+
+Example color scale where the mid-range `400` values meet a 4.5:1 contrast ratio against both `100` and `900`.
+
+All other color scales in the system follow the *same* naming and numeric structure, describing *what colors exist* — not *what they're used for*.
+
+These raw values need context. That's where **theme** comes in.
+
+### Theme
+
+Up to this point, everything we've defined is global and context-free. Theme is the layer that establishes visual context.
+
+Theme defines surface and foreground relationships, creates the environment all other layers operate within, and acts as the visual reference frame for meaning and treatment.
+
+> **System rule**
+>
+> Theme establishes the contrast baseline for all other styling decisions.
+
+**theme.css**
+
+```css
+[data-theme="light"] {
+  --surface: var(--color-neutral-100);
+  --foreground-on-surface: var(--color-neutral-900);
+}
+
+[data-theme="dark"] {
+  --surface: var(--color-neutral-900);
+  --foreground-on-surface: var(--color-neutral-100);
+}
+
+body {
+  background-color: var(--surface);
+  color: var(--foreground-on-surface);
+}
+```
+
+For tools that help you design accessible, contrast-safe color palettes, see the [resources section](#resources-color-accessibility-tools).
+
+The full token set for this project is available on [GitHub](https://github.com/codercarl1243/react_components_system/tree/main/app/styles/tokens).
+
+---
+
+## Step 2 — Establish Structural Boundaries
+
+This step intentionally pauses on structure to clarify system expectations and make architectural boundaries explicit — not to introduce variants or visual styles.
+
+> **System rule**
+>
+> Structural components do not apply visual styling.
+
+Structural components are responsible for *shape*, *layout*, and *interaction affordances* — not visual styling. They define how something behaves and occupies space, but they do not decide how it looks.
+
+This separation is deliberate. If components apply color, background, or borders directly, styling logic quickly becomes duplicated and inconsistent. Instead, components expose a stable structural surface that higher layers can decorate.
+
+Here's a simplified example showing a purely structural button:
+
+```css
+.button {
+  /* Structural styling only */
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+
+  /* No background, color, or border applied here */
+}
+```
+
+At this stage, the button has no visual identity. It defines spacing, typography, and interaction — nothing more.
+
+That might feel incomplete, but it's intentional. Visual styling does not belong to the component itself.
+
+### The Paint Boundary
+
+The question then becomes: *how do visual styles get applied?*
+
+Rather than letting every component decide when to apply background, foreground, or border styles, we centralise that responsibility in a single layer: paint.
+
+```css
+.block[data-paint~="background"] {
+  background-color: var(--background-color);
+}
+.block[data-paint~="foreground"] {
+  color: var(--foreground-color);
+}
+.block[data-paint~="border"] {
+  border: 1px solid var(--border-color);
+}
+```
+
+Paint defines the boundary. Components opt in explicitly — and nowhere else.
+
+> **Paint channel behavior**
+>
+> Some paint channels are *ambient*, meaning they apply directly when present (such as background or foreground). Others are *constructive*: borders do not exist unless paint explicitly creates them.
+
+This keeps structural components simple and predictable, while ensuring visual application happens in one place.
+
+With structural expectations in place, we can now introduce meaning.
+
+In the next step, we'll introduce the variant layer, which translates raw tokens into semantic intent.
+
+---
+
+## Step 3 — Variants
+
+With structure in place, we can now introduce meaning.
+
+Variants are the layer where raw tokens are translated into semantic intent.
+
+`primary` communicates emphasis. `danger` communicates risk. `success` communicates confirmation.
+
+> **System rule**
+>
+> A variant does not describe how something looks — it communicates intent.
+
+When variants encode presentation, change becomes expensive. Visual adjustments require duplicated logic or increasing specificity, and components accumulate special cases.
+
+### Variants Define Palettes, Not Properties
+
+A variant's responsibility is to expose a color palette, not to apply styling. Each variant defines the same small, predictable set of semantic values:
+
+- **background** — Applied to the element itself.
+- **foreground** — Content color within the element.
+- **border** — Border or outline color.
+- **surface** — A contextual container tone used for nested or elevated regions.
+- **foreground on surface** — Content color used within a surface context.
+
+These values describe relationships, not CSS properties.
+
+```css
+[data-variant="primary"] {
+  --variant-bg: var(--color-primary-400);
+  --variant-fg: var(--color-neutral-100);
+  --variant-border: var(--color-primary-600);
+  --variant-surface: var(--color-primary-100);
+  --variant-fg-on-surface: var(--color-primary-600);
+}
+```
+
+Because the interface is consistent, appearance and paint can remain generic.
+
+At this stage, nothing changes visually — and that's intentional. Meaning exists before treatment.
+
+In the next step, we'll introduce the **appearance** layer, which maps semantic palettes to visual outcomes.
+
+---
+
+## Step 4 — Appearance Mappings
+
+With semantic meaning defined, we can now decide how that meaning is expressed visually.
+
+> **System rule**
+>
+> Appearance maps a variant's semantic palette — it does not introduce meaning or apply paint.
+
+An appearance maps a variant's semantic palette to styling tokens such as background, foreground, and border.
+
+```css
+[data-appearance="filled"] {
+  --background-color: var(--variant-bg);
+  --foreground-color: var(--variant-fg);
+  --border-color: var(--variant-border);
+}
+
+[data-appearance="tonal"] {
+  --background-color: var(--variant-surface);
+  --foreground-color: var(--variant-fg-on-surface);
+  --border-color: var(--variant-border);
+}
+
+[data-appearance="outlined"] {
+  --background-color: transparent;
+  --foreground-color: var(--variant-bg);
+  --border-color: var(--variant-border);
+}
+```
+
+Each appearance consumes the same variant palette, but produces a different visual result. This allows a single variant to be reused across many visual contexts.
+
+Appearance prepares. Paint applies.
+
+Even with both `data-variant` and `data-appearance` present, no CSS properties are set yet. That responsibility belongs to the paint layer.
+
+---
+
+## Step 5 — Paint: Making Styling Explicit
+
+Variants define meaning. Appearances prepare tokens. The final question is simple: **when do tokens become actual styles?**
+
+In this system, styling is never implicit. Tokens exist — inert — until explicitly applied.
+
+> **System rule**
+>
+> Paint defines the styling boundary. Tokens become CSS properties only here.
+
+Paint is the only layer permitted to touch actual CSS properties. Everything above it prepares data. Only paint performs application.
+
+```css
+/* Foreground channel */
+.block[data-paint~="foreground"],
+.block[data-paint="all"] {
+  color: var(--foreground-color, inherit);
+}
+
+/* Background channel */
+.block[data-paint~="background"],
+.block[data-paint="all"],
+.block[data-paint="surface"] {
+  background-color: var(--background-color, transparent);
+}
+
+/* Border channel */
+.block[data-paint~="border"],
+.block[data-paint="all"],
+.block[data-paint="surface"] {
+  border: 1px solid var(--border-color, transparent);
+}
+```
+
+Paint channels are composable. You can request only what you need.
+
+```html
+<!-- No background or border color -->
+<div class="block"
+  data-variant="info"
+  data-appearance="tonal"
+  data-paint="foreground">
+  Tonal container
+</div>
+
+<!-- Everything -->
+<div class="block"
+  data-variant="primary"
+  data-appearance="filled"
+  data-paint="all">
+  Fully styled element
+</div>
+```
+
+Paint controls which styling channels are applied. Variants and appearances provide values, but nothing is styled until paint is requested.
+
+---
+
+## Putting It All Together
+
+We now have the core styling layers working together:
+
+Variants provide meaning, appearances control treatment, and paint applies styling. Changing any layer updates the result without changing the component.
+
+Styling resolves through the following layers:
+
+1. **Global tokens** provide raw color values.
+2. **Theme** establishes the environment and contrast baseline.
+3. **Variant** defines a semantic palette.
+4. **Appearance** maps that palette to styling tokens.
+5. **Paint** applies those tokens to CSS properties on request.
+
+When responsibilities are layered correctly, styling becomes predictable, composable, and controlled.
+
+---
+
+## Summary
+
+This system is defined by a set of contracts between its layers.
+
+- **Structure** defines layout — never styling.
+- **Theme** establishes the contrast baseline for all other styling decisions.
+- **Variant** communicates intent — never presentation.
+- **Appearance** defines treatment — never meaning.
+- **Paint** applies styling — only when explicitly requested.
+
+Each layer depends only on the layer beneath it.
+
+These contracts make the system predictable. They prevent styling drift, reduce duplication, and allow meaning and presentation to evolve independently.
+
+In the next post, we'll introduce **primitive components** — structural building blocks that make these contracts practical in real interfaces.
+
+---
+
+## Code & Resources
+
+This section documents constraints, tradeoffs, and reference material — it does not introduce new concepts.
+
+The system is built on CSS custom properties and their inheritance model. For a deeper understanding of how CSS variables work, see the [MDN guide on CSS Custom Properties](https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties).
+
+### Notes & Tradeoffs
+
+Key architectural constraints:
+
+1. **Variants do not compose.** When multiple `data-variant` attributes exist in a subtree, the closest ancestor wins. If a child needs a different semantic meaning, it must opt in *explicitly*.
+2. **Missing tokens fall back silently.** If a variant or appearance is undefined, CSS variable fallbacks apply. This favors resilience over strict enforcement.
+3. **Interactive states are layered separately.** This system defines meaning (*variant*) and mapping (*appearance*), not interaction timing. Hover, focus, and active states live in the appearance or component layer.
+4. **Paint presets are exclusive.** Presets like `surface` and `all` should not be mixed with composable paint channels. This is a deliberate constraint to avoid ambiguous styling outcomes. This constraint is documented rather than enforced by default. Teams that need stricter guarantees can enforce it through typing, linting, or review conventions.
+
+### Theme Validation & Color Systems
+
+Tools for validating contrast and accessibility:
+
+- [WCAG 2.1 Quick Reference guide](https://www.w3.org/WAI/WCAG21/quickref/) — a concise overview of contrast requirements and success criteria
+- [WebAIM Contrast Checker](https://webaim.org/resources/contrastchecker/) — the gold standard for checking contrast ratios
+- [Contrast Grid](https://contrast-grid.eightshapes.com/) — compare entire color palettes at once
+- [Color.review](https://color.review/) — preview colors with vision-deficiency simulations
+
+### CSS Reset
+
+The global baseline defined in this post assumes browser defaults have already been normalised. Without a reset, default browser styles for margins, padding, and font rendering will interfere with the token layer.
+
+- [Andy Bell's modern reset](https://piccalil.li/blog/a-more-modern-css-reset/) — a great starting point for any app
+- [Josh Comeau's CSS reset](https://www.joshwcomeau.com/css/custom-css-reset/) — goes in depth with clear explanations for each rule
+
+### Theming Pipeline (Reference)
+
+Reference implementation of the theming pipeline discussed in the post.
+
+**theme.css**
+
+```css
+/*
+Theme API
+
+Themes define global, environment-level color tokens.
+They describe the default canvas and baseline text colors
+before any component opts into styling.
+
+Themes do NOT:
+  → define variants
+  → apply component styling
+  → control appearance or paint behavior
+
+Theme tokens are consumed by:
+  → the variant layer (as defaults)
+  → global elements (e.g. body)
+*/
+
+:root:has([data-theme="light"]) {
+  --surface: var(--color-neutral-100);
+  --foreground-on-surface: var(--color-neutral-900);
+}
+
+:root:has([data-theme="dark"]) {
+  --surface: var(--color-neutral-900);
+  --foreground-on-surface: var(--color-neutral-100);
+}
+
+body {
+  background-color: var(--surface);
+  color: var(--foreground-on-surface);
+}
+```
+
+**variants.css**
+
+```css
+/*
+Variant tokens are inert by default.
+They do not affect styling until mapped by appearance
+and applied via paint.
+*/
+
+[data-variant] {
+  --background-color: var(--variant-bg);
+  --foreground-color: var(--variant-fg);
+  --border-color: var(--variant-border);
+  --surface-color: var(--variant-surface);
+}
+
+[data-variant="primary"] {
+  --variant-bg: var(--color-primary-400);
+  --variant-fg: var(--color-neutral-100);
+  --variant-border: var(--color-primary-600);
+  --variant-fg-on-surface: var(--color-primary-600);
+  --variant-surface: var(--color-primary-100);
+}
+
+/*
+ Additional variants (secondary, danger, success, etc.)
+ follow the same contract and are omitted here for clarity.
+*/
+```
+
+**appearance.css**
+
+```css
+/*
+Appearance API
+
+Appearances map semantic variant tokens to resolved color variables.
+They DO NOT apply paint directly.
+
+Painting is opt-in and controlled via the data-paint attribute.
+
+variant   → provides tokens
+appearance → maps tokens
+paint     → applies them
+*/
+
+/* Strong, high-emphasis application (buttons, badges, pills) */
+[data-appearance="filled"] {
+  --background-color: var(--variant-bg);
+  --foreground-color: var(--variant-fg);
+  --border-color: var(--variant-border);
+}
+
+/* Tonal surface application (callouts, notices, containers) */
+[data-appearance="tonal"] {
+  --background-color: var(--variant-surface);
+  --foreground-color: var(--variant-fg-on-surface);
+  --border-color: var(--variant-border);
+}
+
+/* .... insert more appearances as your project needs (outlined, ghost etc.) */
+```
+
+**paint.css**
+
+```css
+/*
+Paint API
+
+Paint is opt-in and applies only to Block (and primitives composed from Block).
+This is an explicit design boundary: paint is never applied to arbitrary elements.
+
+Paint controls whether resolved color variables are applied.
+It does not define colors (variants) or how they are mapped (appearance).
+
+Channels (composable):
+- background → applies background-color
+- foreground → applies text color
+- border     → applies border + border-color
+
+Presets (exclusive):
+- surface → background + border (no text color)
+- all     → background + foreground + border
+
+Examples:
+  data-paint="background foreground"  // Composable channels
+  data-paint="surface"                // Preset (do not mix with channels)
+*/
+
+/* Foreground channel */
+.block[data-paint~="foreground"],
+.block[data-paint="all"] {
+  color: var(--foreground-color, inherit);
+}
+
+/* Background channel (and presets that include background) */
+.block[data-paint~="background"],
+.block[data-paint="all"],
+.block[data-paint="surface"] {
+  background-color: var(--background-color, transparent);
+}
+
+/* Border channel (and presets that include border) */
+.block[data-paint~="border"],
+.block[data-paint="all"],
+.block[data-paint="surface"] {
+  border: 1px solid var(--border-color, var(--foreground-on-surface, currentColor));
+}
+```
+
+#### Token Flow Through the System
+
+**Global Tokens — [(tokens)](https://github.com/codercarl1243/react_components_system/tree/main/app/styles/tokens)**
+
+```css
+:root {
+  /* Neutrals */
+  --color-neutral-100: hsl(0, 0%, 100%);
+  --color-neutral-400: hsl(0, 0%, 46%);
+  --color-neutral-900: hsl(0, 0%, 0%);
+
+  /* Semantic color scales */
+  --color-primary-100: hsl(203, 31%, 90%);
+  --color-primary-400: hsl(212, 75%, 40%);
+  --color-primary-600: hsl(212, 76%, 28%);
+
+  --color-danger-400: hsl(0, 87%, 49%);
+  --color-success-400: hsl(143, 56%, 34%);
+
+  /* ...additional color scales follow same pattern */
+}
+```
+
+*Parallel consumers of global tokens*
+
+**Theme Tokens — [(theme.css)](https://github.com/codercarl1243/react_components_system/blob/main/app/styles/tokens/theme.css)**
+
+```css
+[data-theme="light"] {
+  --surface: var(--color-neutral-100);
+  --foreground-on-surface: var(--color-neutral-900);
+}
+/* Repeat for dark theme */
+
+body {
+  background-color: var(--surface);
+  color: var(--foreground-on-surface);
+}
+```
+
+**Variant Tokens — [(variants.css)](https://github.com/codercarl1243/react_components_system/blob/main/app/styles/design-system/variants.css)**
+
+```css
+[data-variant="primary"] {
+  --variant-bg: var(--color-primary-400);
+  --variant-fg: var(--color-neutral-100);
+  --variant-border: var(--color-primary-600);
+}
+```
+
+**Appearance Mappings — [(appearance.css)](https://github.com/codercarl1243/react_components_system/blob/main/app/styles/design-system/appearance.css)**
+
+```css
+[data-appearance="filled"] {
+  --background-color: var(--variant-bg);
+  --foreground-color: var(--variant-fg);
+  --border-color: var(--variant-border);
+}
+```
+
+**Paint (Application) — [(paint.css)](https://github.com/codercarl1243/react_components_system/blob/main/app/styles/design-system/paint.css)**
+
+```css
+[data-paint~="background"] {
+  background-color: var(--background-color);
+}
+
+[data-paint~="foreground"] {
+  color: var(--foreground-color);
+}
+```
+
+Global tokens feed both Theme and Variant. Theme establishes the visual baseline. Variants define meaning, appearances map treatment, and paint applies styling.

@@ -1,19 +1,34 @@
 .primitive-diagram-box {
     --border-style: dashed;
+    
     padding: var(--spacing-sm);
 }
 
 .primitive-diagram-box__child {
     --border-style: solid;
-    padding: var(--spacing) var(--spacing-md);
+
+    padding: var(--spacing-sm) var(--spacing);
     text-align: center;
+
+    &.child--a {
+        width: 8ch;
+    }
+
+    &.child--b {
+        width: 5ch;
+    }
+
+    &.child--c {
+        width: 11ch;
+    }
 }
+
 
 .primitive-diagram-box.inline-example {
     .primitive-diagram-box {
         position: relative;
     }
-    
+
     .arrow__double {
         position: absolute;
         left: 0;

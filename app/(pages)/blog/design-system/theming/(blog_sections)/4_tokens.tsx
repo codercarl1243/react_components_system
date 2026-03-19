@@ -85,17 +85,17 @@ export default function Section4() {
                     title="theme.css"
                     codeString={`:root:has([data-theme="light"]) {
   --surface: var(--color-neutral-100);
-  --text-on-surface: var(--color-neutral-900);
+  --foreground-on-surface: var(--color-neutral-900);
 }
 
 :root:has([data-theme="dark"]) {
   --surface: var(--color-neutral-900);
-  --text-on-surface: var(--color-neutral-100);
+  --foreground-on-surface: var(--color-neutral-100);
 }
 
 body {
   background-color: var(--surface);
-  color: var(--text-on-surface);
+  color: var(--foreground-on-surface);
 }`}
                 />
             </div>

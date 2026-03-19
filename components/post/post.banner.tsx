@@ -48,7 +48,7 @@ export default function PostBanner({ post }: {post: PostType}) {
         />
       )}
       <div className="post__banner__text">
-        <Heading as={"h1"} id={`heading-${id}`} className="post__banner__text-heading">
+        <Heading as={"h1"} id={`heading-${id}`} className="post__banner__text-heading text-on-image">
           {title}
         </Heading>
         {subtitle && (

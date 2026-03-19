@@ -7,15 +7,14 @@ import BlogLink from '@/components/post/post.blogLink';
 import Post from '@/components/post';
 import PostSection from '@/components/post/post.section';
 import Image from '@/components/image';
-import { logInfo } from '@/lib/logging/log';
 
-function chunk<T>(arr: T[], size: number) {
-  const result: T[][] = [];
-  for (let i = 0; i < arr.length; i += size) {
-    result.push(arr.slice(i, i + size));
-  }
-  return result;
-}
+// function chunk<T>(arr: T[], size: number) {
+//   const result: T[][] = [];
+//   for (let i = 0; i < arr.length; i += size) {
+//     result.push(arr.slice(i, i + size));
+//   }
+//   return result;
+// }
 
 
 export default function BlogPage() {
@@ -25,7 +24,7 @@ export default function BlogPage() {
       const layout = index % 4 === 0 ? "large" : "default";
 
       return (
-        <li key={post.id + index} data-layout={layout}>
+        <li key={post.id + index} data-layout={layout} className='content-grid__item'>
           <PostCard
             post={post}
             layout={layout}
@@ -35,7 +34,7 @@ export default function BlogPage() {
     }
   );
 
-  const groups = chunk(formattedPosts, 4);
+  // const groups = chunk(formattedPosts, 4);
 
   return (
     <Post>
@@ -43,11 +42,8 @@ export default function BlogPage() {
         <Image className="width-full" alt={''} src={'/images/blogs/main-image.webp'} variant='hero' height={400} />
         <Heading as={"h1"}>Blogs</Heading>
         <p>Design systems don't usually break all at once. They decay.</p>
-
         <p>Over time, styling stops feeling intentional and starts feeling fragile.</p>
-
         <p>If this sounds familiar, the problem is rarely tooling. It's architecture.</p>
-
         <p>On this site, I explore how <FunHighlight>design tokens</FunHighlight>, <FunHighlight>primitives</FunHighlight> and a small set of definitive <span className="fun-underline">boundaries</span> come together to form a composable styling system.</p>
       </PostSection>
 
@@ -71,17 +67,12 @@ export default function BlogPage() {
         <Heading as="h2">All Posts</Heading>
         {/* <p>Below you'll find all posts in this series.
         Filter or sort them by topic depending on what you're looking for:</p> */}
-        <List as="ul" marker="none" className='post-card__grid-container p-0 flow-6'>
-          {groups.map((group, index) => {
-            return (<li key={"post-card__grid-group" + index}>
-              <List as="ul" marker="none" className='post-card__grid p-0' 
-              // data-side={index % 2 ? "right" : "left"}
-              >
-                {group}
-              </List>
-            </li>)
-          })}
+        <div className='content-grid__container'>
+
+        <List as="ul" marker="none" className='content-grid'>
+          {formattedPosts}
         </List>
+        </div>
       </PostSection>
     </Post>
   )

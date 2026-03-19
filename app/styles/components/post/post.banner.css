@@ -31,23 +31,11 @@
 }
 
 .post__banner__text-heading {
-  --outline-color: var(--color-neutral-900);
-
-  color: var(--color-neutral-100) !important;
   grid-column: 1 / -1;
   grid-row: 1;
   text-align: center;
   max-width: 85%;
   margin-inline: auto;
-  text-shadow:
-    -1px -1px 2px var(--outline-color),
-    1px -1px 2px var(--outline-color),
-    -1px 1px 2px var(--outline-color),
-    1px 1px 2px var(--outline-color),
-    0 -1px 2px var(--outline-color),
-    0 1px 2px var(--outline-color),
-    -1px 0 2px var(--outline-color),
-    1px 0 2px var(--outline-color);
 }
 
 .post__banner__text-subtitle {

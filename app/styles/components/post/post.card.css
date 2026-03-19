@@ -1,10 +1,43 @@
+.post-card--grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr auto auto;
+    gap: var(--spacing);
+
+    .post-card__image,
+    .post-card__heading {
+        grid-column: 1/2;
+        grid-row: 1;
+    }
+
+    .post-card__heading {
+        z-index: 2;
+    }
+
+    .post-card__excerpt {
+        grid-row: 2;
+    }
+
+    .post-card__meta {
+        grid-row: 3;
+    }
+}
+
 .post-card {
     position: relative;
-    height: max(150px, 100%);
-    overflow: hidden;
+    height: 100%;
     outline: 1px solid var(--color-neutral-a2);
     transition: outline-offset 150ms ease-in-out,
         outline-color 150ms ease-in-out;
+    background-color: var(--color-neutral-a2);
+}
+
+.post-card__excerpt {
+    background: linear-gradient(to bottom,
+            color-mix(in srgb, var(--color-neutral-900) 40%, transparent),
+            color-mix(in srgb, var(--color-neutral-900) 70%, transparent));
+    color: var(--color-neutral-100);
+    padding-block: var(--spacing-md);
 }
 
 .post-card__overlay {
@@ -31,51 +64,24 @@
     pointer-events: none;
 }
 
-.post-card__heading {
-    position: relative;
-}
-
-.post-card__excerpt {
-    position: absolute;
-    top: calc(50% + var(--spacing));
-}
-
-.post-card__meta {
-    position: absolute;
-    bottom: 0;
-}
-
 .post-card .post-card__image {
     display: inline-block;
     overflow: hidden;
     width: 100%;
     background-color: transparent !important;
+    position: absolute;
+    inset: 0;
+    height: 100%;
+    opacity: 0.5;
 
     img {
         width: max(250px, 100%) !important;
         height: 100%;
         transform: scale(1.15) translate(-4%, -4%);
-        filter: grayscale(100%) contrast(0.75);
+        filter: grayscale(90%) contrast(0.5);
         transition:
             filter 600ms cubic-bezier(0, 0.25, 0.3, 1),
             transform 600ms cubic-bezier(0.22, 1, 0.36, 1);
-    }
-}
-
-.post-card[data-layout="large"] .post-card__image {
-    height: clamp(100px, 50%, 100%) !important;
-}
-
-.post-card {
-    .post-card__image {
-        position: absolute;
-        inset: 0;
-        height: 100%;
-        opacity: 0.5;
-
-        img {
-            height: 100%;
-        }
     }
 }
 
@@ -101,7 +107,7 @@
 
 .post-card .post-card__link {
     --link-color-override: transparent;
-    
+
     outline: 0;
 }
 

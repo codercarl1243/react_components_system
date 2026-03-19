@@ -65,10 +65,8 @@
     background: none;
     border-radius: var(--radius-md);
     outline: 0;
-    box-shadow: none;
 
     box-shadow: var(--button-shadow, none);
-    outline-color: var(--border-color, currentcolor);
     outline-offset: var(--button-outline-offset);
 
     /* Typography */
@@ -83,14 +81,15 @@
 
     /* Interactive states - UX communication through outlines and transforms */
     &:hover {
+        --button-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2);
+
         outline: 1px solid var(--border-color, currentcolor);
-        box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2);
     }
 
     &:focus-visible {
+        --button-shadow: none;
+
         outline: 2px solid var(--border-color);
-        outline-offset: var(--button-outline-offset);
-        box-shadow: none;
     }
 
     &:active,
@@ -106,17 +105,19 @@
         --background-color: var(--color-neutral-200);
         --foreground-color: var(--color-neutral-800);
         --border-color: var(--color-neutral-400);
+
         cursor: not-allowed;
 
         &:hover,
         &:active {
+            --button-shadow: none;
+
             outline: none;
-            box-shadow: none;
             transform: none;
         }
 
         &:focus-visible {
-            --button-outline-color: var(--color-neutral-600);
+            outline-color: var(--color-neutral-600);
         }
     }
 
