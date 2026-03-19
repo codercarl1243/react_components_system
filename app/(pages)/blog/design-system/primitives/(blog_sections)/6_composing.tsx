@@ -124,7 +124,7 @@ BlockProps<T> & {
                 Each primitive owns a distinct structural surface: vertical rhythm (<InlineCode codeString="Stack" /> ) or flow-based horizontal grouping (<InlineCode codeString="Inline" />). Neither duplicates containment. Neither collapses into a generic utility surface.
             </p>
             <Rule>
-                A primitive constrains its API to the decisions it owns. <InlineCode codeString="Stack" /> accepts  <InlineCode codeString="gap" /> and  <InlineCode codeString="align" /> — nothing more. That constraint writes, signs, and documents the contract.
+                A primitive constrains its API to the decisions it owns. <InlineCode codeString="Stack" /> accepts <InlineCode codeString="gap" /> and <InlineCode codeString="align" /> — nothing more. That constraint writes, signs, and documents the contract.
             </Rule>
             <PrimitiveOwnershipDiagram />
         </PostSection>
