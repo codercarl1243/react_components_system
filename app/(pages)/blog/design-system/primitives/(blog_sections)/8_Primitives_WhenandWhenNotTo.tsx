@@ -15,7 +15,7 @@ export default function Section8() {
                 sources={[{ media: '(max-width: 400px)', srcSet: '/images/blogs/design-system/primitives/primitives_with_without_200x400.webp' }]}
                 src="/images/blogs/design-system/primitives/primitives_with_without_1200x800.webp"
                 alt={`Two side-by-side illustrations — on the left, colourful UI cards stacked neatly labelled "With", on the right, the same cards in a chaotic pile labelled "Without"`}
-                className="mx-auto"
+                className="mx-auto radius-md overflow-hidden"
             />
             <p>
                 Primitives solve structural problems that appear as systems scale.
