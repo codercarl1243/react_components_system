@@ -93,7 +93,6 @@
 .tablist__content-panel {
     padding: var(--spacing);
     height: calc(var(--tablist-height) - (var(--spacing) * 2));
-    outline: 1px solid pink;
 }
 
 .tablist__content:focus-within {
