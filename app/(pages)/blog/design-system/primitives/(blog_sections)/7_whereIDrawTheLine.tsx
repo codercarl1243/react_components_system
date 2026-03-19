@@ -66,7 +66,7 @@ export default function Section7() {
                 <InlineCode codeString="Spacer" /> appears in many design systems as a way to add explicit <span className="italic">whitespace</span> between elements.
             </p>
             <p>
-                The problem is that it puts layout decisions inside content — a  <InlineCode codeString={`<Spacer size="md" />`} /> between two elements is the child deciding its own spacing, which is the layout primitive's job.
+                The problem is that it puts layout decisions inside content — a <InlineCode codeString={`<Spacer size="md" />`} /> between two elements is the child deciding its own spacing, which is the layout primitive's job.
             </p>
         </PostSection>
     );

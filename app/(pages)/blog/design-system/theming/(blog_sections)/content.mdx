@@ -531,12 +531,12 @@ Theme tokens are consumed by:
   → global elements (e.g. body)
 */
 
-[data-theme="light"] {
+:root:has([data-theme="light"]) {
   --surface: var(--color-neutral-100);
   --foreground-on-surface: var(--color-neutral-900);
 }
 
-[data-theme="dark"] {
+:root:has([data-theme="dark"]) {
   --surface: var(--color-neutral-900);
   --foreground-on-surface: var(--color-neutral-100);
 }
