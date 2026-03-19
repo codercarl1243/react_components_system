@@ -38,9 +38,8 @@ export default function Section7() {
 
             <Heading as="h3" headingSize={4}>Text</Heading>
             <p>
-                <InlineCode codeString="Text" /> is another common candidate that didn't make the cut, for a different reason.
-            </p>
-            <p>
+                <InlineCode codeString="Text" /> is another common candidate.
+
                 It could own typography decisions — <span className="italic">font size</span>, <span className="italic">weight</span>, <span className="italic">line height</span> — but the global styling already does most of that work.
             </p>
             <p>
