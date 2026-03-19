@@ -120,7 +120,7 @@ import { clsx } from "clsx";
 function Block<T extends ElementType = "div">({
     as,
     ...rest
-}: BlockProps<T>) {
+    }: BlockProps<T>) {
 
     const Component = as || "div";
 
@@ -142,25 +142,28 @@ import { Block } from "@/components/primitives/block";
 import type { StackProps, BlockProps } from "@/components/primitives/types";
 
 export function Stack<T extends ElementType = "div">({
-  gap = 4,
-  align = "baseline",
-  className,
-  ...blockProps
-}: StackProps<T>) {
+    gap = 4,
+    align = "baseline",
+    justify,
+    className,
+    ...blockProps
+    }: StackProps<T>) {
 
-  const classes = clsx(
-    "stack",
-    \`gap-row-\${gap}\`,
-    \`stack-align-\${align}\`,
-    className
-  );
+    const classes = clsx(
+                    'stack',
+                    // Gap utilities are defined globally (gap.css)
+                    // rather than scoped to Stack
+                    \`gap-row-\${gap}\`, 
+                    \`stack-align-\${align}\`,
+                    justify && \`stack-justify-\${justify}\`,
+                    className);
 
-  return (
-    <Block
-      className={classes}
-      {...blockProps as BlockProps<T>}
-    />
-  );
+    return (
+        <Block
+        className={classes}
+        {...blockProps as BlockProps<T>}
+        />
+    );
 }`}
                                 />
                             )
@@ -171,18 +174,23 @@ export function Stack<T extends ElementType = "div">({
                             panelContent: (
                                 <Code
                                     codeString={`.stack {
-  display: grid;
-  grid-auto-rows: auto;
-  grid-template-columns: minmax(0, 1fr);
-  align-items: var(--stack-alignment);
-  min-width: 0;
+    display: grid;
+    grid-auto-rows: auto;
+    grid-template-columns: minmax(0, 1fr);
+    align-items: var(--stack-alignment);
+    min-width: 0;
 }
 
-.stack-align-start    { --stack-alignment: start; }
-.stack-align-center   { --stack-alignment: center; }
-.stack-align-end      { --stack-alignment: end; }
-.stack-align-stretch  { --stack-alignment: stretch; }
-.stack-align-baseline { --stack-alignment: baseline; }`}
+.stack-align-start      { --stack-alignment: start; }
+.stack-align-center     { --stack-alignment: center; }
+.stack-align-end        { --stack-alignment: end; }
+.stack-align-stretch    { --stack-alignment: stretch; }
+.stack-align-baseline   { --stack-alignment: baseline; }
+
+.stack-justify-start   { --stack-justify: start; }
+.stack-justify-center  { --stack-justify: center; }
+.stack-justify-end     { --stack-justify: end; }
+.stack-justify-stretch { --stack-justify: stretch; }`}
                                     lang="css"
                                 />
                             )
@@ -206,29 +214,30 @@ import { Block } from "@/components/primitives/block";
 import type { InlineProps, BlockProps } from "@/components/primitives/types";
 
 export function Inline<T extends ElementType = "div">({
-  gap = 4,
-  align = "center",
-  justify = "start",
-  wrap = true,
-  className,
-  ...blockProps
-}: InlineProps<T>) {
+    gap = 4,
+    // Default to center — most inline groupings (icon-text pairs, tags) expect vertical centring
+    align = "center",
+    justify = "start",
+    wrap = true,
+    className,
+    ...blockProps
+    }: InlineProps<T>) {
 
-  const classes = clsx(
-    "inline",
-    \`gap-\${gap}\`,
-    \`inline-align-\${align}\`,
-    \`inline-justify-\${justify}\`,
-    wrap ? "inline-wrap" : "inline-nowrap",
-    className
-  );
+    const classes = clsx(
+        "inline",
+        \`gap-\${gap}\`,
+        \`inline-align-\${align}\`,
+        \`inline-justify-\${justify}\`,
+        wrap ? "inline-wrap" : "inline-nowrap",
+        className
+    );
 
-  return (
-    <Block
-      className={classes}
-      {...blockProps as BlockProps<T>}
-    />
-  );
+    return (
+        <Block
+        className={classes}
+        {...blockProps as BlockProps<T>}
+        />
+    );
 }`}
                                 />
                             )
@@ -239,10 +248,10 @@ export function Inline<T extends ElementType = "div">({
                             panelContent: (
                                 <Code
                                     codeString={`.inline {
-  display: inline-flex;
-  align-items: var(--inline-alignment);
-  justify-content: var(--inline-justify);
-  min-width: 0;
+    display: inline-flex;
+    align-items: var(--inline-alignment);
+    justify-content: var(--inline-justify);
+    min-width: 0;
 }
 
 .inline-wrap   { flex-wrap: wrap; }

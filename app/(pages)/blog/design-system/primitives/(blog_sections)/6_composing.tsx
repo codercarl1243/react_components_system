@@ -31,6 +31,7 @@ export default function Section6() {
 BlockProps<T> & {
     gap?: number;
     align?: "start" | "center" | "end" | "stretch" | "baseline";
+    justify?: "start" | "center" | "end" | "stretch";
 };`} />
             <TabList
                 tabListName="composing_code_reference"
@@ -45,6 +46,7 @@ BlockProps<T> & {
                                 codeString={`function Stack<T extends ElementType = "div">({
     gap = 4,
     align = "baseline",
+    justify,
     className,
     ...blockProps
 }: StackProps<T>) {
@@ -55,6 +57,7 @@ BlockProps<T> & {
                 // rather than scoped to Stack
                 \`gap-row-\${gap}\`, 
                 \`stack-align-\${align}\`,
+                justify && \`stack-justify-\${justify}\`,
                 className);
 
     return (
@@ -73,18 +76,24 @@ BlockProps<T> & {
                             <Code
                                 lang="css"
                                 codeString={`.stack {
-  display: grid;
-  grid-auto-rows: auto;
-  grid-template-columns: minmax(0, 1fr);
-  align-items: var(--stack-alignment);
-  min-width: 0;
+    display: grid;
+    grid-auto-rows: auto;
+    grid-template-columns: minmax(0, 1fr);
+    align-items: var(--stack-alignment);
+    justify-items: var(--stack-justify, initial);
+    min-width: 0;
 }
 
 .stack-align-start      { --stack-alignment: start; }
 .stack-align-center     { --stack-alignment: center; }
 .stack-align-end        { --stack-alignment: end; }
 .stack-align-stretch    { --stack-alignment: stretch; }
-.stack-align-baseline   { --stack-alignment: baseline; }`}
+.stack-align-baseline   { --stack-alignment: baseline; }
+
+.stack-justify-start   { --stack-justify: start; }
+.stack-justify-center  { --stack-justify: center; }
+.stack-justify-end     { --stack-justify: end; }
+.stack-justify-stretch { --stack-justify: stretch; }`}
                             />
                         ),
                         tabLabel: "stack.css"
