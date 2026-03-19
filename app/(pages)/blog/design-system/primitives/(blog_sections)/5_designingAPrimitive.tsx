@@ -38,6 +38,7 @@ type BlockProps<T extends ElementType = "div"> = PrimitiveProps<T>;
 
 function Block<T extends ElementType = "div">({
     as,
+    className,
     ...rest
 }: BlockProps<T>) {
 
