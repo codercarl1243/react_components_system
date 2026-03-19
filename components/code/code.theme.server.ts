@@ -1,10 +1,19 @@
 import { cache } from "react";
 import { ThemeRegistration } from "shiki";
 import { getHighlighter } from "@/components/code/code.resources.server";
+import { logInfo } from "@/lib/logging/log";
 
 export const getInlineCodeTheme = cache(async () => {
   const highlighter = await getHighlighter()
-  return highlighter.getTheme('github-light')
+  const baseTheme = highlighter.getTheme('github-light');
+
+  return {
+    ...baseTheme,
+    name: 'custom-github-light',
+    colorReplacements: {
+      '#d73a49': 'var(--color-danger-400)',
+    },
+  }
 });
 
 /**
@@ -12,7 +21,7 @@ export const getInlineCodeTheme = cache(async () => {
  */
 export const getCodeTheme = cache(async (): Promise<ThemeRegistration> => {
   const highlighter = await getHighlighter()
-  const baseTheme = highlighter.getTheme('github-dark-default')
+  const baseTheme = highlighter.getTheme('github-dark-default');
 
   return {
     ...baseTheme,

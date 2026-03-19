@@ -39,7 +39,7 @@ export default function BlogPage() {
   return (
     <Post>
       <PostSection>
-        <Image className="width-full" alt={''} src={'/images/blogs/main-image.webp'} variant='hero' height={400} />
+        <Image className="width-full" alt={'A yellow brick road leads from a ruined foreground — collapsed stone blocks, a skull, and broken UI components, toward a thriving city on a hill in the distance. A metaphor for building a design system from the ground up.'} src={'/images/blogs/main-image.webp'} variant='hero' height={400} width={1200}/>
         <Heading as={"h1"}>Blogs</Heading>
         <p>Design systems don't usually break all at once. They decay.</p>
         <p>Over time, styling stops feeling intentional and starts feeling fragile.</p>

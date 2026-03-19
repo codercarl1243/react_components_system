@@ -1,0 +1,18 @@
+/*
+Link color follows paint, not appearance.
+
+The default link color uses --link-on-surface.
+When a background is explicitly painted, links switch
+to --link-on-filled to maintain contrast.
+*/
+
+.block,
+.block[data-appearance="outlined"],
+.block[data-appearance="ghost"] {
+  --link-color: var(--link-on-surface);
+}
+
+.block[data-paint="all"],
+.block[data-paint~="background"] {
+  --link-color: var(--link-on-filled);
+}

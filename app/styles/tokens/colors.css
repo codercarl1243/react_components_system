@@ -57,9 +57,8 @@
         --color-neutral-800: hsl(0, 0%, 15%);
         --color-neutral-900: hsl(0, 0%, 0%);
 
-        --color-code-dark: hsl(225, 13%, 13%);
-        --color-code-light: hsl(214, 13%, 90%);
-        --color-inline-bg: rgb(244, 244, 229);
+        --color-code-bg: hsl(225, 13%, 13%);
+        --color-inline-bg: hsl(60, 33%, 99%);
 
         /* alpha values */
         --color-neutral-a2: color-mix(in srgb, var(--foreground-on-surface) 20%, transparent);
