@@ -5,11 +5,11 @@ import { isNotNullish } from '@/lib/utils/guards';
 import { handleKeyPress } from '@/lib/utils/keyboardHandlers'
 import type { KeyPressCallbackMap } from '@/lib/utils/keyboardHandlers.type'
 import { useRef, useState, useEffect, useCallback, type KeyboardEvent } from 'react'
-import type { Tab } from '@/components/tablist/tablist.type';
+import type { Tab, TabItem } from '@/components/tablist/tablist.type';
 
-export default function useTablist(defaultTabId?: string) {
+export default function useTablist(defaultTabId?: string, tabs?: TabItem[]) {
   const tablistRef = useRef<HTMLDivElement>(null)
-  const [activeId, setActiveId] = useState<string | undefined>(defaultTabId)
+  const [activeId, setActiveId] = useState<string | undefined>(defaultTabId ?? tabs?.[0]?.id)
 
   const getTabs = useCallback(() => {
     if (!tablistRef.current) return []
