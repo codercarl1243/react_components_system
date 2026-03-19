@@ -150,17 +150,20 @@ export type PrimitiveProps<T extends ElementType = "div"> = {
 With that base contract in place, we can implement the simplest possible primitive: `<Block />`.
 
 ```tsx
+import clsx from 'clsx'
+
 type BlockProps<T extends ElementType = "div"> =
   PrimitiveProps<T>;
 
 export function Block<T extends ElementType = "div">({
   as,
+  className,
   ...rest
 }: BlockProps<T>) {
 
   const Component = as || "div";
 
-  return <Component {...rest} />;
+  return <Component className={clsx("block", className)} {...rest} />;
 }
 ```
 
@@ -299,7 +302,7 @@ A primitive named `Grid` tells you how something is rendered. A primitive named 
 
 ## Primitives — When and When Not To
 
-![TODO: add image](TODO)
+![Two side-by-side illustrations — on the left, colourful UI cards stacked neatly labelled "With", on the right, the same cards in a chaotic pile labelled "Without"](/images/blogs/design-system/primitives/primitives_with_without.webp)
 
 Primitives solve structural problems that appear as systems scale.
 
@@ -314,7 +317,7 @@ Primitives reduce entropy by limiting where structural decisions can live.
 >
 > A primitive should solve a structural problem — not just name a div.
 
-That said, primitives are not mandatory everywhere. Avoid them when you're prototyping quickly, when the layout is truly one-off, or when semantic HTML alone communicates both structure and meaning clearly.
+That said, avoid primitives when you're prototyping quickly, or when semantic HTML alone communicates both structure and meaning clearly.
 
 Over-abstraction is just as harmful as under-structure. The goal is clarity — not purity.
 
@@ -390,16 +393,20 @@ type InlineProps<T extends ElementType = "div"> =
 
 **block.tsx**
 
+> The `block` className connects the component to the paint system. Without it, `data-paint` attributes would have no CSS target to apply styles to. See [Theming Foundations](/blog/design-system/theming) for how the paint layer works.
+
 ```tsx
+import clsx from 'clsx'
 import type { BlockProps } from "@/components/primitives/types";
 
 function Block<T extends ElementType = "div">({
   as,
+  className,
   ...rest
 }: BlockProps<T>) {
   const Component = as || "div";
 
-  return <Component {...rest} />;
+  return <Component className={clsx("block", className)} {...rest} />;
 }
 ```
 
