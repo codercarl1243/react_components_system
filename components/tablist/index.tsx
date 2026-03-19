@@ -21,7 +21,7 @@ export default function TabList({
         setActiveTab,
         tablistRef,
         handleKeyDown,
-    } = useTablist(defaultActiveTabId)
+    } = useTablist(defaultActiveTabId, tabs)
 
     if (!tabs?.length) return null
 
@@ -67,7 +67,7 @@ export default function TabList({
                     const panelId = `${tabListName}-panel-${item.id}`;
                     return (
                         <Panel
-                            key={`${tabListName}-panel-${item.id}`}
+                            key={panelId}
                             itemId={item.id}
                             tabId={tabId}
                             panelId={panelId}
