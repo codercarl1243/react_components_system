@@ -17,12 +17,12 @@ export const getCodeTheme = cache(async (): Promise<ThemeRegistration> => {
   return {
     ...baseTheme,
     name: 'custom-github-dark',
-    bg: "var(--color-neutral-700)",
+    bg: "var(--color-neutral-800)",
     settings: [
       {
         settings: {
           foreground: baseTheme.settings?.[0]?.settings?.foreground || 'var(--color-neutral-300)',
-          background: 'var(--color-neutral-700)',
+          background: 'var(--color-neutral-800)',
         },
       },
       ...(baseTheme.settings || []).slice(1).filter((token) => {
