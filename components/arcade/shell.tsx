@@ -20,9 +20,9 @@ export default function ArcadeShell({ config, Game, Menu }: ArcadeGameDefinition
     return (
         <Stack>
             {Menu && <Menu arcade={api} />}
-            <span className="ml-4">Time: {gameState.timeLeft}</span>
+            <span className="ml-md">Time: {gameState.timeLeft}</span>
             {isRunning &&
-                <span className="ml-4">Time: {gameState.timeLeft}</span>
+                <span className="ml-md">Time: {gameState.timeLeft}</span>
             }
             <div
                 className={clsx(

@@ -1,7 +1,6 @@
 import { cache } from "react";
 import { ThemeRegistration } from "shiki";
 import { getHighlighter } from "@/components/code/code.resources.server";
-import { logInfo } from "@/lib/logging/log";
 
 export const getInlineCodeTheme = cache(async () => {
   const highlighter = await getHighlighter()
