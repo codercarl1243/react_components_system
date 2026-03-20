@@ -17,7 +17,7 @@ export default function LatestProjects() {
     >
       <Heading
         as="h2"
-        className="homepage__latest-projects__heading center mb-16"
+        className="homepage__latest-projects__heading center mb-smxl"
         headingSize={2}
       >
         Featured Project
@@ -25,7 +25,7 @@ export default function LatestProjects() {
       {projects.map((project) => <ProjectCard key={project.id} project={project} layout={project.featured ? "large" : "default"} />)}
 
 
-      <div className="center mt-16">
+      <div className="center mt-2xl">
         <Link href="/projects">View project details →</Link>
       </div>
     </Block>

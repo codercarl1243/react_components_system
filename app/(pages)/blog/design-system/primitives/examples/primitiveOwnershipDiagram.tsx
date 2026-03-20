@@ -35,7 +35,7 @@ export default function PrimitiveOwnershipDiagram() {
                 <Stack>
                     <p><strong>Inline</strong> - flows with content</p>
                     <Block
-                        className="surface-frame p-sm mb-12 frame-inset-2 primitive-diagram-box inline-example"
+                        className="surface-frame p-sm mb-xl frame-inset-2 primitive-diagram-box inline-example"
                         variant="muted"
                         variantAppearance="tonal"
                         paint="all"

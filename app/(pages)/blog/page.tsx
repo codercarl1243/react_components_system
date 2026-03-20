@@ -53,7 +53,7 @@ export default function BlogPage() {
           <li><BlogLink postId="design__theming_01">Theming & Extensible Design Systems</BlogLink></li>
           <li><BlogLink postId="design__primitives_01">Primitives & Styling Boundaries</BlogLink></li>
           <li>Essential Components for everyday sites:
-            <List as="ul" marker='circle' spacing='loose' className='mt-8'>
+            <List as="ul" marker='circle' spacing='loose' className='mt-lg'>
               <li>Button <span className="italic text-sm">(coming soon)</span></li>
               <li>Link <span className="italic text-sm">(coming soon)</span></li>
               <li>Image <span className="italic text-sm">(coming soon)</span></li>

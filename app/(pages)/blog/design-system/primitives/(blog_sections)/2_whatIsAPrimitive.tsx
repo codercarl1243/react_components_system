@@ -32,7 +32,7 @@ export default function Section2() {
                 <li>They don't describe what something is (Button, Card, Modal etc.)</li>
                 <li>They describe how something is arranged in space (Stack, Inline, Block).</li>
             </List> */}
-            <PostNote variant="neutral" className="mt-8">
+            <PostNote variant="neutral" className="mt-lg">
                 <p>
                     Primitives are not <span className="italic">“better divs”</span>. A thin wrapper that accepts arbitrary class name or style props and forwards them to a div has not encoded any intent — it has just renamed markup.
                 </p>

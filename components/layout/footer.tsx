@@ -12,7 +12,7 @@ export default function Footer({ className, ...props }: ComponentProps<'footer'>
   const year = new Date().getFullYear()
 
   return (
-    <footer className={clsx('footer footer-container flow-xl mt-16', className)} {...props} >
+    <footer className={clsx('footer footer-container flow-xl mt-2xl', className)} {...props} >
       <div className='divider' />
       <Block className='footer__content flow-xl'>
         <NavLinks
