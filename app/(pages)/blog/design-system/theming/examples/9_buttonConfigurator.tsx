@@ -262,7 +262,7 @@ export default function ButtonConfigurator() {
                 Button Configurator
             </Heading>
 
-            <Stack gap={8} >
+            <Stack gap={"xl"} >
                 <Block className="mx-auto appearanceExamples__select-group">
                     <Select
                         id="variant-select"

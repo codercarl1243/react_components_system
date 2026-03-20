@@ -37,7 +37,7 @@ export default function AnchorHeading<T extends ValidHeadingTag = "h3">({
   const normalizedPrefix = `${stringUtils.normalizeWhiteSpace(prefix)} `;
 
   return (
-    <Inline gap={2} className="heading-w-prefix">
+    <Inline gap={"sm"} className="heading-w-prefix">
       <span className="prefix">{normalizedPrefix}</span>
       {headingEl}
     </Inline>

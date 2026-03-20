@@ -15,7 +15,7 @@ export default function TokenFlowDiagram() {
   return (
     <Stack
       as="figure"
-      gap={6}
+      gap={"lg"}
       align="stretch"
       className="theming-diagram surface-frame text-sm"
       variant="info"
@@ -24,13 +24,13 @@ export default function TokenFlowDiagram() {
     >
       {/* Global */}
       <Stack
-        gap={4}
+        gap={"md"}
         className="theming-diagram-box surface-frame"
         variant="primary"
         variantAppearance="tonal"
         paint="all"
       >
-        <Row as="strong" gap={2}>
+        <Row as="strong" gap={"sm"}>
           <Icon icon={RiPaletteFill} />
           Global Tokens
           <Link href="https://github.com/codercarl1243/react_components_system/tree/main/app/styles/tokens">
@@ -68,13 +68,13 @@ export default function TokenFlowDiagram() {
         </p>
         {/* Theme */}
         <Stack
-          gap={4}
+          gap={"md"}
           className="theming-diagram-box surface-frame"
           variant="neutral"
           variantAppearance="tonal"
           paint="all"
         >
-          <Row as="strong" gap={2}>
+          <Row as="strong" gap={"sm"}>
             <Icon icon={RiContrastFill} />
             Theme Tokens
             <Link href="https://github.com/codercarl1243/react_components_system/blob/main/app/styles/tokens/theme.css">
@@ -101,13 +101,13 @@ body {
         </Stack>
         {/* Variant */}
         <Stack
-          gap={4}
+          gap={"md"}
           className="theming-diagram-box surface-frame"
           variant="neutral"
           variantAppearance="tonal"
           paint="all"
         >
-          <Row as="strong" gap={2}>
+          <Row as="strong" gap={"sm"}>
             <Icon icon={RiCodeSSlashFill} />
             Variant Tokens
             <Link href="https://github.com/codercarl1243/react_components_system/blob/main/app/styles/design-system/variants.css">
@@ -130,13 +130,13 @@ body {
 
       {/* Appearance */}
       <Stack
-        gap={4}
+        gap={"md"}
         className="theming-diagram-box surface-frame"
         variant="accent"
         variantAppearance="tonal"
         paint="all"
       >
-        <Row as="strong" gap={2}>
+        <Row as="strong" gap={"sm"}>
           <Icon icon={RiPaintBrushFill} />
           Appearance Mappings
           <Link href="https://github.com/codercarl1243/react_components_system/blob/main/app/styles/design-system/appearance.css">
@@ -159,13 +159,13 @@ body {
 
       {/* Paint */}
       <Stack
-        gap={4}
+        gap={"md"}
         className="theming-diagram-box surface-frame"
         variant="warning"
         variantAppearance="tonal"
         paint="all"
       >
-        <Row as="strong" gap={2}>
+        <Row as="strong" gap={"sm"}>
           <Icon icon={RiCheckboxCircleFill} />
           Paint (Application)
           <Link href="https://github.com/codercarl1243/react_components_system/blob/main/app/styles/design-system/paint.css">

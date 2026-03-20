@@ -5,7 +5,7 @@ export default function PrimitiveOwnershipDiagram() {
     return (
         <Stack
             as="figure"
-            gap={16}
+            gap={"2xl"}
             align="stretch"
             className="primitive-diagram frame-inset-4 text-sm p-lg"
             variant="neutral"
@@ -17,7 +17,7 @@ export default function PrimitiveOwnershipDiagram() {
                     <p><strong>Stack</strong> - owns the <span className="fun-underline">vertical</span> layout surface</p>
                     <div style={{ display: "flex", gap: "var(--spacing-md)" }}>
                         <Stack
-                            gap={4}
+                            gap={"md"}
                             className="surface-frame p-sm frame-inset-2 primitive-diagram-box"
                             variant="primary"
                             variantAppearance="tonal"
@@ -42,7 +42,7 @@ export default function PrimitiveOwnershipDiagram() {
                         style={{ display: "flex", gap: "var(--spacing-md)", alignItems: "center" }}
                     >
                         <Inline
-                            gap={4}
+                            gap={"md"}
                             className="surface-frame p-sm frame-inset-2 primitive-diagram-box"
                             variant="primary"
                             variantAppearance="tonal"

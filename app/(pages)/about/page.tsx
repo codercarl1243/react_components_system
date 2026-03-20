@@ -17,7 +17,7 @@ export default function AboutPage() {
                 <Heading as="h1" headingSize={2}>About Me</Heading>
                 <div className="about-page__intro pb-lg">
                     <Image alt="" src="/images/carl_portrait.webp" height={250} width={200} variant="card" className="about-page__intro--portrait" />
-                    <Stack className="about-page__intro--text" gap={8}>
+                    <Stack className="about-page__intro--text" gap={"lg"}>
                         <p>
                             I'm a frontend-focused engineer with production experience in complex systems,
                             specialising in system-driven <span className="fun-underline">UI architecture</span>,{" "}
@@ -106,7 +106,7 @@ export default function AboutPage() {
                 <Heading as="h2" headingSize={4} variant="warning" className="mt-0">
                     Support my work
                 </Heading>
-                <Stack gap={2}>
+                <Stack gap={"sm"}>
                     <p>
                         If something I've built or written has been useful to you, you can support
                         further development by buying me a coffee.
@@ -120,7 +120,7 @@ export default function AboutPage() {
             <Stack
                 as="section"
                 className="about-contact p-lg divider-wrapper"
-                gap={16}
+                gap={"2xl"}
             >
                 <Heading as="h2" headingSize={3} variant="inverse" className="center">
                     Get in touch

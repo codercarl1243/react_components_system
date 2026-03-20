@@ -11,7 +11,7 @@ function Html() {
             variantAppearance="tonal"
             paint="all"
             className="surface-frame p-lg pt-md htmlVsPrimitives__example__box"
-            gap={2}>
+            gap={"sm"}>
             <Heading as="h3" variant="primary" headingSize={5} className="m-0">Document Structure</Heading>
             <List as="ul" marker="none" spacing="tight">
                 <li>Document hierarchy</li>
@@ -30,7 +30,7 @@ function Primitives() {
             variantAppearance="tonal"
             paint="all"
             className="surface-frame p-lg pt-md htmlVsPrimitives__example__box"
-            gap={2}>
+            gap={"sm"}>
             <Heading as="h3" headingSize={5}>Layout Responsibility</Heading>
             <List as="ul" marker="none" spacing="tight">
                 <li>Who owns layout decisions</li>
@@ -50,7 +50,7 @@ export default function HTMLvsPrimitives() {
             <Inline
                 wrap
                 justify="even"
-                gap={2}
+                gap={"sm"}
                 className="htmlVsPrimitives__example__content"
             >
                 <Html />

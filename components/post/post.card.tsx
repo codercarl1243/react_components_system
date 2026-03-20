@@ -58,7 +58,7 @@ export default function PostCard({ post, layout = "default" }: PostCardPropsType
                     </span>
                 </p>
             )}
-            <Inline wrap className='post-card__meta px-md pb-sm' gap={2}>
+            <Inline wrap className='post-card__meta px-md pb-sm' gap={"sm"}>
                 {categories.map(category => <CategoryPill key={`${post.id}-${category}`} category={category} />)}
             </Inline>
         </Block>

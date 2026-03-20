@@ -100,7 +100,7 @@ export default function ContactForm() {
                     autoComplete="off"
                     aria-hidden="true"
                 />
-                <Stack gap={2}>
+                <Stack gap={"sm"}>
                     <TextInput
                         id="contact-name"
                         label="Name"
