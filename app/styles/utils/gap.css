@@ -14,7 +14,7 @@
   gap: var(--spacing-xl);
 }
 
-.gap-xl {
+.gap-2xl {
   gap: var(--spacing-xxl);
 }
 
@@ -36,7 +36,7 @@
     gap: var(--spacing-lg);
   }
 
-  .gap-xl {
+  .gap-2xl {
     gap: var(--spacing-xl);
   }
 }
@@ -58,7 +58,7 @@
   column-gap: var(--spacing-xl);
 }
 
-.gap-col-3xl {
+.gap-col-2xl {
   column-gap: var(--spacing-xxl);
 }
 
@@ -80,7 +80,7 @@
     column-gap: var(--spacing-lg);
   }
 
-  .gap-col-3xl {
+  .gap-col-2xl {
     column-gap: var(--spacing-xl);
   }
 }
@@ -101,7 +101,7 @@
   row-gap: var(--spacing-xl);
 }
 
-.gap-row-3xl {
+.gap-row-2xl {
   row-gap: var(--spacing-xxl);
 }
 
@@ -123,7 +123,7 @@
     row-gap: var(--spacing-lg);
   }
 
-  .gap-row-3xl {
+  .gap-row-2xl {
     row-gap: var(--spacing-xl);
   }
 }
