@@ -1,129 +1,129 @@
-.gap-2 {
+.gap-sm {
   gap: var(--spacing);
 }
 
-.gap-4 {
+.gap-md {
+  gap: var(--spacing-md);
+}
+
+.gap-lg {
   gap: var(--spacing-lg);
 }
 
-.gap-6 {
-  gap: var(--spacing-lg);
-}
-
-.gap-8 {
+.gap-xl {
   gap: var(--spacing-xl);
 }
 
-.gap-16 {
+.gap-xl {
   gap: var(--spacing-xxl);
 }
 
 @media screen and (max-width: 35rem) {
 
-  .gap-2 {
+  .gap-sm {
     gap: var(--spacing-sm);
   }
 
-  .gap-4 {
+  .gap-md {
     gap: var(--spacing);
   }
 
-  .gap-6 {
+  .gap-lg {
     gap: var(--spacing-md);
   }
 
-  .gap-8 {
+  .gap-xl {
     gap: var(--spacing-lg);
   }
 
-  .gap-16 {
+  .gap-xl {
     gap: var(--spacing-xl);
   }
 }
 
 
-.gap-col-2 {
+.gap-col-sm {
   column-gap: var(--spacing);
 }
 
-.gap-col-4 {
+.gap-col-md {
+  column-gap: var(--spacing-md);
+}
+
+.gap-col-lg {
   column-gap: var(--spacing-lg);
 }
 
-.gap-col-6 {
-  column-gap: var(--spacing-lg);
-}
-
-.gap-col-8 {
+.gap-col-xl {
   column-gap: var(--spacing-xl);
 }
 
-.gap-col-16 {
+.gap-col-3xl {
   column-gap: var(--spacing-xxl);
 }
 
 @media screen and (max-width: 35rem) {
 
-  .gap-col-2 {
+  .gap-col-sm {
     column-gap: var(--spacing-sm);
   }
 
-  .gap-col-4 {
+  .gap-col-md {
     column-gap: var(--spacing);
   }
 
-  .gap-col-6 {
+  .gap-col-lg {
     column-gap: var(--spacing-md);
   }
 
-  .gap-col-8 {
+  .gap-col-xl {
     column-gap: var(--spacing-lg);
   }
 
-  .gap-col-16 {
+  .gap-col-3xl {
     column-gap: var(--spacing-xl);
   }
 }
 
-.gap-row-2 {
+.gap-row-sm {
   row-gap: var(--spacing);
 }
 
-.gap-row-4 {
+.gap-row-md {
+  row-gap: var(--spacing-md);
+}
+
+.gap-row-lg {
   row-gap: var(--spacing-lg);
 }
 
-.gap-row-6 {
-  row-gap: var(--spacing-lg);
-}
-
-.gap-row-8 {
+.gap-row-xl {
   row-gap: var(--spacing-xl);
 }
 
-.gap-row-16 {
+.gap-row-3xl {
   row-gap: var(--spacing-xxl);
 }
 
 @media screen and (max-width: 35rem) {
 
-  .gap-row-2 {
+  .gap-row-sm {
     row-gap: var(--spacing-sm);
   }
 
-  .gap-row-4 {
+  .gap-row-md {
     row-gap: var(--spacing);
   }
 
-  .gap-row-6 {
+  .gap-row-lg {
     row-gap: var(--spacing-md);
   }
 
-  .gap-row-8 {
+  .gap-row-xl {
     row-gap: var(--spacing-lg);
   }
 
-  .gap-row-16 {
+  .gap-row-3xl {
     row-gap: var(--spacing-xl);
   }
 }

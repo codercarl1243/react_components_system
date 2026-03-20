@@ -13,7 +13,7 @@ import PostNote from "@/components/post/post.note";
 export default function Resources() {
 
   return (
-    <PostSection id="resources" className="flow-8">
+    <PostSection id="resources" className="flow-xl">
       <Stack>
         <AnchorHeading as={"h2"} id="resources-heading">Code & Resources</AnchorHeading>
         <p className="italic">
@@ -29,7 +29,7 @@ export default function Resources() {
           Key architectural constraints:
         </p>
         <List as="ol" spacing="loose" marker="lower-roman">
-          <li className="flow-4">
+          <li className="flow-md">
             <p>
               <strong>Variants do not compose.</strong>{" "}
               When multiple <InlineCode codeString="data-variant" lang="html" /> attributes exist in a subtree, the closest ancestor wins.
@@ -38,7 +38,7 @@ export default function Resources() {
               If a child needs a different semantic meaning, it must opt in <em className="fun-underline">explicitly</em>.
             </p>
           </li>
-          <li className="flow-4">
+          <li className="flow-md">
             <p>
               <strong>Missing tokens fall back silently.</strong>{" "}
               If a variant or appearance is undefined, CSS variable fallbacks apply.
@@ -47,7 +47,7 @@ export default function Resources() {
               This favors resilience over strict enforcement.
             </p>
           </li>
-          <li className="flow-4">
+          <li className="flow-md">
             <p>
               <strong>Interactive states are layered separately.</strong>{" "}
               This system defines meaning (<em>variant</em>) and mapping (<em>appearance</em>), not interaction timing.
@@ -56,7 +56,7 @@ export default function Resources() {
               Hover, focus, and active states live in the appearance or component layer.
             </p>
           </li>
-          <li className="flow-4">
+          <li className="flow-md">
             <p>
               <strong>Paint presets are exclusive.</strong>{" "}
               Presets like <InlineCode codeString="surface" lang="html" /> and <InlineCode codeString="all" lang="html" /> should not be mixed with composable paint channels.
@@ -275,7 +275,7 @@ Examples:
               tabLabel: "theming flow",
               panelContent: (
                 <Block paint="all" variant="neutral" variantAppearance="filled">
-                  <Heading as="h4" className="px-4">Token Flow Through the System</Heading>
+                  <Heading as="h4" className="px-md">Token Flow Through the System</Heading>
                   <TokenFlowDiagram />
                 </Block>
               )

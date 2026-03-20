@@ -8,7 +8,7 @@ import Image from '@/components/image';
 export default function Home() {
 
   return (
-    <Block className='layout-wrapper homepage px-4 pb-8 flow-8'>
+    <Block className='layout-wrapper homepage px-md pb-lg flow-xl'>
       <Hero />
       <LatestPosts />
       <LatestProjects />

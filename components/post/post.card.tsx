@@ -47,18 +47,18 @@ export default function PostCard({ post, layout = "default" }: PostCardPropsType
             <Heading
                 as="h3"
                 id={`heading-post-${post.id}`}
-                className="post-card__heading text-on-image--tight mt-0 px-2"
+                className="post-card__heading text-on-image--tight mt-0 px-sm"
             >
                 <span className="selectable-text">{title}</span>
             </Heading>
             {layout === "large" && (
-                <p className="post-card__excerpt px-4">
+                <p className="post-card__excerpt px-md">
                     <span className="selectable-text">
                         {excerpt}
                     </span>
                 </p>
             )}
-            <Inline wrap className='post-card__meta px-4 pb-2' gap={2}>
+            <Inline wrap className='post-card__meta px-md pb-sm' gap={2}>
                 {categories.map(category => <CategoryPill key={`${post.id}-${category}`} category={category} />)}
             </Inline>
         </Block>

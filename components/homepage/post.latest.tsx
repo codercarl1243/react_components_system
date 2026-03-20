@@ -16,7 +16,7 @@ export default function LatestPosts() {
 
       <div className="homepage__latest-posts__posts content-grid__container">
 
-        <List as="ul" marker="none" className="content-grid p-0 flow-6">
+        <List as="ul" marker="none" className="content-grid p-0 flow-lg">
           {featuredPost && (
             <li key={featuredPost.id} className="content-grid__item latest-post latest-posts__featured" data-layout="large">
               <PostCard post={featuredPost} layout="large" />

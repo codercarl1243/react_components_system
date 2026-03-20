@@ -40,13 +40,13 @@ export default function Section2() {
             <p>Compare how structural intent is expressed in the following examples:</p>
             <Code
                 title="Before"
-                codeString={`<div className="flex flex-col gap-4">
+                codeString={`<div className="flex flex-col gap-md">
   <div className="flex items-center justify-between">
     <h2>Account</h2>
     <button>Edit</button>
   </div>
 
-  <div className="flex flex-col gap-2">
+  <div className="flex flex-col gap-sm">
     <p>Manage your subscription.</p>
     <button>View billing history</button>
   </div>

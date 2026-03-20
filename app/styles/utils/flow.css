@@ -1,42 +1,42 @@
-:where(.flow-2>*:not(:last-child)) {
+:where(.flow-sm>*:not(:last-child)) {
   margin-block-end: var(--spacing);
 }
 
-:where(.flow-4>*:not(:last-child)) {
+:where(.flow-md>*:not(:last-child)) {
+  margin-block-end: var(--spacing-md);
+}
+
+:where(.flow-lg>*:not(:last-child)) {
   margin-block-end: var(--spacing-lg);
 }
 
-:where(.flow-6>*:not(:last-child)) {
-  margin-block-end: var(--spacing-lg);
-}
-
-:where(.flow-8>*:not(:last-child)) {
+:where(.flow-xl>*:not(:last-child)) {
   margin-block-end: var(--spacing-xl);
 }
 
-:where(.flow-16>*:not(:last-child)) {
+:where(.flow-3xl>*:not(:last-child)) {
   margin-block-end: var(--spacing-3xl);
 }
 
 @media screen and (max-width: 35rem) {
 
-  :where(.flow-2>*:not(:last-child)) {
+  :where(.flow-sm>*:not(:last-child)) {
     margin-block-end: var(--spacing-sm);
   }
 
-  :where(.flow-4>*:not(:last-child)) {
+  :where(.flow-md>*:not(:last-child)) {
     margin-block-end: var(--spacing);
   }
 
-  :where(.flow-6>*:not(:last-child)) {
+  :where(.flow-lg>*:not(:last-child)) {
     margin-block-end: var(--spacing-md);
   }
 
-  :where(.flow-8>*:not(:last-child)) {
+  :where(.flow-xl>*:not(:last-child)) {
     margin-block-end: var(--spacing-lg);
   }
 
-  :where(.flow-16>*:not(:last-child)) {
+  :where(.flow-3xl>*:not(:last-child)) {
     margin-block-end: var(--spacing-xl);
   }
 }

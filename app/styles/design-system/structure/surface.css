@@ -64,8 +64,8 @@ When a .surface-frame is nested inside another .surface-frame:
  Usage
 ---------------------------------
 
-<div class="surface-frame p-8 frame-inset-8">
-  <div class="surface-frame p-4">
+<div class="surface-frame p-lg frame-inset-8">
+  <div class="surface-frame p-lg">
     …
   </div>
 </div>

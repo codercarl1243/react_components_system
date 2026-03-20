@@ -10,7 +10,7 @@ function Html() {
             variant="primary"
             variantAppearance="tonal"
             paint="all"
-            className="surface-frame p-8 pt-4 htmlVsPrimitives__example__box"
+            className="surface-frame p-lg pt-md htmlVsPrimitives__example__box"
             gap={2}>
             <Heading as="h3" variant="primary" headingSize={5} className="m-0">Document Structure</Heading>
             <List as="ul" marker="none" spacing="tight">
@@ -29,7 +29,7 @@ function Primitives() {
             variant="secondary"
             variantAppearance="tonal"
             paint="all"
-            className="surface-frame p-8 pt-4 htmlVsPrimitives__example__box"
+            className="surface-frame p-lg pt-md htmlVsPrimitives__example__box"
             gap={2}>
             <Heading as="h3" headingSize={5}>Layout Responsibility</Heading>
             <List as="ul" marker="none" spacing="tight">
@@ -56,7 +56,7 @@ export default function HTMLvsPrimitives() {
                 <Html />
                 <Primitives />
             </Inline>
-            <figcaption className="htmlVsPrimitives__example__caption italic text-sm px-8">
+            <figcaption className="htmlVsPrimitives__example__caption italic text-sm px-lg">
                 HTML defines document semantics. Primitives define layout responsibility.
             </figcaption>
         </Stack>

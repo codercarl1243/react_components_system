@@ -14,7 +14,7 @@ export default function Resources() {
 
 
     return (
-        <PostSection id="resources" className="flow-8">
+        <PostSection id="resources" className="flow-xl">
             <Stack>
                 <AnchorHeading as={"h2"} id="resources-heading">Code & Resources</AnchorHeading>
                 <p className="italic">

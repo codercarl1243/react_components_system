@@ -10,12 +10,12 @@ import BuyMeACoffeeCTA from "@/components/buyMeACoffeeCTA";
 export default function AboutPage() {
 
     return (
-        <div className="layout-wrapper flow-8 about-page">
+        <div className="layout-wrapper flow-xl about-page">
             <Stack
                 as="section"
             >
                 <Heading as="h1" headingSize={2}>About Me</Heading>
-                <div className="about-page__intro pb-8">
+                <div className="about-page__intro pb-lg">
                     <Image alt="" src="/images/carl_portrait.webp" height={250} width={200} variant="card" className="about-page__intro--portrait" />
                     <Stack className="about-page__intro--text" gap={8}>
                         <p>
@@ -40,7 +40,7 @@ export default function AboutPage() {
                 variant="primary"
                 variantAppearance="tonal"
                 paint="all"
-                className="surface-frame p-8 pb-16"
+                className="surface-frame p-lg pb-2xl"
             >
                 <Heading as="h2" headingSize={4} variant="primary" className="mt-0">Professional focus</Heading>
                 <p>
@@ -58,7 +58,7 @@ export default function AboutPage() {
                 variant="secondary"
                 variantAppearance="tonal"
                 paint="all"
-                className="surface-frame p-8 pb-16"
+                className="surface-frame p-lg pb-2xl"
             >
                 <Heading as="h2" headingSize={4} variant="secondary" className="mt-0">
                     Learning & Professional development
@@ -81,7 +81,7 @@ export default function AboutPage() {
                 variant="accent"
                 variantAppearance="tonal"
                 paint="all"
-                className="surface-frame p-8 pb-16"
+                className="surface-frame p-lg pb-2xl"
             >
                 <Heading as="h2" headingSize={4} variant="accent" className="mt-0">
                     Technologies & tools
@@ -101,7 +101,7 @@ export default function AboutPage() {
                 variant="light"
                 variantAppearance="filled"
                 paint="all"
-                className="surface-frame p-8 pb-16"
+                className="surface-frame p-lg pb-2xl"
             >
                 <Heading as="h2" headingSize={4} variant="warning" className="mt-0">
                     Support my work
@@ -119,7 +119,7 @@ export default function AboutPage() {
             </Stack>
             <Stack
                 as="section"
-                className="about-contact p-8 divider-wrapper"
+                className="about-contact p-lg divider-wrapper"
                 gap={16}
             >
                 <Heading as="h2" headingSize={3} variant="inverse" className="center">

@@ -32,7 +32,7 @@ export default function ButtonExampleClient({
 
   return (
     <Block as="figure"
-      className="surface-frame p-8 frame-inset-8 flow-8 theming_buttonExample"
+      className="surface-frame p-lg frame-inset-8 flow-xl theming_buttonExample"
       variant="inverse"
       variantAppearance='outlined'
       paint="all"

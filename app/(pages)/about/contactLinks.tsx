@@ -32,7 +32,7 @@ export default function ContactLinks() {
             variant="neutral"
             variantAppearance="outlined"
             paint="all"
-            className="contact-links__grid surface-frame p-8">
+            className="contact-links__grid surface-frame p-lg">
             <li>
                 <Link className="contact-link" href="mailto:codercarl1243@gmail.com" showExternalIcon={false}>
                     <Icon className="contact-link__icon" icon={RiMailSendLine} /><span>Email</span>

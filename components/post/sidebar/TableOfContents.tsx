@@ -56,7 +56,7 @@ export default function TableOfContents({ contents }: { contents: PostSideBarPro
     };
 
     return (
-        <nav className="post-sidebar__contents flow-4" aria-labelledby="toc-heading">
+        <nav className="post-sidebar__contents flow-md" aria-labelledby="toc-heading">
             <Heading as={"h2"} id="toc-heading">Table of contents</Heading>
             <ol className='toc-list'>
                 {contentsArray.map(item => {

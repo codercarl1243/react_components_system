@@ -14,7 +14,7 @@ export default function Section4() {
             <AnchorHeading as={"h2"} prefix="Step 1 —" id="global-tokens-heading">
                 Global tokens
             </AnchorHeading>
-            <div className="flow-6">
+            <div className="flow-lg">
                 <p>
                     Every robust theming system starts with a stable set of <span className="bold">global tokens</span>. These are the raw values your entire interface relies on: colors, spacing, typography, radii, shadows, and breakpoints.
                 </p>
@@ -26,7 +26,7 @@ export default function Section4() {
                 </p>
             </div>
 
-            <div className="flow-6">
+            <div className="flow-lg">
                 <Heading as="h3" headingSize={4}>Color tokens</Heading>
                 <p>
                     Color tokens use a numeric scale where lower numbers represent lighter values and higher numbers represent darker ones.
@@ -35,7 +35,7 @@ export default function Section4() {
                 <p>
                     This gives the system room to define explicit contrast guarantees at different points in the scale, without baking semantic meaning into raw values.
                 </p>
-                <Block as="figure" variant="neutral" variantAppearance="filled" paint={"all"} className="surface-frame p-4">
+                <Block as="figure" variant="neutral" variantAppearance="filled" paint={"all"} className="surface-frame p-lg">
                     <Code
                         lang="css"
                         title="colors.css - Global color tokens"
@@ -54,7 +54,7 @@ export default function Section4() {
     /* Additional color scales omitted for clarity */
 }`}
                     />
-                    <figcaption className="pt-4 pb-2 italic text-sm">
+                    <figcaption className="pt-md pb-sm italic text-sm">
                         Example color scale where the mid-range <InlineCode codeString="400" lang="css" /> values meet a 4.5:1 contrast ratio against both <InlineCode codeString="100" lang="css" /> and <InlineCode codeString="900" lang="css" />.
                     </figcaption>
                 </Block>
@@ -67,7 +67,7 @@ export default function Section4() {
                 </p>
             </div>
 
-            <div className="flow-6">
+            <div className="flow-lg">
                 <Heading as="h3" headingSize={4}>Theme</Heading>
                 <p>
                     Up to this point, everything we've defined is global and context-free. Theme is the layer that establishes visual context.

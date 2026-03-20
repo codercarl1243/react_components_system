@@ -50,7 +50,7 @@ export default function Section8() {
                 Paint channels are composable. You can request only what you need.
             </p>
 
-            <Stack as="figure" className="surface-frame p-4" variant="light" variantAppearance="filled" paint="all">
+            <Stack as="figure" className="surface-frame p-lg" variant="light" variantAppearance="filled" paint="all">
                 <Code
                     lang="tsx"
                     highlightTokens={[
@@ -78,7 +78,7 @@ export default function Section8() {
                         variant="info"
                         variantAppearance="tonal"
                         paint={["foreground"]}
-                        className="p-2 mx-auto"
+                        className="p-sm mx-auto"
                         style={{ width: "max-content" }}
                     >
                         Tonal container
@@ -87,7 +87,7 @@ export default function Section8() {
                         variant="primary"
                         variantAppearance="filled"
                         paint="all"
-                        className="p-2 mx-auto"
+                        className="p-sm mx-auto"
                         style={{ width: "max-content" }}
                     >
                         Fully styled element

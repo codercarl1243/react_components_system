@@ -27,7 +27,7 @@ export default function PostSection({ className, width = "full", ...props }: Sec
 
   return (
     <section
-      className={clsx(`post-section flow-6 layout-wrapper width-${width}`, className)}
+      className={clsx(`post-section flow-lg layout-wrapper width-${width}`, className)}
       {...props}
     />
   )
