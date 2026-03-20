@@ -26,7 +26,7 @@ export default function ArcadeShell({ config, Game, Menu }: ArcadeGameDefinition
             }
             <div
                 className={clsx(
-                    "arcade--wrapper mx-auto surface-frame frame-inset-8",
+                    "arcade--wrapper mx-auto surface-frame frame-inset-lg",
                     { "arcade--shake": isShaking },
 
                 )}

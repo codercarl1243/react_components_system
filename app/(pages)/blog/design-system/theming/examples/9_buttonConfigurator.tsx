@@ -247,7 +247,7 @@ export default function ButtonConfigurator() {
             variant="light"
             variantAppearance="filled"
             paint="all"
-            className="flow-md py-lg px-md appearanceExamples surface-frame frame-inset-8"
+            className="flow-md py-lg px-md appearanceExamples surface-frame frame-inset-lg"
         >
             <Block
                 as="figcaption"

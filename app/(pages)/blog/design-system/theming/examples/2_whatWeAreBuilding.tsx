@@ -62,7 +62,7 @@ export default function TokenFlowDiagram() {
 
       <Icon icon={RiArrowDownLongFill} className="mx-auto" />
 
-      <Stack className="surface-frame p-lg frame-inset-8" variant="secondary" variantAppearance="tonal" paint={"all"} style={{ borderStyle: "dashed" }}>
+      <Stack className="surface-frame p-lg frame-inset-lg" variant="secondary" variantAppearance="tonal" paint={"all"} style={{ borderStyle: "dashed" }}>
         <p className="center text-sm italic">
           Parallel consumers of global tokens
         </p>

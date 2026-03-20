@@ -41,7 +41,7 @@ Surface-frame is purely structural.
   The base corner radius for this surface.
 
 • --frame-inset
-  The distance between this surface’s border and a nested surface’s border.
+  The distance between this surface's border and a nested surface's border.
   This value is used to compute the nested radius.
 
 • --frame-radius-nested
@@ -64,8 +64,8 @@ When a .surface-frame is nested inside another .surface-frame:
  Usage
 ---------------------------------
 
-<div class="surface-frame p-lg frame-inset-8">
-  <div class="surface-frame p-lg">
+<div class="surface-frame p-lg frame-inset-lg">
+  <div class="surface-frame p-md">
     …
   </div>
 </div>
@@ -81,11 +81,11 @@ Inset utilities control how much the nested radius is reduced.
 They do NOT add spacing or padding.
 
 .frame-inset-0   → no inset (flat nesting)
-.frame-inset-2   → var(--spacing-sm)
-.frame-inset-4   → var(--spacing)
-.frame-inset-8   → var(--spacing-lg)
-.frame-inset-12  → var(--spacing-xl)
-.frame-inset-16  → var(--spacing-xxl)
+.frame-inset-sm  → var(--spacing-sm)
+.frame-inset-md  → var(--spacing)
+.frame-inset-lg  → var(--spacing-lg)
+.frame-inset-xl  → var(--spacing-xl)
+.frame-inset-2xl → var(--spacing-xxl)
 
 ---------------------------------
  Design Rule
@@ -121,22 +121,22 @@ Keep them separate.
     --frame-inset-base: 0px;
 }
 
-.frame-inset-2 {
+.frame-inset-sm {
     --frame-inset-base: var(--spacing-sm);
 }
 
-.frame-inset-4 {
+.frame-inset-md {
     --frame-inset-base: var(--spacing);
 }
 
-.frame-inset-8 {
+.frame-inset-lg {
     --frame-inset-base: var(--spacing-lg);
 }
 
-.frame-inset-12 {
+.frame-inset-xl {
     --frame-inset-base: var(--spacing-xl);
 }
 
-.frame-inset-16 {
+.frame-inset-2xl {
     --frame-inset-base: var(--spacing-xxl);
 }

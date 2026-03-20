@@ -7,7 +7,7 @@ export default function PrimitiveOwnershipDiagram() {
             as="figure"
             gap={"2xl"}
             align="stretch"
-            className="primitive-diagram frame-inset-4 text-sm p-lg"
+            className="primitive-diagram frame-inset-md text-sm p-lg"
             variant="neutral"
             variantAppearance="filled"
             paint={["background", "foreground"]}
@@ -18,7 +18,7 @@ export default function PrimitiveOwnershipDiagram() {
                     <div style={{ display: "flex", gap: "var(--spacing-md)" }}>
                         <Stack
                             gap={"md"}
-                            className="surface-frame p-sm frame-inset-2 primitive-diagram-box"
+                            className="surface-frame p-sm frame-inset-sm primitive-diagram-box"
                             variant="primary"
                             variantAppearance="tonal"
                             justify="stretch"
@@ -35,7 +35,7 @@ export default function PrimitiveOwnershipDiagram() {
                 <Stack>
                     <p><strong>Inline</strong> - flows with content</p>
                     <Block
-                        className="surface-frame p-sm mb-xl frame-inset-2 primitive-diagram-box inline-example"
+                        className="surface-frame p-sm mb-xl frame-inset-sm primitive-diagram-box inline-example"
                         variant="muted"
                         variantAppearance="tonal"
                         paint="all"
@@ -43,7 +43,7 @@ export default function PrimitiveOwnershipDiagram() {
                     >
                         <Inline
                             gap={"md"}
-                            className="surface-frame p-sm frame-inset-2 primitive-diagram-box"
+                            className="surface-frame p-sm frame-inset-sm primitive-diagram-box"
                             variant="primary"
                             variantAppearance="tonal"
                             paint="all"
