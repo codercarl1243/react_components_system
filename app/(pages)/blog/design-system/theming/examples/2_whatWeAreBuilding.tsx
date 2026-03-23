@@ -1,7 +1,7 @@
 import Code from "@/components/code";
 import Icon from "@/components/icon";
 import Link from "@/components/link";
-import { Row, Stack } from "@/components/primitives";
+import { Inline, Stack } from "@/components/primitives";
 import {
   RiArrowDownLongFill,
   RiPaletteFill,
@@ -30,13 +30,13 @@ export default function TokenFlowDiagram() {
         variantAppearance="tonal"
         paint="all"
       >
-        <Row as="strong" gap={"sm"}>
+        <Inline as="strong" gap={"sm"}>
           <Icon icon={RiPaletteFill} />
           Global Tokens
           <Link href="https://github.com/codercarl1243/react_components_system/tree/main/app/styles/tokens">
             (tokens)
           </Link>
-        </Row>
+        </Inline>
 
         <Code
           copyEnabled={false}
@@ -74,13 +74,13 @@ export default function TokenFlowDiagram() {
           variantAppearance="tonal"
           paint="all"
         >
-          <Row as="strong" gap={"sm"}>
+          <Inline as="strong" gap={"sm"}>
             <Icon icon={RiContrastFill} />
             Theme Tokens
             <Link href="https://github.com/codercarl1243/react_components_system/blob/main/app/styles/tokens/theme.css">
               (theme.css)
             </Link>
-          </Row>
+          </Inline>
 
           <Code
             copyEnabled={false}
@@ -107,13 +107,13 @@ body {
           variantAppearance="tonal"
           paint="all"
         >
-          <Row as="strong" gap={"sm"}>
+          <Inline as="strong" gap={"sm"}>
             <Icon icon={RiCodeSSlashFill} />
             Variant Tokens
             <Link href="https://github.com/codercarl1243/react_components_system/blob/main/app/styles/design-system/variants.css">
               (variants.css)
             </Link>
-          </Row>
+          </Inline>
           <Code
             copyEnabled={false}
             lang="css"
@@ -136,13 +136,13 @@ body {
         variantAppearance="tonal"
         paint="all"
       >
-        <Row as="strong" gap={"sm"}>
+        <Inline as="strong" gap={"sm"}>
           <Icon icon={RiPaintBrushFill} />
           Appearance Mappings
           <Link href="https://github.com/codercarl1243/react_components_system/blob/main/app/styles/design-system/appearance.css">
             (appearance.css)
           </Link>
-        </Row>
+        </Inline>
 
         <Code
           copyEnabled={false}
@@ -165,13 +165,13 @@ body {
         variantAppearance="tonal"
         paint="all"
       >
-        <Row as="strong" gap={"sm"}>
+        <Inline as="strong" gap={"sm"}>
           <Icon icon={RiCheckboxCircleFill} />
           Paint (Application)
           <Link href="https://github.com/codercarl1243/react_components_system/blob/main/app/styles/design-system/paint.css">
             (paint.css)
           </Link>
-        </Row>
+        </Inline>
 
         <Code
           copyEnabled={false}
