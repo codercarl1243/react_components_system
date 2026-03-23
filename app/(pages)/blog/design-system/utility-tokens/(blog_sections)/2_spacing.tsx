@@ -5,6 +5,9 @@ import PostNote from "@/components/post/post.note";
 import PostSection from "@/components/post/post.section";
 import Rule from "@/components/rule";
 import { Stack } from "@/components/primitives";
+import SpacingDiagram from "../examples/spacing";
+import InlineCode from "@/components/code/inlineCode";
+import List from "@/components/list";
 
 export default function Section2() {
     return (
@@ -15,19 +18,16 @@ export default function Section2() {
             <Stack>
                 <p>
                     Spacing is the most frequently used token category in any design system.
-                    Every component — every padding, gap, and margin decision — reaches for spacing tokens.
+                    Every component — every <span className="italic">padding</span>, <span className="italic">gap</span>, and <span className="italic">margin</span> decision — reaches for spacing tokens.
                 </p>
                 <p>
-                    Without a defined scale, spacing decisions scatter. A button gets <code>0.5rem</code> padding.
-                    A card gets <code>16px</code>. A form field gets <code>0.75rem</code>.
-                    Each decision is locally reasonable — and globally inconsistent.
+                    Without a defined scale, spacing decisions scatter. A button gets <InlineCode codeString="0.5rem" lang="css" /> padding while a a card gets a magic number of <InlineCode codeString="14px" lang="css" /> in padding. Each decision is locally reasonable — and globally inconsistent.
                 </p>
                 <Rule>
-                    Spacing decisions should never be made with raw values. Every gap, padding, and margin must come from the scale.
+                    Every gap, padding, and margin must be consistent with it's neighbours.
                 </Rule>
                 <p>
-                    The scale I use is deliberately small — eight steps that cover the full range of layout needs
-                    without creating ambiguity about which value to reach for.
+                    This system introduces a shared scale that covers the full range of layout needs.
                 </p>
                 <Code
                     lang="css"
@@ -43,29 +43,29 @@ export default function Section2() {
 }`}
                 />
             </Stack>
+            <SpacingDiagram />
             <Stack>
                 <Heading as="h3" headingSize={4}>Why these values?</Heading>
+
                 <p>
-                    The scale is built on a base of <code>0.5rem</code> (8px) — a common baseline in UI design that divides evenly
-                    into most layout grids. Each step in the scale is a predictable increment rather than an arbitrary jump.
-                </p>
-                <p>
-                    The naming uses t-shirt sizing (<code>sm</code>, <code>lg</code>, <code>xl</code>) rather than numeric steps
-                    (<code>4</code>, <code>8</code>, <code>16</code>). This keeps names meaningful at a glance —
-                    <code>--spacing-lg</code> reads as "large spacing" rather than requiring mental conversion from a number.
+                    The scale is built on increments of <InlineCode codeString="0.25rem" lang="css" /> (4px) — small enough to be precise, large enough to be meaningful.
                 </p>
             </Stack>
             <Stack>
                 <Heading as="h3" headingSize={4}>Where spacing tokens live in the system</Heading>
                 <p>Spacing tokens are consumed at every layer:</p>
-                <ul>
+                <List as="ul">
                     <li><strong>Primitives</strong> use them for gap values between children</li>
                     <li><strong>Components</strong> use them for internal padding</li>
-                    <li><strong>Utilities</strong> expose them as composable classes</li>
-                </ul>
+                </List>
                 <p>
-                    The utility layer (<code>gap.css</code>, <code>padding.css</code>, <code>margin.css</code>) converts spacing tokens
-                    into classes like <code>.gap-md</code>, <code>.p-lg</code>, and <code>.mb-md</code>.
+                    From there, utility classes expose the same scale as composable helpers for one-off spacing needs.
+                </p>
+                <p>
+                    The utility layer ( <InlineCode codeString="gap.css" />, <InlineCode codeString="padding.css" />, <InlineCode codeString="margin.css" /> ) converts spacing tokens
+                    into classes like <InlineCode codeString=".gap-md" lang="css" />, <InlineCode codeString=".p-lg" lang="css" />, and <InlineCode codeString=".m-md" lang="css" />.
+                </p>
+                <p>
                     These classes are what components reach for in practice.
                 </p>
                 <Code

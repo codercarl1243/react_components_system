@@ -7,13 +7,10 @@ A Practical Implementation Guide
 > **Series Context**
 >
 > This article is part of a broader design system series. It builds on ideas introduced in <BlogLink postId="design__theming_01">Theming Foundations</BlogLink> and <BlogLink postId="design__primitives_01">Primitives</BlogLink>, but stands on its own.
->
-> The theming post covered color tokens — how raw values flow through the system to produce consistent, themeable UI. This post covers the remaining token layer: spacing, typography scale, and breakpoints. These are the values that everything else measures itself against.
 
-After defining structure with primitives, the system still has a gap: the raw values that everything depends on.
-The color layer gives the system its meaning. But without a consistent scale for spacing, type, and layout boundaries, that meaning has no reliable structure to live in.
+The theming post established color. The primitives post established structure. What remains is the scale everything else measures itself against — spacing, type, and layout boundaries.
 
-Utility tokens solve this by standardising the raw values every component depends on. They are not semantic — they do not describe intent the way variants do. They are raw values that the rest of the system consumes to produce consistent, predictable results.
+A shared token layer means every component reaches for the same values. Spacing feels consistent. Type scales predictably. Layout boundaries hold across the entire system.
 
 ---
 
@@ -21,57 +18,62 @@ Utility tokens solve this by standardising the raw values every component depend
 
 ![TODO: add spacing image](/images/blogs/design-system/utility-tokens/spacing.webp)
 
-Spacing is the most frequently used token category in any design system. Every component — every padding, gap, and margin decision — reaches for spacing tokens.
+Spacing is the most frequently used token category in any design system. Every component — every *padding*, *gap*, and *margin* decision — reaches for spacing tokens.
 
-Without a defined scale, spacing decisions scatter. A button gets `0.5rem` padding. A card gets `16px`. A form field gets `0.75rem`. Each decision is locally reasonable — and globally inconsistent.
+Without a defined scale, spacing decisions scatter. A button gets `0.5rem` padding while a card gets a magic number of `14px`. Each decision is locally reasonable — and globally inconsistent.
 
 > **System rule**
 >
-> Spacing decisions should never be made with raw values. Every gap, padding, and margin must come from the scale.
+> Every gap, padding, and margin must be consistent with its neighbours.
 
-The scale I use is deliberately small — eight steps that cover the full range of layout needs without creating ambiguity about which value to reach for.
+This system introduces a shared scale that covers the full range of layout needs.
 
 **spacing.css — [(source)](https://github.com/codercarl1243/react_components_system/blob/main/app/styles/tokens/spacing.css)**
 
 ```css
 :root {
-    --spacing-sm: 0.25rem;   /*  4px */
-    --spacing:    0.5rem;    /*  8px */
-    --spacing-md: 0.75rem;   /* 12px */
-    --spacing-lg: 1rem;      /* 16px */
-    --spacing-xl: 1.5rem;    /* 24px */
+    --spacing-sm:  0.25rem;  /*  4px */
+    --spacing:     0.5rem;   /*  8px */
+    --spacing-md:  0.75rem;  /* 12px */
+    --spacing-lg:  1rem;     /* 16px */
+    --spacing-xl:  1.5rem;   /* 24px */
     --spacing-xxl: 2rem;     /* 32px */
     --spacing-3xl: 4rem;     /* 64px */
 }
 ```
 
+<SpacingDiagram />
+
 ### Why these values?
 
-The scale is built on a base of `0.5rem` (8px) — a common baseline in UI design that divides evenly into most layout grids. Each step in the scale is a predictable increment rather than an arbitrary jump.
-
-The naming uses t-shirt sizing (`sm`, `lg`, `xl`) rather than numeric steps (`4`, `8`, `16`). This keeps names meaningful at a glance — `--spacing-lg` reads as "large spacing" rather than requiring mental conversion from a number.
+The scale is built on increments of `0.25rem` (4px) — small enough to be precise, large enough to be meaningful.
 
 ### Where spacing tokens live in the system
 
 Spacing tokens are consumed at every layer:
 
 - **Primitives** use them for gap values between children
-- **Components** use them for internal padding
-- **Utilities** expose them as composable classes
+- **Components** use them for margins and padding
 
-The utility layer (`gap.css`, `padding.css`, `margin.css`) converts spacing tokens into classes like `.gap-md`, `.p-lg`, and `.mb-md`. These classes are what components reach for in practice.
+From there, utility classes expose the same scale as composable helpers for one-off spacing needs.
+
+
+The utility layer (`gap.css`, `padding.css`, `margin.css`) converts spacing tokens into classes. Because the utility classes use the same t-shirt sizing as the tokens, there is no context switch — `.gap-lg` and `--spacing-lg` are clearly the same thing.
 
 ```css
 /* gap.css */
-.gap-sm { gap: var(--spacing-sm); }
-.gap-md { gap: var(--spacing); }
-.gap-xl { gap: var(--spacing-xl); }
+.gap-sm  { gap: var(--spacing-sm); }  /*  4px */
+.gap     { gap: var(--spacing); }     /*  8px */
+.gap-md  { gap: var(--spacing-md); }  /* 12px */
+.gap-lg  { gap: var(--spacing-lg); }  /* 16px */
+.gap-xl  { gap: var(--spacing-xl); }  /* 24px */
 
 /* padding.css */
-.p-md  { padding: var(--spacing); }
+.p-sm  { padding: var(--spacing-sm); }
+.p     { padding: var(--spacing); }
 .p-lg  { padding: var(--spacing-lg); }
-.px-md { padding-inline: var(--spacing); }
-.py-md { padding-block: var(--spacing); }
+.px-lg { padding-inline: var(--spacing-lg); }
+.py-lg { padding-block: var(--spacing-lg); }
 
 /* ...additional utilities in resources */
 ```
@@ -143,7 +145,6 @@ body {
 
 This means most text inherits the right size without any intervention. The type scale tokens exist for the exceptions — headings, labels, badges, helper text — where a specific size is intentional.
 
-
 ### How the scale is consumed
 
 Font size and line height tokens are consumed through a utility layer that pairs them into named classes:
@@ -173,7 +174,6 @@ The pairing is opinionated — smaller text gets more line height to aid readabi
 
 Breakpoints define where the layout adapts. Like spacing, they need to be consistent — if one component breaks at `768px` and another at `769px`, the result is a layout that feels unpolished at certain widths.
 
-
 **breakpoints.css — [(source)](https://github.com/codercarl1243/react_components_system/blob/main/app/styles/tokens/breakpoints.css)**
 
 ```css
@@ -202,7 +202,7 @@ This is applied to body text and post content throughout the system. It is the r
 CSS custom properties cannot be used directly inside `@media` queries — media queries do not inherit from `:root`. Instead, breakpoint tokens define shared values that are referenced consistently:
 
 ```css
-/* Correct — use the raw value at the same breakpoint */
+/* Use the raw value inside media queries */
 @media screen and (min-width: 35rem) {
     .nav__wrapper {
         flex-direction: row;
@@ -245,7 +245,7 @@ This section documents constraints, tradeoffs, and reference material — it doe
 
 2. **`clamp()` fluid type requires care with accessibility.** Fluid typography respects user font size preferences when the viewport-relative unit (`vw`) is combined with a `rem` minimum. Using `px` minimums would break this — always use `rem` for the min and max values in `clamp()`.
 
-3. **T-shirt size naming is consistent throughout.** The spacing tokens (`--spacing-sm`, `--spacing-lg`) and the utility classes (`.p-sm`, `.p-lg`, `.gap-md`) all use the same t-shirt sizing. A class like `.p-lg` means "padding at the large spacing step" — it maps directly to `--spacing-lg`.
+3. **T-shirt size naming.** Both spacing tokens and utility classes use t-shirt sizing (`sm`, `lg`, `xl`). This keeps the two layers consistent — `--spacing-lg` and `.gap-lg` are clearly the same thing without any mental translation.
 
 ### Further Reading
 
