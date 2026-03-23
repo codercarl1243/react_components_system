@@ -88,7 +88,7 @@ const design_system: readonly Readonly<PostType>[] = [
         pathFragment: 'utility-tokens',
         lastModified: new Date('2026-03-23'),
         createdAt: new Date('2026-03-23'),
-        published: false,
+        published: true,
         featured: false,
         image: {
             src: '/images/blogs/design-system/utility-tokens/main-image.webp',

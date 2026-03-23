@@ -45,7 +45,7 @@ export default function UtilityTokensPage() {
             </Post>
             <PostSideBar
                 contents={TABLE_OF_CONTENTS}
-                relatedPosts={relatedPosts}
+                // relatedPosts={relatedPosts}
                 author={author}
             />
         </>
