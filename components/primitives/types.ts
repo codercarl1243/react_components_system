@@ -41,7 +41,7 @@ export type BaseStyleProps = {
 /*            Utilities               */
 /* ---------------------------------- */
 
-export type Gap = 0 | 2 | 4 | 6 | 8 | 16;
+export type Gap = 0 | "sm" | "md" | "lg" | "xl" | "2xl";
 
 
 /* ---------------------------------- */

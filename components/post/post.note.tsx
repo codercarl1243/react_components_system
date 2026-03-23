@@ -31,10 +31,10 @@ export default function PostNote({ className, children, paint = "all", variant =
     <Stack
       {...props}
       className={clsx(className, 
-        'post-note surface-frame py-8 pr-4 pl-8',
+        'post-note surface-frame py-lg pr-md pl-lg',
         {'has-icon': showIcon}
       )}
-      gap={2}
+      gap={"sm"}
       role={'note'}
       variant={variant}
       variantAppearance='tonal'

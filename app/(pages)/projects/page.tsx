@@ -11,7 +11,7 @@ export default function ProjectsPage() {
 
     if (!projects || projects.length === 0) {
         return (
-            <div className="layout-wrapper flow-8 projects-page">
+            <div className="layout-wrapper flow-xl projects-page">
                 <Heading as="h1" headingSize={2}>Projects</Heading>
                 <p>I'm currently preparing some projects to publish here.
                     Check back soon.
@@ -20,7 +20,7 @@ export default function ProjectsPage() {
         )
     }
     return (
-        <div className="layout-wrapper flow-8 projects-page">
+        <div className="layout-wrapper flow-xl projects-page">
             <Heading as="h1" headingSize={2}>Projects</Heading>
             <ProjectsTablist projects={projects} />
         </div>

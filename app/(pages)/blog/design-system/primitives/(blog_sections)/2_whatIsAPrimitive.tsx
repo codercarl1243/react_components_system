@@ -1,10 +1,8 @@
 import Code from "@/components/code";
 import InlineCode from "@/components/code/inlineCode";
 import AnchorHeading from "@/components/heading/anchorHeading";
-import List from "@/components/list";
 import PostNote from "@/components/post/post.note";
 import PostSection from "@/components/post/post.section";
-// import { Row } from "@/components/primitives";
 import Rule from "@/components/rule";
 
 export default function Section2() {
@@ -32,7 +30,7 @@ export default function Section2() {
                 <li>They don't describe what something is (Button, Card, Modal etc.)</li>
                 <li>They describe how something is arranged in space (Stack, Inline, Block).</li>
             </List> */}
-            <PostNote variant="neutral" className="mt-8">
+            <PostNote variant="neutral" className="mt-lg">
                 <p>
                     Primitives are not <span className="italic">“better divs”</span>. A thin wrapper that accepts arbitrary class name or style props and forwards them to a div has not encoded any intent — it has just renamed markup.
                 </p>
@@ -40,13 +38,13 @@ export default function Section2() {
             <p>Compare how structural intent is expressed in the following examples:</p>
             <Code
                 title="Before"
-                codeString={`<div className="flex flex-col gap-4">
+                codeString={`<div className="flex flex-col gap-md">
   <div className="flex items-center justify-between">
     <h2>Account</h2>
     <button>Edit</button>
   </div>
 
-  <div className="flex flex-col gap-2">
+  <div className="flex flex-col gap-sm">
     <p>Manage your subscription.</p>
     <button>View billing history</button>
   </div>

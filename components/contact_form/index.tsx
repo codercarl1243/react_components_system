@@ -67,13 +67,13 @@ export default function ContactForm() {
     return (
         <form
             ref={formRef}
-            className="contact-form w-full mr-auto p-2"
+            className="contact-form w-full mr-auto p-sm"
             onSubmit={handleSubmit}
             noValidate
         >
             <Block
                 as="fieldset"
-                className="contact-form__fieldset surface-frame p-4"
+                className="contact-form__fieldset surface-frame p-lg"
                 variant='inverse'
                 variantAppearance='outlined'
                 paint={"all"}
@@ -85,7 +85,7 @@ export default function ContactForm() {
                     aria-live="polite"
                     aria-atomic="true"
                     data-status={derivedStatus}
-                    className="contact-form__status p-8"
+                    className="contact-form__status p-lg"
                     paint={statusPaint}
                     variant={statusVariant}
                     variantAppearance='tonal'
@@ -100,7 +100,7 @@ export default function ContactForm() {
                     autoComplete="off"
                     aria-hidden="true"
                 />
-                <Stack gap={2}>
+                <Stack gap={"sm"}>
                     <TextInput
                         id="contact-name"
                         label="Name"

@@ -9,7 +9,7 @@ export default function CategoryPill({ category, className }: PostCategoryPillPr
       variant="secondary"
       variantAppearance="tonal"
       paint={["foreground", "background"]}
-      className={clsx(className, "category-pill surface-frame px-2")}
+      className={clsx(className, "category-pill surface-frame px-sm")}
     >
       {category}
     </Block>

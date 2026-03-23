@@ -247,14 +247,14 @@ export default function ButtonConfigurator() {
             variant="light"
             variantAppearance="filled"
             paint="all"
-            className="flow-4 py-8 px-4 appearanceExamples surface-frame frame-inset-8"
+            className="flow-md py-lg px-md appearanceExamples surface-frame frame-inset-lg"
         >
             <Block
                 as="figcaption"
                 variant="secondary"
                 variantAppearance="tonal"
                 paint={["background", "foreground"]}
-                className="text-sm italic px-4 py-2 surface-frame">
+                className="text-sm italic px-md py-sm surface-frame">
                 Variants provide meaning, appearances control treatment, and paint applies styling.
                 Changing any layer updates the result without changing the component.
             </Block>
@@ -262,7 +262,7 @@ export default function ButtonConfigurator() {
                 Button Configurator
             </Heading>
 
-            <Stack gap={8} >
+            <Stack gap={"xl"} >
                 <Block className="mx-auto appearanceExamples__select-group">
                     <Select
                         id="variant-select"
@@ -304,7 +304,7 @@ export default function ButtonConfigurator() {
                 </span>
                 <Block role="status"
                     aria-live="polite"
-                    className="flow-4">
+                    className="flow-md">
                     <PostInfo className="mx-auto center" variant="info" paint={["foreground"]}>
                         Adjust the controls above to explore how variant, appearance, and paint interact.
                     </PostInfo>
@@ -330,7 +330,7 @@ export default function ButtonConfigurator() {
                                         }}
                                         style={{ overflow: "hidden" }}
                                     >
-                                        <PostInfo as="div" paint={["background", "foreground"]} className="mx-auto flow-6" key={message.id} variant={message.tone}>
+                                        <PostInfo as="div" paint={["background", "foreground"]} className="mx-auto flow-lg" key={message.id} variant={message.tone}>
                                             <p><strong>{message.title}</strong></p>
                                             {lines.map((line, index) => <p key={`${message.id}-${index}`}>{line}</p>)}
                                         </PostInfo>

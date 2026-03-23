@@ -59,7 +59,7 @@ export default function PostSideBar({
                 <span aria-hidden="true">Contents</span>
             </Hamburger.Toggle>
             <Hamburger.Menu
-                className={clsx("post-sidebar flow-8", className)}
+                className={clsx("post-sidebar flow-xl", className)}
                 {...props}
             >
                 {hasContents && <TableOfContents contents={contents} />}

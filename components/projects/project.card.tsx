@@ -29,7 +29,7 @@ export default function ProjectCard({
                 width={1000}
                 height={500}
             />
-            <div className="project-card__content flow-4">
+            <div className="project-card__content flow-md">
                 <Heading as="h3" className="project-card__title" headingSize={4}>
                     {project.title}
                 </Heading>

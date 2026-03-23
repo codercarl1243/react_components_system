@@ -9,5 +9,5 @@ export default function PostInfo({ className, paint, variant, variantAppearance,
         paint={paint ?? "all"}
         variant={variant ?? "neutral"}
         variantAppearance={variantAppearance ?? "tonal"}
-        className={clsx("postinfo text-sm surface-frame p-4", className)} {...props} />
+        className={clsx("postinfo text-sm surface-frame p-lg", className)} {...props} />
 }

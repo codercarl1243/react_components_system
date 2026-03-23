@@ -16,7 +16,7 @@ export default function Section6() {
     return (
         <PostSection id="accessibility">
             <AnchorHeading id="accessibility-heading" as={"h2"}>Accessibility Requirements</AnchorHeading>
-            <div className="flow-4">
+            <div className="flow-md">
                 <AnchorHeading as={"h3"}>WCAG principles in practice</AnchorHeading>
                 <Picture
                     sources={[{ media: '(max-width: 560px)', srcSet: '/images/pour_circles_grid_600x600.webp' }]}
@@ -56,7 +56,7 @@ export default function Section6() {
             </div>
 
 
-            <div className="flow-4">
+            <div className="flow-md">
                 <AnchorHeading as={"h3"}>Designing beyond WCAG</AnchorHeading>
                 <p>
                     WCAG's four principles give us the foundation, but meeting the minimum isn't the goal. As developers, our job is to design buttons that feel <span className="fun-underline">consistent</span>, <span className="fun-underline">predictable</span>, and <span className="fun-underline">inclusive</span> in real-world situations.
@@ -88,7 +88,7 @@ export default function Section6() {
                         </p>
                         <p>This ensures that the button remains in the accessibility tree, preserves discoverability, and maintains tab order.</p>
                     </li>
-                    <li className="flow-4">
+                    <li className="flow-md">
                         <p>
                             <span className="bold">Stable sizing:</span> We enforce minimum sizes with WCAG AAA compliance in mind:
                         </p>
@@ -121,7 +121,7 @@ min-height: 44px;`} copyEnabled={false} />
             </div>
 
 
-            <div className="flow-4">
+            <div className="flow-md">
                 <AnchorHeading as={"h4"}>Assistive Technology isn't everything</AnchorHeading>
                 <p>Screen readers and other assistive tech is definitely powerful and does level the field to some degree, but they don't solve all problems:</p>
                 {/* add icons to these dot points */}
@@ -142,7 +142,7 @@ min-height: 44px;`} copyEnabled={false} />
             </div>
 
 
-            <div className="flow-4">
+            <div className="flow-md">
                 <AnchorHeading as={"h4"}>Further Reading</AnchorHeading>
                 <p>For a dive into accessible button patterns:</p>
                 <List marker="none" spacing="tight">
