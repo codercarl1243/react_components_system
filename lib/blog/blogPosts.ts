@@ -71,6 +71,37 @@ const design_system: readonly Readonly<PostType>[] = [
             BLOG_CATEGORIES.FOUNDATIONS,
         ],
     },
+    {
+        id: asPostId('design__utility_tokens_01'),
+        title: 'Design System Utility Tokens',
+        subtitle: 'A Practical Implementation Guide',
+        excerpt: 'Spacing, typography, and breakpoint tokens — the remaining foundation layer every component depends on.',
+        meta: {
+            title: 'Design System Utility Tokens — Spacing, Typography & Breakpoints',
+            description:
+                'A practical guide to implementing spacing, typography scale, and breakpoint tokens in a design system — the raw values every component depends on.',
+        },
+        // relatedPostIds: asPostIds([
+        //     'design__theming_01',
+        //     'design__primitives_01',
+        // ]),
+        pathFragment: 'utility-tokens',
+        lastModified: new Date('2026-03-23'),
+        createdAt: new Date('2026-03-23'),
+        published: false,
+        featured: false,
+        image: {
+            src: '/images/blogs/design-system/utility-tokens/main-image.webp',
+            alt: 'CSS token variables for spacing, typography, and breakpoints arranged on a structured grid, representing the raw values a design system depends on',
+        },
+        authorId: CODER_CARL_ID,
+        subject: `${BLOG_SUBJECTS.DESIGN_SYSTEM}`,
+        keywords: [BLOG_KEYWORDS.TOKENS, BLOG_KEYWORDS.FOUNDATIONS, BLOG_KEYWORDS.DESIGN_SYSTEM],
+        categories: [
+            BLOG_CATEGORIES.DESIGN_SYSTEM,
+            BLOG_CATEGORIES.FOUNDATIONS,
+        ],
+    },
 ];
 
 const react_components: readonly Readonly<PostType>[] = [
