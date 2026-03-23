@@ -1,7 +1,7 @@
 import { CODER_CARL_ID } from "@/lib/blog/authors/authors";
 import { BLOG_CATEGORIES } from "@/lib/blog/blog.categories";
 import { PostType } from "@/lib/blog/blog.types";
-import { asPostId } from "@/lib/blog/blog.utils";
+import { asPostId, asPostIds } from "@/lib/blog/blog.utils";
 import { BLOG_SUBJECTS } from "./blog.subjects";
 import { BLOG_KEYWORDS } from "./blog.keywords";
 
@@ -16,10 +16,10 @@ const design_system: readonly Readonly<PostType>[] = [
             description:
                 'Build a scalable, maintainable theming system using clear layers, explicit opt-in styling, and framework-agnostic CSS.',
         },
-        // relatedPostIds: asPostIds([
-        //     'design__primitives_01',
-        //     'design__foundations_01',
-        // ]),
+        relatedPostIds: asPostIds([
+            'design__primitives_01',
+            'design__utility_tokens_01',
+        ]),
         pathFragment: 'theming',
         lastModified: new Date('2025-12-10'),
         createdAt: new Date('2025-09-30'),
@@ -44,10 +44,10 @@ const design_system: readonly Readonly<PostType>[] = [
             description:
                 'Learn what primitives are in a design system, how they encode structural intent, and why they create safer, more scalable layout patterns than ad-hoc HTML.',
         },
-        // relatedPostIds: asPostIds([
-        //     'design__theming_01',
-        //     'design__foundations_01',
-        // ]),
+        relatedPostIds: asPostIds([
+            'design__theming_01',
+            'design__utility_tokens_01',
+        ]),
         pathFragment: 'primitives',
         lastModified: new Date('2026-02-17'),
         createdAt: new Date('2025-10-05'),
@@ -81,10 +81,10 @@ const design_system: readonly Readonly<PostType>[] = [
             description:
                 'A practical guide to implementing spacing, typography scale, and breakpoint tokens in a design system — the raw values every component depends on.',
         },
-        // relatedPostIds: asPostIds([
-        //     'design__theming_01',
-        //     'design__primitives_01',
-        // ]),
+        relatedPostIds: asPostIds([
+            'design__theming_01',
+            'design__primitives_01',
+        ]),
         pathFragment: 'utility-tokens',
         lastModified: new Date('2026-03-23'),
         createdAt: new Date('2026-03-23'),
