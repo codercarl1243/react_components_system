@@ -59,27 +59,22 @@ Spacing tokens are consumed at every layer:
 - **Components** use them for internal padding
 - **Utilities** expose them as composable classes
 
-The utility layer (`gap.css`, `padding.css`, `margin.css`) converts spacing tokens into classes like `.gap-md`, `.p-lg`, and `.mb-2`. These classes are what components reach for in practice.
+The utility layer (`gap.css`, `padding.css`, `margin.css`) converts spacing tokens into classes like `.gap-md`, `.p-lg`, and `.mb-md`. These classes are what components reach for in practice.
 
 ```css
 /* gap.css */
-.gap-sm { gap: var(--spacing); }
-.gap-md { gap: var(--spacing-lg); }
+.gap-sm { gap: var(--spacing-sm); }
+.gap-md { gap: var(--spacing); }
 .gap-xl { gap: var(--spacing-xl); }
 
 /* padding.css */
 .p-md  { padding: var(--spacing); }
 .p-lg  { padding: var(--spacing-lg); }
-.px-4 { padding-inline: var(--spacing); }
-.py-4 { padding-block: var(--spacing); }
+.px-md { padding-inline: var(--spacing); }
+.py-md { padding-block: var(--spacing); }
 
 /* ...additional utilities in resources */
 ```
-
-> **Important**
->
-> The numeric suffix in utility classes maps to the spacing token — not to a pixel value.
-> `.gap-md` means "gap at the `--spacing-lg` step" — not "4 pixels".
 
 ---
 
@@ -250,7 +245,7 @@ This section documents constraints, tradeoffs, and reference material — it doe
 
 2. **`clamp()` fluid type requires care with accessibility.** Fluid typography respects user font size preferences when the viewport-relative unit (`vw`) is combined with a `rem` minimum. Using `px` minimums would break this — always use `rem` for the min and max values in `clamp()`.
 
-3. **T-shirt size naming vs numeric naming.** The spacing scale uses t-shirt sizes (`sm`, `lg`) while the utility classes use numbers (`.gap-md`, `.p-lg`). The numbers in utility classes are not pixel values — they map to steps in the spacing scale. This can be confusing initially but becomes intuitive quickly.
+3. **T-shirt size naming is consistent throughout.** The spacing tokens (`--spacing-sm`, `--spacing-lg`) and the utility classes (`.p-sm`, `.p-lg`, `.gap-md`) all use the same t-shirt sizing. A class like `.p-lg` means "padding at the large spacing step" — it maps directly to `--spacing-lg`.
 
 ### Further Reading
 

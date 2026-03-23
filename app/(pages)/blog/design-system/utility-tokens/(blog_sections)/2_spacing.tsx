@@ -65,26 +65,22 @@ export default function Section2() {
                 </ul>
                 <p>
                     The utility layer (<code>gap.css</code>, <code>padding.css</code>, <code>margin.css</code>) converts spacing tokens
-                    into classes like <code>.gap-md</code>, <code>.p-lg</code>, and <code>.mb-2</code>.
+                    into classes like <code>.gap-md</code>, <code>.p-lg</code>, and <code>.mb-md</code>.
                     These classes are what components reach for in practice.
                 </p>
                 <Code
                     lang="css"
                     codeString={`/* gap.css */
-.gap-sm { gap: var(--spacing); }
-.gap-md { gap: var(--spacing-lg); }
+.gap-sm { gap: var(--spacing-sm); }
+.gap-md { gap: var(--spacing); }
 .gap-xl { gap: var(--spacing-xl); }
 
 /* padding.css */
 .p-md  { padding: var(--spacing); }
 .p-lg  { padding: var(--spacing-lg); }
-.px-4 { padding-inline: var(--spacing); }
-.py-4 { padding-block: var(--spacing); }`}
+.px-md { padding-inline: var(--spacing); }
+.py-md { padding-block: var(--spacing); }`}
                 />
-                <PostNote>
-                    The numeric suffix in utility classes maps to the spacing token — not to a pixel value.{" "}
-                    <code>.gap-md</code> means "gap at the <code>--spacing-lg</code> step" — not "4 pixels".
-                </PostNote>
             </Stack>
         </PostSection>
     );
