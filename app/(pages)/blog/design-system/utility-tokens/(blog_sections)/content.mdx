@@ -48,34 +48,32 @@ This system introduces a shared scale that covers the full range of layout needs
 
 The scale is built on increments of `0.25rem` (4px) — small enough to be precise, large enough to be meaningful.
 
+![TODO: t-shirt sizing graphic](/images/blogs/design-system/utility-tokens/tshirt-sizing.webp)
+
+Each step is named using *t-shirt sizing* (`sm`, `md`, `lg`, `xl`) rather than numeric values, so names communicate scale at a glance rather than requiring mental conversion.
+
 ### Where spacing tokens live in the system
 
 Spacing tokens are consumed at every layer:
 
 - **Primitives** use them for gap values between children
-- **Components** use them for margins and padding
+- **Components** use them for internal spacing (margins, padding, gaps, offsets)
 
 From there, utility classes expose the same scale as composable helpers for one-off spacing needs.
 
-
-The utility layer (`gap.css`, `padding.css`, `margin.css`) converts spacing tokens into classes. Because the utility classes use the same t-shirt sizing as the tokens, there is no context switch — `.gap-lg` and `--spacing-lg` are clearly the same thing.
+The utility layer uses the same t-shirt sizing as the tokens — `.gap-lg` and `--spacing-lg` are clearly the same step in the scale.
 
 ```css
 /* gap.css */
-.gap-sm  { gap: var(--spacing-sm); }  /*  4px */
-.gap     { gap: var(--spacing); }     /*  8px */
-.gap-md  { gap: var(--spacing-md); }  /* 12px */
-.gap-lg  { gap: var(--spacing-lg); }  /* 16px */
-.gap-xl  { gap: var(--spacing-xl); }  /* 24px */
+.gap-sm { gap: var(--spacing-sm); }
 
 /* padding.css */
-.p-sm  { padding: var(--spacing-sm); }
-.p     { padding: var(--spacing); }
-.p-lg  { padding: var(--spacing-lg); }
-.px-lg { padding-inline: var(--spacing-lg); }
-.py-lg { padding-block: var(--spacing-lg); }
+.p-sm { padding: var(--spacing-sm); }
 
-/* ...additional utilities in resources */
+/* margin.css */
+.m-sm { margin: var(--spacing-sm); }
+
+/* ...full reference in resources */
 ```
 
 ---

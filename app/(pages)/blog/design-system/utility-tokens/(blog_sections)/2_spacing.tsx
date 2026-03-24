@@ -1,13 +1,13 @@
 import Code from "@/components/code";
 import AnchorHeading from "@/components/heading/anchorHeading";
 import Heading from "@/components/heading";
-import PostNote from "@/components/post/post.note";
 import PostSection from "@/components/post/post.section";
 import Rule from "@/components/rule";
 import { Stack } from "@/components/primitives";
 import SpacingDiagram from "../examples/spacing";
 import InlineCode from "@/components/code/inlineCode";
 import List from "@/components/list";
+import FunHighlight from "@/components/decorations/FunHighlight";
 
 export default function Section2() {
     return (
@@ -16,15 +16,18 @@ export default function Section2() {
                 Spacing — controlling rhythm
             </AnchorHeading>
             <Stack>
+                {/* ![TODO: add spacing image](/images/blogs/design-system/utility-tokens/spacing.webp) */}
                 <p>
                     Spacing is the most frequently used token category in any design system.
+                </p>
+                <p>
                     Every component — every <span className="italic">padding</span>, <span className="italic">gap</span>, and <span className="italic">margin</span> decision — reaches for spacing tokens.
                 </p>
                 <p>
-                    Without a defined scale, spacing decisions scatter. A button gets <InlineCode codeString="0.5rem" lang="css" /> padding while a a card gets a magic number of <InlineCode codeString="14px" lang="css" /> in padding. Each decision is locally reasonable — and globally inconsistent.
+                    Without a defined scale, spacing decisions scatter. A button gets <InlineCode codeString="0.5rem" lang="css" /> padding while a card gets a magic number of <InlineCode codeString="14px" lang="css" /> in padding. Each decision is locally reasonable — and globally inconsistent.
                 </p>
                 <Rule>
-                    Every gap, padding, and margin must be consistent with it's neighbours.
+                    Every gap, padding, and margin must be consistent with its neighbours.
                 </Rule>
                 <p>
                     This system introduces a shared scale that covers the full range of layout needs.
@@ -33,13 +36,13 @@ export default function Section2() {
                     lang="css"
                     title="spacing.css"
                     codeString={`:root {
-    --spacing-sm: 0.25rem;   /*  4px */
-    --spacing:    0.5rem;    /*  8px */
-    --spacing-md: 0.75rem;   /* 12px */
-    --spacing-lg: 1rem;      /* 16px */
-    --spacing-xl: 1.5rem;    /* 24px */
-    --spacing-xxl: 2rem;     /* 32px */
-    --spacing-3xl: 4rem;     /* 64px */
+    --spacing-xs:   0.25rem;    /*  4px */
+    --spacing-sm:   0.5rem;     /*  8px */
+    --spacing-md:   0.75rem;    /* 12px */
+    --spacing-lg:   1rem;       /* 16px */
+    --spacing-xl:   1.5rem;     /* 24px */
+    --spacing-xxl:  2rem;       /* 32px */
+    --spacing-3xl:  4rem;       /* 64px */
 }`}
                 />
             </Stack>
@@ -50,36 +53,42 @@ export default function Section2() {
                 <p>
                     The scale is built on increments of <InlineCode codeString="0.25rem" lang="css" /> (4px) — small enough to be precise, large enough to be meaningful.
                 </p>
+                {/* ![TODO: t-shirt sizing graphic](/images/blogs/design-system/utility-tokens/tshirt-sizing.webp) */}
+                <p>
+                    Each step is named using <strong><FunHighlight>t-shirt sizing</FunHighlight> </strong>( <InlineCode codeString="sm" />, <InlineCode codeString="md" />, <InlineCode codeString="lg" /> etc. ) rather than numeric values, so names communicate scale at a glance rather than requiring mental conversion.
+                </p>
             </Stack>
             <Stack>
                 <Heading as="h3" headingSize={4}>Where spacing tokens live in the system</Heading>
-                <p>Spacing tokens are consumed at every layer:</p>
+                <p>
+                    Spacing tokens are consumed at every layer:
+                </p>
                 <List as="ul">
-                    <li><strong>Primitives</strong> use them for gap values between children</li>
-                    <li><strong>Components</strong> use them for internal padding</li>
+                    <li>
+                        <strong>Primitives</strong> use them for gap values between children
+                    </li>
+                    <li>
+                        <strong>Components</strong> use them for internal spacing ( margins, padding, gaps, and offsets )
+                    </li>
                 </List>
                 <p>
                     From there, utility classes expose the same scale as composable helpers for one-off spacing needs.
                 </p>
                 <p>
-                    The utility layer ( <InlineCode codeString="gap.css" />, <InlineCode codeString="padding.css" />, <InlineCode codeString="margin.css" /> ) converts spacing tokens
-                    into classes like <InlineCode codeString=".gap-md" lang="css" />, <InlineCode codeString=".p-lg" lang="css" />, and <InlineCode codeString=".m-md" lang="css" />.
-                </p>
-                <p>
-                    These classes are what components reach for in practice.
+                    The utility layer uses the same t-shirt sizing as the tokens - there is no context switch - <InlineCode codeString=".gap-lg" lang="css" /> and <InlineCode codeString="--spacing-lg" lang="css" /> are clearly the same step in that scale.
                 </p>
                 <Code
                     lang="css"
                     codeString={`/* gap.css */
 .gap-sm { gap: var(--spacing-sm); }
-.gap-md { gap: var(--spacing); }
-.gap-xl { gap: var(--spacing-xl); }
 
 /* padding.css */
-.p-md  { padding: var(--spacing); }
-.p-lg  { padding: var(--spacing-lg); }
-.px-md { padding-inline: var(--spacing); }
-.py-md { padding-block: var(--spacing); }`}
+.p-sm { padding: var(--spacing-sm); }
+
+/* margin.css */
+.m-sm { margin: var(--spacing-sm); }
+
+/* ...full reference in resources */`}
                 />
             </Stack>
         </PostSection>

@@ -15,7 +15,7 @@
     display: grid;
     grid-template-columns: var(--grid-template-cols);
     grid-template-rows: var(--grid-template-rows);
-    gap: var(--spacing);
+    gap: var(--spacing-sm);
     place-items: center;
 }
 

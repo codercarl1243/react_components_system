@@ -35,9 +35,9 @@
 
 /* spacing */
 .heading:is(h3){
-    --heading-margin-block-start: var(--spacing);
+    --heading-margin-block-start: var(--spacing-sm);
 }
 
 .heading:is(h4){
-    --heading-margin-block-start: var(--spacing-sm);
+    --heading-margin-block-start: var(--spacing-xs);
 }

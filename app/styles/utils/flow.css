@@ -1,5 +1,5 @@
 :where(.flow-sm>*:not(:last-child)) {
-  margin-block-end: var(--spacing);
+  margin-block-end: var(--spacing-sm);
 }
 
 :where(.flow-md>*:not(:last-child)) {
@@ -21,11 +21,11 @@
 @media screen and (max-width: 35rem) {
 
   :where(.flow-sm>*:not(:last-child)) {
-    margin-block-end: var(--spacing-sm);
+    margin-block-end: var(--spacing-xs);
   }
 
   :where(.flow-md>*:not(:last-child)) {
-    margin-block-end: var(--spacing);
+    margin-block-end: var(--spacing-sm);
   }
 
   :where(.flow-lg>*:not(:last-child)) {

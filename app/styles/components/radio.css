@@ -1,7 +1,7 @@
 /* TODO: fix all of this */
 .radiogroup {
     display: grid;
-    gap: var(--spacing-sm, 0.75rem);
+    gap: var(--spacing-xs, 0.75rem);
     padding: 0;
     border: none;
 }

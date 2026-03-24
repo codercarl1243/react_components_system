@@ -11,13 +11,13 @@
 .primitive-diagram-box {
     --border-style: dashed;
 
-    padding: var(--spacing-sm);
+    padding: var(--spacing-xs);
 }
 
 .primitive-diagram-box__child {
     --border-style: solid;
 
-    padding: var(--spacing-sm) var(--spacing);
+    padding: var(--spacing-xs) var(--spacing-sm);
     text-align: center;
 
     &.child--a {

@@ -26,5 +26,5 @@
 
 .author__avatar img {
     border-radius: var(--radius-circle);
-    padding: var(--spacing-sm);
+    padding: var(--spacing-xs);
 }

@@ -78,7 +78,7 @@ export default function Resources() {
                                 <Code
                                     lang="css"
                                     codeString={`:root {
-    --spacing-sm:  0.25rem;  /*  4px */
+    --spacing-xs:  0.25rem;  /*  4px */
     --spacing:     0.5rem;   /*  8px */
     --spacing-md:  0.75rem;  /* 12px */
     --spacing-lg:  1rem;     /* 16px */
