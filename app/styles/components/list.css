@@ -56,7 +56,7 @@
 .list--disc li::before {
     --list-marker-bg-color: currentcolor;
   background: conic-gradient(currentcolor, var(--surface));
-  width: 0.75rem;
+  width: var(--spacing-md);
   left: 0;
   top: 0.35em;
 }
