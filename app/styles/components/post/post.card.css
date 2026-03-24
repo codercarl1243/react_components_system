@@ -2,7 +2,7 @@
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: 1fr auto auto;
-    gap: var(--spacing);
+    gap: var(--spacing-sm);
 
     .post-card__image,
     .post-card__heading {

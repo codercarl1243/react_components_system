@@ -7,7 +7,7 @@
 
     position: relative;
     display: grid;
-    gap: var(--spacing-sm);
+    gap: var(--spacing-xs);
     margin-block-end: var(--spacing-lg);
 
     &::before {
@@ -36,7 +36,7 @@
 
     .input-group__helper {
         color: var(--color-neutral-500);
-        margin-block: var(--spacing-sm);
+        margin-block: var(--spacing-xs);
     }
 
     .input-group__required {
@@ -53,7 +53,7 @@
 
 
     textarea.input-group__input {
-        padding: var(--spacing);
+        padding: var(--spacing-sm);
         min-block-size: clamp(6rem, 10vh, 12rem);
         resize: vertical;
     }
@@ -61,12 +61,12 @@
 
 @media screen and (max-width: 35rem) {
     .input-group {
-        margin-block-end: var(--spacing);
+        margin-block-end: var(--spacing-sm);
     }
 }
 
 .input-group__input {
-    --input-group-input-padding: var(--spacing) var(--spacing-lg);
+    --input-group-input-padding: var(--spacing-sm) var(--spacing-lg);
     --input-group-input-border-color: var(--input-group-accent-color);
 
     padding: var(--input-group-input-padding);

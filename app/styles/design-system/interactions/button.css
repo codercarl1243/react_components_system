@@ -7,7 +7,7 @@ button[data-appearance="ghost"]:not(:disabled, [aria-disabled="true"]) {
     &:focus-visible {
         --background-color: color-mix(in srgb, currentcolor 40%, var(--foreground-on-surface));
 
-        outline-offset: var(--spacing-sm);
+        outline-offset: var(--spacing-xs);
     }
 
     &:active,

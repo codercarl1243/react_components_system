@@ -37,7 +37,7 @@
 }
 
 .socials__item svg {
-    margin-inline-end: var(--spacing-sm);
+    margin-inline-end: var(--spacing-xs);
 }
 
 .footer__copyright {

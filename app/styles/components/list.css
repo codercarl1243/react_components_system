@@ -3,7 +3,7 @@
 
   margin: 0;
   list-style-type: none;
-  padding-inline-start: var(--spacing);
+  padding-inline-start: var(--spacing-sm);
   line-height: var(--line-height-relaxed);
   font-size: var(--font-size-base, inherit);
 }
@@ -38,11 +38,11 @@
 
 /* Spacing variants */
 .list--tight {
-  --list-spacing: var(--spacing-sm);
+  --list-spacing: var(--spacing-xs);
 }
 
 .list--normal {
-  --list-spacing: var(--spacing);
+  --list-spacing: var(--spacing-sm);
 }
 
 .list--loose {
@@ -120,7 +120,7 @@
 /* Definitional list */
 .list--definition {
   display: grid;
-  gap: var(--spacing-sm);
+  gap: var(--spacing-xs);
 }
 
 .list--definition dt {

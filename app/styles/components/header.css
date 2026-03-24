@@ -1,5 +1,5 @@
 .header--wrapper {
-    --gap: clamp(var(--spacing), 2vw, var(--spacing-xl));
+    --gap: clamp(var(--spacing-sm), 2vw, var(--spacing-xl));
 }
 
 .nav__wrapper {
@@ -7,7 +7,7 @@
     flex-direction: column;
     align-items: flex-start;
     justify-content: space-between;
-    padding-inline-start: var(--spacing);
+    padding-inline-start: var(--spacing-sm);
     gap: var(--gap);
     height: 100%;
     width: 100%;
@@ -58,7 +58,7 @@
 
 
     .nav__primary ul {
-        padding-block: var(--spacing-sm);
+        padding-block: var(--spacing-xs);
         padding-inline-end: 0;
         margin-right: auto;
         flex-direction: row;

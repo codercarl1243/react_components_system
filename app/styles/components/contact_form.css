@@ -30,7 +30,7 @@
 
 .contact-form__status:not([data-status="idle"]) {
     margin-block: var(--spacing-lg);
-    margin-inline: var(--spacing-sm);
+    margin-inline: var(--spacing-xs);
     padding: var(--spacing-lg);
 }
 
