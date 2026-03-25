@@ -14,7 +14,7 @@ export default function Section2() {
     return (
         <PostSection id="spacing">
             <AnchorHeading as="h2" id="spacing-heading">
-                Spacing — controlling rhythm
+                Spacing <span className="heading-subtitle">— controlling rhythm</span>
             </AnchorHeading>
             <Stack>
                 {/* ![TODO: add spacing image](/images/blogs/design-system/utility-tokens/spacing.webp) */}
@@ -28,7 +28,7 @@ export default function Section2() {
                     Without a defined scale, spacing decisions scatter. A button gets <InlineCode codeString="0.5rem" lang="css" /> padding while a card gets a magic number of <InlineCode codeString="14px" lang="css" /> in padding. Each decision is locally reasonable — and globally inconsistent.
                 </p>
                 <Rule>
-                    Every gap, padding, and margin must be consistent with its neighbours.
+                    Rhythm requires consistency. Consistency requires a scale.
                 </Rule>
                 <p>
                     This system introduces a shared scale that covers the full range of layout needs.

@@ -4,29 +4,33 @@ import Heading from "@/components/heading";
 import PostSection from "@/components/post/post.section";
 import Rule from "@/components/rule";
 import { Stack } from "@/components/primitives";
+import InlineCode from "@/components/code/inlineCode";
 
 export default function Section3() {
     return (
         <PostSection id="typography">
             <AnchorHeading as="h2" id="typography-heading">
-                Typography Scale — controlling readability
+                Typography Scale <span className="heading-subtitle">— controlling readability</span>
             </AnchorHeading>
             <Stack>
                 <p>
-                    Typography is where inconsistency is most visible. Headings at slightly different sizes,
+                    Inconsistent type is immediately visible. Headings at slightly different sizes,
                     body text with mismatched line heights, labels that feel just a little too large —
-                    these are the gaps a type scale closes.
+                    these are the kinds of decisions that quietly erode trust in a UI.
+                </p>
+                <p>
+                    A type scale makes those decisions intentional. Instead of reaching for a size that
+                    feels right, every component reaches for the same named steps.
                 </p>
                 <Rule>
-                    No font size or line height should be set without a token. The scale is the authority.
+                   Font size and line height are not aesthetic choices — they communicate hierarchy, importance, and rhythm
                 </Rule>
             </Stack>
             <Stack>
                 <Heading as="h3" headingSize={4}>Font sizes</Heading>
                 <p>
-                    Font size tokens use <code>clamp()</code> to scale fluidly between a minimum and maximum value
-                    based on the viewport width. This means type stays readable on small screens without becoming
-                    overwhelming on large ones — without a single media query.
+                    Each token uses <InlineCode codeString="clamp()" lang="css" /> to scale fluidly between a minimum and maximum value.
+                    Type stays readable at small viewport widths without becoming overwhelming at large ones — no media queries needed.
                 </p>
                 <Code
                     lang="css"
@@ -45,15 +49,14 @@ export default function Section3() {
 }`}
                 />
                 <p>
-                    Each <code>clamp()</code> takes three arguments: the minimum size, a fluid calculation using <code>vw</code> units,
-                    and the maximum size. The fluid value is what makes the scale responsive — it grows proportionally with the
-                    viewport rather than jumping at breakpoints.
+                    <InlineCode codeString="clamp(min, fluid, max)" lang="css" /> — the fluid value grows with the viewport,
+                    bounded by a minimum and maximum. The result is type that adapts without breakpoints.
                 </p>
             </Stack>
             <Stack>
                 <Heading as="h3" headingSize={4}>Line heights</Heading>
                 <p>
-                    Line heights are defined separately from font sizes, giving the system independent control over vertical rhythm.
+                    Line heights are defined separately, giving the system independent control over vertical rhythm.
                 </p>
                 <Code
                     lang="css"
@@ -68,16 +71,19 @@ export default function Section3() {
 }`}
                 />
                 <p>
-                    Tighter line heights suit large display text — headings at <code>--font-size-4xl</code> and above pair
-                    naturally with <code>--line-height-tight</code> or <code>--line-height-snug</code>. Body text at{" "}
-                    <code>--font-size-base</code> typically needs more breathing room —{" "}
-                    <code>--line-height-extra-loose</code> or <code>--line-height-super-loose</code>.
+                    Large display text needs tighter leading — headings pair naturally with{" "}
+                    <InlineCode codeString="--line-height-tight" lang="css" /> or{" "}
+                    <InlineCode codeString="--line-height-snug" lang="css" />. Body text needs more room —{" "}
+                    <InlineCode codeString="--font-size-base" lang="css" /> pairs with{" "}
+                    <InlineCode codeString="--line-height-super-loose" lang="css" />.
                 </p>
             </Stack>
             <Stack>
                 <Heading as="h3" headingSize={4}>The global baseline</Heading>
                 <p>
-                    Rather than requiring every element to opt into a size class, the system establishes a baseline on <code>body</code>:
+                    A single <InlineCode codeString="font-size" lang="css" /> on <InlineCode codeString="body" lang="css" /> means
+                    most text inherits the right size without any intervention. The type scale tokens exist for
+                    the exceptions — headings, labels, badges, helper text — where a specific size is intentional.
                 </p>
                 <Code
                     lang="css"
@@ -87,15 +93,12 @@ export default function Section3() {
     -moz-osx-font-smoothing: grayscale;
 }`}
                 />
-                <p>
-                    This means most text inherits the right size without any intervention. The type scale tokens exist for
-                    the exceptions — headings, labels, badges, helper text — where a specific size is intentional.
-                </p>
             </Stack>
             <Stack>
                 <Heading as="h3" headingSize={4}>How the scale is consumed</Heading>
                 <p>
-                    Font size and line height tokens are consumed through a utility layer that pairs them into named classes:
+                    Font size and line height tokens are paired into utility classes. The pairing is opinionated —
+                    smaller text gets more line height, larger text gets less.
                 </p>
                 <Code
                     lang="css"
@@ -107,9 +110,7 @@ export default function Section3() {
 .text-xl   { font-size: var(--font-size-xl);   line-height: var(--line-height-loose); }`}
                 />
                 <p>
-                    The pairing is opinionated — smaller text gets more line height to aid readability, larger text gets tighter
-                    line height to avoid excessive vertical space. These defaults can always be overridden at the component level
-                    when a specific context demands it.
+                    These defaults can always be overridden at the component level when a specific context demands it.
                 </p>
             </Stack>
         </PostSection>

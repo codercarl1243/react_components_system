@@ -1,8 +1,9 @@
 import { Stack, Inline, Block } from "@/components/primitives";
 
 const steps = [
+    { name: "xs", token: "--spacing-xs" },
     { name: "sm", token: "--spacing-sm" },
-    { name: "md", token: "--spacing" },
+    { name: "md", token: "--spacing-md" },
     { name: "lg", token: "--spacing-lg" },
     { name: "xl", token: "--spacing-xl" },
     { name: "xxl", token: "--spacing-xxl" },
@@ -23,7 +24,7 @@ export default function SpacingDiagram() {
         >
             {steps.map(({ name, token }) => (
                 <Inline key={name} gap="md" align="center">
-                    <Block
+                        <Block
                         className="spacing-diagram__block radius-sm"
                         style={{ width: `var(${token})`, height: `var(${token})` }}
                         variant="light"
