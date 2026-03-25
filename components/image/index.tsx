@@ -60,6 +60,9 @@ export default function Image({ variant, src, alt, ...props }: TImage) {
     const imagePlaceholder = isPriority ? 'empty' : (placeholder ?? 'blur');
     const imageBlurDataURL = imagePlaceholder === 'blur' ? (blurDataURL ?? variantBlurDataURL) : undefined
 
+    const maxWidth = `${width ?? variantWidth}px`;
+    const maxHeight = `${height ?? variantHeight}px`;
+
     return (
         <span
             className={clsx(
@@ -77,8 +80,10 @@ export default function Image({ variant, src, alt, ...props }: TImage) {
                 height={height ?? variantHeight}
                 style={{
                     aspectRatio,
-                    width: width ?? variantWidth,
-                    height: height ?? variantHeight,
+                    height: "auto",
+                    // width: "100%",
+                    // maxWidth: maxWidth,
+                    // maxHeight: maxHeight,
                     ...style
                 }}
                 onLoad={handleLoad}

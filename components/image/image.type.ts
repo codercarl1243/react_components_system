@@ -6,6 +6,7 @@ export type ImageVariant =
   | 'logo'
   | 'rectangleLogo'
   | 'card'
+  | 'diagram'
   | 'featured'
   | 'default'
   | 'hero'
