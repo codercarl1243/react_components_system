@@ -1,5 +1,8 @@
-.image {
+.image-wrapper {
     position: relative;
+    overflow: hidden;
+    background-color: var(--color-neutral-200);
+    border-radius: var(--image-border-radius, 0);
 }
 
 .image>img {
@@ -14,13 +17,6 @@
 }
 .image img[data-loaded="true"] {
     opacity: 1;
-}
-
-.image-wrapper {
-    position: relative;
-    overflow: hidden;
-    background-color: var(--color-neutral-200);
-    border-radius: var(--image-border-radius, 0);
 }
 
 .image--rectangleLogo img,

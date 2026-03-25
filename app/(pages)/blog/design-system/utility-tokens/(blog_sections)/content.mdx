@@ -48,7 +48,7 @@ This system introduces a shared scale that covers the full range of layout needs
 
 The scale is built on increments of `0.25rem` (4px) — small enough to be precise, large enough to be meaningful.
 
-![TODO: t-shirt sizing graphic](/images/blogs/design-system/utility-tokens/tshirt-sizing.webp)
+![Three t-shirt illustrations in ascending size labelled sm, md, and lg, each showing their corresponding rem value](/images/blogs/design-system/utility-tokens/tshirt_sizing.webp)
 
 Each step is named using *t-shirt sizing* (`sm`, `md`, `lg`, `xl`) rather than numeric values, so names communicate scale at a glance rather than requiring mental conversion.
 
@@ -65,15 +65,20 @@ The utility layer uses the same t-shirt sizing as the tokens — `.gap-lg` and `
 
 ```css
 /* gap.css */
-.gap-sm { gap: var(--spacing-sm); }
+.gap-sm  { gap: var(--spacing-sm); }  /*  4px */
+.gap     { gap: var(--spacing); }     /*  8px */
+.gap-md  { gap: var(--spacing-md); }  /* 12px */
+.gap-lg  { gap: var(--spacing-lg); }  /* 16px */
+.gap-xl  { gap: var(--spacing-xl); }  /* 24px */
 
 /* padding.css */
-.p-sm { padding: var(--spacing-sm); }
+.p-sm  { padding: var(--spacing-sm); }        /*  4px */
+.p     { padding: var(--spacing); }           /*  8px */
+.p-lg  { padding: var(--spacing-lg); }        /* 16px */
+.px-lg { padding-inline: var(--spacing-lg); } /* 16px */
+.py-lg { padding-block: var(--spacing-lg); }  /* 16px */
 
-/* margin.css */
-.m-sm { margin: var(--spacing-sm); }
-
-/* ...full reference in resources */
+/* ...additional utilities in resources */
 ```
 
 ---

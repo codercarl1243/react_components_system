@@ -8,6 +8,7 @@ import SpacingDiagram from "../examples/spacing";
 import InlineCode from "@/components/code/inlineCode";
 import List from "@/components/list";
 import FunHighlight from "@/components/decorations/FunHighlight";
+import Image from "@/components/image";
 
 export default function Section2() {
     return (
@@ -53,7 +54,12 @@ export default function Section2() {
                 <p>
                     The scale is built on increments of <InlineCode codeString="0.25rem" lang="css" /> (4px) — small enough to be precise, large enough to be meaningful.
                 </p>
-                {/* ![TODO: t-shirt sizing graphic](/images/blogs/design-system/utility-tokens/tshirt-sizing.webp) */}
+                <Image
+                    alt="Three t-shirt illustrations in ascending size labelled sm, md, and lg, each showing their corresponding rem value"
+                    src="/images/blogs/design-system/utility-tokens/tshirt_sizing.webp"
+                    variant="diagram"
+                    className="radius-md mx-auto"
+                />
                 <p>
                     Each step is named using <strong><FunHighlight>t-shirt sizing</FunHighlight> </strong>( <InlineCode codeString="sm" />, <InlineCode codeString="md" />, <InlineCode codeString="lg" /> etc. ) rather than numeric values, so names communicate scale at a glance rather than requiring mental conversion.
                 </p>

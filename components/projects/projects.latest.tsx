@@ -13,11 +13,11 @@ export default function LatestProjects() {
   return (
     <Block
       as="section"
-      className="homepage__latest-projects homepage__section width-full"
+      className="homepage__latest-projects homepage__section"
     >
       <Heading
         as="h2"
-        className="homepage__latest-projects__heading center mb-smxl"
+        className="homepage__latest-projects__heading center mb-xl"
         headingSize={2}
       >
         Featured Project
