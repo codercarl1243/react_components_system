@@ -1,14 +1,14 @@
 .image-wrapper {
     position: relative;
     overflow: hidden;
-    background-color: var(--color-neutral-200);
+    background-color: transparent;
     border-radius: var(--image-border-radius, 0);
 }
 
 .image>img {
     font-style: italic;
     shape-margin: var(--spacing-md);
-    object-fit: cover;
+    object-fit: contain;
     transition: opacity 0.4s ease-in-out;
 }
 
