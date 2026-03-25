@@ -1,9 +1,10 @@
-
 .heading {
     --heading-color: var(--foreground-color, currentcolor);
+
     a {
         --link-color-override: var(--heading-color);
     }
+
     margin-block-start: var(--heading-margin-block-start, var(--spacing-lg));
     margin-block-end: var(--heading-margin-block-end, 0);
     color: var(--heading-color, var(--color-secondary-400));
@@ -19,6 +20,7 @@
     align-items: center;
 }
 
+/* Prefix */
 .heading-w-prefix {
     align-items: baseline;
     margin-block: 2rem 1.25rem;
@@ -33,11 +35,18 @@
     white-space: nowrap;
 }
 
+/* Subtitle */
+.heading .heading-subtitle {
+    font-size: var(--font-size-lg);
+    font-weight: 600;
+    color: var(--text-muted);
+}
+
 /* spacing */
-.heading:is(h3){
+.heading:is(h3) {
     --heading-margin-block-start: var(--spacing-sm);
 }
 
-.heading:is(h4){
+.heading:is(h4) {
     --heading-margin-block-start: var(--spacing-xs);
 }
