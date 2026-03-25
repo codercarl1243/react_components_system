@@ -81,9 +81,6 @@ export default function Image({ variant, src, alt, ...props }: TImage) {
                 style={{
                     aspectRatio,
                     height: "auto",
-                    // width: "100%",
-                    // maxWidth: maxWidth,
-                    // maxHeight: maxHeight,
                     ...style
                 }}
                 onLoad={handleLoad}
