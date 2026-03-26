@@ -5,6 +5,7 @@ import PostSection from "@/components/post/post.section";
 import Rule from "@/components/rule";
 import { Stack } from "@/components/primitives";
 import InlineCode from "@/components/code/inlineCode";
+import LineHeightDiagram from "../examples/line-height";
 
 export default function Section3() {
     return (
@@ -14,16 +15,10 @@ export default function Section3() {
             </AnchorHeading>
             <Stack>
                 <p>
-                    Inconsistent type is immediately visible. Headings at slightly different sizes,
-                    body text with mismatched line heights, labels that feel just a little too large —
-                    these are the kinds of decisions that quietly erode trust in a UI.
-                </p>
-                <p>
-                    A type scale makes those decisions intentional. Instead of reaching for a size that
-                    feels right, every component reaches for the same named steps.
+                    A type scale is like a musical key — everything plays in the same register. Without it, headings drift to slightly different sizes, line heights clash, and labels feel just a little too large. The composition breaks down quietly, one decision at a time.
                 </p>
                 <Rule>
-                   Font size and line height are not aesthetic choices — they communicate hierarchy, importance, and rhythm
+                    Font size sets the tempo. Line height sets the rhythm.
                 </Rule>
             </Stack>
             <Stack>
@@ -71,13 +66,10 @@ export default function Section3() {
 }`}
                 />
                 <p>
-                    Large display text needs tighter leading — headings pair naturally with{" "}
-                    <InlineCode codeString="--line-height-tight" lang="css" /> or{" "}
-                    <InlineCode codeString="--line-height-snug" lang="css" />. Body text needs more room —{" "}
-                    <InlineCode codeString="--font-size-base" lang="css" /> pairs with{" "}
-                    <InlineCode codeString="--line-height-super-loose" lang="css" />.
+                    Large display text needs tighter leading — headings sit closer together. Body text needs more room to breathe.
                 </p>
             </Stack>
+            <LineHeightDiagram />
             <Stack>
                 <Heading as="h3" headingSize={4}>The global baseline</Heading>
                 <p>
