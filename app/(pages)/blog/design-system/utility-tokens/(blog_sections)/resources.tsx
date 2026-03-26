@@ -20,24 +20,37 @@ export default function Resources() {
                 <AnchorHeading as="h3" headingSize={4} id="resources-notes">Notes &amp; Tradeoffs</AnchorHeading>
                 <List as="ol" spacing="loose" marker="lower-roman">
                     <li className="flow-md">
-                           <p>
-                             <strong>CSS custom properties cannot be used in media queries.</strong> This is a limitation of native CSS — media queries evaluate before the cascade, so custom properties have no value at that point.
-                           </p>
-                           <p>
+                        <p>
+                            <strong>CSS custom properties cannot be used in media queries.</strong> This is a limitation of native CSS — media queries evaluate before the cascade, so custom properties have no value at that point.
+                        </p>
+                        <p>
                             While preprocessors such as <Link href="https://sass-lang.com/documentation/at-rules/css/#media">Sass</Link> and <Link href="https://github.com/csstools/postcss-plugins/tree/main/plugins/postcss-custom-media">PostCSS with postcss-custom-media</Link> allow variables in media queries by compiling them to static values at build time, this system uses native CSS, so breakpoint tokens must be consumed as raw values inside <InlineCode codeString="@media" lang="css" /> rules.
-                           </p>
+                        </p>
                     </li>
                     <li>
-                            <strong><InlineCode codeString="clamp()" lang="css" /> fluid type requires care with accessibility.</strong> Fluid typography respects user font size preferences when the viewport-relative unit (<code>vw</code>)
-                            is combined with a <code>rem</code> minimum. Using <code>px</code> minimums would break this —
-                            always use <code>rem</code> for the min and max values in <code>clamp()</code>.
+                        <strong>Fluid typography</strong>
+                        <List as="ul" marker="circle">
+                            <li>
+                                <span className="bold fun-underline">The minimum value must be set in rem</span>, not px. If someone increases their default font size, px values won't scale with it. rem values will.
+                            </li>
+                            <li className="flow-md">
+                                <p>
+                                    Fluid typography can cause sites to fail WCAG SC 1.4.4 which requires that the type can be scaled upwards of 200% when zoomed in.
+                                </p>
+                                <p>
+                                    See <Link href="https://www.smashingmagazine.com/2023/11/addressing-accessibility-concerns-fluid-type/">Addressing Accessibility Concerns With Using Fluid Type — Maxwell Barvian</Link> for a thorough treatment of the issue.
+                                </p>
+                            </li>
+                        </List>
+
                     </li>
                     <li className="flow-md">
                         <p>
-                            <strong>T-shirt size naming vs numeric naming.</strong>{" "}
-                            The spacing scale uses t-shirt sizes (<code>sm</code>, <code>lg</code>) while the utility classes use
-                            numbers (<code>.gap-md</code>, <code>.p-lg</code>). The numbers in utility classes are not pixel values
-                            — they map to steps in the spacing scale. This can be confusing initially but becomes intuitive quickly.
+                            <strong>T-shirt size naming over numeric values.</strong>{" "}
+                            This system uses t-shirt sizing (sm, md, lg) so token names and utility classes share the same language — <InlineCode codeString=".gap-lg" lang="css" /> and <InlineCode codeString="--spacing-lg" lang="css" /> are clearly the same step in that scale.
+                        </p>
+                        <p>
+                            Whichever convention you choose, commit to it early — mixing naming systems creates exactly the inconsistency tokens are meant to prevent.
                         </p>
                     </li>
                 </List>
@@ -46,8 +59,15 @@ export default function Resources() {
                 <AnchorHeading as="h3" headingSize={4} id="resources-further-reading">Further Reading</AnchorHeading>
                 <AnchorHeading as="h4" headingSize={5} id="resources-spacing-layout">Spacing &amp; Layout</AnchorHeading>
                 <List as="ul" spacing="loose" marker="circle">
-                    <li><Link href="https://every-layout.dev/">Every Layout</Link> — excellent treatment of spacing as a system concern</li>
-                    <li><Link href="https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties">MDN: CSS Custom Properties</Link></li>
+                    <li>
+                        <Link href="https://every-layout.dev/">Every Layout - Heydon Pickering & Andy Bell</Link> — excellent treatment of spacing as a system concern.
+                    </li>
+                    <li>
+                        <Link href="https://medium.com/eightshapes-llc/space-in-design-systems-188bcbae0d62">Space in Design Systems — Nathan Curtis</Link> — a deep exploration of spacing concepts including inset, stack, and inline.
+                    </li>
+                    <li>
+                        <Link href="https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties">MDN: CSS Custom Properties</Link>
+                    </li>
                 </List>
                 <AnchorHeading as="h4" headingSize={5} id="resources-typography">Typography</AnchorHeading>
                 <List as="ul" spacing="loose" marker="circle">
