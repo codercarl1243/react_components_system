@@ -8,9 +8,9 @@ A Practical Implementation Guide
 >
 > This article is part of a broader design system series. It builds on ideas introduced in <BlogLink postId="design__theming_01">Theming Foundations</BlogLink> and <BlogLink postId="design__primitives_01">Primitives</BlogLink>, but stands on its own.
 
-The theming post established color. The primitives post established structure. What remains is the scale everything else measures itself against — spacing, type, and layout boundaries.
+A design system gives the developer sheet music to play from, complete with tempo, scores, and notation. Without it, every component improvises.
 
-A shared token layer means every component reaches for the same values. Spacing feels consistent. Type scales predictably. Layout boundaries hold across the entire system.
+Design tokens are the score that keeps everything in rhythm, playing in time, and creating harmony across spacing, type, and layout.
 
 ---
 
@@ -18,13 +18,13 @@ A shared token layer means every component reaches for the same values. Spacing 
 
 ![TODO: add spacing image](/images/blogs/design-system/utility-tokens/spacing.webp)
 
-Spacing is the most frequently used token category in any design system. Every component — every *padding*, *gap*, and *margin* decision — reaches for spacing tokens.
+Spacing is the beat that holds a UI together. Every component — every *padding*, *gap*, and *margin* decision — reaches for spacing tokens.
 
-Without a defined scale, spacing decisions scatter. A button gets `0.5rem` padding while a card gets a magic number of `14px`. Each decision is locally reasonable — and globally inconsistent.
+Without a defined scale, the beat breaks down. A button gets `0.5rem` padding while a card gets an off-beat `14px`. Each decision seems locally reasonable, but is globally inconsistent.
 
 > **System rule**
 >
-> Every gap, padding, and margin must be consistent with its neighbours.
+> Rhythm requires consistency. Consistency requires a scale.
 
 This system introduces a shared scale that covers the full range of layout needs.
 
@@ -51,6 +51,10 @@ The scale is built on increments of `0.25rem` (4px) — small enough to be preci
 ![Three t-shirt illustrations in ascending size labelled sm, md, and lg, each showing their corresponding rem value](/images/blogs/design-system/utility-tokens/tshirt_sizing.webp)
 
 Each step is named using *t-shirt sizing* (`sm`, `md`, `lg`, `xl`) rather than numeric values, so names communicate scale at a glance rather than requiring mental conversion.
+
+> **Note**
+>
+> A musical scale of intensity — pianissimo to fortissimo — would be a natural fit here. But t-shirt sizing (`sm`, `md`, `lg`, `xl`) is so widely adopted across design systems that familiarity wins.
 
 ### Where spacing tokens live in the system
 
@@ -87,13 +91,11 @@ The utility layer uses the same t-shirt sizing as the tokens — `.gap-lg` and `
 
 ![TODO: add typography image](/images/blogs/design-system/utility-tokens/typography.webp)
 
-Inconsistent type is immediately visible. Headings at slightly different sizes, body text with mismatched line heights, labels that feel just a little too large — these are the kinds of decisions that quietly erode trust in a UI.
-
-A type scale makes those decisions intentional. Instead of reaching for a size that feels right, every component reaches for the same named steps.
+A type scale is like a musical key — everything plays in the same register. Without it, headings drift to slightly different sizes, line heights clash, and labels feel just a little too large. The composition breaks down quietly, one decision at a time.
 
 > **System rule**
 >
-> Font sizes are not guesses. The scale decides.
+> Font size sets the tempo. Line height sets the rhythm.
 
 ### Font sizes
 
@@ -134,7 +136,9 @@ Line heights are defined separately, giving the system independent control over 
 }
 ```
 
-Large display text needs tighter leading — headings pair naturally with `--line-height-tight` or `--line-height-snug`. Body text needs more room — `--font-size-base` pairs with `--line-height-super-loose`.
+Large display text needs tighter leading — headings sit closer together. Body text needs more room to breathe.
+
+<LineHeightDiagram />
 
 ### The global baseline
 
@@ -167,15 +171,17 @@ These defaults can always be overridden at the component level when a specific c
 
 ---
 
-## Breakpoints — controlling adaptation
+## Breakpoints — controlling dynamics
 
 ![TODO: add breakpoints image](/images/blogs/design-system/utility-tokens/breakpoints.webp)
 
+Breakpoints are the dynamic markings — they tell the layout when to shift register. Like a musical arrangement that changes feel at the chorus, a layout should adapt at deliberate, shared moments — not at arbitrary pixel values scattered across components.
+
 > **System rule**
 >
-> Breakpoints are shared contracts. Every layout decision that depends on viewport width must reference the same scale.
+> A layout that adapts unpredictably is a performance without a score.
 
-Breakpoints define where the layout adapts. Like spacing, they need to be consistent — if one component breaks at `768px` and another at `769px`, the result is a layout that feels unpolished at certain widths.
+If one component shifts at `768px` and another at `769px`, the result is a layout that feels unpolished. Shared breakpoints ensure every adaptation happens in step.
 
 **breakpoints.css — [(source)](https://github.com/codercarl1243/react_components_system/blob/main/app/styles/tokens/breakpoints.css)**
 
@@ -226,13 +232,13 @@ The tokens remain the single source of truth.
 
 These three token categories form the remaining foundation of the system.
 
-- **Spacing** ensures every gap, padding, and margin comes from a shared scale rather than a local guess.
-- **Typography** ensures font sizes and line heights are consistent, fluid, and purposeful.
-- **Breakpoints** ensure layout boundaries are shared contracts rather than scattered magic numbers.
+- **Spacing** ensures the beat holds — every gap, padding, and margin comes from a shared scale.
+- **Typography** ensures the composition is intentional — font sizes and line heights communicate hierarchy, not guesswork.
+- **Breakpoints** ensure the arrangement shifts in step — layout boundaries are shared contracts, not scattered magic numbers.
 
 Together with the color and theme tokens from the first post, the token layer is now complete. Every value the system needs — colors, spacing, type, and layout boundaries — has a defined home.
 
-At this point, the system is no longer a collection of components — it is a set of constraints that guide every decision.
+At this point, the system is no longer a collection of components — it is a score that every component plays from.
 
 This is the last post in the design system series for now. The next series covers individual components — starting with the <BlogLink postId="components__button__01">Button</BlogLink>.
 
@@ -248,7 +254,7 @@ This section documents constraints, tradeoffs, and reference material — it doe
 
 2. **`clamp()` fluid type requires care with accessibility.** Fluid typography respects user font size preferences when the viewport-relative unit (`vw`) is combined with a `rem` minimum. Using `px` minimums would break this — always use `rem` for the min and max values in `clamp()`.
 
-3. **T-shirt size naming.** Both spacing tokens and utility classes use t-shirt sizing (`sm`, `lg`, `xl`). This keeps the two layers consistent — `--spacing-lg` and `.gap-lg` are clearly the same thing without any mental translation.
+3. **T-shirt size naming.** Both spacing tokens and utility classes use t-shirt sizing (`sm`, `lg`, `xl`). This keeps the two layers consistent — `--spacing-lg` and `.gap-lg` are clearly the same step in the scale without any mental translation.
 
 ### Further Reading
 

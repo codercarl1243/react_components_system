@@ -9,6 +9,7 @@ import InlineCode from "@/components/code/inlineCode";
 import List from "@/components/list";
 import FunHighlight from "@/components/decorations/FunHighlight";
 import Image from "@/components/image";
+import PostNote from "@/components/post/post.note";
 
 export default function Section2() {
     return (
@@ -19,13 +20,10 @@ export default function Section2() {
             <Stack>
                 {/* ![TODO: add spacing image](/images/blogs/design-system/utility-tokens/spacing.webp) */}
                 <p>
-                    Spacing is the most frequently used token category in any design system.
+                    Spacing is the beat that holds a UI together. Every component — every <span className="italic">padding</span>, <span className="italic">gap</span>, and <span className="italic">margin</span> decision — reaches for spacing tokens.
                 </p>
                 <p>
-                    Every component — every <span className="italic">padding</span>, <span className="italic">gap</span>, and <span className="italic">margin</span> decision — reaches for spacing tokens.
-                </p>
-                <p>
-                    Without a defined scale, spacing decisions scatter. A button gets <InlineCode codeString="0.5rem" lang="css" /> padding while a card gets a magic number of <InlineCode codeString="14px" lang="css" /> in padding. Each decision is locally reasonable — and globally inconsistent.
+                    Without a defined scale, the beat breaks down. A button gets <InlineCode codeString="0.5rem" lang="css" /> padding while a card gets an off-beat <InlineCode codeString="14px" lang="css" />. Each decision seems locally reasonable, but is globally inconsistent.
                 </p>
                 <Rule>
                     Rhythm requires consistency. Consistency requires a scale.
@@ -50,7 +48,6 @@ export default function Section2() {
             <SpacingDiagram />
             <Stack>
                 <Heading as="h3" headingSize={4}>Why these values?</Heading>
-
                 <p>
                     The scale is built on increments of <InlineCode codeString="0.25rem" lang="css" /> (4px) — small enough to be precise, large enough to be meaningful.
                 </p>
@@ -63,6 +60,9 @@ export default function Section2() {
                 <p>
                     Each step is named using <strong><FunHighlight>t-shirt sizing</FunHighlight> </strong>( <InlineCode codeString="sm" />, <InlineCode codeString="md" />, <InlineCode codeString="lg" /> etc. ) rather than numeric values, so names communicate scale at a glance rather than requiring mental conversion.
                 </p>
+                <PostNote>
+                  <p>A musical scale of intensity — <span className="italic">pianissimo</span> to <span className="italic">fortissimo</span> — would be a natural fit here. But t-shirt sizing (sm, md, lg, xl) is so widely adopted across design systems that familiarity wins.</p>
+                </PostNote>
             </Stack>
             <Stack>
                 <Heading as="h3" headingSize={4}>Where spacing tokens live in the system</Heading>
@@ -81,7 +81,7 @@ export default function Section2() {
                     From there, utility classes expose the same scale as composable helpers for one-off spacing needs.
                 </p>
                 <p>
-                    The utility layer uses the same t-shirt sizing as the tokens - there is no context switch - <InlineCode codeString=".gap-lg" lang="css" /> and <InlineCode codeString="--spacing-lg" lang="css" /> are clearly the same step in that scale.
+                    The utility layer uses the same t-shirt sizing as the tokens - <InlineCode codeString=".gap-lg" lang="css" /> and <InlineCode codeString="--spacing-lg" lang="css" /> are clearly the same step in that scale.
                 </p>
                 <Code
                     lang="css"
