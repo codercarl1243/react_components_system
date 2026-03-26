@@ -20,10 +20,10 @@ export default function Section1() {
                     </p>
                 </PostNote>
                 <p>
-                    The theming post established color. The primitives post established structure. What remains is the scale everything else measures itself against — spacing, type, and layout boundaries.
+                    A design system gives the developer sheet music to play from, complete with tempo, scores, and notation. Without it, every component improvises.
                 </p>
                 <p>
-                    A shared token layer means every component reaches for the same values. Spacing feels consistent. Type scales predictably. Layout boundaries hold across the entire system.
+                    Design tokens are the score that keeps everything in rhythm, playing in time, and creating harmony across spacing, type, and layout.
                 </p>
             </Stack>
         </PostSection>
