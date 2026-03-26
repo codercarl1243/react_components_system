@@ -30,8 +30,8 @@ export const getMarkerClass = (listType: ValidListTag, marker: OlMarker | UlMark
 
 export const getSpacingClass = (spacing: ValidSpacing) => {
     return {
-        tight: 'list--tight',
-        normal: 'list--normal',
-        loose: 'list--loose'
+        tight: 'flow-sm',
+        normal: 'flow-md',
+        loose: 'flow-lg'
     }[spacing]
 }
