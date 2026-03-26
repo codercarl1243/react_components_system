@@ -4,6 +4,8 @@ import Heading from "@/components/heading";
 import PostSection from "@/components/post/post.section";
 import Rule from "@/components/rule";
 import { Stack } from "@/components/primitives";
+import InlineCode from "@/components/code/inlineCode";
+import PostNote from "@/components/post/post.note";
 
 export default function Section4() {
     return (
@@ -12,12 +14,14 @@ export default function Section4() {
                 Breakpoints — controlling adaptation
             </AnchorHeading>
             <Stack>
+                <p>
+                    Breakpoints are the dynamic markings — they tell the layout when to shift register. Like a musical arrangement that changes feel at the chorus, a layout should also adapt at deliberate, shared moments.
+                </p>
                 <Rule>
-                    Breakpoints are shared contracts. Every layout decision that depends on viewport width must reference the same scale.
+                    A layout that adapts unpredictably is a performance without a score.
                 </Rule>
                 <p>
-                    Breakpoints define where the layout adapts. Like spacing, they need to be consistent — if one component breaks
-                    at <code>768px</code> and another at <code>769px</code>, the result is a layout that feels unpolished at certain widths.
+                    If one component shifts at <InlineCode codeString="768px" lang="css" /> and another at <InlineCode codeString="769px" lang="css" />, the result is a layout that feels unpolished. Shared breakpoints ensure every adaptation happens in step.
                 </p>
                 <Code
                     lang="css"
@@ -33,35 +37,36 @@ export default function Section4() {
                 />
             </Stack>
             <Stack>
-                <Heading as="h3" headingSize={4}>Why <code>rem</code> values?</Heading>
+                <Heading as="h3" headingSize={4}>Why rem?</Heading>
                 <p>
-                    Breakpoints defined in <code>rem</code> rather than <code>px</code> respect the user's browser font size
-                    preference. If a user has set their browser font size to 20px, a <code>35rem</code> breakpoint becomes{" "}
-                    <code>700px</code> — meaning the layout shifts at the right visual moment for that user rather than at a fixed
-                    pixel value that ignores their preference.
+                    Breakpoints defined in <InlineCode codeString="rem" lang="css" /> stay proportional to the type scale.
+                    When a user's font size increases, text takes up more space — a <InlineCode codeString="rem" lang="css" />-based breakpoint shifts the layout at the right moment <em className="fun-underline">relative</em> to that text.
                 </p>
             </Stack>
             <Stack>
                 <Heading as="h3" headingSize={4}>The character width breakpoint</Heading>
                 <p>
-                    <code>--bp-characters</code> is different from the others — it is not a viewport breakpoint but a content constraint.
-                    Setting <code>max-width: var(--bp-characters)</code> on text content keeps line lengths within a readable range
-                    (roughly 65–85 characters per line), regardless of the viewport width.
+                    <InlineCode codeString="--bp-characters" lang="css" /> is different from the others — it is not a viewport breakpoint but a content constraint.
+                    Setting <InlineCode codeString="max-width: var(--bp-characters)" lang="css" /> on text content keeps line lengths within a readable range, regardless of the viewport width.
                 </p>
                 <p>
-                    This is applied to body text and post content throughout the system. It is the reason paragraphs don't stretch
-                    to fill a wide viewport.
+                    This is applied to <InlineCode codeString="<p>" lang="tsx" /> elements throughout the system.
                 </p>
+                <PostNote variant="warning">
+                    <p>
+                        A line that stretches the full width of a wide viewport becomes difficult to read — the eye loses its place tracking back to the start of the next line.
+                    </p>
+                </PostNote>
             </Stack>
             <Stack>
                 <Heading as="h3" headingSize={4}>Using breakpoints in CSS</Heading>
                 <p>
-                    CSS custom properties cannot be used directly inside <code>@media</code> queries — media queries do not inherit
-                    from <code>:root</code>. Instead, breakpoint tokens define shared values that are referenced consistently:
+                    CSS custom properties cannot be used directly inside <InlineCode codeString="@media" lang="css" /> queries — media queries do not inherit
+                    from <InlineCode codeString=":root" lang="css" />. Instead, breakpoint tokens define shared values that are referenced consistently:
                 </p>
                 <Code
                     lang="css"
-                    codeString={`/* Correct — use the raw value at the same breakpoint */
+                    codeString={`/* Use the raw value inside media queries */
 @media screen and (min-width: 35rem) {
     .nav__wrapper {
         flex-direction: row;
@@ -73,7 +78,9 @@ export default function Section4() {
     max-width: var(--bp-lg);
 }`}
                 />
-                <p>The tokens remain the single source of truth.</p>
+                <p>
+                    The tokens remain the single source of truth.
+                </p>
             </Stack>
         </PostSection>
     );

@@ -6,6 +6,8 @@ import Rule from "@/components/rule";
 import { Stack } from "@/components/primitives";
 import InlineCode from "@/components/code/inlineCode";
 import LineHeightDiagram from "../examples/line-height";
+import PostNote from "@/components/post/post.note";
+import Link from "@/components/link";
 
 export default function Section3() {
     return (
@@ -66,25 +68,30 @@ export default function Section3() {
 }`}
                 />
                 <p>
-                    Large display text needs tighter leading — headings sit closer together. Body text needs more room to breathe.
+                    Large display text needs tighter leading. Body text needs more room to breathe.
                 </p>
             </Stack>
             <LineHeightDiagram />
             <Stack>
                 <Heading as="h3" headingSize={4}>The global baseline</Heading>
                 <p>
-                    A single <InlineCode codeString="font-size" lang="css" /> on <InlineCode codeString="body" lang="css" /> means
-                    most text inherits the right size without any intervention. The type scale tokens exist for
-                    the exceptions — headings, labels, badges, helper text — where a specific size is intentional.
+                    A single <span className="italic">font-size</span> and <span className="italic">line-height</span> on <InlineCode codeString="body" lang="css" /> sets the key. The type scale tokens then give precise control where it matters — headings, labels, badges, and helper text.
                 </p>
                 <Code
                     lang="css"
                     codeString={`body {
-    font-size: 1rem;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+    font-size: var(--font-size-base); 
+    line-height: var(--line-height-super-loose);
 }`}
                 />
+                <PostNote variant="neutral" showIcon={false}>
+                    <p>
+                        Not all elements inherit font-size and line-height from body. Form elements — input, button, textarea, and select — use browser defaults unless explicitly reset. A CSS reset handles this.
+                    </p>
+                    <p>
+                        See the <Link href="#resources">Resources section</Link> for recommended starting points.
+                    </p>
+                </PostNote>
             </Stack>
             <Stack>
                 <Heading as="h3" headingSize={4}>How the scale is consumed</Heading>
@@ -102,7 +109,7 @@ export default function Section3() {
 .text-xl   { font-size: var(--font-size-xl);   line-height: var(--line-height-loose); }`}
                 />
                 <p>
-                    These defaults can always be overridden at the component level when a specific context demands it.
+                    The exception is <InlineCode codeString=".text-xs" lang="css" /> — at very small sizes, loose leading creates too much distance between lines. A tighter value keeps small text cohesive.
                 </p>
             </Stack>
         </PostSection>

@@ -5,6 +5,7 @@ import List from "@/components/list";
 import PostSection from "@/components/post/post.section";
 import TabList from "@/components/tablist";
 import { Stack } from "@/components/primitives";
+import InlineCode from "@/components/code/inlineCode";
 
 export default function Resources() {
     return (
@@ -19,19 +20,17 @@ export default function Resources() {
                 <AnchorHeading as="h3" headingSize={4} id="resources-notes">Notes &amp; Tradeoffs</AnchorHeading>
                 <List as="ol" spacing="loose" marker="lower-roman">
                     <li className="flow-md">
-                        <p>
-                            <strong>CSS custom properties cannot be used in media queries.</strong>{" "}
-                            This is a known limitation of the CSS spec. Breakpoint tokens are still valuable as a shared reference,
-                            but they must be consumed as raw values inside <code>@media</code> rules.
-                        </p>
+                           <p>
+                             <strong>CSS custom properties cannot be used in media queries.</strong> This is a limitation of native CSS — media queries evaluate before the cascade, so custom properties have no value at that point.
+                           </p>
+                           <p>
+                            While preprocessors such as <Link href="https://sass-lang.com/documentation/at-rules/css/#media">Sass</Link> and <Link href="https://github.com/csstools/postcss-plugins/tree/main/plugins/postcss-custom-media">PostCSS with postcss-custom-media</Link> allow variables in media queries by compiling them to static values at build time, this system uses native CSS, so breakpoint tokens must be consumed as raw values inside <InlineCode codeString="@media" lang="css" /> rules.
+                           </p>
                     </li>
-                    <li className="flow-md">
-                        <p>
-                            <strong><code>clamp()</code> fluid type requires care with accessibility.</strong>{" "}
-                            Fluid typography respects user font size preferences when the viewport-relative unit (<code>vw</code>)
+                    <li>
+                            <strong><InlineCode codeString="clamp()" lang="css" /> fluid type requires care with accessibility.</strong> Fluid typography respects user font size preferences when the viewport-relative unit (<code>vw</code>)
                             is combined with a <code>rem</code> minimum. Using <code>px</code> minimums would break this —
                             always use <code>rem</code> for the min and max values in <code>clamp()</code>.
-                        </p>
                     </li>
                     <li className="flow-md">
                         <p>

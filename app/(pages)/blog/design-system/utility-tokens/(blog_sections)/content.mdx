@@ -136,21 +136,24 @@ Line heights are defined separately, giving the system independent control over 
 }
 ```
 
-Large display text needs tighter leading — headings sit closer together. Body text needs more room to breathe.
+Large display text needs tighter leading. Body text needs more room to breathe.
 
 <LineHeightDiagram />
 
 ### The global baseline
 
-A single `font-size` on `body` means most text inherits the right size without any intervention. The type scale tokens exist for the exceptions — headings, labels, badges, helper text — where a specific size is intentional.
+A single *font-size* and *line-height* on `body` sets the key. The type scale tokens then give precise control where it matters — headings, labels, badges, and helper text.
 
 ```css
 body {
-    font-size: 1rem;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+    font-size: var(--font-size-base);
+    line-height: var(--line-height-super-loose);
 }
 ```
+
+> **Note**
+>
+> Not all elements inherit font-size and line-height from body. Form elements — input, button, textarea, and select — use browser defaults unless explicitly reset. A CSS reset handles this. See the [Resources section](#resources) for recommended starting points.
 
 ### How the scale is consumed
 
@@ -167,7 +170,7 @@ Font size and line height tokens are paired into utility classes. The pairing is
 /* ...additional sizes in resources */
 ```
 
-These defaults can always be overridden at the component level when a specific context demands it.
+The exception is `text-xs` — at very small sizes, loose leading creates too much distance between lines. A tighter value keeps small text cohesive.
 
 ---
 
@@ -204,7 +207,11 @@ Breakpoints defined in `rem` stay proportional to the type scale. When a user's 
 
 `--bp-characters` is different from the others — it is not a viewport breakpoint but a content constraint. Setting `max-width: var(--bp-characters)` on text content keeps line lengths within a readable range (roughly 65–85 characters per line), regardless of the viewport width.
 
-This is applied to body text and post content throughout the system. It is the reason paragraphs don't stretch to fill a wide viewport.
+This is applied to `p` elements throughout the system.
+
+> **Note**
+>
+> A line that stretches the full width of a wide viewport becomes difficult to read — the eye loses its place tracking back to the start of the next line.
 
 ### Using breakpoints in CSS
 
@@ -236,7 +243,7 @@ These three token categories form the remaining foundation of the system.
 - **Typography** ensures the composition is intentional — font sizes and line heights communicate hierarchy, not guesswork.
 - **Breakpoints** ensure the arrangement shifts in step — layout boundaries are shared contracts, not scattered magic numbers.
 
-Together with the color and theme tokens from the first post, the token layer is now complete. Every value the system needs — colors, spacing, type, and layout boundaries — has a defined home.
+Together with the color and theme tokens from the <BlogLink postId="design__theming_01">theming post</BlogLink>, the token layer is now complete. Every value the system needs — colors, spacing, typography, and layout — has a defined home.
 
 At this point, the system is no longer a collection of components — it is a score that every component plays from.
 
@@ -250,7 +257,7 @@ This section documents constraints, tradeoffs, and reference material — it doe
 
 ### Notes & Tradeoffs
 
-1. **CSS custom properties cannot be used in media queries.** This is a known limitation of the CSS spec. Breakpoint tokens are still valuable as a shared reference, but they must be consumed as raw values inside `@media` rules.
+1. **CSS custom properties cannot be used in media queries.** This is a limitation of native CSS — media queries evaluate before the cascade, so custom properties have no value at that point. Preprocessors like [Sass](https://sass-lang.com/documentation/at-rules/control/if/#in-other-at-rules) and [PostCSS with postcss-custom-media](https://github.com/csstools/postcss-plugins/tree/main/plugins/postcss-custom-media) allow variables in media queries by compiling them to static values at build time. This system uses native CSS, so breakpoint tokens must be consumed as raw values inside `@media` rules.
 
 2. **`clamp()` fluid type requires care with accessibility.** Fluid typography respects user font size preferences when the viewport-relative unit (`vw`) is combined with a `rem` minimum. Using `px` minimums would break this — always use `rem` for the min and max values in `clamp()`.
 
@@ -269,10 +276,16 @@ This section documents constraints, tradeoffs, and reference material — it doe
 - [Utopia](https://utopia.fyi/) — a tool for generating fluid type and space scales
 - [The Elements of Typographic Style](https://webtypography.net/) — the web adaptation of Bringhurst's classic
 
+**CSS Reset**
+
+- [Andy Bell's modern reset](https://piccalil.li/blog/a-more-modern-css-reset/) — a great starting point that handles form element inheritance
+- [Josh Comeau's CSS reset](https://www.joshwcomeau.com/css/custom-css-reset/) — goes in depth with clear explanations for each rule
+
 **Breakpoints**
 
 - [MDN: Using media queries](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_media_queries/Using_media_queries)
 - [Every Layout: The Switcher](https://every-layout.dev/layouts/switcher/) — an alternative to breakpoint-based layout switching
+- [layout-wrapper implementation](https://github.com/codercarl1243/react_components_system/blob/main/app/styles/layout/wrapper.css) — a real-world example combining breakpoint tokens, `clamp()`, and named grid lines
 
 ### Token Reference
 
