@@ -32,7 +32,7 @@ This system introduces a shared scale that covers the full range of layout needs
 
 ```css
 :root {
-    --spacing-sm:  0.25rem;  /*  4px */
+    --spacing-xs:  0.25rem;  /*  4px */
     --spacing:     0.5rem;   /*  8px */
     --spacing-md:  0.75rem;  /* 12px */
     --spacing-lg:  1rem;     /* 16px */
@@ -69,14 +69,14 @@ The utility layer uses the same t-shirt sizing as the tokens — `.gap-lg` and `
 
 ```css
 /* gap.css */
-.gap-sm  { gap: var(--spacing-sm); }  /*  4px */
+.gap-xs  { gap: var(--spacing-xs); }  /*  4px */
 .gap     { gap: var(--spacing); }     /*  8px */
 .gap-md  { gap: var(--spacing-md); }  /* 12px */
 .gap-lg  { gap: var(--spacing-lg); }  /* 16px */
 .gap-xl  { gap: var(--spacing-xl); }  /* 24px */
 
 /* padding.css */
-.p-sm  { padding: var(--spacing-sm); }        /*  4px */
+.p-xs  { padding: var(--spacing-xs); }        /*  4px */
 .p     { padding: var(--spacing); }           /*  8px */
 .p-lg  { padding: var(--spacing-lg); }        /* 16px */
 .px-lg { padding-inline: var(--spacing-lg); } /* 16px */
@@ -257,23 +257,26 @@ This section documents constraints, tradeoffs, and reference material — it doe
 
 ### Notes & Tradeoffs
 
-1. **CSS custom properties cannot be used in media queries.** This is a limitation of native CSS — media queries evaluate before the cascade, so custom properties have no value at that point. Preprocessors like [Sass](https://sass-lang.com/documentation/at-rules/control/if/#in-other-at-rules) and [PostCSS with postcss-custom-media](https://github.com/csstools/postcss-plugins/tree/main/plugins/postcss-custom-media) allow variables in media queries by compiling them to static values at build time. This system uses native CSS, so breakpoint tokens must be consumed as raw values inside `@media` rules.
+1. **CSS custom properties cannot be used in media queries.** This is a limitation of native CSS — media queries evaluate before the cascade, so custom properties have no value at that point. While [Sass](https://sass-lang.com/documentation/at-rules/css/#media) and [PostCSS with postcss-custom-media](https://github.com/csstools/postcss-plugins/tree/main/plugins/postcss-custom-media) allow variables in media queries by compiling them to static values at build time, this system uses native CSS — so breakpoint tokens must be consumed as raw values inside `@media` rules.
 
-2. **`clamp()` fluid type requires care with accessibility.** Fluid typography respects user font size preferences when the viewport-relative unit (`vw`) is combined with a `rem` minimum. Using `px` minimums would break this — always use `rem` for the min and max values in `clamp()`.
+2. **The minimum value in `clamp()` must be in rem.** The minimum value must be set in rem, not px. A px minimum ignores the user's browser font size preference — if someone increases their default font size, px values won't scale with it. rem values will. There is also a broader concern with fluid type and WCAG SC 1.4.4, which requires text to scale to 200% of its original size — since `vw` units do not scale when a user zooms the browser, a poorly configured `clamp()` can fail this requirement. See [Addressing Accessibility Concerns With Using Fluid Type — Maxwell Barvian](https://www.smashingmagazine.com/2023/11/addressing-accessibility-concerns-fluid-type/) for a thorough treatment of the issue.
 
-3. **T-shirt size naming.** Both spacing tokens and utility classes use t-shirt sizing (`sm`, `lg`, `xl`). This keeps the two layers consistent — `--spacing-lg` and `.gap-lg` are clearly the same step in the scale without any mental translation.
+3. **T-shirt sizing over numeric values.** This system uses t-shirt sizing (sm, md, lg) so token names and utility classes share the same language — `.gap-lg` and `--spacing-lg` are clearly the same step in that scale. Whichever convention you choose, commit to it early — mixing naming systems creates exactly the inconsistency tokens are meant to prevent.
 
 ### Further Reading
 
 **Spacing & Layout**
 
-- [Every Layout](https://every-layout.dev/) — excellent treatment of spacing as a system concern
+- [Every Layout — Heydon Pickering & Andy Bell](https://every-layout.dev/) — excellent treatment of spacing as a system concern
+- [Space in Design Systems — Nathan Curtis](https://medium.com/eightshapes-llc/space-in-design-systems-188bcbae0d62) — a deep exploration of spacing concepts including inset, stack, and inline
 - [MDN: CSS Custom Properties](https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties)
 
 **Typography**
 
 - [MDN: clamp()](https://developer.mozilla.org/en-US/docs/Web/CSS/clamp) — the function that powers fluid type
-- [Utopia](https://utopia.fyi/) — a tool for generating fluid type and space scales
+- [Utopia — Trys Mudford & James Gilyead](https://utopia.fyi/) — a tool for generating fluid type and space scales
+- [Addressing Accessibility Concerns With Using Fluid Type — Maxwell Barvian](https://www.smashingmagazine.com/2023/11/addressing-accessibility-concerns-fluid-type/) — a thorough look at how `clamp()` and viewport units interact with WCAG SC 1.4.4
+- [WCAG 2.1 Quick Reference guide](https://www.w3.org/WAI/WCAG21/quickref/) — a concise overview of success criteria
 - [The Elements of Typographic Style](https://webtypography.net/) — the web adaptation of Bringhurst's classic
 
 **CSS Reset**
@@ -284,8 +287,8 @@ This section documents constraints, tradeoffs, and reference material — it doe
 **Breakpoints**
 
 - [MDN: Using media queries](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_media_queries/Using_media_queries)
-- [Every Layout: The Switcher](https://every-layout.dev/layouts/switcher/) — an alternative to breakpoint-based layout switching
-- [layout-wrapper implementation](https://github.com/codercarl1243/react_components_system/blob/main/app/styles/layout/wrapper.css) — a real-world example combining breakpoint tokens, `clamp()`, and named grid lines
+- [Every Layout: The Switcher — Heydon Pickering & Andy Bell](https://every-layout.dev/layouts/switcher/) — an alternative to breakpoint-based layout switching
+- [codercarl.dev layout wrapper](https://github.com/codercarl1243/react_components_system/blob/main/app/styles/layout/wrapper.css) — a real-world example combining breakpoint tokens, `clamp()`, and named grid lines
 
 ### Token Reference
 
@@ -293,7 +296,7 @@ This section documents constraints, tradeoffs, and reference material — it doe
 
 ```css
 :root {
-    --spacing-sm:  0.25rem;  /*  4px */
+    --spacing-xs:  0.25rem;  /*  4px */
     --spacing:     0.5rem;   /*  8px */
     --spacing-md:  0.75rem;  /* 12px */
     --spacing-lg:  1rem;     /* 16px */
