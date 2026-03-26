@@ -84,7 +84,7 @@ export default function Resources() {
         </List>
       </Stack>
       <Stack>
-        <AnchorHeading as="h3" headingSize={4}>CSS Reset</AnchorHeading>
+        <AnchorHeading as="h3" headingSize={4} id="resources-css-reset">CSS Reset</AnchorHeading>
         <p>
           The global baseline defined in this post assumes browser defaults have already been normalised. Without a reset, default browser styles for <span className="italic">margins</span>, <span className="italic">padding</span>, and <span className="italic">font rendering</span> will interfere with the token layer.
         </p>

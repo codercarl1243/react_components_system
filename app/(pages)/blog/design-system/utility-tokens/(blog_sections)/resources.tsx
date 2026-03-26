@@ -16,7 +16,7 @@ export default function Resources() {
                     This section documents constraints, tradeoffs, and reference material — it does not introduce new concepts.
                 </p>
             </Stack>
-            <Stack>
+            <Stack gap={"lg"}>
                 <AnchorHeading as="h3" headingSize={4} id="resources-notes">Notes &amp; Tradeoffs</AnchorHeading>
                 <List as="ol" spacing="loose" marker="lower-roman">
                     <li className="flow-md">
@@ -27,15 +27,15 @@ export default function Resources() {
                             While preprocessors such as <Link href="https://sass-lang.com/documentation/at-rules/css/#media">Sass</Link> and <Link href="https://github.com/csstools/postcss-plugins/tree/main/plugins/postcss-custom-media">PostCSS with postcss-custom-media</Link> allow variables in media queries by compiling them to static values at build time, this system uses native CSS, so breakpoint tokens must be consumed as raw values inside <InlineCode codeString="@media" lang="css" /> rules.
                         </p>
                     </li>
-                    <li>
-                        <strong>Fluid typography</strong>
+                    <li className="flow-md">
+                        <span className="block bold">Fluid typography</span>
                         <List as="ul" marker="circle">
                             <li>
-                                <span className="bold fun-underline">The minimum value must be set in rem</span>, not px. If someone increases their default font size, px values won't scale with it. rem values will.
+                                <strong className="fun-underline">The minimum value must be set in rem</strong>, not px. If someone increases their default font size, px values won't scale with it. rem values will.
                             </li>
                             <li className="flow-md">
                                 <p>
-                                    Fluid typography can cause sites to fail WCAG SC 1.4.4 which requires that the type can be scaled upwards of 200% when zoomed in.
+                                    <strong>Fluid typography can cause sites to fail WCAG</strong> SC 1.4.4 which requires that the type can be scaled upwards of 200% when zoomed in.
                                 </p>
                                 <p>
                                     See <Link href="https://www.smashingmagazine.com/2023/11/addressing-accessibility-concerns-fluid-type/">Addressing Accessibility Concerns With Using Fluid Type — Maxwell Barvian</Link> for a thorough treatment of the issue.
@@ -47,7 +47,7 @@ export default function Resources() {
                     <li className="flow-md">
                         <p>
                             <strong>T-shirt size naming over numeric values.</strong>{" "}
-                            This system uses t-shirt sizing (sm, md, lg) so token names and utility classes share the same language — <InlineCode codeString=".gap-lg" lang="css" /> and <InlineCode codeString="--spacing-lg" lang="css" /> are clearly the same step in that scale.
+                            This system uses t-shirt sizing (sm, md, lg) so token names and utility classes share the same language ( <InlineCode codeString=".gap-lg" lang="css" /> and <InlineCode codeString="--spacing-lg" lang="css" /> are clearly the same step in that scale. ).
                         </p>
                         <p>
                             Whichever convention you choose, commit to it early — mixing naming systems creates exactly the inconsistency tokens are meant to prevent.
@@ -57,28 +57,62 @@ export default function Resources() {
             </Stack>
             <Stack>
                 <AnchorHeading as="h3" headingSize={4} id="resources-further-reading">Further Reading</AnchorHeading>
-                <AnchorHeading as="h4" headingSize={5} id="resources-spacing-layout">Spacing &amp; Layout</AnchorHeading>
-                <List as="ul" spacing="loose" marker="circle">
-                    <li>
-                        <Link href="https://every-layout.dev/">Every Layout - Heydon Pickering & Andy Bell</Link> — excellent treatment of spacing as a system concern.
-                    </li>
-                    <li>
-                        <Link href="https://medium.com/eightshapes-llc/space-in-design-systems-188bcbae0d62">Space in Design Systems — Nathan Curtis</Link> — a deep exploration of spacing concepts including inset, stack, and inline.
-                    </li>
-                    <li>
-                        <Link href="https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties">MDN: CSS Custom Properties</Link>
-                    </li>
-                </List>
-                <AnchorHeading as="h4" headingSize={5} id="resources-typography">Typography</AnchorHeading>
-                <List as="ul" spacing="loose" marker="circle">
-                    <li><Link href="https://developer.mozilla.org/en-US/docs/Web/CSS/clamp">MDN: clamp()</Link> — the function that powers fluid type</li>
-                    <li><Link href="https://utopia.fyi/">Utopia</Link> — a tool for generating fluid type and space scales</li>
-                    <li><Link href="https://webtypography.net/">The Elements of Typographic Style</Link> — the web adaptation of Bringhurst's classic</li>
-                </List>
+                <Stack>
+                    <AnchorHeading as="h4" headingSize={5} id="resources-spacing-layout">Spacing &amp; Layout</AnchorHeading>
+                    <List as="ul" spacing="loose" marker="circle">
+                        <li>
+                            <Link href="https://every-layout.dev/">Every Layout - Heydon Pickering & Andy Bell</Link> — excellent treatment of spacing as a system concern.
+                        </li>
+                        <li>
+                            <Link href="https://medium.com/eightshapes-llc/space-in-design-systems-188bcbae0d62">Space in Design Systems — Nathan Curtis</Link> — a deep exploration of spacing concepts including inset, stack, and inline.
+                        </li>
+                        <li>
+                            <Link href="https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties">MDN: CSS Custom Properties</Link>
+                        </li>
+                    </List>
+                </Stack>
+                <Stack>
+                    <AnchorHeading as="h4" headingSize={5} id="resources-typography">Typography</AnchorHeading>
+                    <List as="ul" spacing="loose" marker="circle">
+                        <li>
+                            <Link href="https://developer.mozilla.org/en-US/docs/Web/CSS/clamp">MDN: clamp()</Link> — the function that powers fluid type
+                        </li>
+                        <li>
+                            <Link href="https://utopia.fyi/">Utopia — Trys Mudford & James Gilyead</Link> — a tool for generating fluid type and space scales
+                        </li>
+                        <li>
+                            <Link href="https://www.smashingmagazine.com/2023/11/addressing-accessibility-concerns-fluid-type/">Addressing Accessibility Concerns With Using Fluid Type — Maxwell Barvian</Link> — a thorough look at how <InlineCode codeString="clamp()" lang="css" /> and viewport units interact with WCAG SC 1.4.4
+                        </li>
+                        <li>
+                            <Link href="https://www.w3.org/WAI/WCAG21/quickref/">WCAG 2.1 Quick Reference guide</Link>— a concise overview of success criteria
+                        </li>
+                    </List>
+                </Stack>
+                <Stack>
+                    <AnchorHeading as="h4" headingSize={5} id="resources-css-reset">CSS Reset</AnchorHeading>
+                    <p>
+                        The global baseline defined in this post assumes browser defaults have already been normalised. Without a reset, default browser styles for <span className="italic">margins</span>, <span className="italic">padding</span>, and <span className="italic">font rendering</span> will interfere with the token layer.
+                    </p>
+                    <List as="ul">
+                        <li>
+                            <Link href="https://piccalil.li/blog/a-more-modern-css-reset/">Andy Bell's modern reset</Link> — a great starting point for any app
+                        </li>
+                        <li>
+                            <Link href="https://www.joshwcomeau.com/css/custom-css-reset/">Josh Comeau's CSS reset</Link> — goes in depth with clear explanations for each rule
+                        </li>
+                    </List>
+                </Stack>
                 <AnchorHeading as="h4" headingSize={5} id="resources-breakpoints">Breakpoints</AnchorHeading>
                 <List as="ul" spacing="loose" marker="circle">
-                    <li><Link href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_media_queries/Using_media_queries">MDN: Using media queries</Link></li>
-                    <li><Link href="https://every-layout.dev/layouts/switcher/">Every Layout: The Switcher</Link> — an alternative to breakpoint-based layout switching</li>
+                    <li>
+                        <Link href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_media_queries/Using_media_queries">MDN: Using media queries</Link>
+                    </li>
+                    <li>
+                        <Link href="https://every-layout.dev/layouts/switcher/">Every Layout: The Switcher</Link> — an alternative to breakpoint-based layout switching
+                    </li>
+                    <li>
+                        <Link href="https://github.com/codercarl1243/react_components_system/blob/main/app/styles/layout/wrapper.css">My own content wrapper implementation</Link> — a real-world example combining breakpoint tokens, <InlineCode codeString="clamp()" lang="css" />, and named grid lines
+                    </li>
                 </List>
             </Stack>
             <Stack>
