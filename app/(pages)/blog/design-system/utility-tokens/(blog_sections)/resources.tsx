@@ -84,7 +84,7 @@ export default function Resources() {
                             <Link href="https://www.smashingmagazine.com/2023/11/addressing-accessibility-concerns-fluid-type/">Addressing Accessibility Concerns With Using Fluid Type — Maxwell Barvian</Link> — a thorough look at how <InlineCode codeString="clamp()" lang="css" /> and viewport units interact with WCAG SC 1.4.4
                         </li>
                         <li>
-                            <Link href="https://www.w3.org/WAI/WCAG21/quickref/">WCAG 2.1 Quick Reference guide</Link>— a concise overview of success criteria
+                            <Link href="https://www.w3.org/WAI/WCAG21/quickref/">WCAG 2.1 Quick Reference guide</Link> — a concise overview of success criteria
                         </li>
                     </List>
                 </Stack>
@@ -111,7 +111,7 @@ export default function Resources() {
                         <Link href="https://every-layout.dev/layouts/switcher/">Every Layout: The Switcher</Link> — an alternative to breakpoint-based layout switching
                     </li>
                     <li>
-                        <Link href="https://github.com/codercarl1243/react_components_system/blob/main/app/styles/layout/wrapper.css">My own content wrapper implementation</Link> — a real-world example combining breakpoint tokens, <InlineCode codeString="clamp()" lang="css" />, and named grid lines
+                        <Link href="https://github.com/codercarl1243/react_components_system/blob/main/app/styles/layout/wrapper.css">codercarl.dev layout wrapper</Link> — a real-world example combining breakpoint tokens, <InlineCode codeString="clamp()" lang="css" />, and named grid lines
                     </li>
                 </List>
             </Stack>
@@ -132,7 +132,7 @@ export default function Resources() {
                                     lang="css"
                                     codeString={`:root {
     --spacing-xs:  0.25rem;  /*  4px */
-    --spacing:     0.5rem;   /*  8px */
+    --spacing-sm:  0.5rem;   /*  8px */
     --spacing-md:  0.75rem;  /* 12px */
     --spacing-lg:  1rem;     /* 16px */
     --spacing-xl:  1.5rem;   /* 24px */
