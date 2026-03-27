@@ -21,8 +21,8 @@ const design_system: readonly Readonly<PostType>[] = [
             'design__utility_tokens_01',
         ]),
         pathFragment: 'theming',
-        lastModified: new Date('2025-12-10'),
-        createdAt: new Date('2025-09-30'),
+        lastModified: new Date('2026-03-27'),
+        createdAt: new Date('2026-03-27'),
         published: true,
         featured: true,
         image: {
@@ -49,8 +49,8 @@ const design_system: readonly Readonly<PostType>[] = [
             'design__utility_tokens_01',
         ]),
         pathFragment: 'primitives',
-        lastModified: new Date('2026-02-17'),
-        createdAt: new Date('2025-10-05'),
+        lastModified: new Date('2026-03-27'),
+        createdAt: new Date('2026-03-27'),
         published: true,
         featured: false,
         image: {
@@ -86,8 +86,8 @@ const design_system: readonly Readonly<PostType>[] = [
             'design__primitives_01',
         ]),
         pathFragment: 'utility-tokens',
-        lastModified: new Date('2026-03-23'),
-        createdAt: new Date('2026-03-23'),
+        lastModified: new Date('2026-03-27'),
+        createdAt: new Date('2026-03-27'),
         published: true,
         featured: false,
         image: {
