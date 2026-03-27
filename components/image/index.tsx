@@ -60,9 +60,6 @@ export default function Image({ variant, src, alt, ...props }: TImage) {
     const imagePlaceholder = isPriority ? 'empty' : (placeholder ?? 'blur');
     const imageBlurDataURL = imagePlaceholder === 'blur' ? (blurDataURL ?? variantBlurDataURL) : undefined
 
-    const maxWidth = `${width ?? variantWidth}px`;
-    const maxHeight = `${height ?? variantHeight}px`;
-
     return (
         <span
             className={clsx(
