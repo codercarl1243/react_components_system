@@ -11,16 +11,20 @@ type BlogLinkProps = {
 export default function BlogLink({ postId, children, ...props }: BlogLinkProps) {
 
     if (!postId) {
-        logWarning(`no post id given to blogLink: ${children}`)
+        if (process.env.NODE_ENV !== 'production') {
+            logWarning(`no post id given to blogLink: ${children}`)
+        }
         return <>{children}</>
     }
     const post = getBlogPostById(postId);
 
     if (!post) {
-        logWarning("Referenced blog post is invalid or unpublished", {
-            context: "BlogLink",
-            data: { postId }
-        })
+        if (process.env.NODE_ENV !== 'production') {
+            logWarning("Referenced blog post is invalid or unpublished", {
+                context: "BlogLink",
+                data: { postId }
+            })
+        }
         if (children) {
             return <>{children}</>
         }
