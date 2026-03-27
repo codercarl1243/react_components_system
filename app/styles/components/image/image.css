@@ -9,12 +9,14 @@
     font-style: italic;
     shape-margin: var(--spacing-md);
     object-fit: contain;
+    height: auto;
     transition: opacity 0.4s ease-in-out;
 }
 
 .image img[data-loaded="false"] {
     opacity: 0;
 }
+
 .image img[data-loaded="true"] {
     opacity: 1;
 }
