@@ -10,8 +10,9 @@ const globalForShiki = globalThis
 export const getHighlighter = cache(async () => {
   if (!globalForShiki.__highlighterPromise) {
 
-    logInfo('🟦 Creating new Shiki highlighter', { context: `getHighlighterSingleton` })
-
+    if (process.env.NODE_ENV !== 'production') {
+      logInfo('🟦 Creating new Shiki highlighter', { context: `getHighlighterSingleton` })
+    }
     globalForShiki.__highlighterPromise = createHighlighter({
       // themes: ['github-dark', 'light-plus'],
       themes: ['github-dark-default', 'github-light'],
