@@ -40,7 +40,7 @@ export default function AboutPage() {
                 variant="primary"
                 variantAppearance="tonal"
                 paint="all"
-                className="surface-frame p-lg pb-2xl"
+                className="surface-frame p-lg pb-xxl"
             >
                 <Heading as="h2" headingSize={4} variant="primary" className="mt-0">Professional focus</Heading>
                 <p>
@@ -58,7 +58,7 @@ export default function AboutPage() {
                 variant="secondary"
                 variantAppearance="tonal"
                 paint="all"
-                className="surface-frame p-lg pb-2xl"
+                className="surface-frame p-lg pb-xxl"
             >
                 <Heading as="h2" headingSize={4} variant="secondary" className="mt-0">
                     Learning & Professional development
@@ -81,7 +81,7 @@ export default function AboutPage() {
                 variant="accent"
                 variantAppearance="tonal"
                 paint="all"
-                className="surface-frame p-lg pb-2xl"
+                className="surface-frame p-lg pb-xxl"
             >
                 <Heading as="h2" headingSize={4} variant="accent" className="mt-0">
                     Technologies & tools
@@ -101,7 +101,7 @@ export default function AboutPage() {
                 variant="light"
                 variantAppearance="filled"
                 paint="all"
-                className="surface-frame p-lg pb-2xl"
+                className="surface-frame p-lg pb-xxl"
             >
                 <Heading as="h2" headingSize={4} variant="warning" className="mt-0">
                     Support my work
@@ -120,7 +120,7 @@ export default function AboutPage() {
             <Stack
                 as="section"
                 className="about-contact p-lg divider-wrapper"
-                gap={"2xl"}
+                gap={"xxl"}
             >
                 <Heading as="h2" headingSize={3} variant="inverse" className="center">
                     Get in touch

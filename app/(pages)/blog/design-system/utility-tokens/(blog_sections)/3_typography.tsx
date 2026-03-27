@@ -38,7 +38,7 @@ export default function Section3() {
     --font-size-base: clamp(1rem,     0.9rem  + 0.5vw,   1.125rem);
     --font-size-lg:   clamp(1.125rem, 1rem    + 0.625vw, 1.25rem);
     --font-size-xl:   clamp(1.25rem,  1rem    + 0.75vw,  1.5rem);
-    --font-size-2xl:  clamp(1.4rem,   1rem    + 1vw,     1.875rem);
+    --font-size-xxl:  clamp(1.4rem,   1rem    + 1vw,     1.875rem);
     --font-size-3xl:  clamp(1.75rem,  1.25rem + 1.375vw, 2.25rem);
     --font-size-4xl:  clamp(1.85rem,  1.25rem + 1.75vw,  3rem);
     --font-size-5xl:  clamp(1.9rem,   1.5rem  + 2.5vw,   3.75rem);

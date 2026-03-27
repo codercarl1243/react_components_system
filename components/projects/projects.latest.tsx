@@ -25,7 +25,7 @@ export default function LatestProjects() {
       {projects.map((project) => <ProjectCard key={project.id} project={project} layout={project.featured ? "large" : "default"} />)}
 
 
-      <div className="center mt-2xl">
+      <div className="center mt-xxl">
         <Link href="/projects">View project details →</Link>
       </div>
     </Block>

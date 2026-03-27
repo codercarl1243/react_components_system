@@ -14,7 +14,7 @@ import Block from "./Block";
  *
  * @param {Object} props
  * @param {T} [props.as="div"] – The element type to render. Defaults to `<div>`.
- * @param {0 | "sm" | "md" | "lg" | "xl" | "2xl"} [props.gap="lg"] – Horizontal spacing between children.
+ * @param {0 | "sm" | "md" | "lg" | "xl" | "xxl"} [props.gap="lg"] – Horizontal spacing between children.
  * @param {"start" | "center" | "end" | "stretch" | "baseline"} [props.align="baseline"] – Cross-axis alignment of items.
  *   Defaults to "baseline" — most inline groupings (icon-text pairs, tags) expect baseline alignment.
  * @param {"start" | "center" | "end" | "stretch" | "even" | "between" | "initial"} [props.justify="initial"] – Main-axis distribution of items.

@@ -5,14 +5,14 @@ export default function PrimitiveOwnershipDiagram() {
     return (
         <Stack
             as="figure"
-            gap={"2xl"}
+            gap={"xxl"}
             align="stretch"
             className="primitive-diagram frame-inset-md text-sm p-lg"
             variant="neutral"
             variantAppearance="filled"
             paint={["background", "foreground"]}
         >
-            <div className="primitive-diagram-resizable surface-frame p-lg pb-2xl">
+            <div className="primitive-diagram-resizable surface-frame p-lg pb-xxl">
                 <Stack>
                     <p><strong>Stack</strong> - owns the <span className="fun-underline">vertical</span> layout surface</p>
                     <div style={{ display: "flex", gap: "var(--spacing-md)" }}>

@@ -22,7 +22,7 @@
   gap: var(--_gap);
 }
 
-.gap-2xl {
+.gap-xxl {
   --_gap: var(--spacing-xxl);
 
   gap: var(--_gap);
@@ -45,7 +45,7 @@
     --_gap: var(--spacing-lg);
   }
 
-  .gap-2xl {
+  .gap-xxl {
     --_gap: var(--spacing-xl);
   }
 }
@@ -75,7 +75,7 @@
   column-gap: var(--_gap-col);
 }
 
-.gap-col-2xl {
+.gap-col-xxl {
   --_gap-col: var(--spacing-xxl);
 
   column-gap: var(--_gap-col);
@@ -98,7 +98,7 @@
     --_gap-col: var(--spacing-lg);
   }
 
-  .gap-col-2xl {
+  .gap-col-xxl {
     --_gap-col: var(--spacing-xl);
   }
 }
@@ -128,7 +128,7 @@
   row-gap: var(--_gap-row);
 }
 
-.gap-row-2xl {
+.gap-row-xxl {
   --_gap-row: var(--spacing-xxl);
 
   row-gap: var(--_gap-row);
@@ -151,7 +151,7 @@
     --_gap-row: var(--spacing-lg);
   }
 
-  .gap-row-2xl {
+  .gap-row-xxl {
     --_gap-row: var(--spacing-xl);
   }
 }
