@@ -86,7 +86,7 @@ They do NOT add spacing or padding.
 .frame-inset-md  → var(--spacing-md)
 .frame-inset-lg  → var(--spacing-lg)
 .frame-inset-xl  → var(--spacing-xl)
-.frame-inset-2xl → var(--spacing-xxl)
+.frame-inset-xxl → var(--spacing-xxl)
 
 ---------------------------------
  Design Rule
@@ -142,6 +142,6 @@ Keep them separate.
     --frame-inset-base: var(--spacing-xl);
 }
 
-.frame-inset-2xl {
+.frame-inset-xxl {
     --frame-inset-base: var(--spacing-xxl);
 }

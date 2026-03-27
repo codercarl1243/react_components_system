@@ -23,8 +23,8 @@
     line-height: var(--line-height-loose);
 }
 
-.text-2xl {
-    font-size: var(--font-size-2xl);
+.text-xxl {
+    font-size: var(--font-size-xxl);
     line-height: var(--line-height-relaxed);
 }
 

@@ -1,31 +1,36 @@
 .gap-sm {
   --_gap: var(--spacing-sm);
+
   gap: var(--_gap);
 }
 
 .gap-md {
   --_gap: var(--spacing-sm);
+
   gap: var(--_gap);
 }
 
 .gap-lg {
   --_gap: var(--spacing-lg);
+
   gap: var(--_gap);
 }
 
 .gap-xl {
   --_gap: var(--spacing-xl);
+
   gap: var(--_gap);
 }
 
-.gap-2xl {
+.gap-xxl {
   --_gap: var(--spacing-xxl);
+
   gap: var(--_gap);
 }
 
 @media screen and (max-width: 35rem) {
   .gap-sm {
-    --_gap: var(--spacing-sm);
+    --_gap: var(--spacing-xs);
   }
 
   .gap-md {
@@ -33,47 +38,52 @@
   }
 
   .gap-lg {
-    --_gap: var(--spacing-sm);
-  }
-
-  .gap-xl {
     --_gap: var(--spacing-md);
   }
 
-  .gap-2xl {
+  .gap-xl {
     --_gap: var(--spacing-lg);
+  }
+
+  .gap-xxl {
+    --_gap: var(--spacing-xl);
   }
 }
 
 
 .gap-col-sm {
   --_gap-col: var(--spacing-sm);
+
   column-gap: var(--_gap-col);
 }
 
 .gap-col-md {
   --_gap-col: var(--spacing-sm);
+
   column-gap: var(--_gap-col);
 }
 
 .gap-col-lg {
   --_gap-col: var(--spacing-lg);
+
   column-gap: var(--_gap-col);
 }
 
 .gap-col-xl {
   --_gap-col: var(--spacing-xl);
+
   column-gap: var(--_gap-col);
 }
 
-.gap-col-2xl {
+.gap-col-xxl {
   --_gap-col: var(--spacing-xxl);
+
   column-gap: var(--_gap-col);
 }
 
 @media screen and (max-width: 35rem) {
   .gap-col-sm {
-    --_gap-col: var(--spacing-sm);
+    --_gap-col: var(--spacing-xs);
   }
 
   .gap-col-md {
@@ -81,47 +91,52 @@
   }
 
   .gap-col-lg {
-    --_gap-col: var(--spacing-sm);
-  }
-
-  .gap-col-xl {
     --_gap-col: var(--spacing-md);
   }
 
-  .gap-col-2xl {
+  .gap-col-xl {
     --_gap-col: var(--spacing-lg);
+  }
+
+  .gap-col-xxl {
+    --_gap-col: var(--spacing-xl);
   }
 }
 
 
 .gap-row-sm {
   --_gap-row: var(--spacing-sm);
+
   row-gap: var(--_gap-row);
 }
 
 .gap-row-md {
   --_gap-row: var(--spacing-sm);
+
   row-gap: var(--_gap-row);
 }
 
 .gap-row-lg {
   --_gap-row: var(--spacing-lg);
+
   row-gap: var(--_gap-row);
 }
 
 .gap-row-xl {
   --_gap-row: var(--spacing-xl);
+
   row-gap: var(--_gap-row);
 }
 
-.gap-row-2xl {
+.gap-row-xxl {
   --_gap-row: var(--spacing-xxl);
+
   row-gap: var(--_gap-row);
 }
 
 @media screen and (max-width: 35rem) {
   .gap-row-sm {
-    --_gap-row: var(--spacing-sm);
+    --_gap-row: var(--spacing-xs);
   }
 
   .gap-row-md {
@@ -129,14 +144,14 @@
   }
 
   .gap-row-lg {
-    --_gap-row: var(--spacing-sm);
-  }
-
-  .gap-row-xl {
     --_gap-row: var(--spacing-md);
   }
 
-  .gap-row-2xl {
+  .gap-row-xl {
     --_gap-row: var(--spacing-lg);
+  }
+
+  .gap-row-xxl {
+    --_gap-row: var(--spacing-xl);
   }
 }

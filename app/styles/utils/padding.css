@@ -25,7 +25,7 @@
     padding: var(--spacing-xl);
 }
 
-.p-2xl {
+.p-xxl {
     padding: var(--spacing-xxl);
 }
 
@@ -56,7 +56,7 @@
     padding-inline: var(--spacing-xl);
 }
 
-.px-2xl {
+.px-xxl {
     padding-inline: var(--spacing-xxl);
 }
 
@@ -84,7 +84,7 @@
     padding-block: var(--spacing-xl);
 }
 
-.py-2xl {
+.py-xxl {
     padding-block: var(--spacing-xxl);
 }
 
@@ -116,7 +116,7 @@
     padding-block-start: var(--spacing-xl);
 }
 
-.pt-2xl {
+.pt-xxl {
     padding-block-start: var(--spacing-xxl);
 }
 
@@ -144,7 +144,7 @@
     padding-block-end: var(--spacing-xl);
 }
 
-.pb-2xl {
+.pb-xxl {
     padding-block-end: var(--spacing-xxl);
 }
 
@@ -172,7 +172,7 @@
     padding-inline-start: var(--spacing-xl);
 }
 
-.pl-2xl {
+.pl-xxl {
     padding-inline-start: var(--spacing-xxl);
 }
 
@@ -200,6 +200,6 @@
     padding-inline-end: var(--spacing-xl);
 }
 
-.pr-2xl {
+.pr-xxl {
     padding-inline-end: var(--spacing-xxl);
 }

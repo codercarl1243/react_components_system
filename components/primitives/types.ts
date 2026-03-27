@@ -41,7 +41,8 @@ export type BaseStyleProps = {
 /*            Utilities               */
 /* ---------------------------------- */
 
-export type Gap = 0 | "sm" | "md" | "lg" | "xl" | "2xl";
+// TODO move this into a shared spacing type
+export type Gap = 0 | "sm" | "md" | "lg" | "xl" | "xxl" | "3xl";
 
 
 /* ---------------------------------- */

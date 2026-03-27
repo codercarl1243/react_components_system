@@ -11,7 +11,8 @@ export type PostCardPropsType = {
 };
 
 export type SectionProps = StackProps<'section'> & {
-  width?: "content" | "bleed" | "full"
+  width?: "content" | "bleed" | "full";
+  flow?: "sm" | "md" | "lg" | "xl" | "xxl" | "3xl"
 };
 
 export type PostPropsType = BlockProps<'article'>;

@@ -92,7 +92,7 @@ export default function NotFound() {
     }, [pathname]);
 
     return (
-    <Stack align="center" justify="center" gap="lg" className="center py-2xl">
+    <Stack align="center" justify="center" gap="lg" className="center py-xxl">
       <LostIllustration />
       <Heading as="h1">Oops! This page doesn't exist.</Heading>
       <p>

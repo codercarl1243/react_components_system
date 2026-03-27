@@ -46,17 +46,17 @@ export default function LineHeightDiagram() {
                         style={{ fontSize, lineHeight }}
                     >
                         {text.split("\n").map((line, i) => (
-                            <span key={i} style={{ display: "block" }}>{line}</span>
+                            <p key={i} style={{ display: "block" }}>{line}</p>
                         ))
                         }
                     </Block>
-                    <Inline gap="sm" align="center" className="line-height-diagram__label">
+                    <Inline className="line-height-diagram__label">
                         <code className="text-sm">{label}</code>
                     </Inline>
                 </Stack>
             ))}
             <figcaption className="italic text-sm">
-                Each block uses the same font size family but a different line height token — showing how leading affects the feel of text at different scales.
+                Each block pairs a font size with its corresponding line height token — showing how leading changes with scale.
             </figcaption>
         </Stack>
     );
