@@ -1,7 +1,6 @@
 .project-card-container {
   container-type: inline-size;
   container-name: project-card;
-  /* width: fit-content; */
 }
 
 .project-card {
@@ -32,8 +31,6 @@
 .project-card__title {
   margin: 0;
 }
-
-.project-card__description {}
 
 .project-card__tech {
   display: flex;
