@@ -14,6 +14,8 @@ to --link-on-filled to maintain contrast.
 
 .block[data-paint="all"] .link,
 .block[data-paint~="background"] .link,
-.block[data-appearance="tonal"] .link {
+.block[data-appearance="tonal"][data-paint~="background"] .link,
+.block[data-appearance="tonal"][data-paint="surface"] .link,
+.block[data-appearance="tonal"][data-paint="all"] .link   {
   --link-color: var(--link-on-filled);
 }
