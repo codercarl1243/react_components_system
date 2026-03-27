@@ -54,7 +54,7 @@ export default function Section4() {
                 </p>
                 <PostNote variant="warning">
                     <p>
-                        A line that stretches the full width of a wide viewport becomes difficult to read — the eye loses its place tracking back to the start of the next line.
+                        A line that stretches the full width of a wide viewport becomes difficult to read — the eye loses its place, tracking back to the start of the next line.
                     </p>
                 </PostNote>
             </Stack>

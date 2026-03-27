@@ -23,7 +23,7 @@ export default function Section2() {
                     Spacing is the beat that holds a UI together. Every component — every <span className="italic">padding</span>, <span className="italic">gap</span>, and <span className="italic">margin</span> decision — reaches for spacing tokens.
                 </p>
                 <p>
-                    Without a defined scale, the beat breaks down. A button gets <InlineCode codeString="0.5rem" lang="css" /> padding while a card gets an off-beat <InlineCode codeString="14px" lang="css" />. Each decision seems locally reasonable, but is globally inconsistent.
+                    Without a defined scale, the beat breaks down. A button gets <InlineCode codeString="0.5rem" lang="css" /> padding, while a card gets an off-beat <InlineCode codeString="14px" lang="css" />. Each decision seems locally reasonable, but is globally inconsistent.
                 </p>
                 <Rule>
                     Rhythm requires consistency. Consistency requires a scale.

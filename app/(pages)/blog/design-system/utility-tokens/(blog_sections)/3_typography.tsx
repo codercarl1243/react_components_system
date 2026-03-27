@@ -46,8 +46,7 @@ export default function Section3() {
 }`}
                 />
                 <p>
-                    <InlineCode codeString="clamp(min, fluid, max)" lang="css" /> — the fluid value grows with the viewport,
-                    bounded by a minimum and maximum. The result is type that adapts without breakpoints.
+                    <InlineCode codeString="clamp(min, fluid, max)" lang="css" /> — the fluid value grows with the viewport, bounded by a minimum and maximum. The result is a type scale that adapts without breakpoints.
                 </p>
             </Stack>
             <Stack>

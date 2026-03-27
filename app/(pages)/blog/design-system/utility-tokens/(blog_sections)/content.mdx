@@ -20,7 +20,7 @@ Design tokens are the score that keeps everything in rhythm, playing in time, an
 
 Spacing is the beat that holds a UI together. Every component — every *padding*, *gap*, and *margin* decision — reaches for spacing tokens.
 
-Without a defined scale, the beat breaks down. A button gets `0.5rem` padding while a card gets an off-beat `14px`. Each decision seems locally reasonable, but is globally inconsistent.
+Without a defined scale, the beat breaks down. A button gets `0.5rem` padding, while a card gets an off-beat `14px`. Each decision seems locally reasonable, but is globally inconsistent.
 
 > **System rule**
 >
@@ -118,7 +118,7 @@ Each token uses `clamp()` to scale fluidly between a minimum and maximum value. 
 }
 ```
 
-`clamp(min, fluid, max)` — the fluid value grows with the viewport, bounded by a minimum and maximum. The result is type that adapts without breakpoints.
+`clamp(min, fluid, max)` — the fluid value grows with the viewport, bounded by a minimum and maximum. The result is a type scale that adapts without breakpoints.
 
 ### Line heights
 
@@ -211,7 +211,7 @@ This is applied to `p` elements throughout the system.
 
 > **Note**
 >
-> A line that stretches the full width of a wide viewport becomes difficult to read — the eye loses its place tracking back to the start of the next line.
+> A line that stretches the full width of a wide viewport becomes difficult to read — the eye loses its place, tracking back to the start of the next line.
 
 ### Using breakpoints in CSS
 
