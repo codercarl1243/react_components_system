@@ -14,6 +14,10 @@
   margin-block-end: var(--spacing-xl);
 }
 
+:where(.flow-xxl>*:not(:last-child)) {
+  margin-block-end: var(--spacing-xxl);
+}
+
 :where(.flow-3xl>*:not(:last-child)) {
   margin-block-end: var(--spacing-3xl);
 }
@@ -36,7 +40,11 @@
     margin-block-end: var(--spacing-lg);
   }
 
-  :where(.flow-3xl>*:not(:last-child)) {
+  :where(.flow-xxl>*:not(:last-child)) {
     margin-block-end: var(--spacing-xl);
+  }
+
+  :where(.flow-3xl>*:not(:last-child)) {
+    margin-block-end: var(--spacing-xxl);
   }
 }

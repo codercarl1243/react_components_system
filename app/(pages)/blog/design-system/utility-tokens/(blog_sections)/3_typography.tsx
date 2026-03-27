@@ -11,7 +11,7 @@ import Link from "@/components/link";
 
 export default function Section3() {
     return (
-        <PostSection id="typography">
+        <PostSection id="typography" flow="xl">
             <AnchorHeading as="h2" id="typography-heading">
                 Typography Scale <span className="heading-subtitle">— controlling readability</span>
             </AnchorHeading>
