@@ -2,7 +2,7 @@
     padding: var(--spacing-lg) var(--spacing-xl);
     border-left: 4px solid var(--text-muted);
     display: grid;
-    gap: var(--spacing);
+    gap: var(--spacing-sm);
 }
 
 .rule__content {

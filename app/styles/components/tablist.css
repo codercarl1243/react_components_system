@@ -13,7 +13,7 @@
 
     display: grid;
     grid-template-columns: minmax(15ch, 10rem) minmax(0, 1fr);
-    column-gap: var(--spacing-sm);
+    column-gap: var(--spacing-xs);
     align-items: start;
 }
 
@@ -21,10 +21,10 @@
     display: flex;
     scrollbar-width: thin;
     scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
-    margin-block-end: var(--spacing-sm);
+    margin-block-end: var(--spacing-xs);
     overflow-x: auto;
-    gap: var(--spacing);
-    padding: var(--spacing);
+    gap: var(--spacing-sm);
+    padding: var(--spacing-sm);
 
     &::-webkit-scrollbar {
         cursor: pointer;
@@ -46,8 +46,8 @@
 }
 
 .tablist__header-tab {
-    --button-padding-x: var(--spacing);
-    --button-padding-y: var(--spacing-sm);
+    --button-padding-x: var(--spacing-sm);
+    --button-padding-y: var(--spacing-xs);
     --button-font-size: 0.875rem;
     --button-outline-offset: 2px;
     --button-margin: 0;
@@ -91,8 +91,8 @@
 }
 
 .tablist__content-panel {
-    padding: var(--spacing);
-    height: calc(var(--tablist-height) - (var(--spacing) * 2));
+    padding: var(--spacing-sm);
+    height: calc(var(--tablist-height) - (var(--spacing-sm) * 2));
 }
 
 .tablist__content:focus-within {

@@ -77,8 +77,7 @@ export default function Image({ variant, src, alt, ...props }: TImage) {
                 height={height ?? variantHeight}
                 style={{
                     aspectRatio,
-                    width: width ?? variantWidth,
-                    height: height ?? variantHeight,
+                    height: "auto",
                     ...style
                 }}
                 onLoad={handleLoad}

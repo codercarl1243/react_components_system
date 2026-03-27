@@ -1,7 +1,7 @@
 /*  Base arcade styles */
 
 .arcade--wrapper {
-  --arcade-border-thickness: var(--spacing);
+  --arcade-border-thickness: var(--spacing-sm);
   --border-color: var(--color-accent-600);
 
   padding: var(--arcade-border-thickness);

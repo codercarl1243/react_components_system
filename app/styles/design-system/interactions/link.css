@@ -7,12 +7,15 @@ to --link-on-filled to maintain contrast.
 */
 
 .block,
-.block[data-appearance="outlined"],
-.block[data-appearance="ghost"] {
+.block[data-appearance="outlined"] .link,
+.block[data-appearance="ghost"] .link{
   --link-color: var(--link-on-surface);
 }
 
-.block[data-paint="all"],
-.block[data-paint~="background"] {
+.block[data-paint="all"] .link,
+.block[data-paint~="background"] .link,
+.block[data-appearance="tonal"][data-paint~="background"] .link,
+.block[data-appearance="tonal"][data-paint="surface"] .link,
+.block[data-appearance="tonal"][data-paint="all"] .link   {
   --link-color: var(--link-on-filled);
 }

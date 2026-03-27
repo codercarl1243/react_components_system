@@ -1,9 +1,8 @@
   .layout-wrapper {
     --layout-min-width: var(--bp-xs);
     --layout-max-width: var(--bp-characters);
-    --layout-padding: clamp(0.25rem, 1vw, 1.5rem);
-    --layout-bleed: clamp(0.25rem, 1.5vw, 3rem);
-
+    --layout-padding: clamp(var(--spacing-xs), 1vw, var(--spacing-xxl));
+    --layout-bleed: clamp(var(--spacing-xs), 1.5vw, var(--spacing-3xl));
 
     display: grid;
     width: clamp(var(--layout-min-width), 100%, var(--layout-max-width));
@@ -16,8 +15,8 @@
 
   @media (min-width: 48rem) {
     .layout-wrapper {
-      --layout-padding: clamp(1rem, 2vw, 2.5rem);
-      --layout-bleed: clamp(1rem, 5.5vw, 5rem);
+      --layout-padding: clamp(var(--spacing-lg), 2vw, var(--spacing-xxl));
+      --layout-bleed: clamp(var(--spacing-lg), 5.5vw, var(--spacing-3xl));
     }
   }
 

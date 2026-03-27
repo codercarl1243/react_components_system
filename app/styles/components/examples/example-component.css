@@ -93,7 +93,7 @@
         &:focus-visible {
             --background-example-color: color-mix(in srgb, currentcolor 40%, var(--surface));
 
-            outline-offset: var(--spacing-sm);
+            outline-offset: var(--spacing-xs);
         }
 
         &:active,

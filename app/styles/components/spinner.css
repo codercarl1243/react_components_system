@@ -8,8 +8,8 @@
   box-sizing: border-box;
   display: block;
   position: absolute;
-  width: 0.75rem;
-  height: 0.75rem;
+  width: var(--spacing-md);
+  height: var(--spacing-md);
   margin: 1px;
   border: 1px solid currentcolor;
   border-radius: 50%;

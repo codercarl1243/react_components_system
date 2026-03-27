@@ -1,6 +1,6 @@
 .post-navigation {
   margin: var(--spacing-xl) 0;
-  padding: var(--spacing-lg) var(--spacing);
+  padding: var(--spacing-lg) var(--spacing-sm);
 
   display: flex;
   justify-content: space-between;
@@ -18,7 +18,7 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   border: 1px solid transparent;
   transition: box-shadow 0.2s ease, border-color 0.2s ease;
-  gap: var(--spacing);
+  gap: var(--spacing-sm);
 
   &:hover {
     transform: translateY(1px);

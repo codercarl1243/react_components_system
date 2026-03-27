@@ -7,13 +7,10 @@ A Practical Implementation Guide
 > **Series Context**
 >
 > This article is part of a broader design system series. It builds on ideas introduced in <BlogLink postId="design__theming_01">Theming Foundations</BlogLink> and <BlogLink postId="design__primitives_01">Primitives</BlogLink>, but stands on its own.
->
-> The theming post covered color tokens — how raw values flow through the system to produce consistent, themeable UI. This post covers the remaining token layer: spacing, typography scale, and breakpoints. These are the values that everything else measures itself against.
 
-After defining structure with primitives, the system still has a gap: the raw values that everything depends on.
-The color layer gives the system its meaning. But without a consistent scale for spacing, type, and layout boundaries, that meaning has no reliable structure to live in.
+A design system gives the developer sheet music to play from, complete with tempo, scores, and notation. Without it, every component improvises.
 
-Utility tokens solve this by standardising the raw values every component depends on. They are not semantic — they do not describe intent the way variants do. They are raw values that the rest of the system consumes to produce consistent, predictable results.
+Design tokens are the score that keeps everything in rhythm, playing in time, and creating harmony across spacing, type, and layout.
 
 ---
 
@@ -21,65 +18,72 @@ Utility tokens solve this by standardising the raw values every component depend
 
 ![TODO: add spacing image](/images/blogs/design-system/utility-tokens/spacing.webp)
 
-Spacing is the most frequently used token category in any design system. Every component — every padding, gap, and margin decision — reaches for spacing tokens.
+Spacing is the beat that holds a UI together. Every component — every *padding*, *gap*, and *margin* decision — reaches for spacing tokens.
 
-Without a defined scale, spacing decisions scatter. A button gets `0.5rem` padding. A card gets `16px`. A form field gets `0.75rem`. Each decision is locally reasonable — and globally inconsistent.
+Without a defined scale, the beat breaks down. A button gets `0.5rem` padding, while a card gets an off-beat `14px`. Each decision seems locally reasonable, but is globally inconsistent.
 
 > **System rule**
 >
-> Spacing decisions should never be made with raw values. Every gap, padding, and margin must come from the scale.
+> Rhythm requires consistency. Consistency requires a scale.
 
-The scale I use is deliberately small — eight steps that cover the full range of layout needs without creating ambiguity about which value to reach for.
+This system introduces a shared scale that covers the full range of layout needs.
 
 **spacing.css — [(source)](https://github.com/codercarl1243/react_components_system/blob/main/app/styles/tokens/spacing.css)**
 
 ```css
 :root {
-    --spacing-sm: 0.25rem;   /*  4px */
-    --spacing:    0.5rem;    /*  8px */
-    --spacing-md: 0.75rem;   /* 12px */
-    --spacing-lg: 1rem;      /* 16px */
-    --spacing-xl: 1.5rem;    /* 24px */
+    --spacing-xs:  0.25rem;  /*  4px */
+    --spacing:     0.5rem;   /*  8px */
+    --spacing-md:  0.75rem;  /* 12px */
+    --spacing-lg:  1rem;     /* 16px */
+    --spacing-xl:  1.5rem;   /* 24px */
     --spacing-xxl: 2rem;     /* 32px */
     --spacing-3xl: 4rem;     /* 64px */
 }
 ```
 
+<SpacingDiagram />
+
 ### Why these values?
 
-The scale is built on a base of `0.5rem` (8px) — a common baseline in UI design that divides evenly into most layout grids. Each step in the scale is a predictable increment rather than an arbitrary jump.
+The scale is built on increments of `0.25rem` (4px) — small enough to be precise, large enough to be meaningful.
 
-The naming uses t-shirt sizing (`sm`, `lg`, `xl`) rather than numeric steps (`4`, `8`, `16`). This keeps names meaningful at a glance — `--spacing-lg` reads as "large spacing" rather than requiring mental conversion from a number.
+![Three t-shirt illustrations in ascending size labelled sm, md, and lg, each showing their corresponding rem value](/images/blogs/design-system/utility-tokens/tshirt_sizing.webp)
+
+Each step is named using *t-shirt sizing* (`sm`, `md`, `lg`, `xl`) rather than numeric values, so names communicate scale at a glance rather than requiring mental conversion.
+
+> **Note**
+>
+> A musical scale of intensity — pianissimo to fortissimo — would be a natural fit here. But t-shirt sizing (`sm`, `md`, `lg`, `xl`) is so widely adopted across design systems that familiarity wins.
 
 ### Where spacing tokens live in the system
 
 Spacing tokens are consumed at every layer:
 
 - **Primitives** use them for gap values between children
-- **Components** use them for internal padding
-- **Utilities** expose them as composable classes
+- **Components** use them for internal spacing (margins, padding, gaps, offsets)
 
-The utility layer (`gap.css`, `padding.css`, `margin.css`) converts spacing tokens into classes like `.gap-md`, `.p-lg`, and `.mb-2`. These classes are what components reach for in practice.
+From there, utility classes expose the same scale as composable helpers for one-off spacing needs.
+
+The utility layer uses the same t-shirt sizing as the tokens — `.gap-lg` and `--spacing-lg` are clearly the same step in the scale.
 
 ```css
 /* gap.css */
-.gap-sm { gap: var(--spacing); }
-.gap-md { gap: var(--spacing-lg); }
-.gap-xl { gap: var(--spacing-xl); }
+.gap-xs  { gap: var(--spacing-xs); }  /*  4px */
+.gap     { gap: var(--spacing); }     /*  8px */
+.gap-md  { gap: var(--spacing-md); }  /* 12px */
+.gap-lg  { gap: var(--spacing-lg); }  /* 16px */
+.gap-xl  { gap: var(--spacing-xl); }  /* 24px */
 
 /* padding.css */
-.p-md  { padding: var(--spacing); }
-.p-lg  { padding: var(--spacing-lg); }
-.px-4 { padding-inline: var(--spacing); }
-.py-4 { padding-block: var(--spacing); }
+.p-xs  { padding: var(--spacing-xs); }        /*  4px */
+.p     { padding: var(--spacing); }           /*  8px */
+.p-lg  { padding: var(--spacing-lg); }        /* 16px */
+.px-lg { padding-inline: var(--spacing-lg); } /* 16px */
+.py-lg { padding-block: var(--spacing-lg); }  /* 16px */
 
 /* ...additional utilities in resources */
 ```
-
-> **Important**
->
-> The numeric suffix in utility classes maps to the spacing token — not to a pixel value.
-> `.gap-md` means "gap at the `--spacing-lg` step" — not "4 pixels".
 
 ---
 
@@ -87,15 +91,15 @@ The utility layer (`gap.css`, `padding.css`, `margin.css`) converts spacing toke
 
 ![TODO: add typography image](/images/blogs/design-system/utility-tokens/typography.webp)
 
-Typography is where inconsistency is most visible. Headings at slightly different sizes, body text with mismatched line heights, labels that feel just a little too large — these are the gaps a type scale closes.
+A type scale is like a musical key — everything plays in the same register. Without it, headings drift to slightly different sizes, line heights clash, and labels feel just a little too large. The composition breaks down quietly, one decision at a time.
 
 > **System rule**
 >
-> No font size or line height should be set without a token. The scale is the authority.
+> Font size sets the tempo. Line height sets the rhythm.
 
 ### Font sizes
 
-Font size tokens use `clamp()` to scale fluidly between a minimum and maximum value based on the viewport width. This means type stays readable on small screens without becoming overwhelming on large ones — without a single media query.
+Each token uses `clamp()` to scale fluidly between a minimum and maximum value. Type stays readable at small viewport widths without becoming overwhelming at large ones — no media queries needed.
 
 **typography.css — [(source)](https://github.com/codercarl1243/react_components_system/blob/main/app/styles/tokens/typography.css)**
 
@@ -114,11 +118,11 @@ Font size tokens use `clamp()` to scale fluidly between a minimum and maximum va
 }
 ```
 
-Each `clamp()` takes three arguments: the minimum size, a fluid calculation using `vw` units, and the maximum size. The fluid value is what makes the scale responsive — it grows proportionally with the viewport rather than jumping at breakpoints.
+`clamp(min, fluid, max)` — the fluid value grows with the viewport, bounded by a minimum and maximum. The result is a type scale that adapts without breakpoints.
 
 ### Line heights
 
-Line heights are defined separately from font sizes, giving the system independent control over vertical rhythm.
+Line heights are defined separately, giving the system independent control over vertical rhythm.
 
 ```css
 :root {
@@ -132,26 +136,28 @@ Line heights are defined separately from font sizes, giving the system independe
 }
 ```
 
-Tighter line heights suit large display text — headings at `--font-size-4xl` and above pair naturally with `--line-height-tight` or `--line-height-snug`. Body text at `--font-size-base` typically needs more breathing room — `--line-height-extra-loose` or `--line-height-super-loose`.
+Large display text needs tighter leading. Body text needs more room to breathe.
+
+<LineHeightDiagram />
 
 ### The global baseline
 
-Rather than requiring every element to opt into a size class, the system establishes a baseline on `body`:
+A single *font-size* and *line-height* on `body` sets the key. The type scale tokens then give precise control where it matters — headings, labels, badges, and helper text.
 
 ```css
 body {
-    font-size: 1rem;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+    font-size: var(--font-size-base);
+    line-height: var(--line-height-super-loose);
 }
 ```
 
-This means most text inherits the right size without any intervention. The type scale tokens exist for the exceptions — headings, labels, badges, helper text — where a specific size is intentional.
-
+> **Note**
+>
+> Not all elements inherit font-size and line-height from body. Form elements — input, button, textarea, and select — use browser defaults unless explicitly reset. A CSS reset handles this. See the [Resources section](#resources) for recommended starting points.
 
 ### How the scale is consumed
 
-Font size and line height tokens are consumed through a utility layer that pairs them into named classes:
+Font size and line height tokens are paired into utility classes. The pairing is opinionated — smaller text gets more line height, larger text gets less.
 
 ```css
 /* sizes.css */
@@ -164,20 +170,21 @@ Font size and line height tokens are consumed through a utility layer that pairs
 /* ...additional sizes in resources */
 ```
 
-The pairing is opinionated — smaller text gets more line height to aid readability, larger text gets tighter line height to avoid excessive vertical space. These defaults can always be overridden at the component level when a specific context demands it.
+The exception is `text-xs` — at very small sizes, loose leading creates too much distance between lines. A tighter value keeps small text cohesive.
 
 ---
 
-## Breakpoints — controlling adaptation
+## Breakpoints — controlling dynamics
 
 ![TODO: add breakpoints image](/images/blogs/design-system/utility-tokens/breakpoints.webp)
 
+Breakpoints are the dynamic markings — they tell the layout when to shift register. Like a musical arrangement that changes feel at the chorus, a layout should adapt at deliberate, shared moments — not at arbitrary pixel values scattered across components.
+
 > **System rule**
 >
-> Breakpoints are shared contracts. Every layout decision that depends on viewport width must reference the same scale.
+> A layout that adapts unpredictably is a performance without a score.
 
-Breakpoints define where the layout adapts. Like spacing, they need to be consistent — if one component breaks at `768px` and another at `769px`, the result is a layout that feels unpolished at certain widths.
-
+If one component shifts at `768px` and another at `769px`, the result is a layout that feels unpolished. Shared breakpoints ensure every adaptation happens in step.
 
 **breakpoints.css — [(source)](https://github.com/codercarl1243/react_components_system/blob/main/app/styles/tokens/breakpoints.css)**
 
@@ -194,20 +201,24 @@ Breakpoints define where the layout adapts. Like spacing, they need to be consis
 
 ### Why `rem` values?
 
-Breakpoints defined in `rem` rather than `px` respect the user's browser font size preference. If a user has set their browser font size to 20px, a `35rem` breakpoint becomes `700px` — meaning the layout shifts at the right visual moment for that user rather than at a fixed pixel value that ignores their preference.
+Breakpoints defined in `rem` stay proportional to the type scale. When a user's font size increases, text takes up more space — a `rem`-based breakpoint shifts the layout at the right moment relative to that text, rather than at a fixed pixel value that has no awareness of how much space the content actually needs.
 
 ### The character width breakpoint
 
 `--bp-characters` is different from the others — it is not a viewport breakpoint but a content constraint. Setting `max-width: var(--bp-characters)` on text content keeps line lengths within a readable range (roughly 65–85 characters per line), regardless of the viewport width.
 
-This is applied to body text and post content throughout the system. It is the reason paragraphs don't stretch to fill a wide viewport.
+This is applied to `p` elements throughout the system.
+
+> **Note**
+>
+> A line that stretches the full width of a wide viewport becomes difficult to read — the eye loses its place, tracking back to the start of the next line.
 
 ### Using breakpoints in CSS
 
 CSS custom properties cannot be used directly inside `@media` queries — media queries do not inherit from `:root`. Instead, breakpoint tokens define shared values that are referenced consistently:
 
 ```css
-/* Correct — use the raw value at the same breakpoint */
+/* Use the raw value inside media queries */
 @media screen and (min-width: 35rem) {
     .nav__wrapper {
         flex-direction: row;
@@ -228,13 +239,13 @@ The tokens remain the single source of truth.
 
 These three token categories form the remaining foundation of the system.
 
-- **Spacing** ensures every gap, padding, and margin comes from a shared scale rather than a local guess.
-- **Typography** ensures font sizes and line heights are consistent, fluid, and purposeful.
-- **Breakpoints** ensure layout boundaries are shared contracts rather than scattered magic numbers.
+- **Spacing** ensures the beat holds — every gap, padding, and margin comes from a shared scale.
+- **Typography** ensures the composition is intentional — font sizes and line heights communicate hierarchy, not guesswork.
+- **Breakpoints** ensure the arrangement shifts in step — layout boundaries are shared contracts, not scattered magic numbers.
 
-Together with the color and theme tokens from the first post, the token layer is now complete. Every value the system needs — colors, spacing, type, and layout boundaries — has a defined home.
+Together with the color and theme tokens from the <BlogLink postId="design__theming_01">theming post</BlogLink>, the token layer is now complete. Every value the system needs — colors, spacing, typography, and layout — has a defined home.
 
-At this point, the system is no longer a collection of components — it is a set of constraints that guide every decision.
+At this point, the system is no longer a collection of components — it is a score that every component plays from.
 
 This is the last post in the design system series for now. The next series covers individual components — starting with the <BlogLink postId="components__button__01">Button</BlogLink>.
 
@@ -246,29 +257,38 @@ This section documents constraints, tradeoffs, and reference material — it doe
 
 ### Notes & Tradeoffs
 
-1. **CSS custom properties cannot be used in media queries.** This is a known limitation of the CSS spec. Breakpoint tokens are still valuable as a shared reference, but they must be consumed as raw values inside `@media` rules.
+1. **CSS custom properties cannot be used in media queries.** This is a limitation of native CSS — media queries evaluate before the cascade, so custom properties have no value at that point. While [Sass](https://sass-lang.com/documentation/at-rules/css/#media) and [PostCSS with postcss-custom-media](https://github.com/csstools/postcss-plugins/tree/main/plugins/postcss-custom-media) allow variables in media queries by compiling them to static values at build time, this system uses native CSS — so breakpoint tokens must be consumed as raw values inside `@media` rules.
 
-2. **`clamp()` fluid type requires care with accessibility.** Fluid typography respects user font size preferences when the viewport-relative unit (`vw`) is combined with a `rem` minimum. Using `px` minimums would break this — always use `rem` for the min and max values in `clamp()`.
+2. **The minimum value in `clamp()` must be in rem.** The minimum value must be set in rem, not px. A px minimum ignores the user's browser font size preference — if someone increases their default font size, px values won't scale with it. rem values will. There is also a broader concern with fluid type and WCAG SC 1.4.4, which requires text to scale to 200% of its original size — since `vw` units do not scale when a user zooms the browser, a poorly configured `clamp()` can fail this requirement. See [Addressing Accessibility Concerns With Using Fluid Type — Maxwell Barvian](https://www.smashingmagazine.com/2023/11/addressing-accessibility-concerns-fluid-type/) for a thorough treatment of the issue.
 
-3. **T-shirt size naming vs numeric naming.** The spacing scale uses t-shirt sizes (`sm`, `lg`) while the utility classes use numbers (`.gap-md`, `.p-lg`). The numbers in utility classes are not pixel values — they map to steps in the spacing scale. This can be confusing initially but becomes intuitive quickly.
+3. **T-shirt sizing over numeric values.** This system uses t-shirt sizing (sm, md, lg) so token names and utility classes share the same language — `.gap-lg` and `--spacing-lg` are clearly the same step in that scale. Whichever convention you choose, commit to it early — mixing naming systems creates exactly the inconsistency tokens are meant to prevent.
 
 ### Further Reading
 
 **Spacing & Layout**
 
-- [Every Layout](https://every-layout.dev/) — excellent treatment of spacing as a system concern
+- [Every Layout — Heydon Pickering & Andy Bell](https://every-layout.dev/) — excellent treatment of spacing as a system concern
+- [Space in Design Systems — Nathan Curtis](https://medium.com/eightshapes-llc/space-in-design-systems-188bcbae0d62) — a deep exploration of spacing concepts including inset, stack, and inline
 - [MDN: CSS Custom Properties](https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties)
 
 **Typography**
 
 - [MDN: clamp()](https://developer.mozilla.org/en-US/docs/Web/CSS/clamp) — the function that powers fluid type
-- [Utopia](https://utopia.fyi/) — a tool for generating fluid type and space scales
+- [Utopia — Trys Mudford & James Gilyead](https://utopia.fyi/) — a tool for generating fluid type and space scales
+- [Addressing Accessibility Concerns With Using Fluid Type — Maxwell Barvian](https://www.smashingmagazine.com/2023/11/addressing-accessibility-concerns-fluid-type/) — a thorough look at how `clamp()` and viewport units interact with WCAG SC 1.4.4
+- [WCAG 2.1 Quick Reference guide](https://www.w3.org/WAI/WCAG21/quickref/) — a concise overview of success criteria
 - [The Elements of Typographic Style](https://webtypography.net/) — the web adaptation of Bringhurst's classic
+
+**CSS Reset**
+
+- [Andy Bell's modern reset](https://piccalil.li/blog/a-more-modern-css-reset/) — a great starting point that handles form element inheritance
+- [Josh Comeau's CSS reset](https://www.joshwcomeau.com/css/custom-css-reset/) — goes in depth with clear explanations for each rule
 
 **Breakpoints**
 
 - [MDN: Using media queries](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_media_queries/Using_media_queries)
-- [Every Layout: The Switcher](https://every-layout.dev/layouts/switcher/) — an alternative to breakpoint-based layout switching
+- [Every Layout: The Switcher — Heydon Pickering & Andy Bell](https://every-layout.dev/layouts/switcher/) — an alternative to breakpoint-based layout switching
+- [codercarl.dev layout wrapper](https://github.com/codercarl1243/react_components_system/blob/main/app/styles/layout/wrapper.css) — a real-world example combining breakpoint tokens, `clamp()`, and named grid lines
 
 ### Token Reference
 
@@ -276,7 +296,7 @@ This section documents constraints, tradeoffs, and reference material — it doe
 
 ```css
 :root {
-    --spacing-sm:  0.25rem;  /*  4px */
+    --spacing-xs:  0.25rem;  /*  4px */
     --spacing:     0.5rem;   /*  8px */
     --spacing-md:  0.75rem;  /* 12px */
     --spacing-lg:  1rem;     /* 16px */

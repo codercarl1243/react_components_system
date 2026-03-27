@@ -1,11 +1,14 @@
-.image {
+.image-wrapper {
     position: relative;
+    overflow: hidden;
+    background-color: transparent;
+    border-radius: var(--image-border-radius, 0);
 }
 
 .image>img {
     font-style: italic;
-    shape-margin: 0.75rem;
-    object-fit: cover;
+    shape-margin: var(--spacing-md);
+    object-fit: contain;
     transition: opacity 0.4s ease-in-out;
 }
 
@@ -14,13 +17,6 @@
 }
 .image img[data-loaded="true"] {
     opacity: 1;
-}
-
-.image-wrapper {
-    position: relative;
-    overflow: hidden;
-    background-color: var(--color-neutral-200);
-    border-radius: var(--image-border-radius, 0);
 }
 
 .image--rectangleLogo img,

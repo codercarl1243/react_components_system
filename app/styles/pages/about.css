@@ -57,7 +57,7 @@
     place-items: start;
     align-items: center;
     column-gap: var(--spacing-md);
-    padding: var(--spacing-sm) var(--spacing-md);
+    padding: var(--spacing-xs) var(--spacing-md);
     border-radius: var(--radius-sm);
     background: none;
     cursor: pointer;
@@ -85,7 +85,7 @@
 .contact-link__state-message {
     opacity: 0;
     background: var(--surface);
-    padding: var(--spacing-sm) var(--spacing-md);
+    padding: var(--spacing-xs) var(--spacing-md);
     box-shadow:
         0 0 0 1px var(--color-neutral-a2),
         0 6px 18px -8px var(--color-neutral-a2);

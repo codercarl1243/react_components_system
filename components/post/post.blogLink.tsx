@@ -17,7 +17,10 @@ export default function BlogLink({ postId, children, ...props }: BlogLinkProps) 
     const post = getBlogPostById(postId);
 
     if (!post) {
-        logWarning(`post id is not correct: ${postId}`)
+        logWarning("Referenced blog post is invalid or unpublished", {
+            context: "BlogLink",
+            data: { postId }
+        })
         if (children) {
             return <>{children}</>
         }

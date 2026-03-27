@@ -54,7 +54,7 @@ export default function PostBanner({ post }: {post: PostType}) {
         {subtitle && (
           <Block 
           as="p" 
-          className="italic text-lg post__banner__text-subtitle px-sm mt-auto"
+          className="post__banner__text-subtitle"
           >
             {subtitle}
           </Block>

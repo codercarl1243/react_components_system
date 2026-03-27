@@ -1,0 +1,28 @@
+.line-height-diagram__text-block {
+    position: relative;
+    max-width: 100%;
+}
+
+.line-height-diagram__text-block::before,
+.line-height-diagram__text-block::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background-color: var(--border-color);
+    opacity: 0.4;
+    pointer-events: none;
+}
+
+.line-height-diagram__text-block::before {
+    top: 0;
+}
+
+.line-height-diagram__text-block::after {
+    bottom: 0;
+}
+
+.line-height-diagram__swatch {
+    flex-shrink: 0;
+}

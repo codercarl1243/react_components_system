@@ -6,7 +6,7 @@ import { Inline } from '@/components/primitives';
 export default function Hero() {
 
   return (
-    <section className='width-full hero homepage__section relative'>
+    <section className='hero homepage__section relative'>
       <Octagons />
       <Heading as={"h1"} id="hero-heading" className='mb-md' variant='neutral' variantAppearance='filled'>
         Hey, I'm Carl
