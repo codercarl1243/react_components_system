@@ -1,6 +1,6 @@
 'use client';
 import { useRef } from 'react';
-import { useScroll, useTransform, motion, MotionValue } from 'framer-motion';
+import { useScroll } from 'framer-motion';
 import Hero from '@/components/homepage/hero';
 import LatestPosts from '@/components/homepage/post.latest';
 import LatestProjects from '@/components/projects/projects.latest';
