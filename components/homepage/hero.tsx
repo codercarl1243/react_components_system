@@ -1,13 +1,9 @@
 import Heading from '@/components/heading';
-import Octagons from '@/components/octagons';
 import { Inline } from '@/components/primitives';
 import LinkButton from '@/components/link/linkButton';
-import Link from '@/components/link';
-
 import ReadTheBlogCTA from './readTheBlogCTA';
 import { RiArrowRightFill } from '@remixicon/react';
 import Icon from '../icon';
-import ButtonLink from '@/components/link/linkButton';
 
 export default function Hero() {
 
