@@ -74,7 +74,3 @@ a:not([class]):focus-visible,
     vertical-align: middle;
     flex-shrink: 0;
 }
-
-.link__button {
-    /* outline: 1px solid red; */
-}
