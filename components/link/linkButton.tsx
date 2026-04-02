@@ -4,7 +4,7 @@ import clsx from "clsx";
 import { Block } from "../primitives";
 
 
-export default function CTALink({className, ...props}: CTALinkProps){
+export default function ButtonLink({className, ...props}: CTALinkProps){
 
     return <Block 
     as={Link} 
@@ -12,6 +12,6 @@ export default function CTALink({className, ...props}: CTALinkProps){
     variant="primary"
     variantAppearance="filled"
     className={
-        clsx("link__cta block px-md py-sm surface-frame link--surface", 
+        clsx("link__button block px-md py-sm surface-frame link--surface", 
             className)} {...props}/>
 }

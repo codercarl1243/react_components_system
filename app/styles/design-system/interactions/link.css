@@ -20,6 +20,10 @@ to --link-on-filled to maintain contrast.
   --link-color: var(--link-on-filled);
 }
 
+.link__button:hover,
+.link__button:focus-visible {
+    outline-color: var(--border-color);
+}
 .link[data-appearance="ghost"]:not(:disabled, [aria-disabled="true"]) {
     
     &:hover {

@@ -75,6 +75,6 @@ a:not([class]):focus-visible,
     flex-shrink: 0;
 }
 
-.link__cta {
+.link__button {
     /* outline: 1px solid red; */
 }

@@ -1,46 +1,97 @@
-import Link from "@/components/link";
+import LinkButton from "@/components/link/linkButton";
 import type { LinkProps } from "@/components/link/link.type";
 import clsx from "clsx";
+import Icon from "@/components/icon";
 
 export default function ReadTheBlogCTA({ className, ...props }: LinkProps) {
     return (
-        <Link
+        <LinkButton
             className={clsx("readTheBlog__Link", className)}
             href="/blog"
+            variant="primary"
+            variantAppearance="filled"
+            paint="all"
             {...props}
         >
-            <svg
-                className="blogIcon icon"
-                viewBox="3 3 22 18"
-                xmlns="http://www.w3.org/2000/svg"
-                width="24" height="24"
-                aria-hidden="true" focusable="false"
-            >
-                <path id="blog-pencil-tip"
-                    d="M5.23447 18.8867L5.00977 18.7866L4.75459 19.4143L5.34099 19.1167L5.23447 18.8867ZM9.36154 16.7923L9.46805 17.0224L9.77693 16.8657L9.53422 16.6116L9.36154 16.7923ZM7.06374 14.3867L7.23641 14.2059L6.83904 14.2865L7.06374 14.3867ZM5.23447 18.8867L5.34099 19.1167L9.46805 17.0224L9.36154 16.7923L9.25503 16.5623L5.12796 18.6566L5.23447 18.8867ZM9.36154 16.7923L9.53422 16.6116L7.23641 14.2059L7.06374 14.3867L6.89106 14.5674L9.18886 16.9731L9.36154 16.7923ZM7.06374 14.3867L6.83904 14.2865L5.00977 18.7866L5.23447 18.8867L5.45917 18.9868L7.28844 14.4868L7.06374 14.3867Z"
-                    stroke="var(--tip-stroke)"
-                    fill="var(--tip-fill)"
-                    strokeWidth="0.1" />
-                <path id="blog-pencil-shaft"
-                    d="M14.0164 7.1079L7.13608 14.3113L7.12734 15.0607L7.78418 14.9898L7.65761 15.6158L8.43227 15.6684L8.24535 16.3575L9.02146 16.2852L8.71382 17.1008L9.4928 16.7787L16.3732 9.57527L14.0164 7.1079Z"
-                    stroke="var(--shaft-stroke)"
-                    fill="var(--shaft-fill)"
-                    strokeWidth="0.5" />
-                <path id="blog-pencil-eraser"
-                    d="M15.0565 6.71722C14.8721 6.52417 14.8721 6.21118 15.0565 6.01813L15.5475 5.5041C16.1983 4.82275 17.2534 4.82275 17.9042 5.5041V5.5041C18.555 6.18544 18.555 7.29012 17.9042 7.97147L17.4132 8.4855C17.2289 8.67855 16.9299 8.67855 16.7455 8.4855L15.0565 6.71722Z"
-                    stroke="var(--eraser-stroke)"
-                    fill="var(--eraser-fill)"
-                    strokeWidth="0.5" />
-                <path id="blog-star-1" fill="var(--color-primary-400)"
-                    d="M14 -1.5 L14.9 2.1 L18.5 3 L14.9 3.9 L14 7.5 L13.1 3.9 L9.5 3 L13.1 2.1 Z" />
-                {/* Star 2: secondary-400, drifts up-right */}
-                <path id="blog-star-2" fill="var(--color-secondary-400)"
-                    d="M20.5 -2 L21.175 0.7 L23.875 1.375 L21.175 2.05 L20.5 4.75 L19.825 2.05 L17.125 1.375 L19.825 0.7 Z" />
-                {/* Star 3: accent-400, floats straight up */}
-                <path id="blog-star-3" fill="var(--color-accent-400)"
-                    d="M8.5 -2 L9.175 0.7 L11.875 1.375 L9.175 2.05 L8.5 4.75 L7.825 2.05 L5.125 1.375 L7.825 0.7 Z" />
-            </svg>
+            <div className="book-icon">
+                <Icon icon={bookIcon} />
+            </div>
             <span>Read the blog</span>
-        </Link>
+        </LinkButton>
     );
+}
+
+const bookIcon = () => {
+
+    return (
+        <svg
+            className="bookIcon"
+            viewBox="0 0 32 26"
+            width="32"
+            height="26"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            aria-hidden="true"
+            focusable="false"
+        >
+            <defs>
+                <filter id="pop-shadow" x="-50%" y="-50%" width="200%" height="200%">
+                    <feDropShadow dx="0" dy="0" stdDeviation="0.6" floodColor="rgba(255, 255, 255)" />
+                </filter>
+            </defs>
+
+            {/* Spine */}
+            <rect x="13.5" y="1" width="3" height="24" fill="#var(--color-warning-600)" stroke="var(--color-warning-600)" strokeWidth="0.5" />
+            <line x1="14.5" y1="1" x2="14.5" y2="25" stroke="var(--color-warning-600)" strokeWidth="0.4" strokeOpacity="0.9" />
+
+            {/* Left cover */}
+            <rect x="1" y="1" width="13.5" height="24" rx="1.5" fill="var(--color-warning-600)" stroke="var(--color-warning-600)" strokeWidth="1" />
+
+            {/* Right cover */}
+            <rect x="17" y="1" width="14" height="24" rx="1.5" fill="var(--color-warning-600)" stroke="var(--color-warning-600)" strokeWidth="1" />
+
+            {/* LHS page */}
+            <path d="M 1.5 1.9 Q 8 0.4 15 1.9 L 15 24.1 Q 8 22.6 1.5 24.1 Z"
+                fill="#F5F2E8" stroke="var(--color-neutral-900)" strokeWidth="0.5" />
+            <line x1="4" y1="8" x2="13" y2="7.5" stroke="var(--color-neutral-600)" strokeWidth="0.55" strokeOpacity="0.75" />
+            <line x1="4" y1="13" x2="13" y2="12.7" stroke="var(--color-neutral-600)" strokeWidth="0.55" strokeOpacity="0.75" />
+            <line x1="4" y1="18" x2="13" y2="17.8" stroke="var(--color-neutral-600)" strokeWidth="0.55" strokeOpacity="0.75" />
+
+            {/* RHS second page — revealed when top page turns */}
+            <path d="M 15 2.3 Q 23 0.8 30.5 2.3 L 30.5 23.7 Q 23 22.2 15 23.7 Z"
+                fill="#EDE9DC" stroke="var(--color-neutral-900)" strokeWidth="0.4" />
+            <line x1="18" y1="8" x2="29" y2="7.5" stroke="var(--color-neutral-600)" strokeWidth="0.5" strokeOpacity="0.65" />
+            <line x1="18" y1="13" x2="29" y2="12.7" stroke="var(--color-neutral-600)" strokeWidth="0.5" strokeOpacity="0.65" />
+            <line x1="18" y1="18" x2="29" y2="17.8" stroke="var(--color-neutral-600)" strokeWidth="0.5" strokeOpacity="0.65" />
+
+            {/* Bookmark — above second page, below turning page */}
+            <g id="book-bookmark">
+                <rect x="19" y="0.5" width="3" height="10" rx="0.5" />
+                <polygon points="19,10.5 20.5,9 22,10.5" fill="#EDE9DC" />
+            </g>
+
+            {/* RHS top page — turns on hover */}
+            <g id="book-rhs-top">
+                <path d="M 15 1.9 Q 23 0.4 30.5 1.9 L 30.5 24.1 Q 23 22.6 15 24.1 Z"
+                    fill="#F5F2E8" stroke="var(--color-neutral-900)" strokeWidth="0.5" />
+                <line x1="18" y1="8" x2="29" y2="7.5" stroke="var(--color-neutral-600)" strokeWidth="0.55" strokeOpacity="0.75" />
+                <line x1="18" y1="13" x2="29" y2="12.7" stroke="var(--color-neutral-600)" strokeWidth="0.55" strokeOpacity="0.75" />
+                <line x1="18" y1="18" x2="29" y2="17.8" stroke="var(--color-neutral-600)" strokeWidth="0.55" strokeOpacity="0.75" />
+            </g>
+
+            {/* Pop marks — last in layer order, nothing clips them */}
+            <text className="pop-mark pop-mark-1"
+                x="16.5" y="2.5" fontSize="5"
+                filter="url(#pop-shadow)"
+                textAnchor="middle" dominantBaseline="middle">✦</text>
+            <text className="pop-mark pop-mark-2"
+                x="26" y="4" fontSize="4.5"
+                filter="url(#pop-shadow)"
+                textAnchor="middle" dominantBaseline="middle">✦</text>
+            <text className="pop-mark pop-mark-3"
+                x="18.5" y="0" fontSize="4"
+                filter="url(#pop-shadow)"
+                textAnchor="middle" dominantBaseline="middle">✦</text>
+        </svg>
+    )
 }

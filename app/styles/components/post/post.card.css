@@ -29,7 +29,7 @@
     outline: 1px solid var(--color-neutral-a2);
     transition: outline-offset 150ms ease-in-out,
         outline-color 150ms ease-in-out;
-    background-color: var(--color-neutral-a2);
+    background-color: var(--color-neutral-100);
 }
 
 .post-card__excerpt {
