@@ -37,7 +37,7 @@ export default function Link({ icon, showExternalIcon = true, children, classNam
 
   if (isExternal && (!scheme || SAFE_EXTERNAL.has(scheme))) {
     return (
-      <a href={href} rel="noopener noreferrer" className={clsx(className, {'link-w-icon': icon}, 'link external')} {...props}>
+      <a href={href} rel="noopener noreferrer" className={clsx(className, { 'link-w-icon': icon }, 'link external')} {...props}>
         {icon && <Icon icon={icon} />}
         {children}
         {showExternalIcon && <Icon color={'currentcolor'} icon={RiExternalLinkLine} size={'sm'} className="external__icon link__icon" />}
@@ -45,7 +45,7 @@ export default function Link({ icon, showExternalIcon = true, children, classNam
     )
   }
   return (
-    <NextLink href={href} className={clsx(className, {'link-w-icon': icon}, 'link internal')} {...props}>
+    <NextLink href={href} className={clsx(className, { 'link-w-icon': icon }, 'link internal')} {...props}>
       {icon && <Icon icon={icon} />}
       {children}
     </NextLink>

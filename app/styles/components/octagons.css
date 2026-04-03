@@ -1,37 +1,34 @@
 .octagon--cluster {
-  position: absolute;
+  position: fixed;
+  right: var(--scrollbar-width, 15px);
   z-index: -1;
-  top: 0;
-  right: 0;
-  opacity: 0.25;
   pointer-events: none;
-}
-
-@media screen and (min-width: 48rem) {
-  .octagon--cluster {
-    right: -250px;
-  }
+  opacity: 0.5;
 }
 
 .octagon {
+  --octagon-fill: var(--color-primary-200);
   display: block;
-  /* filter: saturate(0.75) drop-shadow(0 6px 18px rgba(0, 0, 0, 0.06)); */
+  fill: var(--color-primary-100);
+  position: absolute;
+  width: 25px;
+  height: 25px;
+  right: -15px;
+  transform-box: fill-box;
+  transform-origin: center;
 }
 
-/* Sizing */
-.octagon__small {
-  width: 140px;
+.octagon-one {
+  bottom: 15px;
 }
 
-.octagon__large {
-  width: 220px;
+.octagon-two {
+  bottom: 90px;
 }
 
-/* Alignment offsets */
-.octagon--cluster__top {
-  transform: translateX(-30%);
-}
-
-.octagon--cluster__bottom {
-  transform: translateX(-60%);
+.octagon__logo {
+  width: 50px;
+  height: 50px;
+  right: -15px;
+  bottom: 40px;
 }

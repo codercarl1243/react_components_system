@@ -19,3 +19,28 @@ to --link-on-filled to maintain contrast.
 .block[data-appearance="tonal"][data-paint="all"] .link   {
   --link-color: var(--link-on-filled);
 }
+
+.link__button:hover,
+.link__button:focus-visible {
+    outline-color: var(--border-color);
+}
+.link[data-appearance="ghost"]:not(:disabled, [aria-disabled="true"]) {
+    
+    &:hover {
+        --background-color: var(--variant-surface);
+        --link-color-override: var(--color-link-400);
+    }
+
+    &:focus-visible {
+        --background-color: color-mix(in srgb, currentcolor 40%, var(--foreground-on-surface));
+
+        outline-offset: var(--spacing-xs);
+    }
+
+    &:active,
+    &[data-pressed="true"] {
+        --background-color: color-mix(in srgb, currentcolor 20%, var(--foreground-on-surface));
+
+        outline-style: dashed;
+    }
+}

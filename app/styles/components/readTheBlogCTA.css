@@ -1,0 +1,134 @@
+.readTheBlog__Link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+}
+
+.book-icon {
+    position: relative;
+    width: 32px;
+    height: 26px;
+    flex-shrink: 0;
+    perspective: 200px;
+}
+
+/* ── Whole icon: lifts and scales on hover ── */
+.bookIcon {
+    position: absolute;
+    top: 0;
+    left: 0;
+    overflow: visible;
+    transform: scale(0.95);
+    transform-origin: center bottom;
+    transition: transform 220ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.readTheBlog__Link:hover .bookIcon,
+.readTheBlog__Link:focus-visible .bookIcon {
+    transform: translateY(-1px) scale(1.1);
+}
+
+/* ── RHS top page: turns from spine leftward ── */
+#book-rhs-top {
+    transform-origin: 15px 13px;
+    transform-box: view-box;
+    transition: transform 480ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.readTheBlog__Link:hover #book-rhs-top,
+.readTheBlog__Link:focus-visible #book-rhs-top {
+    transform: rotateY(-170deg);
+    filter: drop-shadow(-1px 1px 1.5px rgba(0, 0, 0, 0.18));
+}
+
+/* ── Bookmark: pops into place after page starts turning ── */
+#book-bookmark {
+    opacity: 0;
+    transform: translateY(-14px) scale(0.5);
+    transform-origin: 20.5px 5px;
+    transform-box: view-box;
+    fill: var(--color-info-600);
+}
+
+
+
+@keyframes bookmark-pop {
+    0% {
+        opacity: 0;
+        transform: translateY(-14px) scale(0.5);
+    }
+
+    35% {
+        opacity: 1;
+        transform: translateY(2px) scale(1.45);
+    }
+
+    60% {
+        transform: translateY(-1.5px) scale(0.88);
+    }
+
+    80% {
+        transform: translateY(0.5px) scale(1.05);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1.0);
+    }
+}
+
+/* ── Pop marks: staggered burst around the bookmark ── */
+.pop-mark {
+    opacity: 0;
+    pointer-events: none;
+    fill: var(--color-accent-400);
+
+}
+
+.readTheBlog__Link:hover,
+.readTheBlog__Link:focus-visible {
+    .pop-mark-1 {
+        --pop-animation-delay: 150ms;
+        --pop-animation-length: 700ms;
+    }
+
+    .pop-mark-2 {
+        --pop-animation-delay: 250ms;
+        --pop-animation-length: 800ms;
+    }
+
+    .pop-mark-3 {
+        --pop-animation-delay: 350ms;
+        --pop-animation-length: 600ms;
+    }
+
+    .pop-mark {
+        animation: pop-mark-in var(--pop-animation-length) ease var(--pop-animation-delay) forwards;
+    }
+
+    #book-bookmark {
+        animation: bookmark-pop 900ms cubic-bezier(0.2, 1.5, 0.5, 1) 250ms forwards;
+    }
+}
+
+@keyframes pop-mark-in {
+
+    20%,
+    100% {
+        opacity: 1;
+    }
+}
+
+/* ── Reduced motion ── */
+@media (prefers-reduced-motion: reduce) {
+
+    .bookIcon,
+    #book-rhs-top,
+    #book-bookmark,
+    .pop-mark {
+        animation: none !important;
+        transition: none !important;
+        transform: none !important;
+        opacity: 1 !important;
+    }
+}

@@ -1,23 +1,34 @@
 import Heading from '@/components/heading';
-import Octagons from '@/components/octagons';
-import Link from '@/components/link';
 import { Inline } from '@/components/primitives';
+import LinkButton from '@/components/link/linkButton';
+import ReadTheBlogCTA from './readTheBlogCTA';
+import { RiArrowRightFill } from '@remixicon/react';
+import Icon from '../icon';
 
 export default function Hero() {
 
   return (
-    <section className='hero homepage__section relative'>
-      <Octagons />
-      <Heading as={"h1"} id="hero-heading" className='mb-md' variant='neutral' variantAppearance='filled'>
+    <section className='hero homepage__section relative flow-xxl'>
+      
+      <Heading as={"h1"} headingSize={2} id="hero-heading" className='mb-md' variant='neutral' variantAppearance='filled'>
         Hey, I'm Carl
       </Heading>
-      <p className='mb-smxl'>
+      <p>
         On this site I share my <span className="fun-underline">process</span>, <span className="fun-underline">tools</span>, <span className="fun-underline">lessons</span>, and the occasional bit of <span className="fun-underline">creative chaos</span> from working with the web.
       </p>
 
-      <Inline>
-        <Link href="/blog">Read the blog</Link>
-        <Link href="/about">About me</Link>
+      <Inline className='hero-cta w-full' justify="end" align="center" gap="xl">
+        <ReadTheBlogCTA />
+        <LinkButton
+          className="hero-cta--contact"
+          href="/about#get-in-touch"
+          variant="neutral"
+          variantAppearance="filled"
+          paint="all"
+        >
+          <span>Contact me</span>
+          <Icon icon={RiArrowRightFill} size="sm" />
+        </LinkButton>
       </Inline>
     </section>
   )
