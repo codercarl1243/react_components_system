@@ -41,7 +41,7 @@ const bookIcon = () => {
             </defs>
 
             {/* Spine */}
-            <rect x="13.5" y="1" width="3" height="24" fill="#var(--color-warning-600)" stroke="var(--color-warning-600)" strokeWidth="0.5" />
+            <rect x="13.5" y="1" width="3" height="24" fill="var(--color-warning-600)" stroke="var(--color-warning-600)" strokeWidth="0.5" />
             <line x1="14.5" y1="1" x2="14.5" y2="25" stroke="var(--color-warning-600)" strokeWidth="0.4" strokeOpacity="0.9" />
 
             {/* Left cover */}
@@ -59,7 +59,7 @@ const bookIcon = () => {
 
             {/* RHS second page — revealed when top page turns */}
             <path d="M 15 2.3 Q 23 0.8 30.5 2.3 L 30.5 23.7 Q 23 22.2 15 23.7 Z"
-                fill="#EDE9DC" stroke="var(--color-neutral-900)" strokeWidth="0.4" />
+                fill="#F5F2E8" stroke="var(--color-neutral-900)" strokeWidth="0.4" />
             <line x1="18" y1="8" x2="29" y2="7.5" stroke="var(--color-neutral-600)" strokeWidth="0.5" strokeOpacity="0.65" />
             <line x1="18" y1="13" x2="29" y2="12.7" stroke="var(--color-neutral-600)" strokeWidth="0.5" strokeOpacity="0.65" />
             <line x1="18" y1="18" x2="29" y2="17.8" stroke="var(--color-neutral-600)" strokeWidth="0.5" strokeOpacity="0.65" />
@@ -67,7 +67,7 @@ const bookIcon = () => {
             {/* Bookmark — above second page, below turning page */}
             <g id="book-bookmark">
                 <rect x="19" y="0.5" width="3" height="10" rx="0.5" />
-                <polygon points="19,10.5 20.5,9 22,10.5" fill="#EDE9DC" />
+                <polygon points="19,10.5 20.5,9 22,10.5" fill="#F5F2E8" />
             </g>
 
             {/* RHS top page — turns on hover */}

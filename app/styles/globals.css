@@ -3,6 +3,7 @@
 @layer components;      /* base components (buttons, links etc.) and their variants */
 @layer design-system;   /* contextual semantics (paint, variants, surfaces, theme) */
 @layer utilities;       /* Helper classes like, .sr-only, grid utilities, typography, margin/padding helpers, etc. */
+@layer pages; 
 
 @import './tokens/index.css' layer(tokens);
 @import './base/index.css' layer(base);
@@ -12,5 +13,5 @@
 @import './typography/index.css' layer(utilities);
 @import './animations/index.css' layer(utilities);
 @import './design-system/index.css' layer(design-system);
-@import './pages/about.css' layer(components);
-@import './pages/arcade.css' layer(components);
+@import './pages/about.css' layer(pages);
+@import './pages/arcade.css' layer(pages);
