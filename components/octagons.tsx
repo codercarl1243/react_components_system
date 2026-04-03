@@ -1,36 +1,34 @@
 'use client';
 
-import { motion, MotionValue, useReducedMotion, useTransform } from 'framer-motion';
+import { motion, MotionValue, useReducedMotion } from 'framer-motion';
 
 interface OctagonProps {
-  scrollY: MotionValue<number>;
-  scrollTarget: number;
+  ref: React.RefObject<HTMLDivElement | null>;
+  thumbY: MotionValue<number>;
+  rotateForwards: MotionValue<number>;
+  rotateBackwards: MotionValue<number>;
 }
 
-export default function Octagons({ scrollY, scrollTarget }: OctagonProps) {
+export default function Octagons({ ref, thumbY, rotateForwards, rotateBackwards }: OctagonProps) {
   const prefersReduced = useReducedMotion();
-
-  const rotate1 = useTransform(scrollY, [0, scrollTarget], [0, 360]);
-  const rotate2 = useTransform(scrollY, [0, scrollTarget], [0, -360]);
-  const rotateLogo = useTransform(scrollY, [0, scrollTarget], [0, 520]);
-  const opacity = useTransform(scrollY, [0, scrollTarget, scrollTarget], [0.25, 0.65, 0.25]);
 
   return (
     <motion.div
+      ref={ref}
       className="octagon--cluster"
-      style={{ opacity }}
+      style={{ top: prefersReduced ? 'auto' : thumbY }}
     >
       <motion.svg
         className="octagon octagon-one"
         viewBox="0 0 200 200"
-        style={{ rotate: prefersReduced ? 0 : rotate1 }}
+        style={{ rotate: prefersReduced ? 0 : rotateBackwards }}
       >
         <polygon points="100,10 165,35 190,100 165,165 100,190 35,165 10,100 35,35" />
       </motion.svg>
       <motion.svg
         className="octagon octagon__logo"
         viewBox="0 0 512 512"
-        style={{ rotate: prefersReduced ? 0 : rotateLogo }}
+        style={{ rotate: prefersReduced ? 0 : rotateForwards }}
       >
         <path d="M499.235 240.311C502.098 240.246 504.822 241.54 506.58 243.8C507.817 245.389 508.489 247.366 508.477 249.382C508.072 315.069 491.342 370.752 455.491 414.498C419.647 458.236 364.863 489.83 288.75 507.678C285.335 508.478 281.7 507.736 278.872 505.662C275.761 503.38 273.923 499.753 273.923 495.894V460.05C273.923 457.787 274.48 455.559 275.545 453.562C277.607 449.696 281.379 447.084 285.641 446.347C379.815 430.052 449.947 360.368 451.142 251.848C451.166 249.617 451.866 247.401 453.198 245.569C455.156 242.878 458.257 241.253 461.584 241.177L499.235 240.311Z" fill="var(--octagon-fill)" />
         <path d="M240.812 495.069C240.812 497.707 239.958 500.275 238.377 502.388C235.573 506.134 230.844 507.956 226.247 507.026C169.916 495.622 123.058 478.562 85.9276 445.239C48.7804 411.901 21.5894 362.487 4.17003 286.809C3.6918 284.731 3.85262 282.509 4.64827 280.52C6.25098 276.512 10.1331 273.884 14.4496 273.884L52.5638 273.884C57.4268 273.884 61.369 277.826 61.3691 282.689C61.3691 283.174 61.4455 283.665 61.5915 284.129C75.7399 329.115 92.1354 366.025 117.69 393.685C143.191 421.285 177.966 439.835 229.201 447.792C232.213 448.259 235.061 449.705 237.172 451.962C239.511 454.462 240.813 457.758 240.813 461.182L240.812 495.069Z" fill="var(--octagon-fill)" />
@@ -41,7 +39,7 @@ export default function Octagons({ scrollY, scrollTarget }: OctagonProps) {
       <motion.svg
         className="octagon octagon-two"
         viewBox="0 0 200 200"
-        style={{ rotate: prefersReduced ? 0 : rotate2 }}
+        style={{ rotate: prefersReduced ? 0 : rotateBackwards }}
       >
         <polygon points="100,10 165,35 190,100 165,165 100,190 35,165 10,100 35,35" />
       </motion.svg>
