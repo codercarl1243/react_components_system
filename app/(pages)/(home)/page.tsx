@@ -28,7 +28,7 @@ export default function Home() {
 
   const padding = 120;
 
-  const thumbY = useTransform(scrollY, [0, scrollMaxValue + padding], [(padding + (padding / 2)), scrollMaxValue - (padding / 3)]);
+  const thumbY = useTransform(scrollY, [0, scrollMaxValue + padding], [(padding * 1.25), scrollMaxValue - (padding * 0.25)]);
   const rotateForwards = useTransform(scrollY, [0, scrollMaxValue], [0, 720]);
   const rotateBackwards = useTransform(scrollY, [0, scrollMaxValue], [0, -360]);
 
