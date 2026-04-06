@@ -121,7 +121,7 @@ const react_components: readonly Readonly<PostType>[] = [
         pathFragment: 'buttons',
         lastModified: new Date('2026-03-17'),
         createdAt: new Date('2026-03-17'),
-        published: true,
+        published: false,
         featured: true,
         image: {
             src: '/images/blogs/react-components/button/main-image.webp',
