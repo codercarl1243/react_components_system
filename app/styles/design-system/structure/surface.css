@@ -145,3 +145,39 @@ Keep them separate.
 .frame-inset-xxl {
     --frame-inset-base: var(--spacing-xxl);
 }
+
+/*
+---------------------------------
+ Surface as Link
+---------------------------------
+
+When a .surface-frame is also a link (e.g. a card or tile),
+use .link--surface to suppress the default link underline
+and show an outline on interaction instead.
+
+The outline uses the surface's effective border-radius so it
+visually follows the frame's corners at any nesting depth.
+*/
+
+.link--surface {
+    --link-color-override: currentcolor;
+
+    text-decoration: none;
+    display: inline-block;
+}
+
+.link--surface:focus-visible,
+.link--surface:hover {
+    outline: 2px solid currentcolor;
+    outline-offset: var(--spacing-xs);
+    border-radius: var(--frame-radius-effective, var(--frame-radius));
+}
+
+/* When .link--surface is nested inside a .surface-frame (but is not
+   itself a .surface-frame), propagate the reduced radius so the
+   outline matches the inset geometry. */
+.surface-frame .link--surface {
+    --frame-radius-effective: clamp(0px,
+            calc(var(--frame-radius) - var(--frame-inset)),
+            999px);
+}

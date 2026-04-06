@@ -32,7 +32,7 @@ export default function PostCard({ post, layout = "default" }: PostCardPropsType
         <Block
             as="article"
             {...applyDataAttributes({ layout, featured })}
-            className="surface-frame post-card post-card--grid"
+            className="post-card post-card--grid"
         >
             <Link
                 href={href}

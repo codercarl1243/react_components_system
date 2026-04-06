@@ -30,6 +30,8 @@
     transition: outline-offset 150ms ease-in-out,
         outline-color 150ms ease-in-out;
     background-color: var(--color-neutral-100);
+    border-radius: var(--radius-md);
+    overflow: hidden
 }
 
 .post-card__excerpt {
@@ -92,6 +94,7 @@
     box-shadow: var(--shadow-sm);
     outline-offset: 4px;
     outline-color: var(--color-neutral-a4);
+    border-radius: calc(var(--radius-md) - 4px);
 
     .post-card__image {
         img {

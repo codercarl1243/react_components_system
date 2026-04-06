@@ -12,18 +12,6 @@
     text-decoration: underline;
 }
 
-.link--surface {
-    --link-color-override: currentcolor;
-
-    text-decoration: none;
-    display: inline-block;
-}
-
-.link--surface:focus-visible,
-.link--surface:hover {
-    outline: 2px solid currentcolor;
-    outline-offset: 0.25em;
-}
 
 a:not([class]):hover,
 a:not([class]):focus-visible,
