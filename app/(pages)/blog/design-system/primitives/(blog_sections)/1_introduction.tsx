@@ -30,7 +30,7 @@ export default function Section1() {
                 role — like vertical arrangement <Icon variant="primary" icon={RiArrowUpDownLine} />, horizontal alignment <Icon variant="primary" icon={RiArrowLeftRightLine} />, or containment <Icon variant="primary" icon={RiCheckboxBlankLine} /> —
                 without taking ownership of visual styling.
             </p>
-            <PostNote variant="info" showIcon={false} className="mt-lg mb-smxl" paint="border">
+            <PostNote variant="info" showIcon={false} className="mt-lg mb-xl" paint="border">
                <Block as="strong" className="callout__heading font-accent">
                     Series Context
                 </Block>

@@ -24,7 +24,7 @@ const design_system: readonly Readonly<PostType>[] = [
         lastModified: new Date('2026-03-27'),
         createdAt: new Date('2026-03-27'),
         published: true,
-        featured: true,
+        featured: false,
         image: {
             src: '/images/blogs/design-system/theming/main-image.webp',
             alt: "A designer's desk with UI panels showing appearance options, variant styles, and style controls, alongside four button variants and design tools scattered around"
@@ -122,7 +122,7 @@ const react_components: readonly Readonly<PostType>[] = [
         lastModified: new Date('2026-03-17'),
         createdAt: new Date('2026-03-17'),
         published: false,
-        featured: false,
+        featured: true,
         image: {
             src: '/images/blogs/react-components/button/main-image.webp',
             alt: 'Button component code arranged as interlocking puzzle pieces on a dark blue background'
