@@ -12,7 +12,6 @@
     text-decoration: underline;
 }
 
-
 a:not([class]):hover,
 a:not([class]):focus-visible,
 .link:hover,
