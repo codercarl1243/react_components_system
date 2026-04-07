@@ -49,8 +49,6 @@ ol[role='list'] {
 
 /* Set core body defaults */
 body {
-  background-color: var(--cc-surface, initial);
-  color: var(--cc-foreground-on-surface, initial);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   min-height: 100dvh;

@@ -48,6 +48,6 @@ Theme tokens are consumed by:
 
 /* Global defaults */
 body {
-    background-color: var(--cc-surface);
-    color: var(--cc-foreground-on-surface);
+    background-color: var(--cc-surface, initial);
+    color: var(--cc-foreground-on-surface, initial);
 }
