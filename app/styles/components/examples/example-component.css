@@ -131,6 +131,6 @@
     &[data-example-paint="surface"] {
         border-width: var(--cc-border-width, 1px);
         border-style: var(--cc-border-style, solid);
-        border-color: var(--cc-border-example-color, transparent);
+        border-color: var(--border-example-color, transparent);
     }
 }
