@@ -20,10 +20,9 @@
     background-color: inherit;
     color: inherit;
     fill: currentcolor;
-
     border: var(--cc-border-width-thin) solid;
     border-color: inherit;
-    border-right: var(--cc-spacing-xl);
-    border-top: var(--cc-spacing-xl);
+    border-right-width: var(--cc-spacing-xl);
+    border-top-width: var(--cc-spacing-xl);
     border-radius: var(--cc-radius-circle);
 }
