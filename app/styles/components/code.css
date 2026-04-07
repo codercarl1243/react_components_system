@@ -54,6 +54,7 @@
                 --code-highlight-border-color: var(--cc-color-warning-400);
                 --code-highlight-background-color: var(--cc-color-neutral-900);
                 --cc-line-color: var(--cc-color-neutral-100);
+                
                 border-style: solid;
             }
         }
