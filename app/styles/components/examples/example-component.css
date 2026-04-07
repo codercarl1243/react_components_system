@@ -5,86 +5,86 @@
 
     /* variants */
     &[data-example-variant] {
-        --background-example-color: var(--cc-variant-example-bg);
-        --foreground-example-color: var(--cc-variant-example-fg);
-        --cc-border-example-color: var(--cc-variant-example-border);
-        --cc-surface-example-color: var(--cc-variant-example-surface);
+        --background-example-color: var(--variant-example-bg);
+        --foreground-example-color: var(--variant-example-fg);
+        --border-example-color: var(--variant-example-border);
+        --surface-example-color: var(--variant-example-surface);
     }
 
     &[data-example-variant="primary"] {
-        --cc-variant-example-bg: var(--cc-color-primary-400);
-        --cc-variant-example-fg: var(--cc-color-neutral-100);
-        --cc-variant-example-border: var(--cc-color-primary-600);
-        --cc-variant-example-text-on-surface: var(--cc-color-primary-600);
-        --cc-variant-example-surface: var(--cc-color-primary-100);
+        --variant-example-bg: var(--cc-color-primary-400);
+        --variant-example-fg: var(--cc-color-neutral-100);
+        --variant-example-border: var(--cc-color-primary-600);
+        --variant-example-text-on-surface: var(--cc-color-primary-600);
+        --variant-example-surface: var(--cc-color-primary-100);
     }
 
     &[data-example-variant="secondary"] {
-        --cc-variant-example-bg: var(--cc-color-secondary-400);
-        --cc-variant-example-fg: var(--cc-color-neutral-100);
-        --cc-variant-example-border: var(--cc-color-secondary-600);
-        --cc-variant-example-text-on-surface: var(--cc-color-secondary-600);
-        --cc-variant-example-surface: var(--cc-color-secondary-100);
+        --variant-example-bg: var(--cc-color-secondary-400);
+        --variant-example-fg: var(--cc-color-neutral-100);
+        --variant-example-border: var(--cc-color-secondary-600);
+        --variant-example-text-on-surface: var(--cc-color-secondary-600);
+        --variant-example-surface: var(--cc-color-secondary-100);
     }
 
     &[data-example-variant="accent"] {
-        --cc-variant-example-bg: var(--cc-color-accent-400);
-        --cc-variant-example-fg: var(--cc-color-neutral-100);
-        --cc-variant-example-border: var(--cc-color-accent-600);
-        --cc-variant-example-text-on-surface: var(--cc-color-accent-600);
-        --cc-variant-example-surface: var(--cc-color-accent-100);
+        --variant-example-bg: var(--cc-color-accent-400);
+        --variant-example-fg: var(--cc-color-neutral-100);
+        --variant-example-border: var(--cc-color-accent-600);
+        --variant-example-text-on-surface: var(--cc-color-accent-600);
+        --variant-example-surface: var(--cc-color-accent-100);
     }
 
     &[data-example-variant="danger"] {
-        --cc-variant-example-bg: var(--cc-color-danger-400);
-        --cc-variant-example-fg: var(--cc-color-neutral-100);
-        --cc-variant-example-border: var(--cc-color-danger-600);
-        --cc-variant-example-text-on-surface: var(--cc-color-danger-600);
-        --cc-variant-example-surface: var(--cc-color-danger-100);
+        --variant-example-bg: var(--cc-color-danger-400);
+        --variant-example-fg: var(--cc-color-neutral-100);
+        --variant-example-border: var(--cc-color-danger-600);
+        --variant-example-text-on-surface: var(--cc-color-danger-600);
+        --variant-example-surface: var(--cc-color-danger-100);
     }
 
     &[data-example-variant="warning"] {
-        --cc-variant-example-bg: var(--cc-color-warning-400);
-        --cc-variant-example-fg: var(--cc-color-neutral-900);
-        --cc-variant-example-border: var(--cc-color-warning-600);
-        --cc-variant-example-text-on-surface: var(--cc-color-warning-600);
-        --cc-variant-example-surface: var(--cc-color-warning-100);
+        --variant-example-bg: var(--cc-color-warning-400);
+        --variant-example-fg: var(--cc-color-neutral-900);
+        --variant-example-border: var(--cc-color-warning-600);
+        --variant-example-text-on-surface: var(--cc-color-warning-600);
+        --variant-example-surface: var(--cc-color-warning-100);
     }
 
     &[data-example-variant="success"] {
-        --cc-variant-example-bg: var(--cc-color-success-400);
-        --cc-variant-example-fg: var(--cc-color-neutral-100);
-        --cc-variant-example-border: var(--cc-color-success-600);
-        --cc-variant-example-text-on-surface: var(--cc-color-success-600);
-        --cc-variant-example-surface: var(--cc-color-success-100);
+        --variant-example-bg: var(--cc-color-success-400);
+        --variant-example-fg: var(--cc-color-neutral-100);
+        --variant-example-border: var(--cc-color-success-600);
+        --variant-example-text-on-surface: var(--cc-color-success-600);
+        --variant-example-surface: var(--cc-color-success-100);
     }
 
     /* appearance */
     /* Strong, high-emphasis application (buttons, badges, pills) */
     &[data-example-appearance="filled"] {
-        --background-example-color: var(--cc-variant-example-bg);
-        --foreground-example-color: var(--cc-variant-example-fg);
-        --cc-border-example-color: var(--cc-variant-example-border);
+        --background-example-color: var(--variant-example-bg);
+        --foreground-example-color: var(--variant-example-fg);
+        --border-example-color: var(--variant-example-border);
 
-        outline-color: var(--cc-border-example-color, transparent);
+        outline-color: var(--border-example-color, transparent);
     }
 
     /* Medium emphasis with visible outline */
     &[data-example-appearance="outlined"] {
         --background-example-color: transparent;
-        --foreground-example-color: var(--cc-variant-example-bg);
-        --cc-border-example-color: var(--cc-variant-example-bg);
+        --foreground-example-color: var(--variant-example-bg);
+        --border-example-color: var(--variant-example-bg);
 
-        outline-color: var(--cc-border-example-color, transparent);
+        outline-color: var(--border-example-color, transparent);
     }
 
     /* Low emphasis, text-forward appearance */
     &[data-example-appearance="ghost"] {
         --background-example-color: transparent;
-        --foreground-example-color: var(--cc-variant-example-bg);
-        --cc-border-example-color: transparent;
+        --foreground-example-color: var(--variant-example-bg);
+        --border-example-color: transparent;
 
-        outline-color: var(--cc-border-example-color, transparent);
+        outline-color: var(--border-example-color, transparent);
 
         &:hover {
             --background-example-color: color-mix(in srgb, currentcolor 15%, var(--cc-surface));
@@ -106,9 +106,9 @@
 
     /* Tonal surface application (callouts, notices, containers) */
     &[data-example-appearance="tonal"] {
-        --background-example-color: var(--cc-variant-example-surface);
-        --foreground-example-color: var(--cc-variant-example-text-on-surface);
-        --cc-border-example-color: var(--cc-variant-example-border);
+        --background-example-color: var(--variant-example-surface);
+        --foreground-example-color: var(--variant-example-text-on-surface);
+        --border-example-color: var(--variant-example-border);
     }
 
     /* paint */
