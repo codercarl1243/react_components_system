@@ -16,7 +16,6 @@
         border: var(--cc-border-width-thick) solid;
         border-radius: var(--cc-radius-md);
         overflow: auto;
-
         white-space: pre;
         scrollbar-width: auto;
         scrollbar-color: var(--cc-color-neutral-200) transparent;
@@ -65,7 +64,6 @@
     --code-highlight-border-color: var(--cc-border-color, var(--cc-color-primary-400));
     --code-highlight-color: var(--cc-color-neutral-900);
     --code-highlight-background-color: var(--cc-surface-color, var(--cc-color-primary-200));
-
     --cc-line-color: var(--code-highlight-color);
 
     background: var(--code-highlight-background-color);
@@ -83,6 +81,7 @@
     --button-margin: 0;
     --button-padding-x: 0;
     --button-padding-y: 0;
+    
     top: var(--cc-spacing-md);
     right: var(--cc-spacing-md);
 }
