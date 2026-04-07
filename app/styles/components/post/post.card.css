@@ -31,7 +31,7 @@
         outline-color 150ms ease-in-out;
     background-color: var(--cc-color-neutral-100);
     border-radius: var(--cc-radius-md);
-    overflow: hidden
+    overflow: hidden;
 }
 
 .post-card__excerpt {
