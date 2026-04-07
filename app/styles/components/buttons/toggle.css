@@ -1,6 +1,6 @@
 .toggle-group {
   display: inline-flex;
-  gap: var(--spacing-xs);
+  gap: var(--cc-spacing-xs);
   justify-content: center;
 }
 
@@ -9,6 +9,6 @@
 }
 
 .toggle-button[aria-pressed="true"] {
-  --background-color: var(--surface-color);
-  border: var(--border-width-thick) solid;
+  --cc-background-color: var(--cc-surface-color);
+  border: var(--cc-border-width-thick) solid;
 }

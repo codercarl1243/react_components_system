@@ -7,8 +7,8 @@
 
 .image>img {
     font-style: italic;
-    shape-margin: var(--spacing-md);
-    object-fit: contain;
+    shape-margin: var(--cc-spacing-md);
+    /* object-fit: contain; */
     height: auto;
     transition: opacity 0.4s ease-in-out;
 }
@@ -28,30 +28,30 @@
 
 .image--featured,
 .image--hero {
-    --image-border-radius: var(--radius-lg);
+    --image-border-radius: var(--cc-radius-lg);
 }
 
 .image--banner {
-    --image-border-radius: var(--radius-md);
+    --image-border-radius: var(--cc-radius-md);
 }
 
 .image--general {
-    --image-border-radius: var(--radius-sm);
+    --image-border-radius: var(--cc-radius-sm);
 }
 
 @media (max-width: 768px) {
 
     .image--hero,
     .image--featured {
-        --image-border-radius: var(--radius-md);
+        --image-border-radius: var(--cc-radius-md);
     }
 
     .image--banner {
-        --image-border-radius: var(--radius-sm);
+        --image-border-radius: var(--cc-radius-sm);
     }
 
     .image--card {
-        --image-border-radius: var(--radius-sm);
+        --image-border-radius: var(--cc-radius-sm);
     }
 }
 

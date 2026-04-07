@@ -10,7 +10,7 @@ export default function LatestPosts() {
   return (
     <Block
       as="section"
-      className="homepage__latest-posts homepage__section"
+      className="homepage__latest-posts homepage__section width-full"
     >
       <Heading as="h2" className="homepage__latest-posts__heading center mb-xl" headingSize={2}>Latest posts</Heading>
 

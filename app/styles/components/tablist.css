@@ -3,8 +3,8 @@
 
     min-width: 0;
     height: var(--tablist-height);
-    background-color: var(--color-neutral-200);
-    outline: 2px solid var(--foreground-on-surface);
+    background-color: var(--cc-color-neutral-200);
+    outline: 2px solid var(--cc-foreground-on-surface);
     outline-offset: -2px;
 }
 
@@ -13,7 +13,7 @@
 
     display: grid;
     grid-template-columns: minmax(15ch, 10rem) minmax(0, 1fr);
-    column-gap: var(--spacing-xs);
+    column-gap: var(--cc-spacing-xs);
     align-items: start;
 }
 
@@ -21,10 +21,10 @@
     display: flex;
     scrollbar-width: thin;
     scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
-    margin-block-end: var(--spacing-xs);
+    margin-block-end: var(--cc-spacing-xs);
     overflow-x: auto;
-    gap: var(--spacing-sm);
-    padding: var(--spacing-sm);
+    gap: var(--cc-spacing-sm);
+    padding: var(--cc-spacing-sm);
 
     &::-webkit-scrollbar {
         cursor: pointer;
@@ -46,8 +46,8 @@
 }
 
 .tablist__header-tab {
-    --button-padding-x: var(--spacing-sm);
-    --button-padding-y: var(--spacing-xs);
+    --button-padding-x: var(--cc-spacing-sm);
+    --button-padding-y: var(--cc-spacing-xs);
     --button-font-size: 0.875rem;
     --button-outline-offset: 2px;
     --button-margin: 0;
@@ -83,16 +83,16 @@
 
 .tablist__content,
 .tablist__content-panel {
-    border-radius: var(--radius-md);
+    border-radius: var(--cc-radius-md);
 }
 
 .tablist__content {
-    background-color: var(--surface);
+    background-color: var(--cc-surface);
 }
 
 .tablist__content-panel {
-    padding: var(--spacing-sm);
-    height: calc(var(--tablist-height) - (var(--spacing-sm) * 2));
+    padding: var(--cc-spacing-sm);
+    height: calc(var(--tablist-height) - (var(--cc-spacing-sm) * 2));
 }
 
 .tablist__content:focus-within {

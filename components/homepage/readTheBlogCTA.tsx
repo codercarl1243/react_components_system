@@ -41,28 +41,28 @@ const bookIcon = () => {
             </defs>
 
             {/* Spine */}
-            <rect x="13.5" y="1" width="3" height="24" fill="var(--color-warning-600)" stroke="var(--color-warning-600)" strokeWidth="0.5" />
-            <line x1="14.5" y1="1" x2="14.5" y2="25" stroke="var(--color-warning-600)" strokeWidth="0.4" strokeOpacity="0.9" />
+            <rect x="13.5" y="1" width="3" height="24" fill="#644802" stroke="#644802" strokeWidth="0.5" />
+            <line x1="14.5" y1="1" x2="14.5" y2="25" stroke="#644802" strokeWidth="0.4" strokeOpacity="0.9" />
 
             {/* Left cover */}
-            <rect x="1" y="1" width="13.5" height="24" rx="1.5" fill="var(--color-warning-600)" stroke="var(--color-warning-600)" strokeWidth="1" />
+            <rect x="1" y="1" width="13.5" height="24" rx="1.5" fill="#644802" stroke="#644802" strokeWidth="1" />
 
             {/* Right cover */}
-            <rect x="17" y="1" width="14" height="24" rx="1.5" fill="var(--color-warning-600)" stroke="var(--color-warning-600)" strokeWidth="1" />
+            <rect x="17" y="1" width="14" height="24" rx="1.5" fill="#644802" stroke="#644802" strokeWidth="1" />
 
             {/* LHS page */}
             <path d="M 1.5 1.9 Q 8 0.4 15 1.9 L 15 24.1 Q 8 22.6 1.5 24.1 Z"
-                fill="#F5F2E8" stroke="var(--color-neutral-900)" strokeWidth="0.5" />
-            <line x1="4" y1="8" x2="13" y2="7.5" stroke="var(--color-neutral-600)" strokeWidth="0.55" strokeOpacity="0.75" />
-            <line x1="4" y1="13" x2="13" y2="12.7" stroke="var(--color-neutral-600)" strokeWidth="0.55" strokeOpacity="0.75" />
-            <line x1="4" y1="18" x2="13" y2="17.8" stroke="var(--color-neutral-600)" strokeWidth="0.55" strokeOpacity="0.75" />
+                fill="#F5F2E8" stroke="#000000" strokeWidth="0.5" />
+            <line x1="4" y1="8" x2="13" y2="7.5" stroke="#4d4d4d" strokeWidth="0.55" strokeOpacity="0.75" />
+            <line x1="4" y1="13" x2="13" y2="12.7" stroke="#4d4d4d" strokeWidth="0.55" strokeOpacity="0.75" />
+            <line x1="4" y1="18" x2="13" y2="17.8" stroke="#4d4d4d" strokeWidth="0.55" strokeOpacity="0.75" />
 
             {/* RHS second page — revealed when top page turns */}
             <path d="M 15 2.3 Q 23 0.8 30.5 2.3 L 30.5 23.7 Q 23 22.2 15 23.7 Z"
-                fill="#F5F2E8" stroke="var(--color-neutral-900)" strokeWidth="0.4" />
-            <line x1="18" y1="8" x2="29" y2="7.5" stroke="var(--color-neutral-600)" strokeWidth="0.5" strokeOpacity="0.65" />
-            <line x1="18" y1="13" x2="29" y2="12.7" stroke="var(--color-neutral-600)" strokeWidth="0.5" strokeOpacity="0.65" />
-            <line x1="18" y1="18" x2="29" y2="17.8" stroke="var(--color-neutral-600)" strokeWidth="0.5" strokeOpacity="0.65" />
+                fill="#F5F2E8" stroke="#000000" strokeWidth="0.4" />
+            <line x1="18" y1="8" x2="29" y2="7.5" stroke="#4d4d4d" strokeWidth="0.5" strokeOpacity="0.65" />
+            <line x1="18" y1="13" x2="29" y2="12.7" stroke="#4d4d4d" strokeWidth="0.5" strokeOpacity="0.65" />
+            <line x1="18" y1="18" x2="29" y2="17.8" stroke="#4d4d4d" strokeWidth="0.5" strokeOpacity="0.65" />
 
             {/* Bookmark — above second page, below turning page */}
             <g id="book-bookmark">
@@ -73,10 +73,10 @@ const bookIcon = () => {
             {/* RHS top page — turns on hover */}
             <g id="book-rhs-top">
                 <path d="M 15 1.9 Q 23 0.4 30.5 1.9 L 30.5 24.1 Q 23 22.6 15 24.1 Z"
-                    fill="#F5F2E8" stroke="var(--color-neutral-900)" strokeWidth="0.5" />
-                <line x1="18" y1="8" x2="29" y2="7.5" stroke="var(--color-neutral-600)" strokeWidth="0.55" strokeOpacity="0.75" />
-                <line x1="18" y1="13" x2="29" y2="12.7" stroke="var(--color-neutral-600)" strokeWidth="0.55" strokeOpacity="0.75" />
-                <line x1="18" y1="18" x2="29" y2="17.8" stroke="var(--color-neutral-600)" strokeWidth="0.55" strokeOpacity="0.75" />
+                    fill="#F5F2E8" stroke="#000000" strokeWidth="0.5" />
+                <line x1="18" y1="8" x2="29" y2="7.5" stroke="#4d4d4d" strokeWidth="0.55" strokeOpacity="0.75" />
+                <line x1="18" y1="13" x2="29" y2="12.7" stroke="#4d4d4d" strokeWidth="0.55" strokeOpacity="0.75" />
+                <line x1="18" y1="18" x2="29" y2="17.8" stroke="#4d4d4d" strokeWidth="0.55" strokeOpacity="0.75" />
             </g>
 
             {/* Pop marks — last in layer order, nothing clips them */}

@@ -1,12 +1,12 @@
 .about-page {
     container-name: about-container;
     container-type: inline-size;
-    padding-block-start: var(--spacing-3xl);
+    padding-block-start: var(--cc-spacing-3xl);
 }
 
 .about-page__intro {
     display: flex;
-    gap: var(--spacing-xl);
+    gap: var(--cc-spacing-xl);
     flex-wrap: wrap;
 }
 
@@ -17,6 +17,7 @@
 
     img {
         margin-inline: auto;
+        object-fit: contain;
     }
 }
 
@@ -25,7 +26,7 @@
     container-name: contact-links-container;
     display: grid;
     grid-template-columns: repeat(2, max-content);
-    gap: var(--spacing-lg) var(--spacing-xl);
+    gap: var(--cc-spacing-lg) var(--cc-spacing-xl);
     justify-content: center;
 }
 
@@ -56,9 +57,9 @@
     grid-template-columns: 1.5rem auto;
     place-items: start;
     align-items: center;
-    column-gap: var(--spacing-md);
-    padding: var(--spacing-xs) var(--spacing-md);
-    border-radius: var(--radius-sm);
+    column-gap: var(--cc-spacing-md);
+    padding: var(--cc-spacing-xs) var(--cc-spacing-md);
+    border-radius: var(--cc-radius-sm);
     background: none;
     cursor: pointer;
     border-color: transparent;
@@ -75,7 +76,7 @@
 }
 
 .contact-link.contact-link--external .icon {
-    color: var(--color-neutral-a4);
+    color: var(--cc-color-neutral-a4);
 }
 
 .contact-link[type="button"] {
@@ -84,13 +85,13 @@
 
 .contact-link__state-message {
     opacity: 0;
-    background: var(--surface);
-    padding: var(--spacing-xs) var(--spacing-md);
+    background: var(--cc-surface);
+    padding: var(--cc-spacing-xs) var(--cc-spacing-md);
     box-shadow:
-        0 0 0 1px var(--color-neutral-a2),
-        0 6px 18px -8px var(--color-neutral-a2);
-    outline-color: var(--color-neutral-a2);
-    border-radius: var(--radius-sm);
+        0 0 0 1px var(--cc-color-neutral-a2),
+        0 6px 18px -8px var(--cc-color-neutral-a2);
+    outline-color: var(--cc-color-neutral-a2);
+    border-radius: var(--cc-radius-sm);
     position: absolute;
     top: -0.75rem;
     right: 0;
@@ -110,22 +111,22 @@
     right: 10px;
     width: 8px;
     height: 8px;
-    background: var(--surface);
+    background: var(--cc-surface);
     transform: rotate(45deg) scale(1);
-    box-shadow: 1px 1px 0 var(--color-neutral-a2);
+    box-shadow: 1px 1px 0 var(--cc-color-neutral-a2);
 }
 
 .contact-link:hover,
 .contact-link:focus-visible {
     box-shadow:
-        0 0 0 1px var(--color-neutral-a2),
-        0 6px 18px -8px var(--color-neutral-a2);
-    outline-color: var(--color-neutral-a2);
+        0 0 0 1px var(--cc-color-neutral-a2),
+        0 6px 18px -8px var(--cc-color-neutral-a2);
+    outline-color: var(--cc-color-neutral-a2);
     transform: translateY(-1px);
 }
 
 .contact-link .contact-link__icon {
-    color: var(--color-neutral-a6);
+    color: var(--cc-color-neutral-a6);
     transition: transform 160ms ease;
 }
 

@@ -1,17 +1,15 @@
-@layer tokens;          /* Design tokens like colors, shadows, spacing. */
-@layer base;            /* Resets,  global element styles. */
-@layer components;      /* base components (buttons, links etc.) and their variants */
-@layer design-system;   /* contextual semantics (paint, variants, surfaces, theme) */
-@layer utilities;       /* Helper classes like, .sr-only, grid utilities, typography, margin/padding helpers, etc. */
-@layer pages; 
+@layer base;         /* Resets, global element styles. */
+@layer coder-design; /* Design system: tokens → primitives → semantic → components */
+@layer components;   /* App-level components (posts, forms, nav, etc.) */
+@layer utilities;    /* Helper classes: .sr-only, grid, typography, margin/padding, etc. */
+@layer pages;
 
-@import './tokens/index.css' layer(tokens);
-@import './base/index.css' layer(base);
-@import './layout/index.css' layer(base);
-@import './components/index.css' layer(components);
-@import './utils/index.css' layer(utilities);
-@import './typography/index.css' layer(utilities);
-@import './animations/index.css' layer(utilities);
-@import './design-system/index.css' layer(design-system);
-@import './pages/about.css' layer(pages);
-@import './pages/arcade.css' layer(pages);
+@import './base/index.css'          layer(base);
+@import './layout/index.css'        layer(base);
+@import './design-system/index.css' layer(coder-design);
+@import './components/index.css'    layer(components);
+@import './utils/index.css'         layer(utilities);
+@import './typography/index.css'    layer(utilities);
+@import './animations/index.css'    layer(utilities);
+@import './pages/about.css'         layer(pages);
+@import './pages/arcade.css'        layer(pages);

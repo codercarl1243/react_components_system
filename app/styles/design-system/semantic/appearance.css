@@ -14,28 +14,28 @@ paint → applies them
 
 /* Strong, high-emphasis application (buttons, badges, pills) */
 [data-appearance="filled"] {
-    --background-color: var(--variant-bg);
-    --foreground-color: var(--variant-fg);
-    --border-color: var(--variant-border);
+    --cc-background-color: var(--cc-variant-bg);
+    --cc-foreground-color: var(--cc-variant-fg);
+    --cc-border-color: var(--cc-variant-border);
 }
 
 /* Medium emphasis with visible outline */
 [data-appearance="outlined"] {
-    --background-color: transparent;
-    --foreground-color: var(--variant-bg);
-    --border-color: var(--variant-bg);
+    --cc-background-color: transparent;
+    --cc-foreground-color: var(--cc-variant-bg);
+    --cc-border-color: var(--cc-variant-bg);
 }
 
 /* Low emphasis, text-forward appearance */
 [data-appearance="ghost"] {
-    --background-color: transparent;
-    --foreground-color: var(--variant-bg);
-    --border-color: transparent;
+    --cc-background-color: transparent;
+    --cc-foreground-color: var(--cc-variant-bg);
+    --cc-border-color: transparent;
 }
 
 /* Tonal surface application (callouts, notices, containers) */
 [data-appearance="tonal"] {
-    --background-color: var(--variant-surface);
-    --foreground-color: var(--variant-fg-on-surface);
-    --border-color: var(--variant-border);
+    --cc-background-color: var(--cc-variant-surface);
+    --cc-foreground-color: var(--cc-variant-fg-on-surface);
+    --cc-border-color: var(--cc-variant-border);
 }

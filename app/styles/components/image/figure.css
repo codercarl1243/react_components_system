@@ -1,14 +1,14 @@
 
 .figure {
     margin: 1.5rem 0;
-    background-color: var(--color-neutral-100);
+    background-color: var(--cc-color-neutral-100);
     padding: 0.5rem;
-    border-radius: var(--radius-lg);
-    border: 1px solid var(--color-neutral-500);
+    border-radius: var(--cc-radius-lg);
+    border: 1px solid var(--cc-color-neutral-500);
 }
 
 .figure-caption {
-    color: var(--color-neutral-500);
+    color: var(--cc-color-neutral-500);
     padding-inline: clamp(0.25em, 1vw, 0.5em);
-    padding-block-start: var(--spacing-sm);
+    padding-block-start: var(--cc-spacing-sm);
 }

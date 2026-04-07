@@ -6,7 +6,7 @@ body:has([data-overlay="visible"]) {
     position: fixed;
     inset: 0;
     opacity: 0;
-    background: var(--color-neutral-a6);
+    background: var(--cc-color-neutral-a6);
     transition: opacity var(--overlay-transition-duration) ease-in-out;
     z-index: 2;
     pointer-events: none;

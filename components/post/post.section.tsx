@@ -23,11 +23,11 @@ import type { SectionProps } from './post.type';
  * 
  * @returns A styled `<section>` element with layout wrapper and flow spacing applied.
  */
-export default function PostSection({ className, width = "full", flow = "lg", ...props }: SectionProps) {
+export default function PostSection({ className, width = "bleed", flow = "lg", ...props }: SectionProps) {
 
   return (
     <section
-      className={clsx(`post-section flow-${flow} layout-wrapper width-${width}`, className)}
+      className={clsx(`post-section flow-${flow} width-${width}`, className)}
       {...props}
     />
   )

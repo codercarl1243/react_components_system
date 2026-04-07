@@ -9,19 +9,19 @@
   flex-direction: column;
   width: clamp(16rem, 100%, 48rem);
   overflow: hidden;
-  outline: 1px solid var(--color-neutral-a2);
-  padding: var(--spacing-lg);
-  background: var(--surface);
+  outline: 1px solid var(--cc-color-neutral-a2);
+  padding: var(--cc-spacing-lg);
+  background: var(--cc-surface);
 }
 
 @container project-card (max-width: 25rem) {
   .project-card {
-    padding: var(--spacing-xs);
+    padding: var(--cc-spacing-xs);
   }
 }
 
 .project-card__image {
-  margin-bottom: var(--spacing-sm);
+  margin-bottom: var(--cc-spacing-sm);
 }
 
 .project-card__content {
@@ -35,13 +35,13 @@
 .project-card__tech {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--spacing-xs);
+  gap: var(--cc-spacing-xs);
   font-size: 0.85rem;
   opacity: 0.7;
 }
 
 .project-card__links {
-  margin-top: var(--spacing-sm);
+  margin-top: var(--cc-spacing-sm);
   display: flex;
-  gap: var(--spacing-sm);
+  gap: var(--cc-spacing-sm);
 }

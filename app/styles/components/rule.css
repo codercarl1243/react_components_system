@@ -1,8 +1,8 @@
 .rule {
-    padding: var(--spacing-lg) var(--spacing-xl);
-    border-left: 4px solid var(--text-muted);
+    padding: var(--cc-spacing-lg) var(--cc-spacing-xl);
+    border-left: 4px solid var(--cc-text-muted);
     display: grid;
-    gap: var(--spacing-sm);
+    gap: var(--cc-spacing-sm);
 }
 
 .rule__content {

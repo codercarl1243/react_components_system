@@ -17,7 +17,7 @@ export default function TokenFlowDiagram() {
       as="figure"
       gap={"lg"}
       align="stretch"
-      className="theming-diagram surface-frame text-sm"
+      className="theming-diagram surface-frame text-sm mx-auto"
       variant="info"
       variantAppearance="tonal"
       paint="border"
@@ -30,7 +30,7 @@ export default function TokenFlowDiagram() {
         variantAppearance="tonal"
         paint="all"
       >
-        <Inline as="strong" gap={"sm"}>
+        <Inline as="strong" gap={"sm"} align="center">
           <Icon icon={RiPaletteFill} />
           Global Tokens
           <Link href="https://github.com/codercarl1243/react_components_system/tree/main/app/styles/tokens">
@@ -74,7 +74,7 @@ export default function TokenFlowDiagram() {
           variantAppearance="tonal"
           paint="all"
         >
-          <Inline as="strong" gap={"sm"}>
+          <Inline as="strong" gap={"sm"} align="center">
             <Icon icon={RiContrastFill} />
             Theme Tokens
             <Link href="https://github.com/codercarl1243/react_components_system/blob/main/app/styles/tokens/theme.css">
@@ -107,7 +107,7 @@ body {
           variantAppearance="tonal"
           paint="all"
         >
-          <Inline as="strong" gap={"sm"}>
+          <Inline as="strong" gap={"sm"} align="center">
             <Icon icon={RiCodeSSlashFill} />
             Variant Tokens
             <Link href="https://github.com/codercarl1243/react_components_system/blob/main/app/styles/design-system/variants.css">
@@ -136,7 +136,7 @@ body {
         variantAppearance="tonal"
         paint="all"
       >
-        <Inline as="strong" gap={"sm"}>
+        <Inline as="strong" gap={"sm"} align="center">
           <Icon icon={RiPaintBrushFill} />
           Appearance Mappings
           <Link href="https://github.com/codercarl1243/react_components_system/blob/main/app/styles/design-system/appearance.css">
@@ -165,7 +165,7 @@ body {
         variantAppearance="tonal"
         paint="all"
       >
-        <Inline as="strong" gap={"sm"}>
+        <Inline as="strong" gap={"sm"} align="center">
           <Icon icon={RiCheckboxCircleFill} />
           Paint (Application)
           <Link href="https://github.com/codercarl1243/react_components_system/blob/main/app/styles/design-system/paint.css">

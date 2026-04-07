@@ -4,5 +4,5 @@
 }
 
 .icon[data-variant] {
-    color: var(--foreground-color);
+    color: var(--cc-foreground-color);
 }

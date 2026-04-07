@@ -1,29 +1,29 @@
 [data-theme="dark"] .fun-highlight {
   --fun-highlight-fg: color-mix(in oklab,
-      var(--color-neutral-100) 85%,
+      var(--cc-color-neutral-100) 85%,
       var(--fun-highlight));
 }
 
 .fun-highlight {
-  --fun-highlight: var(--color-emphasis-100);
+  --fun-highlight: var(--cc-color-emphasis-100);
   --transitionDelay: 0.2s;
   --fun-highlight-fg: color-mix(in oklab,
-      var(--color-neutral-900) 85%,
+      var(--cc-color-neutral-900) 85%,
       var(--fun-highlight));
 
   display: inline-block;
   position: relative;
   background: linear-gradient(135deg,
       var(--fun-highlight) 0%,
-      color-mix(in oklab, var(--fun-highlight), var(--surface) 60%) 35%,
+      color-mix(in oklab, var(--fun-highlight), var(--cc-surface) 60%) 35%,
       var(--fun-highlight) 100%);
   color: var(--fun-highlight-fg);
   background-size: 400% 400%;
   background-position: 0% 50%;
   box-decoration-break: clone;
   -webkit-box-decoration-break: clone;
-  border-radius: var(--radius-md);
-  padding-inline: var(--spacing-xs);
+  border-radius: var(--cc-radius-md);
+  padding-inline: var(--cc-spacing-xs);
   opacity: 0;
   transform: scale(0.98);
   transition:

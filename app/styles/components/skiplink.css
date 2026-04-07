@@ -6,11 +6,11 @@
     transform: translateY(-100%);
     transition: transform 250ms ease-in-out;
 
-    background-color: var(--color-primary-600);
-    color: var(--color-neutral-100);
+    background-color: var(--cc-color-primary-600);
+    color: var(--cc-color-neutral-100);
     padding: 1em 0.5em;
-    border-radius: var(--radius-sm);
-    box-shadow: 1px 1px 4px var(--color-neutral-400);
+    border-radius: var(--cc-radius-sm);
+    box-shadow: 1px 1px 4px var(--cc-color-neutral-400);
 
     &:focus-within {
         transform: translateY(1rem);
@@ -18,13 +18,13 @@
 
     &:hover,
     &:focus-visible {
-        background-color: var(--color-primary-100);
-        color: var(--color-primary-600);
+        background-color: var(--cc-color-primary-100);
+        color: var(--cc-color-primary-600);
         border-style: dashed;
     }
 
     &:focus-visible {
-        outline: 1px dashed var(--color-primary-200);
+        outline: 1px dashed var(--cc-color-primary-200);
         outline-offset: 2px;
     }
 }

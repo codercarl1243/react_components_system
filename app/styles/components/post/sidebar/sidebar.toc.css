@@ -1,11 +1,11 @@
 .toc-list {
     list-style: none;
     margin: 0;
-    padding-inline-start: var(--spacing-sm);
+    padding-inline-start: var(--cc-spacing-sm);
 }
 
 .toc-list>*:not(:last-child) {
-    margin-block-end: var(--spacing-sm);
+    margin-block-end: var(--cc-spacing-sm);
 }
 
 .toc-item {
@@ -14,7 +14,7 @@
 }
 
 .toc-item--active {
-    transform: translateX(var(--spacing-sm));
+    transform: translateX(var(--cc-spacing-sm));
 }
 
 .toc-item--active::before {
@@ -25,7 +25,7 @@
     transform: translateY(-50%);
     width: 4px;
     height: 0.9lh;
-    background-color: var(--color-primary-400);
+    background-color: var(--cc-color-primary-400);
     border-radius: 1.5px;
     animation: slideIn 0.4s cubic-bezier(0.5, 1.5, 0.25, 2);
 }
@@ -57,6 +57,6 @@
 }
 
 .toc-link--active {
-    color: var(--color-neutral-100) !important;
-    background-color: var(--color-primary-400);
+    color: var(--cc-color-neutral-100) !important;
+    background-color: var(--cc-color-primary-400);
 }

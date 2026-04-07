@@ -1,6 +1,6 @@
-@import './variants.css';
-@import './appearance.css';
-@import './paint.css';
-/* Component specific appearances */
-@import './structure/index.css';
-@import './interactions/index.css';
+/* Layer priority is determined by import order: last import = highest priority.
+   tokens → primitives → components → semantic (semantic wins) */
+@import './tokens/index.css'      layer(tokens);
+@import './primitives/index.css'  layer(primitives);
+@import './components/index.css'  layer(components);
+@import './semantic/index.css'    layer(semantic);

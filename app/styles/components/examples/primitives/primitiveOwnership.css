@@ -9,15 +9,15 @@
 
 
 .primitive-diagram-box {
-    --border-style: dashed;
+    --cc-border-style: dashed;
 
-    padding: var(--spacing-xs);
+    padding: var(--cc-spacing-xs);
 }
 
 .primitive-diagram-box__child {
-    --border-style: solid;
+    --cc-border-style: solid;
 
-    padding: var(--spacing-xs) var(--spacing-sm);
+    padding: var(--cc-spacing-xs) var(--cc-spacing-sm);
     text-align: center;
 
     &.child--a {
@@ -42,7 +42,7 @@
     .arrow__double {
         position: absolute;
         left: 0;
-        top: calc(var(--spacing-md) + 100%);
+        top: calc(var(--cc-spacing-md) + 100%);
         width: 100%;
     }
 }

@@ -1,21 +1,21 @@
 /* TODO: fix all of this */
 .radiogroup {
     display: grid;
-    gap: var(--spacing-xs, var(--spacing-md));
+    gap: var(--cc-spacing-xs, var(--cc-spacing-md));
     padding: 0;
     border: none;
 }
 
 .radiogroup > legend {
   font-weight: 600;
-  margin-block-end: var(--spacing-xs, 0.5rem);
+  margin-block-end: var(--cc-spacing-xs, 0.5rem);
   padding: 0;
 }
 
 .radiogroup label {
   display: inline-flex;
   align-items: center;
-  gap: var(--spacing-xs, 0.5rem);
+  gap: var(--cc-spacing-xs, 0.5rem);
   cursor: pointer;
   line-height: 1.2;
 }
@@ -25,14 +25,14 @@
     block-size: 1rem;
     margin: 0;
 
-    accent-color: var(--color-accent-400, currentcolor);
+    accent-color: var(--cc-color-accent-400, currentcolor);
 
     /* Keep native focus ring */
     cursor: pointer;
 }
 
 .radio-input:focus-visible {
-  outline: 2px solid var(--color-focus, currentcolor);
+  outline: 2px solid var(--cc-color-focus, currentcolor);
   outline-offset: 2px;
 }
 

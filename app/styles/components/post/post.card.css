@@ -2,7 +2,7 @@
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: 1fr auto auto;
-    gap: var(--spacing-sm);
+    gap: var(--cc-spacing-sm);
 
     .post-card__image,
     .post-card__heading {
@@ -26,20 +26,20 @@
 .post-card {
     position: relative;
     height: 100%;
-    outline: 1px solid var(--color-neutral-a2);
+    outline: 1px solid var(--cc-color-neutral-a2);
     transition: outline-offset 150ms ease-in-out,
         outline-color 150ms ease-in-out;
-    background-color: var(--color-neutral-100);
-    border-radius: var(--radius-md);
+    background-color: var(--cc-color-neutral-100);
+    border-radius: var(--cc-radius-md);
     overflow: hidden
 }
 
 .post-card__excerpt {
     background: linear-gradient(to bottom,
-            color-mix(in srgb, var(--color-neutral-900) 40%, transparent),
-            color-mix(in srgb, var(--color-neutral-900) 70%, transparent));
-    color: var(--color-neutral-100);
-    padding-block: var(--spacing-md);
+            color-mix(in srgb, var(--cc-color-neutral-900) 40%, transparent),
+            color-mix(in srgb, var(--cc-color-neutral-900) 70%, transparent));
+    color: var(--cc-color-neutral-100);
+    padding-block: var(--cc-spacing-md);
 }
 
 .post-card__overlay {
@@ -91,10 +91,10 @@
 .post-card:has(.post-card__link:focus-visible),
 .post-card:hover,
 .post-card:focus-within {
-    box-shadow: var(--shadow-sm);
+    box-shadow: var(--cc-shadow-sm);
     outline-offset: 4px;
-    outline-color: var(--color-neutral-a4);
-    border-radius: calc(var(--radius-md) - 4px);
+    outline-color: var(--cc-color-neutral-a4);
+    border-radius: calc(var(--cc-radius-md) - 4px);
 
     .post-card__image {
         img {
@@ -109,7 +109,7 @@
 }
 
 .post-card .post-card__link {
-    --link-color-override: transparent;
+    --cc-link-color-override: transparent;
 
     outline: 0;
 }

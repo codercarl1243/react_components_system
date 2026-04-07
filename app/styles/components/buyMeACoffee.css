@@ -4,7 +4,7 @@
 }
 
 .buyMeACoffee__Link .link__icon {
-   fill: var(--link-color);
+   fill: var(--cc-link-color);
 }
 .buyMeACoffee__Link:hover .handWithHeartIcon,
 .buyMeACoffee__Link:focus-visible .handWithHeartIcon {
@@ -31,7 +31,7 @@
     transform: translateX(-6px);
     transform-origin: 50% 60%;
     opacity: 0;
-    fill: var(--color-danger-400);
+    fill: var(--cc-color-danger-400);
 }
 
 .buyMeACoffee__Link:hover #coffee-heart-float,

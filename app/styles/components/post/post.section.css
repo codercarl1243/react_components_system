@@ -1,8 +1,8 @@
 .post-section {
-    --post-section-spacer: var(--spacing-xxl);
+    --post-section-spacer: var(--cc-spacing-xxl);
 
     position: relative;
-    padding-block: var(--spacing-xl);
+    padding-block: var(--cc-spacing-xl);
 }
 
 
@@ -10,7 +10,7 @@
     max-width: 75ch;
 }
 .post-section h2, .post-section h3 {
-    scroll-margin-block-start: var(--spacing-xl);
+    scroll-margin-block-start: var(--cc-spacing-xl);
 }
 
 .post-section:not(:last-of-type)::after {
@@ -18,12 +18,12 @@
     position: absolute;
     bottom: calc(var(--post-section-spacer) / -2);
     height: 1px;
-    width: min(var(--bp-characters), 75%);
+    width: min(var(--cc-bp-characters), 75%);
     left: 0;
     right: 0;
     margin-inline: auto;
-    background-color: var(--text-muted);
-    box-shadow: 1px 4px 10px var(--foreground-on-surface);
+    background-color: var(--cc-text-muted);
+    box-shadow: 1px 4px 10px var(--cc-foreground-on-surface);
     pointer-events: none;
 }
 
@@ -33,7 +33,7 @@
 
 @media screen and (max-width: 35rem) {
     .post-section {
-       --post-section-spacer: var(--spacing-xl);  
+       --post-section-spacer: var(--cc-spacing-xl);  
     }
 
     .post-section:not(:last-of-type)::after {

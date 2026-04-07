@@ -8,7 +8,7 @@ import Icon from '../icon';
 export default function Hero() {
 
   return (
-    <section className='hero homepage__section relative flow-xxl'>
+    <section className='hero homepage__section relative flow-xxl width-bleed'>
       
       <Heading as={"h1"} headingSize={2} id="hero-heading" className='mb-md' variant='neutral' variantAppearance='filled'>
         Hey, I'm Carl
