@@ -32,7 +32,7 @@
         box-shadow: var(--button-shadow, none);
         outline-offset: var(--button-outline-offset);
         font-size: var(--button-font-size);
-        transition: all 0.2s ease;
+        transition: box-shadow 0.2s ease, outline 0.2s ease, transform 0.2s ease, color 0.2s ease, background-color 0.2s ease, ;
 
         /* Layout - reserve space for icon and spinner to prevent layout shift */
         &.button-w-icon {
