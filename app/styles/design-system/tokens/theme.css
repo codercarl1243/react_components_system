@@ -15,7 +15,8 @@ Theme tokens are consumed by:
 - global elements (e.g. body)
 */
 
-/* Light theme */
+/* light theme - Defaulted when no preference is set */
+:root:not([data-theme]),
 :root[data-theme="light"] {
     --cc-surface: var(--cc-color-neutral-100);
     --cc-foreground-on-surface: var(--cc-color-neutral-900);

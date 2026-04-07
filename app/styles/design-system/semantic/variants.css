@@ -25,7 +25,7 @@ These tokens are:
   --cc-background-color: var(--cc-variant-bg);
   --cc-foreground-color: var(--cc-variant-fg);
   --foreground-muted: color-mix(in srgb,
-      var(--cc-foreground-color, var(--cc-foreground-on-surface)) 65%,
+      var(--cc-variant-fg-on-surface, var(--cc-foreground-on-surface)) 65%,
       var(--cc-variant-surface, var(--cc-surface)));
   --cc-border-color: var(--cc-variant-border);
   --cc-surface-color: var(--cc-variant-surface);
