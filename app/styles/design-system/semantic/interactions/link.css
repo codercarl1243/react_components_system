@@ -7,7 +7,8 @@ to --cc-link-on-filled to maintain contrast.
 */
 
 .block,
-.block[data-appearance="outlined"] .block[data-appearance="ghost"] {
+.block[data-appearance="outlined"],
+.block[data-appearance="ghost"] {
 
     .link,
     &.link {
@@ -28,7 +29,36 @@ to --cc-link-on-filled to maintain contrast.
 
 .link__button:hover,
 .link__button:focus-visible {
+    outline-offset: var(--cc-spacing-xs);
     outline-color: var(--cc-border-color);
+}
+
+/* When the link IS the filled surface, use variant foreground — not the link-on-filled token
+   which is designed for links embedded within a filled container, not the filled element itself */
+.link[data-appearance="filled"] {
+    --cc-link-color-override: var(--cc-foreground-color);
+}
+
+/* When a .surface-frame is also a link — suppress underline, outline on interaction.
+   The outline follows the frame's effective border-radius at any nesting depth. */
+.link.surface-frame {
+    --cc-link-color-override: currentcolor;
+
+    text-decoration: none;
+}
+
+.link.surface-frame:focus-visible,
+.link.surface-frame:hover {
+    outline: 2px solid var(--cc-border-color, currentcolor);
+    outline-offset: var(--cc-spacing-xs);
+    border-radius: var(--cc-frame-radius-effective, var(--cc-frame-radius));
+}
+
+/* Nested inside another surface-frame — reduce radius to match inset geometry */
+.surface-frame .link.surface-frame {
+    --cc-frame-radius-effective: clamp(0px,
+            calc(var(--cc-frame-radius) - var(--cc-frame-inset)),
+            999px);
 }
 
 .link[data-appearance="ghost"]:not(:disabled, [aria-disabled="true"]) {

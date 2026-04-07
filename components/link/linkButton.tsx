@@ -12,7 +12,7 @@ export default function ButtonLink({ className, ...props }: CTALinkProps) {
         variant="primary"
         variantAppearance="filled"
         className={
-            clsx("link__button block px-md py-sm surface-frame link--surface",
+            clsx("link link__button block px-md py-sm surface-frame",
                 className)}
         {...props} />
 }

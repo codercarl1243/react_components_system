@@ -146,38 +146,4 @@ Keep them separate.
     --cc-frame-inset-base: var(--cc-spacing-xxl);
 }
 
-/*
----------------------------------
- Surface as Link
----------------------------------
-
-When a .surface-frame is also a link (e.g. a card or tile),
-use .link--cc-surface to suppress the default link underline
-and show an outline on interaction instead.
-
-The outline uses the surface's effective border-radius so it
-visually follows the frame's corners at any nesting depth.
-*/
-
-.link--cc-surface {
-    --cc-link-color-override: currentcolor;
-
-    text-decoration: none;
-    /* display: inline-block; */
-}
-
-.link--cc-surface:focus-visible,
-.link--cc-surface:hover {
-    outline: 2px solid currentcolor;
-    outline-offset: var(--cc-spacing-xs);
-    border-radius: var(--cc-frame-radius-effective, var(--cc-frame-radius));
-}
-
-/* When .link--cc-surface is nested inside a .surface-frame (but is not
-   itself a .surface-frame), propagate the reduced radius so the
-   outline matches the inset geometry. */
-.surface-frame .link--cc-surface {
-    --cc-frame-radius-effective: clamp(0px,
-            calc(var(--cc-frame-radius) - var(--cc-frame-inset)),
-            999px);
-}
+/* Surface as Link — interaction behaviour lives in interactions/link.css */

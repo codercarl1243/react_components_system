@@ -50,8 +50,6 @@
     fill: var(--cc-color-info-600);
 }
 
-
-
 @keyframes bookmark-pop {
     0% {
         opacity: 0;
@@ -82,7 +80,6 @@
     opacity: 0;
     pointer-events: none;
     fill: var(--cc-color-accent-400);
-
 }
 
 .readTheBlog__Link:hover,

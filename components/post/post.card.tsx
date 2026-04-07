@@ -36,7 +36,7 @@ export default function PostCard({ post, layout = "default" }: PostCardPropsType
         >
             <Link
                 href={href}
-                className="post-card__link post-card__overlay link--surface"
+                className="post-card__link post-card__overlay surface-frame"
                 aria-labelledby={`heading-post-${post.id}`}
             />
             {image.src && <Image

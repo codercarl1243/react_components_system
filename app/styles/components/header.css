@@ -35,8 +35,7 @@
     }
 }
 
-.nav__list__item:hover .icon,
-.nav__list__item:focus-visible .icon {
+.nav__list__item:hover .icon {
     transform: translateY(-1px) scale(1.125);
 }
 

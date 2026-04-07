@@ -15,7 +15,6 @@
 
 @layer structure {
     .button {
-        /* Layout properties */
         --button-font-size: 1rem;
         --button-margin: var(--cc-spacing-sm);
         --button-padding-y: var(--cc-spacing-sm);
