@@ -24,11 +24,9 @@
         /* AA: 24px x 24px minimum, AAA: 44px x 44px minimum */
         min-width: 44px;
         min-height: 44px;
-
         display: grid;
         gap: var(--cc-spacing-sm);
         align-items: center;
-
         margin: var(--button-margin);
         padding: var(--button-padding-y) var(--button-padding-x);
         box-shadow: var(--button-shadow, none);
