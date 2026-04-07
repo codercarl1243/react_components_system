@@ -24,21 +24,21 @@ Examples:
 /* Foreground channel */
 .block[data-paint~="foreground"],
 .block[data-paint="all"] {
-    color: var(--foreground-color, inherit);
+    color: var(--cc-foreground-color, inherit);
 }
 
 /* Background channel (and presets that include background) */
 .block[data-paint~="background"],
 .block[data-paint="all"],
 .block[data-paint="surface"] {
-    background-color: var(--background-color, transparent);
+    background-color: var(--cc-background-color, transparent);
 }
 
 /* Border channel (and presets that include border) */
 .block[data-paint~="border"],
 .block[data-paint="all"],
 .block[data-paint="surface"] {
-    border-width: var(--border-width, 1px);
-    border-style: var(--border-style, solid);
-    border-color: var(--border-color, var(--foreground-on-surface, currentcolor));
+    border-width: var(--cc-border-width, 1px);
+    border-style: var(--cc-border-style, solid);
+    border-color: var(--cc-border-color, var(--cc-foreground-on-surface, currentcolor));
 }

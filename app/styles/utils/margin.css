@@ -7,27 +7,27 @@
 }
 
 .m-xs {
-    margin: var(--spacing-xs);
+    margin: var(--cc-spacing-xs);
 }
 
 .m-sm {
-    margin: var(--spacing-sm);
+    margin: var(--cc-spacing-sm);
 }
 
 .m-md {
-    margin: var(--spacing-md);
+    margin: var(--cc-spacing-md);
 }
 
 .m-lg {
-    margin: var(--spacing-lg);
+    margin: var(--cc-spacing-lg);
 }
 
 .m-xl {
-    margin: var(--spacing-xl);
+    margin: var(--cc-spacing-xl);
 }
 
 .m-xxl {
-    margin: var(--spacing-xxl);
+    margin: var(--cc-spacing-xxl);
 }
 
 /* ---------------------------------- */
@@ -39,27 +39,27 @@
 }
 
 .mx-xs {
-    margin-inline: var(--spacing-xs);
+    margin-inline: var(--cc-spacing-xs);
 }
 
 .mx-sm {
-    margin-inline: var(--spacing-sm);
+    margin-inline: var(--cc-spacing-sm);
 }
 
 .mx-md {
-    margin-inline: var(--spacing-md);
+    margin-inline: var(--cc-spacing-md);
 }
 
 .mx-lg {
-    margin-inline: var(--spacing-lg);
+    margin-inline: var(--cc-spacing-lg);
 }
 
 .mx-xl {
-    margin-inline: var(--spacing-xl);
+    margin-inline: var(--cc-spacing-xl);
 }
 
 .mx-xxl {
-    margin-inline: var(--spacing-xxl);
+    margin-inline: var(--cc-spacing-xxl);
 }
 
 .my-0 {
@@ -67,27 +67,27 @@
 }
 
 .my-xs {
-    margin-block: var(--spacing-xs);
+    margin-block: var(--cc-spacing-xs);
 }
 
 .my-sm {
-    margin-block: var(--spacing-sm);
+    margin-block: var(--cc-spacing-sm);
 }
 
 .my-md {
-    margin-block: var(--spacing-md);
+    margin-block: var(--cc-spacing-md);
 }
 
 .my-lg {
-    margin-block: var(--spacing-lg);
+    margin-block: var(--cc-spacing-lg);
 }
 
 .my-xl {
-    margin-block: var(--spacing-xl);
+    margin-block: var(--cc-spacing-xl);
 }
 
 .my-xxl {
-    margin-block: var(--spacing-xxl);
+    margin-block: var(--cc-spacing-xxl);
 }
 
 /* ---------------------------------- */
@@ -99,27 +99,27 @@
 }
 
 .mt-xs {
-    margin-block-start: var(--spacing-xs);
+    margin-block-start: var(--cc-spacing-xs);
 }
 
 .mt-sm {
-    margin-block-start: var(--spacing-sm);
+    margin-block-start: var(--cc-spacing-sm);
 }
 
 .mt-md {
-    margin-block-start: var(--spacing-md);
+    margin-block-start: var(--cc-spacing-md);
 }
 
 .mt-lg {
-    margin-block-start: var(--spacing-lg);
+    margin-block-start: var(--cc-spacing-lg);
 }
 
 .mt-xl {
-    margin-block-start: var(--spacing-xl);
+    margin-block-start: var(--cc-spacing-xl);
 }
 
 .mt-xxl {
-    margin-block-start: var(--spacing-xxl);
+    margin-block-start: var(--cc-spacing-xxl);
 }
 
 .mb-0 {
@@ -127,27 +127,27 @@
 }
 
 .mb-xs {
-    margin-block-end: var(--spacing-xs);
+    margin-block-end: var(--cc-spacing-xs);
 }
 
 .mb-sm {
-    margin-block-end: var(--spacing-sm);
+    margin-block-end: var(--cc-spacing-sm);
 }
 
 .mb-md {
-    margin-block-end: var(--spacing-md);
+    margin-block-end: var(--cc-spacing-md);
 }
 
 .mb-lg {
-    margin-block-end: var(--spacing-lg);
+    margin-block-end: var(--cc-spacing-lg);
 }
 
 .mb-xl {
-    margin-block-end: var(--spacing-xl);
+    margin-block-end: var(--cc-spacing-xl);
 }
 
 .mb-xxl {
-    margin-block-end: var(--spacing-xxl);
+    margin-block-end: var(--cc-spacing-xxl);
 }
 
 .ml-auto {
@@ -159,27 +159,27 @@
 }
 
 .ml-xs {
-    margin-inline-start: var(--spacing-xs);
+    margin-inline-start: var(--cc-spacing-xs);
 }
 
 .ml-sm {
-    margin-inline-start: var(--spacing-sm);
+    margin-inline-start: var(--cc-spacing-sm);
 }
 
 .ml-md {
-    margin-inline-start: var(--spacing-md);
+    margin-inline-start: var(--cc-spacing-md);
 }
 
 .ml-lg {
-    margin-inline-start: var(--spacing-lg);
+    margin-inline-start: var(--cc-spacing-lg);
 }
 
 .ml-xl {
-    margin-inline-start: var(--spacing-xl);
+    margin-inline-start: var(--cc-spacing-xl);
 }
 
 .ml-xxl {
-    margin-inline-start: var(--spacing-xxl);
+    margin-inline-start: var(--cc-spacing-xxl);
 }
 
 .mr-auto {
@@ -191,25 +191,25 @@
 }
 
 .mr-xs {
-    margin-inline-end: var(--spacing-xs);
+    margin-inline-end: var(--cc-spacing-xs);
 }
 
 .mr-sm {
-    margin-inline-end: var(--spacing-sm);
+    margin-inline-end: var(--cc-spacing-sm);
 }
 
 .mr-md {
-    margin-inline-end: var(--spacing-md);
+    margin-inline-end: var(--cc-spacing-md);
 }
 
 .mr-lg {
-    margin-inline-end: var(--spacing-lg);
+    margin-inline-end: var(--cc-spacing-lg);
 }
 
 .mr-xl {
-    margin-inline-end: var(--spacing-xl);
+    margin-inline-end: var(--cc-spacing-xl);
 }
 
 .mr-xxl {
-    margin-inline-end: var(--spacing-xxl);
+    margin-inline-end: var(--cc-spacing-xxl);
 }

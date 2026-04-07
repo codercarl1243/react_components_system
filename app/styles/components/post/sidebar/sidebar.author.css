@@ -1,14 +1,14 @@
 .post-sidebar__author {
     margin-top: auto;
     height: fit-content;
-    padding-block: var(--spacing-md);
+    padding-block: var(--cc-spacing-md);
 }
 
 .author {
     display: flex;
     align-items: center;
     flex-wrap: wrap;
-    gap: var(--spacing-lg);
+    gap: var(--cc-spacing-lg);
     justify-content: center;
 }
 
@@ -19,12 +19,12 @@
 
 .author .author__avatar {
     overflow: hidden;
-    border-radius: var(--radius-circle);
-    background-color: var(--surface);
-    box-shadow: var(--shadow-sm);
+    border-radius: var(--cc-radius-circle);
+    background-color: var(--cc-surface);
+    box-shadow: var(--cc-shadow-sm);
 }
 
 .author__avatar img {
-    border-radius: var(--radius-circle);
-    padding: var(--spacing-xs);
+    border-radius: var(--cc-radius-circle);
+    padding: var(--cc-spacing-xs);
 }

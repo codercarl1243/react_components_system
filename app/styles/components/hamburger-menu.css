@@ -8,7 +8,7 @@
     /* Hidden by default */
 
     align-items: center;
-    gap: var(--spacing-sm);
+    gap: var(--cc-spacing-sm);
     position: fixed;
     transition: border-radius 250ms ease-in-out;
     right: var(--right);
@@ -54,7 +54,7 @@
     }
 
     &:focus-visible {
-        --button-outline-offset: var(--spacing-xs);
+        --button-outline-offset: var(--cc-spacing-xs);
     }
 }
 
@@ -67,11 +67,11 @@ main:has(.hamburger-menu--wrapper[data-mode="hamburger"]) {
 }
 
 .hamburger-menu--wrapper[data-mode="hamburger"]+main {
-    padding-block-start: var(--spacing-3xl);
+    padding-block-start: var(--cc-spacing-3xl);
 }
 
 .hamburger-menu--wrapper[data-mode="hamburger"] {
-    min-height: var(--bp-xs);
+    min-height: var(--cc-bp-xs);
     height: 100dvh;
     position: fixed;
     min-width: initial;
@@ -88,7 +88,7 @@ main:has(.hamburger-menu--wrapper[data-mode="hamburger"]) {
         /* ⬇️ defaults to open state */
         --translation: 0%;
 
-        background-color: var(--surface);
+        background-color: var(--cc-surface);
 
         position: fixed;
         top: 0;
@@ -104,10 +104,10 @@ main:has(.hamburger-menu--wrapper[data-mode="hamburger"]) {
             transition-duration: 0ms;
         }
         &[data-vertical="top"]{
-            padding-block-start: var(--spacing-3xl);
+            padding-block-start: var(--cc-spacing-3xl);
         }
         &[data-vertical="bottom"]{
-            padding-block-end: var(--spacing-3xl);
+            padding-block-end: var(--cc-spacing-3xl);
         }
         &[data-horizontal="right"] {
             --right: 0;

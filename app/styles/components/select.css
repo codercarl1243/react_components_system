@@ -1,49 +1,49 @@
 .select-wrapper {
-    --select-foreground-color: var(--foreground-color, var(--color-neutral-900));
-    --select-background-color: var(--background-color, var(--color-neutral-100));
-    --select-border-color: var(--border-color, var(--color-neutral-700));
+    --select-foreground-color: var(--cc-foreground-color, var(--cc-color-neutral-900));
+    --select-background-color: var(--cc-background-color, var(--cc-color-neutral-100));
+    --select-border-color: var(--cc-border-color, var(--cc-color-neutral-700));
 
     display: flex;
     flex-direction: column;
-    gap: var(--spacing-sm);
+    gap: var(--cc-spacing-sm);
 }
 
 .select-label {
-    font-size: var(--font-size-sm);
-    line-height: var(--line-height-snug);
+    font-size: var(--cc-font-size-sm);
+    line-height: var(--cc-line-height-snug);
     font-weight: 600;
     color: var(--select-foreground-color);
 }
 
 .select {
     appearance: none;
-    padding: var(--spacing-xs) var(--spacing-sm);
+    padding: var(--cc-spacing-xs) var(--cc-spacing-sm);
     background: var(--select-background-color);
     color: var(--select-foreground-color);
     border-color: var(--select-border-color);
-    border-radius: var(--radius-md);
+    border-radius: var(--cc-radius-md);
     font: inherit;
     cursor: pointer;
     transition: border-color 0.15s, box-shadow 0.15s;
 }
 
 .select:focus-visible {
-    --select-border-color: var(--color-primary-400);
+    --select-border-color: var(--cc-color-primary-400);
     /* outline: none; */
-    box-shadow: var(--shadow-sm);
+    box-shadow: var(--cc-shadow-sm);
 }
 
 .select--error {
-    --select-border-color: var(--color-danger-400);
+    --select-border-color: var(--cc-color-danger-400);
 }
 
 .select-helper {
-    font-size: var(--font-size-xs);
-    color: var(--text-muted);
+    font-size: var(--cc-font-size-xs);
+    color: var(--cc-text-muted);
 }
 
 .select-error {
-    font-size: var(--font-size-xs);
-    color: var(--color-danger-400);
+    font-size: var(--cc-font-size-xs);
+    color: var(--cc-color-danger-400);
     font-weight: 600;
 }

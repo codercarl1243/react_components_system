@@ -2,5 +2,5 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 1fr;
-    row-gap: var(--spacing-md);
+    row-gap: var(--cc-spacing-md);
 }

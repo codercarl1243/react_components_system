@@ -9,6 +9,6 @@
     &:focus-visible,
     &:active,
     &[data-pressed="true"] {
-        box-shadow: 0 0 4px 4px var(--color-neutral-100);
+        box-shadow: 0 0 4px 4px var(--cc-color-neutral-100);
     }
 }

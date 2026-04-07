@@ -5,15 +5,15 @@
 
 .footer {
     justify-content: center;
-    max-width: var(--bp-lg);
+    max-width: var(--cc-bp-lg);
     margin-inline: auto;
-    padding-block-end: var(--spacing-lg);
-    padding-block-start: var(--spacing-3xl);
-    padding-inline: var(--spacing-xl);
+    padding-block-end: var(--cc-spacing-lg);
+    padding-block-start: var(--cc-spacing-3xl);
+    padding-inline: var(--cc-spacing-xl);
 }
 
 .footer__content {
-    --gap: clamp(var(--spacing-lg), 1.5vw, var(--spacing-3xl));
+    --gap: clamp(var(--cc-spacing-lg), 1.5vw, var(--cc-spacing-3xl));
 
     display: flex;
     flex-direction: column;
@@ -37,11 +37,11 @@
 }
 
 .socials__item svg {
-    margin-inline-end: var(--spacing-xs);
+    margin-inline-end: var(--cc-spacing-xs);
 }
 
 .footer__copyright {
-    color: var(--color-neutral-400);
+    color: var(--cc-color-neutral-400);
     text-align: center;
 }
 

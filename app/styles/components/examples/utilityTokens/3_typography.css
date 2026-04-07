@@ -10,7 +10,7 @@
     left: 0;
     right: 0;
     height: 1px;
-    background-color: var(--border-color);
+    background-color: var(--cc-border-color);
     opacity: 0.4;
     pointer-events: none;
 }

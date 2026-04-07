@@ -1,7 +1,7 @@
 .callout__heading {
-    font-size: var(--font-size-sm);
+    font-size: var(--cc-font-size-sm);
     font-weight: 600;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    color: var(--text-muted);
+    color: var(--cc-text-muted);
 }

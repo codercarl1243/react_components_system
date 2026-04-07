@@ -6,37 +6,37 @@
 }
 
 .fun-underline:nth-of-type(9n+1) {
-    --background: var(--color-emphasis-100);
+    --background: var(--cc-color-emphasis-100);
 }
 
 .fun-underline:nth-of-type(9n+2) {
-    --background: var(--color-emphasis-200);
+    --background: var(--cc-color-emphasis-200);
 }
 
 .fun-underline:nth-of-type(9n+3) {
-    --background: var(--color-emphasis-300);
+    --background: var(--cc-color-emphasis-300);
 }
 
 .fun-underline:nth-of-type(9n+4) {
-    --background: var(--color-emphasis-400);
+    --background: var(--cc-color-emphasis-400);
 }
 
 .fun-underline:nth-of-type(9n+5) {
-    --background: var(--color-emphasis-500);
+    --background: var(--cc-color-emphasis-500);
 }
 
 .fun-underline:nth-of-type(9n+6) {
-    --background: var(--color-emphasis-600);
+    --background: var(--cc-color-emphasis-600);
 }
 
 .fun-underline:nth-of-type(9n+7) {
-    --background: var(--color-emphasis-700);
+    --background: var(--cc-color-emphasis-700);
 }
 
 .fun-underline:nth-of-type(9n+8) {
-    --background: var(--color-emphasis-800);
+    --background: var(--cc-color-emphasis-800);
 }
 
 .fun-underline:nth-of-type(9n+9) {
-    --background: var(--color-emphasis-900);
+    --background: var(--cc-color-emphasis-900);
 }

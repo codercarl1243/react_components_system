@@ -1,7 +1,7 @@
 .readTheBlog__Link {
     display: inline-flex;
     align-items: center;
-    gap: var(--spacing-sm);
+    gap: var(--cc-spacing-sm);
 }
 
 .book-icon {
@@ -47,10 +47,8 @@
     transform: translateY(-14px) scale(0.5);
     transform-origin: 20.5px 5px;
     transform-box: view-box;
-    fill: var(--color-info-600);
+    fill: var(--cc-color-info-600);
 }
-
-
 
 @keyframes bookmark-pop {
     0% {
@@ -81,8 +79,7 @@
 .pop-mark {
     opacity: 0;
     pointer-events: none;
-    fill: var(--color-accent-400);
-
+    fill: var(--cc-color-accent-400);
 }
 
 .readTheBlog__Link:hover,

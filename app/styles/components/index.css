@@ -1,11 +1,9 @@
-@import './primitives/index.css';
 @import './buttons/index.css';
 @import './post/index.css';
 @import './skiplink.css';
 @import './code.css';
 @import './header.css';
 @import './footer.css';
-@import './link.css';
 @import './spinner.css';
 @import './examples/index.css';
 @import './heading.css';

@@ -32,11 +32,11 @@ export default function PostCard({ post, layout = "default" }: PostCardPropsType
         <Block
             as="article"
             {...applyDataAttributes({ layout, featured })}
-            className="surface-frame post-card post-card--grid"
+            className="post-card post-card--grid"
         >
             <Link
                 href={href}
-                className="post-card__link post-card__overlay link--surface"
+                className="post-card__link post-card__overlay surface-frame"
                 aria-labelledby={`heading-post-${post.id}`}
             />
             {image.src && <Image

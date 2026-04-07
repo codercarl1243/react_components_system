@@ -1,8 +1,8 @@
 /*  Base arcade styles */
 
 .arcade--wrapper {
-  --arcade-border-thickness: var(--spacing-sm);
-  --border-color: var(--color-accent-600);
+  --arcade-border-thickness: var(--cc-spacing-sm);
+  --cc-border-color: var(--cc-color-accent-600);
 
   padding: var(--arcade-border-thickness);
   position: relative;
@@ -13,7 +13,7 @@
   justify-content: space-between;
   height: min(750px, 85dvh);
   width: min(500px, 100%);
-  border-radius: var(--spacing-md);
+  border-radius: var(--cc-spacing-md);
   background-color: transparent;
 }
 
@@ -24,14 +24,14 @@
   left: -50%;
   width: 200%;
   height: 200%;
-  background: var(--color-accent-200);
+  background: var(--cc-color-accent-200);
   z-index: -1;
 }
 
 .arcade--game {
-  --border-color: var(--color-accent-600);
+  --cc-border-color: var(--cc-color-accent-600);
   
-  background-color: var(--surface);
+  background-color: var(--cc-surface);
   height: 100%;
   width: 100%;
 }
@@ -62,7 +62,7 @@
 
 /* Effects */
 .combo-active {
-  color: var(--color-accent-400);
+  color: var(--cc-color-accent-400);
   font-weight: 700;
   animation: pulse 200ms ease;
 }

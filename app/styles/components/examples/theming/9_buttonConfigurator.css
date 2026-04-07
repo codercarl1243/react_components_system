@@ -6,7 +6,7 @@
     align-items: start;
     justify-items: center;
     width: 100%;
-    max-width: var(--bp-md);
+    max-width: var(--cc-bp-md);
 }
 
 

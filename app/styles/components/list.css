@@ -2,8 +2,8 @@
   margin: 0;
   list-style-type: none;
   padding-inline-start: var(--spacing);
-  line-height: var(--line-height-relaxed);
-  font-size: var(--font-size-base, inherit);
+  line-height: var(--cc-line-height-relaxed);
+  font-size: var(--cc-font-size-base, inherit);
 }
 
 .list--none,
@@ -17,8 +17,8 @@
 }
 
 :where(.list:not(.list--none)) > li::before {
-  --list-marker-bg-color: var(--background-color, transparent);
-  --list-color: var(--foreground-color, var(--color-secondary-400));
+  --list-marker-bg-color: var(--cc-background-color, transparent);
+  --list-color: var(--cc-foreground-color, var(--cc-color-secondary-400));
   --list-border: none;
   --list-border-radius: 0;
 
@@ -26,7 +26,7 @@
   position: absolute;
   left: 0.35em;
   top: 0.5em;
-  width: var(--spacing-sm);
+  width: var(--cc-spacing-sm);
   aspect-ratio: 1;
   border: var(--list-border);
   border-radius: var(--list-border-radius);
@@ -37,8 +37,8 @@
 .list--disc > li::before {
   --list-marker-bg-color: currentcolor;
   
-  background: conic-gradient(currentcolor, var(--surface));
-  width: var(--spacing-md);
+  background: conic-gradient(currentcolor, var(--cc-surface));
+  width: var(--cc-spacing-md);
   left: 0;
   top: 0.5em;
 }
@@ -46,12 +46,12 @@
 /* Unordered list variants */
 .list--disc > li::before,
 .list--circle > li::before {
-  --list-border-radius: var(--radius-circle);
+  --list-border-radius: var(--cc-radius-circle);
 }
 
 .list--circle > li::before {
-  --list-marker-bg-color: var(--surface-color);
-  --list-border: var(--border-width-thin) solid currentcolor;
+  --list-marker-bg-color: var(--cc-surface-color);
+  --list-border: var(--cc-border-width-thin) solid currentcolor;
 }
 
 /* Ordered list variants */
@@ -102,7 +102,7 @@
 /* Definitional list */
 .list--definition {
   display: grid;
-  gap: var(--spacing-sm);
+  gap: var(--cc-spacing-sm);
 }
 
 .list--definition dt {
@@ -111,5 +111,5 @@
 
 .list--definition dd {
   margin: 0;
-  color: var(--text-muted);
+  color: var(--cc-text-muted);
 }

@@ -11,7 +11,7 @@
     grid-template-columns: var(--content-grid-col-template);
     grid-auto-rows: minmax(200px, auto);
     grid-auto-flow: dense;
-    gap: var(--spacing-sm);
+    gap: var(--cc-spacing-sm);
 }
 
 .content-grid .content-grid__item {
@@ -23,7 +23,7 @@
   .content-grid {
     --content-grid-col-template: repeat(4, 1fr);
 
-    gap: var(--spacing-md);
+    gap: var(--cc-spacing-md);
     grid-auto-rows: 125px;
   }
 

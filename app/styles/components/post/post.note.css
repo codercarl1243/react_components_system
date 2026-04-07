@@ -1,14 +1,14 @@
 .post-note {
     position: relative;
-    padding-inline: clamp(var(--spacing-sm), var(--spacing-xs) + 0.25vw, var(--spacing-lg));
-    padding-block: var(--spacing-lg);
-    box-shadow: inset 2px 2px 4px color-mix(in srgb, var(--background-color) 10%, transparent),
-        inset -1px -1px 2px color-mix(in srgb, var(--background-color) 90%, transparent);
+    padding-inline: clamp(var(--cc-spacing-sm), var(--cc-spacing-xs) + 0.25vw, var(--cc-spacing-lg));
+    padding-block: var(--cc-spacing-lg);
+    box-shadow: inset 2px 2px 4px color-mix(in srgb, var(--cc-background-color) 10%, transparent),
+        inset -1px -1px 2px color-mix(in srgb, var(--cc-background-color) 90%, transparent);
     border-left-width: 3px !important;
 }
 
 .post-note.has-icon {
-    padding: var(--spacing-lg) var(--spacing-lg);
+    padding: var(--cc-spacing-lg) var(--cc-spacing-lg);
 }
 
 .post-note__icon {
@@ -20,10 +20,9 @@
     background-color: inherit;
     color: inherit;
     fill: currentcolor;
-
-    border: var(--border-width-thin) solid;
+    border: var(--cc-border-width-thin) solid;
     border-color: inherit;
-    border-right: var(--spacing-xl);
-    border-top: var(--spacing-xl);
-    border-radius: var(--radius-circle);
+    border-right-width: var(--cc-spacing-xl);
+    border-top-width: var(--cc-spacing-xl);
+    border-radius: var(--cc-radius-circle);
 }

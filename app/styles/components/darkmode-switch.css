@@ -5,7 +5,7 @@
 
     &:hover,
     &:focus-visible {
-        outline: 1px solid var(--foreground-on-surface);
+        outline: 1px solid var(--cc-foreground-on-surface);
         outline-offset: 4px;
     }
 

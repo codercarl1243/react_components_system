@@ -37,14 +37,14 @@ Surface-frame is purely structural.
  Core Concepts
 ---------------------------------
 
-• --frame-radius
+• --cc-frame-radius
   The base corner radius for this surface.
 
-• --frame-inset
+• --cc-frame-inset
   The distance between this surface's border and a nested surface's border.
   This value is used to compute the nested radius.
 
-• --frame-radius-nested
+• --cc-frame-radius-nested
   A derived radius:
     nestedRadius = frameRadius - frameInset
 
@@ -81,12 +81,12 @@ Inset utilities control how much the nested radius is reduced.
 They do NOT add spacing or padding.
 
 .frame-inset-0   → no inset (flat nesting)
-.frame-inset-xs  → var(--spacing-xs)
-.frame-inset-sm  → var(--spacing-sm)
-.frame-inset-md  → var(--spacing-md)
-.frame-inset-lg  → var(--spacing-lg)
-.frame-inset-xl  → var(--spacing-xl)
-.frame-inset-xxl → var(--spacing-xxl)
+.frame-inset-xs  → var(--cc-spacing-xs)
+.frame-inset-sm  → var(--cc-spacing-sm)
+.frame-inset-md  → var(--cc-spacing-md)
+.frame-inset-lg  → var(--cc-spacing-lg)
+.frame-inset-xl  → var(--cc-spacing-xl)
+.frame-inset-xxl → var(--cc-spacing-xxl)
 
 ---------------------------------
  Design Rule
@@ -100,48 +100,50 @@ Keep them separate.
 
 .surface-frame {
     /* Base geometry */
-    --frame-radius: var(--radius-md);
+    --cc-frame-radius: var(--cc-radius-md);
 
     /* Default inset (overridable) */
-    --frame-inset-base: var(--spacing-xs);
-    --frame-inset: var(--frame-inset-base);
+    --cc-frame-inset-base: var(--cc-spacing-xs);
+    --cc-frame-inset: var(--cc-frame-inset-base);
 
-    border: var(--border-width, 1px) var(--border-style, solid) var(--border-color);
-    border-radius: var(--frame-radius-effective, var(--frame-radius));
+    border: var(--cc-border-width, 1px) var(--cc-border-style, solid) var(--cc-border-color);
+    border-radius: var(--cc-frame-radius-effective, var(--cc-frame-radius));
 }
 
 /* Nested surface frames derive a smaller radius */
 .surface-frame .surface-frame {
-    --frame-radius-effective: clamp(0px,
-            calc(var(--frame-radius) - var(--frame-inset)),
+    --cc-frame-radius-effective: clamp(0px,
+            calc(var(--cc-frame-radius) - var(--cc-frame-inset)),
             999px);
 }
 
 /* Geometry utilities — single responsibility */
 .frame-inset-0 {
-    --frame-inset-base: 0px;
+    --cc-frame-inset-base: 0px;
 }
 
 .frame-inset-xs {
-    --frame-inset-base: var(--spacing-xs);
+    --cc-frame-inset-base: var(--cc-spacing-xs);
 }
 
 .frame-inset-sm {
-    --frame-inset-base: var(--spacing-sm);
+    --cc-frame-inset-base: var(--cc-spacing-sm);
 }
 
 .frame-inset-md {
-    --frame-inset-base: var(--spacing-md);
+    --cc-frame-inset-base: var(--cc-spacing-md);
 }
 
 .frame-inset-lg {
-    --frame-inset-base: var(--spacing-lg);
+    --cc-frame-inset-base: var(--cc-spacing-lg);
 }
 
 .frame-inset-xl {
-    --frame-inset-base: var(--spacing-xl);
+    --cc-frame-inset-base: var(--cc-spacing-xl);
 }
 
 .frame-inset-xxl {
-    --frame-inset-base: var(--spacing-xxl);
+    --cc-frame-inset-base: var(--cc-spacing-xxl);
 }
+
+/* Surface as Link — interaction behaviour lives in interactions/link.css */

@@ -7,6 +7,6 @@
     aspect-ratio: 1;
     display: inline-block;
     vertical-align: middle;
-    border-radius: var(--border-radius);
+    border-radius: var(--cc-border-radius);
     pointer-events: none;
 }

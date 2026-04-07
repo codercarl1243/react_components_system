@@ -1,11 +1,11 @@
 .shiki-wrapper {
-    --line-background-color: inherit;
-    --line-color: inherit;
+    --cc-line-background-color: inherit;
+    --cc-line-color: inherit;
 
     position: relative;
     font-size: 1rem;
-    background: var(--color-neutral-900);
-    border-radius: var(--radius-md);
+    background: var(--cc-color-neutral-900);
+    border-radius: var(--cc-radius-md);
     min-width: 0;
 
     .shiki {
@@ -13,13 +13,12 @@
         padding: 1.15em 0.5em;
         padding-inline-end: 3em;
         margin-block: 0;
-        border: var(--border-width-thick) solid;
-        border-radius: var(--radius-md);
+        border: var(--cc-border-width-thick) solid;
+        border-radius: var(--cc-radius-md);
         overflow: auto;
-
         white-space: pre;
         scrollbar-width: auto;
-        scrollbar-color: var(--color-neutral-200) transparent;
+        scrollbar-color: var(--cc-color-neutral-200) transparent;
 
         &::-webkit-scrollbar {
             height: 10px;
@@ -27,8 +26,8 @@
         }
 
         &::-webkit-scrollbar-thumb {
-            background-color: var(--color-neutral-100);
-            border-radius: var(--radius-sm);
+            background-color: var(--cc-color-neutral-100);
+            border-radius: var(--cc-radius-sm);
         }
 
         code {
@@ -38,23 +37,24 @@
         .line {
             display: inline-flex;
             width: 100%;
-            background-color: var(--line-background-color) !important;
+            background-color: var(--cc-line-background-color) !important;
 
             .custom-code-highlight span {
-                color: var(--line-color) !important;
+                color: var(--cc-line-color) !important;
             }
         }
 
         .line:hover {
-            --line-background-color: var(--color-neutral-900);
-            --line-color: var(--surface-color);
-            --code-highlight-background-color: var(--color-neutral-900);
-            --code-highlight-color: var(--color-neutral-100);
+            --cc-line-background-color: var(--cc-color-neutral-900);
+            --cc-line-color: var(--cc-surface-color);
+            --code-highlight-background-color: var(--cc-color-neutral-900);
+            --code-highlight-color: var(--cc-color-neutral-100);
 
             .custom-code-highlight:hover {
-                --code-highlight-border-color: var(--color-warning-400);
-                --code-highlight-background-color: var(--color-neutral-900);
-                --line-color: var(--color-neutral-100);
+                --code-highlight-border-color: var(--cc-color-warning-400);
+                --code-highlight-background-color: var(--cc-color-neutral-900);
+                --cc-line-color: var(--cc-color-neutral-100);
+                
                 border-style: solid;
             }
         }
@@ -62,18 +62,17 @@
 }
 
 .shiki .custom-code-highlight {
-    --code-highlight-border-color: var(--border-color, var(--color-primary-400));
-    --code-highlight-color: var(--color-neutral-900);
-    --code-highlight-background-color: var(--surface-color, var(--color-primary-200));
-
-    --line-color: var(--code-highlight-color);
+    --code-highlight-border-color: var(--cc-border-color, var(--cc-color-primary-400));
+    --code-highlight-color: var(--cc-color-neutral-900);
+    --code-highlight-background-color: var(--cc-surface-color, var(--cc-color-primary-200));
+    --cc-line-color: var(--code-highlight-color);
 
     background: var(--code-highlight-background-color);
     padding: 0 0.15em;
-    border-width: var(--border-width-thin);
+    border-width: var(--cc-border-width-thin);
     border-style: dashed;
     border-color: var(--code-highlight-border-color);
-    border-radius: var(--radius-sm);
+    border-radius: var(--cc-radius-sm);
     box-decoration-break: clone;
     -webkit-box-decoration-break: clone;
 }
@@ -83,18 +82,19 @@
     --button-margin: 0;
     --button-padding-x: 0;
     --button-padding-y: 0;
-    top: var(--spacing-md);
-    right: var(--spacing-md);
+    
+    top: var(--cc-spacing-md);
+    right: var(--cc-spacing-md);
 }
 
 .shiki-wrapper:has(.code-title) {
-    padding: var(--spacing-xs);
+    padding: var(--cc-spacing-xs);
 
     .code-header {
-        padding-inline-start: var(--spacing-xs);
-        padding-block: var(--spacing-xs);
+        padding-inline-start: var(--cc-spacing-xs);
+        padding-block: var(--cc-spacing-xs);
         display: flex;
-        gap: var(--spacing-xs-md);
+        gap: var(--cc-spacing-xs-md);
         justify-content: space-between;
         align-items: center;
     }
@@ -122,15 +122,15 @@
     .shiki-wrapper pre {
         max-height: 22rem;
         padding-inline-end: 0;
-        font-size: var(--font-size-sm);
+        font-size: var(--cc-font-size-sm);
     }
 }
 
 .shiki-inline {
-    background-color: var(--color-inline-bg);
-    border: var(--border-width-thin) solid;
-    padding: 0.125em var(--spacing-xs);
-    border-radius: var(--radius-md);
+    background-color: var(--cc-color-inline-bg);
+    border: var(--cc-border-width-thin) solid;
+    padding: 0.125em var(--cc-spacing-xs);
+    border-radius: var(--cc-radius-md);
     white-space: pre-wrap;
     word-break: break-word;
     overflow-wrap: break-word;
