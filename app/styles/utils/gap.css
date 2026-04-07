@@ -5,7 +5,7 @@
 }
 
 .gap-md {
-  --_gap: var(--cc-spacing-sm);
+  --_gap: var(--cc-spacing-md);
 
   gap: var(--_gap);
 }
@@ -58,7 +58,7 @@
 }
 
 .gap-col-md {
-  --_gap-col: var(--cc-spacing-sm);
+  --_gap-col: var(--cc-spacing-md);
 
   column-gap: var(--_gap-col);
 }
@@ -111,7 +111,7 @@
 }
 
 .gap-row-md {
-  --_gap-row: var(--cc-spacing-sm);
+  --_gap-row: var(--cc-spacing-md);
 
   row-gap: var(--_gap-row);
 }
