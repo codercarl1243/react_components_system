@@ -8,6 +8,7 @@
 
 .octagon {
   --octagon-fill: var(--cc-color-primary-200);
+  
   display: block;
   fill: var(--cc-color-primary-100);
   position: absolute;
