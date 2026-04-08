@@ -28,9 +28,6 @@
 
         &:hover,
         &:focus-visible {
-            /* text-decoration: underline;
-            text-decoration-style: dotted; */
-
             &:after {
                 content: '#';
                 position: absolute;
