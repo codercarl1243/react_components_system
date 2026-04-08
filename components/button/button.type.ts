@@ -13,11 +13,14 @@ type BaseButtonProps = {
   isLoading?: boolean;
   icon?: IconProps['icon'];
   onClick?: ButtonClickHandler;
-  variant?: Variant;
-  appearance?: VariantAppearance;
   showSpinner?: boolean;
 };
 
 export type ButtonProps = Omit<BlockWrapperProps<"button", BaseButtonProps>, 'as'>
 
 export type IconButtonProps = AccessibleLabel & Omit<ButtonProps, 'children'>;
+
+export type TSwitchProps = {
+    checked: boolean;
+} & Omit<ButtonProps, 'as' | "role" | "aria-checked" >;
+

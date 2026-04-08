@@ -21,16 +21,27 @@ to --cc-link-on-filled to maintain contrast.
 .block[data-appearance="tonal"][data-paint~="background"],
 .block[data-appearance="tonal"][data-paint="surface"],
 .block[data-appearance="tonal"][data-paint="all"] {
+
     .link,
     &.link {
         --cc-link-color: var(--cc-link-on-filled);
     }
 }
 
+.link__button {
+    --outline-offset: -3px;
+    --outline-color: transparent;
+
+    outline: 1px solid var(--outline-color);
+    transition: text-decoration-color 0.2s ease,
+        outline 0.2s ease,
+        outline-offset 0.2s ease;
+}
+
 .link__button:hover,
 .link__button:focus-visible {
-    outline-offset: var(--cc-spacing-xs);
-    outline-color: var(--cc-border-color);
+    --outline-offset: var(--cc-spacing-xs);
+    --outline-color: var(--cc-border-color);
 }
 
 /* When the link IS the filled surface, use variant foreground — not the link-on-filled token
