@@ -53,7 +53,7 @@ export default function useBubbles(cooldown = COOLDOWN_DURATION) {
     const createBubble = () => {
         const lifetime = MIN_BUBBLE_LIFETIME + Math.random() * (MAX_BUBBLE_LIFETIME - MIN_BUBBLE_LIFETIME);
         const bubbleId = `bubble-${bubbleIdCounter.current++}`;
-        const bubbleColor = `--color-emphasis-${(Math.floor(Math.random() * 9) + 1) * 100}`
+        const bubbleColor = `--cc-color-emphasis-${(Math.floor(Math.random() * 9) + 1) * 100}`
         const bubbleSize =
             MIN_BUBBLE_SIZE +
             Math.random() * (MAX_BUBBLE_SIZE - MIN_BUBBLE_SIZE);
