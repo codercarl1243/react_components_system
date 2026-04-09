@@ -2,7 +2,6 @@ import type { MouseEvent } from 'react'
 import type { IconProps } from '@/components/icon/icon.type';
 import type { BlockWrapperProps } from '../primitives/types';
 import type { AccessibleLabel } from '@/types/accessibility';
-import type { Variant, VariantAppearance } from '@/types/variant';
 
 export type ButtonMouseEvent = MouseEvent<HTMLButtonElement>;
 
@@ -22,5 +21,5 @@ export type IconButtonProps = AccessibleLabel & Omit<ButtonProps, 'children'>;
 
 export type TSwitchProps = {
     checked: boolean;
-} & Omit<ButtonProps, 'as' | "role" | "aria-checked" >;
+} & Omit<ButtonProps, "role" | "aria-checked">;
 
