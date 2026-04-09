@@ -33,6 +33,7 @@ to --cc-link-on-filled to maintain contrast.
     --outline-color: transparent;
 
     outline: 1px solid var(--outline-color);
+    outline-offset: var(--outline-offset);
     transition: text-decoration-color 0.2s ease,
         outline 0.2s ease,
         outline-offset 0.2s ease;
