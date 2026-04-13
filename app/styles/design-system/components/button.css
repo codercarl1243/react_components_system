@@ -4,7 +4,6 @@
         appearance: none;
         background: none;
         border-radius: var(--cc-radius-md);
-        outline: 0;
         font: inherit;
         line-height: 1.25;
         white-space: nowrap;
@@ -19,6 +18,7 @@
         --button-margin: var(--cc-spacing-sm);
         --button-padding-y: var(--cc-spacing-sm);
         --button-padding-x: var(--cc-spacing-xs);
+        --button-outline-offset: -3px;
 
         /* WCAG Target Size Requirements */
         /* AA: 24px x 24px minimum, AAA: 44px x 44px minimum */
@@ -30,9 +30,40 @@
         margin: var(--button-margin);
         padding: var(--button-padding-y) var(--button-padding-x);
         box-shadow: var(--button-shadow, none);
+        outline: 1px solid transparent;
         outline-offset: var(--button-outline-offset);
         font-size: var(--button-font-size);
-        transition: box-shadow 0.2s ease, outline 0.2s ease, transform 0.2s ease, color 0.2s ease, background-color 0.2s ease, ;
+        transition: box-shadow 0.2s ease,
+            outline 0.2s ease,
+            outline-offset 0.2s ease,
+            transform 0.2s ease,
+            color 0.2s ease,
+            background-color 0.2s ease;
+
+
+        &.button--icon-only {
+            --button-padding-y: 0;
+            --button-padding-x: 0;
+            --button-margin: 0;
+
+            grid-template-columns: 1fr;
+            place-content: center;
+
+            .button__content {
+                display: none;
+            }
+
+            & .icon,
+            & .spinner {
+                grid-column: 1;
+            }
+
+            &[data-loading="true"] {
+                .icon {
+                    display: none;
+                }
+            }
+        }
 
         /* Layout - reserve space for icon and spinner to prevent layout shift */
         &.button-w-icon {
@@ -75,19 +106,25 @@
         /* Interactive states - UX communication through outlines and transforms */
         &:hover {
             --button-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2);
+            --button-outline-offset: 3px;
 
-            outline: 1px solid var(--cc-border-color, currentcolor);
+            outline-color: var(--cc-border-color, currentcolor);
         }
 
         &:focus-visible {
             --button-shadow: none;
+            --button-outline-offset: 4px;
 
-            outline: 2px solid var(--cc-border-color);
+            outline-width: 2px;
+            outline-color: var(--cc-border-color, currentcolor);
         }
 
         &:active,
         &[data-pressed="true"] {
-            outline: 1px dotted var(--cc-border-color, currentcolor);
+            --button-outline-offset: 1px;
+
+            outline-style: dotted;
+            outline-color: var(--cc-border-color, currentcolor);
             transform: translateY(1px);
         }
 
@@ -104,8 +141,9 @@
             &:hover,
             &:active {
                 --button-shadow: none;
+                --button-outline-offset: -3px;
 
-                outline: none;
+                outline-color: transparent;
                 transform: none;
             }
 
@@ -118,7 +156,9 @@
             cursor: wait;
 
             &:hover:not(:focus-visible) {
-                outline: none;
+                --button-outline-offset: -3px;
+
+                outline-color: transparent;
                 box-shadow: none;
                 transform: none;
             }
@@ -132,7 +172,7 @@
 
     /* Touch device optimization */
     @media screen and (any-pointer: coarse) {
-        .button {
+        .button:not(.button--icon-only, .switch) {
             --button-margin: 12px;
             --button-padding-y: 12px;
             --button-padding-x: 20px;

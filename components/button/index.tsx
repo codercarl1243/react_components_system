@@ -85,7 +85,11 @@ export default function Button({
   return (
     <Block
       as="button"
-      className={clsx(className, { 'button-w-icon': icon }, { 'button-w-spinner': showSpinner }, 'button')}
+      className={clsx(
+        className,
+        { 'button-w-icon': icon },
+        { 'button-w-spinner': showSpinner },
+        'button')}
       onClick={onClickHandler}
       aria-disabled={isLoading || disabled}
       data-loading={isLoading}

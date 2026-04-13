@@ -12,7 +12,7 @@ export default function DarkModeSwitch({ userTheme }: { userTheme: string }) {
             checked={theme === "dark"}
             onClick={toggleTheme}
             aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
-            className='block darkmode__switch surface-frame'
+            className='darkmode__switch m-0 p-0'
             variant={"light"}
             variantAppearance='filled'
             paint="all"

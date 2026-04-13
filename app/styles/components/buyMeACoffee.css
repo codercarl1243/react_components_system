@@ -31,7 +31,6 @@
     transform: translateX(-6px);
     transform-origin: 50% 60%;
     opacity: 0;
-    fill: var(--cc-color-danger-400);
 }
 
 .buyMeACoffee__Link:hover #coffee-heart-float,

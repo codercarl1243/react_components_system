@@ -1,19 +1,25 @@
 import clsx from "clsx";
-import { TSwitchProps } from "./type";
+import type { TSwitchProps } from "@/components/button/button.type";
+import Button from "@/components/button";
 
-export default function Switch({ checked, variant = "inverse", variantAppearance = "filled", paint = "all", children, className, ...props }: TSwitchProps) {
+export default function Switch({
+    checked,
+    variant = "inverse",
+    variantAppearance = "filled",
+    children,
+    className,
+    ...props }: TSwitchProps) {
 
     return (
-        <button
-            {...props}
-            type="button"
+        <Button
+            className={clsx(className, 'switch')}
             aria-checked={checked}
             role="switch"
-            data-variant={variant}
-            data-appearance={variantAppearance}
-            data-paint={paint}
-            className={clsx(className, 'switch')}>
+            variant={variant}
+            variantAppearance={variantAppearance}
+            {...props}
+        >
             {children}
-        </button>
+        </Button>
     )
 }

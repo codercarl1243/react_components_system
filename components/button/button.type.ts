@@ -2,7 +2,6 @@ import type { MouseEvent } from 'react'
 import type { IconProps } from '@/components/icon/icon.type';
 import type { BlockWrapperProps } from '../primitives/types';
 import type { AccessibleLabel } from '@/types/accessibility';
-import type { Variant, VariantAppearance } from '@/types/variant';
 
 export type ButtonMouseEvent = MouseEvent<HTMLButtonElement>;
 
@@ -13,11 +12,14 @@ type BaseButtonProps = {
   isLoading?: boolean;
   icon?: IconProps['icon'];
   onClick?: ButtonClickHandler;
-  variant?: Variant;
-  appearance?: VariantAppearance;
   showSpinner?: boolean;
 };
 
 export type ButtonProps = Omit<BlockWrapperProps<"button", BaseButtonProps>, 'as'>
 
 export type IconButtonProps = AccessibleLabel & Omit<ButtonProps, 'children'>;
+
+export type TSwitchProps = {
+    checked: boolean;
+} & Omit<ButtonProps, "role" | "aria-checked">;
+
