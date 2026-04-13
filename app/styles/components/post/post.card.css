@@ -35,9 +35,7 @@
 }
 
 .post-card__excerpt {
-    background: linear-gradient(to bottom,
-            color-mix(in srgb, var(--cc-color-neutral-900) 40%, transparent),
-            color-mix(in srgb, var(--cc-color-neutral-900) 70%, transparent));
+    background: color-mix(in srgb, var(--cc-color-neutral-900) 80%, transparent);
     color: var(--cc-color-neutral-100);
     padding-block: var(--cc-spacing-md);
 }
