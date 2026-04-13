@@ -102,7 +102,10 @@ body {
             <PostNote className="my-lg">
                 <p> For tools that help you design accessible, contrast-safe color palettes, see the <Link href="#resources-color-accessibility-tools">resources section</Link>.</p>
                 <p className="italic">
-                    The full token set for this project is available on <Link href="https://github.com/codercarl1243/react_components_system/tree/main/app/styles/tokens">GitHub</Link>.
+                    View the{' '}
+                    <Link href="https://github.com/codercarl1243/react_components_system/tree/main/app/styles/design-system/tokens">
+                        complete token set on GitHub
+                    </Link>.
                 </p>
             </PostNote>
         </PostSection>

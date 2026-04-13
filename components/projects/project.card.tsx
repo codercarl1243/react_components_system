@@ -4,6 +4,8 @@ import Heading from "@/components/heading";
 import Link from "@/components/link";
 import { Project } from "@/lib/projects/projects.type";
 import List from "@/components/list";
+import Icon from "@/components/icon";
+import { RiGithubFill } from "@remixicon/react";
 
 type ProjectCardProps = {
     project: Project;
@@ -45,7 +47,7 @@ export default function ProjectCard({
                     <div className="project-card__links">
                         {project.github && (
                             <Link href={project.github}>
-                                GitHub
+                                <Icon icon={RiGithubFill} /><span>Source Code</span>
                             </Link>
                         )}
                         {project.demo && (

@@ -16,7 +16,7 @@ This post focuses on fixing that — not with another library, but by treating t
 
 Before diving into the details, it helps to see the shape of the system as a whole. The diagram below shows how raw values move through the system and are progressively shaped before a component ever reads them.
 
-**Global Tokens — [(tokens)](https://github.com/codercarl1243/react_components_system/tree/main/app/styles/tokens)**
+**Global Tokens — [(tokens)](https://github.com/codercarl1243/react_components_system/tree/main/app/styles/design-system/tokens)**
 
 ```css
 :root {
@@ -39,7 +39,7 @@ Before diving into the details, it helps to see the shape of the system as a who
 
 *Parallel consumers of global tokens*
 
-**Theme Tokens — [(theme.css)](https://github.com/codercarl1243/react_components_system/blob/main/app/styles/tokens/theme.css)**
+**Theme Tokens — [(theme.css)](https://github.com/codercarl1243/react_components_system/blob/main/app/styles/design-system/tokens/theme.css)**
 
 ```css
 /* Light theme */
@@ -56,7 +56,7 @@ body {
 }
 ```
 
-**Variant Tokens — [(variants.css)](https://github.com/codercarl1243/react_components_system/blob/main/app/styles/design-system/variants.css)**
+**Variant Tokens — [(variants.css)](https://github.com/codercarl1243/react_components_system/blob/main/app/styles/design-system/semantic/variants.css)**
 
 ```css
 [data-variant="primary"] {
@@ -66,7 +66,7 @@ body {
 }
 ```
 
-**Appearance Mappings — [(appearance.css)](https://github.com/codercarl1243/react_components_system/blob/main/app/styles/design-system/appearance.css)**
+**Appearance Mappings — [(appearance.css)](https://github.com/codercarl1243/react_components_system/blob/main/app/styles/design-system/semantic/appearance.css)**
 
 ```css
 [data-appearance="filled"] {
@@ -76,7 +76,7 @@ body {
 }
 ```
 
-**Paint (Application) — [(paint.css)](https://github.com/codercarl1243/react_components_system/blob/main/app/styles/design-system/paint.css)**
+**Paint (Application) — [(paint.css)](https://github.com/codercarl1243/react_components_system/blob/main/app/styles/design-system/semantic/paint.css)**
 
 ```css
 [data-paint~="background"] {
@@ -233,7 +233,7 @@ body {
 
 For tools that help you design accessible, contrast-safe color palettes, see the [resources section](#resources-color-accessibility-tools).
 
-The full token set for this project is available on [GitHub](https://github.com/codercarl1243/react_components_system/tree/main/app/styles/tokens).
+The full token set for this project is available on [GitHub](https://github.com/codercarl1243/react_components_system/tree/main/app/styles/design-system/tokens).
 
 ---
 
@@ -659,7 +659,7 @@ Examples:
 
 #### Token Flow Through the System
 
-**Global Tokens — [(tokens)](https://github.com/codercarl1243/react_components_system/tree/main/app/styles/tokens)**
+**Global Tokens — [(tokens)](https://github.com/codercarl1243/react_components_system/tree/main/app/styles/design-system/tokens)**
 
 ```css
 :root {
@@ -682,7 +682,7 @@ Examples:
 
 *Parallel consumers of global tokens*
 
-**Theme Tokens — [(theme.css)](https://github.com/codercarl1243/react_components_system/blob/main/app/styles/tokens/theme.css)**
+**Theme Tokens — [(theme.css)](https://github.com/codercarl1243/react_components_system/blob/main/app/styles/design-system/tokens/theme.css)**
 
 ```css
 [data-theme="light"] {
@@ -697,7 +697,7 @@ body {
 }
 ```
 
-**Variant Tokens — [(variants.css)](https://github.com/codercarl1243/react_components_system/blob/main/app/styles/design-system/variants.css)**
+**Variant Tokens — [(variants.css)](https://github.com/codercarl1243/react_components_system/blob/main/app/styles/design-system/semantic/variants.css)**
 
 ```css
 [data-variant="primary"] {
@@ -707,7 +707,7 @@ body {
 }
 ```
 
-**Appearance Mappings — [(appearance.css)](https://github.com/codercarl1243/react_components_system/blob/main/app/styles/design-system/appearance.css)**
+**Appearance Mappings — [(appearance.css)](https://github.com/codercarl1243/react_components_system/blob/main/app/styles/design-system/semantic/appearance.css)**
 
 ```css
 [data-appearance="filled"] {
@@ -717,7 +717,7 @@ body {
 }
 ```
 
-**Paint (Application) — [(paint.css)](https://github.com/codercarl1243/react_components_system/blob/main/app/styles/design-system/paint.css)**
+**Paint (Application) — [(paint.css)](https://github.com/codercarl1243/react_components_system/blob/main/app/styles/design-system/semantic/paint.css)**
 
 ```css
 [data-paint~="background"] {
