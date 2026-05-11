@@ -1,5 +1,6 @@
 // import TeleviContent from "@/app/(pages)/projects/content/televi";
 import { Project } from "./projects.type";
+import NihongoContent from "@/app/(pages)/projects/content/nihongo";
 
 
 export const projects: Project[] = [
@@ -27,4 +28,28 @@ export const projects: Project[] = [
   //   ],
   //   createdAt: new Date("2026-02-01")
   // }
+  {
+    id: "nihongo",
+    title: "Nihongo (日本語)",
+    description:
+      "A privacy-first desktop language tutor featuring real-time voice conversation, spaced repetition vocabulary tracking, and local AI inference via a Python sidecar — no audio or conversation data ever leaves the device.",
+    slug: "nihongo",
+    status: "active",
+    // image: {
+      // src: "/images/projects/nihongo/main.webp",
+      // alt: "Screenshot of the Nihongo language tutor application"
+    // },
+    content: () => <NihongoContent />,
+    featured: true,
+    github: "https://github.com/codercarl1243/nihongo",
+    tech: [
+      "Rust",
+      "Tauri",
+      "React",
+      "TypeScript",
+      "Python",
+      "SQLite"
+    ],
+    createdAt: new Date("2026-05-01")
+  }
 ]

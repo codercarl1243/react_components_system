@@ -6,7 +6,7 @@ export interface Project {
     description: string;
     status: "active" | "experimental" | "archived"
     content: () => ReactNode;
-    image: {
+    image?: {
         src: string;
         alt: string;
     }
