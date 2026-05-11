@@ -10,7 +10,7 @@ export const getInlineCodeTheme = cache(async () => {
     ...baseTheme,
     name: 'custom-github-light',
     colorReplacements: {
-      '#d73a49': 'var(--color-danger-400)',
+      '#d73a49': 'var(--cc-color-danger-400)',
     },
   }
 });
@@ -25,12 +25,12 @@ export const getCodeTheme = cache(async (): Promise<ThemeRegistration> => {
   return {
     ...baseTheme,
     name: 'custom-github-dark',
-    bg: "var(--color-neutral-800)",
+    bg: "var(--cc-color-neutral-800)",
     settings: [
       {
         settings: {
-          foreground: baseTheme.settings?.[0]?.settings?.foreground || 'var(--color-neutral-300)',
-          background: 'var(--color-neutral-800)',
+          foreground: baseTheme.settings?.[0]?.settings?.foreground || 'var(--cc-color-neutral-300)',
+          background: 'var(--cc-color-neutral-800)',
         },
       },
       ...(baseTheme.settings || []).slice(1).filter((token) => {
@@ -50,18 +50,18 @@ export const getCodeTheme = cache(async (): Promise<ThemeRegistration> => {
           'string.comment',
         ],
         settings: {
-          foreground: 'var(--color-neutral-300)',
+          foreground: 'var(--cc-color-neutral-300)',
           fontStyle: 'italic',
         },
       },
     ],
     colors: {
       ...baseTheme.colors,
-      'editor.background': 'var(--color-neutral-800)',
-      comment: 'var(--color-neutral-300)',
+      'editor.background': 'var(--cc-color-neutral-800)',
+      comment: 'var(--cc-color-neutral-300)',
     },
     colorReplacements: {
-      '#24292e': 'var(--color-neutral-800)',
+      '#24292e': 'var(--cc-color-neutral-800)',
     },
   }
 })
