@@ -6,6 +6,7 @@ import { Project } from "@/lib/projects/projects.type";
 import List from "@/components/list";
 import Icon from "@/components/icon";
 import { RiGithubFill } from "@remixicon/react";
+import { isNonEmptyString, isNotNull } from "@/lib/utils/guards";
 
 type ProjectCardProps = {
     project: Project;
@@ -25,13 +26,14 @@ export default function ProjectCard({
                 className={clsx("project-card surface-frame", className)}
                 data-layout={layout}
             >
-                <Image
-                    className="project-card__image mx-auto"
-                    src={project.image.src}
-                    alt={project.image.alt}
-                    width={600}
-                    height={400}
-                />
+{   isNotNull(project.image) && isNonEmptyString(project.image?.src) && isNonEmptyString(project.image.alt) &&
+                    <Image
+                        className="project-card__image mx-auto"
+                        src={project.image?.src}
+                        alt={project.image?.alt}
+                        width={600}
+                        height={400}
+                />}
                 <div className="project-card__content flow-md">
                     <Heading as="h3" className="project-card__title" headingSize={4}>
                         {project.title}

@@ -27,25 +27,20 @@ export function handleKeyPress(
   event: KeyPressEventType,
   keyMap: KeyPressCallbackMap
 ) {
-  if (!event?.key) return;
-  if (!keyMap || Object.keys(keyMap).length === 0) return;
+  if (!event?.key || !keyMap || Object.keys(keyMap).length === 0) return;
 
   // Ignore events during IME composition (e.g., typing Japanese/Chinese/Korean)
   if (event.key === 'Process' || (event as KeyboardEvent).isComposing) return;
 
-  // Normalize the pressed key
-  const normalizedKey = normalizeKey(event.key, event);
+  const pressed = normalizeKeyPress(event.key, event);
+  const match = Object.keys(keyMap).find(rawKey =>
+    normalizeKeyString(rawKey) === pressed
+  );
 
-  // Normalize the keymap for case-insensitive matching
-  const normalizedKeyMap = normalizeKeyMap(keyMap);
-
-  // Look up the callback
-  const callback = normalizedKeyMap[normalizedKey];
-
-  if (!callback) return;
-
-  event.preventDefault();
-  callback(event);
+  if (match) {
+    event.preventDefault();
+    keyMap[match]?.(event);
+  }
 }
 
 /**
@@ -87,121 +82,49 @@ export function getKeyAlias(key: string): string {
 }
 
 /**
- * Normalizes all keys in the keymap to a canonical form:
- * - Applies key aliases (e.g., 'Ctrl' → 'control', 'Esc' → 'escape')
- * - Enforces consistent modifier order (control, meta, shift, alt)
- * - Lowercases everything for case-insensitive matching
- * 
- * This ensures keyMap entries like 'Shift+Control+K' or 'Ctrl+Enter'
- * are normalized to match the format produced by normalizeKey().
+ * Normalizes a single string (like "Ctrl + Enter") into 
+ * the canonical format (like "control+enter").
  */
-function normalizeKeyMap(keyMap: KeyPressCallbackMap): KeyPressCallbackMap {
-  const modifierOrder: ReadonlyArray<string> = ['control', 'meta', 'shift', 'alt'];
-  const normalizedEntries: Array<[string, KeyPressCallbackMap[string]]> = [];
+function normalizeKeyString(rawKey: string): string {
+  const tokens = rawKey.toLowerCase().split('+').map(t => t.trim());
+  const modifiers = new Set<string>();
+  let baseKey = '';
 
-  for (const [rawKey, callback] of Object.entries(keyMap)) {
-    if (!rawKey) {
-      normalizedEntries.push([rawKey, callback]);
-      continue;
-    }
-
-    const tokens = rawKey.split('+').map((token) => token.trim());
-
-    const modifierSet = new Set<string>();
-    let baseKey = '';
-
-    if (tokens.length === 2 && tokens[0] === '' && tokens[1] === '') {
-      baseKey = '+';
+  for (const token of tokens) {
+    const canonical = getKeyAlias(token);
+    if (MODIFIER_ORDER.includes(canonical as any)) {
+      modifiers.add(canonical);
     } else {
-      for (let i = 0; i < tokens.length; i++) {
-        const token = tokens[i];
-
-        if (token === '') {
-          if (i === tokens.length - 1 && i > 0) {
-            baseKey = '+';
-          }
-          continue;
-        }
-
-        const canonical = getKeyAlias(token);
-
-        if (modifierOrder.includes(canonical)) {
-          modifierSet.add(canonical);
-          continue;
-        }
-
-        baseKey = canonical;
-
-      }
-    }
-
-    const orderedModifiers = modifierOrder.filter((name) => modifierSet.has(name));
-    const parts = baseKey ? [...orderedModifiers, baseKey] : orderedModifiers;
-    normalizedEntries.push([parts.join('+'), callback]);
-
-    if (baseKey === '+') {
-      const modifiersWithShift = new Set(modifierSet);
-      modifiersWithShift.add('shift');
-      const orderedWithShift = modifierOrder.filter((name) => modifiersWithShift.has(name));
-      const aliasParts = [...orderedWithShift, '='];
-      normalizedEntries.push([aliasParts.join('+'), callback]);
+      baseKey = canonical;
     }
   }
-  return Object.fromEntries(normalizedEntries);
+
+  return toCanonicalCombo(baseKey, modifiers);
 }
-// return Object.fromEntries(
-//   Object.entries(keyMap).map(([rawKey, callback]) => {
-//     if (!rawKey) return [rawKey, callback];
 
-//     // Split on '+' but be careful with keys that are literally '+'
-//     const tokens = rawKey.split('+').map((token) => token.trim());
 
-//     // Handle the edge case where the key is '+' itself
-//     // After split, we get ['', ''] for '+' or ['Control', '', ''] for 'Control+'
-//     // We need to detect this and handle it specially
+const MODIFIER_ORDER = ['control', 'meta', 'shift', 'alt'] as const;
 
-//     const modifierSet = new Set<string>();
-//     let baseKey = '';
+/**
+ * The "Single Source of Truth" for key formatting.
+ * Takes raw tokens and returns a sorted, lowercased, aliased string.
+ */
+function toCanonicalCombo(baseKey: string, modifiers: Set<string>): string {
+  const canonicalBase = getKeyAlias(baseKey);
 
-//     // Check if this is a single '+' key (splits into ['', ''])
-//     if (tokens.length === 2 && tokens[0] === '' && tokens[1] === '') {
-//       baseKey = '+';
-//     } else {
-//       // Normal processing
-//       for (let i = 0; i < tokens.length; i++) {
-//         const token = tokens[i];
+  // If the 'base' is actually a modifier (e.g. user just pressed "Ctrl"), 
+  // we treat the modifier list as the whole combo.
+  if (MODIFIER_ORDER.includes(canonicalBase as any)) {
+    modifiers.add(canonicalBase);
+    const sorted = MODIFIER_ORDER.filter(m => modifiers.has(m));
+    return sorted.join('+');
+  }
 
-//         // Skip empty tokens unless it's the last one and previous was non-empty
-//         // This handles 'Control+' -> ['Control', ''] where '+' is the base key
-//         if (token === '') {
-//           // Check if this empty token represents a '+' key
-//           if (i === tokens.length - 1 && i > 0) {
-//             baseKey = '+';
-//           }
-//           continue;
-//         }
-
-//         const canonical = getKeyAlias(token);
-
-//         if (modifierOrder.includes(canonical)) {
-//           modifierSet.add(canonical);
-//           continue;
-//         }
-
-//         // Last non-modifier token becomes the base key
-//         baseKey = canonical;
-//       }
-//     }
-
-//     // Build key in consistent order: modifiers (sorted) + base key
-//     const orderedModifiers = modifierOrder.filter((name) => modifierSet.has(name));
-//     const parts = baseKey ? [...orderedModifiers, baseKey] : orderedModifiers;
-
-//     return [parts.join('+'), callback];
-//   })
-// );
-// }
-
+  const sortedMods = MODIFIER_ORDER.filter(m => modifiers.has(m));
+  return sortedMods.length > 0
+    ? [...sortedMods, canonicalBase].join('+')
+    : canonicalBase;
+}
 /**
  * Normalizes a key press into a canonical string representation.
  * Combines active modifiers with the key name, excluding modifier keys themselves.
@@ -210,54 +133,31 @@ function normalizeKeyMap(keyMap: KeyPressCallbackMap): KeyPressCallbackMap {
  * unshifted key from event.code to ensure consistency with keyMap entries.
  * 
  * @example
- * normalizeKey('Enter', event) // 'enter' (no modifiers)
- * normalizeKey('k', event) // 'control+k' (with Ctrl pressed)
- * normalizeKey('Control', event) // 'control' (modifier key alone)
- * normalizeKey('?', event) // 'shift+/' (Shift+/ pressed, uses code)
+ * normalizeKeyPress('Enter', event) // 'enter' (no modifiers)
+ * normalizeKeyPress('k', event) // 'control+k' (with Ctrl pressed)
+ * normalizeKeyPress('Control', event) // 'control' (modifier key alone)
+ * normalizeKeyPress('?', event) // 'shift+/' (Shift+/ pressed, uses code)
  */
-export function normalizeKey(key: string, event: KeyPressEventType): string {
-  if (!key || typeof key !== 'string') return '';
+export function normalizeKeyPress(key: string, event: KeyPressEventType): string {
+  if (!key) return '';
 
-  // When Shift is pressed, event.key gives the shifted character (e.g., '?' for Shift+/)
-  // but we want the unshifted key (e.g., '/') to match keyMap entries like 'Shift+/'
-  // Also handle numpad keys which should be normalized regardless of Shift
-  let canonicalKey: string;
+  const modifiers = new Set<string>();
+  if (event.ctrlKey) modifiers.add('control');
+  if (event.metaKey) modifiers.add('meta');
+  if (event.shiftKey) modifiers.add('shift');
+  if (event.altKey) modifiers.add('alt');
 
-  if (event.code && event.code.startsWith('Numpad')) {
-    // Always normalize numpad keys to their main keyboard equivalents
-    canonicalKey = getKeyFromCode(event.code);
+  let baseKey = key;
+  // Use your existing logic for shifted symbols/numpad
+  if (event.code?.startsWith('Numpad')) {
+    baseKey = getKeyFromCode(event.code);
   } else if (event.shiftKey && event.code && isShiftedSymbol(key, event.code)) {
-    // Use the unshifted key derived from code (e.g., 'Slash' -> '/')
-    canonicalKey = getKeyFromCode(event.code);
-  } else {
-    // Normal case: use key with alias resolution
-    canonicalKey = getKeyAlias(key);
+    baseKey = getKeyFromCode(event.code);
   }
 
-  // Modifier keys that should be excluded from the final key combination
-  const modifierKeys = ['control', 'meta', 'shift', 'alt'];
-
-  // If only a modifier key is pressed (without another key), return just that modifier
-  if (modifierKeys.includes(canonicalKey)) {
-    return canonicalKey;
-  }
-
-  // Build the modifier prefix
-  const modifiers: string[] = [];
-
-  if (event.ctrlKey) modifiers.push('control');
-  if (event.metaKey) modifiers.push('meta');
-  if (event.shiftKey) modifiers.push('shift');
-  if (event.altKey) modifiers.push('alt');
-
-  // If there are modifiers, combine them with the key
-  if (modifiers.length > 0) {
-    return [...modifiers, canonicalKey].join('+');
-  }
-
-  // No modifiers, just return the canonical key
-  return canonicalKey;
+  return toCanonicalCombo(baseKey, modifiers);
 }
+
 
 /**
  * Checks if a key represents a shifted symbol by comparing key length and code.

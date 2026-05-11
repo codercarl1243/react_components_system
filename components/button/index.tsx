@@ -47,6 +47,8 @@ export default function Button({
   isLoading = false,
   showSpinner = false,
   icon,
+  onKeyDown,
+  onKeyUp,
   ...props
 }: ButtonProps) {
   const { handleClick } = useButton()
@@ -71,16 +73,18 @@ export default function Button({
     void handleClick(onClick)(event)
   }
 
-  function onKeyDown(event: React.KeyboardEvent<HTMLButtonElement>) {
+  function handleKeyDown(event: React.KeyboardEvent<HTMLButtonElement>) {
     handleKeyPress(event, {
       Enter: () => (event.currentTarget.dataset.pressed = 'true'),
     })
+    onKeyDown?.(event)
   }
 
-  function onKeyUp(event: React.KeyboardEvent<HTMLButtonElement>) {
+  function handleKeyUp(event: React.KeyboardEvent<HTMLButtonElement>) {
     handleKeyPress(event, {
       Enter: () => delete event.currentTarget.dataset.pressed,
     })
+    onKeyUp?.(event)
   }
   return (
     <Block
@@ -94,8 +98,8 @@ export default function Button({
       aria-disabled={isLoading || disabled}
       data-loading={isLoading}
       type={type}
-      onKeyDown={onKeyDown}
-      onKeyUp={onKeyUp}
+      onKeyDown={handleKeyDown}
+      onKeyUp={handleKeyUp}
       data-testid="base-button"
       paint="all"
       {...props}

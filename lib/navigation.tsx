@@ -14,12 +14,12 @@ export const NAV_LINKS = [
     match: (pathname: string) =>
       pathname === '/blog' || pathname.startsWith('/blog/')
   },
-  {
-    href: '/projects',
-    label: 'Projects',
-    icon: RiToolsLine,
-    match: (pathname: string) => pathname.startsWith('/projects')
-  },
+  // {
+  //   href: '/projects',
+  //   label: 'Projects',
+  //   icon: RiToolsLine,
+  //   match: (pathname: string) => pathname.startsWith('/projects')
+  // },
   {
     href: '/about',
     label: 'About',
