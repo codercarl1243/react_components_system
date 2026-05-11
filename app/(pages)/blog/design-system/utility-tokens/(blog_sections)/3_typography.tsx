@@ -83,7 +83,7 @@ export default function Section3() {
     line-height: var(--line-height-super-loose);
 }`}
                 />
-                <PostNote variant="neutral" showIcon={false}>
+                <PostNote>
                     <p>
                         Not all elements inherit font-size and line-height from body. Form elements — input, button, textarea, and select — use browser defaults unless explicitly reset. A CSS reset handles this.
                     </p>
