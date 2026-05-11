@@ -1,4 +1,4 @@
-import TeleviContent from "@/app/(pages)/projects/content/televi";
+// import TeleviContent from "@/app/(pages)/projects/content/televi";
 import { Project } from "./projects.type";
 
 
