@@ -1,14 +1,32 @@
 .button.button--copy {
-    --button-margin: 6px;
-    --button-padding-x: 12px;
-    --button-padding-y: 12px;
-    --button-outline-offset: 2px;
+    outline-width: 1px;
 
-    outline-width: 2px;
+    & .icon {
+        transition: transform 0.2s ease;
+    }
+
+    &:not(:hover) {
+        --button-outline-offset: 0px;
+        outline-color: transparent;
+    }
+
+    &:hover {
+        --button-outline-offset: 2px;
+        outline-color: color-mix(in srgb, currentcolor 55%, var(--cc-color-neutral-100) 45%);
+
+        .icon {
+            transform: scale(1.05);
+        }
+
+    }
 
     &:focus-visible,
     &:active,
     &[data-pressed="true"] {
-        box-shadow: 0 0 4px 4px var(--cc-color-neutral-100);
+        box-shadow: 0 0 8px 2px var(--cc-color-neutral-100);
+
+        & .icon {
+            transform: scale(0.85);
+        }
     }
 }
