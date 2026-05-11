@@ -2,7 +2,7 @@ import Heading from "@/components/heading";
 import List from "@/components/list";
 import { Stack } from "@/components/primitives";
 import Image from '@/components/image'
-import Link from "@/components/link";
+// import Link from "@/components/link";
 import ContactForm from "@/components/contact_form";
 import ContactLinks from "./contactLinks";
 import BuyMeACoffeeCTA from "@/components/buyMeACoffeeCTA";
@@ -13,6 +13,7 @@ export default function AboutPage() {
         <div className="layout-wrapper flow-xl about-page">
             <Stack
                 as="section"
+                className="width-bleed"
             >
                 <Heading as="h1" headingSize={2}>About Me</Heading>
                 <div className="about-page__intro pb-lg">
@@ -28,10 +29,10 @@ export default function AboutPage() {
                             Alongside building systems, I write about them — breaking down patterns,
                             trade-offs, and implementation details so others can apply them in practice.
                         </p>
-                        <p>
+                        {/* <p>
                              If you'd like to see what I've been working on lately, take a look at the{" "}
                             <Link href="/projects">projects page</Link>.
-                        </p>
+                        </p> */}
                     </Stack>
                 </div>
             </Stack>
@@ -40,7 +41,7 @@ export default function AboutPage() {
                 variant="primary"
                 variantAppearance="tonal"
                 paint="all"
-                className="surface-frame p-lg pb-xxl"
+                className="surface-frame width-bleed p-lg pb-xxl"
             >
                 <Heading as="h2" headingSize={4} variant="primary" className="mt-0">Professional focus</Heading>
                 <p>
@@ -58,7 +59,7 @@ export default function AboutPage() {
                 variant="secondary"
                 variantAppearance="tonal"
                 paint="all"
-                className="surface-frame p-lg pb-xxl"
+                className="surface-frame width-bleed p-lg pb-xxl"
             >
                 <Heading as="h2" headingSize={4} variant="secondary" className="mt-0">
                     Learning & Professional development
@@ -81,7 +82,7 @@ export default function AboutPage() {
                 variant="accent"
                 variantAppearance="tonal"
                 paint="all"
-                className="surface-frame p-lg pb-xxl"
+                className="surface-frame width-bleed p-lg pb-xxl"
             >
                 <Heading as="h2" headingSize={4} variant="accent" className="mt-0">
                     Technologies & tools
@@ -101,7 +102,7 @@ export default function AboutPage() {
                 variant="light"
                 variantAppearance="filled"
                 paint="all"
-                className="surface-frame p-lg pb-xxl"
+                className="surface-frame width-bleed p-lg pb-xxl"
             >
                 <Heading as="h2" headingSize={4} variant="warning" className="mt-0">
                     Support my work
@@ -119,7 +120,7 @@ export default function AboutPage() {
             </Stack>
             <Stack
                 as="section"
-                className="about-contact p-lg divider-wrapper"
+                className="about-contact width-bleed p-lg divider-wrapper"
                 gap={"xxl"}
             >
                 <Heading as="h2" headingSize={3} variant="inverse" className="center">
