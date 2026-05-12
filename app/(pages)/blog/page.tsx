@@ -74,7 +74,7 @@ export default function BlogPage() {
         Filter or sort them by topic depending on what you're looking for:</p> */}
         <div className='content-grid__container'>
 
-          <List as="ul" marker="none" className='content-grid'>
+          <List as="ul" marker="none" spacing="none" className='content-grid'>
             {formattedPosts}
           </List>
         </div>
